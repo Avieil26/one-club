@@ -1,0 +1,23 @@
+{
+  "buildCommand": "npx expo export -p web",
+  "outputDirectory": "dist",
+  "devCommand": "npx expo start --web",
+  "cleanUrls": true,
+  "framework": null,
+  "headers": [
+    {
+      "source": "/futz-beta.apk",
+      "headers": [
+        { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Futz-BETA.apk\"" },
+        { "key": "Cache-Control", "value": "public, max-age=300" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!futz-beta\\.apk).*)",
+      "destination": "/"
+    }
+  ]
+}

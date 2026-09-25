@@ -1,0 +1,2135 @@
+{
+  "results": [
+    {
+      "ourId": "carvajal",
+      "queries": [
+        "Dani Carvajal"
+      ],
+      "he": "דני קרוואחל",
+      "ourRating": 84,
+      "ourPos": "RB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "alaba",
+      "queries": [
+        "David Alaba"
+      ],
+      "he": "דוד אלאבה",
+      "ourRating": 84,
+      "ourPos": "CB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "pepe",
+      "queries": [
+        "Pepe"
+      ],
+      "he": "פפה",
+      "ourRating": 80,
+      "ourPos": "CB",
+      "winner": {
+        "ovr": 77,
+        "pac": 86,
+        "sho": 67,
+        "pas": 70,
+        "dri": 82,
+        "def": 52,
+        "phy": 61,
+        "pos": "RW",
+        "team": "FC Porto",
+        "league": "Liga Portugal",
+        "nation": "Brazil",
+        "name": "Pepê",
+        "gender": "Men's Football",
+        "id": 238896
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 77,
+          "pac": 86,
+          "sho": 67,
+          "pas": 70,
+          "dri": 82,
+          "def": 52,
+          "phy": 61,
+          "pos": "RW",
+          "team": "FC Porto",
+          "league": "Liga Portugal",
+          "nation": "Brazil",
+          "name": "Pepê",
+          "gender": "Men's Football",
+          "id": 238896
+        },
+        {
+          "value": 80,
+          "ovr": 81,
+          "pac": 87,
+          "sho": 80,
+          "pas": 75,
+          "dri": 84,
+          "def": 37,
+          "phy": 69,
+          "pos": "RW",
+          "team": "Villarreal CF",
+          "league": "LALIGA EA SPORTS",
+          "nation": "Côte d'Ivoire",
+          "name": "Nicolas Pépé",
+          "gender": "Men's Football",
+          "id": 226110
+        },
+        {
+          "value": 5,
+          "ovr": 69,
+          "pac": 63,
+          "sho": 48,
+          "pas": 59,
+          "dri": 66,
+          "def": 69,
+          "phy": 66,
+          "pos": "CB",
+          "team": "Albacete BP",
+          "league": "LALIGA HYPERMOTION",
+          "nation": "Spain",
+          "name": "Pepe Sánchez",
+          "gender": "Men's Football",
+          "id": 254787
+        },
+        {
+          "value": 0,
+          "ovr": 76,
+          "pac": 64,
+          "sho": 70,
+          "pas": 77,
+          "dri": 74,
+          "def": 73,
+          "phy": 76,
+          "pos": "CM",
+          "team": "Valencia CF",
+          "league": "LALIGA EA SPORTS",
+          "nation": "Spain",
+          "name": "Pepelu",
+          "gender": "Men's Football",
+          "id": 230786
+        }
+      ]
+    },
+    {
+      "ourId": "di-maria",
+      "queries": [
+        "Ángel Di María"
+      ],
+      "he": "אנחל די מריה",
+      "ourRating": 82,
+      "ourPos": "RW",
+      "winner": {
+        "ovr": 82,
+        "pac": 71,
+        "sho": 80,
+        "pas": 85,
+        "dri": 85,
+        "def": 43,
+        "phy": 62,
+        "pos": "RW",
+        "team": "Rosario Central",
+        "league": "LPF",
+        "nation": "Argentina",
+        "name": "Ángel Di María",
+        "gender": "Men's Football",
+        "id": 183898
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 82,
+          "pac": 71,
+          "sho": 80,
+          "pas": 85,
+          "dri": 85,
+          "def": 43,
+          "phy": 62,
+          "pos": "RW",
+          "team": "Rosario Central",
+          "league": "LPF",
+          "nation": "Argentina",
+          "name": "Ángel Di María",
+          "gender": "Men's Football",
+          "id": 183898
+        }
+      ]
+    },
+    {
+      "ourId": "montgomery",
+      "queries": [
+        "Adam Montgomery"
+      ],
+      "he": "אדם מונטגומרי",
+      "ourRating": 64,
+      "ourPos": "LB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "trusty",
+      "queries": [
+        "Auston Trusty"
+      ],
+      "he": "אוסטין טראסטי",
+      "ourRating": 76,
+      "ourPos": "CB",
+      "winner": {
+        "ovr": 74,
+        "pac": 76,
+        "sho": 47,
+        "pas": 56,
+        "dri": 60,
+        "def": 72,
+        "phy": 82,
+        "pos": "CB",
+        "team": "Celtic",
+        "league": "Scottish Premiership",
+        "nation": "United States",
+        "name": "Auston Trusty",
+        "gender": "Men's Football",
+        "id": 235755
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 74,
+          "pac": 76,
+          "sho": 47,
+          "pas": 56,
+          "dri": 60,
+          "def": 72,
+          "phy": 82,
+          "pos": "CB",
+          "team": "Celtic",
+          "league": "Scottish Premiership",
+          "nation": "United States",
+          "name": "Auston Trusty",
+          "gender": "Men's Football",
+          "id": 235755
+        }
+      ]
+    },
+    {
+      "ourId": "diomande",
+      "queries": [
+        "Mohamed Diomande"
+      ],
+      "he": "מוחמד דיומאנדה",
+      "ourRating": 75,
+      "ourPos": "CM",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "butland",
+      "queries": [
+        "Jack Butland"
+      ],
+      "he": "ג׳ק באטלנד",
+      "ourRating": 78,
+      "ourPos": "GK",
+      "winner": {
+        "ovr": 75,
+        "pac": 76,
+        "sho": 74,
+        "pas": 72,
+        "dri": 76,
+        "def": 49,
+        "phy": 75,
+        "pos": "GK",
+        "team": "Hull City",
+        "league": "Premier League",
+        "nation": "England",
+        "name": "Jack Butland",
+        "gender": "Men's Football",
+        "id": 203042
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 75,
+          "pac": 76,
+          "sho": 74,
+          "pas": 72,
+          "dri": 76,
+          "def": 49,
+          "phy": 75,
+          "pos": "GK",
+          "team": "Hull City",
+          "league": "Premier League",
+          "nation": "England",
+          "name": "Jack Butland",
+          "gender": "Men's Football",
+          "id": 203042
+        }
+      ]
+    },
+    {
+      "ourId": "king",
+      "queries": [
+        "Leon King"
+      ],
+      "he": "לאון קינג",
+      "ourRating": 66,
+      "ourPos": "CB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "icardi",
+      "queries": [
+        "Mauro Icardi"
+      ],
+      "he": "מאורו איקרדי",
+      "ourRating": 82,
+      "ourPos": "ST",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "depay",
+      "queries": [
+        "Memphis Depay"
+      ],
+      "he": "ממפיס דה פאי",
+      "ourRating": 82,
+      "ourPos": "ST",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "neymar",
+      "queries": [
+        "Neymar"
+      ],
+      "he": "ניימאר",
+      "ourRating": 86,
+      "ourPos": "LW",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "busquets",
+      "queries": [
+        "Sergio Busquets"
+      ],
+      "he": "סרג׳יו בוסקטס",
+      "ourRating": 84,
+      "ourPos": "CDM",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "alba",
+      "queries": [
+        "Jordi Alba"
+      ],
+      "he": "ז׳ורדי אלבה",
+      "ourRating": 82,
+      "ourPos": "LB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "mahrez",
+      "queries": [
+        "Riyad Mahrez"
+      ],
+      "he": "ריאד מחרז",
+      "ourRating": 84,
+      "ourPos": "RW",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "trippier",
+      "queries": [
+        "Kieran Trippier"
+      ],
+      "he": "קיירן טריפיר",
+      "ourRating": 83,
+      "ourPos": "RB",
+      "winner": {
+        "ovr": 77,
+        "pac": 54,
+        "sho": 63,
+        "pas": 82,
+        "dri": 74,
+        "def": 78,
+        "phy": 66,
+        "pos": "RB",
+        "team": "Wolves",
+        "league": "EFL Championship",
+        "nation": "England",
+        "name": "Kieran Trippier",
+        "gender": "Men's Football",
+        "id": 186345
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 77,
+          "pac": 54,
+          "sho": 63,
+          "pas": 82,
+          "dri": 74,
+          "def": 78,
+          "phy": 66,
+          "pos": "RB",
+          "team": "Wolves",
+          "league": "EFL Championship",
+          "nation": "England",
+          "name": "Kieran Trippier",
+          "gender": "Men's Football",
+          "id": 186345
+        }
+      ]
+    },
+    {
+      "ourId": "paqueta",
+      "queries": [
+        "Lucas Paquetá",
+        "Lucas Paqueta",
+        "Paquetá"
+      ],
+      "he": "לוקאס פאקטה",
+      "ourRating": 83,
+      "ourPos": "CM",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "keane",
+      "queries": [
+        "Michael Keane"
+      ],
+      "he": "מייקל קיין",
+      "ourRating": 78,
+      "ourPos": "CB",
+      "winner": {
+        "ovr": 76,
+        "pac": 42,
+        "sho": 58,
+        "pas": 62,
+        "dri": 59,
+        "def": 77,
+        "phy": 76,
+        "pos": "CB",
+        "team": "Everton",
+        "league": "Premier League",
+        "nation": "England",
+        "name": "Michael Keane",
+        "gender": "Men's Football",
+        "id": 207599
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 76,
+          "pac": 42,
+          "sho": 58,
+          "pas": 62,
+          "dri": 59,
+          "def": 77,
+          "phy": 76,
+          "pos": "CB",
+          "team": "Everton",
+          "league": "Premier League",
+          "nation": "England",
+          "name": "Michael Keane",
+          "gender": "Men's Football",
+          "id": 207599
+        }
+      ]
+    },
+    {
+      "ourId": "fullkrug",
+      "queries": [
+        "Niclas Füllkrug"
+      ],
+      "he": "ניקלאס פולקרוג",
+      "ourRating": 81,
+      "ourPos": "ST",
+      "winner": {
+        "ovr": 76,
+        "pac": 46,
+        "sho": 79,
+        "pas": 70,
+        "dri": 71,
+        "def": 43,
+        "phy": 73,
+        "pos": "ST",
+        "team": "SV Werder Bremen",
+        "league": "Bundesliga",
+        "nation": "Germany",
+        "name": "Niclas Füllkrug",
+        "gender": "Men's Football",
+        "id": 205431
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 76,
+          "pac": 46,
+          "sho": 79,
+          "pas": 70,
+          "dri": 71,
+          "def": 43,
+          "phy": 73,
+          "pos": "ST",
+          "team": "SV Werder Bremen",
+          "league": "Bundesliga",
+          "nation": "Germany",
+          "name": "Niclas Füllkrug",
+          "gender": "Men's Football",
+          "id": 205431
+        }
+      ]
+    },
+    {
+      "ourId": "hojlund",
+      "queries": [
+        "Rasmus Højlund"
+      ],
+      "he": "רסמוס הוילון",
+      "ourRating": 79,
+      "ourPos": "ST",
+      "winner": {
+        "ovr": 78,
+        "pac": 83,
+        "sho": 78,
+        "pas": 65,
+        "dri": 73,
+        "def": 42,
+        "phy": 79,
+        "pos": "ST",
+        "team": "SSC Napoli",
+        "league": "Serie A Enilive",
+        "nation": "Denmark",
+        "name": "Rasmus Højlund",
+        "gender": "Men's Football",
+        "id": 259399
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 78,
+          "pac": 83,
+          "sho": 78,
+          "pas": 65,
+          "dri": 73,
+          "def": 42,
+          "phy": 79,
+          "pos": "ST",
+          "team": "SSC Napoli",
+          "league": "Serie A Enilive",
+          "nation": "Denmark",
+          "name": "Rasmus Højlund",
+          "gender": "Men's Football",
+          "id": 259399
+        }
+      ]
+    },
+    {
+      "ourId": "varane",
+      "queries": [
+        "Raphaël Varane"
+      ],
+      "he": "רפאל וראן",
+      "ourRating": 83,
+      "ourPos": "CB",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "aké",
+      "queries": [
+        "aké"
+      ],
+      "he": "נתן אקה",
+      "ourRating": 82,
+      "ourPos": "CB",
+      "winner": {
+        "ovr": 80,
+        "pac": 66,
+        "sho": 53,
+        "pas": 71,
+        "dri": 74,
+        "def": 82,
+        "phy": 71,
+        "pos": "CB",
+        "team": "Fenerbahçe",
+        "league": "Trendyol Süper Lig",
+        "nation": "Holland",
+        "name": "Nathan Aké",
+        "gender": "Men's Football",
+        "id": 208920
+      },
+      "winnerScore": 75,
+      "seen": [
+        {
+          "value": 75,
+          "ovr": 80,
+          "pac": 66,
+          "sho": 53,
+          "pas": 71,
+          "dri": 74,
+          "def": 82,
+          "phy": 71,
+          "pos": "CB",
+          "team": "Fenerbahçe",
+          "league": "Trendyol Süper Lig",
+          "nation": "Holland",
+          "name": "Nathan Aké",
+          "gender": "Men's Football",
+          "id": 208920
+        },
+        {
+          "value": 70,
+          "ovr": 73,
+          "pac": 71,
+          "sho": 70,
+          "pas": 71,
+          "dri": 75,
+          "def": 45,
+          "phy": 74,
+          "pos": "GK",
+          "team": "Philadelphia",
+          "league": "MLS",
+          "nation": "Jamaica",
+          "name": "Andre Blake",
+          "gender": "Men's Football",
+          "id": 216939
+        },
+        {
+          "value": 70,
+          "ovr": 71,
+          "pac": 78,
+          "sho": 67,
+          "pas": 65,
+          "dri": 73,
+          "def": 39,
+          "phy": 52,
+          "pos": "LM",
+          "team": "Zulte Waregem",
+          "league": "1A Pro League",
+          "nation": "France",
+          "name": "Marley Aké",
+          "gender": "Men's Football",
+          "id": 251341
+        },
+        {
+          "value": 70,
+          "ovr": 69,
+          "pac": 70,
+          "sho": 68,
+          "pas": 62,
+          "dri": 69,
+          "def": 20,
+          "phy": 66,
+          "pos": "GK",
+          "team": "Nashville SC",
+          "league": "MLS",
+          "nation": "United States",
+          "name": "Brian Schwake",
+          "gender": "Men's Football",
+          "id": 261305
+        }
+      ]
+    },
+    {
+      "ourId": "walker",
+      "queries": [
+        "Kyle Walker"
+      ],
+      "he": "קייל ווקר",
+      "ourRating": 84,
+      "ourPos": "RB",
+      "winner": {
+        "ovr": 76,
+        "pac": 81,
+        "sho": 63,
+        "pas": 72,
+        "dri": 71,
+        "def": 73,
+        "phy": 76,
+        "pos": "RB",
+        "team": "Burnley",
+        "league": "EFL Championship",
+        "nation": "England",
+        "name": "Kyle Walker",
+        "gender": "Men's Football",
+        "id": 188377
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 76,
+          "pac": 81,
+          "sho": 63,
+          "pas": 72,
+          "dri": 71,
+          "def": 73,
+          "phy": 76,
+          "pos": "RB",
+          "team": "Burnley",
+          "league": "EFL Championship",
+          "nation": "England",
+          "name": "Kyle Walker",
+          "gender": "Men's Football",
+          "id": 188377
+        },
+        {
+          "value": 5,
+          "ovr": 76,
+          "pac": 76,
+          "sho": 47,
+          "pas": 68,
+          "dri": 76,
+          "def": 73,
+          "phy": 64,
+          "pos": "RB",
+          "team": "West Ham",
+          "league": "EFL Championship",
+          "nation": "England",
+          "name": "Kyle Walker-Peters",
+          "gender": "Men's Football",
+          "id": 227927
+        }
+      ]
+    }
+  ],
+  "womenResults": [
+    {
+      "ourId": "aitana",
+      "name": "Aitana Bonmatí",
+      "winner": {
+        "ovr": 90,
+        "pac": 80,
+        "sho": 85,
+        "pas": 86,
+        "dri": 88,
+        "def": 75,
+        "phy": 72,
+        "pos": "CM",
+        "team": "FC Barcelona",
+        "league": "Liga F Moeve",
+        "nation": "Spain",
+        "name": "Aitana Bonmatí",
+        "gender": "Women's Football",
+        "id": 241667
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 90,
+          "pac": 80,
+          "sho": 85,
+          "pas": 86,
+          "dri": 88,
+          "def": 75,
+          "phy": 72,
+          "pos": "CM",
+          "team": "FC Barcelona",
+          "league": "Liga F Moeve",
+          "nation": "Spain",
+          "name": "Aitana Bonmatí",
+          "gender": "Women's Football",
+          "id": 241667
+        }
+      ]
+    },
+    {
+      "ourId": "hansen",
+      "name": "Caroline Graham Hansen",
+      "winner": {
+        "ovr": 89,
+        "pac": 88,
+        "sho": 87,
+        "pas": 88,
+        "dri": 90,
+        "def": 47,
+        "phy": 76,
+        "pos": "RW",
+        "team": "FC Barcelona",
+        "league": "Liga F Moeve",
+        "nation": "Norway",
+        "name": "Caroline Graham Hansen",
+        "gender": "Women's Football",
+        "id": 227102
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 89,
+          "pac": 88,
+          "sho": 87,
+          "pas": 88,
+          "dri": 90,
+          "def": 47,
+          "phy": 76,
+          "pos": "RW",
+          "team": "FC Barcelona",
+          "league": "Liga F Moeve",
+          "nation": "Norway",
+          "name": "Caroline Graham Hansen",
+          "gender": "Women's Football",
+          "id": 227102
+        }
+      ]
+    },
+    {
+      "ourId": "hegerberg",
+      "name": "Ada Hegerberg",
+      "winner": {
+        "ovr": 85,
+        "pac": 71,
+        "sho": 85,
+        "pas": 76,
+        "dri": 82,
+        "def": 39,
+        "phy": 79,
+        "pos": "ST",
+        "team": "OL Lyonnes",
+        "league": "Arkema PL",
+        "nation": "Norway",
+        "name": "Ada Hegerberg",
+        "gender": "Women's Football",
+        "id": 227310
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 71,
+          "sho": 85,
+          "pas": 76,
+          "dri": 82,
+          "def": 39,
+          "phy": 79,
+          "pos": "ST",
+          "team": "OL Lyonnes",
+          "league": "Arkema PL",
+          "nation": "Norway",
+          "name": "Ada Hegerberg",
+          "gender": "Women's Football",
+          "id": 227310
+        }
+      ]
+    },
+    {
+      "ourId": "kerr",
+      "name": "Sam Kerr",
+      "winner": {
+        "ovr": 85,
+        "pac": 79,
+        "sho": 85,
+        "pas": 74,
+        "dri": 86,
+        "def": 41,
+        "phy": 80,
+        "pos": "ST",
+        "team": "Gotham FC",
+        "league": "NWSL",
+        "nation": "Australia",
+        "name": "Sam Kerr",
+        "gender": "Women's Football",
+        "id": 227125
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 79,
+          "sho": 85,
+          "pas": 74,
+          "dri": 86,
+          "def": 41,
+          "phy": 80,
+          "pos": "ST",
+          "team": "Gotham FC",
+          "league": "NWSL",
+          "nation": "Australia",
+          "name": "Sam Kerr",
+          "gender": "Women's Football",
+          "id": 227125
+        }
+      ]
+    },
+    {
+      "ourId": "miedema",
+      "name": "Vivianne Miedema",
+      "winner": {
+        "ovr": 87,
+        "pac": 83,
+        "sho": 86,
+        "pas": 80,
+        "dri": 86,
+        "def": 34,
+        "phy": 82,
+        "pos": "CAM",
+        "team": "Manchester City",
+        "league": "Barclays WSL",
+        "nation": "Holland",
+        "name": "Vivianne Miedema",
+        "gender": "Women's Football",
+        "id": 233746
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 83,
+          "sho": 86,
+          "pas": 80,
+          "dri": 86,
+          "def": 34,
+          "phy": 82,
+          "pos": "CAM",
+          "team": "Manchester City",
+          "league": "Barclays WSL",
+          "nation": "Holland",
+          "name": "Vivianne Miedema",
+          "gender": "Women's Football",
+          "id": 233746
+        }
+      ]
+    },
+    {
+      "ourId": "mead",
+      "name": "Beth Mead",
+      "winner": {
+        "ovr": 84,
+        "pac": 83,
+        "sho": 84,
+        "pas": 82,
+        "dri": 84,
+        "def": 67,
+        "phy": 73,
+        "pos": "RM",
+        "team": "Manchester City",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Beth Mead",
+        "gender": "Women's Football",
+        "id": 245802
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 84,
+          "pac": 83,
+          "sho": 84,
+          "pas": 82,
+          "dri": 84,
+          "def": 67,
+          "phy": 73,
+          "pos": "RM",
+          "team": "Manchester City",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Beth Mead",
+          "gender": "Women's Football",
+          "id": 245802
+        }
+      ]
+    },
+    {
+      "ourId": "lauren-james",
+      "name": "Lauren James",
+      "winner": {
+        "ovr": 85,
+        "pac": 90,
+        "sho": 81,
+        "pas": 78,
+        "dri": 87,
+        "def": 40,
+        "phy": 82,
+        "pos": "LM",
+        "team": "Chelsea",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Lauren James",
+        "gender": "Women's Football",
+        "id": 265249
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 90,
+          "sho": 81,
+          "pas": 78,
+          "dri": 87,
+          "def": 40,
+          "phy": 82,
+          "pos": "LM",
+          "team": "Chelsea",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Lauren James",
+          "gender": "Women's Football",
+          "id": 265249
+        }
+      ]
+    },
+    {
+      "ourId": "earps",
+      "name": "Mary Earps",
+      "winner": {
+        "ovr": 82,
+        "pac": 78,
+        "sho": 79,
+        "pas": 84,
+        "dri": 82,
+        "def": 41,
+        "phy": 82,
+        "pos": "GK",
+        "team": "London City",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Mary Earps",
+        "gender": "Women's Football",
+        "id": 247504
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 82,
+          "pac": 78,
+          "sho": 79,
+          "pas": 84,
+          "dri": 82,
+          "def": 41,
+          "phy": 82,
+          "pos": "GK",
+          "team": "London City",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Mary Earps",
+          "gender": "Women's Football",
+          "id": 247504
+        }
+      ]
+    },
+    {
+      "ourId": "williamson",
+      "name": "Leah Williamson",
+      "winner": {
+        "ovr": 85,
+        "pac": 75,
+        "sho": 48,
+        "pas": 73,
+        "dri": 73,
+        "def": 86,
+        "phy": 78,
+        "pos": "CB",
+        "team": "Arsenal",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Leah Williamson",
+        "gender": "Women's Football",
+        "id": 246426
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 75,
+          "sho": 48,
+          "pas": 73,
+          "dri": 73,
+          "def": 86,
+          "phy": 78,
+          "pos": "CB",
+          "team": "Arsenal",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Leah Williamson",
+          "gender": "Women's Football",
+          "id": 246426
+        }
+      ]
+    },
+    {
+      "ourId": "bronze",
+      "name": "Lucy Bronze",
+      "winner": {
+        "ovr": 85,
+        "pac": 71,
+        "sho": 68,
+        "pas": 81,
+        "dri": 80,
+        "def": 85,
+        "phy": 87,
+        "pos": "RB",
+        "team": "Chelsea",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Lucy Bronze",
+        "gender": "Women's Football",
+        "id": 227246
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 71,
+          "sho": 68,
+          "pas": 81,
+          "dri": 80,
+          "def": 85,
+          "phy": 87,
+          "pos": "RB",
+          "team": "Chelsea",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Lucy Bronze",
+          "gender": "Women's Football",
+          "id": 227246
+        }
+      ]
+    },
+    {
+      "ourId": "walsh",
+      "name": "Keira Walsh",
+      "winner": {
+        "ovr": 85,
+        "pac": 66,
+        "sho": 46,
+        "pas": 81,
+        "dri": 79,
+        "def": 79,
+        "phy": 76,
+        "pos": "CDM",
+        "team": "Chelsea",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Keira Walsh",
+        "gender": "Women's Football",
+        "id": 242830
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 66,
+          "sho": 46,
+          "pas": 81,
+          "dri": 79,
+          "def": 79,
+          "phy": 76,
+          "pos": "CDM",
+          "team": "Chelsea",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Keira Walsh",
+          "gender": "Women's Football",
+          "id": 242830
+        }
+      ]
+    },
+    {
+      "ourId": "katoto",
+      "name": "Marie-Antoinette Katoto",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "renard",
+      "name": "Wendie Renard",
+      "winner": {
+        "ovr": 84,
+        "pac": 48,
+        "sho": 62,
+        "pas": 70,
+        "dri": 69,
+        "def": 86,
+        "phy": 84,
+        "pos": "CB",
+        "team": "OL Lyonnes",
+        "league": "Arkema PL",
+        "nation": "France",
+        "name": "Wendie Renard",
+        "gender": "Women's Football",
+        "id": 227316
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 84,
+          "pac": 48,
+          "sho": 62,
+          "pas": 70,
+          "dri": 69,
+          "def": 86,
+          "phy": 84,
+          "pos": "CB",
+          "team": "OL Lyonnes",
+          "league": "Arkema PL",
+          "nation": "France",
+          "name": "Wendie Renard",
+          "gender": "Women's Football",
+          "id": 227316
+        }
+      ]
+    },
+    {
+      "ourId": "karchaoui",
+      "name": "Sakina Karchaoui",
+      "winner": {
+        "ovr": 87,
+        "pac": 89,
+        "sho": 76,
+        "pas": 87,
+        "dri": 88,
+        "def": 79,
+        "phy": 72,
+        "pos": "CM",
+        "team": "Paris SG",
+        "league": "Arkema PL",
+        "nation": "France",
+        "name": "Sakina Karchaoui",
+        "gender": "Women's Football",
+        "id": 233662
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 89,
+          "sho": 76,
+          "pas": 87,
+          "dri": 88,
+          "def": 79,
+          "phy": 72,
+          "pos": "CM",
+          "team": "Paris SG",
+          "league": "Arkema PL",
+          "nation": "France",
+          "name": "Sakina Karchaoui",
+          "gender": "Women's Football",
+          "id": 233662
+        }
+      ]
+    },
+    {
+      "ourId": "rodman",
+      "name": "Trinity Rodman",
+      "winner": {
+        "ovr": 87,
+        "pac": 91,
+        "sho": 82,
+        "pas": 81,
+        "dri": 83,
+        "def": 55,
+        "phy": 82,
+        "pos": "LM",
+        "team": "Washington Spirit",
+        "league": "NWSL",
+        "nation": "United States",
+        "name": "Trinity Rodman",
+        "gender": "Women's Football",
+        "id": 266928
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 91,
+          "sho": 82,
+          "pas": 81,
+          "dri": 83,
+          "def": 55,
+          "phy": 82,
+          "pos": "LM",
+          "team": "Washington Spirit",
+          "league": "NWSL",
+          "nation": "United States",
+          "name": "Trinity Rodman",
+          "gender": "Women's Football",
+          "id": 266928
+        }
+      ]
+    },
+    {
+      "ourId": "smith",
+      "name": "Sophia Smith",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "horan",
+      "name": "Lindsey Horan",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "buhl",
+      "name": "Klara Bühl",
+      "winner": {
+        "ovr": 88,
+        "pac": 84,
+        "sho": 85,
+        "pas": 85,
+        "dri": 86,
+        "def": 37,
+        "phy": 74,
+        "pos": "LM",
+        "team": "FC Bayern München",
+        "league": "GPFBL",
+        "nation": "Germany",
+        "name": "Klara Bühl",
+        "gender": "Women's Football",
+        "id": 248822
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 88,
+          "pac": 84,
+          "sho": 85,
+          "pas": 85,
+          "dri": 86,
+          "def": 37,
+          "phy": 74,
+          "pos": "LM",
+          "team": "FC Bayern München",
+          "league": "GPFBL",
+          "nation": "Germany",
+          "name": "Klara Bühl",
+          "gender": "Women's Football",
+          "id": 248822
+        }
+      ]
+    },
+    {
+      "ourId": "oberdorf",
+      "name": "Lena Oberdorf",
+      "winner": {
+        "ovr": 84,
+        "pac": 60,
+        "sho": 62,
+        "pas": 77,
+        "dri": 74,
+        "def": 85,
+        "phy": 84,
+        "pos": "CDM",
+        "team": "FC Bayern München",
+        "league": "GPFBL",
+        "nation": "Germany",
+        "name": "Lena Oberdorf",
+        "gender": "Women's Football",
+        "id": 248717
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 84,
+          "pac": 60,
+          "sho": 62,
+          "pas": 77,
+          "dri": 74,
+          "def": 85,
+          "phy": 84,
+          "pos": "CDM",
+          "team": "FC Bayern München",
+          "league": "GPFBL",
+          "nation": "Germany",
+          "name": "Lena Oberdorf",
+          "gender": "Women's Football",
+          "id": 248717
+        }
+      ]
+    },
+    {
+      "ourId": "debinha",
+      "name": "Debinha",
+      "winner": {
+        "ovr": 87,
+        "pac": 85,
+        "sho": 79,
+        "pas": 85,
+        "dri": 89,
+        "def": 46,
+        "phy": 57,
+        "pos": "CAM",
+        "team": "KC Current",
+        "league": "NWSL",
+        "nation": "Brazil",
+        "name": "Debinha",
+        "gender": "Women's Football",
+        "id": 226893
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 87,
+          "pac": 85,
+          "sho": 79,
+          "pas": 85,
+          "dri": 89,
+          "def": 46,
+          "phy": 57,
+          "pos": "CAM",
+          "team": "KC Current",
+          "league": "NWSL",
+          "nation": "Brazil",
+          "name": "Debinha",
+          "gender": "Women's Football",
+          "id": 226893
+        }
+      ]
+    },
+    {
+      "ourId": "hemp",
+      "name": "Lauren Hemp",
+      "winner": {
+        "ovr": 87,
+        "pac": 92,
+        "sho": 77,
+        "pas": 83,
+        "dri": 87,
+        "def": 63,
+        "phy": 69,
+        "pos": "LM",
+        "team": "Manchester City",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Lauren Hemp",
+        "gender": "Women's Football",
+        "id": 257008
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 92,
+          "sho": 77,
+          "pas": 83,
+          "dri": 87,
+          "def": 63,
+          "phy": 69,
+          "pos": "LM",
+          "team": "Manchester City",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Lauren Hemp",
+          "gender": "Women's Football",
+          "id": 257008
+        }
+      ]
+    },
+    {
+      "ourId": "kelly",
+      "name": "Chloe Kelly",
+      "winner": {
+        "ovr": 86,
+        "pac": 89,
+        "sho": 85,
+        "pas": 85,
+        "dri": 84,
+        "def": 43,
+        "phy": 69,
+        "pos": "RM",
+        "team": "Arsenal",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Chloe Kelly",
+        "gender": "Women's Football",
+        "id": 257001
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 86,
+          "pac": 89,
+          "sho": 85,
+          "pas": 85,
+          "dri": 84,
+          "def": 43,
+          "phy": 69,
+          "pos": "RM",
+          "team": "Arsenal",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Chloe Kelly",
+          "gender": "Women's Football",
+          "id": 257001
+        }
+      ]
+    },
+    {
+      "ourId": "russo",
+      "name": "Alessia Russo",
+      "winner": {
+        "ovr": 88,
+        "pac": 84,
+        "sho": 88,
+        "pas": 73,
+        "dri": 86,
+        "def": 39,
+        "phy": 78,
+        "pos": "ST",
+        "team": "Arsenal",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Alessia Russo",
+        "gender": "Women's Football",
+        "id": 258980
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 88,
+          "pac": 84,
+          "sho": 88,
+          "pas": 73,
+          "dri": 86,
+          "def": 39,
+          "phy": 78,
+          "pos": "ST",
+          "team": "Arsenal",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Alessia Russo",
+          "gender": "Women's Football",
+          "id": 258980
+        }
+      ]
+    },
+    {
+      "ourId": "guijarro",
+      "name": "Patri Guijarro",
+      "winner": {
+        "ovr": 88,
+        "pac": 78,
+        "sho": 82,
+        "pas": 83,
+        "dri": 88,
+        "def": 84,
+        "phy": 88,
+        "pos": "CDM",
+        "team": "FC Barcelona",
+        "league": "Liga F Moeve",
+        "nation": "Spain",
+        "name": "Patri Guijarro",
+        "gender": "Women's Football",
+        "id": 237289
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 88,
+          "pac": 78,
+          "sho": 82,
+          "pas": 83,
+          "dri": 88,
+          "def": 84,
+          "phy": 88,
+          "pos": "CDM",
+          "team": "FC Barcelona",
+          "league": "Liga F Moeve",
+          "nation": "Spain",
+          "name": "Patri Guijarro",
+          "gender": "Women's Football",
+          "id": 237289
+        }
+      ]
+    },
+    {
+      "ourId": "paraluelo",
+      "name": "Salma Paralluelo",
+      "winner": {
+        "ovr": 87,
+        "pac": 93,
+        "sho": 84,
+        "pas": 79,
+        "dri": 85,
+        "def": 46,
+        "phy": 78,
+        "pos": "LW",
+        "team": "OL Lyonnes",
+        "league": "Arkema PL",
+        "nation": "Spain",
+        "name": "Salma Paralluelo",
+        "gender": "Women's Football",
+        "id": 269404
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 87,
+          "pac": 93,
+          "sho": 84,
+          "pas": 79,
+          "dri": 85,
+          "def": 46,
+          "phy": 78,
+          "pos": "LW",
+          "team": "OL Lyonnes",
+          "league": "Arkema PL",
+          "nation": "Spain",
+          "name": "Salma Paralluelo",
+          "gender": "Women's Football",
+          "id": 269404
+        }
+      ]
+    },
+    {
+      "ourId": "mapi",
+      "name": "Mapi León",
+      "winner": {
+        "ovr": 88,
+        "pac": 77,
+        "sho": 68,
+        "pas": 80,
+        "dri": 77,
+        "def": 89,
+        "phy": 86,
+        "pos": "CB",
+        "team": "London City",
+        "league": "Barclays WSL",
+        "nation": "Spain",
+        "name": "Mapi León",
+        "gender": "Women's Football",
+        "id": 236479
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 88,
+          "pac": 77,
+          "sho": 68,
+          "pas": 80,
+          "dri": 77,
+          "def": 89,
+          "phy": 86,
+          "pos": "CB",
+          "team": "London City",
+          "league": "Barclays WSL",
+          "nation": "Spain",
+          "name": "Mapi León",
+          "gender": "Women's Football",
+          "id": 236479
+        }
+      ]
+    },
+    {
+      "ourId": "paredes",
+      "name": "Irene Paredes",
+      "winner": {
+        "ovr": 87,
+        "pac": 74,
+        "sho": 52,
+        "pas": 67,
+        "dri": 70,
+        "def": 88,
+        "phy": 84,
+        "pos": "CB",
+        "team": "FC Barcelona",
+        "league": "Liga F Moeve",
+        "nation": "Spain",
+        "name": "Irene Paredes",
+        "gender": "Women's Football",
+        "id": 227190
+      },
+      "winnerScore": 100,
+      "seen": [
+        {
+          "value": 100,
+          "ovr": 87,
+          "pac": 74,
+          "sho": 52,
+          "pas": 67,
+          "dri": 70,
+          "def": 88,
+          "phy": 84,
+          "pos": "CB",
+          "team": "FC Barcelona",
+          "league": "Liga F Moeve",
+          "nation": "Spain",
+          "name": "Irene Paredes",
+          "gender": "Women's Football",
+          "id": 227190
+        }
+      ]
+    },
+    {
+      "ourId": "caicedo-w",
+      "name": "Linda Caicedo",
+      "winner": {
+        "ovr": 85,
+        "pac": 93,
+        "sho": 75,
+        "pas": 78,
+        "dri": 89,
+        "def": 37,
+        "phy": 68,
+        "pos": "LW",
+        "team": "Real Madrid",
+        "league": "Liga F Moeve",
+        "nation": "Colombia",
+        "name": "Linda Caicedo",
+        "gender": "Women's Football",
+        "id": 273153
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 93,
+          "sho": 75,
+          "pas": 78,
+          "dri": 89,
+          "def": 37,
+          "phy": 68,
+          "pos": "LW",
+          "team": "Real Madrid",
+          "league": "Liga F Moeve",
+          "nation": "Colombia",
+          "name": "Linda Caicedo",
+          "gender": "Women's Football",
+          "id": 273153
+        }
+      ]
+    },
+    {
+      "ourId": "banda",
+      "name": "Barbra Banda",
+      "winner": {
+        "ovr": 88,
+        "pac": 92,
+        "sho": 84,
+        "pas": 64,
+        "dri": 80,
+        "def": 33,
+        "phy": 82,
+        "pos": "ST",
+        "team": "Orlando Pride",
+        "league": "NWSL",
+        "nation": "Zambia",
+        "name": "Barbra Banda",
+        "gender": "Women's Football",
+        "id": 276359
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 88,
+          "pac": 92,
+          "sho": 84,
+          "pas": 64,
+          "dri": 80,
+          "def": 33,
+          "phy": 82,
+          "pos": "ST",
+          "team": "Orlando Pride",
+          "league": "NWSL",
+          "nation": "Zambia",
+          "name": "Barbra Banda",
+          "gender": "Women's Football",
+          "id": 276359
+        }
+      ]
+    },
+    {
+      "ourId": "berger",
+      "name": "Ann-Katrin Berger",
+      "winner": {
+        "ovr": 87,
+        "pac": 87,
+        "sho": 85,
+        "pas": 82,
+        "dri": 87,
+        "def": 45,
+        "phy": 82,
+        "pos": "GK",
+        "team": "Gotham FC",
+        "league": "NWSL",
+        "nation": "Germany",
+        "name": "Ann-Katrin Berger",
+        "gender": "Women's Football",
+        "id": 258310
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 87,
+          "sho": 85,
+          "pas": 82,
+          "dri": 87,
+          "def": 45,
+          "phy": 82,
+          "pos": "GK",
+          "team": "Gotham FC",
+          "league": "NWSL",
+          "nation": "Germany",
+          "name": "Ann-Katrin Berger",
+          "gender": "Women's Football",
+          "id": 258310
+        }
+      ]
+    },
+    {
+      "ourId": "endler",
+      "name": "Christiane Endler",
+      "winner": {
+        "ovr": 85,
+        "pac": 84,
+        "sho": 80,
+        "pas": 83,
+        "dri": 85,
+        "def": 42,
+        "phy": 86,
+        "pos": "GK",
+        "team": "OL Lyonnes",
+        "league": "Arkema PL",
+        "nation": "Chile",
+        "name": "Christiane Endler",
+        "gender": "Women's Football",
+        "id": 245956
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 84,
+          "sho": 80,
+          "pas": 83,
+          "dri": 85,
+          "def": 42,
+          "phy": 86,
+          "pos": "GK",
+          "team": "OL Lyonnes",
+          "league": "Arkema PL",
+          "nation": "Chile",
+          "name": "Christiane Endler",
+          "gender": "Women's Football",
+          "id": 245956
+        }
+      ]
+    },
+    {
+      "ourId": "nusken",
+      "name": "Sjoeke Nüsken",
+      "winner": {
+        "ovr": 83,
+        "pac": 67,
+        "sho": 72,
+        "pas": 77,
+        "dri": 79,
+        "def": 82,
+        "phy": 77,
+        "pos": "CDM",
+        "team": "Chelsea",
+        "league": "Barclays WSL",
+        "nation": "Germany",
+        "name": "Sjoeke Nüsken",
+        "gender": "Women's Football",
+        "id": 262093
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 83,
+          "pac": 67,
+          "sho": 72,
+          "pas": 77,
+          "dri": 79,
+          "def": 82,
+          "phy": 77,
+          "pos": "CDM",
+          "team": "Chelsea",
+          "league": "Barclays WSL",
+          "nation": "Germany",
+          "name": "Sjoeke Nüsken",
+          "gender": "Women's Football",
+          "id": 262093
+        }
+      ]
+    },
+    {
+      "ourId": "stanway",
+      "name": "Georgia Stanway",
+      "winner": {
+        "ovr": 86,
+        "pac": 82,
+        "sho": 79,
+        "pas": 80,
+        "dri": 86,
+        "def": 78,
+        "phy": 78,
+        "pos": "CDM",
+        "team": "Arsenal",
+        "league": "Barclays WSL",
+        "nation": "England",
+        "name": "Georgia Stanway",
+        "gender": "Women's Football",
+        "id": 243404
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 86,
+          "pac": 82,
+          "sho": 79,
+          "pas": 80,
+          "dri": 86,
+          "def": 78,
+          "phy": 78,
+          "pos": "CDM",
+          "team": "Arsenal",
+          "league": "Barclays WSL",
+          "nation": "England",
+          "name": "Georgia Stanway",
+          "gender": "Women's Football",
+          "id": 243404
+        }
+      ]
+    },
+    {
+      "ourId": "caldentey",
+      "name": "Mariona Caldentey",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "popp",
+      "name": "Alexandra Popp",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "gwinn",
+      "name": "Giulia Gwinn",
+      "winner": {
+        "ovr": 84,
+        "pac": 84,
+        "sho": 68,
+        "pas": 79,
+        "dri": 84,
+        "def": 82,
+        "phy": 70,
+        "pos": "RB",
+        "team": "FC Bayern München",
+        "league": "GPFBL",
+        "nation": "Germany",
+        "name": "Giulia Gwinn",
+        "gender": "Women's Football",
+        "id": 247788
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 84,
+          "pac": 84,
+          "sho": 68,
+          "pas": 79,
+          "dri": 84,
+          "def": 82,
+          "phy": 70,
+          "pos": "RB",
+          "team": "FC Bayern München",
+          "league": "GPFBL",
+          "nation": "Germany",
+          "name": "Giulia Gwinn",
+          "gender": "Women's Football",
+          "id": 247788
+        }
+      ]
+    },
+    {
+      "ourId": "diani",
+      "name": "Kadidiatou Diani",
+      "winner": {
+        "ovr": 87,
+        "pac": 91,
+        "sho": 84,
+        "pas": 81,
+        "dri": 88,
+        "def": 56,
+        "phy": 73,
+        "pos": "RM",
+        "team": "London City",
+        "league": "Barclays WSL",
+        "nation": "France",
+        "name": "Kadidiatou Diani",
+        "gender": "Women's Football",
+        "id": 227361
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 91,
+          "sho": 84,
+          "pas": 81,
+          "dri": 88,
+          "def": 56,
+          "phy": 73,
+          "pos": "RM",
+          "team": "London City",
+          "league": "Barclays WSL",
+          "nation": "France",
+          "name": "Kadidiatou Diani",
+          "gender": "Women's Football",
+          "id": 227361
+        }
+      ]
+    },
+    {
+      "ourId": "morgan",
+      "name": "Alex Morgan",
+      "winner": null,
+      "winnerScore": 0,
+      "seen": []
+    },
+    {
+      "ourId": "lavelle",
+      "name": "Rose Lavelle",
+      "winner": {
+        "ovr": 87,
+        "pac": 85,
+        "sho": 79,
+        "pas": 84,
+        "dri": 87,
+        "def": 60,
+        "phy": 65,
+        "pos": "CAM",
+        "team": "Gotham FC",
+        "league": "NWSL",
+        "nation": "United States",
+        "name": "Rose Lavelle",
+        "gender": "Women's Football",
+        "id": 232075
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 87,
+          "pac": 85,
+          "sho": 79,
+          "pas": 84,
+          "dri": 87,
+          "def": 60,
+          "phy": 65,
+          "pos": "CAM",
+          "team": "Gotham FC",
+          "league": "NWSL",
+          "nation": "United States",
+          "name": "Rose Lavelle",
+          "gender": "Women's Football",
+          "id": 232075
+        }
+      ]
+    },
+    {
+      "ourId": "swanson",
+      "name": "Mallory Swanson",
+      "winner": {
+        "ovr": 85,
+        "pac": 84,
+        "sho": 80,
+        "pas": 82,
+        "dri": 83,
+        "def": 42,
+        "phy": 58,
+        "pos": "LM",
+        "team": "Chicago Stars FC",
+        "league": "NWSL",
+        "nation": "United States",
+        "name": "Mallory Swanson",
+        "gender": "Women's Football",
+        "id": 232073
+      },
+      "winnerScore": 95,
+      "seen": [
+        {
+          "value": 95,
+          "ovr": 85,
+          "pac": 84,
+          "sho": 80,
+          "pas": 82,
+          "dri": 83,
+          "def": 42,
+          "phy": 58,
+          "pos": "LM",
+          "team": "Chicago Stars FC",
+          "league": "NWSL",
+          "nation": "United States",
+          "name": "Mallory Swanson",
+          "gender": "Women's Football",
+          "id": 232073
+        }
+      ]
+    }
+  ]
+}

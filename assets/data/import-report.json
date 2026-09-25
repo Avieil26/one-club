@@ -1,0 +1,661 @@
+{
+  "generatedAt": "2026-09-24T10:11:49.785Z",
+  "eaBuild": "M97aJNMwRgARBSdoH5nPR",
+  "minOvr": 73,
+  "eaTotalCatalog": 19789,
+  "importedGold": 3799,
+  "legacyKept": 9,
+  "rosterTotal": 3808,
+  "matchedExisting": 292,
+  "unmatchedExisting": [
+    {
+      "id": "vinicius",
+      "en": "Vinicius Junior",
+      "rating": 90
+    },
+    {
+      "id": "ralston",
+      "en": "Anthony Ralston",
+      "rating": 73
+    },
+    {
+      "id": "tavernier",
+      "en": "James Tavernier",
+      "rating": 79
+    },
+    {
+      "id": "souttar",
+      "en": "John Souttar",
+      "rating": 74
+    },
+    {
+      "id": "son",
+      "en": "Son Heung-min",
+      "rating": 87
+    },
+    {
+      "id": "aké",
+      "en": "aké",
+      "rating": 82
+    },
+    {
+      "id": "pandur",
+      "en": "Ivor Pandur",
+      "rating": 72
+    },
+    {
+      "id": "katoto",
+      "en": "Marie-Antoinette Katoto",
+      "rating": 86
+    },
+    {
+      "id": "kim",
+      "en": "Kim Min-jae",
+      "rating": 83
+    }
+  ],
+  "topNewPlayers": [
+    {
+      "id": "ea-246219-khadija-shaw",
+      "en": "Khadija Shaw",
+      "rating": 90,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-238794-vini-jr",
+      "en": "Vini Jr.",
+      "rating": 89,
+      "club": "ריאל מדריד"
+    },
+    {
+      "id": "ea-262531-claudia-pina",
+      "en": "Claudia Pina",
+      "rating": 89,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-241846-ewa-pajor",
+      "en": "Ewa Pajor",
+      "rating": 89,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-279799-temwa-chawinga",
+      "en": "Temwa Chawinga",
+      "rating": 89,
+      "club": "KC Current"
+    },
+    {
+      "id": "ea-256196-willian-pacho",
+      "en": "Willian Pacho",
+      "rating": 89,
+      "club": "פריז סן ז׳רמן"
+    },
+    {
+      "id": "ea-265898-melchie-dumornay",
+      "en": "Melchie Dumornay",
+      "rating": 88,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-245830-yui-hasegawa",
+      "en": "Yui Hasegawa",
+      "rating": 88,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-247819-nico-schlotterbeck",
+      "en": "Nico Schlotterbeck",
+      "rating": 87,
+      "club": "בורוסיה דורטמונד"
+    },
+    {
+      "id": "ea-259287-pernille-harder",
+      "en": "Pernille Harder",
+      "rating": 87,
+      "club": "באיירן מינכן"
+    },
+    {
+      "id": "ea-278219-tabitha-chawinga",
+      "en": "Tabitha Chawinga",
+      "rating": 87,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-253436-ona-batlle",
+      "en": "Ona Batlle",
+      "rating": 87,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-263009-hannah-hampton",
+      "en": "Hannah Hampton",
+      "rating": 87,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-265239-katie-mccabe",
+      "en": "Katie McCabe",
+      "rating": 86,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-265674-selma-bacha",
+      "en": "Selma Bacha",
+      "rating": 86,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-231432-lindsey-heaps",
+      "en": "Lindsey Heaps",
+      "rating": 86,
+      "club": "Denver Summit FC"
+    },
+    {
+      "id": "ea-259532-joan-garcia",
+      "en": "Joan García",
+      "rating": 86,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-245879-caroline-weir",
+      "en": "Caroline Weir",
+      "rating": 86,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-252154-marco-carnesecchi",
+      "en": "Marco Carnesecchi",
+      "rating": 86,
+      "club": "Bergamo Calcio"
+    },
+    {
+      "id": "ea-251570-rayan-cherki",
+      "en": "Rayan Cherki",
+      "rating": 86,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-227323-guro-reiten",
+      "en": "Guro Reiten",
+      "rating": 86,
+      "club": "Gotham FC"
+    },
+    {
+      "id": "ea-246272-marie-katoto",
+      "en": "Marie Katoto",
+      "rating": 86,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-273466-alyssa-thompson",
+      "en": "Alyssa Thompson",
+      "rating": 85,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-210008-adrien-rabiot",
+      "en": "Adrien Rabiot",
+      "rating": 85,
+      "club": "Milano FC"
+    },
+    {
+      "id": "ea-246641-chiamaka-nnadozie",
+      "en": "Chiamaka Nnadozie",
+      "rating": 85,
+      "club": "ברייטון"
+    },
+    {
+      "id": "ea-227353-kenza-dali",
+      "en": "Kenza Dali",
+      "rating": 85,
+      "club": "San Diego Wave"
+    },
+    {
+      "id": "ea-245882-erin-cuthbert",
+      "en": "Erin Cuthbert",
+      "rating": 85,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-227095-manuela-giugliano",
+      "en": "Manuela Giugliano",
+      "rating": 85,
+      "club": "רומא"
+    },
+    {
+      "id": "ea-261733-sandy-baltimore",
+      "en": "Sandy Baltimore",
+      "rating": 85,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-245697-clara-mateo",
+      "en": "Clara Mateo",
+      "rating": 85,
+      "club": "Paris FC"
+    },
+    {
+      "id": "ea-225375-konrad-laimer",
+      "en": "Konrad Laimer",
+      "rating": 85,
+      "club": "באיירן מינכן"
+    },
+    {
+      "id": "ea-230872-mile-svilar",
+      "en": "Mile Svilar",
+      "rating": 85,
+      "club": "AS Roma"
+    },
+    {
+      "id": "ea-240714-jill-roord",
+      "en": "Jill Roord",
+      "rating": 85,
+      "club": "FC Twente"
+    },
+    {
+      "id": "ea-268942-cata-coll",
+      "en": "Cata Coll",
+      "rating": 85,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-210035-grimaldo",
+      "en": "Grimaldo",
+      "rating": 85,
+      "club": "אתלטיקו מדריד"
+    },
+    {
+      "id": "ea-224293-ruben-neves",
+      "en": "Rúben Neves",
+      "rating": 85,
+      "club": "אל-הילאל"
+    },
+    {
+      "id": "ea-245037-eric-garcia",
+      "en": "Eric García",
+      "rating": 85,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-227254-alex-greenwood",
+      "en": "Alex Greenwood",
+      "rating": 85,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-265293-maya-le-tissier",
+      "en": "Maya Le Tissier",
+      "rating": 85,
+      "club": "Manchester Utd"
+    },
+    {
+      "id": "ea-240030-ellie-carpenter",
+      "en": "Ellie Carpenter",
+      "rating": 85,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-265340-jess-park",
+      "en": "Jess Park",
+      "rating": 85,
+      "club": "Manchester Utd"
+    },
+    {
+      "id": "ea-227337-svenja-huth",
+      "en": "Svenja Huth",
+      "rating": 85,
+      "club": "VfL Wolfsburg"
+    },
+    {
+      "id": "ea-232202-delphine-cascarino",
+      "en": "Delphine Cascarino",
+      "rating": 85,
+      "club": "London City"
+    },
+    {
+      "id": "ea-267234-kerolin-nicoli",
+      "en": "Kerolin Nicoli",
+      "rating": 85,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-177003-luka-modric",
+      "en": "Luka Modrić",
+      "rating": 85,
+      "club": "Milano FC"
+    },
+    {
+      "id": "ea-227110-caitlin-foord",
+      "en": "Caitlin Foord",
+      "rating": 85,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-264875-kerstin-casparij",
+      "en": "Kerstin Casparij",
+      "rating": 85,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-273136-lorena",
+      "en": "Lorena",
+      "rating": 85,
+      "club": "KC Current"
+    },
+    {
+      "id": "ea-248343-emily-fox",
+      "en": "Emily Fox",
+      "rating": 85,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-244302-lea-schuller",
+      "en": "Lea Schüller",
+      "rating": 85,
+      "club": "Manchester Utd"
+    },
+    {
+      "id": "ea-244176-deniz-undav",
+      "en": "Deniz Undav",
+      "rating": 85,
+      "club": "VfB Stuttgart"
+    },
+    {
+      "id": "ea-241159-marc-guehi",
+      "en": "Marc Guéhi",
+      "rating": 85,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-227013-fridolina-rolfo",
+      "en": "Fridolina Rolfö",
+      "rating": 84,
+      "club": "Manchester Utd"
+    },
+    {
+      "id": "ea-237197-grace-geyoro",
+      "en": "Grace Geyoro",
+      "rating": 84,
+      "club": "London City"
+    },
+    {
+      "id": "ea-264936-geraldine-reuteler",
+      "en": "Géraldine Reuteler",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-227119-steph-catley",
+      "en": "Steph Catley",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-267384-taylor-flint",
+      "en": "Taylor Flint",
+      "rating": 84,
+      "club": "Rac. Louisville"
+    },
+    {
+      "id": "ea-267530-esmee-brugts",
+      "en": "Esmee Brugts",
+      "rating": 84,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-245872-kim-little",
+      "en": "Kim Little",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-265063-janina-minge",
+      "en": "Janina Minge",
+      "rating": 84,
+      "club": "VfL Wolfsburg"
+    },
+    {
+      "id": "ea-264947-nicole-anyomi",
+      "en": "Nicole Anyomi",
+      "rating": 84,
+      "club": "London City"
+    },
+    {
+      "id": "ea-223848-sergej-milinkovicsavic",
+      "en": "Sergej Milinković-Savić",
+      "rating": 84,
+      "club": "אל-הילאל"
+    },
+    {
+      "id": "ea-228813-aleix-garcia",
+      "en": "Aleix García",
+      "rating": 84,
+      "club": "Leverkusen"
+    },
+    {
+      "id": "ea-177683-yann-sommer",
+      "en": "Yann Sommer",
+      "rating": 84,
+      "club": "קלאב ברוז׳"
+    },
+    {
+      "id": "ea-254243-elliot-anderson",
+      "en": "Elliot Anderson",
+      "rating": 84,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-272094-fiamma-benitez",
+      "en": "Fiamma Benítez",
+      "rating": 84,
+      "club": "אתלטיקו מדריד"
+    },
+    {
+      "id": "ea-277954-kenan-yldz",
+      "en": "Kenan Yıldız",
+      "rating": 84,
+      "club": "יובנטוס"
+    },
+    {
+      "id": "ea-261740-jule-brand",
+      "en": "Jule Brand",
+      "rating": 84,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-265536-damaris-egurrola",
+      "en": "Damaris Egurrola",
+      "rating": 84,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-265025-selina-cerci",
+      "en": "Selina Cerci",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-242896-ingrid-syrstad-engen",
+      "en": "Ingrid Syrstad Engen",
+      "rating": 84,
+      "club": "OL Lyonnes"
+    },
+    {
+      "id": "ea-193698-oliver-baumann",
+      "en": "Oliver Baumann",
+      "rating": 84,
+      "club": "TSG Hoffenheim"
+    },
+    {
+      "id": "ea-78012-yan-diomande",
+      "en": "Yan Diomande",
+      "rating": 84,
+      "club": "ריאל מדריד"
+    },
+    {
+      "id": "ea-277846-nico-paz",
+      "en": "Nico Paz",
+      "rating": 84,
+      "club": "Como"
+    },
+    {
+      "id": "ea-234579-julian-quinones",
+      "en": "Julián Quiñones",
+      "rating": 84,
+      "club": "Al Qadsiah"
+    },
+    {
+      "id": "ea-263011-ella-toone",
+      "en": "Ella Toone",
+      "rating": 84,
+      "club": "Manchester Utd"
+    },
+    {
+      "id": "ea-240243-matheus-cunha",
+      "en": "Matheus Cunha",
+      "rating": 84,
+      "club": "Man Utd"
+    },
+    {
+      "id": "ea-261773-laura-freigang",
+      "en": "Laura Freigang",
+      "rating": 84,
+      "club": "Frankfurt"
+    },
+    {
+      "id": "ea-258706-melvine-malard",
+      "en": "Melvine Malard",
+      "rating": 84,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-267382-naomi-girma",
+      "en": "Naomi Girma",
+      "rating": 84,
+      "club": "צ׳לסי"
+    },
+    {
+      "id": "ea-271446-vicky-lopez",
+      "en": "Vicky López",
+      "rating": 84,
+      "club": "ברצלונה"
+    },
+    {
+      "id": "ea-227678-ezri-konsa",
+      "en": "Ezri Konsa",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-256197-piero-hincapie",
+      "en": "Piero Hincapié",
+      "rating": 84,
+      "club": "ארסנל"
+    },
+    {
+      "id": "ea-222077-manuel-locatelli",
+      "en": "Manuel Locatelli",
+      "rating": 84,
+      "club": "יובנטוס"
+    },
+    {
+      "id": "ea-236987-boubacar-kamara",
+      "en": "Boubacar Kamara",
+      "rating": 84,
+      "club": "אסטון וילה"
+    },
+    {
+      "id": "ea-226890-marta",
+      "en": "Marta",
+      "rating": 84,
+      "club": "Orlando Pride"
+    },
+    {
+      "id": "ea-210676-wladimiro-falcone",
+      "en": "Wladimiro Falcone",
+      "rating": 84,
+      "club": "Lecce"
+    },
+    {
+      "id": "ea-245824-ayaka-yamashita",
+      "en": "Ayaka Yamashita",
+      "rating": 84,
+      "club": "מנצ׳סטר סיטי"
+    },
+    {
+      "id": "ea-259372-athenea",
+      "en": "Athenea",
+      "rating": 84,
+      "club": "ריאל מדריד"
+    },
+    {
+      "id": "ea-264886-glodis-perla-viggosdottir",
+      "en": "Glódís Perla Viggósdóttir",
+      "rating": 84,
+      "club": "באיירן מינכן"
+    },
+    {
+      "id": "ea-266091-ashley-sanchez",
+      "en": "Ashley Sanchez",
+      "rating": 84,
+      "club": "NC Courage"
+    },
+    {
+      "id": "ea-239345-linda-dallmann",
+      "en": "Linda Dallmann",
+      "rating": 84,
+      "club": "באיירן מינכן"
+    },
+    {
+      "id": "ea-229476-waldemar-anton",
+      "en": "Waldemar Anton",
+      "rating": 84,
+      "club": "בורוסיה דורטמונד"
+    },
+    {
+      "id": "ea-20801-cristiano-ronaldo",
+      "en": "Cristiano Ronaldo",
+      "rating": 84,
+      "club": "Al Nassr"
+    },
+    {
+      "id": "ea-212218-aymeric-laporte",
+      "en": "Aymeric Laporte",
+      "rating": 84,
+      "club": "Athletic Club"
+    },
+    {
+      "id": "ea-229582-gianluca-mancini",
+      "en": "Gianluca Mancini",
+      "rating": 84,
+      "club": "AS Roma"
+    },
+    {
+      "id": "ea-247513-vanessa-gilles",
+      "en": "Vanessa Gilles",
+      "rating": 84,
+      "club": "באיירן מינכן"
+    },
+    {
+      "id": "ea-227327-sara-dabritz",
+      "en": "Sara Däbritz",
+      "rating": 83,
+      "club": "ריאל מדריד"
+    },
+    {
+      "id": "ea-262457-olga-carmona",
+      "en": "Olga Carmona",
+      "rating": 83,
+      "club": "פריז סן ז׳רמן"
+    },
+    {
+      "id": "ea-210514-joao-cancelo",
+      "en": "João Cancelo",
+      "rating": 83,
+      "club": "ברצלונה"
+    }
+  ],
+  "iconsSeparate": 82,
+  "projectedWithIcons": 3890
+}

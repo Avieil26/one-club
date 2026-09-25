@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+
+const players = fs.readFileSync('lib/fcPlayers.ts', 'utf8');
+const faces = fs.readFileSync('lib/eaFace.ts', 'utf8');
+const ids = [...players.matchAll(/p\('([^']+)'/g)].map((m) => m[1]);
+const faceKeys = [...faces.matchAll(/^\s+(?:'([^']+)'|([A-Za-z0-9\-]+)):\s*f\(/gm)].map((m) => m[1] || m[2]);
+const faceSet = new Set(faceKeys);
+const missing = ids.filter((id) => !faceSet.has(id));
+const dupes = ids.filter((id, index) => ids.indexOf(id) !== index);
+const faceDupes = faceKeys.filter((id, index) => faceKeys.indexOf(id) !== index);
+const incomplete = [...faces.matchAll(/f\(([^)]*)\)/g)].filter((m) => m[1].split(',').length !== 7);
+console.log('players', ids.length, 'faces', faceSet.size);
+console.log('missing', missing.join(',') || 'none');
+console.log('dupPlayers', dupes.join(',') || 'none');
+console.log('dupFaces', [...new Set(faceDupes)].join(',') || 'none');
+const catalog = fs.readFileSync('lib/sbcCatalog.ts', 'utf8');
+const used = [...catalog.matchAll(/'[a-z0-9\-]+'/g)].map((m) => m[0].slice(1, -1));
+const idSet = new Set(ids);
+const unknownSquad = used.filter((id) => id.startsWith('sbc-') ? false : /^[a-z]/.test(id) && !idSet.has(id) && !['classic', 'admin'].includes(id));
+console.log('badFaces', incomplete.length);
+console.log('squadIds', unknownSquad.join(',') || 'none');
+if (missing.length || dupes.length || faceDupes.length || incomplete.length || unknownSquad.length) process.exit(1);

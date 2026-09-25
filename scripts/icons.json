@@ -1,0 +1,6846 @@
+[
+  {
+    "url": "https://wefut.com/player/27/20691/pele",
+    "ovr": 95,
+    "position": "CAM",
+    "name": "Pelé",
+    "pac": 93,
+    "sho": 94,
+    "pas": 91,
+    "dri": 94,
+    "def": 58,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20690/diego-armando-maradona",
+    "ovr": 95,
+    "position": "CAM",
+    "name": "Maradona",
+    "pac": 90,
+    "sho": 91,
+    "pas": 91,
+    "dri": 96,
+    "def": 40,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/48/Argentina_celebrando_copa_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20693/ronaldo",
+    "ovr": 94,
+    "position": "ST",
+    "name": "Ronaldo",
+    "pac": 94,
+    "sho": 94,
+    "pas": 79,
+    "dri": 94,
+    "def": 43,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/36/12.12.2025_%E2%80%93_Cerim%C3%B4nia_de_lan%C3%A7amento_do_SBT_News_-_54980664160_%28cropped2%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20692/zinedine-zidane",
+    "ovr": 94,
+    "position": "CAM",
+    "name": "Zidane",
+    "pac": 83,
+    "sho": 90,
+    "pas": 94,
+    "dri": 94,
+    "def": 73,
+    "phy": 84,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20694/ronaldinho",
+    "ovr": 93,
+    "position": "LW",
+    "name": "Ronaldinho",
+    "pac": 91,
+    "sho": 89,
+    "pas": 90,
+    "dri": 95,
+    "def": 38,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Trickster",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Ronaldinho_in_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20695/franz-beckenbauer",
+    "ovr": 93,
+    "position": "CB",
+    "name": "Beckenbauer",
+    "pac": 82,
+    "sho": 73,
+    "pas": 88,
+    "dri": 84,
+    "def": 93,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/56/Franz_Beckenbauer_%281975%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20696/johan-cruyff",
+    "ovr": 93,
+    "position": "CAM",
+    "name": "Cruyff",
+    "pac": 90,
+    "sho": 91,
+    "pas": 90,
+    "dri": 94,
+    "def": 42,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Johan_Cruijff_%281974%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20697/paolo-maldini",
+    "ovr": 93,
+    "position": "CB",
+    "name": "Maldini",
+    "pac": 85,
+    "sho": 55,
+    "pas": 75,
+    "dri": 72,
+    "def": 95,
+    "phy": 84,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20698/garrincha",
+    "ovr": 93,
+    "position": "RW",
+    "name": "Garrincha",
+    "pac": 90,
+    "sho": 87,
+    "pas": 92,
+    "dri": 95,
+    "def": 40,
+    "phy": 66,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Manoel_Francisco_dos_Santos-Garrincha.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20699/mia-hamm",
+    "ovr": 93,
+    "position": "ST",
+    "name": "Hamm",
+    "pac": 92,
+    "sho": 93,
+    "pas": 86,
+    "dri": 92,
+    "def": 54,
+    "phy": 81,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "United States",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/7/75/Hamm_Luftbild_Innenstadt_2007.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20700/iniesta",
+    "ovr": 92,
+    "position": "CM",
+    "name": "Iniesta",
+    "pac": 83,
+    "sho": 80,
+    "pas": 91,
+    "dri": 92,
+    "def": 62,
+    "phy": 68,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Andr%C3%A9s_Iniesta_2011.jpg"
+  },
+  {
+    "url": "https://wefut.com/player/27/20701/gianluigi-buffon",
+    "ovr": 92,
+    "position": "GK",
+    "name": "Buffon",
+    "pac": 95,
+    "sho": 88,
+    "pas": 79,
+    "dri": 94,
+    "def": 51,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Far Reach",
+        "plus": true
+      },
+      {
+        "name": "Far Throw",
+        "plus": false
+      },
+      {
+        "name": "Cross Claimer",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20702/gerd-muller",
+    "ovr": 92,
+    "position": "ST",
+    "name": "Müller",
+    "pac": 87,
+    "sho": 92,
+    "pas": 76,
+    "dri": 85,
+    "def": 44,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Germany",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20703/nadine-angerer",
+    "ovr": 92,
+    "position": "GK",
+    "name": "Angerer",
+    "pac": 92,
+    "sho": 88,
+    "pas": 79,
+    "dri": 94,
+    "def": 59,
+    "phy": 92,
+    "playstyles": [
+      {
+        "name": "Far Reach",
+        "plus": true
+      },
+      {
+        "name": "Cross Claimer",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Germany",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20704/christine-sinclair",
+    "ovr": 92,
+    "position": "ST",
+    "name": "Sinclair",
+    "pac": 83,
+    "sho": 93,
+    "pas": 86,
+    "dri": 90,
+    "def": 54,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Canada",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c2/20260315_Jack_Sinclair_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20705/bobby-charlton",
+    "ovr": 92,
+    "position": "CAM",
+    "name": "Charlton",
+    "pac": 90,
+    "sho": 91,
+    "pas": 87,
+    "dri": 91,
+    "def": 50,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20706/ferenc-puskas",
+    "ovr": 92,
+    "position": "ST",
+    "name": "Puskás",
+    "pac": 90,
+    "sho": 94,
+    "pas": 89,
+    "dri": 91,
+    "def": 45,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Hungary",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20707/birgit-prinz",
+    "ovr": 92,
+    "position": "ST",
+    "name": "Prinz",
+    "pac": 84,
+    "sho": 92,
+    "pas": 80,
+    "dri": 85,
+    "def": 52,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Enforcer",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/39/Birgit_Prinz_20180519_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20708/oliver-kahn",
+    "ovr": 91,
+    "position": "GK",
+    "name": "Kahn",
+    "pac": 93,
+    "sho": 86,
+    "pas": 70,
+    "dri": 95,
+    "def": 57,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Far Reach",
+        "plus": true
+      },
+      {
+        "name": "Far Throw",
+        "plus": false
+      },
+      {
+        "name": "1v1 Close Down",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4b/2022-07-30_Fu%C3%9Fball%2C_M%C3%A4nner%2C_DFL-Supercup%2C_RB_Leipzig_-_FC_Bayern_M%C3%BCnchen_1DX_3179_by_Stepro.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20709/roberto-baggio",
+    "ovr": 91,
+    "position": "CAM",
+    "name": "Baggio",
+    "pac": 85,
+    "sho": 86,
+    "pas": 90,
+    "dri": 91,
+    "def": 38,
+    "phy": 65,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4e/%D8%B1%D9%88%D8%A8%D8%B1%D8%AA%D9%88_%D8%A8%D8%A7%D8%AC%D9%88_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20710/thierry-henry",
+    "ovr": 91,
+    "position": "ST",
+    "name": "Henry",
+    "pac": 93,
+    "sho": 90,
+    "pas": 84,
+    "dri": 90,
+    "def": 51,
+    "phy": 78,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Thierry_Henry_Charlton.jpg"
+  },
+  {
+    "url": "https://wefut.com/player/27/20711/cafu",
+    "ovr": 91,
+    "position": "RB",
+    "name": "Cafu",
+    "pac": 90,
+    "sho": 56,
+    "pas": 84,
+    "dri": 85,
+    "def": 88,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Relentless",
+        "plus": true
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/64/Cafu_-_26.02.2026_-_Cerim%C3%B4nia_de_apresenta%C3%A7%C3%A3o_das_ta%C3%A7as_da_Copa_do_Mundo_de_2026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20712/xavi",
+    "ovr": 91,
+    "position": "CM",
+    "name": "Xavi",
+    "pac": 80,
+    "sho": 78,
+    "pas": 92,
+    "dri": 91,
+    "def": 69,
+    "phy": 70,
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM"
+    ],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Xavi%2C_Persepolis_vs._Al_Sadd%2C_20190520_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20713/zlatan-ibrahimovic",
+    "ovr": 91,
+    "position": "ST",
+    "name": "Ibrahimović",
+    "pac": 84,
+    "sho": 93,
+    "pas": 82,
+    "dri": 90,
+    "def": 46,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Sweden",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Zlatan_Ibrahimovi%C4%87_nyc.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20714/zico",
+    "ovr": 91,
+    "position": "CAM",
+    "name": "Zico",
+    "pac": 89,
+    "sho": 92,
+    "pas": 91,
+    "dri": 91,
+    "def": 62,
+    "phy": 71,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Zico_2012_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20715/franco-baresi",
+    "ovr": 91,
+    "position": "CB",
+    "name": "Baresi",
+    "pac": 75,
+    "sho": 48,
+    "pas": 75,
+    "dri": 74,
+    "def": 94,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20716/carlos-alberto",
+    "ovr": 91,
+    "position": "RB",
+    "name": "Carlos Alberto",
+    "pac": 89,
+    "sho": 64,
+    "pas": 82,
+    "dri": 84,
+    "def": 88,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20717/marco-van-basten",
+    "ovr": 91,
+    "position": "ST",
+    "name": "van Basten",
+    "pac": 85,
+    "sho": 93,
+    "pas": 76,
+    "dri": 89,
+    "def": 37,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Acrobatic",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Netherlands",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20719/alex-morgan",
+    "ovr": 91,
+    "position": "ST",
+    "name": "Morgan",
+    "pac": 93,
+    "sho": 90,
+    "pas": 80,
+    "dri": 90,
+    "def": 48,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "United States",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20718/ruud-gullit",
+    "ovr": 91,
+    "position": "CAM",
+    "name": "Gullit",
+    "pac": 86,
+    "sho": 88,
+    "pas": 89,
+    "dri": 87,
+    "def": 80,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/67/25th_Laureus_World_Sports_Awards_-_Ruud_Gullit_-_240422_131911_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20720/homare-sawa",
+    "ovr": 91,
+    "position": "CM",
+    "name": "Sawa",
+    "pac": 84,
+    "sho": 87,
+    "pas": 91,
+    "dri": 91,
+    "def": 83,
+    "phy": 76,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Japan",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Homare_Sawa_2015_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20739/eusebio",
+    "ovr": 91,
+    "position": "ST",
+    "name": "Eusébio",
+    "pac": 92,
+    "sho": 92,
+    "pas": 84,
+    "dri": 91,
+    "def": 44,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Portugal",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/55/Eusebio_en_1973.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20742/rivaldo",
+    "ovr": 90,
+    "position": "LW",
+    "name": "Rivaldo",
+    "pac": 87,
+    "sho": 88,
+    "pas": 87,
+    "dri": 91,
+    "def": 42,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Rivaldo.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20743/casillas",
+    "ovr": 90,
+    "position": "GK",
+    "name": "Casillas",
+    "pac": 90,
+    "sho": 88,
+    "pas": 84,
+    "dri": 93,
+    "def": 59,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Footwork",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Far Reach",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Iker-Casillas-SportsTrade-2021-cropped.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20744/luis-figo",
+    "ovr": 90,
+    "position": "RW",
+    "name": "Luís Figo",
+    "pac": 89,
+    "sho": 84,
+    "pas": 88,
+    "dri": 91,
+    "def": 38,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Portugal",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/1/15/Luis_Figo_2023.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20745/andrea-pirlo",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Pirlo",
+    "pac": 75,
+    "sho": 79,
+    "pas": 93,
+    "dri": 89,
+    "def": 69,
+    "phy": 68,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6e/20150616_-_Portugal_-_Italie_-_Gen%C3%A8ve_-_Andrea_Pirlo_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20747/wayne-rooney",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Rooney",
+    "pac": 89,
+    "sho": 91,
+    "pas": 84,
+    "dri": 88,
+    "def": 59,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20746/raul",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Raúl",
+    "pac": 86,
+    "sho": 90,
+    "pas": 80,
+    "dri": 88,
+    "def": 45,
+    "phy": 72,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/5a/25th_Laureus_World_Sports_Awards_-_Ra%C3%BAl_-_240422_132916-2_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20748/julie-foudy",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Foudy",
+    "pac": 80,
+    "sho": 84,
+    "pas": 88,
+    "dri": 87,
+    "def": 76,
+    "phy": 81,
+    "playstyles": [
+      {
+        "name": "Relentless",
+        "plus": true
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "RB"
+    ],
+    "nation": "United States",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Julie_Foudy_portrait_shot_2014.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20749/hege-riise",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Riise",
+    "pac": 83,
+    "sho": 82,
+    "pas": 88,
+    "dri": 90,
+    "def": 78,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "RB"
+    ],
+    "nation": "Norway",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20751/toni-kroos",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Kroos",
+    "pac": 74,
+    "sho": 82,
+    "pas": 91,
+    "dri": 86,
+    "def": 76,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20750/kaka",
+    "ovr": 90,
+    "position": "CAM",
+    "name": "Kaká",
+    "pac": 90,
+    "sho": 85,
+    "pas": 87,
+    "dri": 90,
+    "def": 43,
+    "phy": 71,
+    "playstyles": [
+      {
+        "name": "Rapid",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20752/bobby-moore",
+    "ovr": 90,
+    "position": "CB",
+    "name": "Moore",
+    "pac": 74,
+    "sho": 62,
+    "pas": 81,
+    "dri": 76,
+    "def": 92,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20753/rivellino",
+    "ovr": 90,
+    "position": "CAM",
+    "name": "Rivellino",
+    "pac": 87,
+    "sho": 88,
+    "pas": 90,
+    "dri": 93,
+    "def": 46,
+    "phy": 72,
+    "playstyles": [
+      {
+        "name": "Trickster",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20754/tobin-heath",
+    "ovr": 90,
+    "position": "RW",
+    "name": "Heath",
+    "pac": 88,
+    "sho": 84,
+    "pas": 87,
+    "dri": 93,
+    "def": 55,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Trickster",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "United States",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20755/lotta-schelin",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Schelin",
+    "pac": 91,
+    "sho": 89,
+    "pas": 82,
+    "dri": 89,
+    "def": 46,
+    "phy": 82,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Sweden",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Lotta_Schelin_2016.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20756/george-best",
+    "ovr": 90,
+    "position": "RW",
+    "name": "Best",
+    "pac": 91,
+    "sho": 89,
+    "pas": 82,
+    "dri": 92,
+    "def": 56,
+    "phy": 69,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Northern Ireland",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20757/formiga",
+    "ovr": 90,
+    "position": "CDM",
+    "name": "Formiga",
+    "pac": 82,
+    "sho": 78,
+    "pas": 85,
+    "dri": 85,
+    "def": 90,
+    "phy": 86,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Formiga_na_NBR%2C_prepara%C3%A7%C3%A3o_Rio_2016.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20758/caroline-seger",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Seger",
+    "pac": 78,
+    "sho": 79,
+    "pas": 90,
+    "dri": 86,
+    "def": 85,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Sweden",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/34/17_Seger_Caroline_130406_Sve-Isl_2-0_173006_0300.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20759/aya-miyama",
+    "ovr": 90,
+    "position": "LM",
+    "name": "Miyama",
+    "pac": 84,
+    "sho": 86,
+    "pas": 88,
+    "dri": 90,
+    "def": 60,
+    "phy": 70,
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Japan",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/51/Aya_Miyama_in_2011.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20760/camille-abily",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Abily",
+    "pac": 82,
+    "sho": 89,
+    "pas": 90,
+    "dri": 89,
+    "def": 80,
+    "phy": 78,
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/00/FFWM2011_FRA-GER_20110705_imBorussiapark046.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20761/alessandro-del-piero",
+    "ovr": 90,
+    "position": "CAM",
+    "name": "Del Piero",
+    "pac": 83,
+    "sho": 90,
+    "pas": 87,
+    "dri": 91,
+    "def": 41,
+    "phy": 69,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/9/95/25th_Laureus_World_Sports_Awards_-_Alessandro_Del_Piero_-_240421_155220_%28cropped%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20763/roberto-carlos",
+    "ovr": 90,
+    "position": "LB",
+    "name": "Roberto Carlos",
+    "pac": 91,
+    "sho": 83,
+    "pas": 83,
+    "dri": 81,
+    "def": 85,
+    "phy": 86,
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a8/LS3_1288_%2853332367864%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20762/dennis-bergkamp",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Bergkamp",
+    "pac": 83,
+    "sho": 89,
+    "pas": 85,
+    "dri": 89,
+    "def": 35,
+    "phy": 76,
+    "playstyles": [
+      {
+        "name": "First Touch",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/7/75/Dennis_Bergkamp_2014_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20764/lothar-matthaus",
+    "ovr": 90,
+    "position": "CM",
+    "name": "Matthäus",
+    "pac": 88,
+    "sho": 87,
+    "pas": 88,
+    "dri": 81,
+    "def": 89,
+    "phy": 82,
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20765/karl-heinz-rummenigge",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Rummenigge",
+    "pac": 90,
+    "sho": 91,
+    "pas": 80,
+    "dri": 92,
+    "def": 56,
+    "phy": 78,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Germany",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20766/kenny-dalglish",
+    "ovr": 90,
+    "position": "ST",
+    "name": "Dalglish",
+    "pac": 89,
+    "sho": 90,
+    "pas": 83,
+    "dri": 89,
+    "def": 41,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Scotland",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20767/alan-shearer",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Shearer",
+    "pac": 82,
+    "sho": 91,
+    "pas": 76,
+    "dri": 81,
+    "def": 49,
+    "phy": 86,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20769/paul-scholes",
+    "ovr": 89,
+    "position": "CM",
+    "name": "Scholes",
+    "pac": 79,
+    "sho": 85,
+    "pas": 90,
+    "dri": 88,
+    "def": 68,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20768/roy-keane",
+    "ovr": 89,
+    "position": "CM",
+    "name": "Keane",
+    "pac": 78,
+    "sho": 74,
+    "pas": 82,
+    "dri": 83,
+    "def": 88,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": true
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Republic of Ireland",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Michael_Keane_2017.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20770/javier-zanetti",
+    "ovr": 89,
+    "position": "RB",
+    "name": "Zanetti",
+    "pac": 83,
+    "sho": 60,
+    "pas": 85,
+    "dri": 81,
+    "def": 86,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Relentless",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Argentina",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Metalist-Inter_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20771/alessandro-nesta",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Nesta",
+    "pac": 76,
+    "sho": 44,
+    "pas": 63,
+    "dri": 70,
+    "def": 92,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Block",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Alessandro_Nesta_as_Miami_FC_Manager.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20772/marcel-desailly",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Desailly",
+    "pac": 82,
+    "sho": 51,
+    "pas": 65,
+    "dri": 67,
+    "def": 89,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c7/25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Marcel_Desailly_-_240422_192752-3_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20773/fabio-cannavaro",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Cannavaro",
+    "pac": 80,
+    "sho": 44,
+    "pas": 62,
+    "dri": 67,
+    "def": 93,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Aerial Fortress",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/09/Fabio_Cannavaro_2011.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20774/francesco-totti",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Totti",
+    "pac": 85,
+    "sho": 91,
+    "pas": 89,
+    "dri": 90,
+    "def": 40,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Italy",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/42/KL-2018_%284%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20775/lilian-thuram",
+    "ovr": 89,
+    "position": "RB",
+    "name": "Thuram",
+    "pac": 88,
+    "sho": 58,
+    "pas": 76,
+    "dri": 75,
+    "def": 90,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": true
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/06/RC_Lens_-_OGC_Nice_%2810-04-2022%29_6_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20776/hristo-stoichkov",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Stoichkov",
+    "pac": 90,
+    "sho": 91,
+    "pas": 84,
+    "dri": 90,
+    "def": 49,
+    "phy": 84,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Bulgaria",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20777/frank-lampard",
+    "ovr": 89,
+    "position": "CM",
+    "name": "Lampard",
+    "pac": 78,
+    "sho": 91,
+    "pas": 88,
+    "dri": 86,
+    "def": 75,
+    "phy": 81,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/33/The_Frank_Lampard.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20778/pavel-nedved",
+    "ovr": 89,
+    "position": "LM",
+    "name": "Nedvěd",
+    "pac": 86,
+    "sho": 86,
+    "pas": 87,
+    "dri": 88,
+    "def": 58,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Czech Republic",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/46/Pavel_Nedv%C4%9Bd.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20779/rio-ferdinand",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Ferdinand",
+    "pac": 84,
+    "sho": 48,
+    "pas": 65,
+    "dri": 65,
+    "def": 90,
+    "phy": 86,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20780/samuel-eto-o",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Eto'o",
+    "pac": 92,
+    "sho": 90,
+    "pas": 79,
+    "dri": 87,
+    "def": 45,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Cameroon",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20781/ruud-van-nistelrooy",
+    "ovr": 89,
+    "position": "ST",
+    "name": "van Nistelrooy",
+    "pac": 84,
+    "sho": 89,
+    "pas": 71,
+    "dri": 84,
+    "def": 38,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Netherlands",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20782/andriy-shevchenko",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Shevchenko",
+    "pac": 87,
+    "sho": 90,
+    "pas": 72,
+    "dri": 86,
+    "def": 35,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Ukraine",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20783/steven-gerrard",
+    "ovr": 89,
+    "position": "CM",
+    "name": "Gerrard",
+    "pac": 80,
+    "sho": 88,
+    "pas": 89,
+    "dri": 86,
+    "def": 78,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20784/didier-drogba",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Drogba",
+    "pac": 87,
+    "sho": 90,
+    "pas": 74,
+    "dri": 81,
+    "def": 44,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Côte d'Ivoire",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/7/77/Didier_Drogba_%282019%29_%28cropped2%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20785/steffi-jones",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Jones",
+    "pac": 80,
+    "sho": 59,
+    "pas": 74,
+    "dri": 70,
+    "def": 91,
+    "phy": 86,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/2/26/Curtis_Jones_in_2022.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20786/pepe",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Pepe",
+    "pac": 78,
+    "sho": 51,
+    "pas": 61,
+    "dri": 65,
+    "def": 90,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Portugal",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/55/Pepe_2018.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20787/philipp-lahm",
+    "ovr": 89,
+    "position": "RB",
+    "name": "Lahm",
+    "pac": 84,
+    "sho": 68,
+    "pas": 85,
+    "dri": 83,
+    "def": 86,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Philipp_Lahm_auf_der_Berlinale_2024%2C_Ausschnitt.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20788/sergio-aguero",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Agüero",
+    "pac": 88,
+    "sho": 90,
+    "pas": 78,
+    "dri": 89,
+    "def": 33,
+    "phy": 74,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20789/hugo-sanchez",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Sánchez",
+    "pac": 89,
+    "sho": 90,
+    "pas": 78,
+    "dri": 89,
+    "def": 41,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Acrobatic",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Mexico",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Robert_S%C3%A1nchez_FIFA_Club_World_Cup_final_extraction.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20791/jean-pierre-papin",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Papin",
+    "pac": 83,
+    "sho": 93,
+    "pas": 73,
+    "dri": 83,
+    "def": 44,
+    "phy": 76,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/PapinJP1997_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20792/eric-cantona",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Cantona",
+    "pac": 86,
+    "sho": 89,
+    "pas": 86,
+    "dri": 89,
+    "def": 50,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Eric_Cantona_Cannes_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20794/ronald-koeman",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Koeman",
+    "pac": 78,
+    "sho": 86,
+    "pas": 86,
+    "dri": 79,
+    "def": 89,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Martin_Koeman%2C_Blauw-Wit%2C_1962.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20795/marcelo",
+    "ovr": 89,
+    "position": "LB",
+    "name": "Marcelo",
+    "pac": 87,
+    "sho": 72,
+    "pas": 87,
+    "dri": 89,
+    "def": 83,
+    "phy": 76,
+    "playstyles": [
+      {
+        "name": "First Touch",
+        "plus": true
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Marcelo_Vieira_in_2022.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20798/emilio-butragueno",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Emilio Butragueño",
+    "pac": 92,
+    "sho": 89,
+    "pas": 78,
+    "dri": 90,
+    "def": 40,
+    "phy": 66,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Spain",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20797/socrates",
+    "ovr": 89,
+    "position": "CAM",
+    "name": "Sócrates",
+    "pac": 82,
+    "sho": 88,
+    "pas": 89,
+    "dri": 89,
+    "def": 43,
+    "phy": 82,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20800/gary-lineker",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Lineker",
+    "pac": 86,
+    "sho": 89,
+    "pas": 71,
+    "dri": 84,
+    "def": 40,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20801/gabriel-batistuta",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Batistuta",
+    "pac": 86,
+    "sho": 92,
+    "pas": 74,
+    "dri": 82,
+    "def": 38,
+    "phy": 81,
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20803/kelly-smith",
+    "ovr": 89,
+    "position": "ST",
+    "name": "Smith",
+    "pac": 88,
+    "sho": 90,
+    "pas": 84,
+    "dri": 89,
+    "def": 46,
+    "phy": 77,
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20805/carles-puyol",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Carles Puyol",
+    "pac": 75,
+    "sho": 46,
+    "pas": 66,
+    "dri": 60,
+    "def": 91,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Slide Tackle",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/65/Premios_Goya_2020_-_Carles_Pujol.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20806/peter-schmeichel",
+    "ovr": 89,
+    "position": "GK",
+    "name": "Schmeichel",
+    "pac": 89,
+    "sho": 84,
+    "pas": 86,
+    "dri": 91,
+    "def": 47,
+    "phy": 87,
+    "playstyles": [
+      {
+        "name": "Far Throw",
+        "plus": true
+      },
+      {
+        "name": "Footwork",
+        "plus": false
+      },
+      {
+        "name": "1v1 Close Down",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Denmark",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/9/95/Kasper_Schmeichel_Celtic-20240722_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20808/lucio",
+    "ovr": 89,
+    "position": "CB",
+    "name": "Lúcio",
+    "pac": 82,
+    "sho": 72,
+    "pas": 74,
+    "dri": 78,
+    "def": 91,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Aerial Fortress",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/9/94/Lucio_2019_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20809/jairzinho",
+    "ovr": 89,
+    "position": "RW",
+    "name": "Jairzinho",
+    "pac": 91,
+    "sho": 89,
+    "pas": 84,
+    "dri": 90,
+    "def": 49,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "Rapid",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Jairzinho_1970s.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20814/david-beckham",
+    "ovr": 88,
+    "position": "RM",
+    "name": "Beckham",
+    "pac": 80,
+    "sho": 86,
+    "pas": 92,
+    "dri": 85,
+    "def": 66,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Odell_Beckham_Jr._%2853103730122%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20817/emmanuel-petit",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Petit",
+    "pac": 77,
+    "sho": 77,
+    "pas": 79,
+    "dri": 77,
+    "def": 85,
+    "phy": 87,
+    "playstyles": [
+      {
+        "name": "Relentless",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CAM",
+      "CM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Petit_2023.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20816/robert-pires",
+    "ovr": 88,
+    "position": "LM",
+    "name": "Pirès",
+    "pac": 86,
+    "sho": 81,
+    "pas": 86,
+    "dri": 87,
+    "def": 38,
+    "phy": 67,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Lucas_Pires_29112025_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20820/michael-owen",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Owen",
+    "pac": 89,
+    "sho": 88,
+    "pas": 69,
+    "dri": 87,
+    "def": 35,
+    "phy": 68,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/50/Owen_Beck.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20818/claude-makelele",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Makélélé",
+    "pac": 81,
+    "sho": 48,
+    "pas": 76,
+    "dri": 78,
+    "def": 88,
+    "phy": 87,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Claude_Mak%C3%A9l%C3%A9l%C3%A9_%2853557564951%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20823/hernan-crespo",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Crespo",
+    "pac": 88,
+    "sho": 88,
+    "pas": 71,
+    "dri": 87,
+    "def": 36,
+    "phy": 71,
+    "playstyles": [
+      {
+        "name": "Precision Header",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Chelsea_Legends_1_Inter_Forever_4_%2827457022797%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20824/yaya-toure",
+    "ovr": 88,
+    "position": "CM",
+    "name": "Touré",
+    "pac": 80,
+    "sho": 85,
+    "pas": 89,
+    "dri": 84,
+    "def": 81,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Côte d'Ivoire",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20825/juan-roman-riquelme",
+    "ovr": 88,
+    "position": "CAM",
+    "name": "Riquelme",
+    "pac": 74,
+    "sho": 85,
+    "pas": 90,
+    "dri": 91,
+    "def": 33,
+    "phy": 68,
+    "playstyles": [
+      {
+        "name": "Inventive",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20827/ashley-cole",
+    "ovr": 88,
+    "position": "LB",
+    "name": "Cole",
+    "pac": 88,
+    "sho": 65,
+    "pas": 79,
+    "dri": 80,
+    "def": 86,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": true
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20828/xabi-alonso",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Xabi Alonso",
+    "pac": 74,
+    "sho": 77,
+    "pas": 86,
+    "dri": 81,
+    "def": 83,
+    "phy": 80,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Spain",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20829/michael-essien",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Essien",
+    "pac": 82,
+    "sho": 73,
+    "pas": 77,
+    "dri": 79,
+    "def": 86,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Ghana",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20830/petr-cech",
+    "ovr": 88,
+    "position": "GK",
+    "name": "Čech",
+    "pac": 86,
+    "sho": 85,
+    "pas": 76,
+    "dri": 88,
+    "def": 54,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Deflector",
+        "plus": true
+      },
+      {
+        "name": "Far Throw",
+        "plus": false
+      },
+      {
+        "name": "Far Reach",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Czech Republic",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/7/75/Arsenal_players_training_before_2019_UEFA_Europa_League_final_07_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20831/fernando-torres",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Fernando Torres",
+    "pac": 90,
+    "sho": 87,
+    "pas": 76,
+    "dri": 87,
+    "def": 43,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Spain",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Fernando_Torres_2017.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20832/edwin-van-der-sar",
+    "ovr": 88,
+    "position": "GK",
+    "name": "van der Sar",
+    "pac": 84,
+    "sho": 87,
+    "pas": 79,
+    "dri": 86,
+    "def": 39,
+    "phy": 92,
+    "playstyles": [
+      {
+        "name": "1v1 Close Down",
+        "plus": true
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Deflector",
+        "plus": false
+      }
+    ],
+    "positions": [],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Edwin_van_der_Sar_2015.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20834/marinette-pichon",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Pichon",
+    "pac": 85,
+    "sho": 89,
+    "pas": 80,
+    "dri": 88,
+    "def": 44,
+    "phy": 75,
+    "playstyles": [
+      {
+        "name": "Acrobatic",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20833/gareth-bale",
+    "ovr": 88,
+    "position": "RW",
+    "name": "Bale",
+    "pac": 95,
+    "sho": 89,
+    "pas": 84,
+    "dri": 89,
+    "def": 65,
+    "phy": 79,
+    "playstyles": [
+      {
+        "name": "Rapid",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Wales",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/f/ff/2022_FIFA_World_Cup_United_States_1%E2%80%931_Wales_-_%2832%29_2.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20836/sissi",
+    "ovr": 88,
+    "position": "CAM",
+    "name": "Sissi",
+    "pac": 84,
+    "sho": 89,
+    "pas": 88,
+    "dri": 87,
+    "def": 41,
+    "phy": 69,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Sele%C3%A7%C3%A3o_Brasileira_Feminina_nos_Jogos_Ol%C3%ADmpicos_de_Sydney%2C_2000%2C_Acervo_do_Museu_do_Futebol_%28cropped_Sissi%29.tif?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20837/mario-kempes",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Kempes",
+    "pac": 86,
+    "sho": 91,
+    "pas": 77,
+    "dri": 86,
+    "def": 47,
+    "phy": 82,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Argentina",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Mario_Kempes_Argentina_v_Spain_19_July_2026-036_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20838/geoff-hurst",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Hurst",
+    "pac": 84,
+    "sho": 91,
+    "pas": 72,
+    "dri": 83,
+    "def": 39,
+    "phy": 78,
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Geoff_Hurst_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20840/bastian-schweinsteiger",
+    "ovr": 88,
+    "position": "CM",
+    "name": "Schweinsteiger",
+    "pac": 78,
+    "sho": 83,
+    "pas": 86,
+    "dri": 83,
+    "def": 83,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Re-publica_23_-_Tag_3_%2852957826298%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20841/maicon",
+    "ovr": 88,
+    "position": "RB",
+    "name": "Maicon",
+    "pac": 86,
+    "sho": 82,
+    "pas": 81,
+    "dri": 84,
+    "def": 83,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Whipped Pass",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/1/17/Maicon_Douglas_Sisenando_-_Inter_Mailand_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20842/giorgio-chiellini",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Chiellini",
+    "pac": 78,
+    "sho": 55,
+    "pas": 62,
+    "dri": 64,
+    "def": 92,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Long Throw",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20843/nemanja-vidic",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Vidić",
+    "pac": 79,
+    "sho": 48,
+    "pas": 62,
+    "dri": 62,
+    "def": 90,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Serbia",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20845/franck-ribery",
+    "ovr": 88,
+    "position": "LM",
+    "name": "Ribéry",
+    "pac": 89,
+    "sho": 85,
+    "pas": 85,
+    "dri": 90,
+    "def": 37,
+    "phy": 67,
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "France",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20846/fernando-hierro",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Fernando Hierro",
+    "pac": 75,
+    "sho": 75,
+    "pas": 76,
+    "dri": 69,
+    "def": 92,
+    "phy": 84,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Spain",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20848/gheorghe-hagi",
+    "ovr": 88,
+    "position": "CAM",
+    "name": "Hagi",
+    "pac": 83,
+    "sho": 87,
+    "pas": 88,
+    "dri": 88,
+    "def": 41,
+    "phy": 68,
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Romania",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20849/cha-bum-kun",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Cha Bum Kun",
+    "pac": 88,
+    "sho": 87,
+    "pas": 78,
+    "dri": 86,
+    "def": 60,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Korea Republic",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/05/Cha_Bum_Kun.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20850/dunga",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Dunga",
+    "pac": 76,
+    "sho": 77,
+    "pas": 82,
+    "dri": 82,
+    "def": 87,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Brazil",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/66/Aecio_Neves_e_Dunga_-_17-06-2008_%288368243127%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20851/raphael-varane",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Varane",
+    "pac": 84,
+    "sho": 49,
+    "pas": 66,
+    "dri": 74,
+    "def": 88,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Liver-RM_%288%29_%28Varane%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20852/frank-rijkaard",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Rijkaard",
+    "pac": 77,
+    "sho": 76,
+    "pas": 80,
+    "dri": 80,
+    "def": 87,
+    "phy": 87,
+    "playstyles": [
+      {
+        "name": "Intercept",
+        "plus": true
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4a/FrankRijkaard2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20854/michael-laudrup",
+    "ovr": 88,
+    "position": "CAM",
+    "name": "Laudrup",
+    "pac": 84,
+    "sho": 82,
+    "pas": 89,
+    "dri": 90,
+    "def": 40,
+    "phy": 64,
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Denmark",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/1/15/Brian-Laudrup-Darren-Laver-Lars-Hogh_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20857/ellen-white",
+    "ovr": 88,
+    "position": "ST",
+    "name": "White",
+    "pac": 88,
+    "sho": 88,
+    "pas": 73,
+    "dri": 85,
+    "def": 55,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Ben_White_2018.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20858/patrick-vieira",
+    "ovr": 88,
+    "position": "CM",
+    "name": "Vieira",
+    "pac": 82,
+    "sho": 78,
+    "pas": 80,
+    "dri": 83,
+    "def": 88,
+    "phy": 90,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/54/RC_Lens_-_Arsenal_FC_%2803-10-2023%29_18_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20859/laurent-blanc",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Blanc",
+    "pac": 78,
+    "sho": 75,
+    "pas": 75,
+    "dri": 79,
+    "def": 90,
+    "phy": 85,
+    "playstyles": [
+      {
+        "name": "Anticipate",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "ST",
+      "CM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "France",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20860/miroslav-klose",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Klose",
+    "pac": 86,
+    "sho": 87,
+    "pas": 73,
+    "dri": 81,
+    "def": 40,
+    "phy": 79,
+    "playstyles": [
+      {
+        "name": "Precision Header",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Germany",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8c/2016209185719_2016-07-27_Champions_for_Charity_-_Sven_-_1D_X_-_0149_-_DV3P4742_mod.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20861/sol-campbell",
+    "ovr": 88,
+    "position": "CB",
+    "name": "Campbell",
+    "pac": 81,
+    "sho": 45,
+    "pas": 60,
+    "dri": 61,
+    "def": 89,
+    "phy": 89,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20862/gennaro-gattuso",
+    "ovr": 88,
+    "position": "CDM",
+    "name": "Gattuso",
+    "pac": 76,
+    "sho": 62,
+    "pas": 69,
+    "dri": 72,
+    "def": 88,
+    "phy": 88,
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": true
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20864/ian-rush",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Rush",
+    "pac": 85,
+    "sho": 90,
+    "pas": 69,
+    "dri": 85,
+    "def": 43,
+    "phy": 79,
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "Wales",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20863/john-barnes",
+    "ovr": 88,
+    "position": "LW",
+    "name": "Barnes",
+    "pac": 89,
+    "sho": 85,
+    "pas": 83,
+    "dri": 90,
+    "def": 44,
+    "phy": 83,
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20865/ian-wright",
+    "ovr": 88,
+    "position": "ST",
+    "name": "Wright",
+    "pac": 89,
+    "sho": 89,
+    "pas": 70,
+    "dri": 83,
+    "def": 40,
+    "phy": 76,
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "RM"
+    ],
+    "nation": "England",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20866/gianluca-zambrotta",
+    "ovr": 88,
+    "position": "RB",
+    "name": "Zambrotta",
+    "pac": 88,
+    "sho": 69,
+    "pas": 81,
+    "dri": 82,
+    "def": 85,
+    "phy": 82,
+    "playstyles": [
+      {
+        "name": "Relentless",
+        "plus": true
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM",
+      "CDM",
+      "LB",
+      "CB",
+      "RB"
+    ],
+    "nation": "Italy",
+    "photo": ""
+  },
+  {
+    "url": "https://wefut.com/player/27/20868/robin-van-persie",
+    "ovr": 88,
+    "position": "ST",
+    "name": "van Persie",
+    "pac": 84,
+    "sho": 91,
+    "pas": 84,
+    "dri": 88,
+    "def": 45,
+    "phy": 73,
+    "playstyles": [
+      {
+        "name": "First Touch",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Netherlands",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/0/00/Feyenoord_Rotterdam_U19_vs._FC_Salburg_U19_%28Uefa_Youth_League_2024-11-06_Vierte_Runde%29_37_%28Shaqueel_van_Persie%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  {
+    "url": "https://wefut.com/player/27/20871/yuki-nagasato",
+    "ovr": 88,
+    "position": "CAM",
+    "name": "Nagasato",
+    "pac": 83,
+    "sho": 88,
+    "pas": 84,
+    "dri": 89,
+    "def": 47,
+    "phy": 78,
+    "playstyles": [
+      {
+        "name": "First Touch",
+        "plus": true
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      }
+    ],
+    "positions": [
+      "LW",
+      "ST",
+      "RW",
+      "CAM",
+      "LM",
+      "CM",
+      "RM"
+    ],
+    "nation": "Japan",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Yuki_Nagasato_BL_FCB_gg._1._FFC_Frankfurt_Muenchen-1_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  }
+]
