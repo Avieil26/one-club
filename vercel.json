@@ -14,9 +14,15 @@
       ]
     }
   ],
+  "crons": [
+    {
+      "path": "/api/market-prices",
+      "schedule": "0 4 * * *"
+    }
+  ],
   "rewrites": [
     {
-      "source": "/((?!futz-beta\\.apk).*)",
+      "source": "/((?!futz-beta\\.apk|api/|career-preview\\.png).*)",
       "destination": "/"
     }
   ]

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>משחקונים</title>
+<style>
+  @font-face {
+    font-family: Heebo;
+    src: url("fonts/Heebo.ttf") format("truetype");
+    font-weight: 100 900;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07090d; color: #f7f4ea; font-family: Heebo, Arial, sans-serif; }
+  body { padding: 22px; display: flex; gap: 22px; direction: ltr; align-items: flex-start; }
+  .kicker { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-align: right; direction: rtl; }
+  .phone {
+    width: 390px; min-height: 780px; border-radius: 28px; overflow: hidden;
+    display: flex; flex-direction: column; direction: rtl;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 28px 60px rgba(0,0,0,.5);
+  }
+  .stripes { height: 7px; display: flex; direction: ltr; }
+  .stripes i { flex: 1; }
+  .pad { padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .pill {
+    height: 28px; padding: 0 10px; border-radius: 99px; display: flex; align-items: center;
+    font-size: 12px; font-weight: 800;
+    background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14);
+  }
+  h1 { margin: 0; font-size: 30px; font-weight: 800; line-height: 1; text-align: right; }
+  .lead { margin: 0; font-size: 13px; line-height: 1.45; font-weight: 500; color: rgba(247,244,234,.74); text-align: right; }
+
+  .hub { background: radial-gradient(480px 240px at 100% 0%, rgba(226,59,87,.2), transparent 55%), linear-gradient(180deg, #16141c, #0c0e14 42%, #08090d); }
+  .hero {
+    border-radius: 18px; overflow: hidden; min-height: 210px; display: flex; direction: ltr;
+    background: linear-gradient(160deg, #3a1520, #1a0b10 70%);
+    box-shadow: inset 0 0 0 1px rgba(255,143,163,.35), 0 16px 30px rgba(0,0,0,.35);
+  }
+  .hero img { width: 148px; height: 210px; object-fit: cover; object-position: center 12%; }
+  .hero .copy { flex: 1; padding: 16px; display: flex; flex-direction: column; align-items: flex-end; direction: rtl; }
+  .hero .copy span { color: #ff8fa3; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+  .hero h2 { margin: 8px 0 0; font-size: 28px; text-align: right; }
+  .hero p { margin: 8px 0 0; text-align: right; color: rgba(247,244,234,.75); font-size: 13px; line-height: 1.4; }
+  .play {
+    margin-top: auto; height: 42px; border: 0; border-radius: 8px; background: #f4f1e6; color: #2a0a12;
+    font-family: Heebo, Arial, sans-serif; font-weight: 800; font-size: 15px; padding: 0 14px;
+    box-shadow: inset -4px 0 0 #b4233c; display: flex; align-items: center; gap: 8px;
+  }
+  .soon {
+    border-radius: 18px; padding: 14px; display: flex; gap: 10px; align-items: center; direction: ltr;
+    background: linear-gradient(160deg, rgba(196,146,255,.16), rgba(20,12,28,.8));
+    box-shadow: inset 0 0 0 1px rgba(196,146,255,.35);
+  }
+  .soon .faces { display: flex; }
+  .soon .faces img { width: 42px; height: 56px; object-fit: cover; object-position: center 16%; border-radius: 8px; margin-left: -8px; box-shadow: 0 6px 12px rgba(0,0,0,.4); }
+  .soon .faces img:first-child { margin-left: 0; }
+  .soon .txt { flex: 1; text-align: right; direction: rtl; }
+  .soon b { display: block; font-size: 16px; }
+  .soon em { font-style: normal; color: #d7b4ff; font-size: 12px; font-weight: 700; }
+
+  .club { background: radial-gradient(420px 200px at 90% 0%, rgba(226,59,87,.28), transparent 55%), linear-gradient(180deg, #2a1218, #14090d 50%, #090607); }
+  .club .k { color: #ff8fa3; }
+  .club .stripes i:nth-child(1) { background: #6b1d32; }
+  .club .stripes i:nth-child(2) { background: #f4f1e6; }
+  .club .stripes i:nth-child(3) { background: #e23b57; }
+  .shot { height: 250px; border-radius: 18px; overflow: hidden; position: relative; box-shadow: inset 0 0 0 1px rgba(255,143,163,.35), 0 16px 28px rgba(0,0,0,.4); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
+  .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,6,10,.72), transparent 42%); }
+  .opt {
+    height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; font-weight: 800; font-size: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .badge { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+  .lives { display: flex; gap: 6px; }
+  .lives i { width: 10px; height: 10px; border-radius: 99px; background: #e23b57; box-shadow: 0 0 8px rgba(226,59,87,.7); }
+
+  .draft { background: radial-gradient(460px 220px at 80% 0%, rgba(196,146,255,.3), transparent 52%), linear-gradient(180deg, #241433, #100a16 46%, #09070d); }
+  .draft .k { color: #d7b4ff; }
+  .draft .stripes i:nth-child(1) { background: #4a2170; }
+  .draft .stripes i:nth-child(2) { background: #f4f1e6; }
+  .draft .stripes i:nth-child(3) { background: #c492ff; }
+  .pitch {
+    height: 132px; border-radius: 14px; position: relative; direction: ltr;
+    background: linear-gradient(180deg, #163528, #0c2218);
+    box-shadow: inset 0 0 0 1px rgba(160,230,200,.28);
+  }
+  .p { position: absolute; width: 28px; height: 36px; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,.4); }
+  .p img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+  .hole { position: absolute; width: 32px; height: 42px; border-radius: 7px; border: 1.5px dashed #d7b4ff; box-shadow: 0 0 12px rgba(196,146,255,.45); }
+  .five { display: flex; gap: 6px; direction: ltr; }
+  .fc {
+    flex: 1; border-radius: 10px; overflow: hidden; background: linear-gradient(180deg, #3a2a12, #161008); color: #f7f4ea;
+    box-shadow: 0 0 0 1px rgba(240,212,138,.45), 0 8px 14px rgba(0,0,0,.35);
+  }
+  .fc.focus { transform: translateY(-6px); box-shadow: 0 0 0 2px #c492ff, 0 12px 18px rgba(0,0,0,.45); }
+  .fc img { width: 100%; height: 78px; object-fit: cover; object-position: center 14%; display: block; }
+  .fc .ov { position: absolute; }
+  .fc { position: relative; }
+  .fc .ov { top: 4px; left: 4px; font-size: 12px; font-weight: 800; text-shadow: 0 1px 3px #000; }
+  .fc b { display: block; text-align: center; font-size: 10px; padding: 4px 2px 5px; }
+</style>
+</head>
+<body>
+  <section style="width:390px">
+    <p class="kicker" style="color:#ff8fa3">הטאב</p>
+    <article class="phone hub">
+      <div class="pad">
+        <h1>משחקונים</h1>
+        <p class="lead">משחקים קצרים על הקלפים שכבר יש במאגר. מעט נקודות, בשביל להישאר.</p>
+        <div class="hero">
+          <div class="copy">
+            <span>מועדון</span>
+            <h2>איזה מועדון</h2>
+            <p>מזהים את השחקן ובוחרים איפה הוא משחק.</p>
+            <button class="play"><i style="width:8px;height:8px;background:#e23b57;display:block"></i>שחק</button>
+          </div>
+          <img src="games/saka.png" alt="" />
+        </div>
+        <div class="soon">
+          <div class="faces">
+            <img src="games/haaland.png" alt="" />
+            <img src="games/kane.png" alt="" />
+            <img src="games/salah.png" alt="" />
+          </div>
+          <div class="txt">
+            <b>דראפט</b>
+            <em>חמישה קלפים לעמדה, כמו ב־EA</em>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section style="width:390px">
+    <p class="kicker" style="color:#ff8fa3">איזה מועדון</p>
+    <article class="phone club">
+      <div class="stripes"><i></i><i></i><i></i></div>
+      <div class="pad">
+        <div class="top">
+          <span class="pill k">+12 לניחוש</span>
+          <span class="lives"><i></i><i></i><i></i></span>
+        </div>
+        <h1>איזה מועדון?</h1>
+        <p class="lead">השם מוסתר. שלוש טעויות סוגרות את הסיבוב.</p>
+        <div class="shot"><img src="games/saka.png" alt="" /></div>
+        <div class="opt">ארסנל <span class="badge" style="background:#9c1d2e;color:#fff">ARS</span></div>
+        <div class="opt">צ׳לסי <span class="badge" style="background:#034694;color:#fff">CHE</span></div>
+        <div class="opt">טוטנהאם <span class="badge" style="background:#12223a;color:#fff">TOT</span></div>
+        <div class="opt">מנצ׳סטר יונייטד <span class="badge" style="background:#c8102e;color:#fff">MUN</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section style="width:390px">
+    <p class="kicker" style="color:#d7b4ff">דראפט</p>
+    <article class="phone draft">
+      <div class="stripes"><i></i><i></i><i></i></div>
+      <div class="pad">
+        <div class="top">
+          <span class="pill">4-3-3</span>
+          <span class="pill k">כימיה 9</span>
+        </div>
+        <h1>בחרו קפטן</h1>
+        <p class="lead">קודם נבחר המערך. עכשיו אחד מחמישה כוכבים. אחר כך חמישה קלפים לכל עמדה, והמגרש מתמלא.</p>
+        <div class="pitch">
+          <div class="hole" style="left:176px;top:10px"></div>
+          <div class="p" style="left:48px;top:18px"><img src="games/yamal.png" alt="" /></div>
+          <div class="p" style="left:300px;top:18px"><img src="games/saka.png" alt="" /></div>
+          <div class="p" style="left:176px;top:78px"><img src="games/pedri.png" alt="" /></div>
+        </div>
+        <div class="five">
+          <div class="fc"><span class="ov">91</span><img src="games/haaland.png" alt="" /><b>האלנד</b></div>
+          <div class="fc focus"><span class="ov">90</span><img src="games/kane.png" alt="" /><b>קיין</b></div>
+          <div class="fc"><span class="ov">90</span><img src="games/bellingham.png" alt="" /><b>בלינגהאם</b></div>
+          <div class="fc"><span class="ov">89</span><img src="games/yamal.png" alt="" /><b>ימאל</b></div>
+          <div class="fc"><span class="ov">87</span><img src="games/salah.png" alt="" /><b>סלאח</b></div>
+        </div>
+        <p class="lead">הניקוד נפתח רק אחרי שה־11 סגור. ריצה אחת ביום.</p>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

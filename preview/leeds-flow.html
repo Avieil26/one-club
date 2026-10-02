@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>אליפות עם לידס · שלושה מסכים</title>
+<style>
+  @font-face {
+    font-family: Heebo;
+    src: url("fonts/Heebo.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #05070b; color: #f7f4ea; font-family: Heebo, Arial, sans-serif; }
+  body { padding: 22px 22px 28px; }
+  h2 { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #ffd100; }
+  .row { display: flex; gap: 18px; align-items: flex-start; }
+  .col { display: flex; flex-direction: column; }
+
+  .stripes { height: 6px; background: linear-gradient(90deg, #1d428a 0 34%, #f7f4ea 34% 67%, #ffd100 67% 100%); }
+  .btn {
+    height: 46px; border: 0; border-radius: 4px; background: #f4f1e6; color: #10284a;
+    display: flex; align-items: center; gap: 10px; padding: 0 14px;
+    font-family: Heebo, Arial, sans-serif; font-size: 15px; font-weight: 700;
+    box-shadow: inset -4px 0 0 #1d428a;
+  }
+  .pip { width: 8px; height: 8px; background: #ffd100; flex: none; }
+
+  .card {
+    width: 640px; height: 300px; display: flex; overflow: hidden; border-radius: 16px;
+    position: relative;
+    background: #0c1c38;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .card .photo { width: 250px; position: relative; flex: none; }
+  .card .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+  .card .photo::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to left, #0c1c38, rgba(12,28,56,0) 36%);
+  }
+  .card .copy { flex: 1; display: flex; flex-direction: column; padding: 16px 18px 14px; position: relative; }
+  .eye { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+  .eye .gold { color: #ffd100; }
+  .eye .dim { color: rgba(247,244,234,.7); }
+  .card h1 { margin: 14px 0 0; font-size: 34px; font-weight: 800; line-height: .95; letter-spacing: -.03em; }
+  .lines { margin-top: 12px; display: grid; gap: 2px; }
+  .lines div { display: flex; align-items: baseline; gap: 8px; }
+  .lines b { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .lines span { font-size: 13px; font-weight: 600; }
+  .note { margin: 6px 0 0; font-size: 12px; font-weight: 500; color: rgba(247,244,234,.75); }
+  .card .btn { margin-top: auto; }
+
+  .phone {
+    width: 340px; min-height: 640px; border-radius: 22px; overflow: hidden;
+    background: linear-gradient(180deg, #12315c 0%, #07111f 38%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+    display: flex; flex-direction: column;
+  }
+  .hero { height: 168px; position: relative; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #07111f, transparent 55%); }
+  .pad { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .back { font-size: 13px; font-weight: 600; color: rgba(247,244,234,.7); }
+  .phone h1 { margin: 0; font-size: 30px; font-weight: 800; line-height: .95; letter-spacing: -.03em; }
+  .panel { border-radius: 8px; padding: 12px; background: rgba(255,255,255,.05); box-shadow: inset -3px 0 0 #1d428a; }
+  .panel strong { display: block; margin-bottom: 4px; color: #ffd100; font-size: 12px; letter-spacing: .08em; }
+  .panel p, .panel li { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 500; color: rgba(247,244,234,.88); }
+  .panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .panel li { padding-inline-start: 12px; position: relative; }
+  .panel li::before { content: ""; position: absolute; inset-inline-start: 0; top: 7px; width: 6px; height: 6px; background: #ffd100; }
+  .phone .btn { margin-top: auto; }
+
+  .kicker { font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #ffd100; }
+  .lead { margin: 4px 0 0; font-size: 13px; font-weight: 500; color: rgba(247,244,234,.75); }
+  .field { display: grid; gap: 6px; }
+  .field span { font-size: 12px; font-weight: 600; color: rgba(247,244,234,.7); }
+  .box {
+    min-height: 44px; border-radius: 4px; padding: 12px;
+    background: rgba(255,255,255,.04); color: rgba(247,244,234,.38); font-size: 14px;
+    box-shadow: inset 0 0 0 1px rgba(247,244,234,.14), inset -3px 0 0 #1d428a;
+  }
+  .box.tall { min-height: 78px; }
+  .drop {
+    border-radius: 8px; padding: 14px; min-height: 108px;
+    background: rgba(255,255,255,.04);
+    box-shadow: inset 0 0 0 1px rgba(255,209,0,.45), inset -3px 0 0 #1d428a;
+  }
+  .drop b { display: block; font-size: 15px; }
+  .drop p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.45; color: rgba(247,244,234,.72); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="col">
+      <h2>הכרטיס</h2>
+      <article class="card">
+        <div class="stripes" style="position:absolute;top:0;left:0;right:0;z-index:2"></div>
+        <div class="copy">
+          <div class="eye" style="margin-top:8px"><span class="gold">LEEDS UNITED</span><span class="dim">WORLD CLASS</span></div>
+          <h1>אליפות עם לידס</h1>
+          <div class="lines">
+            <div><b>2</b><span>לידס</span></div>
+            <div><b>1</b><span>ברנטפורד</span></div>
+          </div>
+          <p class="note">22 במאי 2022 · פנדל בדקה 56</p>
+          <button class="btn"><span class="pip"></span>לכרטיס האתגר</button>
+        </div>
+        <div class="photo"><img src="raphinha-leeds.jpg" alt="" /></div>
+      </article>
+    </div>
+
+    <div class="col">
+      <h2>אחרי הלחיצה</h2>
+      <section class="phone">
+        <div class="stripes"></div>
+        <div class="hero"><img src="raphinha-leeds.jpg" alt="" /></div>
+        <div class="pad">
+          <div class="back">‹ אתגרי קריירה</div>
+          <div class="eye"><span class="gold">קריירת שחקן</span><span class="dim">WORLD CLASS</span></div>
+          <h1>אליפות עם לידס</h1>
+          <div class="panel">
+            <strong>המשחק</strong>
+            <p>ברנטפורד 1–2 לידס, 22 במאי 2022. ראפיניה מהפנדל, הריסון בדקה ה־90.</p>
+          </div>
+          <div class="panel">
+            <strong>מה חייב להיות בצילום</strong>
+            <ul>
+              <li>טבלה עם לידס במקום הראשון</li>
+              <li>מסך השחקן עם סמל לידס</li>
+              <li>הגדרות על World Class ומעלה</li>
+            </ul>
+          </div>
+          <button class="btn"><span class="pip"></span>הגשת הוכחה</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="col">
+      <h2>הגשת הוכחה</h2>
+      <section class="phone">
+        <div class="stripes"></div>
+        <div class="pad" style="padding-top:16px">
+          <div class="back">‹ חזרה לאתגר</div>
+          <div class="kicker">אליפות עם לידס</div>
+          <h1>ההוכחה</h1>
+          <p class="lead">ההגשה ממתינה לאישור לפני שהיא מופיעה.</p>
+          <label class="field"><span>שם השחקן או המועדון</span><div class="box">לידס יונייטד</div></label>
+          <label class="field"><span>מה עשיתם</span><div class="box tall">משפט קצר על העונה</div></label>
+          <div class="drop">
+            <b>צילום מסך</b>
+            <p>עד 3 תמונות. טבלה, מסך שחקן, והגדרות הקושי.</p>
+          </div>
+          <button class="btn"><span class="pip"></span>שליחת ההגשה</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

@@ -7,11 +7,14 @@
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   display_name text not null,
+  avatar_url text,
   is_admin boolean not null default false,
   approved_count integer not null default 0,
   reputation integer not null default 0,
   created_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists avatar_url text;
 
 create table if not exists public.career_challenges (
   id uuid primary key default gen_random_uuid(),
@@ -119,6 +122,12 @@ create table if not exists public.sbc_worked (
   primary key (solution_id, user_id)
 );
 
+create table if not exists public.sbc_failed (
+  solution_id uuid not null references public.sbc_solutions (id) on delete cascade,
+  user_id uuid not null references public.profiles (id),
+  primary key (solution_id, user_id)
+);
+
 create table if not exists public.reports (
   id uuid primary key default gen_random_uuid(),
   comment_id uuid not null references public.comments (id) on delete cascade,
@@ -137,6 +146,7 @@ alter table public.grounds_posts enable row level security;
 alter table public.sbc_challenges enable row level security;
 alter table public.sbc_solutions enable row level security;
 alter table public.sbc_worked enable row level security;
+alter table public.sbc_failed enable row level security;
 alter table public.reports enable row level security;
 
 create or replace function public.handle_new_user()
@@ -146,7 +156,7 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, display_name)
+  insert into public.profiles (id, display_name, avatar_url)
   values (
     new.id,
     coalesce(
@@ -154,7 +164,8 @@ begin
       nullif(trim(new.raw_user_meta_data->>'full_name'), ''),
       nullif(trim(new.raw_user_meta_data->>'name'), ''),
       split_part(new.email, '@', 1)
-    )
+    ),
+    nullif(coalesce(new.raw_user_meta_data->>'avatar_url', new.raw_user_meta_data->>'picture'), '')
   );
   return new;
 end;
@@ -612,6 +623,35 @@ begin
 end;
 $$;
 
+create or replace function public.vote_sbc_solution(p_id uuid, p_vote text)
+returns void
+language plpgsql security definer set search_path = public as $$
+declare
+  v_user uuid := auth.uid();
+  v_author uuid;
+  v_was_up boolean;
+begin
+  if v_user is null then raise exception 'צריך להתחבר'; end if;
+  if p_vote not in ('up', 'down', 'clear') then raise exception 'דירוג לא תקין'; end if;
+  select user_id into v_author from public.sbc_solutions where id = p_id and status = 'approved';
+  if v_author is null then raise exception 'הפתרון לא נמצא'; end if;
+  if v_author = v_user then raise exception 'אי אפשר לדרג פתרון של עצמך'; end if;
+  select exists(
+    select 1 from public.sbc_worked where solution_id = p_id and user_id = v_user
+  ) into v_was_up;
+  delete from public.sbc_worked where solution_id = p_id and user_id = v_user;
+  delete from public.sbc_failed where solution_id = p_id and user_id = v_user;
+  if p_vote = 'up' then
+    insert into public.sbc_worked (solution_id, user_id) values (p_id, v_user);
+    if not v_was_up then
+      perform public.bump_profile(v_author, 0, 2);
+    end if;
+  elsif p_vote = 'down' then
+    insert into public.sbc_failed (solution_id, user_id) values (p_id, v_user);
+  end if;
+end;
+$$;
+
 revoke all on function public.bump_profile(uuid, integer, integer) from public, anon, authenticated;
 revoke all on function public.assert_admin() from public, anon, authenticated;
 revoke all on function public.comment_is_blocked(text) from public, anon, authenticated;
@@ -631,6 +671,7 @@ grant execute on function public.moderate_grounds_level(uuid, boolean) to authen
 grant execute on function public.create_sbc_challenge(text, text, text, timestamptz, integer) to authenticated;
 grant execute on function public.add_sbc_solution(text, text, text[], text, text, text, timestamptz, integer) to authenticated;
 grant execute on function public.mark_sbc_worked(uuid) to authenticated;
+grant execute on function public.vote_sbc_solution(uuid, text) to authenticated;
 
 drop policy if exists profiles_read on public.profiles;
 create policy profiles_read on public.profiles for select to authenticated using (true);
@@ -670,6 +711,9 @@ create policy solutions_read on public.sbc_solutions for select to authenticated
 drop policy if exists worked_read on public.sbc_worked;
 create policy worked_read on public.sbc_worked for select to authenticated using (true);
 
+drop policy if exists failed_read on public.sbc_failed;
+create policy failed_read on public.sbc_failed for select to authenticated using (true);
+
 drop policy if exists reports_read on public.reports;
 create policy reports_read on public.reports for select to authenticated using (
   reporter_id = auth.uid()
@@ -689,3 +733,117 @@ create policy proofs_read on storage.objects for select to public using (bucket_
 drop policy if exists proofs_insert on storage.objects;
 create policy proofs_insert on storage.objects for insert to authenticated
 with check (bucket_id = 'proofs' and (storage.foldername(name))[1] = auth.uid()::text);
+
+create table if not exists public.player_votes (
+  player_id text not null,
+  user_id uuid not null references public.profiles (id) on delete cascade,
+  vote smallint not null check (vote in (-1, 1)),
+  primary key (player_id, user_id)
+);
+
+create table if not exists public.player_comments (
+  id uuid primary key default gen_random_uuid(),
+  player_id text not null,
+  user_id uuid not null references public.profiles (id) on delete cascade,
+  body text not null,
+  status text not null default 'visible' check (status in ('visible', 'hidden_pending')),
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.player_comment_votes (
+  comment_id uuid not null references public.player_comments (id) on delete cascade,
+  user_id uuid not null references public.profiles (id) on delete cascade,
+  vote smallint not null check (vote in (-1, 1)),
+  primary key (comment_id, user_id)
+);
+
+alter table public.player_votes enable row level security;
+alter table public.player_comments enable row level security;
+alter table public.player_comment_votes enable row level security;
+
+grant select on public.player_votes, public.player_comments, public.player_comment_votes to authenticated;
+
+drop policy if exists player_votes_read on public.player_votes;
+create policy player_votes_read on public.player_votes for select to authenticated using (true);
+drop policy if exists player_votes_write on public.player_votes;
+create policy player_votes_write on public.player_votes for insert to authenticated with check (user_id = auth.uid());
+drop policy if exists player_votes_remove on public.player_votes;
+create policy player_votes_remove on public.player_votes for delete to authenticated using (user_id = auth.uid());
+grant insert, delete on public.player_votes to authenticated;
+drop policy if exists player_comments_read on public.player_comments;
+create policy player_comments_read on public.player_comments for select to authenticated using (
+  status = 'visible' or user_id = auth.uid()
+);
+drop policy if exists player_comment_votes_read on public.player_comment_votes;
+create policy player_comment_votes_read on public.player_comment_votes for select to authenticated using (true);
+
+create table if not exists public.fut_likes (
+  post_id uuid not null references public.fut_posts (id) on delete cascade,
+  user_id uuid not null references public.profiles (id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id)
+);
+
+alter table public.fut_likes enable row level security;
+grant select on public.fut_likes to authenticated;
+drop policy if exists fut_likes_read on public.fut_likes;
+create policy fut_likes_read on public.fut_likes for select to authenticated using (true);
+
+create or replace function public.toggle_fut_like(p_post uuid)
+returns void
+language plpgsql security definer set search_path = public as $$
+declare
+  v_user uuid := auth.uid();
+begin
+  if v_user is null then raise exception 'צריך להתחבר'; end if;
+  if not exists (select 1 from public.fut_posts where id = p_post and kind = 'squad' and status = 'approved') then
+    raise exception 'הקבוצה לא נמצאה';
+  end if;
+  if exists (select 1 from public.fut_likes where post_id = p_post and user_id = v_user) then
+    delete from public.fut_likes where post_id = p_post and user_id = v_user;
+  else
+    insert into public.fut_likes (post_id, user_id) values (p_post, v_user);
+  end if;
+end;
+$$;
+
+grant execute on function public.toggle_fut_like(uuid) to authenticated;
+
+create or replace function public.save_profile_avatar(p_url text)
+returns void
+language plpgsql security definer set search_path = public as $$
+declare
+  v_user uuid := auth.uid();
+begin
+  if v_user is null then raise exception 'צריך להתחבר'; end if;
+  if p_url is null or p_url !~ '^https?://' then return; end if;
+  perform set_config('app.trusted', '1', true);
+  update public.profiles set avatar_url = left(p_url, 500) where id = v_user;
+end;
+$$;
+
+grant execute on function public.save_profile_avatar(text) to authenticated;
+
+alter table public.profiles add column if not exists squad jsonb;
+
+create or replace function public.save_profile_squad(p_squad jsonb)
+returns void
+language plpgsql security definer set search_path = public as $$
+declare
+  v_user uuid := auth.uid();
+  v_formation text;
+begin
+  if v_user is null then raise exception 'צריך להתחבר'; end if;
+  if p_squad is null or jsonb_typeof(p_squad) <> 'object' then
+    raise exception 'הסגל לא תקין';
+  end if;
+  v_formation := p_squad->>'formation';
+  if v_formation is null or v_formation !~ '^[0-9]{2,5}(-[0-9])?$' then
+    raise exception 'מערך לא נתמך';
+  end if;
+  perform set_config('app.trusted', '1', true);
+  update public.profiles set squad = p_squad where id = v_user;
+end;
+$$;
+
+grant execute on function public.save_profile_squad(jsonb) to authenticated;

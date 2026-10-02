@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="utf-8" />
+<title>דראפט</title>
+<style>
+  @font-face { font-family: Heebo; src: url("fonts/Heebo.ttf") format("truetype"); font-weight: 100 900; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #05060a; }
+  body { padding: 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .col { width: 390px; }
+  .label { margin: 0 0 8px; text-align: right; direction: rtl; font-family: Heebo, Arial, sans-serif; color: #e7c56a; font-weight: 800; font-size: 13px; }
+  .phone {
+    width: 390px; height: 844px; border-radius: 30px; overflow: hidden; position: relative;
+    font-family: Heebo, Arial, sans-serif; color: #f4f7f2; direction: rtl;
+    background: #07110d;
+    box-shadow: 0 0 0 1px rgba(227,179,65,.4), 0 22px 44px rgba(0,0,0,.55);
+  }
+  .stage { height: 100%; padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+  .kicker { margin: 0; text-align: right; font-size: 12px; font-weight: 800; color: #e3b341; }
+  h1 { margin: 0; font-size: 26px; font-weight: 800; text-align: right; line-height: 1; }
+
+  .block { display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; }
+  .head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2px;
+  }
+  .head span { font-size: 13px; font-weight: 800; }
+  .head b { font-size: 22px; line-height: 1; }
+  .head em { font-style: normal; font-size: 13px; font-weight: 900; }
+  .us-head b, .us-head em { color: #f0d48a; }
+  .foe-head span, .foe-head b, .foe-head em { color: #d5e4f2; }
+
+  .pitch {
+    flex: 1; min-height: 0; border-radius: 16px; position: relative; direction: ltr; overflow: hidden;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 28px, rgba(0,0,0,.06) 28px 56px),
+      linear-gradient(180deg, #2faf62 0%, #1b8a48 55%, #146c38 100%);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.75), inset 0 0 28px rgba(0,0,0,.22);
+  }
+  .pitch.away {
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 28px, rgba(0,0,0,.08) 28px 56px),
+      linear-gradient(180deg, #1a6b58 0%, #0e4a40 55%, #083028 100%);
+    box-shadow: inset 0 0 0 2px rgba(210,230,240,.55), inset 0 0 28px rgba(0,0,0,.28);
+  }
+  .line { position: absolute; border: 1.5px solid rgba(255,255,255,.78); }
+  .touch { inset: 7px; border-radius: 6px; }
+  .half { left: 7px; right: 7px; top: 50%; height: 0; }
+  .ring { width: 54px; height: 54px; border-radius: 50%; left: 50%; top: 50%; margin: -27px 0 0 -27px; }
+  .spot { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.9); left: 50%; top: 50%; margin: -2px 0 0 -2px; }
+  .box { width: 132px; height: 52px; left: 50%; margin-left: -66px; }
+  .box.top { top: 7px; border-top: 0; }
+  .box.bot { bottom: 7px; border-bottom: 0; }
+
+  .mini {
+    position: absolute; width: 54px; height: 68px; margin: -34px 0 0 -27px; border-radius: 7px; overflow: hidden; direction: ltr;
+    background: linear-gradient(165deg, #fff6d2 0%, #f0d48a 26%, #c8963a 64%, #6e4c12 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 5px 8px rgba(0,0,0,.38);
+  }
+  .pitch.away .mini {
+    background: linear-gradient(165deg, #f3f8fc 0%, #c5d7e6 28%, #6d8ea6 66%, #243848 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 5px 8px rgba(0,0,0,.4);
+  }
+  .mini img { position: absolute; left: 1px; right: 1px; top: 0; height: 48px; object-fit: contain; object-position: center bottom; }
+  .mini b { position: absolute; top: 2px; left: 3px; font-size: 11px; font-weight: 900; color: #1a1208; line-height: 1; }
+  .pitch.away .mini b { color: #10202c; }
+  .mini span {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, transparent, rgba(28,18,6,.92) 42%);
+    color: #fff8e8; font-size: 8px; font-weight: 900;
+  }
+  .pitch.away .mini span { background: linear-gradient(180deg, transparent, rgba(10,22,32,.92) 42%); color: #f4fbff; }
+
+  .sim {
+    background: #05060a url("stadium-night.jpg") center 30% / cover no-repeat;
+  }
+  .veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,8,14,.55) 0%, rgba(5,8,14,.28) 28%, rgba(5,8,14,.2) 100%); }
+  .sim .stage { position: relative; z-index: 1; }
+  .bug {
+    margin-top: 8px; border-radius: 18px; padding: 14px 14px 12px;
+    background: linear-gradient(180deg, rgba(8,12,18,.78), rgba(8,12,18,.62));
+    box-shadow: inset 0 1px 0 rgba(255,244,214,.28), inset 0 0 0 1px rgba(227,179,65,.4);
+    backdrop-filter: blur(6px);
+  }
+  .sides { display: flex; align-items: center; justify-content: space-between; }
+  .who { width: 72px; text-align: center; }
+  .who small { display: block; font-size: 13px; font-weight: 800; color: rgba(244,247,242,.75); }
+  .who b { color: #f0d48a; font-size: 15px; }
+  .big { font-size: 64px; font-weight: 900; line-height: .85; direction: ltr; white-space: nowrap; text-shadow: 0 8px 18px rgba(0,0,0,.55); }
+  .clock { margin-top: 4px; text-align: center; font-size: 18px; font-weight: 800; color: #f0d48a; }
+  .log { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .log div { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 800; }
+  .log b { color: #f0d48a; direction: ltr; }
+  .chance {
+    margin-top: 10px; border-radius: 12px; padding: 12px 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(100deg, rgba(40,28,8,.55), rgba(150,100,24,.9));
+    box-shadow: inset 0 1px 0 rgba(255,236,190,.5), inset 0 0 0 1px rgba(240,196,81,.65);
+  }
+  .chance span { font-size: 16px; font-weight: 800; }
+  .chance b { font-size: 22px; }
+  .hero {
+    width: 168px; height: 220px; margin: 12px auto 0; position: relative; direction: ltr; border-radius: 14px;
+    background: linear-gradient(165deg, #fff6d2 0%, #f0d48a 26%, #c8963a 64%, #6e4c12 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 16px 28px rgba(0,0,0,.45);
+  }
+  .hero img { position: absolute; left: 10px; right: 10px; top: 6px; height: 156px; object-fit: contain; object-position: center bottom; }
+  .hero .ov { position: absolute; top: 10px; left: 12px; font-size: 28px; font-weight: 900; color: #1a1208; }
+  .hero .pos { position: absolute; top: 40px; left: 12px; font-size: 12px; font-weight: 900; color: #1a1208; }
+  .hero .nm { position: absolute; left: 6px; right: 6px; bottom: 8px; text-align: center; font-size: 16px; font-weight: 900; color: #1a1208; }
+  .goal-copy h1 { margin-top: 12px; font-size: 30px; text-shadow: 0 6px 16px rgba(0,0,0,.7); }
+  .goal-copy p { margin: 4px 0 0; text-align: right; font-size: 16px; font-weight: 800; color: #f0d48a; }
+  .scoreline { margin-top: 14px; font-size: 40px; font-weight: 900; text-align: center; direction: ltr; text-shadow: 0 8px 18px rgba(0,0,0,.6); }
+</style>
+</head>
+<body>
+
+  <div class="col">
+    <p class="label">1 · לפני השריקה</p>
+    <div class="phone"><div class="stage">
+      <p class="kicker">לוחצים להתחיל</p>
+      <h1>ההרכבים</h1>
+      <div class="block">
+        <div class="head us-head"><span>שלכם · 4-3-3</span><em>26/33</em><b>87</b></div>
+        <div class="pitch">
+          <i class="line touch"></i><i class="line half"></i><i class="line ring"></i><i class="spot"></i>
+          <i class="line box top"></i><i class="line box bot"></i>
+          <div class="mini" style="left:18%;top:16%"><img src="sim-faces/kvara.png" alt=""><b>89</b><span>קווארה</span></div>
+          <div class="mini" style="left:50%;top:12%"><img src="sim-faces/haaland.png" alt=""><b>91</b><span>האלנד</span></div>
+          <div class="mini" style="left:82%;top:16%"><img src="sim-faces/saka.png" alt=""><b>87</b><span>סאקה</span></div>
+          <div class="mini" style="left:24%;top:38%"><img src="sim-faces/valverde.png" alt=""><b>87</b><span>ולוורדה</span></div>
+          <div class="mini" style="left:50%;top:40%"><img src="sim-faces/pedri.png" alt=""><b>90</b><span>פדרי</span></div>
+          <div class="mini" style="left:76%;top:38%"><img src="sim-faces/bernardo.png" alt=""><b>84</b><span>ברנרדו</span></div>
+          <div class="mini" style="left:12%;top:64%"><img src="sim-faces/theo.png" alt=""><b>82</b><span>תיאו</span></div>
+          <div class="mini" style="left:37%;top:68%"><img src="sim-faces/dias.png" alt=""><b>87</b><span>דיאש</span></div>
+          <div class="mini" style="left:63%;top:68%"><img src="sim-faces/saliba.png" alt=""><b>88</b><span>סליבה</span></div>
+          <div class="mini" style="left:88%;top:64%"><img src="sim-faces/trent.png" alt=""><b>84</b><span>טרנט</span></div>
+          <div class="mini" style="left:50%;top:90%"><img src="sim-faces/alisson.png" alt=""><b>87</b><span>אליסון</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="head foe-head"><span>יריב · 4-3-3</span><em>33/33</em><b>86</b></div>
+        <div class="pitch away">
+          <i class="line touch"></i><i class="line half"></i><i class="line ring"></i><i class="spot"></i>
+          <i class="line box top"></i><i class="line box bot"></i>
+          <div class="mini" style="left:18%;top:16%"><img src="sim-faces/danjuma.png" alt=""><b>75</b><span>דניומה</span></div>
+          <div class="mini" style="left:50%;top:12%"><img src="sim-faces/mbappe.png" alt=""><b>91</b><span>אמבפה</span></div>
+          <div class="mini" style="left:82%;top:16%"><img src="sim-faces/yamal.png" alt=""><b>90</b><span>ימאל</span></div>
+          <div class="mini" style="left:24%;top:38%"><img src="sim-faces/cama.png" alt=""><b>81</b><span>קמאבינגה</span></div>
+          <div class="mini" style="left:50%;top:40%"><img src="sim-faces/gavi.png" alt=""><b>83</b><span>גאבי</span></div>
+          <div class="mini" style="left:76%;top:38%"><img src="sim-faces/depaul.png" alt=""><b>83</b><span>דה פול</span></div>
+          <div class="mini" style="left:12%;top:64%"><img src="sim-faces/mendy.png" alt=""><b>80</b><span>מנדי</span></div>
+          <div class="mini" style="left:37%;top:68%"><img src="sim-faces/cubarsi.png" alt=""><b>86</b><span>קובארסי</span></div>
+          <div class="mini" style="left:63%;top:68%"><img src="sim-faces/rudiger.png" alt=""><b>83</b><span>רודיגר</span></div>
+          <div class="mini" style="left:88%;top:64%"><img src="sim-faces/kounde.png" alt=""><b>85</b><span>קונדה</span></div>
+          <div class="mini" style="left:50%;top:90%"><img src="sim-faces/courtois.png" alt=""><b>90</b><span>קורטואה</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="col">
+    <p class="label">2 · המשחק</p>
+    <div class="phone sim"><div class="veil"></div><div class="stage">
+      <p class="kicker">שמינית הגמר</p>
+      <div class="bug">
+        <div class="sides">
+          <div class="who"><small>שלכם</small><b>87</b></div>
+          <div class="big">1–1</div>
+          <div class="who"><small>יריב</small><b>86</b></div>
+        </div>
+        <div class="clock">דקה 67</div>
+        <div class="log">
+          <div><span>שער · האלנד</span><b>23׳</b></div>
+          <div><span>שער · אמבפה</span><b>61׳</b></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="col">
+    <p class="label">3 · התקפה מסוכנת</p>
+    <div class="phone sim"><div class="veil"></div><div class="stage">
+      <p class="kicker">שמינית הגמר</p>
+      <div class="bug">
+        <div class="sides">
+          <div class="who"><small>שלכם</small><b>87</b></div>
+          <div class="big">1–1</div>
+          <div class="who"><small>יריב</small><b>86</b></div>
+        </div>
+        <div class="clock">דקה 71</div>
+        <div class="chance"><span>התקפה מסוכנת</span><b>שלכם</b></div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="col">
+    <p class="label">4 · שער</p>
+    <div class="phone sim"><div class="veil"></div><div class="stage">
+      <p class="kicker">רגע השער</p>
+      <div class="hero">
+        <img src="sim-faces/haaland.png" alt="">
+        <div class="ov">91</div>
+        <div class="pos">ST</div>
+        <div class="nm">האלנד</div>
+      </div>
+      <div class="goal-copy">
+        <h1>האלנד כבש</h1>
+        <p>דקה 72</p>
+      </div>
+      <div class="scoreline">2–1</div>
+    </div></div>
+  </div>
+
+</body>
+</html>

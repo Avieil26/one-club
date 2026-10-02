@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>משחקונים</title>
+<style>
+  @font-face {
+    font-family: Heebo;
+    src: url("fonts/Heebo.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07090d; color: #f7f4ea; font-family: Heebo, Arial, sans-serif; }
+  body { padding: 28px; display: flex; gap: 28px; align-items: flex-start; direction: ltr; }
+  .col { width: 380px; }
+  .kicker { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-align: right; direction: rtl; }
+  .phone {
+    border-radius: 28px; overflow: hidden; min-height: 760px;
+    display: flex; flex-direction: column; direction: rtl;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 30px 70px rgba(0,0,0,.45);
+  }
+  .stripes { height: 7px; display: flex; direction: ltr; }
+  .stripes i { flex: 1; display: block; }
+  .pad { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .xp {
+    height: 28px; padding: 0 10px; border-radius: 99px; display: flex; align-items: center;
+    font-size: 12px; font-weight: 800; letter-spacing: .04em;
+    background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  h1 { margin: 0; font-size: 28px; font-weight: 800; line-height: 1.05; text-align: right; }
+  .lead { margin: 0; font-size: 13px; font-weight: 500; line-height: 1.45; color: rgba(247,244,234,.72); text-align: right; }
+
+  .shot {
+    height: 250px; border-radius: 18px; overflow: hidden; position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 16px 30px rgba(0,0,0,.35);
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .shot::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.72), transparent 46%);
+  }
+  .shot b {
+    position: absolute; right: 14px; bottom: 12px; z-index: 1;
+    font-size: 13px; font-weight: 700; letter-spacing: .08em;
+  }
+
+  .opt {
+    height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; font-weight: 700; font-size: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .opt em { font-style: normal; font-size: 12px; font-weight: 700; opacity: .7; }
+
+  .pair { display: flex; gap: 10px; direction: ltr; }
+  .fut {
+    flex: 1; height: 248px; border-radius: 16px; padding: 8px; position: relative; overflow: hidden;
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
+  }
+  .fut .face { height: 100%; border-radius: 12px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  .fut img { width: 100%; height: 150px; object-fit: cover; object-position: center 18%; }
+  .meta { display: flex; justify-content: space-between; padding: 8px 8px 0; }
+  .ovr { font-size: 26px; font-weight: 800; line-height: 1; }
+  .pos { font-size: 12px; font-weight: 800; letter-spacing: .08em; margin-top: 4px; }
+  .who { margin: 6px 8px 0; font-size: 13px; font-weight: 800; text-align: center; }
+  .hide {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 42px; font-weight: 800; background: rgba(8,10,16,.28); backdrop-filter: blur(7px);
+  }
+
+  .actions { display: flex; gap: 8px; }
+  .go {
+    flex: 1; height: 52px; border: 0; border-radius: 12px; font-family: Heebo, Arial, sans-serif;
+    font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .pip { width: 8px; height: 8px; }
+
+  .chain { display: flex; gap: 8px; align-items: center; direction: ltr; }
+  .mini {
+    width: 72px; height: 96px; border-radius: 10px; overflow: hidden; position: relative; flex: none;
+    box-shadow: 0 8px 16px rgba(0,0,0,.35);
+  }
+  .mini img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+  .link { flex: 1; height: 3px; border-radius: 99px; background: linear-gradient(90deg, #3ddc97, #f4f1e6); }
+  .now { font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+
+  .guess { background: radial-gradient(420px 220px at 80% 0%, rgba(255,196,87,.28), transparent 55%), linear-gradient(180deg, #2a2112, #120e09 46%, #090807); }
+  .guess .k { color: #ffc857; }
+  .guess .stripes i:nth-child(1) { background: #6b4a16; }
+  .guess .stripes i:nth-child(2) { background: #f4f1e6; }
+  .guess .stripes i:nth-child(3) { background: #ffc857; }
+  .guess .shot { box-shadow: inset 0 0 0 1px rgba(255,200,87,.35), 0 16px 30px rgba(0,0,0,.35); }
+
+  .high { background: radial-gradient(380px 200px at 0% 0%, rgba(94,168,255,.25), transparent 50%), linear-gradient(180deg, #102033, #0a1018 50%, #070b10); }
+  .high .k { color: #8eb7ff; }
+  .high .stripes i:nth-child(1) { background: #1d428a; }
+  .high .stripes i:nth-child(2) { background: #f4f1e6; }
+  .high .stripes i:nth-child(3) { background: #5ea8ff; }
+  .gold { background: linear-gradient(160deg, #f0d48a, #a67c2d 55%, #5c4012); color: #2a1c08; }
+  .gold .face { background: linear-gradient(180deg, #3a2a12, #1a1208); color: #f7f4ea; }
+  .ice { background: linear-gradient(160deg, #d5e4f7, #6d88a8 55%, #243246); color: #102033; }
+  .ice .face { background: linear-gradient(180deg, #16304a, #0c1824); color: #f7f4ea; }
+  .up { background: #f4f1e6; color: #10284a; box-shadow: inset -4px 0 0 #1d428a; }
+  .down { background: #141820; color: #f7f4ea; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset -4px 0 0 #e23b57; }
+  .up .pip { background: #1d428a; }
+  .down .pip { background: #e23b57; }
+
+  .linkg { background: radial-gradient(420px 240px at 100% 0%, rgba(61,220,151,.22), transparent 52%), linear-gradient(180deg, #0d241c, #07140f 48%, #050b09); }
+  .linkg .k { color: #7dffc3; }
+  .linkg .stripes i:nth-child(1) { background: #0e3d2c; }
+  .linkg .stripes i:nth-child(2) { background: #f4f1e6; }
+  .linkg .stripes i:nth-child(3) { background: #3ddc97; }
+  .pick { box-shadow: inset -3px 0 0 #3ddc97, inset 0 0 0 1px rgba(61,220,151,.35); }
+  .pick em { color: #7dffc3; opacity: 1; }
+</style>
+</head>
+<body>
+  <section class="col">
+    <p class="kicker" style="color:#ffc857">ניחוש מהתמונה</p>
+    <article class="phone guess">
+      <div class="stripes"><i></i><i></i><i></i></div>
+      <div class="pad">
+        <div class="top"><span class="xp">3 ניחושים</span><span class="xp k">+12 XP</span></div>
+        <h1>מי על הקלף?</h1>
+        <p class="lead">הפנים גלויות, השם מוסתר. ניחוש אחד ביום נותן את הניקוד.</p>
+        <div class="shot"><img src="games/yamal.png" alt="" style="object-position:center 12%" /><b>דקה 1</b></div>
+        <div class="opt">לאמין ימאל <em>RW</em></div>
+        <div class="opt">פדרי <em>CM</em></div>
+        <div class="opt">גאבי <em>CM</em></div>
+        <div class="opt">אנסו פאטי <em>LW</em></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="col">
+    <p class="kicker" style="color:#8eb7ff">גבוה או נמוך</p>
+    <article class="phone high">
+      <div class="stripes"><i></i><i></i><i></i></div>
+      <div class="pad">
+        <div class="top"><span class="xp">רצף 4</span><span class="xp k">+8 XP</span></div>
+        <h1>הדירוג הבא</h1>
+        <p class="lead">האלנד על 91. הבא גבוה ממנו או נמוך?</p>
+        <div class="pair">
+          <div class="fut gold">
+            <div class="face">
+              <div class="meta"><div><div class="ovr">91</div><div class="pos">ST</div></div></div>
+              <img src="games/haaland.png" alt="" />
+              <div class="who">האלנד</div>
+            </div>
+          </div>
+          <div class="fut ice">
+            <div class="face">
+              <img src="games/bellingham.png" alt="" />
+              <div class="hide">?</div>
+              <div class="who">בלינגהאם</div>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="go up"><span class="pip"></span>גבוה</button>
+          <button class="go down"><span class="pip"></span>נמוך</button>
+        </div>
+        <p class="lead">טעות סוגרת את הרצף. הרצף עצמו נשמר ליום אחד.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="col">
+    <p class="kicker" style="color:#7dffc3">שרשרת כימיה</p>
+    <article class="phone linkg">
+      <div class="stripes"><i></i><i></i><i></i></div>
+      <div class="pad">
+        <div class="top"><span class="xp">שרשרת 6</span><span class="xp k">+4 XP</span></div>
+        <h1>מי ממשיך?</h1>
+        <p class="lead">בוחרים שחקן עם מועדון, ליגה או מדינה משותפים. בלי חיבור השרשרת נעצרת.</p>
+        <div class="chain">
+          <div class="mini" style="box-shadow:0 0 0 1px #ffc857"><img src="games/yamal.png" alt="" /></div>
+          <div class="link"></div>
+          <div class="mini"><img src="games/pedri.png" alt="" style="opacity:.35" /></div>
+        </div>
+        <div class="now">עכשיו · ימאל · ברצלונה · ספרד</div>
+        <div class="opt pick">פדרי <em>מועדון + מדינה</em></div>
+        <div class="opt">בלינגהאם <em>אין חיבור</em></div>
+        <div class="opt">האלנד <em>אין חיבור</em></div>
+        <p class="lead">כל חוליה מוסיפה מעט. השרשרת היומית נעצרת בטעות הראשונה.</p>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

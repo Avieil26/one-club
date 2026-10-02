@@ -19,7 +19,7 @@ export default function NewSbcScreen() {
   if (!app.user?.isAdmin) {
     return (
       <Screen scene="sbc">
-        <Title>׳¨׳§ ׳׳ ׳”׳ ׳™׳›׳•׳ ׳׳™׳¦׳•׳¨ SBC</Title>
+        <Title>רק מנהל יכול ליצור SBC</Title>
       </Screen>
     );
   }
@@ -29,29 +29,29 @@ export default function NewSbcScreen() {
       await app.createSbc({ title, kind, requirements, endsAt, targetScore });
       router.back();
     } catch (error) {
-      Alert.alert('׳¨׳’׳¢', errorMessage(error));
+      Alert.alert('רגע', errorMessage(error));
     }
   }
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: 'SBC ׳—׳“׳©' }} />
-      <Title>׳׳×׳’׳¨ SBC</Title>
-      <Field label="׳©׳" value={title} onChangeText={setTitle} />
+      <Stack.Screen options={{ title: 'SBC חדש' }} />
+      <Title>אתגר SBC</Title>
+      <Field label="שם" value={title} onChangeText={setTitle} />
       <ChoiceGroup
         options={[
           { id: 'streamlined', label: 'Streamlined' },
-          { id: 'classic', label: '׳§׳׳׳¡׳™' },
+          { id: 'classic', label: 'קלאסי' },
         ]}
         value={kind}
         onChange={setKind}
       />
-      <Field label="׳“׳¨׳™׳©׳•׳×" value={requirements} onChangeText={setRequirements} multiline />
+      <Field label="דרישות" value={requirements} onChangeText={setRequirements} multiline />
       {kind === 'streamlined' ? (
-        <Field label="׳™׳¢׳“ ׳ ׳™׳§׳•׳“" value={targetScore} onChangeText={setTargetScore} keyboardType="number-pad" />
+        <Field label="יעד ניקוד" value={targetScore} onChangeText={setTargetScore} keyboardType="number-pad" />
       ) : null}
-      <Field label="׳×׳׳¨׳™׳ ׳¡׳™׳•׳" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
-      <Button label="׳₪׳¨׳¡׳•׳" onPress={save} disabled={app.busy} />
+      <Field label="תאריך סיום" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
+      <Button label="פרסום" onPress={save} disabled={app.busy} />
     </Screen>
   );
 }

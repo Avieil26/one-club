@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native';
 
 import { ClubBadge } from '@/components/ClubBadge';
-import { SbcChallengeBadge, SbcRewardPack } from '@/components/SbcRewardPack';
-import { Button, Muted, Screen, Title } from '@/components/ui';
-import { formatRemaining } from '@/lib/format';
+import { NationFlag } from '@/components/NationFlag';
+import { SbcRewardPack } from '@/components/SbcRewardPack';
+import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
-import { sbcTileTheme } from '@/lib/sbcTileTheme';
+import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
 
@@ -27,22 +26,47 @@ function useNow(intervalMs = 30_000) {
   return now;
 }
 
+function compactRemaining(iso: string | null, now: number) {
+  if (!iso) return '';
+  const diff = new Date(iso).getTime() - now;
+  if (Number.isNaN(diff) || diff <= 0) return '';
+  const hours = Math.floor(diff / 3_600_000);
+  const days = Math.floor(hours / 24);
+  if (days >= 1) return `${days}d`;
+  if (hours >= 1) return `${hours}h`;
+  return `${Math.max(1, Math.floor(diff / 60_000))}m`;
+}
+
+const PLAYER_REWARD: Record<string, number> = {
+  'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
+  'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
+};
+
+function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
+  if (nation) return <NationFlag nation={nation} size={size} />;
+  if (club) return <ClubBadge club={club} size={size} />;
+  return <View style={{ width: size, height: size }} />;
+}
+
 function SbcTile({
   challenge,
-  solutionCount,
   now,
   onPress,
 }: {
   challenge: SbcChallenge;
-  solutionCount: number;
   now: number;
   onPress: () => void;
 }) {
   const theme = sbcTileTheme(challenge);
-  const [group, name] = challenge.title.includes(' · ') ? challenge.title.split(' · ') : ['', challenge.title];
+  const face = sbcFace(challenge);
+  const nations = challenge.nations ?? [];
   const clubs = challenge.clubs ?? [];
-  const remaining = formatRemaining(challenge.endsAt, now);
-  const urgent = Boolean(challenge.endsAt) && new Date(challenge.endsAt!).getTime() - now < 24 * 60 * 60 * 1000;
+  const leftNation = nations[0];
+  const rightNation = nations[1];
+  const leftClub = nations.length ? undefined : clubs[0];
+  const rightClub = nations.length ? undefined : clubs[1];
+  const remaining = compactRemaining(challenge.endsAt, now);
+  const playerCard = PLAYER_REWARD[challenge.id];
 
   return (
     <Pressable
@@ -50,79 +74,39 @@ function SbcTile({
       onPress={onPress}
       style={{
         flex: 1,
-        borderRadius: 14,
-        overflow: 'hidden',
+        minHeight: 118,
+        backgroundColor: 'rgba(8,10,14,0.92)',
         borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.14)',
-        shadowColor: theme.accent,
-        shadowOpacity: 0.18,
-        shadowRadius: 8,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 4,
+        borderColor: 'rgba(255,255,255,0.16)',
+        overflow: 'visible',
       }}
     >
-      <LinearGradient
-        colors={theme.colors}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{ minHeight: 122, padding: 8, gap: 5, direction: 'ltr' }}
-      >
-        <LinearGradient
-          colors={['rgba(255,255,255,0.12)', 'transparent', 'rgba(0,0,0,0.2)']}
-          locations={[0, 0.45, 1]}
-          style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
-        />
-
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          {theme.badgeText ? (
-            <SbcChallengeBadge text={theme.badgeText} tone={theme.badgeTone} size={38} />
-          ) : clubs.length ? (
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-              <ClubBadge club={clubs[clubs.length - 1]} size={28} />
-              {clubs.length > 1 ? <ClubBadge club={clubs[0]} size={28} /> : null}
-            </View>
-          ) : (
-            <View
-              style={{
-                paddingHorizontal: 7,
-                paddingVertical: 3,
-                borderRadius: 7,
-                backgroundColor: 'rgba(0,0,0,0.28)',
-                borderWidth: 1,
-                borderColor: 'rgba(255,255,255,0.16)',
-              }}
-            >
-              <Text style={{ color: theme.accent, fontSize: 9, fontWeight: '800', letterSpacing: 0.6 }}>
-                {challenge.kind === 'streamlined' ? 'STREAM' : 'CLASSIC'}
-              </Text>
-            </View>
-          )}
-          <SbcRewardPack visual={theme.pack} size={34} label={theme.packLabel} />
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', direction: 'ltr' }}>
+        <View style={{ width: 5, alignSelf: 'stretch', backgroundColor: face.edge }} />
+        <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
+          <SideMark club={leftClub} nation={leftNation} size={36} />
         </View>
-
-        <View style={{ gap: 2, alignItems: 'flex-end', marginTop: 'auto' }}>
-          {group ? <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 10, fontWeight: '700' }}>{group}</Text> : null}
-          <Text style={{ color: '#F7F8FA', fontSize: 14, fontWeight: '800', textAlign: 'right' }}>{name}</Text>
-          {challenge.reward ? (
-            <Text style={{ color: theme.accent, fontSize: 11, fontWeight: '800', textAlign: 'right' }}>{challenge.reward}</Text>
-          ) : null}
-          <Text
-            style={{
-              color: urgent ? '#FFE08A' : 'rgba(255,255,255,0.88)',
-              fontSize: 11,
-              fontWeight: '800',
-              textAlign: 'right',
-            }}
-          >
-            {challenge.endsAt ? `נשאר: ${remaining}` : remaining}
+        <View style={{ flex: 1, gap: 2, paddingVertical: 12, minWidth: 0 }}>
+          <Text style={{ color: '#C9A227', fontSize: 10, fontWeight: '800', letterSpacing: 1.1 }}>{face.category}</Text>
+          <Text numberOfLines={1} style={{ color: '#F7F8FA', fontSize: 20, fontWeight: '800' }}>
+            {face.en}
           </Text>
-          {challenge.kind === 'classic' ? (
-            <Text style={{ color: 'rgba(255,255,255,0.72)', fontSize: 10, fontWeight: '700', textAlign: 'right' }}>
-              {solutionCount ? `${solutionCount} פתרונות` : 'עדיין אין פתרונות'}
-            </Text>
-          ) : null}
+          <Text numberOfLines={1} style={{ color: 'rgba(255,255,255,0.62)', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
+            {face.he}
+          </Text>
+          {remaining ? <Text style={{ color: '#E7C56A', fontSize: 12, fontWeight: '800', marginTop: 4 }}>{remaining}</Text> : null}
         </View>
-      </LinearGradient>
+        <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
+          <SideMark club={rightClub} nation={rightNation} size={36} />
+        </View>
+        <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
+          {playerCard ? (
+            <Image source={playerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
+          ) : (
+            <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
+          )}
+        </View>
+      </View>
     </Pressable>
   );
 }
@@ -132,32 +116,29 @@ export default function SbcScreen() {
   const router = useRouter();
   const now = useNow();
   const width = useWindowDimensions().width;
-  const columns = width >= 980 ? 3 : 2;
-  const challenges = openSbcChallenges(app.sbcChallenges, now);
+  const columns = width >= 760 ? 2 : 1;
+  const challenges = openSbcChallenges(app.sbcChallenges, now).sort((a, b) => sbcFace(a).rank - sbcFace(b).rank);
   const rows = rowsOf(challenges, columns);
-  const solutionCounts = app.solutions.reduce<Record<string, number>>((acc, solution) => {
-    if (solution.status !== 'approved') return acc;
-    acc[solution.challengeId] = (acc[solution.challengeId] ?? 0) + 1;
-    return acc;
-  }, {});
-
   return (
-    <Screen refreshing={app.busy} onRefresh={app.refresh} scene="sbc" maxWidth={920}>
-      <Title>SBC</Title>
-      <Muted>כל אתגר בצבע שלו. כשהזמן נגמר — האתגר יורד אוטומטית.</Muted>
-      <Button label="מחשבון Streamlined" variant="copper" onPress={() => router.push('/sbc/calculator')} />
+    <Screen refreshing={app.busy} onRefresh={app.refresh} scene="sbc" maxWidth={1080}>
+      <View style={{ width: '100%', direction: 'rtl', alignItems: 'flex-start', paddingTop: 4 }}>
+        <Text style={{ width: '100%', color: '#F7F8FA', fontSize: 38, fontWeight: '900', letterSpacing: 1, textAlign: 'right' }}>SBC</Text>
+      </View>
+      <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: 'flex-start' }}>
+        <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: 'right', width: '100%' }}>מחשבון Streamlined</Text>
+      </Pressable>
+      <Muted>מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.</Muted>
       {app.user?.isAdmin ? <Button label="אתגר SBC חדש" variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
       {!challenges.length ? <Muted>אין כרגע SBC פעילים.</Muted> : null}
       {rows.map((row, rowIndex) => (
         <View
           key={row.map((item) => item.id).join('-')}
-          style={{ flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch', paddingHorizontal: width >= 700 ? 12 : 0 }}
+          style={{ flexDirection: 'row-reverse', gap: 14, alignItems: 'stretch', paddingHorizontal: width >= 700 ? 8 : 0 }}
         >
           {row.map((challenge) => (
             <SbcTile
               key={challenge.id}
               challenge={challenge}
-              solutionCount={solutionCounts[challenge.id] ?? 0}
               now={now}
               onPress={() => router.push(`/sbc/${challenge.id}`)}
             />

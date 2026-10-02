@@ -11,6 +11,21 @@ import type { FcPlayer } from '@/lib/fcPlayers';
 const CARD_W = 78;
 const CARD_H = Math.round(78 * 1.42);
 
+function spotsFor(formation: Formation): Record<string, { x: number; y: number }> {
+  const drawn = SPOTS[formation.id];
+  if (drawn && formation.lines.flat().every((slot) => drawn[slot.id])) return drawn;
+  const spots: Record<string, { x: number; y: number }> = {};
+  const rows = formation.lines.length;
+  formation.lines.forEach((line, row) => {
+    const y = rows === 1 ? 0.5 : 0.1 + (row / (rows - 1)) * 0.78;
+    line.forEach((slot, index) => {
+      const x = line.length === 1 ? 0.5 : 0.08 + (index / (line.length - 1)) * 0.84;
+      spots[slot.id] = { x, y };
+    });
+  });
+  return spots;
+}
+
 const SPOTS: Record<string, Record<string, { x: number; y: number }>> = {
   '433': {
     lw: { x: 0.18, y: 0.13 },
@@ -74,17 +89,22 @@ export function SquadPitch({
   playerChem,
   activeSlot,
   onSlot,
+  showChemHud = false,
 }: {
   formation: Formation;
   placed: Record<string, FcPlayer | null>;
   playerChem: Record<string, number>;
   activeSlot?: string | null;
   onSlot?: (slotId: string) => void;
+  showChemHud?: boolean;
 }) {
   const [width, setWidth] = useState(0);
   const [opened, setOpened] = useState<FcPlayer | null>(null);
   const height = 720;
-  const spots = SPOTS[formation.id] ?? SPOTS['433'];
+  const widest = Math.max(...formation.lines.map((line) => line.length));
+  const cardW = widest >= 5 ? 62 : CARD_W;
+  const cardH = widest >= 5 ? Math.round(62 * 1.42) : CARD_H;
+  const spots = spotsFor(formation);
   const teamChem = Object.values(playerChem).reduce((sum, value) => sum + value, 0);
 
   return (
@@ -182,28 +202,32 @@ export function SquadPitch({
           }}
         />
 
-        {/* Team chem HUD */}
-        <View
-          style={{
-            position: 'absolute',
-            top: 22,
-            left: 22,
-            zIndex: 5,
-            paddingHorizontal: 12,
-            paddingVertical: 8,
-            borderRadius: 12,
-            backgroundColor: 'rgba(4, 14, 11, 0.72)',
-            borderWidth: 1,
-            borderColor: 'rgba(61, 220, 151, 0.35)',
-            gap: 4,
-          }}
-        >
-          <Text style={{ color: 'rgba(200, 240, 220, 0.7)', fontSize: 10, fontWeight: '700', letterSpacing: 1.2 }}>CHEM</Text>
-          <Text style={{ color: '#3DDC97', fontSize: 22, fontWeight: '900', lineHeight: 24 }}>
-            {teamChem}
-            <Text style={{ color: 'rgba(200, 240, 220, 0.45)', fontSize: 13, fontWeight: '700' }}>/33</Text>
-          </Text>
-        </View>
+        {/* Optional Team chem HUD (centered pill at top, never overlaps corner cards) */}
+        {showChemHud ? (
+          <View
+            style={{
+              position: 'absolute',
+              top: 8,
+              alignSelf: 'center',
+              zIndex: 5,
+              paddingHorizontal: 12,
+              paddingVertical: 4,
+              borderRadius: 20,
+              backgroundColor: 'rgba(4, 14, 11, 0.85)',
+              borderWidth: 1,
+              borderColor: 'rgba(61, 220, 151, 0.4)',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            <Text style={{ color: 'rgba(200, 240, 220, 0.8)', fontSize: 11, fontWeight: '700' }}>כימיה</Text>
+            <Text style={{ color: '#3DDC97', fontSize: 14, fontWeight: '900' }}>
+              {teamChem}
+              <Text style={{ color: 'rgba(200, 240, 220, 0.5)', fontSize: 11, fontWeight: '700' }}>/33</Text>
+            </Text>
+          </View>
+        ) : null}
 
         {width > 0
           ? formation.lines.flat().map((slot) => {
@@ -224,7 +248,7 @@ export function SquadPitch({
                     shadowOffset: { width: 0, height: 4 },
                   }}
                 >
-                  <PortraitCard player={player} width={CARD_W - 2} variant="pitch" />
+                  <PortraitCard player={player} width={cardW - 2} variant="pitch" />
                   <View style={{ position: 'absolute', bottom: 6, left: 6, zIndex: 4 }}>
                     <ChemDiamonds chem={chem} size={6} />
                   </View>
@@ -237,8 +261,8 @@ export function SquadPitch({
                       : ['rgba(18, 40, 32, 0.55)', 'rgba(8, 20, 16, 0.75)']
                   }
                   style={{
-                    width: CARD_W,
-                    height: CARD_H,
+                    width: cardW,
+                    height: cardH,
                     borderRadius: 12,
                     borderWidth: 1.5,
                     borderColor: selected ? '#5B9CFF' : 'rgba(140, 210, 180, 0.28)',
@@ -271,12 +295,15 @@ export function SquadPitch({
                   accessibilityRole="button"
                   onPress={() => {
                     if (onSlot) onSlot(slot.id);
+                    else if (player) setOpened(player);
+                  }}
+                  onLongPress={() => {
                     if (player) setOpened(player);
                   }}
                   style={{
                     position: 'absolute',
-                    left: spot.x * width - CARD_W / 2,
-                    top: spot.y * height - CARD_H / 2,
+                    left: spot.x * width - cardW / 2,
+                    top: spot.y * height - cardH / 2,
                     zIndex: 2,
                   }}
                 >

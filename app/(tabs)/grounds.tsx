@@ -84,6 +84,8 @@ export default function GroundsScreen() {
       ) : (
         <TileGrid
           items={filtered}
+          wide={3}
+          narrow={1}
           render={(post) => (
             <GroundsPlayerCard
               post={post}
@@ -92,6 +94,7 @@ export default function GroundsScreen() {
               meId={app.user?.id ?? null}
               onFollow={onFollow}
               onMessage={onMessage}
+              onOpenProfile={(id) => router.push(`/player/${id}`)}
               onNeedAuth={() => Alert.alert('רגע', 'צריך להתחבר כדי לעקוב או לשלוח הודעה')}
             />
           )}

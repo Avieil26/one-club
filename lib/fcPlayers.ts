@@ -1,4 +1,6 @@
+import { destinedEdition } from '@/lib/destinedEditions';
 import { DB_PLAYERS } from '@/lib/playerDb';
+import { totwFor } from '@/lib/specialCards';
 
 export type PlayStyle = { name: string; plus: boolean };
 
@@ -13,6 +15,18 @@ export type FcPlayer = {
   icon?: boolean;
   positions?: string[];
   playstyles?: PlayStyle[];
+  /** Promo card of an existing player. The regular card keeps the plain id. */
+  edition?: 'destined' | 'hero' | 'totw';
+  /** English name used on the card and in search. */
+  en?: string;
+  face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
+  /** Regular-card id when this row is a promo version. */
+  baseId?: string;
+  /** Rating of the regular card, so the pair stays together in the list. */
+  pairRating?: number;
+  regularPosition?: string;
+  regularClub?: string;
+  regularLeague?: string;
 };
 
 export const N = {
@@ -125,4 +139,48 @@ export const C = {
   villa: 'אסטון וילה',
 } as const;
 
-export const PLAYERS: FcPlayer[] = DB_PLAYERS;
+function withPromoCards(players: FcPlayer[]): FcPlayer[] {
+  const cards: FcPlayer[] = [];
+  for (const player of players) {
+    cards.push(player);
+    const promo = destinedEdition(player.id);
+    if (promo) {
+      cards.push({
+        ...player,
+        id: `${player.id}--destined`,
+        edition: 'destined',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        rating: promo.rating,
+        position: promo.position || player.position,
+        club: promo.club || player.club,
+        league: promo.league || player.league,
+      });
+    }
+    const totw = totwFor(player.id);
+    if (totw) {
+      cards.push({
+        ...player,
+        id: `${player.id}--totw`,
+        edition: 'totw',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        rating: totw.rating,
+        position: totw.position,
+        face: totw.face,
+        ...(totw.positions?.length ? { positions: totw.positions } : {}),
+        ...(totw.playstyles?.length ? { playstyles: totw.playstyles } : {}),
+      });
+    }
+  }
+  return cards;
+}
+
+/** Every card in the database, including promo versions beside their regular card. */
+export const PLAYERS: FcPlayer[] = withPromoCards(DB_PLAYERS);

@@ -14,7 +14,7 @@ for (const challenge of officialChallenges) {
   const placed = placedPreview(challenge.previewSquad);
   const missing = Object.entries(challenge.previewSquad).filter(([, id]) => !PLAYERS.some((player) => player.id === id));
   if (missing.length) throw new Error(`${challenge.id} missing ${missing.map(([, id]) => id).join(', ')}`);
-  const report = evaluateSquad(formationById(challenge.previewFormation === '442' ? '442' : '433'), placed, challenge.rules);
+  const report = evaluateSquad(formationById(challenge.previewFormation), placed, challenge.rules);
   if (!report.ready) {
     throw new Error(`${challenge.id} failed: ${report.checks.filter((check) => !check.ok).map((check) => check.label).join(', ')}`);
   }

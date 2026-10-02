@@ -1,5 +1,41 @@
 import { officialChallenges } from '@/lib/sbcCatalog';
-import type { Database } from '@/lib/types';
+import type { CareerChallenge, Database } from '@/lib/types';
+
+/** Approved career challenges. Merged onto the live list so they stay visible. */
+export const featuredCareerChallenges: CareerChallenge[] = [
+  {
+    id: 'ch-leeds-title',
+    title: 'אליפות עם לידס',
+    mode: 'player',
+    rules:
+      'יוצרים שחקן ומתחילים בלידס יונייטד. בעונה הראשונה זוכים באליפות הליגה שבה הקבוצה מתחילה. אסור לעבור מועדון באמצע העונה. רמת קושי מינימלית: World Class.',
+    proofRequirements:
+      'צילום של טבלת הליגה עם לידס במקום הראשון, צילום של מסך השחקן עם הסמל של לידס, וצילום של מסך ההגדרות עם World Class ומעלה.',
+    shareCode: null,
+    endsAt: null,
+    createdBy: 'admin',
+    createdAt: '2026-09-29T15:40:00.000Z',
+  },
+  {
+    id: 'ch-championship-promotion',
+    title: 'עלייה בלי רכש מבוגר',
+    mode: 'manager',
+    rules:
+      'מתחילים בקבוצה מהצ׳מפיונשיפ. עד סוף העונה עולים לפרמייר ליג. עד חלון ינואר אסור לקנות שחקן מעל גיל 23. השאלות מותרות. רמת קושי מינימלית: World Class.',
+    proofRequirements:
+      'צילום של טבלת סוף העונה עם קו העלייה, וצילום של הסגל שבו רואים את הגילאים.',
+    shareCode: null,
+    endsAt: null,
+    createdBy: 'admin',
+    createdAt: '2026-09-29T15:40:00.000Z',
+  },
+];
+
+export function mergeFeaturedCareer(list: CareerChallenge[]): CareerChallenge[] {
+  const titles = new Set(list.map((challenge) => challenge.title));
+  const missing = featuredCareerChallenges.filter((challenge) => !titles.has(challenge.title));
+  return [...missing, ...list];
+}
 
 export const STORAGE_KEY = 'fc27-community-db-v1';
 
@@ -33,6 +69,7 @@ export function seedDatabase(): Database {
       },
     ],
     careerChallenges: [
+      ...featuredCareerChallenges,
       {
         id: 'ch-academy',
         title: 'רק שחקני אקדמיה עד ינואר',
@@ -139,6 +176,7 @@ export function seedDatabase(): Database {
         createdAt: '2026-09-22T21:00:00.000Z',
       },
     ],
+    futLikes: [],
     comments: [
       {
         id: 'cmt-1',

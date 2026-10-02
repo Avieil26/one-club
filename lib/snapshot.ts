@@ -18,6 +18,7 @@ export function toSnapshot(db: Database, mode: Snapshot['mode']): Snapshot {
     ),
     futPosts: db.futPosts.filter((item) => item.status === 'approved' || seeAll || item.userId === user?.id),
     ratings: db.futRatings,
+    likes: db.futLikes ?? [],
     comments: db.comments.filter((item) => item.status === 'visible' || seeAll || item.userId === user?.id),
     grounds: db.groundsPosts,
     sbcChallenges: db.sbcChallenges,

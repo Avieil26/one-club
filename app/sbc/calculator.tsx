@@ -26,14 +26,14 @@ export default function CalculatorScreen() {
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: '׳׳—׳©׳‘׳•׳' }} />
-      <Title>׳׳—׳©׳‘׳•׳ Streamlined</Title>
+      <Stack.Screen options={{ title: 'מחשבון' }} />
+      <Title>מחשבון Streamlined</Title>
       <Muted>
-        ׳›׳ ׳›׳¨׳˜׳™׳¡ ׳ ׳•׳×׳ ׳ ׳™׳§׳•׳“ ׳׳₪׳™ ׳”׳“׳™׳¨׳•׳’. ׳׳₪׳©׳¨ ׳›׳₪׳™׳׳•׳™׳•׳×, ׳•׳׳₪׳©׳¨ ׳׳”׳’׳™׳© ׳—׳׳§ ׳•׳׳—׳–׳•׳¨ ׳׳—׳¨ ׳›׳. ׳”׳׳¡׳₪׳¨׳™׳ ׳”׳ ׳˜׳‘׳׳× ׳”׳”׳©׳§׳” ׳©׳₪׳•׳¨׳¡׳׳” (75 = 90, 83 = 410, 88 = 8,300) ׳•׳׳₪׳©׳¨ ׳׳¢׳¨׳•׳ ׳׳•׳×׳, ׳›׳™ EA ׳׳׳¨׳• ׳©׳”׳˜׳‘׳׳” ׳™׳›׳•׳׳” ׳׳”׳©׳×׳ ׳•׳×. ׳׳™׳ ׳׳—׳™׳¨׳™ ׳׳˜׳‘׳¢׳•׳×.
+        כל כרטיס נותן ניקוד לפי הדירוג. אפשר כפילויות, ואפשר להגיש חלק ולחזור אחר כך. המספרים הם טבלת ההשקה שפורסמה (75 = 90, 83 = 410, 88 = 8,300) ואפשר לערוך אותם, כי EA אמרו שהטבלה יכולה להשתנות. אין מחירי מטבעות.
       </Muted>
-      <Field label="׳™׳¢׳“ ׳ ׳™׳§׳•׳“" value={target} onChangeText={setTarget} keyboardType="number-pad" />
+      <Field label="יעד ניקוד" value={target} onChangeText={setTarget} keyboardType="number-pad" />
       <ChoiceGroup
-        label="׳“׳™׳¨׳•׳’ ׳׳™׳ ׳™׳׳•׳"
+        label="דירוג מינימום"
         options={OVRS.map((ovr) => ({ id: String(ovr), label: String(ovr) }))}
         value={String(minOvr)}
         onChange={(value) => setMinOvr(Number(value))}
@@ -41,7 +41,7 @@ export default function CalculatorScreen() {
       {OVRS.map((ovr) => (
         <Field
           key={ovr}
-          label={`׳ ׳™׳§׳•׳“ ׳׳›׳¨׳˜׳™׳¡ ${ovr}`}
+          label={`ניקוד לכרטיס ${ovr}`}
           value={scores[ovr] ?? ''}
           keyboardType="number-pad"
           onChangeText={(value) => setScores((current) => ({ ...current, [ovr]: value }))}
@@ -52,11 +52,11 @@ export default function CalculatorScreen() {
           <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: 'right' }}>{strategy.title}</Text>
           {strategy.lines.map((line) => (
             <Muted key={`${strategy.id}-${line.ovr}`}>
-              {line.count} ׳›׳¨׳˜׳™׳¡׳™ ׳“׳™׳¨׳•׳’ {line.ovr} ֲ· {line.scoreEach} ׳ ׳§׳•׳“׳•׳× ׳›׳ ׳׳—׳“ ֲ· ׳¡׳”׳´׳› {line.total}
+              {line.count} כרטיסי דירוג {line.ovr} · {line.scoreEach} נקודות כל אחד · סה״כ {line.total}
             </Muted>
           ))}
           <Muted>
-            {strategy.cardCount} ׳›׳¨׳˜׳™׳¡׳™׳ ׳׳’׳™׳¢׳™׳ ׳-{strategy.totalScore}, ׳׳¢׳ ׳™׳¢׳“ {target || '0'}
+            {strategy.cardCount} כרטיסים מגיעים ל-{strategy.totalScore}, מעל יעד {target || '0'}
           </Muted>
         </Card>
       ))}

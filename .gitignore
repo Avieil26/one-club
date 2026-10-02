@@ -43,3 +43,21 @@ yarn-error.*
 
 .vercel
 .env*
+
+# Android beta binary (hosted on EAS, ~113MB)
+*.apk
+
+# Temporary CDP profiles & test verify folders
+temp_edge_cdp*
+
+# Editor / assistant folders
+.cursor/
+.claude/
+
+# Root screenshot / capture artifacts
+*-preview*.png
+preview-*.png
+tab-*.png
+sbc-preview-*.png
+filter-preview-*.png
+nav-preview-*.png

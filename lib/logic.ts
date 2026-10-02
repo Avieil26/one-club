@@ -10,14 +10,31 @@ import type {
   NewSbc,
   NewSolution,
   Profile,
+  ProfileSquad,
 } from '@/lib/types';
 import { nowIso, parseEndDate, uid } from '@/lib/format';
 import { hashPassword } from '@/lib/password';
+import { normalizeSquad } from '@/lib/profileSquad';
+import { readSquad, solutionImages } from '@/lib/sbcSolution';
 
 function mustUser(db: Database): Profile {
   const user = db.profiles.find((profile) => profile.id === db.sessionUserId);
   if (!user) throw new Error('צריך להתחבר');
   return user;
+}
+
+export function setAvatar(db: Database, uri: string) {
+  const user = mustUser(db);
+  const picture = uri.trim();
+  if (!picture) throw new Error('חסרה תמונה');
+  user.avatarUrl = picture;
+}
+
+export function saveSquad(db: Database, squad: ProfileSquad) {
+  const user = mustUser(db);
+  const clean = normalizeSquad(squad);
+  if (!clean) throw new Error('שימו לפחות שחקן אחד בסגל');
+  user.squad = clean;
 }
 
 function mustAdmin(db: Database): Profile {
@@ -156,11 +173,21 @@ export function rateFut(db: Database, postId: string, fit: number, fun: number, 
   if (author) bump(author, 0, 1);
 }
 
+export function toggleFutLike(db: Database, postId: string) {
+  const user = mustUser(db);
+  const post = db.futPosts.find((item) => item.id === postId && item.kind === 'squad');
+  if (!post) throw new Error('הקבוצה לא נמצאה');
+  if (!db.futLikes) db.futLikes = [];
+  const index = db.futLikes.findIndex((like) => like.postId === postId && like.userId === user.id);
+  if (index >= 0) db.futLikes.splice(index, 1);
+  else db.futLikes.push({ postId, userId: user.id });
+}
+
 export function addComment(db: Database, input: NewComment): boolean {
   const user = mustUser(db);
   const body = input.body.trim();
   if (body.length > 120) throw new Error('תגובה יכולה להכיל עד 120 תווים');
-  if (!body && !input.preset) throw new Error('בחרו תגובה או כתבו משפט קצר');
+  if (!body) throw new Error('כתבו משפט קצר');
   const exists = targetExists(db, input.targetType, input.targetId);
   if (!exists) throw new Error('הפוסט לא נמצא');
   const status = commentVisibility(body);
@@ -308,27 +335,47 @@ export function addSolution(db: Database, input: NewSolution) {
   const challenge = db.sbcChallenges.find((item) => item.id === input.challengeId);
   if (!challenge) throw new Error('האתגר לא נמצא');
   if (challenge.kind !== 'classic') throw new Error('פתרון קהילה מיועד ל-SBC קלאסי. ל-Streamlined יש מחשבון.');
+  const squad = readSquad(input.squad, input.formation);
+  const shots = solutionImages(input.imageUris);
+  if (!squad && !shots.length) throw new Error('אפשר לבנות סגל של 11 שחקנים, או להעלות צילום מסך');
   db.sbcSolutions.unshift({
     id: uid('sol'),
     challengeId: challenge.id,
     userId: user.id,
     explanation: text(input.explanation, 'הסבר', 800),
-    imageUris: images(input.imageUris, 1, 3),
+    imageUris: shots,
+    squad: squad?.slots ?? null,
+    formation: squad?.formation ?? null,
     workedUserIds: [],
+    failedUserIds: [],
     status: 'approved',
     createdAt: nowIso(),
   });
 }
 
-export function markWorked(db: Database, solutionId: string) {
+export function voteSolution(db: Database, solutionId: string, vote: 'up' | 'down' | 'clear') {
   const user = mustUser(db);
   const solution = db.sbcSolutions.find((item) => item.id === solutionId);
   if (!solution) throw new Error('הפתרון לא נמצא');
-  if (solution.userId === user.id) throw new Error('אי אפשר לסמן פתרון של עצמך');
-  if (solution.workedUserIds.includes(user.id)) return;
-  solution.workedUserIds.push(user.id);
-  const author = db.profiles.find((profile) => profile.id === solution.userId);
-  if (author) bump(author, 0, 2);
+  if (solution.userId === user.id) throw new Error('אי אפשר לדרג פתרון של עצמך');
+  if (!solution.failedUserIds) solution.failedUserIds = [];
+  const wasUp = solution.workedUserIds.includes(user.id);
+  solution.workedUserIds = solution.workedUserIds.filter((id) => id !== user.id);
+  solution.failedUserIds = solution.failedUserIds.filter((id) => id !== user.id);
+  if (vote === 'clear') return;
+  if (vote === 'up') {
+    solution.workedUserIds.push(user.id);
+    if (!wasUp) {
+      const author = db.profiles.find((profile) => profile.id === solution.userId);
+      if (author) bump(author, 0, 2);
+    }
+    return;
+  }
+  solution.failedUserIds.push(user.id);
+}
+
+export function markWorked(db: Database, solutionId: string) {
+  voteSolution(db, solutionId, 'up');
 }
 
 function accountEmail(email: string): string {

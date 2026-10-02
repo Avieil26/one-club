@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>שאר האתגרים</title>
+<style>
+  @font-face {
+    font-family: Heebo;
+    src: url("fonts/Heebo.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #05070b; color: #f7f4ea; font-family: Heebo, Arial, sans-serif; }
+  body { padding: 22px; display: grid; gap: 16px; }
+  h2 { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .18em; }
+  .card {
+    width: 640px; height: 250px; display: flex; position: relative; overflow: hidden;
+    border-radius: 16px; box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .stripes { position: absolute; top: 0; left: 0; right: 0; height: 6px; z-index: 2; }
+  .copy { flex: 1; display: flex; flex-direction: column; padding: 18px 18px 14px; }
+  .eye { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; letter-spacing: .16em; margin-top: 6px; }
+  .dim { color: rgba(247,244,234,.68); }
+  h1 { margin: 10px 0 0; font-size: 22px; font-weight: 800; line-height: 1.15; letter-spacing: 0; }
+  .note { margin: 8px 0 0; font-size: 13px; font-weight: 500; color: rgba(247,244,234,.78); }
+  .btn {
+    margin-top: auto; height: 44px; border: 0; border-radius: 4px; background: #f4f1e6;
+    display: flex; align-items: center; gap: 10px; padding: 0 14px;
+    font-family: Heebo, Arial, sans-serif; font-size: 15px; font-weight: 700;
+  }
+  .pip { width: 8px; height: 8px; flex: none; }
+  .panel { width: 168px; flex: none; position: relative; overflow: hidden; }
+  .panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .panel::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.05) 48%);
+  }
+  .panel span {
+    position: absolute; inset-inline-start: 16px; bottom: 16px; z-index: 2;
+    font-size: 13px; font-weight: 800; letter-spacing: .14em; color: #fff;
+  }
+
+  .orange { background: #2a1208; }
+  .orange h2, .orange .brand { color: #ff8a3d; }
+  .orange .stripes { background: linear-gradient(90deg, #8a3410 0 34%, #f4f1e6 34% 67%, #ff7a1a 67% 100%); }
+  .orange .panel { background: radial-gradient(120px 80px at 30% 20%, #ffb067, transparent 60%), linear-gradient(160deg, #ff7a1a, #8a3410 70%); }
+  .orange .btn { color: #3a1608; box-shadow: inset -4px 0 0 #e25a12; }
+  .orange .pip { background: #ff7a1a; }
+
+  .green { background: #071610; }
+  .green h2, .green .brand { color: #7dffb2; }
+  .green .stripes { background: linear-gradient(90deg, #0e3d2c 0 34%, #f4f1e6 34% 67%, #3ddc97 67% 100%); }
+  .green .panel { background: radial-gradient(90px 50px at 50% 0%, rgba(190,255,170,.55), transparent 70%), linear-gradient(180deg, #1c6b45, #0b2418); }
+  .green .btn { color: #072016; box-shadow: inset -4px 0 0 #148f5b; }
+  .green .pip { background: #3ddc97; }
+
+  .wine { background: #1a0b10; }
+  .wine h2, .wine .brand { color: #ff8fa3; }
+  .wine .stripes { background: linear-gradient(90deg, #6b1d32 0 34%, #f4f1e6 34% 67%, #e23b57 67% 100%); }
+  .wine .panel { background: radial-gradient(80px 40px at 70% 80%, rgba(255,255,255,.2), transparent 60%), linear-gradient(200deg, #e23b57, #4a1020); }
+  .wine .btn { color: #2a0a12; box-shadow: inset -4px 0 0 #b4233c; }
+  .wine .pip { background: #e23b57; }
+</style>
+</head>
+<body>
+  <section class="orange">
+    <h2>כתום</h2>
+    <article class="card">
+      <div class="stripes"></div>
+      <div class="copy">
+        <div class="eye"><span class="brand">CHAMPIONSHIP</span><span class="dim">WORLD CLASS</span></div>
+        <h1>עלייה בלי רכש מבוגר</h1>
+        <p class="note">מהצ׳מפיונשיפ לפרמייר ליג. עד ינואר, בלי רכש מעל גיל 23.</p>
+        <button class="btn"><span class="pip"></span>לכרטיס האתגר</button>
+      </div>
+      <div class="panel"><img src="bellingham-face.jpg" alt="" style="object-position:50% 42%" /><span>עלייה</span></div>
+    </article>
+  </section>
+
+  <section class="green">
+    <h2>ירוק</h2>
+    <article class="card">
+      <div class="stripes"></div>
+      <div class="copy">
+        <div class="eye"><span class="brand">YOUTH</span><span class="dim">WORLD CLASS</span></div>
+        <h1>רק שחקני אקדמיה עד ינואר</h1>
+        <p class="note">ליגה שנייה. בלי רכש מעל גיל 21. פתוח עד 20.10.2026.</p>
+        <button class="btn"><span class="pip"></span>לכרטיס האתגר</button>
+      </div>
+      <div class="panel"><img src="garnacho-youth.png" alt="" style="object-position:62% 42%" /><span>אקדמיה</span></div>
+    </article>
+  </section>
+
+  <section class="wine">
+    <h2>אדום</h2>
+    <article class="card">
+      <div class="stripes"></div>
+      <div class="copy">
+        <div class="eye"><span class="brand">FIRST GOAL</span><span class="dim">WORLD CLASS</span></div>
+        <h1>שער בכורה בליגה</h1>
+        <p class="note">שחקן צעיר. שער ליגה ראשון. פתוח עד 05.10.2026.</p>
+        <button class="btn"><span class="pip"></span>לכרטיס האתגר</button>
+      </div>
+      <div class="panel"><img src="garnacho-goal.png" alt="" style="object-position:78% 38%" /><span>שער</span></div>
+    </article>
+  </section>
+</body>
+</html>

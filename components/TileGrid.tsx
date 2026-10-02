@@ -1,16 +1,18 @@
 import { ReactNode, useMemo } from 'react';
 import { useWindowDimensions, View } from 'react-native';
 
-export function useColumns(wide = 3, narrow = 2) {
+export function useColumns(wide = 3, narrow = 1) {
   const { width } = useWindowDimensions();
-  return width >= 980 ? wide : narrow;
+  if (width >= 980) return wide;
+  if (width >= 700) return Math.min(2, wide);
+  return narrow;
 }
 
 export function TileGrid<T>({
   items,
   render,
   wide = 3,
-  narrow = 2,
+  narrow = 1,
 }: {
   items: T[];
   render: (item: T) => ReactNode;

@@ -13,7 +13,7 @@ export type PlayerMedia = {
   photo?: string;
   face?: FaceStats;
   /** Zoom/crop toward the head for tall full-body shots */
-  photoFocus?: 'face' | 'center';
+  photoFocus?: 'face' | 'center' | 'bust';
 };
 
 const photo = (file: string) => `https://upload.wikimedia.org/wikipedia/commons/thumb/${file}`;
@@ -124,12 +124,36 @@ import { ICON_FACE, ICON_PHOTOS } from '@/lib/iconPlayers';
 import { rosterMedia } from '@/lib/playerDb';
 import { PLAYER_PHOTOS } from '@/lib/playerPhotos';
 
+const CARD_PHOTO_PX = 330;
+
+function thumbName(file: string): string {
+  if (/\.svg$/i.test(file)) return `${file}.png`;
+  if (/\.tiff?$/i.test(file)) return `${file}.jpg`;
+  return file;
+}
+
+export function cardPhotoUrl(url: string): string {
+  if (!url) return '';
+  const normalized = url.replace('https://thumb.wikimedia.org', 'https://upload.wikimedia.org');
+  if (!normalized.includes('wikimedia.org')) return normalized;
+  const clean = normalized.split(/[?#]/)[0];
+  const sized = clean.match(/^(.*)\/\d+px-[^/]+$/);
+  if (sized) {
+    const file = sized[1].split('/').pop() ?? '';
+    return `${sized[1]}/${CARD_PHOTO_PX}px-${thumbName(file)}`;
+  }
+  const original = clean.match(/^(https?:\/\/upload\.wikimedia\.org\/wikipedia\/[^/]+)\/([0-9a-f])\/([0-9a-f]{2})\/([^/]+)$/i);
+  if (!original) return clean;
+  const file = original[4];
+  return `${original[1]}/thumb/${original[2]}/${original[3]}/${file}/${CARD_PHOTO_PX}px-${thumbName(file)}`;
+}
+
 export function playerMedia(id: string): PlayerMedia {
   const roster = rosterMedia(id);
   const extra = PLAYER_PHOTOS[id];
   const iconPhoto = ICON_PHOTOS[id];
   const base = PLAYER_MEDIA[id] ?? { en: roster?.en ?? extra?.en ?? iconPhoto?.en ?? id };
-  const photo = roster?.photo ?? base.photo ?? extra?.photo ?? iconPhoto?.photo;
+  const photo = cardPhotoUrl(roster?.photo ?? base.photo ?? extra?.photo ?? iconPhoto?.photo ?? '');
   const face = roster?.face ?? EA_FACE[id] ?? ICON_FACE[id] ?? base.face;
   const photoFocus = iconPhoto?.photoFocus ?? base.photoFocus;
   return {

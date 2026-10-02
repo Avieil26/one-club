@@ -20,7 +20,7 @@ export default function NewChallengeScreen() {
   if (!app.user?.isAdmin) {
     return (
       <Screen scene="career">
-        <Title>׳¨׳§ ׳׳ ׳”׳ ׳™׳›׳•׳ ׳׳™׳¦׳•׳¨ ׳׳×׳’׳¨</Title>
+        <Title>רק מנהל יכול ליצור אתגר</Title>
       </Screen>
     );
   }
@@ -30,29 +30,29 @@ export default function NewChallengeScreen() {
       await app.createChallenge({ title, mode, rules, proofRequirements, shareCode, endsAt });
       router.back();
     } catch (error) {
-      Alert.alert('׳¨׳’׳¢', errorMessage(error));
+      Alert.alert('רגע', errorMessage(error));
     }
   }
 
   return (
     <Screen scene="career">
-      <Stack.Screen options={{ title: '׳׳×׳’׳¨ ׳—׳“׳©' }} />
-      <Title>׳׳×׳’׳¨ ׳—׳“׳©</Title>
-      <Field label="׳›׳•׳×׳¨׳×" value={title} onChangeText={setTitle} />
+      <Stack.Screen options={{ title: 'אתגר חדש' }} />
+      <Title>אתגר חדש</Title>
+      <Field label="כותרת" value={title} onChangeText={setTitle} />
       <ChoiceGroup
-        label="׳¡׳•׳’"
+        label="סוג"
         options={[
-          { id: 'manager', label: '׳§׳¨׳™׳™׳¨׳× ׳׳׳׳' },
-          { id: 'player', label: '׳§׳¨׳™׳™׳¨׳× ׳©׳—׳§׳' },
+          { id: 'manager', label: 'קריירת מאמן' },
+          { id: 'player', label: 'קריירת שחקן' },
         ]}
         value={mode}
         onChange={setMode}
       />
-      <Field label="׳—׳•׳§׳™׳" value={rules} onChangeText={setRules} multiline />
-      <Field label="׳׳” ׳—׳™׳™׳‘ ׳׳”׳•׳₪׳™׳¢ ׳‘׳¦׳™׳׳•׳" value={proofRequirements} onChangeText={setProofRequirements} multiline />
-      <Field label="׳§׳•׳“ ׳©׳™׳×׳•׳£ ׳׳”׳׳©׳—׳§, ׳׳ ׳™׳©" value={shareCode} onChangeText={setShareCode} />
-      <Field label="׳×׳׳¨׳™׳ ׳¡׳™׳•׳" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
-      <Button label="׳₪׳¨׳¡׳•׳ ׳”׳׳×׳’׳¨" onPress={save} disabled={app.busy} />
+      <Field label="חוקים" value={rules} onChangeText={setRules} multiline />
+      <Field label="מה חייב להופיע בצילום" value={proofRequirements} onChangeText={setProofRequirements} multiline />
+      <Field label="קוד שיתוף מהמשחק, אם יש" value={shareCode} onChangeText={setShareCode} />
+      <Field label="תאריך סיום" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
+      <Button label="פרסום האתגר" onPress={save} disabled={app.busy} />
     </Screen>
   );
 }

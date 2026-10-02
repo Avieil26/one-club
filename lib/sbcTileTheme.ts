@@ -11,6 +11,78 @@ export type SbcTileTheme = {
 };
 
 const BY_ID: Record<string, SbcTileTheme> = {
+  'sbc-mm-italy': {
+    colors: ['#10140C', '#1A140C', '#6A3A22'],
+    accent: '#E7B89A',
+    pack: 'mixed',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'bronze',
+  },
+  'sbc-mm-norway': {
+    colors: ['#14120C', '#2A2414', '#C9A227'],
+    accent: '#F0E2B0',
+    pack: 'electrum',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
+  'sbc-mm-netherlands': {
+    colors: ['#121418', '#1C2228', '#9AA3B0'],
+    accent: '#E8EEF4',
+    pack: 'silver-x2',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'silver',
+  },
+  'sbc-mm-england': {
+    colors: ['#1A1408', '#3A2C10', '#E3B341'],
+    accent: '#FFE7A8',
+    pack: 'gold',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
+  'sbc-veiga': {
+    colors: ['#1A1408', '#3A2C10', '#E3B341'],
+    accent: '#FFE7A8',
+    pack: 'gold',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
+  'sbc-nusa': {
+    colors: ['#1A1408', '#3A2C10', '#C9A227'],
+    accent: '#FFE7A8',
+    pack: 'gold-jumbo',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
+  'sbc-dfg-1': {
+    colors: ['#1A1408', '#3A2C10', '#C9A227'],
+    accent: '#FFE7A8',
+    pack: 'gold-small',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
+  'sbc-totw-upgrade': {
+    colors: ['#0C1210', '#10201C', '#14B8A6'],
+    accent: '#D5FFF6',
+    pack: 'otw',
+    packLabel: 'TOTW',
+    badgeText: null,
+    badgeTone: 'teal',
+  },
+  'sbc-intro-espinoza': {
+    colors: ['#14180C', '#243018', '#C9A227'],
+    accent: '#FFE7A8',
+    pack: 'gold-small',
+    packLabel: '',
+    badgeText: null,
+    badgeTone: 'gold',
+  },
   'sbc-madrid-dreams': {
     colors: ['#0B1A3A', '#1E3A8A', '#C9A227'],
     accent: '#FFE08A',
@@ -54,8 +126,8 @@ const BY_ID: Record<string, SbcTileTheme> = {
   'sbc-otw-duo-1': {
     colors: ['#04241F', '#0A5A4A', '#1E3A8A'],
     accent: '#7EF0D0',
-    pack: 'pick',
-    packLabel: '83+',
+    pack: 'otw',
+    packLabel: 'OTW',
     badgeText: '83+',
     badgeTone: 'teal',
   },
@@ -63,14 +135,14 @@ const BY_ID: Record<string, SbcTileTheme> = {
     colors: ['#042018', '#0E5A48', '#164A3A'],
     accent: '#7EF0D0',
     pack: 'otw',
-    packLabel: '83+',
+    packLabel: 'OTW',
     badgeText: '83+',
     badgeTone: 'teal',
   },
   'sbc-upgrade-83': {
     colors: ['#04241F', '#0A5A4A', '#1A8A78'],
     accent: '#A8FFE8',
-    pack: 'rare-75',
+    pack: 'otw',
     packLabel: '83+',
     badgeText: '83+',
     badgeTone: 'teal',
@@ -86,8 +158,8 @@ const BY_ID: Record<string, SbcTileTheme> = {
   'sbc-getting-started': {
     colors: ['#0A1C28', '#1A4A5A', '#2BB8A0'],
     accent: '#A8FFE8',
-    pack: 'mixed',
-    packLabel: 'START',
+    pack: 'gold-small',
+    packLabel: '',
     badgeText: null,
     badgeTone: 'green',
   },
@@ -110,8 +182,8 @@ const BY_ID: Record<string, SbcTileTheme> = {
   'sbc-gold-upgrade': {
     colors: ['#241808', '#7A5A14', '#F0C14A'],
     accent: '#FFF0B0',
-    pack: 'gold-small',
-    packLabel: 'GOLD',
+    pack: 'gold',
+    packLabel: '',
     badgeText: null,
     badgeTone: 'gold',
   },
@@ -119,15 +191,15 @@ const BY_ID: Record<string, SbcTileTheme> = {
     colors: ['#12161C', '#3A4558', '#9AA3B2'],
     accent: '#E8ECF2',
     pack: 'silver-x2',
-    packLabel: '75+',
+    packLabel: 'SILVER',
     badgeText: null,
     badgeTone: 'silver',
   },
   'sbc-bronze-upgrade': {
     colors: ['#1A1008', '#5A3A1C', '#B07840'],
     accent: '#E8C090',
-    pack: 'silver-x2',
-    packLabel: '×2',
+    pack: 'mixed',
+    packLabel: '',
     badgeText: null,
     badgeTone: 'bronze',
   },
@@ -135,7 +207,7 @@ const BY_ID: Record<string, SbcTileTheme> = {
     colors: ['#0C1020', '#2A1A4A', '#5B3FA8'],
     accent: '#D0C0FF',
     pack: 'gold-jumbo',
-    packLabel: 'JUMBO',
+    packLabel: '',
     badgeText: null,
     badgeTone: 'blue',
   },
@@ -143,7 +215,7 @@ const BY_ID: Record<string, SbcTileTheme> = {
     colors: ['#0A1814', '#1A4A3A', '#3DDC97'],
     accent: '#A8F0C8',
     pack: 'practice',
-    packLabel: 'DRILL',
+    packLabel: '',
     badgeText: '10',
     badgeTone: 'green',
   },
@@ -166,6 +238,42 @@ const FALLBACK_STREAM: SbcTileTheme = {
   badgeText: null,
   badgeTone: 'teal',
 };
+
+const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-mm-italy': { en: 'Italy vs Belgium', category: 'MARQUEE MATCHUPS', edge: '#009246', rank: 0 },
+  'sbc-mm-norway': { en: 'Norway vs Portugal', category: 'MARQUEE MATCHUPS', edge: '#BA0C2F', rank: 0 },
+  'sbc-mm-netherlands': { en: 'Netherlands vs Germany', category: 'MARQUEE MATCHUPS', edge: '#FF6A00', rank: 0 },
+  'sbc-mm-england': { en: 'England vs Spain', category: 'MARQUEE MATCHUPS', edge: '#CF081F', rank: 0 },
+  'sbc-veiga': { en: 'Renato Veiga', category: 'DESTINED', edge: '#C9A227', rank: 1 },
+  'sbc-nusa': { en: 'Antonio Nusa', category: 'DESTINED', edge: '#C9A227', rank: 1 },
+  'sbc-dfg-1': { en: 'Destined Challenge 1', category: 'DESTINED', edge: '#C9A227', rank: 1 },
+  'sbc-intro-espinoza': { en: 'Cristian Espinoza', category: 'FOUNDATIONS', edge: '#3DDC97', rank: 1 },
+  'sbc-otw-duo-1': { en: 'Ones to Watch Duo Pick', category: 'PLAYERS', edge: '#14B8A6', rank: 1 },
+  'sbc-otw-bouaddi': { en: 'Ayyoub Bouaddi', category: 'PLAYERS', edge: '#14B8A6', rank: 1 },
+  'sbc-upgrade-83': { en: '83+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-upgrade-79x2': { en: '2x 79+ Upgrade', category: 'UPGRADES', edge: '#3B82F6', rank: 2 },
+  'sbc-totw-upgrade': { en: 'TOTW Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-getting-started': { en: 'Intro to Streamlined SBCs', category: 'UPGRADES', edge: '#2BB8A0', rank: 2 },
+  'sbc-gold-reroll': { en: 'Gold Re-Roll', category: 'UPGRADES', edge: '#E3B341', rank: 2 },
+  'sbc-bronze-silver-reroll': { en: 'Bronze and Silver Re-roll', category: 'UPGRADES', edge: '#8A7A60', rank: 2 },
+  'sbc-gold-upgrade': { en: 'Gold Upgrade', category: 'UPGRADES', edge: '#E3B341', rank: 2 },
+  'sbc-silver-upgrade': { en: 'Silver Upgrade', category: 'UPGRADES', edge: '#C5CED6', rank: 2 },
+  'sbc-bronze-upgrade': { en: 'Bronze Upgrade', category: 'UPGRADES', edge: '#C4845C', rank: 2 },
+  'sbc-league-nation-advanced': { en: 'League and Nation Advanced', category: 'UPGRADES', edge: '#5B3FA8', rank: 2 },
+  'sbc-nations-10': { en: '10 Nations', category: 'PRACTICE', edge: '#3DDC97', rank: 3 },
+};
+
+export function sbcFace(challenge: SbcChallenge) {
+  const face = FACE[challenge.id];
+  const hebrew = challenge.title.includes(' · ') ? challenge.title.split(' · ').slice(1).join(' · ') : challenge.title;
+  return {
+    en: face?.en ?? hebrew,
+    he: hebrew,
+    category: face?.category ?? (challenge.kind === 'streamlined' ? 'UPGRADES' : 'SBC'),
+    edge: face?.edge ?? '#C9A227',
+    rank: face?.rank ?? 4,
+  };
+}
 
 export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   const known = BY_ID[challenge.id];

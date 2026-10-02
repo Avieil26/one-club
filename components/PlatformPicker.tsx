@@ -12,6 +12,17 @@ const ICONS: Record<PlatformId, ImageSourcePropType> = {
   switch2: require('@/assets/images/platform-switch2.png'),
 };
 
+export function PlatformMark({ id, size = 36 }: { id: PlatformId; size?: number }) {
+  return (
+    <Image
+      source={ICONS[id]}
+      accessibilityLabel={PLATFORMS.find((item) => item.id === id)?.label ?? id}
+      style={{ width: size, height: size * 0.78 }}
+      resizeMode="contain"
+    />
+  );
+}
+
 export function PlatformPicker({
   value,
   onChange,

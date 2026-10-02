@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>תצוגת משחקונים</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500;700;800&display=swap');
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07090d; color: #f7f4ea; font-family: Heebo, Arial, sans-serif; }
+  body { padding: 28px 32px 64px; }
+  header { direction: rtl; margin-bottom: 22px; }
+  header p { margin: 0; color: #e8c46a; font-weight: 800; letter-spacing: .14em; font-size: 12px; }
+  header h1 { margin: 6px 0 0; font-size: 32px; font-weight: 800; }
+  header span { display: block; margin-top: 6px; color: rgba(247,244,234,.7); font-size: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 380px); gap: 28px 26px; direction: rtl; justify-content: start; }
+  .kicker { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-align: right; direction: rtl; }
+  .phone {
+    border-radius: 30px; overflow: hidden; min-height: 760px;
+    display: flex; flex-direction: column; direction: rtl;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 28px 60px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.16);
+  }
+  .stripes { height: 7px; display: flex; direction: ltr; }
+  .stripes i { flex: 1; display: block; }
+  .pad { padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .pill {
+    height: 28px; padding: 0 10px; border-radius: 99px; display: flex; align-items: center;
+    font-size: 12px; font-weight: 800;
+    background: rgba(255,255,255,.07);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px rgba(255,255,255,.1);
+  }
+  h2 { margin: 0; font-size: 30px; font-weight: 800; line-height: 1.05; text-align: right; }
+  .lead { margin: 0; font-size: 13px; line-height: 1.45; color: rgba(247,244,234,.74); text-align: right; }
+  img.face { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; display: block; }
+
+  .slip {
+    border-radius: 12px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(180deg, #f8f3e8, #e4d5bc);
+    color: #2a0a12;
+    box-shadow: 0 10px 18px rgba(0,0,0,.28), inset 0 1px 0 #fff, inset 0 0 0 1px rgba(90,40,20,.18);
+  }
+  .slip b { font-size: 15px; }
+  .slip em { font-style: normal; font-size: 12px; font-weight: 800; letter-spacing: .06em; opacity: .62; }
+  .slip.lock {
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    color: rgba(247,244,234,.55);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .field {
+    height: 48px; border-radius: 12px; display: flex; align-items: center; padding: 0 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.18));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.1);
+    color: rgba(247,244,234,.45); font-weight: 700;
+  }
+  .go {
+    height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 800; font-size: 18px;
+    background: linear-gradient(180deg, #f7f1e4, #e7d7b8);
+    color: #2a0a12;
+    box-shadow: 0 10px 18px rgba(0,0,0,.28), inset 0 1px 0 #fff, inset -4px 0 0 #e8c46a;
+  }
+  .pip { width: 8px; height: 8px; background: #e23b57; }
+
+  .dossier {
+    background:
+      radial-gradient(420px 240px at 100% 0%, rgba(255,143,163,.28), transparent 55%),
+      linear-gradient(180deg, #4a1524, #1a070d 52%, #10060a);
+  }
+  .dossier .k { color: #ffb3c2; }
+  .dossier .stripes i:nth-child(1) { background: #6b1d32; }
+  .dossier .stripes i:nth-child(2) { background: #f4f1e6; }
+  .dossier .stripes i:nth-child(3) { background: #e23b57; }
+  .cover {
+    height: 210px; border-radius: 18px; overflow: hidden; position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,180,190,.35), 0 16px 28px rgba(0,0,0,.4);
+  }
+  .cover img { filter: blur(14px) saturate(.65); transform: scale(1.18); }
+  .veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(42,10,18,.15), rgba(16,6,10,.72));
+    display: flex; align-items: flex-end; justify-content: flex-end; padding: 12px;
+    font-weight: 800; letter-spacing: .12em; font-size: 13px;
+  }
+
+  .net {
+    background:
+      radial-gradient(380px 220px at 0% 0%, rgba(255,209,0,.16), transparent 50%),
+      linear-gradient(180deg, #16325f, #0c1c38 48%, #081222);
+  }
+  .net .k { color: #ffd100; }
+  .net .stripes i:nth-child(1) { background: #1d428a; }
+  .net .stripes i:nth-child(2) { background: #f4f1e6; }
+  .net .stripes i:nth-child(3) { background: #ffd100; }
+  .board { display: grid; grid-template-columns: 54px 1fr 1fr 1fr; gap: 6px; direction: rtl; }
+  .h, .side {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 11px; font-weight: 800; line-height: 1.2; color: #ffd100;
+  }
+  .side { writing-mode: horizontal-tb; }
+  .cell {
+    height: 92px; border-radius: 12px; overflow: hidden; position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,209,0,.18);
+  }
+  .cell img { height: 100%; }
+  .cell span {
+    position: absolute; right: 0; left: 0; bottom: 0; padding: 12px 4px 4px;
+    background: linear-gradient(to top, rgba(8,16,32,.9), transparent);
+    font-size: 11px; font-weight: 800; text-align: center;
+  }
+  .cell.empty { display: flex; align-items: center; justify-content: center; color: rgba(255,209,0,.7); font-size: 22px; font-weight: 500; }
+  .cell.hit { box-shadow: inset 0 0 0 1px rgba(125,255,178,.7), 0 8px 16px rgba(0,0,0,.3); }
+
+  .groups {
+    background:
+      radial-gradient(420px 200px at 100% 0%, rgba(213,140,255,.25), transparent 52%),
+      linear-gradient(180deg, #2a1848, #140c22 50%, #0c0814);
+  }
+  .groups .k { color: #e2b6ff; }
+  .groups .stripes i:nth-child(1) { background: #5b2d82; }
+  .groups .stripes i:nth-child(2) { background: #f4f1e6; }
+  .groups .stripes i:nth-child(3) { background: #d58cff; }
+  .solved {
+    border-radius: 14px; padding: 8px;
+    background: linear-gradient(180deg, #f0d48a, #a67c2d);
+    color: #2a1c08;
+    box-shadow: 0 10px 18px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .solved .tag { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-align: right; }
+  .solved .row, .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .tile {
+    height: 78px; border-radius: 10px; overflow: hidden; position: relative;
+    background: #1a1030;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), 0 6px 12px rgba(0,0,0,.28);
+  }
+  .tile b {
+    position: absolute; right: 0; left: 0; bottom: 0; font-size: 10px; text-align: center;
+    padding: 10px 2px 3px; background: linear-gradient(to top, rgba(0,0,0,.85), transparent);
+  }
+  .tiles { margin-top: 2px; }
+
+  .who {
+    background:
+      radial-gradient(360px 200px at 0% 0%, rgba(61,220,200,.2), transparent 50%),
+      linear-gradient(180deg, #12343a, #0b1c20 50%, #071214);
+  }
+  .who .k { color: #7dffe8; }
+  .who .stripes i:nth-child(1) { background: #0e3d3a; }
+  .who .stripes i:nth-child(2) { background: #f4f1e6; }
+  .who .stripes i:nth-child(3) { background: #3ddcc8; }
+  .ask {
+    border-radius: 14px; padding: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 0 0 1px rgba(125,255,232,.25);
+    text-align: right;
+  }
+  .ask b { display: block; font-size: 20px; margin-bottom: 8px; }
+  .yn { display: flex; gap: 8px; }
+  .yn i {
+    flex: 1; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-style: normal; font-weight: 800;
+  }
+  .yes { background: linear-gradient(180deg, #d9ffe9, #7dffc3); color: #072016; box-shadow: inset 0 1px 0 #fff; }
+  .no { background: linear-gradient(180deg, #2a1218, #14080c); color: #ffb3c2; box-shadow: inset 0 0 0 1px rgba(255,143,163,.4); }
+  .faces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .mini {
+    height: 64px; border-radius: 8px; overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  .mini.off { filter: grayscale(1) brightness(.35); }
+
+  .heat {
+    background:
+      radial-gradient(420px 240px at 80% 0%, rgba(255,122,26,.3), transparent 55%),
+      linear-gradient(180deg, #3a1608, #1a0c08 46%, #0c0706);
+  }
+  .heat .k { color: #ff8a3d; }
+  .heat .stripes i:nth-child(1) { background: #8a3410; }
+  .heat .stripes i:nth-child(2) { background: #f4f1e6; }
+  .heat .stripes i:nth-child(3) { background: #ff7a1a; }
+  .score {
+    height: 92px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px;
+    background: linear-gradient(90deg, #2a1208, #e25a12 70%, #ffb067);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 12px 22px rgba(0,0,0,.3);
+    color: #2a0e06;
+  }
+  .score strong { font-size: 42px; line-height: 1; }
+  .score em { font-style: normal; font-weight: 800; font-size: 18px; }
+  .guess {
+    border-radius: 12px; padding: 8px 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .guess .line { display: flex; justify-content: space-between; font-weight: 800; font-size: 14px; }
+  .bar { margin-top: 6px; height: 6px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .bar u { display: block; height: 100%; border-radius: 99px; text-decoration: none; }
+
+  .hand {
+    background:
+      radial-gradient(480px 220px at 50% 100%, rgba(61,220,151,.18), transparent 55%),
+      linear-gradient(180deg, #16382a, #0c2418 40%, #07140f);
+  }
+  .hand .k { color: #7dffc3; }
+  .hand .stripes i:nth-child(1) { background: #0e3d2c; }
+  .hand .stripes i:nth-child(2) { background: #f4f1e6; }
+  .hand .stripes i:nth-child(3) { background: #3ddc97; }
+  .fan { height: 230px; display: flex; justify-content: center; align-items: flex-end; }
+  .fcard {
+    width: 78px; height: 132px; margin: 0 -10px; border-radius: 12px; overflow: hidden; position: relative;
+    transform-origin: 50% 120%;
+    background: linear-gradient(160deg, #f0d48a, #8a6230);
+    box-shadow: 0 12px 18px rgba(0,0,0,.4), inset 0 0 0 1px rgba(255,255,255,.3);
+    padding: 4px;
+  }
+  .fcard .in { height: 100%; border-radius: 9px; overflow: hidden; background: #1a1208; position: relative; }
+  .fcard .ovr {
+    position: absolute; top: 4px; right: 5px; font-weight: 800; font-size: 16px; line-height: 1; z-index: 1;
+    text-shadow: 0 1px 2px #000;
+  }
+  .fcard .pos { position: absolute; top: 22px; right: 6px; font-size: 10px; font-weight: 800; z-index: 1; }
+  .fcard .nm {
+    position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 10px; font-weight: 800;
+    padding: 12px 2px 4px; background: linear-gradient(to top, rgba(0,0,0,.88), transparent);
+  }
+  .combo {
+    margin-top: -8px; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(180deg, #f7f1e4, #d9c49a);
+    color: #102016;
+    box-shadow: 0 12px 20px rgba(0,0,0,.3), inset 0 1px 0 #fff, inset -4px 0 0 #148f5b;
+  }
+  .combo b { font-size: 16px; }
+  .combo em { font-style: normal; font-weight: 800; }
+
+  .sol {
+    background:
+      radial-gradient(400px 180px at 100% 0%, rgba(196,140,70,.2), transparent 50%),
+      linear-gradient(180deg, #3a2616, #1a100a 45%, #0d0906);
+  }
+  .sol .k { color: #e7c39a; }
+  .sol .stripes i:nth-child(1) { background: #6b3d22; }
+  .sol .stripes i:nth-child(2) { background: #f4f1e6; }
+  .sol .stripes i:nth-child(3) { background: #c47b4a; }
+  .cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; direction: ltr; }
+  .pile { display: flex; flex-direction: column; align-items: center; }
+  .back {
+    width: 100%; height: 16px; border-radius: 6px 6px 2px 2px; margin-bottom: -8px;
+    background: linear-gradient(180deg, #6b1d32, #3a1020);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .topc {
+    width: 100%; height: 120px; border-radius: 10px; overflow: hidden; position: relative;
+    box-shadow: 0 10px 16px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.16);
+  }
+  .topc b {
+    position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 11px;
+    padding: 12px 2px 4px; background: linear-gradient(to top, rgba(0,0,0,.88), transparent);
+  }
+  .pile.on .topc { box-shadow: 0 0 0 2px #7dffc3, 0 10px 16px rgba(0,0,0,.35); }
+  .hold {
+    border-radius: 14px; padding: 8px; display: flex; gap: 10px; align-items: center;
+    background: linear-gradient(180deg, rgba(125,255,195,.16), rgba(255,255,255,.04));
+    box-shadow: inset 0 0 0 1px rgba(125,255,195,.4), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  .hold img { width: 54px; height: 70px; object-fit: cover; object-position: center 16%; border-radius: 8px; }
+  .hold div { text-align: right; }
+  .hold b { display: block; font-size: 16px; }
+  .hold em { font-style: normal; color: #7dffc3; font-weight: 800; font-size: 12px; }
+
+  .time {
+    background:
+      radial-gradient(380px 200px at 0% 100%, rgba(232,196,106,.16), transparent 50%),
+      linear-gradient(180deg, #241c10, #12100c 50%, #0a0907);
+  }
+  .time .k { color: #e8c46a; }
+  .time .stripes i:nth-child(1) { background: #6b4a16; }
+  .time .stripes i:nth-child(2) { background: #f4f1e6; }
+  .time .stripes i:nth-child(3) { background: #e8c46a; }
+  .rail { display: flex; flex-direction: column; gap: 0; padding-right: 18px; position: relative; }
+  .rail::before {
+    content: ""; position: absolute; right: 5px; top: 8px; bottom: 8px; width: 2px;
+    background: linear-gradient(#e8c46a, rgba(232,196,106,.2));
+  }
+  .node { display: flex; gap: 10px; align-items: center; position: relative; padding: 7px 0; }
+  .node::before {
+    content: ""; position: absolute; right: -16px; width: 10px; height: 10px; border-radius: 50%;
+    background: #e8c46a; box-shadow: 0 0 0 3px rgba(232,196,106,.2);
+  }
+  .tcard {
+    width: 64px; height: 80px; border-radius: 10px; overflow: hidden; flex: none;
+    box-shadow: 0 8px 14px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.16);
+  }
+  .tmeta { text-align: right; }
+  .tmeta b { display: block; font-size: 16px; }
+  .tmeta em { font-style: normal; color: rgba(247,244,234,.65); font-weight: 700; font-size: 13px; }
+  .node.now .tcard { box-shadow: 0 0 0 2px #e8c46a, 0 12px 20px rgba(0,0,0,.4); transform: translateY(-2px); }
+  .node.now .tmeta b { color: #e8c46a; }
+
+  .code {
+    background:
+      radial-gradient(300px 180px at 100% 0%, rgba(226,59,87,.22), transparent 50%),
+      radial-gradient(300px 180px at 0% 100%, rgba(94,168,255,.18), transparent 50%),
+      linear-gradient(180deg, #1a1e28, #10131a 50%, #0a0c10);
+  }
+  .code .k { color: #f4f1e6; }
+  .code .stripes i:nth-child(1) { background: #1d428a; }
+  .code .stripes i:nth-child(2) { background: #f4f1e6; }
+  .code .stripes i:nth-child(3) { background: #e23b57; }
+  .clue {
+    align-self: center; min-width: 180px; height: 64px; border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, #f7f1e4, #e4d3b4);
+    color: #2a0a12;
+    box-shadow: 0 12px 22px rgba(0,0,0,.35), inset 0 1px 0 #fff;
+  }
+  .clue b { font-size: 22px; line-height: 1; }
+  .clue em { font-style: normal; font-size: 12px; font-weight: 800; }
+  .spy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .agent {
+    height: 108px; border-radius: 12px; overflow: hidden; position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 8px 14px rgba(0,0,0,.3);
+  }
+  .agent b {
+    position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 12px;
+    padding: 14px 3px 4px; background: linear-gradient(to top, rgba(0,0,0,.9), transparent);
+  }
+  .agent.blue { box-shadow: inset 0 0 0 2px #8eb7ff, 0 8px 14px rgba(0,0,0,.3); }
+  .agent.red { box-shadow: inset 0 0 0 2px #e23b57, 0 8px 14px rgba(0,0,0,.3); }
+  .agent i {
+    position: absolute; top: 6px; left: 6px; font-style: normal; font-size: 10px; font-weight: 800;
+    padding: 2px 6px; border-radius: 99px;
+  }
+  .agent.blue i { background: #1d428a; }
+  .agent.red i { background: #8a2032; }
+</style>
+</head>
+<body>
+  <header>
+    <p>תצוגה</p>
+    <h1>תשעה פורמטים</h1>
+    <span>מסכי דוגמה. עדיין לא באתר. רק גברים מהמאגר.</span>
+  </header>
+  <div class="grid">
+
+    <section>
+      <p class="kicker" style="color:#ffb3c2">תיק שחקן</p>
+      <article class="phone dossier">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">רמז 3 מתוך 6</span><span class="pill">12 נקודות על השולחן</span></div>
+          <h2>מי בתיק?</h2>
+          <p class="lead">כל רמז נפתח רק אם עדיין לא ניחשתם. התמונה נשארת מטושטשת עד הסוף.</p>
+          <div class="cover">
+            <img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" />
+            <div class="veil">התיק סגור</div>
+          </div>
+          <div class="slip"><b>ספרד</b><em>מדינה</em></div>
+          <div class="slip"><b>לה ליגה</b><em>ליגה</em></div>
+          <div class="slip"><b>כנף ימין</b><em>עמדה</em></div>
+          <div class="slip lock"><b>הרמז הבא סגור</b><em>כדרור</em></div>
+          <div class="field">כתבו שם מהמאגר</div>
+          <div class="go"><span class="pip"></span>נחש</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#ffd100">הרשת</p>
+      <article class="phone net">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">3 מתוך 9</span><span class="pill">שם אחד למשבצת</span></div>
+          <h2>הרשת</h2>
+          <p class="lead">כל משבצת מבקשת גבר אחד מהמאגר שיושב גם על השורה וגם על הטור.</p>
+          <div class="board">
+            <div></div>
+            <div class="h">ברצלונה</div>
+            <div class="h">ריאל</div>
+            <div class="h">סיטי</div>
+            <div class="side">ברזיל</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><span>ויניסיוס</span></div>
+            <div class="cell empty">+</div>
+            <div class="side">אנגליה</div>
+            <div class="cell empty">+</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /><span>פודן</span></div>
+            <div class="side">צרפת</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><span>מבאפה</span></div>
+            <div class="cell empty">+</div>
+          </div>
+          <div class="field">חפשו שחקן למשבצת הפנויה</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#e2b6ff">קבוצות</p>
+      <article class="phone groups">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">קבוצה 1 מתוך 4</span><span class="pill">ארבעה ניסיונות</span></div>
+          <h2>קבוצות</h2>
+          <p class="lead">שישה עשר קלפים. כל רביעייה חולקת דבר אחד מהקלף, והוא נחשף רק אחרי שסוגרים אותה.</p>
+          <div class="solved">
+            <div class="tag">פלייסטייל · אצה</div>
+            <div class="row" style="margin-top:6px">
+              <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /><b>ימאל</b></div>
+              <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><b>מבאפה</b></div>
+              <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><b>ויניסיוס</b></div>
+              <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ousmane_Dembele_France_v_Senegal_16_June_2026-341_%28cropped%29_2.jpg/500px-Ousmane_Dembele_France_v_Senegal_16_June_2026-341_%28cropped%29_2.jpg" /><b>דמבלה</b></div>
+            </div>
+          </div>
+          <div class="tiles">
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /><b>סאקה</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /><b>האלנד</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/330px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg" /><b>בלינגהאם</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" /><b>פדרי</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg/500px-Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg" /><b>רודרי</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg/500px-Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg" /><b>קיין</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Declan_Rice_England_v_Ghana_23_June_2026-150.jpg/500px-Declan_Rice_England_v_Ghana_23_June_2026-150.jpg" /><b>רייס</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg/500px-Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg" /><b>סלאח</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Cole_Palmer_2025_FIFA_Club_World_Cup_Final.jpg" /><b>פאלמר</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Federico_Valverde_2021_%28cropped%29.jpg/330px-Federico_Valverde_2021_%28cropped%29.jpg" /><b>בלברדה</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg/330px-BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg" /><b>סון</b></div>
+            <div class="tile"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/FRA-ARG_%2810%29_%28cropped%29.jpg/330px-FRA-ARG_%2810%29_%28cropped%29.jpg" /><b>גריזמן</b></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#7dffe8">נחש מי</p>
+      <article class="phone who">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">נשארו 9</span><span class="pill">שאלה 4</span></div>
+          <h2>נחש מי</h2>
+          <div class="ask">
+            <b>הוא משחק בלה ליגה?</b>
+            <div class="yn"><i class="yes">כן</i><i class="no">לא</i></div>
+          </div>
+          <div class="faces">
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/330px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg/500px-Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg/500px-Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Declan_Rice_England_v_Ghana_23_June_2026-150.jpg/500px-Declan_Rice_England_v_Ghana_23_June_2026-150.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Federico_Valverde_2021_%28cropped%29.jpg/330px-Federico_Valverde_2021_%28cropped%29.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg/500px-Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Cole_Palmer_2025_FIFA_Club_World_Cup_Final.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /></div>
+            <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg/330px-BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg" /></div>
+            <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/FRA-ARG_%2810%29_%28cropped%29.jpg/330px-FRA-ARG_%2810%29_%28cropped%29.jpg" /></div>
+          </div>
+          <p class="lead">כן סוגר את מי שלא בליגה. לא סוגר את מי שבליגה. נשארים עם פרצוף אחד.</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#ff8a3d">חם או קר</p>
+      <article class="phone heat">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">ניחוש 6</span><span class="pill">השם חסוי</span></div>
+          <h2>חם או קר</h2>
+          <p class="lead">בוחרים גבר מהמאגר. המספר אומר כמה הוא קרוב, לפי מועדון, ליגה, מדינה, עמדה ודירוג.</p>
+          <div class="score"><div><em>ימאל</em><div style="font-weight:800">הרותח עד עכשיו</div></div><strong>92</strong></div>
+          <div class="guess"><div class="line"><span>ימאל</span><span>92 · רותח</span></div><div class="bar"><u style="width:92%;background:linear-gradient(90deg,#ff7a1a,#ffd100)"></u></div></div>
+          <div class="guess"><div class="line"><span>סאקה</span><span>71 · חם</span></div><div class="bar"><u style="width:71%;background:linear-gradient(90deg,#e25a12,#f4f1e6)"></u></div></div>
+          <div class="guess"><div class="line"><span>פדרי</span><span>64 · חם</span></div><div class="bar"><u style="width:64%;background:#e25a12"></u></div></div>
+          <div class="guess"><div class="line"><span>האלנד</span><span>24 · קר</span></div><div class="bar"><u style="width:24%;background:#5ea8ff"></u></div></div>
+          <div class="field">הניחוש הבא</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#7dffc3">יד של קלפים</p>
+      <article class="phone hand">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">סיבוב 2</span><span class="pill">1,240</span></div>
+          <h2>היד</h2>
+          <p class="lead">חמישה קלפים. מניחים צירוף, והניקוד הוא הדירוגים כפול הכימיה שביניהם.</p>
+          <div class="fan">
+            <div class="fcard" style="transform:rotate(-12deg)"><div class="in"><div class="ovr">90</div><div class="pos">RW</div><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /><div class="nm">ימאל</div></div></div>
+            <div class="fcard" style="transform:rotate(-6deg)"><div class="in"><div class="ovr">90</div><div class="pos">CM</div><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" /><div class="nm">פדרי</div></div></div>
+            <div class="fcard"><div class="in"><div class="ovr">89</div><div class="pos">LW</div><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><div class="nm">ויניסיוס</div></div></div>
+            <div class="fcard" style="transform:rotate(6deg)"><div class="in"><div class="ovr">91</div><div class="pos">ST</div><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><div class="nm">מבאפה</div></div></div>
+            <div class="fcard" style="transform:rotate(12deg)"><div class="in"><div class="ovr">90</div><div class="pos">CM</div><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/330px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg" /><div class="nm">בלינגהאם</div></div></div>
+          </div>
+          <div class="combo"><div><b>שלישייה · ספרד</b><div>ימאל, פדרי, בלינגהאם</div></div><em>×3</em></div>
+          <div class="go" style="background:linear-gradient(180deg,#e7fff3,#7dffc3);color:#072016;box-shadow:0 10px 18px rgba(0,0,0,.28), inset 0 1px 0 #fff, inset -4px 0 0 #0e3d2c"><span class="pip" style="background:#0e3d2c"></span>הנח את הצירוף</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#e7c39a">סוליטר</p>
+      <article class="phone sol">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">4 עמודות</span><span class="pill">קלף ביד</span></div>
+          <h2>סוליטר</h2>
+          <p class="lead">מניחים קלף על קלף רק אם יש מועדון, ליגה או מדינה משותפים.</p>
+          <div class="cols">
+            <div class="pile on"><div class="back"></div><div class="back"></div><div class="topc"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /><b>ימאל</b></div></div>
+            <div class="pile"><div class="back"></div><div class="topc"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /><b>האלנד</b></div></div>
+            <div class="pile"><div class="back"></div><div class="back"></div><div class="back"></div><div class="topc"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /><b>סאקה</b></div></div>
+            <div class="pile"><div class="topc"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><b>מבאפה</b></div></div>
+          </div>
+          <div class="hold">
+            <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" />
+            <div><b>פדרי ביד</b><em>קישור לימאל · מועדון ומדינה</em></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#e8c46a">ציר זמן</p>
+      <article class="phone time">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill k">לפי דירוג</span><span class="pill">טעות מוציאה קלף</span></div>
+          <h2>ציר הזמן</h2>
+          <p class="lead">המספרים על הציר כבר פתוחים. הקלף ביד עדיין בלי מספר, ושמים אותו ברווח הנכון.</p>
+          <div class="rail">
+            <div class="node"><div class="tcard"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /></div><div class="tmeta"><b>האלנד</b><em>91</em></div></div>
+            <div class="node now"><div class="tcard"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /></div><div class="tmeta"><b>ימאל</b><em>הרווח בין 91 ל־88</em></div></div>
+            <div class="node"><div class="tcard"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Declan_Rice_England_v_Ghana_23_June_2026-150.jpg/500px-Declan_Rice_England_v_Ghana_23_June_2026-150.jpg" /></div><div class="tmeta"><b>רייס</b><em>88</em></div></div>
+            <div class="node"><div class="tcard"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /></div><div class="tmeta"><b>סאקה</b><em>87</em></div></div>
+            <div class="node"><div class="tcard"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /></div><div class="tmeta"><b>פודן</b><em>84</em></div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="kicker" style="color:#f4f1e6">שם קוד</p>
+      <article class="phone code">
+        <div class="stripes"><i></i><i></i><i></i></div>
+        <div class="pad">
+          <div class="top"><span class="pill">לבד מול הלוח</span><span class="pill k">מילה אחת</span></div>
+          <h2>שם קוד</h2>
+          <div class="clue"><b>מהירות</b><em>שלושה קלפים</em></div>
+          <div class="spy">
+            <div class="agent blue"><i>שלך</i><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /><b>ימאל</b></div>
+            <div class="agent blue"><i>שלך</i><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><b>מבאפה</b></div>
+            <div class="agent blue"><i>שלך</i><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><b>ויניסיוס</b></div>
+            <div class="agent red"><i>מלכודת</i><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg/500px-Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg" /><b>קיין</b></div>
+            <div class="agent"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg/500px-Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg" /><b>רודרי</b></div>
+            <div class="agent"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" /><b>פדרי</b></div>
+            <div class="agent"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /><b>סאקה</b></div>
+            <div class="agent"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /><b>האלנד</b></div>
+            <div class="agent"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Declan_Rice_England_v_Ghana_23_June_2026-150.jpg/500px-Declan_Rice_England_v_Ghana_23_June_2026-150.jpg" /><b>רייס</b></div>
+          </div>
+          <p class="lead">בתצוגה המלכודת מסומנת. במשחק עצמו רואים רק את המילה, ובוחרים שלושה.</p>
+        </div>
+      </article>
+    </section>
+
+  </div>
+</body>
+</html>

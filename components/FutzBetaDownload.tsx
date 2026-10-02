@@ -21,14 +21,14 @@ export function FutzBetaDownload() {
     const url = apkDownloadUrl();
     const available = ready ?? (await isApkAvailable());
     if (!available) {
-      Alert.alert('בקרוב', 'קובץ ה־APK של Futz BETA עדיין לא הועלה. נסו שוב אחרי עדכון הבטא.');
+      Alert.alert('בקרוב', 'קובץ ה־APK של 1 CLUB עדיין לא הועלה. נסו שוב אחרי עדכון הבטא.');
       return;
     }
     try {
       if (Platform.OS === 'web' && typeof document !== 'undefined') {
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'Futz-BETA.apk';
+        a.download = '1-CLUB.apk';
         a.rel = 'noopener';
         document.body.appendChild(a);
         a.click();
@@ -40,6 +40,13 @@ export function FutzBetaDownload() {
       Alert.alert('רגע', 'ההורדה נכשלה. נסו שוב בעוד רגע.');
     }
   }
+
+  if (Platform.OS !== 'web') return null;
+
+  const ios =
+    typeof navigator !== 'undefined' &&
+    (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
 
   return (
     <LinearGradient
@@ -57,7 +64,7 @@ export function FutzBetaDownload() {
     >
       <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 14 }}>
         <Image
-          source={require('@/assets/images/futz-beta-logo.png')}
+          source={require('@/assets/images/brand-1club.png')}
           style={{
             width: 72,
             height: 72,
@@ -69,18 +76,20 @@ export function FutzBetaDownload() {
         />
         <View style={{ flex: 1, gap: 4 }}>
           <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '800', textAlign: 'right', letterSpacing: 1.2 }}>
-            ANDROID · BETA
+            {ios ? 'באתר' : 'ANDROID · BETA'}
           </Text>
-          <Text style={{ color: '#F7F4EA', fontSize: 22, fontWeight: '900', textAlign: 'right' }}>Futz BETA</Text>
+          <Text style={{ color: '#F7F4EA', fontSize: 22, fontWeight: '900', textAlign: 'right' }}>1 CLUB</Text>
           <Muted>
-            {ready === false
-              ? 'הכפתור מוכן — קובץ ה־APK יעלה מיד אחרי בילד הבטא.'
-              : 'גרסת בטא להתקנה ישירה בטלפון — לא בחנות.'}
+            {ios
+              ? 'באייפון נכנסים דרך האתר. הורדת האפליקציה היא לאנדרואיד.'
+              : ready === false
+                ? 'הכפתור מוכן — קובץ ה־APK יעלה מיד אחרי בילד הבטא.'
+                : 'גרסת בטא להתקנה ישירה בטלפון — לא בחנות.'}
           </Muted>
         </View>
       </View>
 
-      <Pressable
+      {ios ? null : <Pressable
         accessibilityRole="button"
         onPress={download}
         style={({ pressed }) => ({
@@ -96,10 +105,10 @@ export function FutzBetaDownload() {
           style={{ paddingVertical: 14, alignItems: 'center' }}
         >
           <Text style={{ color: ready === false ? '#E5E7EB' : '#1A1208', fontSize: 16, fontWeight: '900' }}>
-            {ready === false ? 'APK בבנייה · Futz BETA' : 'הורדת APK · Futz BETA'}
+            {ready === false ? 'APK בבנייה · 1 CLUB' : 'הורדת APK · 1 CLUB'}
           </Text>
         </LinearGradient>
-      </Pressable>
+      </Pressable>}
     </LinearGradient>
   );
 }

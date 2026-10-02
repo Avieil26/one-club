@@ -116,6 +116,12 @@ const TEAM_ID: Record<string, number> = {
   Celtic: 732,
 };
 
+/** Crests football-data.org does not carry. */
+const CREST_URI: Record<string, string> = {
+  'טרבזונספור': 'https://r2.thesportsdb.com/images/media/team/badge/96s34o1776827629.png',
+  'לוס אנג׳לס': 'https://r2.thesportsdb.com/images/media/team/badge/7nbj2a1602103638.png',
+};
+
 const COLORS: Record<string, Pick<ClubLook, 'letters' | 'bg' | 'fg' | 'accent'>> = {
   [C.celtic]: { letters: 'CFC', bg: '#018749', fg: '#FFFFFF', accent: '#F4F7F2' },
   [C.rangers]: { letters: 'RFC', bg: '#1B458F', fg: '#FFFFFF', accent: '#E10600' },
@@ -140,9 +146,12 @@ const COLORS: Record<string, Pick<ClubLook, 'letters' | 'bg' | 'fg' | 'accent'>>
   [C.milan]: { letters: 'ACM', bg: '#FB090B', fg: '#FFFFFF', accent: '#000000' },
   [C.juve]: { letters: 'JUV', bg: '#000000', fg: '#FFFFFF', accent: '#FFFFFF' },
   [C.napoli]: { letters: 'NAP', bg: '#12A0D7', fg: '#FFFFFF', accent: '#FFFFFF' },
+  'טרבזונספור': { letters: 'TS', bg: '#6C1D45', fg: '#7EC8E3', accent: '#7EC8E3' },
+  'לוס אנג׳לס': { letters: 'LA', bg: '#111111', fg: '#C4A35A', accent: '#C4A35A' },
 };
 
 function crestUriFor(club: string): string | null {
+  if (CREST_URI[club]) return CREST_URI[club];
   const id = TEAM_ID[club];
   if (!id) return null;
   return `https://crests.football-data.org/${id}.png`;

@@ -1,7 +1,7 @@
 import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal';
+export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
 
 const SCENES: Record<
   SceneId,
@@ -21,11 +21,11 @@ const SCENES: Record<
     base: '#05080A',
   },
   career: {
-    source: require('@/assets/images/scene-career.png'),
-    tint: ['rgba(4,8,14,0.6)', 'rgba(8,14,22,0.42)', 'rgba(3,6,12,0.8)'],
-    wash: 'rgba(10,16,24,0.3)',
-    vignette: ['rgba(0,0,0,0.48)', 'transparent', 'transparent', 'rgba(0,0,0,0.76)'],
-    base: '#05080A',
+    source: require('@/assets/images/scene-career-scout.png'),
+    tint: ['rgba(8,14,22,0.40)', 'rgba(8,14,22,0.30)', 'rgba(8,14,22,0.50)'],
+    wash: 'rgba(8,14,22,0.22)',
+    vignette: ['rgba(0,0,0,0.25)', 'transparent', 'transparent', 'rgba(0,0,0,0.50)'],
+    base: '#070D14',
   },
   ultimate: {
     source: require('@/assets/images/scene-ultimate.png'),
@@ -42,11 +42,11 @@ const SCENES: Record<
     base: '#05080A',
   },
   sbc: {
-    source: require('@/assets/images/scene-sbc.png'),
-    tint: ['rgba(4,8,16,0.35)', 'rgba(6,10,18,0.18)', 'rgba(3,6,12,0.45)'],
-    wash: 'rgba(4,8,14,0.12)',
-    vignette: ['rgba(0,0,0,0.28)', 'transparent', 'transparent', 'rgba(0,0,0,0.42)'],
-    base: '#060A14',
+    source: require('@/assets/images/scene-sbc-tunnel.png'),
+    tint: ['rgba(0,0,0,0.18)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.28)'],
+    wash: 'transparent',
+    vignette: ['rgba(0,0,0,0.2)', 'transparent', 'transparent', 'rgba(0,0,0,0.35)'],
+    base: '#07080A',
   },
   market: {
     source: require('@/assets/images/market-stadium-bg.png'),
@@ -54,6 +54,27 @@ const SCENES: Record<
     wash: 'rgba(8,14,12,0.22)',
     vignette: ['rgba(0,0,0,0.48)', 'transparent', 'transparent', 'rgba(0,0,0,0.76)'],
     base: '#05080A',
+  },
+  draft: {
+    source: require('@/assets/images/scene-ultimate.png'),
+    tint: ['rgba(12,8,4,0.62)', 'rgba(8,10,8,0.38)', 'rgba(4,6,5,0.78)'],
+    wash: 'rgba(8,10,8,0.18)',
+    vignette: ['rgba(0,0,0,0.35)', 'transparent', 'transparent', 'rgba(0,0,0,0.62)'],
+    base: '#07060A',
+  },
+  games: {
+    source: require('@/assets/images/scene-grounds.png'),
+    tint: ['rgba(5,7,12,0.42)', 'rgba(5,7,12,0.18)', 'rgba(4,8,6,0.62)'],
+    wash: 'rgba(5,8,10,0.12)',
+    vignette: ['rgba(0,0,0,0.28)', 'transparent', 'transparent', 'rgba(0,0,0,0.45)'],
+    base: '#05070C',
+  },
+  board: {
+    source: require('@/assets/images/board-stadium.jpg'),
+    tint: ['rgba(7,8,12,0.94)', '#07080c', '#07080c'],
+    wash: 'rgba(7,8,12,0.4)',
+    vignette: ['#07080c', '#07080c', '#07080c', '#07080c'],
+    base: '#07080c',
   },
   modal: {
     source: require('@/assets/images/scene-ultimate.png'),

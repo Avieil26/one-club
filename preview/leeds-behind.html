@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>אליפות עם לידס</title>
+<style>
+  @font-face {
+    font-family: Heebo;
+    src: url("fonts/Heebo.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: #05070b;
+    font-family: Heebo, Arial, sans-serif;
+  }
+  body { padding: 24px; }
+  .card {
+    width: 420px;
+    height: 560px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #071018;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 60px rgba(0,0,0,.45);
+  }
+  .card img.player {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 118%;
+    object-fit: cover;
+    object-position: 22% 8%;
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(5,12,24,.92) 0%, rgba(5,12,24,.2) 34%, transparent 52%),
+      linear-gradient(to left, rgba(6,16,36,.94) 0%, rgba(6,16,36,.78) 36%, rgba(6,16,36,.22) 58%, rgba(6,16,36,0) 78%);
+  }
+  .stripes {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 7px;
+    background: linear-gradient(90deg, #1d428a 0 34%, #f7f4ea 34% 67%, #ffd100 67% 100%);
+    z-index: 3;
+  }
+  .frame {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(247,244,234,.28);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .copy {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 28px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    color: #f7f4ea;
+  }
+  .eyebrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .22em;
+  }
+  .eyebrow span:first-child { color: #ffd100; }
+  .eyebrow span:last-child { color: rgba(247,244,234,.72); letter-spacing: .18em; }
+  h1 {
+    margin: auto 0 0;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: .92;
+    letter-spacing: -0.03em;
+  }
+  .score {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    row-gap: 2px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(247,244,234,.22);
+  }
+  .nums, .meta { display: grid; gap: 2px; }
+  .nums b {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .meta strong { font-size: 13px; font-weight: 600; line-height: 28px; }
+  .when { grid-column: 1 / -1; margin-top: 6px; font-size: 12px; font-weight: 500; color: rgba(247,244,234,.78); }
+  .btn {
+    margin-top: 14px;
+    height: 46px;
+    border: 0;
+    border-radius: 4px;
+    background: #f4f1e6;
+    color: #10284a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    font-family: Heebo, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: inset -4px 0 0 #1d428a;
+  }
+  .pip { width: 8px; height: 8px; background: #ffd100; }
+</style>
+</head>
+<body>
+  <article class="card">
+    <img class="player" src="raphinha-leeds.jpg" alt="" />
+    <div class="scrim"></div>
+    <div class="stripes"></div>
+    <div class="frame"></div>
+    <div class="copy">
+      <div class="eyebrow">
+        <span>LEEDS UNITED</span>
+        <span>WORLD CLASS</span>
+      </div>
+      <h1>אליפות<br>עם לידס</h1>
+      <div class="score">
+        <div class="nums"><b>2</b><b>1</b></div>
+        <div class="meta"><strong>לידס</strong><strong>ברנטפורד</strong></div>
+        <div class="when">22 במאי 2022 · פנדל בדקה 56, השער של הריסון בדקה ה־90</div>
+      </div>
+      <button class="btn"><span class="pip"></span>לכרטיס האתגר</button>
+    </div>
+  </article>
+</body>
+</html>

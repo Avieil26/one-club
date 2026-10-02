@@ -49,6 +49,20 @@ export async function uploadProofs(userId: string, uris: string[], folder: strin
   return uploaded;
 }
 
+export async function uploadAvatar(userId: string, uri: string): Promise<string> {
+  const supabase = getSupabase();
+  const bytes = await uriToBytes(uri);
+  const body = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
+  const png = uri.startsWith('data:image/png');
+  const path = `${userId}/avatar/${Date.now()}.${png ? 'png' : 'jpg'}`;
+  const { error } = await supabase.storage.from('proofs').upload(path, body, {
+    contentType: png ? 'image/png' : 'image/jpeg',
+    upsert: false,
+  });
+  if (error) throw new Error('העלאת התמונה נכשלה');
+  return supabase.storage.from('proofs').getPublicUrl(path).data.publicUrl;
+}
+
 async function uriToBytes(uri: string): Promise<Uint8Array> {
   if (uri.startsWith('data:')) {
     const payload = uri.split(',')[1] ?? '';

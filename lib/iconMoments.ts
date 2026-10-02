@@ -1,0 +1,110 @@
+export type TrophyKind =
+  | 'worldcup'
+  | 'ucl'
+  | 'euro'
+  | 'wwc'
+  | 'olympic'
+  | 'ballondor'
+  | 'premier'
+  | 'libertadores'
+  | 'europa';
+
+export type IconMoment = {
+  trophy?: TrophyKind;
+  count: number;
+  caption: string;
+  photo?: string;
+};
+
+/** Biggest trophy each icon actually won, plus a photo of that moment. */
+export const ICON_MOMENTS: Record<string, IconMoment> = {
+  'icon-pele': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Pele_celebrating_1970.jpg/960px-Pele_celebrating_1970.jpg",  trophy: 'worldcup', count: 3, caption: 'שלושה גביעי עולם' },
+  'icon-diego-armando-maradona': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Maradona-Mundial_86_con_la_copa.JPG/960px-Maradona-Mundial_86_con_la_copa.JPG",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1986' },
+  'icon-ronaldo': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Ronaldo_2002_cropped.jpg",  trophy: 'worldcup', count: 2, caption: 'שני גביעי עולם' },
+  'icon-zinedine-zidane': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Zinedine_Zidane_2008-2.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-ronaldinho': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Ronaldinho_Ga%C3%BAcho_2016.jpg/960px-Ronaldinho_Ga%C3%BAcho_2016.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2002' },
+  'icon-franz-beckenbauer': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Beckenbauer_cruyff_alfieri.jpg/960px-Beckenbauer_cruyff_alfieri.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1974' },
+  'icon-johan-cruyff': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Johan_Cruijff_%281965%29.jpg/960px-Johan_Cruijff_%281965%29.jpg",  trophy: 'ucl', count: 3, caption: 'שלושה גביעי אירופה' },
+  'icon-garrincha': { photo: "https://upload.wikimedia.org/wikipedia/commons/2/25/MFdSantos-Garrincha_%28cropped%29.jpg",  trophy: 'worldcup', count: 2, caption: 'שני גביעי עולם' },
+  'icon-mia-hamm': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Mia_Hamm_signing_an_autograph.jpg", trophy: 'wwc', count: 2, caption: 'שני גביעי עולם לנשים' },
+  'icon-christine-sinclair': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Christine_Sinclair_2013-05-04_Spirit_-_Thorns-2.jpg/960px-Christine_Sinclair_2013-05-04_Spirit_-_Thorns-2.jpg",  trophy: 'olympic', count: 1, caption: 'זהב אולימפי' },
+  'icon-birgit-prinz': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Birgit_Prinz.jpg",  trophy: 'wwc', count: 2, caption: 'שני גביעי עולם לנשים' },
+  'icon-iniesta': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andr%C3%A9s_Iniesta_%28cropped%29.jpg",  trophy: 'worldcup', count: 1, caption: 'גמר המונדיאל 2010' },
+  'icon-oliver-kahn': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Oliver_Kahn.jpg/960px-Oliver_Kahn.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2001' },
+  'icon-roberto-baggio': { photo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Roberto_Baggio_-_Lanerossi_Vicenza.jpg",  trophy: 'ballondor', count: 1, caption: 'כדור הזהב 1993' },
+  'icon-thierry-henry': { photo: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Italy_vs_France_-_FIFA_World_Cup_2006_final_-_Thierry_Henry.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-cafu': { photo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Marcos_Evangelista_de_Moraes_%28Cafu%29_01.jpg",  trophy: 'worldcup', count: 2, caption: 'שני גביעי עולם' },
+  'icon-xavi': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Xavi_Hernandez_%2831521652051%29.jpg/960px-Xavi_Hernandez_%2831521652051%29.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2010' },
+  'icon-zlatan-ibrahimovic': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/af/Zlatan_Ibrahimovi%C4%87_goal_celebration_Euro_2012_vs_France.jpg",  trophy: 'europa', count: 1, caption: 'יורופה ליג 2017' },
+  'icon-zico': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Zico_2012.jpg/960px-Zico_2012.jpg",  trophy: 'libertadores', count: 1, caption: 'גביע ליברטדורס 1981' },
+  'icon-ruud-gullit': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Netherlands_v_sovietunion_final_1988_02.jpg/960px-Netherlands_v_sovietunion_final_1988_02.jpg",  trophy: 'euro', count: 1, caption: 'יורו 1988' },
+  'icon-homare-sawa': { photo: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Homare_Sawa_in_2011.JPG", trophy: 'wwc', count: 1, caption: 'גביע העולם 2011' },
+  'icon-eusebio': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Eusebio_%281963%29.jpg/960px-Eusebio_%281963%29.jpg",  trophy: 'ucl', count: 1, caption: 'גביע אירופה 1962' },
+  'icon-rivaldo': { photo: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Rivaldo_bunyodkor_2010.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2002' },
+  'icon-casillas': { photo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Iker_Casillas_2018.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2010' },
+  'icon-luis-figo': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/L._Figo_2017_%28cropped%29.jpg/960px-L._Figo_2017_%28cropped%29.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2002' },
+  'icon-andrea-pirlo': { photo: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Andrea_Pirlo.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2006' },
+  'icon-raul': { photo: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Ra%C3%BAl_Gonz%C3%A1lez_footballer.jpg",  trophy: 'ucl', count: 3, caption: 'שלושה גביעי ליגת האלופות' },
+  'icon-julie-foudy': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Boxer_Meets_with_Julie_Foudy_February_07%2C_2001.jpg",  trophy: 'wwc', count: 2, caption: 'שני גביעי עולם לנשים' },
+  'icon-lotta-schelin': { photo: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Lotta_Schelin_October_2013.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות לנשים' },
+  'icon-formiga': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Formiga_PSG_2017.jpg", count: 0, caption: 'כסף אולימפי' },
+  'icon-caroline-seger': { photo: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Caroline_Seger_2014.jpg", count: 0, caption: 'כסף אולימפי 2016' },
+  'icon-aya-miyama': { photo: "https://upload.wikimedia.org/wikipedia/commons/8/89/Miyama-2010-bos.jpg",  trophy: 'wwc', count: 1, caption: 'גביע העולם 2011' },
+  'icon-camille-abily': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Camille_Abily_May_2015.jpg/960px-Camille_Abily_May_2015.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות לנשים' },
+  'icon-alessandro-del-piero': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Serie_A_1999-09-25_Lecce_x_Juventus_-_Savino_x_Del_Piero.jpg/960px-Serie_A_1999-09-25_Lecce_x_Juventus_-_Savino_x_Del_Piero.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2006' },
+  'icon-roberto-carlos': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Roberto_Carlos_7221.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2002' },
+  'icon-dennis-bergkamp': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Dennis_Bergkamp_1989%2C_Bestanddeelnr_934-4782.jpg/960px-Dennis_Bergkamp_1989%2C_Bestanddeelnr_934-4782.jpg",  trophy: 'premier', count: 1, caption: 'אליפות אנגליה' },
+  'icon-roy-keane': { photo: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Roy_keane_2014.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 1999' },
+  'icon-javier-zanetti': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Javier_Zanetti_-_Inter_Mailand_%281%29.jpg/960px-Javier_Zanetti_-_Inter_Mailand_%281%29.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2010' },
+  'icon-alessandro-nesta': { photo: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Alessandro_Nesta_as_Miami_FC_Manager.jpg",  trophy: 'ucl', count: 2, caption: 'שני גביעי ליגת האלופות' },
+  'icon-marcel-desailly': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Marcel_Desailly_1Goal.jpg/960px-Marcel_Desailly_1Goal.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-fabio-cannavaro': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Fabio_Cannavaro_in_world_cup_2006.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2006' },
+  'icon-francesco-totti': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Totti-a.s.Roma-celebration.jpg/960px-Totti-a.s.Roma-celebration.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2006' },
+  'icon-lilian-thuram': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Italy_vs_France_-_FIFA_World_Cup_2006_final_-_Lilian_Thuram_and_Zinedine_Zidane.jpg/960px-Italy_vs_France_-_FIFA_World_Cup_2006_final_-_Lilian_Thuram_and_Zinedine_Zidane.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-frank-lampard': { photo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Frank_Lampard_2019.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2012' },
+  'icon-pavel-nedved': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Nedved_-_2006_FIFA_World_Cup_%28cropped%29.jpg",  trophy: 'ballondor', count: 1, caption: 'כדור הזהב 2003' },
+  'icon-didier-drogba': { photo: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Drogba_chelsea.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2012' },
+  'icon-steffi-jones': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Steffi_Jones_2009.jpg/960px-Steffi_Jones_2009.jpg",  trophy: 'wwc', count: 2, caption: 'שני גביעי עולם לנשים' },
+  'icon-pepe': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Kepler_Laveran_de_Lima_Ferreira_%28Pepe%29_at_the_Portugal_v._Poland_UEFA_Euro_2016_quarterfinal_%28cropped%29.jpg/960px-Kepler_Laveran_de_Lima_Ferreira_%28Pepe%29_at_the_Portugal_v._Poland_UEFA_Euro_2016_quarterfinal_%28cropped%29.jpg",  trophy: 'euro', count: 1, caption: 'יורו 2016' },
+  'icon-philipp-lahm': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Philipp_Lahm_lifts_the_2014_FIFA_World_Cup.jpg/960px-Philipp_Lahm_lifts_the_2014_FIFA_World_Cup.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2014' },
+  'icon-hugo-sanchez': { photo: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Hugo_S%C3%A1nchez_2017.jpg",  trophy: 'europa', count: 1, caption: 'גביע אופ״א 1986' },
+  'icon-jean-pierre-papin': { photo: "https://upload.wikimedia.org/wikipedia/commons/0/07/Jean-Pierre_Papin%2C_2006.jpg",  trophy: 'ballondor', count: 1, caption: 'כדור הזהב 1991' },
+  'icon-eric-cantona': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cantona_at_The_Lowry%2C_Salford%2C_February_2017_%2805%29.JPG/960px-Cantona_at_The_Lowry%2C_Salford%2C_February_2017_%2805%29.JPG",  trophy: 'premier', count: 1, caption: 'אליפות אנגליה' },
+  'icon-ronald-koeman': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/de/Ronald_Koeman_%282014%29_%28cropped%29.jpg", trophy: 'ucl', count: 1, caption: 'גמר גביע אירופה 1992' },
+  'icon-marcelo': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/59/Marcelo_Vieira_609.jpg",  trophy: 'ucl', count: 5, caption: 'חמישה גביעי ליגת האלופות' },
+  'icon-carles-puyol': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/52/Carles_Puyol_2011.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2010' },
+  'icon-peter-schmeichel': { photo: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Peter_Schmeichel_in_2018.jpg", trophy: 'ucl', count: 1, caption: 'ליגת האלופות 1999' },
+  'icon-lucio': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/L%C3%BAcio_-_Inter_Mailand_%284%29.jpg/960px-L%C3%BAcio_-_Inter_Mailand_%284%29.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2002' },
+  'icon-jairzinho': { photo: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jairzinho_1974.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1970' },
+  'icon-david-beckham': { photo: "https://upload.wikimedia.org/wikipedia/commons/7/77/Beckham_first_goal_LA_Galaxy.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 1999' },
+  'icon-emmanuel-petit': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Emmanuel_Petit.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-robert-pires': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Robert_Pires_2011.jpg/960px-Robert_Pires_2011.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-michael-owen': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Michael_Owen.jpg/960px-Michael_Owen.jpg",  trophy: 'ballondor', count: 1, caption: 'כדור הזהב 2001' },
+  'icon-claude-makelele': { photo: "https://upload.wikimedia.org/wikipedia/commons/0/03/Claude_Mak%C3%A9l%C3%A9l%C3%A9.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2002' },
+  'icon-hernan-crespo': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Hern%C3%A1n_Crespo_-_07FEB2007_-_Francia_-_presidencia-govar-bis.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2007' },
+  'icon-petr-cech': { photo: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Petr_%C4%8Cech.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2012' },
+  'icon-fernando-torres': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Fernando_Torres_2012_FIFA_Club_World_Cup.jpg/960px-Fernando_Torres_2012_FIFA_Club_World_Cup.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2010' },
+  'icon-edwin-van-der-sar': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Edwin_van_der_Sar_2011.jpg/960px-Edwin_van_der_Sar_2011.jpg",  trophy: 'ucl', count: 2, caption: 'שני גביעי ליגת האלופות' },
+  'icon-gareth-bale': { photo: "https://upload.wikimedia.org/wikipedia/commons/d/da/Gareth_Bale_2015_%289%29.jpg",  trophy: 'ucl', count: 4, caption: 'ארבעה גביעי ליגת האלופות' },
+  'icon-sissi': { count: 0, caption: 'כסף אולימפי' },
+  'icon-mario-kempes': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Kempes_versus_Holanda3.JPG/960px-Kempes_versus_Holanda3.JPG",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1978' },
+  'icon-geoff-hurst': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/England_vs_germany_hurst_heads_to_goal.jpg/960px-England_vs_germany_hurst_heads_to_goal.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1966' },
+  'icon-bastian-schweinsteiger': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Germany_and_Argentina_face_off_in_the_final_of_the_World_Cup_2014_-2014-07-13_%286%29.jpg/960px-Germany_and_Argentina_face_off_in_the_final_of_the_World_Cup_2014_-2014-07-13_%286%29.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2014' },
+  'icon-maicon': { photo: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Maicon_Sisenando.jpg",  trophy: 'ucl', count: 1, caption: 'ליגת האלופות 2010' },
+  'icon-cha-bum-kun': { photo: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Cha_Bum-Kun_in_2012_Olympics.jpg",  trophy: 'europa', count: 1, caption: 'גביע אופ״א' },
+  'icon-dunga': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Dunga061115.jpg/960px-Dunga061115.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1994' },
+  'icon-raphael-varane': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/2018_World_Cup_Final_-_France_v_Croatia_-_1st_Half.jpg/960px-2018_World_Cup_Final_-_France_v_Croatia_-_1st_Half.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2018' },
+  'icon-frank-rijkaard': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Frank_Rijkaard_%282007%29.jpg/960px-Frank_Rijkaard_%282007%29.jpg",  trophy: 'ucl', count: 3, caption: 'שלושה גביעי אירופה' },
+  'icon-michael-laudrup': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Michael_Laudrup_2015b.jpg/960px-Michael_Laudrup_2015b.jpg",  trophy: 'ucl', count: 1, caption: 'גביע אירופה 1992' },
+  'icon-ellen-white': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Euro_2022_Final_England_v_Germany_%2852254784059%29.jpg/960px-Euro_2022_Final_England_v_Germany_%2852254784059%29.jpg",  trophy: 'euro', count: 1, caption: 'יורו 2022' },
+  'icon-patrick-vieira': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Patrick_Vieira_-_Inter_Mailand_%283%29.jpg/960px-Patrick_Vieira_-_Inter_Mailand_%283%29.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 1998' },
+  'icon-miroslav-klose': { photo: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Miroslav_Klose_5dec2006.jpg",  trophy: 'worldcup', count: 1, caption: 'גביע העולם 2014' },
+  'icon-robin-van-persie': { photo: "https://upload.wikimedia.org/wikipedia/commons/3/38/Van_persie_henry.jpg",  trophy: 'premier', count: 1, caption: 'אליפות אנגליה 2013' },
+  'icon-yuki-nagasato': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Y%C5%ABki_%C5%8Cgimi_2012.jpg/960px-Y%C5%ABki_%C5%8Cgimi_2012.jpg",  trophy: 'wwc', count: 1, caption: 'גביע העולם 2011' },
+  'icon-yaya-toure': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Yaya_Toure_2010.jpg/960px-Yaya_Toure_2010.jpg", trophy: 'premier', count: 1, caption: 'אליפות אנגליה' },
+  'icon-gianluca-zambrotta': { photo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Gianluca_Zambrotta_-_001.jpg", trophy: 'worldcup', count: 1, caption: 'גביע העולם 2006' },
+  'icon-sergio-aguero': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Sergio_Ag%C3%BCero_2012-08-09_001.jpg/960px-Sergio_Ag%C3%BCero_2012-08-09_001.jpg", trophy: 'premier', count: 1, caption: 'אליפות אנגליה' },
+  'icon-karl-heinz-rummenigge': { photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Karl-Heinz_Rummenigge_2640.jpg/960px-Karl-Heinz_Rummenigge_2640.jpg", trophy: 'ballondor', count: 2, caption: 'כדור הזהב' },
+  'icon-tobin-heath': { photo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Tobin_Heath_.jpg", trophy: 'wwc', count: 2, caption: 'שני גביעי עולם לנשים' },
+  'icon-hege-riise': { trophy: 'wwc', count: 1, caption: 'גביע העולם 1995' },
+};

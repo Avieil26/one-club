@@ -1,39 +1,104 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
-import { Pressable, Text } from 'react-native';
+import React, { useState } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { CareerChallengeCard } from '@/components/CareerChallengeCard';
 import { Button, Muted, Screen, Title } from '@/components/ui';
-import { TileGrid } from '@/components/TileGrid';
-import { formatDate } from '@/lib/format';
-import { modeLabel } from '@/lib/labels';
-import { isOpen } from '@/lib/selectors';
+import { CareerScoutView } from '@/components/CareerScoutView';
+import { CAREER_SCOUT_PLAYERS } from '@/lib/careerScoutData';
 import { useApp } from '@/lib/store';
 
 export default function CareerScreen() {
   const app = useApp();
   const router = useRouter();
+  const params = useLocalSearchParams<{ tab?: string }>();
+  const [careerTab, setCareerTab] = useState<'scout' | 'challenges'>(
+    params.tab === 'challenges' ? 'challenges' : 'scout',
+  );
 
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="career">
-      <Title>קריירה</Title>
-      <Muted>אתגר, צילום, וקרדיט אחרי אישור. אחרי 5 אישורים ההגשה עולה מיד.</Muted>
-      {app.user?.isAdmin ? <Button label="אתגר חדש" onPress={() => router.push('/career/new')} /> : null}
-      <TileGrid
-        items={app.challenges}
-        render={(challenge) => (
-          <Pressable accessibilityRole="button" onPress={() => router.push(`/career/${challenge.id}`)} style={{ borderRadius: 18, overflow: 'hidden' }}>
-            <LinearGradient
-              colors={challenge.mode === 'manager' ? ['#1E4D8C', '#10243F'] : ['#0E6B45', '#12382A']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{ minHeight: 150, padding: 16, justifyContent: 'space-between' }}>
-              <Text style={{ color: 'rgba(255,255,255,0.78)', fontWeight: '700', textAlign: 'right' }}>{modeLabel(challenge.mode)}</Text>
-              <Text style={{ color: '#F7F4EA', fontSize: 18, fontWeight: '800', textAlign: 'right' }}>{challenge.title}</Text>
-              <Text style={{ color: 'rgba(255,255,255,0.82)', textAlign: 'right' }}>{isOpen(challenge) ? `פתוח עד ${formatDate(challenge.endsAt)}` : 'האתגר נסגר'}</Text>
-            </LinearGradient>
-          </Pressable>
-        )}
-      />
+      {/* MODE SWITCHER TABS */}
+      <View style={styles.tabSwitcher}>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => setCareerTab('scout')}
+          style={[styles.switchBtn, careerTab === 'scout' && styles.switchBtnActive]}
+        >
+          <Text style={[styles.switchBtnText, careerTab === 'scout' && styles.switchBtnTextActive]}>
+            🌟 סקאוטינג כישרונות ({CAREER_SCOUT_PLAYERS.length})
+          </Text>
+        </Pressable>
+
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => setCareerTab('challenges')}
+          style={[styles.switchBtn, careerTab === 'challenges' && styles.switchBtnActive]}
+        >
+          <Text
+            style={[
+              styles.switchBtnText,
+              careerTab === 'challenges' && styles.switchBtnTextActive,
+            ]}
+          >
+            🏆 אתגרי קריירה
+          </Text>
+        </Pressable>
+      </View>
+
+      {careerTab === 'scout' ? (
+        <CareerScoutView onSwitchToChallenges={() => setCareerTab('challenges')} />
+      ) : (
+        <View style={{ gap: 14 }}>
+          <Title>אתגרי קריירה</Title>
+          <Muted>אתגר, צילום, וקרדיט אחרי אישור. אחרי 5 אישורים ההגשה עולה מיד.</Muted>
+          {app.user?.isAdmin ? (
+            <Button label="אתגר חדש" onPress={() => router.push('/career/new')} />
+          ) : null}
+          <View style={{ gap: 14 }}>
+            {app.challenges.map((challenge) => (
+              <CareerChallengeCard
+                key={challenge.id}
+                challenge={challenge}
+                onPress={() => router.push(`/career/${challenge.id}`)}
+              />
+            ))}
+          </View>
+        </View>
+      )}
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  tabSwitcher: {
+    flexDirection: 'row-reverse',
+    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+    borderRadius: 14,
+    padding: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    marginBottom: 6,
+  },
+  switchBtn: {
+    flex: 1,
+    paddingVertical: 9,
+    borderRadius: 11,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  switchBtnActive: {
+    backgroundColor: 'rgba(0, 255, 140, 0.2)',
+    borderWidth: 1,
+    borderColor: '#00ff8c',
+  },
+  switchBtnText: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: '#94a3b8',
+  },
+  switchBtnTextActive: {
+    color: '#00ff8c',
+    fontWeight: '900',
+  },
+});

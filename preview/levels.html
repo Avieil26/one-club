@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="utf-8" />
+<title>לוח הקהילה</title>
+<style>
+  @font-face { font-family: Heebo; src: url("fonts/Heebo.ttf") format("truetype"); font-weight: 100 900; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07080c; }
+  body {
+    min-height: 100vh;
+    padding: 22px 18px 28px;
+    font-family: Heebo, Arial, sans-serif;
+    color: #f3f5f7;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 150px;
+    background:
+      linear-gradient(180deg, rgba(7,8,12,.2), rgba(7,8,12,.45) 62%, #07080c),
+      url("stadium-night.jpg") center 40% / cover no-repeat;
+    pointer-events: none;
+  }
+  .boards { display: flex; gap: 28px; direction: rtl; align-items: flex-start; position: relative; z-index: 1; }
+  .col { flex: 1; min-width: 0; }
+  h2 {
+    margin: 8px 0 16px;
+    direction: rtl;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 30px; font-weight: 800; letter-spacing: 0;
+    text-shadow: 0 2px 16px rgba(0,0,0,.45);
+  }
+  h2 svg { width: 28px; height: 28px; flex: none; }
+  .xp h2 { color: #f7f8fa; }
+  .solve h2 { color: #5ee6a0; }
+  .love h2 { color: #ff5d73; }
+  .head, .row {
+    display: grid;
+    grid-template-columns: 42px 54px minmax(0, 1fr) 42px 92px;
+    align-items: center;
+    direction: rtl;
+    column-gap: 8px;
+  }
+  .head {
+    padding: 0 6px 8px;
+    color: #8b939e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .04em;
+  }
+  .head span:nth-child(1),
+  .head span:nth-child(2),
+  .rk, .trend { text-align: center; }
+  .head span:nth-child(5), .val { text-align: left; }
+  .row {
+    min-height: 58px;
+    padding: 0 6px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .rk { display: flex; justify-content: center; }
+  .rk b { font-size: 15px; font-weight: 700; color: #d5dbe3; }
+  .trend {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    font-size: 13px; font-weight: 800; direction: ltr;
+  }
+  .trend.up { color: #3ddc97; }
+  .trend.down { color: #ff5a6a; }
+  .trend.flat { color: #8b939e; font-weight: 700; }
+  .user { display: flex; align-items: center; gap: 10px; min-width: 0; direction: rtl; }
+  .user img {
+    width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center 18%;
+    background: #1b2128; flex: none;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.2);
+  }
+  .user div { min-width: 0; text-align: right; }
+  .user b {
+    display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+    font-size: 15px; font-weight: 800; line-height: 1.15;
+  }
+  .user b span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    background: #3ddc97; box-shadow: 0 0 0 2px rgba(61,220,151,.16);
+  }
+  .user small {
+    display: flex; direction: rtl; justify-content: flex-end; align-items: center; gap: 4px;
+    margin-top: 1px; color: #8b939e; font-size: 11px; font-weight: 600;
+  }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  .lvl {
+    width: 34px; height: 38px; justify-self: center;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900; color: #241c14;
+    background:
+      linear-gradient(160deg, rgba(255,255,255,.55), transparent 42%),
+      linear-gradient(180deg, #f4f7fb, #b7c0ca 55%, #8d98a4);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    filter: drop-shadow(0 1px 0 rgba(0,0,0,.35));
+  }
+  .lvl.g {
+    background:
+      linear-gradient(160deg, rgba(255,255,255,.5), transparent 40%),
+      linear-gradient(180deg, #ffe7a6, #e2b34a 52%, #a67c2d);
+  }
+  .lvl.b {
+    background:
+      linear-gradient(160deg, rgba(255,255,255,.45), transparent 40%),
+      linear-gradient(180deg, #f3c7a2, #c4844a 52%, #8a5430);
+  }
+  .val {
+    display: flex; align-items: center; justify-content: flex-start; gap: 5px;
+    direction: ltr; font-size: 16px; font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .val svg { width: 14px; height: 14px; flex: none; }
+</style>
+</head>
+<body>
+  <div class="boards">
+
+    <section class="col xp">
+      <h2>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="1.7" d="M12 2.8 20.2 7.4v9.2L12 21.2 3.8 16.6V7.4L12 2.8z"/></svg>
+        הכי הרבה XP
+      </h2>
+      <div class="head"><span>דירוג</span><span>מגמה</span><span>משתמש</span><span>רמה</span><span>XP</span></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#f0c14a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/yamal.png" alt=""><div><b><span>מאיה</span><i class="dot"></i></b><small>הצטרפה העונה</small></div></div><div class="lvl g">24</div><div class="val">1,680</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#d7dee6" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/pedri.png" alt=""><div><b><span>נועם</span><i class="dot"></i></b><small>הצטרף בקיץ</small></div></div><div class="lvl g">21</div><div class="val">1,420</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#c9844a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>1</div><div class="user"><img src="sim-faces/haaland.png" alt=""><div><b><span>אביאל</span></b><small>הצטרף אשתקד</small></div></div><div class="lvl b">18</div><div class="val">1,160</div></div>
+      <div class="row"><div class="rk"><b>4</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/saka.png" alt=""><div><b><span>דניאל</span><i class="dot"></i></b><small>הצטרף העונה</small></div></div><div class="lvl">16</div><div class="val">980</div></div>
+      <div class="row"><div class="rk"><b>5</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>2</div><div class="user"><img src="sim-faces/kvara.png" alt=""><div><b><span>יעל</span></b><small>הצטרפה בקיץ</small></div></div><div class="lvl">14</div><div class="val">860</div></div>
+      <div class="row"><div class="rk"><b>6</b></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>1</div><div class="user"><img src="sim-faces/valverde.png" alt=""><div><b><span>עומר</span><i class="dot"></i></b><small>הצטרף העונה</small></div></div><div class="lvl b">12</div><div class="val">740</div></div>
+      <div class="row"><div class="rk"><b>7</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>3</div><div class="user"><img src="sim-faces/dias.png" alt=""><div><b><span>רוני</span></b><small>הצטרף אשתקד</small></div></div><div class="lvl">11</div><div class="val">610</div></div>
+      <div class="row"><div class="rk"><b>8</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/gavi.png" alt=""><div><b><span>שי</span></b><small>הצטרף בקיץ</small></div></div><div class="lvl b">9</div><div class="val">540</div></div>
+      <div class="row"><div class="rk"><b>9</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/saliba.png" alt=""><div><b><span>ליאור</span><i class="dot"></i></b><small>הצטרף העונה</small></div></div><div class="lvl">8</div><div class="val">390</div></div>
+    </section>
+
+    <section class="col solve">
+      <h2>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#3ddc97" d="M12 2a10 10 0 1 0 .01 20.01A10 10 0 0 0 12 2zm-1.1 14.1-3.6-3.6 1.5-1.5 2.1 2.1 4.8-4.8 1.5 1.5-6.3 6.3z"/></svg>
+        פותרים
+      </h2>
+      <div class="head"><span>דירוג</span><span>מגמה</span><span>משתמש</span><span>רמה</span><span>פתרונות</span></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#f0c14a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/yamal.png" alt=""><div><b><span>מאיה</span><i class="dot"></i></b><small>הצטרפה העונה</small></div></div><div class="lvl g">24</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>14</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#d7dee6" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/saka.png" alt=""><div><b><span>דניאל</span></b><small>הצטרף העונה</small></div></div><div class="lvl">16</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>11</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#c9844a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>2</div><div class="user"><img src="sim-faces/pedri.png" alt=""><div><b><span>נועם</span><i class="dot"></i></b><small>הצטרף בקיץ</small></div></div><div class="lvl g">21</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>9</div></div>
+      <div class="row"><div class="rk"><b>4</b></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>1</div><div class="user"><img src="sim-faces/kvara.png" alt=""><div><b><span>יעל</span><i class="dot"></i></b><small>הצטרפה בקיץ</small></div></div><div class="lvl">14</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>8</div></div>
+      <div class="row"><div class="rk"><b>5</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/haaland.png" alt=""><div><b><span>אביאל</span></b><small>הצטרף אשתקד</small></div></div><div class="lvl b">18</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>6</div></div>
+      <div class="row"><div class="rk"><b>6</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/dias.png" alt=""><div><b><span>רוני</span><i class="dot"></i></b><small>הצטרף אשתקד</small></div></div><div class="lvl">11</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>5</div></div>
+      <div class="row"><div class="rk"><b>7</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>2</div><div class="user"><img src="sim-faces/valverde.png" alt=""><div><b><span>עומר</span></b><small>הצטרף העונה</small></div></div><div class="lvl b">12</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>4</div></div>
+      <div class="row"><div class="rk"><b>8</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/saliba.png" alt=""><div><b><span>ליאור</span></b><small>הצטרף העונה</small></div></div><div class="lvl">8</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>3</div></div>
+      <div class="row"><div class="rk"><b>9</b></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>1</div><div class="user"><img src="sim-faces/gavi.png" alt=""><div><b><span>שי</span><i class="dot"></i></b><small>הצטרף בקיץ</small></div></div><div class="lvl b">9</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#3ddc97" d="M9 16.2 4.8 12l1.4-1.4L9 13.4l8.8-8.8L19.2 6z"/></svg>2</div></div>
+    </section>
+
+    <section class="col love">
+      <h2>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>
+        מפרגנים
+      </h2>
+      <div class="head"><span>דירוג</span><span>מגמה</span><span>משתמש</span><span>רמה</span><span>אישורים</span></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#f0c14a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>2</div><div class="user"><img src="sim-faces/pedri.png" alt=""><div><b><span>נועם</span><i class="dot"></i></b><small>הצטרף בקיץ</small></div></div><div class="lvl g">21</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>22</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#d7dee6" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/yamal.png" alt=""><div><b><span>מאיה</span></b><small>הצטרפה העונה</small></div></div><div class="lvl g">24</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>18</div></div>
+      <div class="row"><div class="rk"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#c9844a" d="M8 3h8v2h2.2c.5 0 .8.4.8.9V8a3.2 3.2 0 0 1-2.6 3.1A5.2 5.2 0 0 1 13 15.2V18h3v2H8v-2h3v-2.8a5.2 5.2 0 0 1-3.4-4.1A3.2 3.2 0 0 1 5 8V5.9c0-.5.3-.9.8-.9H8V3zm-1.2 3.2V8c0 .8.5 1.5 1.2 1.8-.1-.6-.2-1.2-.2-1.8V6.2H6.8zm10.4 0h-1V8c0 .6-.1 1.2-.2 1.8.7-.3 1.2-1 1.2-1.8V6.2z"/></svg></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/valverde.png" alt=""><div><b><span>עומר</span><i class="dot"></i></b><small>הצטרף העונה</small></div></div><div class="lvl b">12</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>15</div></div>
+      <div class="row"><div class="rk"><b>4</b></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>1</div><div class="user"><img src="sim-faces/dias.png" alt=""><div><b><span>רוני</span><i class="dot"></i></b><small>הצטרף אשתקד</small></div></div><div class="lvl">11</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>12</div></div>
+      <div class="row"><div class="rk"><b>5</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>3</div><div class="user"><img src="sim-faces/haaland.png" alt=""><div><b><span>אביאל</span></b><small>הצטרף אשתקד</small></div></div><div class="lvl b">18</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>11</div></div>
+      <div class="row"><div class="rk"><b>6</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/saka.png" alt=""><div><b><span>דניאל</span><i class="dot"></i></b><small>הצטרף העונה</small></div></div><div class="lvl">16</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>9</div></div>
+      <div class="row"><div class="rk"><b>7</b></div><div class="trend up"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 1.2 9.2 8H.8z"/></svg>1</div><div class="user"><img src="sim-faces/gavi.png" alt=""><div><b><span>שי</span></b><small>הצטרף בקיץ</small></div></div><div class="lvl b">9</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>7</div></div>
+      <div class="row"><div class="rk"><b>8</b></div><div class="trend flat">–</div><div class="user"><img src="sim-faces/kvara.png" alt=""><div><b><span>יעל</span><i class="dot"></i></b><small>הצטרפה בקיץ</small></div></div><div class="lvl">14</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>6</div></div>
+      <div class="row"><div class="rk"><b>9</b></div><div class="trend down"><svg width="9" height="9" viewBox="0 0 10 10"><path fill="currentColor" d="M5 8.8.8 2h8.4z"/></svg>2</div><div class="user"><img src="sim-faces/saliba.png" alt=""><div><b><span>ליאור</span></b><small>הצטרף העונה</small></div></div><div class="lvl">8</div><div class="val"><svg viewBox="0 0 24 24"><path fill="#ff4d6a" d="M12 20.4s-6.7-4.1-6.7-8.6c0-2.4 1.8-4.1 4-4.1 1.2 0 2.2.6 2.7 1.5.5-.9 1.5-1.5 2.7-1.5 2.2 0 4 1.7 4 4.1 0 4.5-6.7 8.6-6.7 8.6z"/></svg>4</div></div>
+    </section>
+
+  </div>
+</body>
+</html>

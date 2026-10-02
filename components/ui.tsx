@@ -9,9 +9,11 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
   type KeyboardTypeOptions,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SceneAtmosphere, type SceneId } from '@/components/MarketAtmosphere';
 import { SiteNav } from '@/components/SiteNav';
@@ -52,15 +54,25 @@ export function Screen({
   showNav?: boolean;
 }) {
   const web = Platform.OS === 'web';
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+  const insets = useSafeAreaInsets();
+  const bottomPad = Math.max(96, insets.bottom + 72);
+
   return (
-    <View style={[styles.screenShell, { backgroundColor: scene === 'sbc' ? '#060A14' : '#05080A' }]}>
+    <View style={[styles.screenShell, { backgroundColor: scene === 'sbc' ? '#060A14' : scene === 'board' ? '#07080c' : '#05080A' }]}>
       {/* Full-bleed background behind everything */}
       <SceneAtmosphere scene={scene} />
       {showNav ? <SiteNav /> : null}
       <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView
           style={{ backgroundColor: 'transparent' }}
-          contentContainerStyle={[styles.content, web && styles.webContent]}
+          contentContainerStyle={[
+            styles.content,
+            { paddingBottom: bottomPad },
+            web && (isMobile ? styles.mobileWebContent : styles.webContent),
+            web && { paddingBottom: bottomPad },
+          ]}
           keyboardShouldPersistTaps="handled"
           refreshControl={
             onRefresh ? (
@@ -68,7 +80,14 @@ export function Screen({
             ) : undefined
           }
         >
-          <View style={web ? { width: '100%', maxWidth, alignSelf: 'center', gap: 14 } : { gap: 14 }}>{children}</View>
+          <View
+            style={[
+              web ? { width: '100%', maxWidth, alignSelf: 'center', gap: 14 } : { width: '100%', gap: 14 },
+              { direction: 'rtl', alignItems: 'stretch' },
+            ]}
+          >
+            {children}
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
@@ -76,11 +95,19 @@ export function Screen({
 }
 
 export function Title({ children }: { children: ReactNode }) {
-  return <Text style={styles.h1}>{children}</Text>;
+  return (
+    <Text style={[styles.h1, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+      {children}
+    </Text>
+  );
 }
 
 export function Muted({ children }: { children: ReactNode }) {
-  return <Text style={styles.muted}>{children}</Text>;
+  return (
+    <Text style={[styles.muted, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+      {children}
+    </Text>
+  );
 }
 
 export function Card({ children, onPress }: { children: ReactNode; onPress?: () => void }) {
@@ -123,6 +150,7 @@ export function Field({
   multiline,
   keyboardType,
   secure,
+  maxLength,
 }: {
   label: string;
   value: string;
@@ -131,20 +159,25 @@ export function Field({
   multiline?: boolean;
   keyboardType?: KeyboardTypeOptions;
   secure?: boolean;
+  maxLength?: number;
 }) {
   return (
     <View style={styles.field}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         value={value}
-        onChangeText={onChangeText}
+        onChangeText={(text) => onChangeText(maxLength ? text.slice(0, maxLength) : text)}
         placeholder={placeholder}
         placeholderTextColor={colors.muted}
         multiline={multiline}
         keyboardType={keyboardType}
         secureTextEntry={secure}
+        maxLength={maxLength}
         style={[styles.input, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
+      {maxLength != null ? (
+        <Text style={styles.label}>נשארו {Math.max(0, maxLength - value.length)}</Text>
+      ) : null}
     </View>
   );
 }
@@ -256,12 +289,13 @@ export function ScorePicker({
 const styles = StyleSheet.create({
   screenShell: { flex: 1, backgroundColor: '#05080A' },
   screen: { flex: 1, backgroundColor: 'transparent' },
-  content: { padding: 16, paddingBottom: 40 },
+  content: { padding: 16, paddingBottom: 60, direction: 'rtl' },
   webContent: { paddingHorizontal: 24, paddingTop: 28 },
-  h1: { color: colors.text, fontSize: 22, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' },
-  h2: { color: colors.text, fontSize: 16, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' },
-  muted: { color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: 'right', writingDirection: 'rtl' },
-  card: { backgroundColor: colors.card, borderRadius: 16, padding: 16, gap: 10, borderWidth: 1, borderColor: colors.line },
+  mobileWebContent: { paddingHorizontal: 12, paddingTop: 14, paddingBottom: 60 },
+  h1: { color: colors.text, fontSize: 24, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', width: '100%', alignSelf: 'stretch' },
+  h2: { color: colors.text, fontSize: 18, fontWeight: '800', textAlign: 'right', writingDirection: 'rtl', width: '100%', alignSelf: 'stretch' },
+  muted: { color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: 'right', writingDirection: 'rtl', width: '100%', alignSelf: 'stretch' },
+  card: { backgroundColor: colors.card, borderRadius: 16, padding: 16, gap: 10, borderWidth: 1, borderColor: colors.line, width: '100%', alignSelf: 'stretch' },
   button: { borderRadius: 10, minHeight: 46, paddingVertical: 12, paddingHorizontal: 14, alignItems: 'center', justifyContent: 'center' },
   primary: { backgroundColor: colors.blue },
   gold: { backgroundColor: colors.gold },
@@ -296,7 +330,7 @@ const styles = StyleSheet.create({
   chipOn: { backgroundColor: colors.blue, borderColor: colors.blue },
   chipText: { color: colors.text, fontSize: 13, fontWeight: '600' },
   chipTextOn: { color: '#FFFFFF' },
-  badge: { alignSelf: 'flex-end', borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.line },
+  badge: { alignSelf: 'flex-start', borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.line },
   badgeGreen: { borderColor: colors.green },
   badgeGold: { borderColor: colors.gold },
   badgeAmber: { borderColor: colors.amber },

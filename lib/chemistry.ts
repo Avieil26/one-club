@@ -1,7 +1,38 @@
 import type { CardQuality, SquadRules } from '@/lib/types';
 import type { FcPlayer } from '@/lib/fcPlayers';
 
-export type FormationId = '433' | '442';
+export type FormationId =
+  | '3142'
+  | '3412'
+  | '3421'
+  | '343'
+  | '352'
+  | '41212'
+  | '41212-2'
+  | '4132'
+  | '4141'
+  | '4213'
+  | '4222'
+  | '4231'
+  | '4231-2'
+  | '424'
+  | '4312'
+  | '4321'
+  | '433'
+  | '433-2'
+  | '433-3'
+  | '433-4'
+  | '4411'
+  | '4411-2'
+  | '442'
+  | '442-2'
+  | '451'
+  | '451-2'
+  | '5212'
+  | '5221'
+  | '523'
+  | '532'
+  | '541';
 
 export type PitchSlot = {
   id: string;
@@ -17,7 +48,112 @@ export type Formation = {
 
 const pos = (id: string, position: string): PitchSlot => ({ id, position });
 
+const back4 = [pos('lb', 'LB'), pos('lcb', 'CB'), pos('rcb', 'CB'), pos('rb', 'RB')];
+const back3 = [pos('lcb', 'CB'), pos('cb', 'CB'), pos('rcb', 'CB')];
+const back5 = [pos('lwb', 'LWB'), pos('lcb', 'CB'), pos('cb', 'CB'), pos('rcb', 'CB'), pos('rwb', 'RWB')];
+const keeper = [pos('gk', 'GK')];
+
+function shape(id: FormationId, label: string, lines: PitchSlot[][]): Formation {
+  return { id, label, lines: [...lines, keeper], links: [] };
+}
+
+/** Ultimate Team shapes from EA FC 27. Attack is the first line, the keeper is last. */
 export const FORMATIONS: Formation[] = [
+  shape('3142', '3-1-4-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    [pos('cdm', 'CDM')],
+    back3,
+  ]),
+  shape('3412', '3-4-1-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back3,
+  ]),
+  shape('3421', '3-4-2-1', [
+    [pos('st', 'ST')],
+    [pos('lcam', 'CAM'), pos('rcam', 'CAM')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back3,
+  ]),
+  shape('343', '3-4-3', [
+    [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back3,
+  ]),
+  shape('352', '3-5-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('cam', 'CAM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back3,
+  ]),
+  shape('41212', '4-1-2-1-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lcm', 'CM'), pos('rcm', 'CM')],
+    [pos('cdm', 'CDM')],
+    back4,
+  ]),
+  shape('41212-2', '4-1-2-1-2 (2)', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lm', 'LM'), pos('rm', 'RM')],
+    [pos('cdm', 'CDM')],
+    back4,
+  ]),
+  shape('4132', '4-1-3-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lcm', 'CM'), pos('cm', 'CM'), pos('rcm', 'CM')],
+    [pos('cdm', 'CDM')],
+    back4,
+  ]),
+  shape('4141', '4-1-4-1', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    [pos('cdm', 'CDM')],
+    back4,
+  ]),
+  shape('4213', '4-2-1-3', [
+    [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
+    [pos('cam', 'CAM')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('4222', '4-2-2-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lcam', 'CAM'), pos('rcam', 'CAM')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('4231', '4-2-3-1', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('cam', 'CAM'), pos('rm', 'RM')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('4231-2', '4-2-3-1 (2)', [
+    [pos('st', 'ST')],
+    [pos('lcam', 'CAM'), pos('cam', 'CAM'), pos('rcam', 'CAM')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('424', '4-2-4', [
+    [pos('lw', 'LW'), pos('lst', 'ST'), pos('rst', 'ST'), pos('rw', 'RW')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('4312', '4-3-1-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lcm', 'CM'), pos('cm', 'CM'), pos('rcm', 'CM')],
+    back4,
+  ]),
+  shape('4321', '4-3-2-1', [
+    [pos('st', 'ST')],
+    [pos('lcam', 'CAM'), pos('rcam', 'CAM')],
+    [pos('lcm', 'CM'), pos('cm', 'CM'), pos('rcm', 'CM')],
+    back4,
+  ]),
   {
     id: '433',
     label: '4-3-3',
@@ -75,21 +211,95 @@ export const FORMATIONS: Formation[] = [
       ['lst', 'rst'],
     ],
   },
+  shape('433-2', '4-3-3 (2)', [
+    [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
+    [pos('lcdm', 'CDM'), pos('cm', 'CM'), pos('rcdm', 'CDM')],
+    back4,
+  ]),
+  shape('433-3', '4-3-3 (3)', [
+    [pos('lw', 'LW'), pos('cf', 'CF'), pos('rw', 'RW')],
+    [pos('lcm', 'CM'), pos('cam', 'CAM'), pos('rcm', 'CM')],
+    back4,
+  ]),
+  shape('433-4', '4-3-3 (4)', [
+    [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
+    [pos('lcm', 'CM'), pos('cam', 'CAM'), pos('rcm', 'CM')],
+    back4,
+  ]),
+  shape('4411', '4-4-1-1', [
+    [pos('st', 'ST')],
+    [pos('cf', 'CF')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back4,
+  ]),
+  shape('4411-2', '4-4-1-1 (2)', [
+    [pos('st', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back4,
+  ]),
+  shape('442-2', '4-4-2 (2)', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lm', 'LM'), pos('lcdm', 'CDM'), pos('rcdm', 'CDM'), pos('rm', 'RM')],
+    back4,
+  ]),
+  shape('451', '4-5-1', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('lcam', 'CAM'), pos('cam', 'CAM'), pos('rcam', 'CAM'), pos('rm', 'RM')],
+    back4,
+  ]),
+  shape('451-2', '4-5-1 (2)', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('cm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back4,
+  ]),
+  shape('5212', '5-2-1-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('cam', 'CAM')],
+    [pos('lcm', 'CM'), pos('rcm', 'CM')],
+    back5,
+  ]),
+  shape('5221', '5-2-2-1', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('rm', 'RM')],
+    [pos('lcdm', 'CDM'), pos('rcdm', 'CDM')],
+    back5,
+  ]),
+  shape('523', '5-2-3', [
+    [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
+    [pos('lcm', 'CM'), pos('rcm', 'CM')],
+    back5,
+  ]),
+  shape('532', '5-3-2', [
+    [pos('lst', 'ST'), pos('rst', 'ST')],
+    [pos('lcm', 'CM'), pos('cm', 'CM'), pos('rcm', 'CM')],
+    back5,
+  ]),
+  shape('541', '5-4-1', [
+    [pos('st', 'ST')],
+    [pos('lm', 'LM'), pos('lcm', 'CM'), pos('rcm', 'CM'), pos('rm', 'RM')],
+    back5,
+  ]),
 ];
+
+FORMATIONS.sort((a, b) => a.label.localeCompare(b.label, 'en', { numeric: true }));
 
 const FITS: Record<string, string[]> = {
   GK: ['GK'],
   CB: ['CB'],
-  LB: ['LB'],
-  RB: ['RB'],
+  LB: ['LB', 'LWB'],
+  RB: ['RB', 'RWB'],
+  LWB: ['LWB', 'LB', 'LM'],
+  RWB: ['RWB', 'RB', 'RM'],
   CDM: ['CDM', 'CM'],
   CM: ['CM', 'CDM', 'CAM'],
-  CAM: ['CAM', 'CM'],
-  LM: ['LM', 'LW'],
-  RM: ['RM', 'RW'],
+  CAM: ['CAM', 'CM', 'CF'],
+  CF: ['CF', 'ST', 'CAM'],
+  LM: ['LM', 'LW', 'LWB'],
+  RM: ['RM', 'RW', 'RWB'],
   LW: ['LW', 'LM'],
   RW: ['RW', 'RM'],
-  ST: ['ST'],
+  ST: ['ST', 'CF'],
 };
 
 export function positionFits(playerPosition: string, slotPosition: string): boolean {
@@ -155,7 +365,11 @@ export type SquadReport = {
   ready: boolean;
 };
 
-export function formationById(id: FormationId): Formation {
+export function isFormationId(id: string): id is FormationId {
+  return FORMATIONS.some((formation) => formation.id === id);
+}
+
+export function formationById(id: string | null | undefined): Formation {
   return FORMATIONS.find((formation) => formation.id === id) ?? FORMATIONS[0];
 }
 
@@ -261,6 +475,13 @@ function buildChecks(
     const highest = Math.max(0, ...countBy(players, (player) => player.league).values());
     checks.push({ label: `עד ${rules.maxSameLeague} מאותה ליגה (${highest})`, ok: highest <= rules.maxSameLeague });
   }
+  if (rules.minSameLeague) {
+    const highest = Math.max(0, ...countBy(players, (player) => player.league).values());
+    checks.push({
+      label: `לפחות ${rules.minSameLeague} מאותה ליגה (${highest})`,
+      ok: highest >= rules.minSameLeague,
+    });
+  }
   if (rules.maxSameClub) {
     const highest = Math.max(0, ...countBy(players, (player) => player.club).values());
     checks.push({ label: `עד ${rules.maxSameClub} מאותו מועדון (${highest})`, ok: highest <= rules.maxSameClub });
@@ -279,6 +500,14 @@ function buildChecks(
   for (const rule of rules.leagueAtLeast ?? []) {
     const count = players.filter((player) => player.league === rule.league).length;
     checks.push({ label: `לפחות ${rule.count} מ${rule.league} (${count})`, ok: count >= rule.count });
+  }
+  if (rules.nationsAtLeast) {
+    const names = rules.nationsAtLeast.nations.join(' או ');
+    const count = players.filter((player) => rules.nationsAtLeast?.nations.includes(player.nation)).length;
+    checks.push({
+      label: `לפחות ${rules.nationsAtLeast.count} מ${names} (${count})`,
+      ok: count >= rules.nationsAtLeast.count,
+    });
   }
   if (rules.clubsAtLeast) {
     const names = rules.clubsAtLeast.clubs.join(' או ');
@@ -302,6 +531,11 @@ function buildChecks(
     const label = rules.minQuality === 'gold' ? 'זהב' : 'כסף';
     const ok = players.length > 0 && players.every((player) => player.rating >= floor);
     checks.push({ label: `כל הכרטיסים מ${label} ומעלה`, ok });
+  }
+  if (rules.exactQuality) {
+    const label = rules.exactQuality === 'gold' ? 'זהב' : rules.exactQuality === 'silver' ? 'כסף' : 'ארד';
+    const count = players.filter((player) => cardQuality(player.rating) === rules.exactQuality).length;
+    checks.push({ label: `כל הכרטיסים ${label} (${count}/11)`, ok: players.length === 11 && count === 11 });
   }
   return checks;
 }

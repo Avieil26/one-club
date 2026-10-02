@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Image, Pressable, Text, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
@@ -63,9 +63,10 @@ export default function NewGroundsScreen() {
         // Same cropped face is the card image — not the raw full screenshot
         levelImageUri: avatarUri,
       });
-      router.back();
+      Alert.alert('פורסם', 'המודעה עלתה לגראונדס.');
+      router.replace('/grounds');
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert('הפרסום נכשל', errorMessage(error));
     }
   }
 

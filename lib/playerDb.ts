@@ -1,5 +1,6 @@
 import rosterJson from '@/assets/data/players.json';
 import { ICON_PLAYERS } from '@/lib/iconPlayers';
+import { HERO_PLAYERS, SOLO_TOTW } from '@/lib/specialCards';
 import type { FcPlayer, PlayStyle } from '@/lib/fcPlayers';
 
 export type RosterFace = {
@@ -57,6 +58,8 @@ const iconIds = new Set(ICON_PLAYERS.map((player) => player.id));
 export const DB_PLAYERS: FcPlayer[] = [
   ...regularPlayers.filter((player) => !iconIds.has(player.id)),
   ...ICON_PLAYERS,
+  ...HERO_PLAYERS,
+  ...SOLO_TOTW,
 ].sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name, 'he'));
 
 const mediaById = new Map<string, { en: string; photo?: string; face?: RosterFace }>();

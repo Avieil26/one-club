@@ -1,9 +1,14 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
 import { catalogChallenge, mergeOfficialSbcs, RETIRED_SBC_IDS } from '@/lib/sbcCatalog';
-import { loadSocial, sendMessageLocal, toggleFollowLocal } from '@/lib/socialLocal';
+import { decodeSolution, encodeSolution, proofImages, readSquad } from '@/lib/sbcSolution';
+import { mergeFeaturedCareer, seedDatabase } from '@/lib/seed';
+import { normalizeSquad } from '@/lib/profileSquad';
+import { loadSocial, saveSquadLocal, toggleFollowLocal } from '@/lib/socialLocal';
 import { toSnapshot } from '@/lib/snapshot';
-import { getSupabase, uploadProofs } from '@/lib/supabase';
+import { getSupabase, uploadAvatar, uploadProofs } from '@/lib/supabase';
 import type {
   CareerChallenge,
   CareerMode,
@@ -14,6 +19,7 @@ import type {
   CommentTarget,
   ContactType,
   Database,
+  DirectMessage,
   DivisionId,
   FutPost,
   FutRating,
@@ -43,6 +49,8 @@ type ProfileRow = {
   approved_count: number;
   reputation: number;
   created_at: string;
+  avatar_url?: string | null;
+  squad?: unknown;
 };
 type ChallengeRow = {
   id: string;
@@ -164,14 +172,38 @@ async function rows<T>(table: string): Promise<T[]> {
   return (data ?? []) as T[];
 }
 
+async function messageRows(): Promise<DirectMessage[]> {
+  const { data, error } = await getSupabase()
+    .from('direct_messages')
+    .select('id,from_user_id,to_user_id,body,created_at');
+  if (error) {
+    if (error.code === 'PGRST205' || error.code === '42P01') return [];
+    fail(error);
+  }
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    fromUserId: row.from_user_id,
+    toUserId: row.to_user_id,
+    body: row.body,
+    createdAt: row.created_at,
+  }));
+}
+
+function pictureOf(meta: Record<string, unknown>): string | null {
+  const raw = meta.avatar_url ?? meta.picture;
+  return typeof raw === 'string' && /^https?:\/\//.test(raw) ? raw : null;
+}
+
 function mapProfile(row: ProfileRow): Profile {
   return {
     id: row.id,
     displayName: row.display_name,
+    avatarUrl: row.avatar_url || null,
     isAdmin: row.is_admin,
     approvedCount: row.approved_count,
     reputation: row.reputation,
     createdAt: row.created_at,
+    squad: normalizeSquad(row.squad),
   };
 }
 
@@ -285,25 +317,108 @@ function mapSbc(row: SbcRow): SbcChallenge {
   };
 }
 
-function mapSolution(row: SolutionRow, worked: WorkedRow[], challengeKeyById: Map<string, string>): SbcSolution {
+function mapSolution(
+  row: SolutionRow,
+  worked: WorkedRow[],
+  failed: WorkedRow[],
+  challengeKeyById: Map<string, string>,
+): SbcSolution {
+  const decoded = decodeSolution(row.explanation);
   return {
     id: row.id,
     challengeId: challengeKeyById.get(row.challenge_id) ?? row.challenge_id,
     userId: row.user_id,
-    explanation: row.explanation,
-    imageUris: row.image_uris ?? [],
+    explanation: decoded.explanation,
+    imageUris: (row.image_uris ?? []).filter((uri) => uri && uri !== 'squad'),
+    squad: decoded.squad?.slots ?? null,
+    formation: decoded.squad?.formation ?? null,
     workedUserIds: worked.filter((item) => item.solution_id === row.id).map((item) => item.user_id),
+    failedUserIds: failed.filter((item) => item.solution_id === row.id).map((item) => item.user_id),
     status: row.status,
     createdAt: row.created_at,
   };
 }
+
+async function rowsOptional<T>(table: string): Promise<T[]> {
+  const { data, error } = await getSupabase().from(table).select('*');
+  if (error) return [];
+  return (data ?? []) as T[];
+}
+
+const LIKE_PREFIX = 'futlike:';
+
+async function latestAvatars(userIds: string[]): Promise<Map<string, string>> {
+  const found = new Map<string, string>();
+  const supabase = getSupabase();
+  await Promise.all(
+    userIds.map(async (id) => {
+      const { data, error } = await supabase.storage.from('proofs').list(`${id}/avatar`, {
+        limit: 10,
+        sortBy: { column: 'created_at', order: 'desc' },
+      });
+      if (error || !data?.length) return;
+      const file = data.find((item) => /\.(jpe?g|png|webp)$/i.test(item.name));
+      if (!file) return;
+      found.set(id, supabase.storage.from('proofs').getPublicUrl(`${id}/avatar/${file.name}`).data.publicUrl);
+    }),
+  );
+  return found;
+}
+
+async function squadLikes(): Promise<{ postId: string; userId: string }[]> {
+  const supabase = getSupabase();
+  const primary = await supabase.from('fut_likes').select('post_id, user_id');
+  if (!primary.error) {
+    return (primary.data ?? []).map((row) => ({ postId: row.post_id as string, userId: row.user_id as string }));
+  }
+  const fallback = await supabase.from('player_votes').select('player_id, user_id').like('player_id', `${LIKE_PREFIX}%`);
+  if (fallback.error) return [];
+  return (fallback.data ?? []).map((row) => ({
+    postId: String(row.player_id).slice(LIKE_PREFIX.length),
+    userId: row.user_id as string,
+  }));
+}
+
+const DEMO_PROFILES: Record<string, Profile> = {
+  admin: {
+    id: 'admin',
+    displayName: 'אביאל',
+    isAdmin: true,
+    approvedCount: 6,
+    reputation: 48,
+    createdAt: '2026-09-18T10:00:00.000Z',
+  },
+  maya: {
+    id: 'maya',
+    displayName: 'מאיה',
+    isAdmin: false,
+    approvedCount: 5,
+    reputation: 62,
+    createdAt: '2026-09-18T12:00:00.000Z',
+  },
+  noam: {
+    id: 'noam',
+    displayName: 'נועם',
+    isAdmin: false,
+    approvedCount: 1,
+    reputation: 8,
+    createdAt: '2026-09-19T12:00:00.000Z',
+  },
+};
 
 async function readSnapshot(): Promise<Snapshot> {
   const supabase = getSupabase();
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError) authFail(sessionError);
   const session = sessionData.session;
-  if (!session) {
+
+  let demoId: string | null = null;
+  try {
+    demoId = await AsyncStorage.getItem('fc27_demo_user');
+  } catch {}
+  const demoProfile = demoId ? DEMO_PROFILES[demoId] : null;
+
+  if (!session && !demoProfile) {
     return toSnapshot(
       {
         sessionUserId: null,
@@ -312,6 +427,7 @@ async function readSnapshot(): Promise<Snapshot> {
         careerSubmissions: [],
         futPosts: [],
         futRatings: [],
+        futLikes: [],
         comments: [],
         groundsPosts: [],
         sbcChallenges: mergeOfficialSbcs([]),
@@ -325,44 +441,52 @@ async function readSnapshot(): Promise<Snapshot> {
   }
 
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
-  if (!profiles.some((profile) => profile.id === session.user.id)) {
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
+  if (session) {
+    if (!profiles.some((profile) => profile.id === session.user.id)) {
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
+    }
+    const meta = (session.user.user_metadata ?? {}) as Record<string, unknown>;
+    const googleName =
+      typeof meta.full_name === 'string'
+        ? meta.full_name
+        : typeof meta.name === 'string'
+          ? meta.name
+          : typeof meta.display_name === 'string'
+            ? meta.display_name
+            : null;
+    const googlePicture = pictureOf(meta);
+    if (!profiles.some((profile) => profile.id === session.user.id)) {
+      profiles = [
+        ...profiles,
+        {
+          id: session.user.id,
+          displayName: googleName?.trim() || session.user.email?.split('@')[0] || 'שחקן',
+          email: session.user.email ?? undefined,
+          avatarUrl: googlePicture,
+          isAdmin: false,
+          approvedCount: 0,
+          reputation: 0,
+          createdAt: new Date().toISOString(),
+        },
+      ];
+    } else {
+      profiles = profiles.map((profile) => {
+        if (profile.id !== session.user.id) return profile;
+        return {
+          ...profile,
+          email: session.user.email ?? undefined,
+          displayName: googleName?.trim() || profile.displayName,
+          avatarUrl: googlePicture || profile.avatarUrl || null,
+        };
+      });
+    }
+  } else if (demoProfile) {
+    if (!profiles.some((profile) => profile.id === demoProfile.id)) {
+      profiles = [...profiles, demoProfile];
+    }
   }
-  const meta = session.user.user_metadata ?? {};
-  const googleName =
-    typeof meta.full_name === 'string'
-      ? meta.full_name
-      : typeof meta.name === 'string'
-        ? meta.name
-        : typeof meta.display_name === 'string'
-          ? meta.display_name
-          : null;
-  if (!profiles.some((profile) => profile.id === session.user.id)) {
-    profiles = [
-      ...profiles,
-      {
-        id: session.user.id,
-        displayName: googleName?.trim() || session.user.email?.split('@')[0] || 'שחקן',
-        email: session.user.email ?? undefined,
-        isAdmin: false,
-        approvedCount: 0,
-        reputation: 0,
-        createdAt: new Date().toISOString(),
-      },
-    ];
-  } else {
-    profiles = profiles.map((profile) => {
-      if (profile.id !== session.user.id) return profile;
-      return {
-        ...profile,
-        email: session.user.email ?? undefined,
-        displayName: googleName?.trim() || profile.displayName,
-      };
-    });
-  }
-
-  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked] =
+  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, uploaded, directMessages] =
     await Promise.all([
       rows<ChallengeRow>('career_challenges'),
       rows<SubmissionRow>('career_submissions'),
@@ -373,30 +497,51 @@ async function readSnapshot(): Promise<Snapshot> {
       rows<SbcRow>('sbc_challenges'),
       rows<SolutionRow>('sbc_solutions'),
       rows<WorkedRow>('sbc_worked'),
+      rowsOptional<WorkedRow>('sbc_failed'),
+      squadLikes(),
+      latestAvatars(profiles.map((profile) => profile.id)),
+      messageRows(),
     ]);
+  if (uploaded.size) {
+    profiles = profiles.map((profile) => {
+      const custom = uploaded.get(profile.id);
+      return custom ? { ...profile, avatarUrl: custom } : profile;
+    });
+  }
 
   const challengeKeyById = new Map(
     sbcChallenges.map((row) => [row.id, row.catalog_key || row.id] as const),
   );
 
   const social = await loadSocial();
+  const seed = seedDatabase();
   const db: Database = {
-    sessionUserId: session.user.id,
-    profiles,
-    careerChallenges: challenges.map(mapChallenge),
+    sessionUserId: session ? session.user.id : (demoProfile?.id ?? null),
+    profiles: profiles.length ? profiles : seed.profiles,
+    careerChallenges: mergeFeaturedCareer(
+      challenges.length ? challenges.map(mapChallenge) : seed.careerChallenges,
+    ),
     careerSubmissions: submissions.map(mapSubmission),
     futPosts: futPosts.map(mapFut),
     futRatings: ratings.map(mapRating),
+    futLikes: likes,
     comments: comments.map(mapComment),
     groundsPosts: grounds.map(mapGrounds),
-    sbcChallenges: mergeOfficialSbcs(sbcChallenges.map(mapSbc)),
+    sbcChallenges: sbcChallenges.length ? mergeOfficialSbcs(sbcChallenges.map(mapSbc)) : seed.sbcChallenges,
     sbcSolutions: solutions
-      .map((row) => mapSolution(row, worked, challengeKeyById))
+      .map((row) => mapSolution(row, worked, failed, challengeKeyById))
       .filter((solution) => !RETIRED_SBC_IDS.has(solution.challengeId)),
     reports: [],
     follows: social.follows,
-    messages: social.messages,
+    messages: directMessages,
   };
+  const sessionId = db.sessionUserId;
+  db.profiles = db.profiles.map((profile) => {
+    const local = social.squads[profile.id];
+    const mine = profile.id === sessionId;
+    const squad = mine ? local ?? profile.squad ?? null : profile.squad ?? local ?? null;
+    return squad ? { ...profile, squad } : profile;
+  });
   return toSnapshot(db, 'remote');
 }
 
@@ -418,11 +563,22 @@ export function createRemoteBackend(): Backend {
     init: readSnapshot,
     reload: readSnapshot,
     subscribe(onChange) {
-      const { data } = getSupabase().auth.onAuthStateChange(() => onChange());
-      return () => data.subscription.unsubscribe();
+      const supabase = getSupabase();
+      const { data } = supabase.auth.onAuthStateChange(() => onChange());
+      const channel = supabase
+        .channel('direct-messages')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, () => onChange())
+        .subscribe();
+      return () => {
+        data.subscription.unsubscribe();
+        void supabase.removeChannel(channel);
+      };
     },
-    signInDemo() {
-      return Promise.reject(new Error('בשרת נכנסים עם אימייל וסיסמה'));
+    async signInDemo(profileId) {
+      const profile = DEMO_PROFILES[profileId];
+      if (!profile) throw new Error('הפרופיל לא נמצא');
+      await AsyncStorage.setItem('fc27_demo_user', profileId);
+      return readSnapshot();
     },
     signInNamed() {
       return Promise.reject(new Error('בשרת נכנסים עם אימייל וסיסמה'));
@@ -439,7 +595,12 @@ export function createRemoteBackend(): Backend {
       const { data, error } = await getSupabase().auth.signUp({
         email: email.trim(),
         password,
-        options: { data: { display_name: displayName } },
+        options: {
+          data: {
+            display_name: displayName,
+            terms_accepted_at: new Date().toISOString(),
+          },
+        },
       });
       if (error) authFail(error);
       if (!data.session) throw new Error('נרשמת. אם צריך לאשר אימייל, אשרו אותו ואז התחברו.');
@@ -457,6 +618,7 @@ export function createRemoteBackend(): Backend {
       return readSnapshot();
     },
     async signOut() {
+      await AsyncStorage.removeItem('fc27_demo_user');
       const { error } = await getSupabase().auth.signOut();
       if (error) fail(error);
       return readSnapshot();
@@ -508,6 +670,26 @@ export function createRemoteBackend(): Backend {
     },
     async rateFut(postId, fit, fun, creativity) {
       await call('rate_fut', { p_post: postId, p_fit: fit, p_fun: fun, p_creativity: creativity });
+      return readSnapshot();
+    },
+    async toggleFutLike(postId) {
+      const { data: userData, error: userError } = await getSupabase().auth.getUser();
+      if (userError || !userData.user) throw new Error('צריך להתחבר');
+      const supabase = getSupabase();
+      const rpc = await supabase.rpc('toggle_fut_like', { p_post: postId });
+      if (!rpc.error) return readSnapshot();
+      const missing = /function|schema cache|does not exist|PGRST202/i.test(rpc.error.message ?? '');
+      if (!missing) fail(rpc.error);
+      const key = `futlike:${postId}`;
+      const existing = await supabase.from('player_votes').select('vote').eq('player_id', key).eq('user_id', userData.user.id).maybeSingle();
+      if (existing.error) fail(existing.error);
+      if (existing.data) {
+        const removed = await supabase.from('player_votes').delete().eq('player_id', key).eq('user_id', userData.user.id);
+        if (removed.error) fail(removed.error);
+      } else {
+        const added = await supabase.from('player_votes').upsert({ player_id: key, user_id: userData.user.id, vote: 1 });
+        if (added.error) fail(added.error);
+      }
       return readSnapshot();
     },
     async addComment(input: NewComment) {
@@ -568,7 +750,21 @@ export function createRemoteBackend(): Backend {
     async sendMessage(toUserId, body) {
       const { data: userData, error: userError } = await getSupabase().auth.getUser();
       if (userError || !userData.user) throw new Error('צריך להתחבר');
-      await sendMessageLocal(userData.user.id, toUserId, body);
+      const text = body.trim();
+      if (!text) throw new Error('כתבו הודעה');
+      if (text.length > 500) throw new Error('ההודעה ארוכה מדי');
+      if (toUserId === userData.user.id) throw new Error('אי אפשר לשלוח הודעה לעצמך');
+      const { error } = await getSupabase().from('direct_messages').insert({
+        from_user_id: userData.user.id,
+        to_user_id: toUserId,
+        body: text,
+      });
+      if (error) {
+        if (error.code === 'PGRST205' || error.code === '42P01') {
+          throw new Error('הצ׳אט עדיין לא מחובר לשרת');
+        }
+        fail(error);
+      }
       return readSnapshot();
     },
     async createSbc(input: NewSbc) {
@@ -584,14 +780,15 @@ export function createRemoteBackend(): Backend {
     async addSolution(input: NewSolution) {
       const { data: userData, error: userError } = await getSupabase().auth.getUser();
       if (userError || !userData.user) throw new Error('צריך להתחבר');
-      if (!input.imageUris.filter(Boolean).length) {
-        throw new Error('צריך לפחות צילום מסך אחד של הסגל שהשלמתם');
-      }
-      const imageUris = await uploadProofs(userData.user.id, input.imageUris, 'sbc');
+      if (!input.explanation.trim()) throw new Error('חסר הסבר');
+      const squad = readSquad(input.squad, input.formation);
+      const proofs = proofImages(input.imageUris, squad);
+      if (!proofs.length) throw new Error('אפשר לבנות סגל של 11 שחקנים, או להעלות צילום מסך');
+      const imageUris = proofs[0] === 'squad' ? proofs : await uploadProofs(userData.user.id, proofs, 'sbc');
       const catalog = catalogChallenge(input.challengeId);
       await call('add_sbc_solution', {
         p_challenge: input.challengeId,
-        p_explanation: input.explanation,
+        p_explanation: encodeSolution(input.explanation, squad),
         p_images: imageUris,
         p_title: catalog?.title ?? null,
         p_requirements: catalog?.requirements ?? null,
@@ -602,7 +799,42 @@ export function createRemoteBackend(): Backend {
       return readSnapshot();
     },
     async markWorked(solutionId) {
-      await call('mark_sbc_worked', { p_id: solutionId });
+      return this.voteSolution(solutionId, 'up');
+    },
+    async voteSolution(solutionId, vote) {
+      const { error } = await getSupabase().rpc('vote_sbc_solution', { p_id: solutionId, p_vote: vote });
+      const missing = error && /does not exist|schema cache|PGRST202|Could not find the function/i.test(error.message ?? '');
+      if (missing) {
+        if (vote === 'up') {
+          await call('mark_sbc_worked', { p_id: solutionId });
+          return readSnapshot();
+        }
+        if (vote === 'clear') return readSnapshot();
+        throw new Error('סימון "לא עבד" יתעדכן אחרי עדכון השרת. בינתיים אפשר לסמן שעבד לי.');
+      }
+      if (error) fail(error);
+      return readSnapshot();
+    },
+    async setAvatar(uri) {
+      const { data: userData, error: userError } = await getSupabase().auth.getUser();
+      if (userError || !userData.user) throw new Error('צריך להתחבר');
+      const url = await uploadAvatar(userData.user.id, uri);
+      const updated = await getSupabase().auth.updateUser({ data: { avatar_url: url } });
+      if (updated.error) fail(updated.error);
+      const rpc = await getSupabase().rpc('save_profile_avatar', { p_url: url });
+      if (rpc.error && !/function|schema cache|does not exist|PGRST202|avatar_url|column/i.test(rpc.error.message ?? '')) {
+        fail(rpc.error);
+      }
+      return readSnapshot();
+    },
+    async saveSquad(squad) {
+      const { data: userData, error: userError } = await getSupabase().auth.getUser();
+      if (userError || !userData.user) throw new Error('צריך להתחבר');
+      await saveSquadLocal(userData.user.id, squad);
+      const rpc = await getSupabase().rpc('save_profile_squad', { p_squad: squad });
+      if (rpc.error && !/function|schema cache|does not exist|PGRST202|Could not find the function/i.test(rpc.error.message ?? '')) {
+        fail(rpc.error);
+      }
       return readSnapshot();
     },
   };

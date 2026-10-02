@@ -1,10 +1,10 @@
-import * as Linking from 'expo-linking';
-import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 
+import { requestInAppGoogleAuth } from '@/components/GoogleAuthSheet';
 import { getSupabase } from '@/lib/supabase';
 
-WebBrowser.maybeCompleteAuthSession();
+/** App-only return. The phone must never land on the website. */
+const APP_RETURN = 'fc27israel://auth/callback';
 
 function redirectUrl(): string {
   if (Platform.OS === 'web') {
@@ -13,7 +13,7 @@ function redirectUrl(): string {
     }
     return 'https://fc27-israel.vercel.app/';
   }
-  return Linking.createURL('auth/callback');
+  return APP_RETURN;
 }
 
 function pickParams(url: string): Record<string, string> {
@@ -55,7 +55,7 @@ async function sessionFromUrl(url: string): Promise<void> {
     return;
   }
 
-  throw new Error('לא התקבלה סשן מגוגל. בדקו שהכתובת fc27israel://** מופיעה ב-Redirect URLs ב-Supabase.');
+  throw new Error('לא התקבלה סשן מגוגל');
 }
 
 export async function signInWithGoogleOAuth(): Promise<void> {
@@ -81,9 +81,13 @@ export async function signInWithGoogleOAuth(): Promise<void> {
   if (error) throw error;
   if (!data.url) throw new Error('לא התקבלה כתובת התחברות מגוגל');
 
-  const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
-  if (result.type !== 'success' || !('url' in result) || !result.url) {
+  let returned = '';
+  try {
+    returned = await requestInAppGoogleAuth(data.url);
+  } catch (error) {
+    if (error instanceof Error && error.message) throw error;
     throw new Error('התחברות עם גוגל בוטלה');
   }
-  await sessionFromUrl(result.url);
+  if (!returned) throw new Error('התחברות עם גוגל בוטלה');
+  await sessionFromUrl(returned);
 }

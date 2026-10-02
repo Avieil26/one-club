@@ -33,6 +33,8 @@ export default function TabLayout() {
       <Tabs.Screen name="ultimate" options={{ title: 'אולטימייט', tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="●" color={color} focused={focused} /> }} />
       <Tabs.Screen name="grounds" options={{ title: 'גראונדס', tabBarActiveTintColor: colors.green, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="☰" color={color} focused={focused} /> }} />
       <Tabs.Screen name="sbc" options={{ title: 'SBC', tabBarActiveTintColor: colors.copper, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▦" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="games" options={{ title: 'משחקונים', tabBarActiveTintColor: '#E23B57', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="✦" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="board" options={{ title: 'לוח', tabBarActiveTintColor: '#F4F6F8', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⬡" color={color} focused={focused} /> }} />
       <Tabs.Screen name="market" options={{ title: 'שחקנים', tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▨" color={color} focused={focused} /> }} />
     </Tabs>
   );

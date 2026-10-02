@@ -17,7 +17,7 @@ export type TierTone = CardTone & {
   faceColors: [string, string, string];
   accent: string;
   glow: string;
-  label: 'GOLD' | 'SILVER' | 'BRONZE' | 'ICON';
+  label: 'GOLD' | 'SILVER' | 'BRONZE' | 'ICON' | 'HERO' | 'TOTW';
 };
 
 export type IconTone = TierTone;
@@ -84,6 +84,38 @@ export function iconChrome(): IconTone {
     label: 'ICON',
     frameColors: ['#F5E6A8', '#C9A227', '#8A6A18', '#E8C547'],
     faceColors: ['#2A2114', '#12100A', '#050402'],
+  };
+}
+
+/** Purple Hero chrome — metallic violet frame, dark purple face. */
+export function heroChrome(): IconTone {
+  return {
+    face: '#24143A',
+    deep: '#100818',
+    shine: 'rgba(210, 170, 255, 0.22)',
+    frame: '#8B5CFF',
+    ink: '#F4E9FF',
+    accent: '#D2B4FF',
+    glow: 'rgba(139, 92, 255, 0.55)',
+    label: 'HERO',
+    frameColors: ['#E4D4FF', '#A078FF', '#4C2888', '#C9A6FF'],
+    faceColors: ['#3A2060', '#1A1030', '#0C0816'],
+  };
+}
+
+/** Team of the Week — gold frame, black face. */
+export function totwChrome(): IconTone {
+  return {
+    face: '#14120C',
+    deep: '#050402',
+    shine: 'rgba(255, 220, 140, 0.16)',
+    frame: '#E0B83A',
+    ink: '#F7E7B4',
+    accent: '#F0D060',
+    glow: 'rgba(224, 184, 58, 0.5)',
+    label: 'TOTW',
+    frameColors: ['#FFF3C0', '#E0B83A', '#8A6418', '#F0D060'],
+    faceColors: ['#1C1810', '#0E0C08', '#050402'],
   };
 }
 

@@ -1,11 +1,13 @@
 import { usePathname, useRouter } from 'expo-router';
-import { Image, Platform, Pressable, Text, View } from 'react-native';
+import { Image, Platform, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { LevelChip } from '@/components/OwnerLevelPlate';
+import { communityXp, xpProgress } from '@/lib/communityBoard';
 import { useApp } from '@/lib/store';
 
-const GOLD = '#E3B341';
 const TEXT = '#F4F7F2';
+const QUIET = 'rgba(244,247,242,0.62)';
 
 /** Order: בית first (right in RTL), שחקנים last (left). Do NOT use row-reverse — html already has dir=rtl. */
 const LINKS = [
@@ -14,6 +16,8 @@ const LINKS = [
   { href: '/ultimate' as const, label: 'אולטימייט' },
   { href: '/grounds' as const, label: 'גראונדס' },
   { href: '/sbc' as const, label: 'SBC' },
+  { href: '/games' as const, label: 'משחקונים' },
+  { href: '/board' as const, label: 'לוח' },
   { href: '/market' as const, label: 'שחקנים' },
 ];
 
@@ -25,9 +29,152 @@ function isActive(pathname: string, href: string) {
 export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user } = useApp();
+  const app = useApp();
+  const { user } = app;
+  const progress = user ? xpProgress(communityXp(user.id, app)) : null;
   const insets = useSafeAreaInsets();
   const mobile = Platform.OS !== 'web';
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+
+  const logoNode = (
+    <Pressable
+      onPress={() => router.push('/')}
+      style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}
+    >
+      <Image
+        source={require('@/assets/images/brand-1club.png')}
+        style={{
+          width: isMobile ? 36 : 40,
+          height: isMobile ? 36 : 40,
+          borderRadius: 12,
+          borderWidth: 1,
+          borderColor: 'rgba(255,255,255,0.28)',
+        }}
+      />
+      <Text
+        style={{
+          color: '#F7F4EA',
+          fontSize: isMobile ? 15 : 17,
+          fontWeight: '900',
+          letterSpacing: 0.6,
+          textShadowColor: 'rgba(0,0,0,0.55)',
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 4,
+        }}
+      >
+        1 CLUB
+      </Text>
+    </Pressable>
+  );
+
+  const profileNode = (
+    <Pressable
+      onPress={() => router.push(user?.email ? '/profile' : '/register')}
+      style={{
+        minHeight: 32,
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        borderRadius: 16,
+        backgroundColor: 'rgba(22, 30, 24, 0.7)',
+        borderWidth: 1,
+        borderColor: 'rgba(227, 179, 65, 0.3)',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Text style={{ color: '#FFE08A', fontWeight: '700', fontSize: 13 }}>
+        {user ? 'פרופיל' : 'התחברות'}
+      </Text>
+    </Pressable>
+  );
+
+  const accountNode = (
+    <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
+      {progress ? <LevelChip progress={progress} /> : null}
+      {profileNode}
+    </View>
+  );
+
+  const renderLinks = () =>
+    LINKS.map((item) => {
+      const on = isActive(pathname, item.href);
+      return (
+        <Pressable
+          key={item.href}
+          onPress={() => router.push(item.href)}
+          style={{
+            minHeight: 32,
+            paddingHorizontal: isMobile ? 12 : 10,
+            paddingVertical: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: isMobile ? 16 : 8,
+            backgroundColor: isMobile && on ? 'rgba(227, 179, 65, 0.16)' : 'transparent',
+            borderWidth: isMobile ? 1 : 0,
+            borderColor: isMobile && on ? 'rgba(227, 179, 65, 0.45)' : 'transparent',
+          }}
+        >
+          <Text
+            style={{
+              color: on ? TEXT : QUIET,
+              fontWeight: on ? '800' : '600',
+              fontSize: isMobile ? 13.5 : 15,
+              textAlign: 'center',
+            }}
+          >
+            {item.label}
+          </Text>
+          {!isMobile ? (
+            <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />
+          ) : null}
+        </Pressable>
+      );
+    });
+
+  if (isMobile) {
+    return (
+      <View
+        style={{
+          zIndex: 100,
+          elevation: 24,
+          backgroundColor: 'rgba(5, 8, 10, 0.95)',
+          paddingTop: mobile ? insets.top + 6 : 8,
+          paddingBottom: 6,
+          paddingHorizontal: 12,
+          borderBottomWidth: 1,
+          borderBottomColor: 'rgba(227, 179, 65, 0.18)',
+          gap: 6,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            direction: 'rtl',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {logoNode}
+          {accountNode}
+        </View>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            direction: 'rtl',
+            alignItems: 'center',
+            gap: 4,
+            paddingVertical: 2,
+          }}
+        >
+          {renderLinks()}
+        </ScrollView>
+      </View>
+    );
+  }
 
   return (
     <View
@@ -35,10 +182,9 @@ export function SiteNav() {
         zIndex: 100,
         elevation: 24,
         backgroundColor: 'transparent',
-        paddingTop: mobile ? insets.top + 10 : 14,
-        paddingBottom: 12,
+        paddingTop: mobile ? insets.top + 8 : 10,
+        paddingBottom: 8,
         paddingHorizontal: 14,
-        gap: 12,
       }}
     >
       <View
@@ -47,118 +193,14 @@ export function SiteNav() {
           direction: 'rtl',
           alignItems: 'center',
           justifyContent: 'space-between',
+          gap: 12,
         }}
       >
-        <Pressable
-          onPress={() => router.push('/')}
-          style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}
-        >
-          <Image
-            source={require('@/assets/images/futz-beta-logo.png')}
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: 'rgba(227,179,65,0.4)',
-            }}
-          />
-          <View>
-            <Text
-              style={{
-                color: '#FFE08A',
-                fontSize: 17,
-                fontWeight: '900',
-                letterSpacing: 0.4,
-                textShadowColor: 'rgba(0,0,0,0.55)',
-                textShadowOffset: { width: 0, height: 1 },
-                textShadowRadius: 4,
-              }}
-            >
-              Futz
-            </Text>
-            <Text
-              style={{
-                color: 'rgba(126,208,200,0.95)',
-                fontSize: 10,
-                fontWeight: '800',
-                letterSpacing: 1.4,
-              }}
-            >
-              BETA
-            </Text>
-          </View>
-        </Pressable>
-        <Pressable
-          onPress={() => router.push(user?.email ? '/profile' : '/register')}
-          style={{
-            minHeight: 40,
-            paddingVertical: 8,
-            paddingHorizontal: 16,
-            borderRadius: 10,
-            backgroundColor: GOLD,
-            borderWidth: 1,
-            borderColor: '#F5D56A',
-            shadowColor: '#000',
-            shadowOpacity: 0.35,
-            shadowRadius: 6,
-            shadowOffset: { width: 0, height: 2 },
-            elevation: 4,
-          }}
-        >
-          <Text style={{ color: '#1A1408', fontWeight: '800', fontSize: 14 }}>
-            {user ? 'פרופיל' : 'התחברות'}
-          </Text>
-        </Pressable>
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          direction: 'rtl',
-          flexWrap: 'wrap',
-          gap: 8,
-          justifyContent: 'flex-start',
-        }}
-      >
-        {LINKS.map((item) => {
-          const on = isActive(pathname, item.href);
-          return (
-            <Pressable
-              key={item.href}
-              onPress={() => router.push(item.href)}
-              style={{
-                minWidth: 92,
-                minHeight: 44,
-                paddingHorizontal: 14,
-                paddingVertical: 10,
-                borderRadius: 12,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: on ? GOLD : 'rgba(8, 14, 12, 0.72)',
-                borderWidth: 1.5,
-                borderColor: on ? '#F5D56A' : 'rgba(227, 179, 65, 0.45)',
-                shadowColor: '#000',
-                shadowOpacity: on ? 0.4 : 0.28,
-                shadowRadius: on ? 8 : 5,
-                shadowOffset: { width: 0, height: 2 },
-                elevation: on ? 6 : 3,
-              }}
-            >
-              <Text
-                style={{
-                  color: on ? '#1A1408' : TEXT,
-                  fontWeight: '800',
-                  fontSize: 14,
-                  letterSpacing: 0.3,
-                  textAlign: 'center',
-                }}
-              >
-                {item.label}
-              </Text>
-            </Pressable>
-          );
-        })}
+        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
+          {logoNode}
+          {renderLinks()}
+        </View>
+        {accountNode}
       </View>
     </View>
   );

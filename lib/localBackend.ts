@@ -13,6 +13,7 @@ import type {
   NewGrounds,
   NewSbc,
   NewSolution,
+  ProfileSquad,
   Snapshot,
 } from '@/lib/types';
 
@@ -33,6 +34,7 @@ export type Backend = {
   moderateCareer(id: string, status: 'approved' | 'rejected'): Promise<Snapshot>;
   createFutPost(input: NewFutPost): Promise<Snapshot>;
   rateFut(postId: string, fit: number, fun: number, creativity: number): Promise<Snapshot>;
+  toggleFutLike(postId: string): Promise<Snapshot>;
   addComment(input: NewComment): Promise<{ snap: Snapshot; held: boolean }>;
   reportComment(commentId: string): Promise<Snapshot>;
   moderateComment(commentId: string, action: 'visible' | 'remove'): Promise<Snapshot>;
@@ -43,6 +45,9 @@ export type Backend = {
   createSbc(input: NewSbc): Promise<Snapshot>;
   addSolution(input: NewSolution): Promise<Snapshot>;
   markWorked(solutionId: string): Promise<Snapshot>;
+  voteSolution(solutionId: string, vote: 'up' | 'down' | 'clear'): Promise<Snapshot>;
+  setAvatar(uri: string): Promise<Snapshot>;
+  saveSquad(squad: ProfileSquad): Promise<Snapshot>;
 };
 
 function syncOfficialSbcs(current: Database): Database {
@@ -67,16 +72,23 @@ export function createLocalBackend(): Backend {
       const raw = await AsyncStorage.getItem(STORAGE_KEY);
       if (raw) {
         try {
-          db = JSON.parse(raw) as Database;
+          db = { ...seedDatabase(), ...JSON.parse(raw) };
         } catch {
           db = seedDatabase();
         }
       } else {
         db = seedDatabase();
       }
+      if (!db.sessionUserId) {
+        const demoUser = await AsyncStorage.getItem('fc27_demo_user');
+        if (demoUser && db.profiles.some((p) => p.id === demoUser)) {
+          db.sessionUserId = demoUser;
+        }
+      }
       db = syncOfficialSbcs(db);
       if (!db.follows) db.follows = [];
       if (!db.messages) db.messages = [];
+      if (!db.futLikes) db.futLikes = [];
       db.groundsPosts = (db.groundsPosts ?? []).map((post) => ({
         ...post,
         playerLevel: post.playerLevel ?? (post.skillRating && post.skillRating <= 50 ? post.skillRating : 10),
@@ -97,6 +109,7 @@ export function createLocalBackend(): Backend {
     async signInDemo(profileId) {
       if (!db.profiles.some((profile) => profile.id === profileId)) throw new Error('הפרופיל לא נמצא');
       db.sessionUserId = profileId;
+      await AsyncStorage.setItem('fc27_demo_user', profileId);
       return commit();
     },
     async signInNamed(name) {
@@ -116,6 +129,7 @@ export function createLocalBackend(): Backend {
     },
     async signOut() {
       db.sessionUserId = null;
+      await AsyncStorage.removeItem('fc27_demo_user');
       return commit();
     },
     async resetDemo() {
@@ -141,6 +155,11 @@ export function createLocalBackend(): Backend {
     },
     async rateFut(postId, fit, fun, creativity) {
       logic.rateFut(db, postId, fit, fun, creativity);
+      return commit();
+    },
+    async toggleFutLike(postId) {
+      if (!db.futLikes) db.futLikes = [];
+      logic.toggleFutLike(db, postId);
       return commit();
     },
     async addComment(input) {
@@ -185,6 +204,18 @@ export function createLocalBackend(): Backend {
     },
     async markWorked(solutionId) {
       logic.markWorked(db, solutionId);
+      return commit();
+    },
+    async voteSolution(solutionId, vote) {
+      logic.voteSolution(db, solutionId, vote);
+      return commit();
+    },
+    async setAvatar(uri) {
+      logic.setAvatar(db, uri);
+      return commit();
+    },
+    async saveSquad(squad) {
+      logic.saveSquad(db, squad);
       return commit();
     },
   };

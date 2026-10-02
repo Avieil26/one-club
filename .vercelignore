@@ -1,0 +1,5 @@
+public/futz-beta.apk
+*.apk
+node_modules
+.git
+dist

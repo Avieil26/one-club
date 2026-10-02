@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="utf-8" />
+<title>ההרכבים</title>
+<style>
+  @font-face { font-family: Heebo; src: url("fonts/Heebo.ttf") format("truetype"); font-weight: 100 900; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07060a; }
+  body { padding: 22px 24px 28px; font-family: Heebo, Arial, sans-serif; color: #f6f1e4; }
+  .label { margin: 0 0 10px; text-align: right; direction: rtl; color: #e7c56a; font-weight: 800; font-size: 14px; }
+  .stack { width: 1080px; display: flex; flex-direction: column; gap: 14px; }
+  .pitch {
+    height: 340px; border-radius: 22px; position: relative; direction: ltr; overflow: hidden;
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,.045) 0 16px, transparent 16px 32px),
+      linear-gradient(180deg, #24964c 0%, #18753a 48%, #146432 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 16px 30px rgba(0,0,0,.4);
+  }
+  .pitch.night {
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 16px, transparent 16px 32px),
+      radial-gradient(520px 180px at 50% 0%, rgba(255,186,120,.22), transparent 60%),
+      linear-gradient(180deg, #16324a 0%, #0e3a34 46%, #081c18 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,180,196,.35), 0 16px 30px rgba(0,0,0,.45);
+  }
+  .line { position: absolute; border: 1.5px solid rgba(255,255,255,.5); }
+  .touch { inset: 12px; border-radius: 10px; }
+  .half { left: 12px; right: 12px; top: 50%; height: 0; }
+  .ring { width: 86px; height: 86px; border-radius: 50%; left: 50%; top: 50%; margin: -43px 0 0 -43px; }
+  .area { width: 210px; height: 72px; left: 50%; margin-left: -105px; }
+  .area.top { top: 12px; border-top: 0; border-radius: 0 0 8px 8px; }
+  .area.bot { bottom: 12px; border-bottom: 0; border-radius: 8px 8px 0 0; }
+  .band {
+    display: flex; align-items: center; justify-content: flex-start; gap: 14px; direction: rtl;
+    margin-bottom: 8px;
+  }
+  .band b { font-size: 28px; line-height: 1; }
+  .band span { font-size: 13px; font-weight: 800; }
+  .oursband { color: #d8fff0; }
+  .foeband { color: #ffc2d0; }
+  .stars { color: #f5c451; letter-spacing: 2px; font-size: 14px; text-shadow: 0 0 8px rgba(245,196,81,.55); }
+  .chem { font-size: 18px; font-weight: 900; }
+  .chem small { font-size: 12px; opacity: .7; }
+  .mini {
+    position: absolute; z-index: 3; width: 62px; height: 82px; margin: -41px 0 0 -31px;
+    border-radius: 9px; direction: ltr;
+    background: linear-gradient(165deg, #fff6d4 0%, #e7c56a 36%, #9a7024 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 8px 14px rgba(0,0,0,.35);
+  }
+  .night .mini {
+    background: linear-gradient(165deg, #ffe4ea 0%, #e07a96 38%, #7a2844 100%);
+  }
+  .mini img { position: absolute; left: 4px; right: 4px; top: 2px; height: 58px; margin: 0 auto; object-fit: contain; object-position: center bottom; }
+  .mini .ov { position: absolute; top: 3px; left: 5px; font-size: 13px; font-weight: 900; color: #1a1208; }
+  .mini .nm { position: absolute; left: 2px; right: 2px; bottom: 3px; text-align: center; font-size: 9px; font-weight: 900; color: #1a1208; }
+</style>
+</head>
+<body>
+  <p class="label">לפני השריקה · לוחצים להתחיל</p>
+  <div class="stack">
+    <div class="band oursband"><span>שלכם · 4-3-3 · ארטטה</span><b>87</b><div class="stars">★★★★★</div><div class="chem">26<small>/33</small></div></div>
+    <div class="pitch">
+      <i class="line touch"></i><i class="line half"></i><i class="line ring"></i>
+      <i class="line area top"></i><i class="line area bot"></i>
+      <div class="mini" style="left:50%;top:18%"><img src="sim-faces/haaland.png" alt=""><b class="ov">91</b><span class="nm">האלנד</span></div>
+      <div class="mini" style="left:16%;top:24%"><img src="sim-faces/kvara.png" alt=""><b class="ov">89</b><span class="nm">קווארצחליה</span></div>
+      <div class="mini" style="left:84%;top:24%"><img src="sim-faces/saka.png" alt=""><b class="ov">87</b><span class="nm">סאקה</span></div>
+      <div class="mini" style="left:28%;top:48%"><img src="sim-faces/valverde.png" alt=""><b class="ov">87</b><span class="nm">ולוורדה</span></div>
+      <div class="mini" style="left:50%;top:52%"><img src="sim-faces/pedri.png" alt=""><b class="ov">90</b><span class="nm">פדרי</span></div>
+      <div class="mini" style="left:72%;top:48%"><img src="sim-faces/bernardo.png" alt=""><b class="ov">84</b><span class="nm">ברנרדו</span></div>
+      <div class="mini" style="left:10%;top:74%"><img src="sim-faces/theo.png" alt=""><b class="ov">82</b><span class="nm">הרננדס</span></div>
+      <div class="mini" style="left:32%;top:78%"><img src="sim-faces/dias.png" alt=""><b class="ov">87</b><span class="nm">דיאש</span></div>
+      <div class="mini" style="left:68%;top:78%"><img src="sim-faces/saliba.png" alt=""><b class="ov">88</b><span class="nm">סליבה</span></div>
+      <div class="mini" style="left:90%;top:74%"><img src="sim-faces/trent.png" alt=""><b class="ov">84</b><span class="nm">טרנט</span></div>
+      <div class="mini" style="left:50%;top:90%"><img src="sim-faces/alisson.png" alt=""><b class="ov">87</b><span class="nm">אליסון</span></div>
+    </div>
+    <div class="band foeband"><span>יריב · 4-3-3 · נבנה בדראפט · אנצ׳לוטי</span><b>86</b><div class="stars">★★★★★</div><div class="chem">33<small>/33</small></div></div>
+    <div class="pitch night">
+      <i class="line touch"></i><i class="line half"></i><i class="line ring"></i>
+      <i class="line area top"></i><i class="line area bot"></i>
+      <div class="mini" style="left:50%;top:18%"><img src="sim-faces/mbappe.png" alt=""><b class="ov">91</b><span class="nm">אמבפה</span></div>
+      <div class="mini" style="left:16%;top:24%"><img src="sim-faces/danjuma.png" alt=""><b class="ov">75</b><span class="nm">Danjuma</span></div>
+      <div class="mini" style="left:84%;top:24%"><img src="sim-faces/yamal.png" alt=""><b class="ov">90</b><span class="nm">ימאל</span></div>
+      <div class="mini" style="left:28%;top:48%"><img src="sim-faces/gavi.png" alt=""><b class="ov">83</b><span class="nm">גאבי</span></div>
+      <div class="mini" style="left:50%;top:52%"><img src="sim-faces/cama.png" alt=""><b class="ov">81</b><span class="nm">קמאבינגה</span></div>
+      <div class="mini" style="left:72%;top:48%"><img src="sim-faces/depaul.png" alt=""><b class="ov">83</b><span class="nm">דה פול</span></div>
+      <div class="mini" style="left:10%;top:74%"><img src="sim-faces/mendy.png" alt=""><b class="ov">80</b><span class="nm">מנדי</span></div>
+      <div class="mini" style="left:32%;top:78%"><img src="sim-faces/cubarsi.png" alt=""><b class="ov">86</b><span class="nm">קובארסי</span></div>
+      <div class="mini" style="left:68%;top:78%"><img src="sim-faces/rudiger.png" alt=""><b class="ov">83</b><span class="nm">רודיגר</span></div>
+      <div class="mini" style="left:90%;top:74%"><img src="sim-faces/kounde.png" alt=""><b class="ov">85</b><span class="nm">קונדה</span></div>
+      <div class="mini" style="left:50%;top:90%"><img src="sim-faces/courtois.png" alt=""><b class="ov">90</b><span class="nm">קורטואה</span></div>
+    </div>
+  </div>
+</body>
+</html>

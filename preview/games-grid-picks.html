@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>הרשת · שלוש הצעות</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500;700;800&display=swap');
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 28px 24px 60px; background: #e7e2d6; color: #161616; font-family: Heebo, Arial, sans-serif; }
+  header p { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #38003c; }
+  header h1 { margin: 6px 0 0; font-size: 34px; font-weight: 800; letter-spacing: -0.03em; }
+  header span { display: block; margin-top: 6px; max-width: 40rem; font-size: 16px; line-height: 1.5; color: #3c3830; }
+  .stage { display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; margin-top: 22px; }
+  .label { margin: 0 0 10px; font-size: 14px; font-weight: 800; }
+  .phone {
+    width: 380px; min-height: 840px; border-radius: 28px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.14), 0 24px 40px rgba(0,0,0,.16);
+  }
+  .pad { position: relative; z-index: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  h2 { margin: 0; font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: .95; }
+  .lead { margin: 0; font-size: 16px; line-height: 1.45; }
+  img.face { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; display: block; }
+  .board { display: grid; grid-template-columns: 52px 1fr 1fr 1fr; gap: 6px; }
+  .h, .side { display: flex; align-items: center; justify-content: center; text-align: center; font-size: 13px; font-weight: 800; line-height: 1.15; }
+  .cell { height: 92px; position: relative; overflow: hidden; }
+  .cell span {
+    position: absolute; inset: auto 0 0 0; padding: 14px 3px 4px; text-align: center;
+    font-size: 12px; font-weight: 800; color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,.82), transparent);
+  }
+  .cell.empty { display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .field { min-height: 48px; display: flex; align-items: center; padding: 0 14px; font-size: 16px; font-weight: 700; }
+
+  /* פוטמוב: קנבס אפור, מודול ירוק, כרטיס לבן */
+  .foto { background: #eef0f3; }
+  .foto .mod {
+    display: flex; align-items: center; gap: 12px; padding: 12px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #2ec56a, #14964a);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 10px 18px rgba(12,80,40,.18);
+    color: #fff;
+  }
+  .foto .mod b { display: block; font-size: 22px; line-height: 1; }
+  .foto .mod em { font-style: normal; font-size: 13px; font-weight: 700; opacity: .92; }
+  .faces3 { display: flex; }
+  .faces3 img { width: 36px; height: 44px; object-fit: cover; object-position: center 16%; border-radius: 8px; border: 2px solid #fff; margin-right: -8px; }
+  .foto .card {
+    background: #fff; border-radius: 16px; padding: 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8), 0 10px 24px rgba(20,24,30,.06), inset 0 0 0 1px #e6e8ee;
+  }
+  .foto h2 { display: none; }
+  .foto .lead { color: #3a4150; }
+  .foto .h, .foto .side { color: #5c6570; }
+  .foto .cell { border-radius: 10px; background: #f4f6f8; box-shadow: inset 0 0 0 1px #e1e5ea; }
+  .foto .cell.empty { color: #12a150; }
+  .foto .field { margin-top: 4px; border-radius: 999px; background: #12a150; color: #fff; justify-content: center; }
+
+  /* פרמייר ליג: סגול הבית, פס ירוק חשמלי, גיאומטריה חדה */
+  .pl { background: #f2f2f2; }
+  .pl .hero {
+    position: absolute; top: 0; right: 0; left: 0; height: 248px; background: #38003c; overflow: hidden;
+  }
+  .pl .hero::before, .pl .hero::after {
+    content: ""; position: absolute; background: #00ff87;
+  }
+  .pl .hero::before { width: 220px; height: 220px; border: 18px solid #00ff87; background: transparent; border-radius: 40px; left: -70px; bottom: -90px; transform: rotate(18deg); }
+  .pl .hero::after { width: 140%; height: 10px; left: -20%; bottom: 36px; transform: rotate(-8deg); }
+  .pl .pad { padding-top: 22px; }
+  .pl h2, .pl .lead { color: #fff; position: relative; }
+  .pl .lead { max-width: 16rem; }
+  .pl .card {
+    position: relative; margin-top: 28px; background: #fff; border-radius: 8px; padding: 12px;
+    box-shadow: 0 12px 0 #38003c;
+  }
+  .pl .h, .pl .side { color: #38003c; }
+  .pl .cell { background: #f7f7f7; box-shadow: inset 0 0 0 1px #e4e4e4; }
+  .pl .cell.empty { color: #38003c; }
+  .pl .field { background: #38003c; color: #00ff87; }
+
+  /* אריחי Connections: שורה צבעונית ומשבצות שמנת */
+  .nyt { background: #fff; }
+  .nyt .bar { height: 52px; background: #121212; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-weight: 800; }
+  .nyt .bar b { font-size: 18px; letter-spacing: -0.03em; }
+  .nyt .bar span { font-size: 13px; border: 1px solid #fff; padding: 4px 8px; }
+  .nyt .pad { padding-top: 18px; }
+  .nyt h2 { color: #121212; font-size: 34px; }
+  .nyt .lead { color: #222; }
+  .solved {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    min-height: 52px; padding: 8px 12px; border-radius: 8px;
+    background: #f9df6d; color: #121212; font-weight: 800;
+  }
+  .solved small { display: block; font-size: 12px; font-weight: 700; }
+  .nyt .h, .nyt .side { color: #121212; }
+  .nyt .cell { border-radius: 6px; background: #efefe6; }
+  .nyt .cell.empty { color: #121212; font-weight: 800; }
+  .nyt .field { border-radius: 8px; background: #efefe6; color: #121212; box-shadow: inset 0 0 0 2px #121212; }
+</style>
+</head>
+<body>
+  <header>
+    <p>פוטמוב · פרמייר ליג · ניו יורק טיימס · <span dir="ltr">FUT.GG</span> · אימקולט גריד</p>
+    <h1>שלוש הצעות להרשת</h1>
+    <span>אותו לוח. הרקע הוא שפה של אתר, לא כתם צבע.</span>
+  </header>
+  <div class="stage">
+
+    <section>
+      <p class="label">א · כמו פוטמוב</p>
+      <article class="phone foto">
+        <div class="pad">
+          <div class="mod">
+            <div class="faces3">
+              <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" />
+              <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" />
+              <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" />
+            </div>
+            <div><b>הרשת</b><em>שלוש משבצות על הלוח</em></div>
+          </div>
+          <p class="lead">כל משבצת מבקשת גבר אחד מהמאגר, שיושב גם על השורה וגם על הטור.</p>
+          <div class="card"><div class="board">
+            <div></div><div class="h">ברצלונה</div><div class="h">ריאל</div><div class="h">סיטי</div>
+            <div class="side">ברזיל</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><span>ויניסיוס</span></div>
+            <div class="cell empty">+</div>
+            <div class="side">אנגליה</div>
+            <div class="cell empty">+</div><div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /><span>פודן</span></div>
+            <div class="side">צרפת</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><span>מבאפה</span></div>
+            <div class="cell empty">+</div>
+          </div></div>
+          <div class="field">חפשו שחקן</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="label">ב · כמו הפרמייר ליג</p>
+      <article class="phone pl">
+        <div class="hero"></div>
+        <div class="pad">
+          <h2>הרשת</h2>
+          <p class="lead">כל משבצת מבקשת גבר אחד מהמאגר, שיושב גם על השורה וגם על הטור.</p>
+          <div class="card"><div class="board">
+            <div></div><div class="h">ברצלונה</div><div class="h">ריאל</div><div class="h">סיטי</div>
+            <div class="side">ברזיל</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><span>ויניסיוס</span></div>
+            <div class="cell empty">+</div>
+            <div class="side">אנגליה</div>
+            <div class="cell empty">+</div><div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /><span>פודן</span></div>
+            <div class="side">צרפת</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><span>מבאפה</span></div>
+            <div class="cell empty">+</div>
+          </div></div>
+          <div class="field">חפשו שחקן</div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="label">ג · כמו חיבורים</p>
+      <article class="phone nyt">
+        <div class="bar"><b>משחקים</b><span>הרשת</span></div>
+        <div class="pad">
+          <h2>הרשת</h2>
+          <p class="lead">כל משבצת מבקשת גבר אחד מהמאגר, שיושב גם על השורה וגם על הטור.</p>
+          <div class="solved"><div>ויניסיוס · פודן · מבאפה<small>שלוש משבצות שנסגרו</small></div></div>
+          <div class="board">
+            <div></div><div class="h">ברצלונה</div><div class="h">ריאל</div><div class="h">סיטי</div>
+            <div class="side">ברזיל</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><span>ויניסיוס</span></div>
+            <div class="cell empty">+</div>
+            <div class="side">אנגליה</div>
+            <div class="cell empty">+</div><div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /><span>פודן</span></div>
+            <div class="side">צרפת</div>
+            <div class="cell empty">+</div>
+            <div class="cell"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><span>מבאפה</span></div>
+            <div class="cell empty">+</div>
+          </div>
+          <div class="field">חפשו שחקן</div>
+        </div>
+      </article>
+    </section>
+
+  </div>
+</body>
+</html>

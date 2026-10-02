@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>נחש מי · הרשת</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500;700;800&display=swap');
+  * { box-sizing: border-box; }
+  html, body { margin: 0; color: #1c140c; font-family: Heebo, Arial, sans-serif; }
+  body {
+    min-height: 100vh;
+    padding: 36px 40px 72px;
+    background:
+      radial-gradient(820px 420px at 100% 0%, #ffb088, transparent 52%),
+      radial-gradient(760px 460px at 0% 100%, #8fd6ff, transparent 48%),
+      linear-gradient(160deg, #fff6ea, #f3e4ff 55%, #e7f6ff);
+  }
+  header { margin-bottom: 28px; }
+  header p { margin: 0; color: #e23b57; font-weight: 800; letter-spacing: .16em; font-size: 12px; }
+  header h1 { margin: 8px 0 0; font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: #1a1030; }
+  header span { display: block; margin-top: 8px; max-width: 36rem; color: #3d3428; font-size: 16px; line-height: 1.5; }
+  .stage { display: flex; gap: 36px; align-items: flex-start; flex-wrap: wrap; }
+  .label { margin: 0 0 12px; font-size: 13px; font-weight: 800; letter-spacing: .12em; }
+
+  .phone {
+    width: 400px; min-height: 860px; border-radius: 36px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.14),
+      0 40px 80px rgba(0,0,0,.55),
+      inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  .atmosphere, .grain, .vignette { position: absolute; inset: 0; pointer-events: none; }
+  .pad { position: relative; z-index: 1; padding: 22px 20px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .pill {
+    min-height: 32px; padding: 0 12px; border-radius: 999px; display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 700;
+    background: rgba(8,10,16,.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+  }
+  h2 { margin: 0; font-size: 48px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .lead { margin: 0; font-size: 16px; line-height: 1.5; color: #e4dccb; max-width: 22rem; }
+  img.face { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+  .ghost {
+    position: absolute; z-index: 0; font-weight: 800; line-height: .8; letter-spacing: -0.06em;
+    color: transparent; pointer-events: none; user-select: none;
+  }
+
+  .grain {
+    opacity: .18; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  /* הרשת — צעיף משחק, כמו תוכנייה. פסים קשיחים, לא כתמי צבע */
+  .net { background: #102a8a; }
+  .net .wash {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      180deg,
+      #102a8a 0 26px,
+      #f6f1e6 26px 52px,
+      #e10600 52px 57px,
+      #f6f1e6 57px 83px
+    );
+    background-size: 100% 83px;
+  }
+  .net .grain { display: none; }
+  .net .pad {
+    flex: 0 1 auto;
+    margin: 36px 16px;
+    padding: 18px 16px 16px 22px;
+    background: #f6f1e6;
+    border-radius: 4px;
+    box-shadow: 8px 8px 0 #0b1c4d;
+  }
+  .net .pad::after {
+    content: "";
+    position: absolute;
+    top: 12px; bottom: 12px; left: 7px;
+    width: 10px;
+    background: radial-gradient(circle, #102a8a 3px, transparent 3.5px) center / 10px 16px repeat-y;
+  }
+  .net h2 { color: #102a8a; text-shadow: none; }
+  .net .lead { color: #1c2430; text-shadow: none; }
+  .net .pill {
+    background: #102a8a; color: #f6f1e6;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .net .sheet {
+    padding: 0; border-radius: 0; background: transparent;
+    box-shadow: none; backdrop-filter: none;
+  }
+  .board { display: grid; grid-template-columns: 64px 1fr 1fr 1fr; gap: 8px; }
+  .h, .side {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 13px; font-weight: 800; line-height: 1.25; color: #102a8a;
+    text-shadow: none;
+  }
+  .cell {
+    height: 104px; border-radius: 14px; overflow: hidden; position: relative;
+    background: #fffdf8;
+    box-shadow: inset 0 0 0 2px #102a8a;
+  }
+  .cell span {
+    position: absolute; right: 0; left: 0; bottom: 0; padding: 16px 4px 6px;
+    background: linear-gradient(to top, rgba(6,12,22,.92), transparent);
+    font-size: 13px; font-weight: 800; text-align: center;
+  }
+  .cell.empty { display: flex; align-items: center; justify-content: center; color: #e10600; font-size: 22px; }
+  .cell.hit { box-shadow: inset 0 0 0 2px #102a8a; }
+  .field {
+    min-height: 52px; border-radius: 4px; display: flex; align-items: center; padding: 0 16px;
+    background: #102a8a; color: #f6f1e6; font-size: 16px; font-weight: 700;
+    box-shadow: none;
+  }
+
+  /* נחש מי — שקיעה רוויה: כתום, ורוד, סגול */
+  .who {
+    background:
+      radial-gradient(260px 220px at 12% 0%, #ffe27a, transparent 62%),
+      radial-gradient(380px 320px at 100% 18%, #ff4f86, transparent 58%),
+      linear-gradient(155deg, #ff8a1e 0%, #ff2f78 46%, #6a22d6 100%);
+  }
+  .who .atmosphere {
+    background:
+      radial-gradient(140px 140px at 78% 12%, rgba(255,255,255,.55), transparent 70%),
+      repeating-linear-gradient(115deg, transparent 0 28px, rgba(255,255,255,.08) 28px 29px);
+  }
+  .who .vignette { background: linear-gradient(180deg, rgba(255,255,255,.2), transparent 24%); }
+  .who .ghost { left: -18px; top: 64px; font-size: 220px; color: rgba(255,255,255,.16); -webkit-text-stroke: 0; }
+  .who h2, .who .lead { color: #fffaf6; }
+  .who .pill { background: rgba(255,255,255,.92); color: #6a1480; box-shadow: inset 0 1px 0 #fff, 0 8px 16px rgba(80,10,40,.18); }
+  .ask {
+    border-radius: 18px; padding: 16px 16px 14px;
+    background: linear-gradient(180deg, #fffaf4, #ffe8c8);
+    color: #3a1248;
+    box-shadow: inset 0 1px 0 #fff, 0 16px 28px rgba(70,10,40,.28), inset -5px 0 0 #ff2f78;
+  }
+  .ask b { display: block; font-size: 22px; line-height: 1.35; margin-bottom: 12px; }
+  .yn { display: flex; gap: 10px; }
+  .yn button {
+    flex: 1; min-height: 48px; border: 0; border-radius: 12px; font-family: inherit;
+    font-size: 18px; font-weight: 800; cursor: pointer;
+  }
+  .yn .yes {
+    background: linear-gradient(180deg, #ffe14a, #ffb703);
+    color: #3a1240;
+    box-shadow: inset 0 1px 0 #fff, 0 8px 16px rgba(80,10,40,.22);
+  }
+  .yn .no {
+    background: linear-gradient(180deg, #3a1280, #24105a);
+    color: #fff6ea;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 8px 16px rgba(40,8,70,.28);
+  }
+  .yn button:focus-visible { outline: 2px solid #fffaf4; outline-offset: 3px; }
+  .table {
+    padding: 10px; border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.12));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 0 0 1px rgba(255,255,255,.28), 0 16px 30px rgba(60,10,40,.2);
+  }
+  .faces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .mini {
+    height: 72px; border-radius: 10px; overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 6px 10px rgba(0,0,0,.25);
+  }
+  .mini.off { filter: grayscale(1) brightness(.38); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .net .wash { animation: scarf 14s linear infinite; }
+    .who .atmosphere { animation: lamp 8s ease-in-out infinite alternate; }
+  }
+  @keyframes scarf {
+    from { background-position: 0 0; }
+    to { background-position: 0 83px; }
+  }
+  @keyframes lamp { from { filter: brightness(.92); } to { filter: brightness(1.08); } }
+</style>
+</head>
+<body>
+  <header>
+    <p>תצוגה · <span dir="ltr">1 CLUB</span></p>
+    <h1>נחש מי, והרשת</h1>
+    <span>שני מסכים. המשבצות הן המשחק. מה שסביבן הוא האור, הרקע והכתב.</span>
+  </header>
+  <div class="stage">
+    <section>
+      <p class="label" style="color:#c2185b">נחש מי</p>
+      <article class="phone who">
+        <div class="atmosphere"></div>
+        <div class="ghost" aria-hidden="true">מי</div>
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="pad">
+          <div class="top">
+            <span class="pill">נשארו 9</span>
+            <span class="pill">שאלה 4</span>
+          </div>
+          <h2>נחש מי</h2>
+          <p class="lead">שאלה אחת בכל פעם. כן סוגר את מי שלא מתאים. לא סוגר את מי שכן.</p>
+          <div class="ask">
+            <b>הוא משחק בלה ליגה?</b>
+            <div class="yn">
+              <button class="yes" type="button">כן</button>
+              <button class="no" type="button">לא</button>
+            </div>
+          </div>
+          <div class="table">
+            <div class="faces">
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg/500px-Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/330px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/330px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg/500px-Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg/500px-Harry_Kane_England_v_Ghana_23_June_2026-219_%28cropped%29.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Declan_Rice_England_v_Ghana_23_June_2026-150.jpg/500px-Declan_Rice_England_v_Ghana_23_June_2026-150.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Federico_Valverde_2021_%28cropped%29.jpg/330px-Federico_Valverde_2021_%28cropped%29.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg/500px-Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_%28cropped%29.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Cole_Palmer_2025_FIFA_Club_World_Cup_Final.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /></div>
+              <div class="mini off"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg/330px-BFA_2023_-2_Heung-Min_Son_%28cropped%29.jpg" /></div>
+              <div class="mini"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/FRA-ARG_%2810%29_%28cropped%29.jpg/330px-FRA-ARG_%2810%29_%28cropped%29.jpg" /></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <p class="label" style="color:#102a8a">הרשת</p>
+      <article class="phone net">
+        <div class="wash"></div>
+        <div class="grain"></div>
+        <div class="pad">
+          <div class="top">
+            <span class="pill">שלוש משבצות</span>
+            <span class="pill">שם אחד למשבצת</span>
+          </div>
+          <h2>הרשת</h2>
+          <p class="lead">כל משבצת מבקשת גבר אחד מהמאגר, שיושב גם על השורה וגם על הטור.</p>
+          <div class="sheet"><div class="board">
+            <div></div>
+            <div class="h">ברצלונה</div>
+            <div class="h">ריאל</div>
+            <div class="h">סיטי</div>
+            <div class="side">ברזיל</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg/330px-Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_%28cropped%29.jpg" /><span>ויניסיוס</span></div>
+            <div class="cell empty">+</div>
+            <div class="side">אנגליה</div>
+            <div class="cell empty">+</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg/500px-2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2613%2C_Phil_Foden.jpg" /><span>פודן</span></div>
+            <div class="side">צרפת</div>
+            <div class="cell empty">+</div>
+            <div class="cell hit"><img class="face" alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/330px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg" /><span>מבאפה</span></div>
+            <div class="cell empty">+</div>
+          </div></div>
+          <div class="field">חפשו שחקן למשבצת הפנויה</div>
+        </div>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

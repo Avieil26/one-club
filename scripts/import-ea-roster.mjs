@@ -5,7 +5,7 @@
  */
 import fs from 'node:fs';
 
-const BUILD = process.env.EA_BUILD || 'M97aJNMwRgARBSdoH5nPR';
+const BUILD = process.env.EA_BUILD || 'k-zaXBBH8WXV4_dg4TYbd';
 /** Gold (75+) plus high silver to reach 3000+ cards with icons. */
 const MIN_OVR = 73;
 const PAGE_SIZE = 100;
@@ -179,6 +179,14 @@ const CLUB_HE = {
   Brighton: 'ברייטון',
   'Brighton & Hove Albion': 'ברייטון',
   'Aston Villa': 'אסטון וילה',
+  Trabzonspor: 'טרבזונספור',
+  LAFC: 'לוס אנג׳לס',
+  'Los Angeles FC': 'לוס אנג׳לס',
+  'Los Angeles Galaxy': 'לוס אנג׳לס גלאקסי',
+  'Al Nassr': 'אל-נסר',
+  'Al Ittihad': 'אל-איתיחאד',
+  'Al Ahli': 'אל-אהלי',
+  'Al Qadsiah': 'אל-קאדסיה',
 };
 
 function sleep(ms) {
@@ -318,10 +326,14 @@ function scoreMatch(item, candidateEn) {
   return 0;
 }
 
-async function fetchPage(page) {
+async function fetchPage(page, attempt = 0) {
   const url = `https://www.ea.com/_next/data/${BUILD}/games/ea-sports-fc/ratings.json?page=${page}&sortBy=overallRating&sortDir=desc`;
   const response = await fetch(url, { headers });
   if (response.status === 404) throw new Error(`EA build hash expired (${BUILD}). Set EA_BUILD env to the new _next/data hash.`);
+  if ((response.status === 429 || response.status >= 500) && attempt < 5) {
+    await sleep(1000 * (attempt + 1));
+    return fetchPage(page, attempt + 1);
+  }
   if (!response.ok) throw new Error(`EA ${response.status} page=${page}`);
   const data = await response.json();
   return {
@@ -330,7 +342,137 @@ async function fetchPage(page) {
   };
 }
 
+function playerFromItem(item) {
+  const en = displayName(item);
+  const photo = (item.avatarUrl || '').split('?')[0] || undefined;
+  const positions = positionsOf(item);
+  const playstyles = playstylesOf(item);
+  return {
+    id: slugId(item),
+    eaId: item.id,
+    name: en,
+    en,
+    rating: item.overallRating,
+    position: item.position?.shortLabel || 'CM',
+    nation: mapNation(item.nationality?.label),
+    league: mapLeague(item.leagueName),
+    club: mapClub(item.team?.label),
+    ...(photo ? { photo } : {}),
+    face: faceOf(item),
+    ...(positions.length ? { positions } : {}),
+    ...(playstyles.length ? { playstyles } : {}),
+    ...(item.gender?.label ? { gender: item.gender.label } : {}),
+    matched: false,
+  };
+}
+
+/** Add every EA player whose id is not already in players.json. No rating floor. */
+async function importMissing() {
+  const file = new URL('../assets/data/players.json', import.meta.url);
+  const roster = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const have = new Set(roster.map((player) => player.eaId).filter(Boolean));
+  const added = [];
+  let page = 1;
+  let total = null;
+
+  while (true) {
+    const { items, total: catalog } = await fetchPage(page);
+    if (total === null) {
+      total = catalog;
+      console.log(`EA total catalog=${total}, already have=${have.size}`);
+    }
+    if (!items.length) break;
+    for (const item of items) {
+      if (!item.id || have.has(item.id)) continue;
+      added.push(playerFromItem(item));
+      have.add(item.id);
+    }
+    console.log(`page ${page}: new ${added.length}, lastOvr=${items.at(-1)?.overallRating}`);
+    if (items.length < PAGE_SIZE) break;
+    if (page % 40 === 0) {
+      const checkpoint = [...roster, ...added].sort((a, b) => b.rating - a.rating || a.en.localeCompare(b.en));
+      fs.writeFileSync(file, JSON.stringify(checkpoint));
+      console.log(`checkpoint ${checkpoint.length}`);
+    }
+    page += 1;
+    await sleep(DELAY_MS);
+  }
+
+  const next = [...roster, ...added].sort((a, b) => b.rating - a.rating || a.en.localeCompare(b.en));
+  fs.writeFileSync(file, JSON.stringify(next));
+  console.log(JSON.stringify({
+    before: roster.length,
+    added: added.length,
+    after: next.length,
+    eaTotal: total,
+    highestNew: added[0]?.rating,
+    lowestNew: added.at(-1)?.rating,
+  }));
+}
+
+async function appendPlayers(count) {
+  const file = new URL('../assets/data/players.json', import.meta.url);
+  const roster = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const have = new Set(roster.map((player) => player.eaId).filter(Boolean));
+  const added = [];
+  let page = 1;
+
+  while (added.length < count) {
+    const { items } = await fetchPage(page);
+    if (!items.length) break;
+    for (const item of items) {
+      if (added.length >= count) break;
+      if (!item.id || have.has(item.id)) continue;
+      const en = displayName(item);
+      const photo = (item.avatarUrl || '').split('?')[0] || undefined;
+      const positions = positionsOf(item);
+      const playstyles = playstylesOf(item);
+      added.push({
+        id: slugId(item),
+        eaId: item.id,
+        name: en,
+        en,
+        rating: item.overallRating,
+        position: item.position?.shortLabel || 'CM',
+        nation: mapNation(item.nationality?.label),
+        league: mapLeague(item.leagueName),
+        club: mapClub(item.team?.label),
+        ...(photo ? { photo } : {}),
+        face: faceOf(item),
+        ...(positions.length ? { positions } : {}),
+        ...(playstyles.length ? { playstyles } : {}),
+        ...(item.gender?.label ? { gender: item.gender.label } : {}),
+        matched: false,
+      });
+      have.add(item.id);
+    }
+    console.log(`page ${page}: added ${added.length}/${count}, lastOvr=${items.at(-1)?.overallRating}`);
+    if (items.length < PAGE_SIZE) break;
+    page += 1;
+    await sleep(DELAY_MS);
+  }
+
+  if (added.length < count) throw new Error(`EA list ended after ${added.length} new players`);
+  fs.writeFileSync(file, JSON.stringify([...roster, ...added]));
+  console.log(JSON.stringify({
+    before: roster.length,
+    added: added.length,
+    after: roster.length + added.length,
+    highestNew: added[0]?.rating,
+    lowestNew: added.at(-1)?.rating,
+  }));
+}
+
 async function main() {
+  if (process.env.IMPORT_MISSING === '1') {
+    await importMissing();
+    return;
+  }
+  const append = Number(process.env.APPEND_COUNT || 0);
+  if (append > 0) {
+    await appendPlayers(append);
+    return;
+  }
   const { players: existing, iconIds } = loadExisting();
   const byEn = existing.map((p) => ({ ...p, key: norm(p.en) }));
 

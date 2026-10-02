@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 export type PackVisual =
   | 'gold-small'
@@ -123,97 +123,53 @@ const TONES: Record<PackVisual, PackTone> = {
   },
 };
 
-/** Slim FUT-style pack — tall, foil rim, small face window. */
+const PACK_ART = {
+  copper: require('@/assets/images/packs/pack-copper.png'),
+  electrum: require('@/assets/images/packs/pack-electrum.png'),
+  silver: require('@/assets/images/packs/pack-silver.png'),
+  gold: require('@/assets/images/packs/pack-gold.png'),
+  p83: require('@/assets/images/packs/pack-83.png'),
+  p79: require('@/assets/images/packs/pack-79.png'),
+  p75: require('@/assets/images/packs/pack-75.png'),
+  otw: require('@/assets/images/packs/pack-otw.png'),
+  totw: require('@/assets/images/packs/pack-totw.png'),
+} as const;
+
+function packArt(visual: PackVisual, label?: string) {
+  const stamp = label?.trim() ?? '';
+  if (stamp === 'TOTW') return PACK_ART.totw;
+  if (stamp === 'OTW') return PACK_ART.otw;
+  if (stamp === '83+') return PACK_ART.p83;
+  if (stamp === '79+') return PACK_ART.p79;
+  if (stamp === '75+') return PACK_ART.p75;
+  if (visual === 'electrum' || visual === 'electrum-small') return PACK_ART.electrum;
+  if (visual === 'silver-x2') return PACK_ART.silver;
+  if (visual === 'mixed') return PACK_ART.copper;
+  if (visual === 'otw') return PACK_ART.otw;
+  if (visual === 'pick') return PACK_ART.p79;
+  if (visual === 'rare-75' || visual === 'practice') return PACK_ART.p75;
+  return PACK_ART.gold;
+}
+
+/** Photographed reward pack. The picture is the object, so it is not a flat rectangle. */
 export function SbcRewardPack({
   visual,
-  size = 44,
+  size = 54,
   label,
 }: {
   visual: PackVisual;
   size?: number;
   label?: string;
 }) {
-  const tone = TONES[visual];
   const w = size;
-  const h = Math.round(size * 1.55);
-  const r = Math.max(5, size * 0.12);
-
+  const h = Math.round(size * 1.38);
   return (
-    <View
-      style={{
-        width: w,
-        height: h,
-        shadowColor: tone.glow,
-        shadowOpacity: 0.45,
-        shadowRadius: 8,
-        shadowOffset: { width: 0, height: 3 },
-        elevation: 6,
-      }}
-    >
-      <LinearGradient colors={tone.rim} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ flex: 1, borderRadius: r, padding: 2 }}>
-        <LinearGradient colors={tone.face} style={{ flex: 1, borderRadius: r - 1.5, overflow: 'hidden' }}>
-          <LinearGradient
-            colors={['rgba(255,255,255,0.28)', 'transparent', 'rgba(0,0,0,0.35)']}
-            locations={[0, 0.35, 1]}
-            style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
-          />
-          {/* Top foil strip */}
-          <LinearGradient
-            colors={tone.band}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            style={{ height: h * 0.11, opacity: 0.95 }}
-          />
-          {/* Face circle */}
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <View
-              style={{
-                width: w * 0.55,
-                height: w * 0.55,
-                borderRadius: w * 0.28,
-                borderWidth: 1.5,
-                borderColor: tone.foil,
-                backgroundColor: 'rgba(0,0,0,0.35)',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <View
-                style={{
-                  width: w * 0.22,
-                  height: w * 0.28,
-                  borderRadius: 3,
-                  backgroundColor: tone.foil,
-                  opacity: 0.85,
-                }}
-              />
-            </View>
-          </View>
-          {/* Bottom label */}
-          <View
-            style={{
-              paddingVertical: 3,
-              alignItems: 'center',
-              backgroundColor: 'rgba(0,0,0,0.45)',
-              borderTopWidth: 1,
-              borderTopColor: 'rgba(255,255,255,0.12)',
-            }}
-          >
-            <Text
-              numberOfLines={1}
-              style={{
-                color: tone.ink,
-                fontSize: Math.max(7, size * 0.16),
-                fontWeight: '800',
-                letterSpacing: 0.3,
-              }}
-            >
-              {label ?? 'PACK'}
-            </Text>
-          </View>
-        </LinearGradient>
-      </LinearGradient>
-    </View>
+    <Image
+      source={packArt(visual, label)}
+      resizeMode="contain"
+      accessibilityIgnoresInvertColors
+      style={{ width: w, height: h }}
+    />
   );
 }
 

@@ -12,6 +12,7 @@ import type {
   NewGrounds,
   NewSbc,
   NewSolution,
+  ProfileSquad,
   Snapshot,
 } from '@/lib/types';
 
@@ -30,6 +31,7 @@ type AppValue = Snapshot & {
   moderateCareer: (id: string, status: 'approved' | 'rejected') => Promise<void>;
   createFutPost: (input: NewFutPost) => Promise<void>;
   rateFut: (postId: string, fit: number, fun: number, creativity: number) => Promise<void>;
+  toggleFutLike: (postId: string) => Promise<void>;
   addComment: (input: NewComment) => Promise<boolean>;
   reportComment: (commentId: string) => Promise<void>;
   moderateComment: (commentId: string, action: 'visible' | 'remove') => Promise<void>;
@@ -40,6 +42,9 @@ type AppValue = Snapshot & {
   createSbc: (input: NewSbc) => Promise<void>;
   addSolution: (input: NewSolution) => Promise<void>;
   markWorked: (solutionId: string) => Promise<void>;
+  voteSolution: (solutionId: string, vote: 'up' | 'down' | 'clear') => Promise<void>;
+  setAvatar: (uri: string) => Promise<void>;
+  saveSquad: (squad: ProfileSquad) => Promise<void>;
   refresh: () => Promise<void>;
 };
 
@@ -51,6 +56,7 @@ const EMPTY: Snapshot = {
   submissions: [],
   futPosts: [],
   ratings: [],
+  likes: [],
   comments: [],
   grounds: [],
   sbcChallenges: [],
@@ -114,6 +120,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     createFutPost: (input) => run(() => backend.createFutPost(input), setSnap).then(() => undefined),
     rateFut: (postId, fit, fun, creativity) =>
       run(() => backend.rateFut(postId, fit, fun, creativity), setSnap).then(() => undefined),
+    toggleFutLike: (postId) => run(() => backend.toggleFutLike(postId), setSnap).then(() => undefined),
     addComment: (input) => run(() => backend.addComment(input), (result) => setSnap(result.snap)).then((result) => result.held),
     reportComment: (commentId) => run(() => backend.reportComment(commentId), setSnap).then(() => undefined),
     moderateComment: (commentId, action) =>
@@ -126,6 +133,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     createSbc: (input) => run(() => backend.createSbc(input), setSnap).then(() => undefined),
     addSolution: (input) => run(() => backend.addSolution(input), setSnap).then(() => undefined),
     markWorked: (solutionId) => run(() => backend.markWorked(solutionId), setSnap).then(() => undefined),
+    voteSolution: (solutionId, vote) => run(() => backend.voteSolution(solutionId, vote), setSnap).then(() => undefined),
+    setAvatar: (uri) => run(() => backend.setAvatar(uri), setSnap).then(() => undefined),
+    saveSquad: (squad) => run(() => backend.saveSquad(squad), setSnap).then(() => undefined),
     refresh: () => run(() => backend.reload(), setSnap).then(() => undefined),
   };
 

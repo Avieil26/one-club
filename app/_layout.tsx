@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
+import { useFonts } from 'expo-font';
 import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Updates from 'expo-updates';
 
 import { Arrival } from '@/components/Arrival';
+import { CookieNotice } from '@/components/CookieNotice';
+import { GoogleAuthSheet } from '@/components/GoogleAuthSheet';
+import { NoticeHost } from '@/components/NoticeHost';
+import { TermsConsentModal } from '@/components/TermsConsentModal';
 import { colors } from '@/components/ui';
+import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
 
 export { ErrorBoundary } from 'expo-router';
@@ -25,11 +32,56 @@ const theme = {
 };
 
 export default function RootLayout() {
+  useFonts({
+    Heebo: require('../assets/fonts/Heebo.ttf'),
+    GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
+  });
+
+  useEffect(() => {
+    if (__DEV__ || Platform.OS === 'web' || !Updates.isEnabled) return;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const check = await Updates.checkForUpdateAsync();
+        if (!check.isAvailable || cancelled) return;
+        await Updates.fetchUpdateAsync();
+        if (!cancelled) await Updates.reloadAsync();
+      } catch {
+        // Keep the installed copy if the update server is unreachable.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   useEffect(() => {
     SplashScreen.hideAsync();
     if (Platform.OS === 'web') {
       document.documentElement.lang = 'he';
       document.documentElement.dir = 'rtl';
+      const styleId = 'fc27-scroll';
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: #14120e; }
+*::-webkit-scrollbar-thumb { background: #8a7340; border-radius: 8px; border: 2px solid #14120e; }
+*::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button:single-button,
+*::-webkit-scrollbar-button:vertical:decrement,
+*::-webkit-scrollbar-button:vertical:increment,
+*::-webkit-scrollbar-button:horizontal:decrement,
+*::-webkit-scrollbar-button:horizontal:increment,
+*::-webkit-scrollbar-button:start:decrement,
+*::-webkit-scrollbar-button:end:increment,
+*::-webkit-scrollbar-button:vertical:start:decrement,
+*::-webkit-scrollbar-button:vertical:end:increment {
+  display: none; width: 0; height: 0; background: transparent;
+}`;
+        document.head.appendChild(style);
+      }
       return;
     }
     if (!I18nManager.isRTL) {
@@ -60,7 +112,9 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               </Stack>
             </Gate>
+            {Platform.OS !== 'web' ? <GoogleAuthSheet /> : null}
           </View>
+          <NoticeHost />
         </View>
       </ThemeProvider>
     </AppProvider>
@@ -76,9 +130,10 @@ function Gate({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
-    const onAccount = segments[0] === 'login' || segments[0] === 'register';
-    if (!user && !onAccount) router.replace('/register');
-    if (user && onAccount) router.replace('/(tabs)');
+    const onAuth = segments[0] === 'login' || segments[0] === 'register';
+    const onLegal = segments[0] === 'legal';
+    if (!user && !onAuth && !onLegal) router.replace('/register');
+    if (user && onAuth) router.replace('/(tabs)');
   }, [ready, user, segments, router]);
 
   useEffect(() => {
@@ -86,12 +141,16 @@ function Gate({ children }: { children: React.ReactNode }) {
   }, [segments]);
 
   useEffect(() => {
-    if (!user || !fromLogin.current) return;
+    if (!user?.id || !fromLogin.current) return;
     fromLogin.current = false;
     setArriving(true);
-    const timer = setTimeout(() => setArriving(false), 1100);
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (!arriving) return;
+    const timer = setTimeout(() => setArriving(false), 900);
     return () => clearTimeout(timer);
-  }, [user]);
+  }, [arriving]);
 
   if (!ready) {
     return (
@@ -103,7 +162,9 @@ function Gate({ children }: { children: React.ReactNode }) {
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <View style={{ flex: 1 }}>{children}</View>
-      {arriving && user ? <Arrival name={user.displayName} /> : null}
+      {arriving && user ? <Arrival name={user.displayName} onDone={() => setArriving(false)} /> : null}
+      <CookieNotice />
+      <TermsConsentModal />
     </View>
   );
 }

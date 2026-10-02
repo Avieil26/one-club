@@ -88,5 +88,8 @@ export function pendingCount(input: {
 export function solutionsFor(solutions: SbcSolution[], challengeId: string): SbcSolution[] {
   return solutions
     .filter((solution) => solution.challengeId === challengeId && solution.status === 'approved')
-    .sort((a, b) => b.workedUserIds.length - a.workedUserIds.length || b.createdAt.localeCompare(a.createdAt));
+    .sort((a, b) => {
+      const score = (item: SbcSolution) => item.workedUserIds.length - (item.failedUserIds?.length ?? 0);
+      return score(b) - score(a) || b.createdAt.localeCompare(a.createdAt);
+    });
 }

@@ -1,14 +1,23 @@
 export type ModerationStatus = 'pending' | 'approved' | 'rejected';
 
+/** A squad the player built on their profile. Player ids, not a screenshot. */
+export type ProfileSquad = {
+  formation: string;
+  slots: Record<string, string>;
+  bench: string[];
+};
+
 export type Profile = {
   id: string;
   displayName: string;
   email?: string;
   passwordHash?: string;
+  avatarUrl?: string | null;
   isAdmin: boolean;
   approvedCount: number;
   reputation: number;
   createdAt: string;
+  squad?: ProfileSquad | null;
 };
 
 export type CareerMode = 'manager' | 'player';
@@ -62,6 +71,11 @@ export type FutRating = {
   fun: number;
   creativity: number;
   createdAt: string;
+};
+
+export type FutLike = {
+  postId: string;
+  userId: string;
 };
 
 export type CommentTarget = 'fut_post' | 'career_submission' | 'sbc_solution';
@@ -137,7 +151,10 @@ export type SquadRules = {
   maxClubs?: number;
   minSameClub?: number;
   maxSameClub?: number;
+  minSameLeague?: number;
   sameNationAtLeast?: number;
+  /** At least `count` players whose nation is any of `nations`. */
+  nationsAtLeast?: { nations: string[]; count: number };
   nationAtLeast?: { nation: string; count: number }[];
   leagueAtLeast?: { league: string; count: number }[];
   clubsAtLeast?: { clubs: string[]; count: number };
@@ -145,6 +162,8 @@ export type SquadRules = {
   minSilver?: number;
   minBronze?: number;
   minQuality?: CardQuality;
+  /** Every card must be this quality. Silver means silver only, not gold. */
+  exactQuality?: CardQuality;
 };
 
 export type SbcChallenge = {
@@ -159,7 +178,9 @@ export type SbcChallenge = {
   createdAt: string;
   reward?: string | null;
   clubs?: string[];
-  previewFormation?: '433' | '442' | null;
+  /** Nation pair for an international SBC, shown as flags on the card. */
+  nations?: string[];
+  previewFormation?: string | null;
   previewSquad?: Record<string, string> | null;
 };
 
@@ -169,7 +190,12 @@ export type SbcSolution = {
   userId: string;
   explanation: string;
   imageUris: string[];
+  /** Eleven roster ids keyed by pitch slot, when the solution was built in the app. */
+  squad?: Record<string, string> | null;
+  formation?: string | null;
   workedUserIds: string[];
+  /** Users who marked this solution as not working. */
+  failedUserIds: string[];
   status: ModerationStatus;
   createdAt: string;
 };
@@ -188,6 +214,7 @@ export type Database = {
   careerSubmissions: CareerSubmission[];
   futPosts: FutPost[];
   futRatings: FutRating[];
+  futLikes: FutLike[];
   comments: Comment[];
   groundsPosts: GroundsPost[];
   sbcChallenges: SbcChallenge[];
@@ -205,6 +232,7 @@ export type Snapshot = {
   submissions: CareerSubmission[];
   futPosts: FutPost[];
   ratings: FutRating[];
+  likes: FutLike[];
   comments: Comment[];
   grounds: GroundsPost[];
   sbcChallenges: SbcChallenge[];
@@ -273,4 +301,6 @@ export type NewSolution = {
   challengeId: string;
   explanation: string;
   imageUris: string[];
+  squad?: Record<string, string> | null;
+  formation?: string | null;
 };

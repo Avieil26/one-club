@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>תצוגה מקדימה · אתגרי קריירה</title>
+<style>
+  :root {
+    --ink: #f6f3ea;
+    --muted: rgba(246,243,234,.72);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #07090d; color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; }
+  body { padding: 36px 28px 64px; }
+  h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -.03em; }
+  .lead { margin: 0 0 28px; color: var(--muted); font-size: 15px; }
+  .section { margin: 0 0 42px; }
+  .section h2 { margin: 0 0 14px; font-size: 13px; letter-spacing: .18em; color: #e3b341; font-weight: 800; }
+  .row { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; }
+  .phone {
+    width: 360px;
+    border-radius: 32px;
+    padding: 14px;
+    background:
+      radial-gradient(120px 80px at 80% 0%, rgba(227,179,65,.16), transparent 70%),
+      linear-gradient(180deg, #141a22, #0b0f14);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .phone p.label { margin: 0 0 10px; text-align: center; color: rgba(255,255,255,.45); font-size: 12px; letter-spacing: .08em; }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    min-height: 214px;
+    border-radius: 26px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    isolation: isolate;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(115deg, transparent 38%, rgba(255,255,255,.16) 48%, transparent 58%);
+    mix-blend-mode: screen;
+    z-index: 0;
+  }
+  .card > * { position: relative; z-index: 1; }
+  .top, .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .pill, .diff {
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    backdrop-filter: blur(8px);
+  }
+  .pill { background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.22); }
+  .diff { background: rgba(227,179,65,.18); color: #ffe7a3; border: 1px solid rgba(227,179,65,.45); }
+  .kicker { margin: 14px 0 0; font-size: 11px; letter-spacing: .22em; font-weight: 800; opacity: .8; }
+  h3 { margin: 4px 0 0; font-size: 28px; line-height: 1.05; font-weight: 900; }
+  .hook { margin: 8px 0 0; font-size: 14px; color: rgba(255,255,255,.84); }
+  .foot { margin-top: 18px; font-size: 12px; color: rgba(255,255,255,.78); }
+  .go {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.28);
+    font-weight: 900;
+  }
+
+  .leeds {
+    background:
+      radial-gradient(140px 90px at 100% 0%, rgba(255,205,0,.55), transparent 60%),
+      radial-gradient(180px 120px at 0% 100%, rgba(29,66,138,.9), transparent 70%),
+      linear-gradient(145deg, #1d428a 0%, #0d2148 42%, #07111f 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 18px 40px rgba(0,0,0,.35);
+  }
+  .leeds .shirt {
+    position: absolute; inset-inline-start: -20px; top: 28px; width: 150px; height: 190px;
+    background: linear-gradient(180deg, rgba(255,255,255,.16), transparent 70%);
+    transform: skewX(-18deg);
+    z-index: 0;
+  }
+  .promo {
+    background:
+      radial-gradient(160px 100px at 90% 110%, rgba(130,70,255,.65), transparent 60%),
+      linear-gradient(180deg, #6e1630 0%, #2a1024 46%, #140818 100%);
+    box-shadow: inset 0 1px 0 rgba(255,180,160,.35), 0 18px 40px rgba(0,0,0,.35);
+  }
+  .promo .rise {
+    position: absolute; inset-inline-end: 22px; bottom: 18px; width: 3px; height: 120px;
+    background: linear-gradient(180deg, #ffe08a, transparent);
+    border-radius: 4px;
+    z-index: 0;
+  }
+  .academy {
+    background:
+      radial-gradient(200px 80px at 50% -10%, rgba(190,255,170,.45), transparent 55%),
+      linear-gradient(165deg, #123826 0%, #0c1c16 50%, #07110e 100%);
+    box-shadow: inset 0 1px 0 rgba(180,255,190,.28), 0 18px 40px rgba(0,0,0,.35);
+  }
+
+  .screen {
+    width: 332px;
+    min-height: 640px;
+    border-radius: 28px;
+    padding: 18px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .back { font-size: 13px; font-weight: 700; opacity: .8; }
+  .hero-kicker { margin: 8px 0 0; letter-spacing: .18em; font-size: 11px; font-weight: 800; }
+  .screen h3 { font-size: 30px; margin: 2px 0 0; }
+  .meta { font-size: 12px; opacity: .75; }
+  .panel {
+    border-radius: 18px;
+    padding: 14px;
+    background: rgba(6,10,14,.42);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(10px);
+  }
+  .panel strong { display: block; margin-bottom: 6px; font-size: 13px; }
+  .panel p { margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.86); }
+  .checks { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .checks li {
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+    font-size: 12.5px;
+  }
+  .cta {
+    margin-top: auto;
+    border: 0;
+    border-radius: 16px;
+    padding: 14px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #1a1208;
+    background: linear-gradient(90deg, #fff1b8, #e3b341 45%, #a67c1a);
+    box-shadow: 0 10px 24px rgba(227,179,65,.28);
+  }
+
+  .field { display: grid; gap: 6px; }
+  .field span { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.7); }
+  .box {
+    min-height: 46px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.05);
+    padding: 12px;
+    color: rgba(255,255,255,.35);
+    font-size: 14px;
+  }
+  .box.tall { min-height: 88px; }
+  .drop {
+    border-radius: 18px;
+    min-height: 132px;
+    padding: 16px;
+    border: 1px dashed rgba(227,179,65,.7);
+    background:
+      radial-gradient(80px 40px at 50% 0%, rgba(227,179,65,.2), transparent 70%),
+      rgba(255,255,255,.03);
+  }
+  .drop b { display: block; font-size: 16px; }
+  .drop p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.72); }
+  .submit-screen { min-height: 700px; }
+</style>
+</head>
+<body>
+  <h1>תצוגה מקדימה · לא באתר</h1>
+  <p class="lead">שלושה עולמות צבע. הכרטיס, העמוד שנפתח, והגשת ההוכחה מדברים באותה שפה.</p>
+
+  <section class="section">
+    <h2>כרטיסים ברשימה</h2>
+    <div class="row">
+      <div class="phone">
+        <p class="label">כרטיס 1</p>
+        <article class="card leeds">
+          <div class="shirt"></div>
+          <div class="top"><span class="pill">קריירת שחקן</span><span class="diff">WORLD CLASS</span></div>
+          <div>
+            <p class="kicker">LEEDS UNITED</p>
+            <h3>אליפות עם לידס</h3>
+            <p class="hook">עונה אחת במועדון. בלי מעבר באמצע.</p>
+          </div>
+          <div class="foot"><span>פתוח · בלי הגבלת זמן</span><span class="go">‹</span></div>
+        </article>
+      </div>
+      <div class="phone">
+        <p class="label">כרטיס 2</p>
+        <article class="card promo">
+          <div class="rise"></div>
+          <div class="top"><span class="pill">קריירת מאמן</span><span class="diff">WORLD CLASS</span></div>
+          <div>
+            <p class="kicker">CHAMPIONSHIP → PREMIER</p>
+            <h3>עלייה בלי רכש מבוגר</h3>
+            <p class="hook">עד ינואר, אף רכש מעל גיל 23.</p>
+          </div>
+          <div class="foot"><span>פתוח · בלי הגבלת זמן</span><span class="go">‹</span></div>
+        </article>
+      </div>
+      <div class="phone">
+        <p class="label">כרטיס 3</p>
+        <article class="card academy">
+          <div class="top"><span class="pill">קריירת מאמן</span><span class="diff">WORLD CLASS</span></div>
+          <div>
+            <p class="kicker">YOUTH ONLY</p>
+            <h3>רק שחקני אקדמיה עד ינואר</h3>
+            <p class="hook">ליגה שנייה. בלי רכש מעל גיל 21.</p>
+          </div>
+          <div class="foot"><span>פתוח עד 20.10.2026</span><span class="go">‹</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>עמוד האתגר</h2>
+    <div class="row">
+      <div class="phone">
+        <div class="screen leeds">
+          <div class="back">‹ אתגרי קריירה</div>
+          <div>
+            <p class="hero-kicker">קריירת שחקן · WORLD CLASS</p>
+            <h3>אליפות עם לידס</h3>
+            <p class="meta">פתוח · בלי הגבלת זמן</p>
+          </div>
+          <div class="panel">
+            <strong>המשימה</strong>
+            <p>יוצרים שחקן ומתחילים בלידס. בעונה הראשונה זוכים באליפות הליגה שבה הקבוצה מתחילה. אסור לעבור מועדון באמצע העונה.</p>
+          </div>
+          <div class="panel">
+            <strong>מה חייב להיות בצילום</strong>
+            <ul class="checks">
+              <li>טבלה עם לידס במקום הראשון</li>
+              <li>מסך השחקן עם סמל לידס</li>
+              <li>הגדרות על World Class ומעלה</li>
+            </ul>
+          </div>
+          <button class="cta">הגשת הוכחה</button>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="screen promo">
+          <div class="back">‹ אתגרי קריירה</div>
+          <div>
+            <p class="hero-kicker">קריירת מאמן · WORLD CLASS</p>
+            <h3>עלייה בלי רכש מבוגר</h3>
+            <p class="meta">פתוח · בלי הגבלת זמן</p>
+          </div>
+          <div class="panel">
+            <strong>המשימה</strong>
+            <p>מתחילים בצ׳מפיונשיפ ועולים לפרמייר ליג בעונה אחת. עד חלון ינואר אסור לקנות שחקן מעל גיל 23. השאלות מותרות.</p>
+          </div>
+          <div class="panel">
+            <strong>מה חייב להיות בצילום</strong>
+            <ul class="checks">
+              <li>טבלת סוף העונה עם קו העלייה</li>
+              <li>הסגל, עם הגילאים</li>
+            </ul>
+          </div>
+          <button class="cta">הגשת הוכחה</button>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="screen academy">
+          <div class="back">‹ אתגרי קריירה</div>
+          <div>
+            <p class="hero-kicker">קריירת מאמן · WORLD CLASS</p>
+            <h3>רק שחקני אקדמיה עד ינואר</h3>
+            <p class="meta">פתוח עד 20.10.2026</p>
+          </div>
+          <div class="panel">
+            <strong>המשימה</strong>
+            <p>מתחילים בליגה שנייה. עד חלון ינואר אסור לקנות שחקן מעל גיל 21, וצריך להעפיל בפלייאוף או לסיים בחצי העליון.</p>
+          </div>
+          <div class="panel">
+            <strong>מה חייב להיות בצילום</strong>
+            <ul class="checks">
+              <li>טבלת הליגה</li>
+              <li>הסגל, עם הגילאים</li>
+            </ul>
+          </div>
+          <button class="cta">הגשת הוכחה</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>הגשת הוכחה</h2>
+    <div class="row">
+      <div class="phone">
+        <div class="screen submit-screen leeds">
+          <div class="back">‹ חזרה לאתגר</div>
+          <div>
+            <p class="hero-kicker">הגשה · אליפות עם לידס</p>
+            <h3>ההוכחה</h3>
+            <p class="meta">ההגשה ממתינה לאישור לפני שהיא מופיעה.</p>
+          </div>
+          <label class="field"><span>שם השחקן או המועדון</span><div class="box">למשל לידס יונייטד</div></label>
+          <label class="field"><span>מה עשיתם</span><div class="box tall">משפט קצר על העונה</div></label>
+          <div class="drop">
+            <b>צילום מסך להוכחה</b>
+            <p>עד 3 תמונות. טבלה, מסך שחקן, והגדרות הקושי.</p>
+          </div>
+          <button class="cta">שליחת ההגשה</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="utf-8" />
+<title>משחקונים</title>
+<style>
+  @font-face { font-family: Heebo; src: url("fonts/Heebo.ttf") format("truetype"); font-weight: 100 900; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #05060a; }
+  body { padding: 28px; display: flex; gap: 28px; align-items: flex-start; }
+  .col { width: 400px; }
+  .label { margin: 0 0 10px; text-align: right; direction: rtl; font-family: Heebo, Arial, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: .08em; }
+  .phone {
+    width: 400px; height: 844px; border-radius: 32px; overflow: hidden; position: relative;
+    direction: rtl; font-family: Heebo, Arial, sans-serif; color: #f6f1e4;
+    background: #05070c url("bg.png") center 70% / cover no-repeat;
+    box-shadow: 0 0 0 1px rgba(232,196,106,.28), 0 30px 70px rgba(0,0,0,.55);
+  }
+  .veil {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(420px 220px at 80% 0%, rgba(232,196,106,.28), transparent 60%),
+      radial-gradient(360px 240px at 0% 18%, rgba(226,59,87,.18), transparent 55%),
+      linear-gradient(180deg, rgba(5,7,12,.55) 0%, rgba(5,7,12,.28) 38%, rgba(4,10,8,.78) 100%);
+  }
+  .pad { position: relative; z-index: 1; padding: 22px 16px 18px; display: flex; flex-direction: column; gap: 14px; height: 100%; }
+  .eyebrow { margin: 0; text-align: right; color: #e8c46a; font-size: 12px; font-weight: 800; letter-spacing: .16em; }
+  h1 { margin: 0; font-size: 36px; line-height: .95; font-weight: 800; text-align: right; }
+  .lead { margin: 0; text-align: right; color: rgba(246,241,228,.78); font-size: 14px; line-height: 1.45; font-weight: 500; }
+
+  .club, .draft-card {
+    border-radius: 22px; overflow: hidden; position: relative;
+    box-shadow: 0 16px 36px rgba(0,0,0,.4);
+  }
+  .club {
+    min-height: 228px; display: flex; direction: ltr;
+    background: linear-gradient(155deg, rgba(92,22,40,.92), rgba(28,8,14,.88) 70%);
+    box-shadow: inset 0 1px 0 rgba(255,196,206,.45), inset 0 0 0 1px rgba(255,143,163,.4), 0 16px 36px rgba(0,0,0,.4);
+  }
+  .club img.hero { width: 156px; height: 228px; object-fit: cover; object-position: center 12%; }
+  .club .copy { flex: 1; padding: 16px 16px 14px; display: flex; flex-direction: column; align-items: flex-end; direction: rtl; }
+  .club .copy span { color: #ffb3c2; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+  .club h2 { margin: 8px 0 0; font-size: 30px; text-align: right; }
+  .club p { margin: 8px 0 0; text-align: right; color: rgba(246,241,228,.78); font-size: 14px; line-height: 1.4; }
+  .play {
+    margin-top: auto; height: 44px; border: 0; border-radius: 10px; background: #f4f1e6; color: #2a0a12;
+    font-family: Heebo, Arial, sans-serif; font-weight: 800; font-size: 16px; padding: 0 16px;
+    box-shadow: inset -4px 0 0 #e8c46a, inset 0 1px 0 #fff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .play i { width: 8px; height: 8px; background: #e23b57; display: block; }
+
+  .draft-card {
+    padding: 14px; display: flex; gap: 12px; align-items: center; direction: ltr;
+    background: linear-gradient(160deg, rgba(16,40,30,.9), rgba(8,14,12,.86));
+    box-shadow: inset 0 1px 0 rgba(232,196,106,.45), inset 0 0 0 1px rgba(232,196,106,.38), 0 16px 36px rgba(0,0,0,.4);
+  }
+  .mini {
+    width: 132px; height: 92px; border-radius: 12px; position: relative; direction: ltr;
+    background:
+      linear-gradient(180deg, rgba(20,70,46,.95), rgba(10,36,24,.95));
+    box-shadow: inset 0 0 0 1px rgba(180,230,190,.35);
+  }
+  .mini .ln { position: absolute; background: rgba(255,255,255,.35); }
+  .mini b {
+    position: absolute; width: 18px; height: 24px; border-radius: 4px; overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0,0,0,.45);
+  }
+  .mini b img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+  .draft-card .txt { flex: 1; text-align: right; direction: rtl; }
+  .draft-card .txt em { font-style: normal; color: #e8c46a; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+  .draft-card h2 { margin: 6px 0 0; font-size: 26px; }
+  .draft-card p { margin: 6px 0 0; color: rgba(246,241,228,.75); font-size: 13px; line-height: 1.4; }
+
+  .steps { display: flex; gap: 6px; direction: rtl; }
+  .steps span {
+    flex: 1; height: 28px; border-radius: 99px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800;
+    background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); color: rgba(246,241,228,.55);
+  }
+  .steps .now { color: #1a1408; background: linear-gradient(180deg, #f3e0a2, #c6a15a); box-shadow: none; }
+  .steps .done { color: #e8c46a; box-shadow: inset 0 0 0 1px rgba(232,196,106,.45); }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .pill {
+    height: 30px; padding: 0 12px; border-radius: 99px; display: flex; align-items: center;
+    font-size: 13px; font-weight: 800;
+    background: rgba(8,10,14,.45); box-shadow: inset 0 0 0 1px rgba(232,196,106,.4); color: #f3e0a2;
+  }
+  .draft h1 { font-size: 32px; }
+  .draft .lead { font-size: 13px; }
+  .pitch {
+    height: 168px; border-radius: 16px; position: relative; direction: ltr;
+    background:
+      linear-gradient(180deg, rgba(22,92,58,.92), rgba(10,46,30,.94));
+    box-shadow: inset 0 0 0 1px rgba(190,235,205,.4), inset 0 0 40px rgba(0,0,0,.25);
+  }
+  .pitch .box { position: absolute; border: 1px solid rgba(255,255,255,.28); }
+  .p { position: absolute; width: 34px; height: 44px; border-radius: 7px; overflow: hidden; box-shadow: 0 6px 10px rgba(0,0,0,.4); }
+  .p img { width: 100%; height: 100%; object-fit: cover; object-position: center 14%; }
+  .hole {
+    position: absolute; width: 38px; height: 50px; border-radius: 8px;
+    border: 1.5px dashed #f3e0a2; box-shadow: 0 0 16px rgba(232,196,106,.55);
+  }
+  .five { display: flex; gap: 6px; direction: ltr; }
+  .fc { flex: 1; padding: 2px; border-radius: 10px; background: linear-gradient(180deg, #f7e7b2, #8d6b2e 46%, #f0d48a); }
+  .fc.focus { transform: translateY(-8px); background: linear-gradient(180deg, #fff4cc, #e8c46a 40%, #fff1c2); box-shadow: 0 12px 18px rgba(0,0,0,.45); }
+  .fc .in { border-radius: 8px; overflow: hidden; background: linear-gradient(180deg, #2c2414, #141008); position: relative; }
+  .fc img { width: 100%; height: 86px; object-fit: cover; object-position: center 12%; display: block; }
+  .fc .ov { position: absolute; top: 4px; left: 5px; font-size: 14px; font-weight: 800; color: #f7e7b2; text-shadow: 0 1px 3px #000; }
+  .fc .pos { position: absolute; top: 20px; left: 5px; font-size: 9px; font-weight: 800; color: rgba(247,231,178,.8); }
+  .fc b { display: block; text-align: center; font-size: 11px; padding: 5px 2px 6px; color: #f6f1e4; }
+</style>
+</head>
+<body>
+  <section class="col">
+    <p class="label" style="color:#e8c46a">הטאב</p>
+    <article class="phone">
+      <div class="veil"></div>
+      <div class="pad">
+        <p class="eyebrow">משחקים קצרים</p>
+        <h1>משחקונים</h1>
+        <p class="lead">שני משחקים על הקלפים שבמאגר. מעט נקודות, על הזרקורים.</p>
+        <div class="club">
+          <div class="copy">
+            <span>מועדון</span>
+            <h2>איזה מועדון</h2>
+            <p>מזהים את השחקן ובוחרים איפה הוא משחק.</p>
+            <button class="play"><i></i>שחק</button>
+          </div>
+          <img class="hero" src="games/saka.png" alt="" />
+        </div>
+        <div class="draft-card">
+          <div class="mini">
+            <div class="ln" style="left:8px;right:8px;top:8px;height:76px;background:transparent;border:1px solid rgba(255,255,255,.28);border-radius:4px"></div>
+            <b style="left:18px;top:14px"><img src="games/yamal.png" alt="" /></b>
+            <b style="left:57px;top:14px"><img src="games/haaland.png" alt="" /></b>
+            <b style="left:96px;top:14px"><img src="games/saka.png" alt="" /></b>
+            <b style="left:57px;top:52px"><img src="games/pedri.png" alt="" /></b>
+          </div>
+          <div class="txt">
+            <em>כמו ב־FC 27</em>
+            <h2>דראפט</h2>
+            <p>מערך, קפטן, וחמישה קלפים לכל עמדה.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="col">
+    <p class="label" style="color:#f3e0a2">דראפט</p>
+    <article class="phone draft">
+      <div class="veil"></div>
+      <div class="pad">
+        <div class="steps">
+          <span class="done">מערך</span>
+          <span class="now">קפטן</span>
+          <span>עמדות</span>
+          <span>מנג׳ר</span>
+        </div>
+        <div class="top">
+          <span class="pill">4-3-3 נעול</span>
+          <span class="pill">כימיה 18</span>
+        </div>
+        <h1>בחרו קפטן</h1>
+        <p class="lead">אחד מחמישה כוכבים. אחר כך חמישה קלפים לכל עמדה ב־11, ואפשר לסדר כדי להרים כימיה.</p>
+        <div class="pitch">
+          <div class="box" style="left:16px;right:16px;top:10px;bottom:10px;border-radius:8px"></div>
+          <div class="box" style="left:120px;right:120px;top:10px;height:36px"></div>
+          <div class="hole" style="left:181px;top:16px"></div>
+          <div class="p" style="left:48px;top:22px"><img src="games/yamal.png" alt="" /></div>
+          <div class="p" style="left:312px;top:22px"><img src="games/saka.png" alt="" /></div>
+          <div class="p" style="left:181px;top:96px"><img src="games/pedri.png" alt="" /></div>
+        </div>
+        <div class="five">
+          <div class="fc"><div class="in"><span class="ov">91</span><span class="pos">ST</span><img src="games/haaland.png" alt="" /><b>האלנד</b></div></div>
+          <div class="fc focus"><div class="in"><span class="ov">90</span><span class="pos">ST</span><img src="games/kane.png" alt="" /><b>קיין</b></div></div>
+          <div class="fc"><div class="in"><span class="ov">90</span><span class="pos">CAM</span><img src="games/bellingham.png" alt="" /><b>בלינגהאם</b></div></div>
+          <div class="fc"><div class="in"><span class="ov">90</span><span class="pos">RW</span><img src="games/yamal.png" alt="" /><b>ימאל</b></div></div>
+          <div class="fc"><div class="in"><span class="ov">87</span><span class="pos">RW</span><img src="games/salah.png" alt="" /><b>סלאח</b></div></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

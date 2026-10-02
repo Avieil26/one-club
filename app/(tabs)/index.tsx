@@ -3,10 +3,15 @@ import { useRouter } from 'expo-router';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Animated, Image, Pressable, Text, View, type ImageSourcePropType } from 'react-native';
 
+import { AuthorNote } from '@/components/AuthorNote';
 import { FutzBetaDownload } from '@/components/FutzBetaDownload';
+import { LegalLinks } from '@/components/LegalLinks';
+import { PlatformMark } from '@/components/PlatformPicker';
+import { SquadPhoto } from '@/components/SquadPhoto';
 import { useColumns } from '@/components/TileGrid';
 import { Card, colors, Muted, Screen, Title } from '@/components/ui';
 import { PLAYERS } from '@/lib/fcPlayers';
+import { displayName } from '@/lib/labels';
 import { openChallenges } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
@@ -157,12 +162,13 @@ function DoorButton({
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { user, challenges, futPosts, grounds } = useApp();
+  const { user, challenges, futPosts, grounds, profiles, likes } = useApp();
   const open = openChallenges(challenges);
   const columns = useColumns(5, 2);
   const featured = futPosts.find((post) => post.kind === 'squad');
+  const featuredLikes = featured ? likes.filter((like) => like.postId === featured.id).length : 0;
   const stats = [
-    { value: String(PLAYERS.length), label: 'שחקנים' },
+    { value: Number(PLAYERS.length).toLocaleString('en-US'), label: 'שחקנים' },
     { value: String(open.length), label: 'אתגרים פתוחים' },
     { value: String(grounds.length), label: 'מודעות' },
   ];
@@ -170,8 +176,8 @@ export default function HomeScreen() {
   return (
     <Screen scene="home">
       <Rise index={0}>
-        <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '700', textAlign: 'right', letterSpacing: 1 }}>
-          Futz BETA
+        <Text style={{ color: '#FD6502', fontSize: 13, fontWeight: '700', textAlign: 'right', letterSpacing: 1 }}>
+          1 CLUB
         </Text>
         <Title>{user ? user.displayName : 'המגרש'}</Title>
         <Muted>הקהילה הישראלית ל-EA FC 27. לא קשורה ל-EA.</Muted>
@@ -180,22 +186,52 @@ export default function HomeScreen() {
         <FutzBetaDownload />
       </Rise>
       <Rise index={2}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', gap: 10 }}>
+        <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8 }}>
           {stats.map((item) => (
             <View
               key={item.label}
               style={{
                 flex: 1,
+                minWidth: 0,
                 backgroundColor: 'rgba(14, 18, 24, 0.82)',
                 borderRadius: 16,
-                paddingVertical: 16,
-                paddingHorizontal: 12,
+                paddingVertical: 14,
+                paddingHorizontal: 6,
                 borderWidth: 1,
                 borderColor: 'rgba(227, 179, 65, 0.18)',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              <Text style={{ color: colors.text, fontSize: 28, fontWeight: '800', textAlign: 'right' }}>{item.value}</Text>
-              <Text style={{ color: colors.muted, fontSize: 13, textAlign: 'right' }}>{item.label}</Text>
+              <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.65}
+                style={{
+                  color: colors.text,
+                  fontSize: 22,
+                  fontWeight: '800',
+                  textAlign: 'center',
+                  writingDirection: 'ltr',
+                  width: '100%',
+                }}
+              >
+                {item.value}
+              </Text>
+              <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}
+                style={{
+                  color: colors.muted,
+                  fontSize: 12,
+                  textAlign: 'center',
+                  marginTop: 2,
+                  width: '100%',
+                }}
+              >
+                {item.label}
+              </Text>
             </View>
           ))}
         </View>
@@ -212,11 +248,28 @@ export default function HomeScreen() {
       {featured ? (
         <Rise index={8}>
           <Card onPress={() => router.push(`/ultimate/${featured.id}`)}>
-            <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '700', textAlign: 'right' }}>קבוצה מהקהילה</Text>
-            <Text style={{ color: colors.text, fontSize: 18, fontWeight: '700', textAlign: 'right' }}>{featured.body}</Text>
+            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+              <PlatformMark id={featured.platform} size={40} />
+              <View style={{ flex: 1 }}>
+                <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '700', textAlign: 'right' }}>קבוצה מהקהילה</Text>
+                <Text style={{ color: colors.text, fontSize: 18, fontWeight: '700', textAlign: 'right' }}>
+                  {displayName(profiles, featured.userId)}
+                </Text>
+              </View>
+            </View>
+            <SquadPhoto uris={featured.imageUris} expandable={false} />
+            <AuthorNote
+              name={displayName(profiles, featured.userId)}
+              body={featured.body}
+              avatarUrl={profiles.find((profile) => profile.id === featured.userId)?.avatarUrl}
+            />
+            <Muted>{featuredLikes ? `${featuredLikes} לייקים` : 'עדיין בלי לייקים'}</Muted>
           </Card>
         </Rise>
       ) : null}
+      <View style={{ marginTop: 36, alignItems: 'center' }}>
+        <LegalLinks />
+      </View>
     </Screen>
   );
 }

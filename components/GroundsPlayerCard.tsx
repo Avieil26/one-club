@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { Image, ImageBackground, Pressable, Text, View } from 'react-native';
+import { Image, ImageBackground, Pressable, Text, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Defs, LinearGradient as SvgGrad, Rect, Stop } from 'react-native-svg';
 
@@ -20,6 +20,7 @@ type Props = {
   meId: string | null;
   onMessage: (userId: string) => void;
   onFollow: (userId: string) => void;
+  onOpenProfile: (userId: string) => void;
   onNeedAuth?: () => void;
 };
 
@@ -52,7 +53,7 @@ function CinematicHero({ children }: { children: ReactNode }) {
 }
 
 /** Dark metallic plaque like PREVIEW — crest + ladder + colored level bar */
-function RankMonument({ level, division }: { level: number; division: string }) {
+function RankMonument({ level }: { level: number }) {
   const tone = playerLevelTone(level);
   const crest = crestFor(level);
   const uid = `rail-${Math.round(level)}`;
@@ -128,25 +129,11 @@ function RankMonument({ level, division }: { level: number; division: string }) 
       >
         <Text style={{ color: tone.text, fontWeight: '900', fontSize: 15 }}>{tone.label}</Text>
       </LinearGradient>
-
-      <Text
-        style={{
-          color: '#F7F4EA',
-          fontWeight: '800',
-          fontSize: 13,
-          marginTop: 10,
-          textShadowColor: 'rgba(0,0,0,0.8)',
-          textShadowOffset: { width: 0, height: 1 },
-          textShadowRadius: 4,
-        }}
-      >
-        {division}
-      </Text>
     </LinearGradient>
   );
 }
 
-export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, onFollow, onNeedAuth }: Props) {
+export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, onFollow, onOpenProfile, onNeedAuth }: Props) {
   const tone = playerLevelTone(post.playerLevel);
   const name = displayName(profiles, post.userId);
   const followers = follows.filter((f) => f.followingId === post.userId).length;
@@ -154,6 +141,8 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
   const iFollow = Boolean(meId && follows.some((f) => f.followerId === meId && f.followingId === post.userId));
   const isMe = Boolean(meId && meId === post.userId);
   const hasAvatar = Boolean(post.avatarUri && post.avatarUri !== 'placeholder');
+  const { width } = useWindowDimensions();
+  const compact = width < 720;
 
   function pressMessage() {
     if (!meId) {
@@ -184,21 +173,23 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
       }}
     >
       <CinematicHero>
-        <RankMonument level={post.playerLevel} division={divisionLabel(post.division)} />
+        {isMe ? <RankMonument level={post.playerLevel} /> : null}
       </CinematicHero>
 
       {/* Bottom panel — dark slate like PREVIEW */}
       <View style={{ padding: 14, gap: 12, backgroundColor: '#1A2228' }}>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 12 }}>
+        <View style={compact ? { gap: 10 } : { flexDirection: 'row', alignItems: 'flex-start', gap: 12 }}>
           <View
             style={{
               width: 76,
               height: 76,
+              flexShrink: 0,
+              alignSelf: compact ? 'flex-end' : 'auto',
               borderRadius: 38,
               overflow: 'hidden',
               backgroundColor: '#0A100E',
               borderWidth: 2,
-              borderColor: tone.bg,
+              borderColor: isMe ? tone.bg : 'rgba(180,200,220,0.35)',
             }}
           >
             {hasAvatar ? (
@@ -210,9 +201,9 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
             )}
           </View>
 
-          <View style={{ flex: 1, gap: 4 }}>
+          <View style={{ flex: compact ? undefined : 1, width: compact ? '100%' : undefined, gap: 4 }}>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'flex-end' }}>
-              {post.levelVerified ? (
+              {isMe && post.levelVerified ? (
                 <View style={{ backgroundColor: '#1A5C3E', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 }}>
                   <Text style={{ color: '#E8FFF4', fontWeight: '800', fontSize: 11 }}>רמה מאומתת</Text>
                 </View>
@@ -223,18 +214,21 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
                 </View>
               ) : null}
             </View>
-            <Text style={{ color: '#F7F4EA', fontSize: 17, fontWeight: '800', textAlign: 'right' }}>
+            <Text style={{ color: '#F7F4EA', fontSize: 17, fontWeight: '800', textAlign: 'right', width: '100%' }}>
               {intentLabel(post.intent)} · {post.position}
             </Text>
-            <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', fontWeight: '600' }}>
-              {platformLabel(post.platform)} · {post.archetype}
+            <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', fontWeight: '600', width: '100%' }}>
+              {divisionLabel(post.division)} · {platformLabel(post.platform)} · {post.archetype}
             </Text>
-            <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right' }}>
+            <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', width: '100%' }}>
               EA ID: {post.eaId || '—'} · {post.gamertag || '—'}
             </Text>
-            <Text style={{ color: 'rgba(180,200,220,0.55)', fontSize: 12, textAlign: 'right' }}>
-              {followers} עוקבים · {following} עוקב · {name}
-            </Text>
+            <Pressable onPress={() => onOpenProfile(post.userId)}>
+              <Text style={{ color: 'rgba(180,200,220,0.55)', fontSize: 12, textAlign: 'right', width: '100%' }}>
+                {followers} עוקבים · {following} עוקב · {name}
+              </Text>
+              <Text style={{ color: '#E3B341', fontSize: 13, fontWeight: '800', textAlign: 'right', marginTop: 4 }}>לפרופיל המלא</Text>
+            </Pressable>
           </View>
         </View>
 

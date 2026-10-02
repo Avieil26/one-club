@@ -1,27 +1,35 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { DirectMessage, UserFollow } from '@/lib/types';
+import { normalizeSquad } from '@/lib/profileSquad';
+import type { DirectMessage, ProfileSquad, UserFollow } from '@/lib/types';
 
 const KEY = 'fc27-social-v1';
 
 export type SocialBundle = {
   follows: UserFollow[];
   messages: DirectMessage[];
+  squads: Record<string, ProfileSquad>;
 };
-
-const EMPTY: SocialBundle = { follows: [], messages: [] };
 
 export async function loadSocial(): Promise<SocialBundle> {
   try {
     const raw = await AsyncStorage.getItem(KEY);
-    if (!raw) return EMPTY;
+    if (!raw) return { follows: [], messages: [], squads: {} };
     const parsed = JSON.parse(raw) as SocialBundle;
+    const squads: Record<string, ProfileSquad> = {};
+    if (parsed.squads && typeof parsed.squads === 'object') {
+      for (const [userId, raw] of Object.entries(parsed.squads)) {
+        const squad = normalizeSquad(raw);
+        if (squad) squads[userId] = squad;
+      }
+    }
     return {
       follows: Array.isArray(parsed.follows) ? parsed.follows : [],
       messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+      squads,
     };
   } catch {
-    return EMPTY;
+    return { follows: [], messages: [], squads: {} };
   }
 }
 
@@ -56,6 +64,15 @@ export async function sendMessageLocal(fromUserId: string, toUserId: string, bod
     body: text,
     createdAt: new Date().toISOString(),
   });
+  await save(bundle);
+  return bundle;
+}
+
+export async function saveSquadLocal(userId: string, squad: ProfileSquad): Promise<SocialBundle> {
+  const clean = normalizeSquad(squad);
+  if (!clean) throw new Error('שימו לפחות שחקן אחד בסגל');
+  const bundle = await loadSocial();
+  bundle.squads[userId] = clean;
   await save(bundle);
   return bundle;
 }
