@@ -406,3 +406,4 @@ const styles = StyleSheet.create({
 function desktopFont(base: number) {
   return base;
 }
+
