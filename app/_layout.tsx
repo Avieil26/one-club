@@ -4,7 +4,6 @@ import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Updates from 'expo-updates';
 
 import { Arrival } from '@/components/Arrival';
 import { CookieNotice } from '@/components/CookieNotice';
@@ -36,24 +35,6 @@ export default function RootLayout() {
     Heebo: require('../assets/fonts/Heebo.ttf'),
     GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
   });
-
-  useEffect(() => {
-    if (__DEV__ || Platform.OS === 'web' || !Updates.isEnabled) return;
-    let cancelled = false;
-    void (async () => {
-      try {
-        const check = await Updates.checkForUpdateAsync();
-        if (!check.isAvailable || cancelled) return;
-        await Updates.fetchUpdateAsync();
-        if (!cancelled) await Updates.reloadAsync();
-      } catch {
-        // Keep the installed copy if the update server is unreachable.
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     SplashScreen.hideAsync();
