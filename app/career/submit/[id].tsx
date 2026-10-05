@@ -63,9 +63,7 @@ export default function SubmitChallengeScreen() {
         <CareerStripes theme={theme} />
         <Text style={[styles.kicker, { color: theme.accent }]}>{challenge.title}</Text>
         <Title>הגשה ל«{challenge.title}»</Title>
-        <Muted>
-          'ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.'
-        </Muted>
+        <Muted>ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.</Muted>
         {challenge.proofRequirements ? (
           <Muted>מה חייב להופיע בצילום: {challenge.proofRequirements}</Muted>
         ) : null}
