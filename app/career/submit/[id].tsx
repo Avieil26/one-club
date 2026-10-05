@@ -7,7 +7,6 @@ import { ImageRow, Muted, Screen, Title } from '@/components/ui';
 import { careerCream, careerFont, careerThemeFor } from '@/lib/careerCardTheme';
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
-import { TRUSTED_APPROVALS } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 
 export default function SubmitChallengeScreen() {
@@ -18,7 +17,6 @@ export default function SubmitChallengeScreen() {
   const [playerOrClubName, setPlayerOrClubName] = useState('');
   const [note, setNote] = useState('');
   const [imageUris, setImageUris] = useState<string[]>([]);
-  const trusted = (app.user?.approvedCount ?? 0) >= TRUSTED_APPROVALS;
   const challengeTitle = challenge?.title ?? 'האתגר';
 
   async function choose() {
@@ -39,10 +37,8 @@ export default function SubmitChallengeScreen() {
       }
       await app.submitCareer({ challengeId: id, playerOrClubName, note, imageUris });
       Alert.alert(
-        trusted ? 'פורסם' : 'נשלח לאישור',
-        trusted
-          ? `ההגשה ל«${challengeTitle}» עלתה לקהילה.`
-          : `ההגשה ל«${challengeTitle}» תופיע אחרי אישור.`,
+        'נשלח לאישור',
+        `ההגשה ל«${challengeTitle}» נשלחה לבדיקה. היא תופיע רק אחרי אישור מנהל.`,
       );
       router.replace(`/career/${id}`);
     } catch (error) {
@@ -68,9 +64,7 @@ export default function SubmitChallengeScreen() {
         <Text style={[styles.kicker, { color: theme.accent }]}>{challenge.title}</Text>
         <Title>הגשה ל«{challenge.title}»</Title>
         <Muted>
-          {trusted
-            ? 'אתם מאומתים, אז ההגשה תפורסם מיד תחת האתגר הזה.'
-            : 'ההגשה ממתינה לאישור ולא מופיעה בפיד לפני כן.'}
+          'ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.'
         </Muted>
         {challenge.proofRequirements ? (
           <Muted>מה חייב להופיע בצילום: {challenge.proofRequirements}</Muted>
