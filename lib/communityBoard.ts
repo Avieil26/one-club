@@ -1,9 +1,31 @@
 import type { CareerSubmission, FutPost, FutRating, GroundsPost, Profile, SbcSolution, Snapshot } from '@/lib/types';
 
-/** Cumulative XP required to stand on this level. Level 1 is 0. Level 50 is about 2,110. */
+/** Cumulative XP required to stand on each level. Level 1 is 0 and level 50 is 4,000. */
 export function xpToReach(level: number): number {
   if (level <= 1) return 0;
-  return Math.round(25 * (level - 1) ** 1.14);
+  const anchors = [
+    [1, 0],
+    [5, 100],
+    [10, 250],
+    [15, 500],
+    [20, 800],
+    [25, 1200],
+    [30, 1550],
+    [35, 2000],
+    [40, 2500],
+    [45, 3200],
+    [50, 4000],
+  ] as const;
+  const safe = Math.min(50, Math.max(1, Math.floor(level)));
+  for (let index = 1; index < anchors.length; index += 1) {
+    const [nextLevel, nextXp] = anchors[index];
+    if (safe <= nextLevel) {
+      const [prevLevel, prevXp] = anchors[index - 1];
+      const ratio = (safe - prevLevel) / (nextLevel - prevLevel);
+      return Math.round(prevXp + (nextXp - prevXp) * ratio);
+    }
+  }
+  return 4000;
 }
 
 export function levelForXp(xp: number): number {
