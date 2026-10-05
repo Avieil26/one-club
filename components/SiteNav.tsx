@@ -11,9 +11,9 @@ const QUIET = 'rgba(244,247,242,0.62)';
 
 const LINKS = [
   { href: '/' as const, label: 'בית' },
+  { href: '/champions' as const, label: 'FUT Champions' },
   { href: '/career' as const, label: 'קריירה' },
   { href: '/ultimate' as const, label: 'אולטימייט' },
-  { href: '/champions' as const, label: 'FUT Champions' },
   { href: '/grounds' as const, label: 'גראונדס' },
   { href: '/sbc' as const, label: 'SBC' },
   { href: '/games' as const, label: 'משחקונים' },
