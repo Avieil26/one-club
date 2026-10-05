@@ -96,6 +96,28 @@ export function SiteNav() {
     </View>
   );
 
+  const championsButton = (
+    <Pressable
+      accessibilityRole="button"
+      onPress={() => router.push('/champions')}
+      style={{
+        minHeight: 32,
+        paddingHorizontal: isMobile ? 12 : 11,
+        paddingVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: isMobile ? 16 : 9,
+        backgroundColor: 'rgba(224, 45, 55, 0.18)',
+        borderWidth: 1,
+        borderColor: 'rgba(240, 74, 82, 0.55)',
+      }}
+    >
+      <Text style={{ color: '#FF6670', fontWeight: '800', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>
+        FUT Champions
+      </Text>
+    </Pressable>
+  );
+
   const renderLinks = () =>
     LINKS.map((item) => {
       const on = isActive(pathname, item.href);
@@ -156,6 +178,7 @@ export function SiteNav() {
           }}
         >
           {logoNode}
+          {championsButton}
           {accountNode}
         </View>
 
@@ -198,6 +221,7 @@ export function SiteNav() {
       >
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
           {logoNode}
+          {championsButton}
           {renderLinks()}
         </View>
         {accountNode}
