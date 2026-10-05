@@ -268,6 +268,9 @@ export function PortraitCard({
   edition = 'auto',
   shell = false,
   glow = false,
+  photoOverride,
+  faceOverride,
+  heightOverride,
 }: {
   player: FcPlayer;
   width?: number;
@@ -277,6 +280,9 @@ export function PortraitCard({
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
   glow?: boolean;
+  photoOverride?: string;
+  faceOverride?: FaceStats;
+  heightOverride?: number;
 }) {
   const artId = player.baseId ?? player.id;
   const showDestined = !shell && (edition === 'auto' ? player.edition === 'destined' : edition === 'destined');
@@ -305,7 +311,18 @@ export function PortraitCard({
   if (player.icon) {
     return <IconPortraitCard player={player} width={width} variant={variant} shell={shell} />;
   }
-  return <StandardPortraitCard player={player} width={width} variant={variant} shell={shell} edition={edition} />;
+  return (
+    <StandardPortraitCard
+      player={player}
+      width={width}
+      variant={variant}
+      shell={shell}
+      edition={edition}
+      photoOverride={photoOverride}
+      faceOverride={faceOverride}
+      heightOverride={heightOverride}
+    />
+  );
 }
 
 /** Empty gold, silver, icon, or OTW card, using the same shape as the player cards. */
@@ -350,18 +367,24 @@ function StandardPortraitCard({
   variant,
   shell = false,
   edition = 'auto',
+  photoOverride,
+  faceOverride,
+  heightOverride,
 }: {
   player: FcPlayer;
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
   edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw';
+  photoOverride?: string;
+  faceOverride?: FaceStats;
+  heightOverride?: number;
 }) {
   const media = playerMedia(player.baseId ?? player.id);
   const shown = edition === 'auto' ? player.edition : edition;
   const totw = shown === 'totw' ? totwFor(player.baseId ?? player.id) : null;
   const special = shown === 'hero' || shown === 'totw';
-  const stats = shown === 'totw' ? (totw?.face ?? player.face) : shown === 'hero' ? player.face : media.face;
+  const stats = faceOverride ?? (shown === 'totw' ? (totw?.face ?? player.face) : shown === 'hero' ? player.face : media.face);
   const rating = shown === 'totw'
     ? (totw?.face.ovr ?? totw?.rating ?? player.rating)
     : shown === 'hero'
@@ -376,9 +399,9 @@ function StandardPortraitCard({
       : player.position;
   const tone: TierTone = shown === 'hero' ? heroChrome() : shown === 'totw' ? totwChrome() : tierChrome(rating);
   const [failed, setFailed] = useState(false);
-  const showPhoto = Boolean(media.photo) && !failed;
+  const showPhoto = Boolean(photoOverride ?? media.photo) && !failed;
   const pitch = variant === 'pitch';
-  const height = Math.round(width * (pitch ? 1.42 : PORTRAIT_RATIO));
+  const height = heightOverride ?? Math.round(width * (pitch ? 1.42 : PORTRAIT_RATIO));
   const pad = Math.max(3, Math.round(width * (pitch ? 0.028 : 0.032)));
   const photoH = Math.round(height * (pitch ? 0.58 : 0.52));
   const radius = width * 0.1;
@@ -474,7 +497,7 @@ function StandardPortraitCard({
             <View style={{ flex: 1, overflow: 'hidden' }}>
               {shell || !showPhoto ? null : (
                 <Image
-                  source={{ uri: media.photo }}
+                  source={{ uri: photoOverride ?? media.photo }}
                   onError={() => setFailed(true)}
                   resizeMode="cover"
                   style={photoImageStyle(media.photoFocus)}
