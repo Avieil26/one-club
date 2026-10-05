@@ -5,7 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { getSupabase } from '@/lib/supabase';
 
 /** Build an OAuth return URL that works in native builds and during Expo Go development. */
-function redirectUrl(): string {
+export function getAuthRedirectUrl(): string {
   if (Platform.OS === 'web') {
     if (typeof window !== 'undefined' && window.location?.origin) {
       return `${window.location.origin}/`;
@@ -60,7 +60,7 @@ async function sessionFromUrl(url: string): Promise<void> {
 
 export async function signInWithGoogleOAuth(): Promise<void> {
   const supabase = getSupabase();
-  const redirectTo = redirectUrl();
+  const redirectTo = getAuthRedirectUrl();
 
   if (Platform.OS === 'web') {
     const { error } = await supabase.auth.signInWithOAuth({
