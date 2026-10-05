@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
@@ -56,7 +56,7 @@ function Controller({ platform }: { platform: PlatformId }) {
   );
 }
 
-function Panel({ children, style }: { children: React.ReactNode; style?: object }) {
+function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
     <View style={[styles.panel, style]}>
       <LinearGradient colors={['rgba(26,9,12,.96)', 'rgba(5,9,14,.98)']} style={StyleSheet.absoluteFillObject} />
