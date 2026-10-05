@@ -16,7 +16,9 @@ function face(colored: boolean): ImageStyle {
 
 export default function WhoGameScreen() {
   const router = useRouter();
-  const [round, setRound] = useState<MarkRound>(() => makeMarkRound());
+  const [correctCount, setCorrectCount] = useState(0);
+  const [usedPrompts, setUsedPrompts] = useState<string[]>([]);
+  const [round, setRound] = useState<MarkRound>(() => makeMarkRound(0, []));
   const [lives, setLives] = useState(3);
   const [locked, setLocked] = useState<Record<string, 'hit' | 'miss'>>({});
   const [note, setNote] = useState<string | null>(null);
@@ -47,10 +49,14 @@ export default function WhoGameScreen() {
       }
       setGood(true);
       setNote('נכון');
+      const nextCorrectCount = correctCount + 1;
+      const nextUsedPrompts = [...usedPrompts, round.prompt];
+      setCorrectCount(nextCorrectCount);
+      setUsedPrompts(nextUsedPrompts);
       wait.current = setTimeout(() => {
         wait.current = null;
         lockedRef.current = {};
-        setRound(makeMarkRound(round.prompt));
+        setRound(makeMarkRound(nextCorrectCount, nextUsedPrompts));
         setLocked({});
         setNote(null);
         setGood(false);
@@ -73,7 +79,9 @@ export default function WhoGameScreen() {
     wait.current = null;
     lockedRef.current = {};
     livesRef.current = 3;
-    setRound(makeMarkRound());
+    setCorrectCount(0);
+    setUsedPrompts([]);
+    setRound(makeMarkRound(0, []));
     setLives(3);
     setLocked({});
     setNote(null);
