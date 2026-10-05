@@ -17,7 +17,7 @@ import { openChallenges } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
 const doors: {
-  href: '/career' | '/ultimate' | '/champions' | '/grounds' | '/sbc' | '/market';
+  href: '/career' | '/ultimate' | '/grounds' | '/sbc' | '/market';
   label: string;
   hint: string;
   accent: string;
@@ -40,14 +40,6 @@ const doors: {
     accent: '#E3B341',
     gradient: ['#0A0804', '#1C160A', '#3A2E12'],
     logo: require('@/assets/images/door-ultimate.png'),
-  },
-  {
-    href: '/champions',
-    label: 'FUT Champions',
-    hint: 'תחרות, פרסים וטקטיקות',
-    accent: '#F04A52',
-    gradient: ['#16070A', '#3A0B12', '#6A1019'],
-    icon: 'trophy',
   },
   {
     href: '/grounds',
