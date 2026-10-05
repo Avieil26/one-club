@@ -54,9 +54,10 @@ export function SiteNav() {
 
   const renderLinks = () => LINKS.map((item) => {
     const on = isActive(pathname, item.href);
+    const champions = item.href === '/champions';
     return (
-      <Pressable key={item.href} onPress={() => router.push(item.href)} style={{ minHeight: 32, paddingHorizontal: isMobile ? 12 : 10, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', borderRadius: isMobile ? 16 : 8, backgroundColor: isMobile && on ? 'rgba(227, 179, 65, 0.16)' : 'transparent', borderWidth: isMobile ? 1 : 0, borderColor: isMobile && on ? 'rgba(227, 179, 65, 0.45)' : 'transparent' }}>
-        <Text style={{ color: on ? TEXT : QUIET, fontWeight: on ? '800' : '600', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>{item.label}</Text>
+      <Pressable key={item.href} onPress={() => router.push(item.href)} style={{ minHeight: 32, paddingHorizontal: isMobile ? 12 : 11, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', borderRadius: isMobile ? 16 : 9, backgroundColor: champions ? 'rgba(224, 45, 55, 0.18)' : isMobile && on ? 'rgba(227, 179, 65, 0.16)' : 'transparent', borderWidth: champions || isMobile ? 1 : 0, borderColor: champions ? 'rgba(240, 74, 82, 0.55)' : isMobile && on ? 'rgba(227, 179, 65, 0.45)' : 'transparent' }}>
+        <Text style={{ color: champions ? '#FF6670' : on ? TEXT : QUIET, fontWeight: champions || on ? '800' : '600', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>{item.label}</Text>
         {!isMobile ? <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} /> : null}
       </Pressable>
     );
