@@ -443,7 +443,7 @@ function factRules(difficulty: number): MarkRule[] {
 
   if (difficulty >= 1) {
     rules.push(
-      factRule('מי זכה בפרס שחקן השנה של UEFA שלוש פעמים?', [
+      factRule('מי זכה בפרס UEFA Men's Player of the Year שלוש פעמים?', [
         'cristiano-ronaldo', 'cristiano', 'cr7', 'cristiano-ronaldo-7',
       ], 1, 1),
       factRule('מי נבחר לנבחרת השנה של FIFPRO תשע שנים ברציפות?', ['iniesta'], 1, 1),
@@ -459,7 +459,6 @@ function factRules(difficulty: number): MarkRule[] {
       factRule('מי מלך ההופעות בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
       factRule('מי מלך השערים בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
       factRule('מי השחקן היחיד שכבש בשלושה גמרי ליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
-      factRule('מי היה מלך שערי גביע העולם שלוש פעמים או יותר?', ['klose'], 1, 1),
       factRule('מי נבחר ל-FIFPRO World 11 גם ב-2024 וגם ב-2025?', [
         'bellingham', 'mbappe', 'vandijk', 'carvajal',
       ], 1, 3),
@@ -490,8 +489,7 @@ function factRules(difficulty: number): MarkRule[] {
   if (difficulty >= 4) {
     rules.push(
       factRule('מי זכה גם במונדיאל וגם בליגת האלופות?', [
-        'messi', 'cristiano-ronaldo', 'cristiano', 'cr7', 'modric', 'kroos',
-        'benzema', 'iniesta', 'casemiro', 'varane', 'ronaldinho',
+        'messi', 'modric', 'kroos', 'iniesta', 'varane', 'ronaldinho',
       ], 1, 4),
       factRule('מי נבחר ל-FIFPRO World 11 ב-2024?', [
         'ederson', 'carvajal', 'vandijk', 'rudiger', 'bellingham', 'debruyne',
