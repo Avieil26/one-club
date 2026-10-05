@@ -6,6 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ClubBadge } from '@/components/ClubBadge';
 import { NationFlag } from '@/components/NationFlag';
 import { SbcRewardPack } from '@/components/SbcRewardPack';
+import { PortraitCard } from '@/components/PortraitCard';
+import type { FcPlayer } from '@/lib/fcPlayers';
 import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
 import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
@@ -38,163 +40,49 @@ function compactRemaining(iso: string | null, now: number) {
   return `${Math.max(1, Math.floor(diff / 60_000))}m`;
 }
 
-type SbcPlayerCardData = {
-  rating: number;
-  position: string;
-  name: string;
-  photo: string;
-  stats: [number, number, number, number, number, number];
-};
-
-// Current FC27 player SBC rewards. The card is rendered into the exact same
-// 70x92 slot previously occupied by the pack artwork.
-const SBC_PLAYER_CARDS: Record<string, SbcPlayerCardData> = {
-  'sbc-potm-olise': {
-    rating: 91, position: 'RW', name: 'OLISE',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg/500px-Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg',
-    stats: [84, 83, 90, 92, 48, 70],
-  },
-  'sbc-potm-raphinha': {
-    rating: 89, position: 'ST', name: 'RAPHINHA',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg/500px-Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg',
-    stats: [92, 87, 86, 88, 55, 77],
-  },
-  'sbc-dfg-tarciane': {
-    rating: 84, position: 'CB', name: 'TARCIANE',
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dash%20preseason%202025%20-%2013.jpg',
-    stats: [80, 45, 74, 70, 84, 87],
-  },
-  'sbc-dfg-akliouche': {
-    rating: 85, position: 'CAM', name: 'AKLIOUCHE',
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maghnes%20Akliouche%20France%20v%20Senegal%2016%20June%202026-512.jpg',
-    stats: [84, 83, 86, 89, 55, 70],
-  },
-  'sbc-potm-gross': {
-    rating: 84, position: 'CDM', name: 'GROSS',
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pascal%20Gross%20Ecuador%20v%20Germany%2025%20June%202026-065.jpg',
-    stats: [76, 79, 88, 83, 77, 79],
-  },
-  'sbc-potm-malen': {
-    rating: 85, position: 'ST', name: 'MALEN',
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Netherlands%20v%20Tunisia%202026%20World%20Cup%20-%2055374906960.jpg',
-    stats: [87, 85, 75, 86, 39, 70],
-  },
-  'sbc-dfg-frattesi': {
-    rating: 84, position: 'CM', name: 'FRATTESI',
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Norway%20Italy%20-%20June%202025%20D%2048.jpg',
-    stats: [84, 81, 81, 84, 77, 78],
-  },
-};
-
-const SBC_STAT_LABELS = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
-
 const PLAYER_REWARD: Record<string, number> = {
   'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
   'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
 };
 
-function SbcPlayerCard({ data }: { data: SbcPlayerCardData }) {
-  return (
-    <View
-      style={{
-        width: 70,
-        height: 92,
-        borderRadius: 10,
-        overflow: 'hidden',
-        borderWidth: 1.2,
-        borderColor: '#D7B64C',
-        backgroundColor: '#081214',
-        shadowColor: '#000',
-        shadowOpacity: 0.42,
-        shadowRadius: 6,
-        shadowOffset: { width: 0, height: 3 },
-        elevation: 5,
-      }}
-    >
-      <LinearGradient
-        colors={['#0B2926', '#123F3B', '#0B1719', '#6E5314']}
-        locations={[0, 0.38, 0.72, 1]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-      />
-      <LinearGradient
-        colors={['rgba(255,255,255,0.28)', 'rgba(255,255,255,0)']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0.8 }}
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 22 }}
-      />
-      <View style={{ position: 'absolute', top: 4, left: 5, zIndex: 5 }}>
-        <Text style={{ color: '#FFF3CA', fontSize: 15, lineHeight: 15, fontWeight: '900' }}>{data.rating}</Text>
-        <Text style={{ color: '#FFF3CA', fontSize: 7.5, lineHeight: 8, fontWeight: '900', letterSpacing: 0.4 }}>{data.position}</Text>
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          top: 2,
-          right: 2,
-          width: 56,
-          height: 56,
-          borderTopRightRadius: 8,
-          borderBottomLeftRadius: 24,
-          overflow: 'hidden',
-          opacity: 0.98,
-        }}
-      >
-        <Image
-          source={{ uri: data.photo }}
-          resizeMode="cover"
-          accessibilityIgnoresInvertColors
-          style={{ width: 56, height: 56, backgroundColor: 'rgba(0,0,0,0.08)' }}
-        />
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          left: 4,
-          right: 4,
-          bottom: 3,
-          paddingTop: 4,
-          borderTopWidth: 1,
-          borderTopColor: 'rgba(255,241,188,0.42)',
-        }}
-      >
-        <Text
-          numberOfLines={1}
-          style={{
-            color: '#FFF9E7',
-            fontSize: 7.2,
-            lineHeight: 8,
-            fontWeight: '900',
-            textAlign: 'center',
-            letterSpacing: 0.45,
-          }}
-        >
-          {data.name}
-        </Text>
-        <View style={{ marginTop: 3, gap: 1.5 }}>
-          {[0, 1].map((row) => (
-            <View key={row} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              {[0, 1, 2].map((col) => {
-                const index = row * 3 + col;
-                return (
-                  <View key={index} style={{ width: 19.2, alignItems: 'center' }}>
-                    <Text style={{ color: 'rgba(255,249,231,0.7)', fontSize: 4.1, lineHeight: 5, fontWeight: '800' }}>
-                      {SBC_STAT_LABELS[index]}
-                    </Text>
-                    <Text style={{ color: '#FFF9E7', fontSize: 7.2, lineHeight: 7.5, fontWeight: '900' }}>
-                      {data.stats[index]}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          ))}
-        </View>
-      </View>
-    </View>
-  );
-}
+const SBC_PLAYER_CARDS: Record<string, { player: FcPlayer; photo: string }> = {
+  'sbc-potm-olise': {
+    player: { id: 'sbc-card-olise', name: 'אוליסה', en: 'Michael Olise', rating: 91, position: 'RW', nation: 'צרפת', league: 'Bundesliga', club: 'Bayern',
+      face: { ovr: 91, pac: 84, sho: 83, pas: 90, dri: 92, def: 48, phy: 70 } },
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg/500px-Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg',
+  },
+  'sbc-potm-raphinha': {
+    player: { id: 'sbc-card-raphinha', name: 'ראפיניה', en: 'Raphinha', rating: 89, position: 'ST', nation: 'ברזיל', league: 'LaLiga', club: 'Barcelona',
+      face: { ovr: 89, pac: 92, sho: 87, pas: 86, dri: 88, def: 55, phy: 77 } },
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg/500px-Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg',
+  },
+  'sbc-dfg-tarciane': {
+    player: { id: 'sbc-card-tarciane', name: 'טארסיאני', en: 'Tarciane', rating: 84, position: 'CB', nation: 'ברזיל', league: 'NWSL', club: 'Houston Dash',
+      face: { ovr: 84, pac: 80, sho: 45, pas: 74, dri: 70, def: 84, phy: 87 } },
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dash%20preseason%202025%20-%2013.jpg',
+  },
+  'sbc-dfg-akliouche': {
+    player: { id: 'sbc-card-akliouche', name: 'אקליוש', en: 'Maghnes Akliouche', rating: 85, position: 'CAM', nation: 'צרפת', league: 'Ligue 1', club: 'Monaco',
+      face: { ovr: 85, pac: 84, sho: 83, pas: 86, dri: 89, def: 55, phy: 70 } },
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maghnes%20Akliouche%20France%20v%20Senegal%2016%20June%202026-512.jpg',
+  },
+  'sbc-potm-gross': {
+    player: { id: 'sbc-card-gross', name: 'גרוס', en: 'Pascal Groß', rating: 84, position: 'CDM', nation: 'גרמניה', league: 'Premier League', club: 'Brighton',
+      face: { ovr: 84, pac: 76, sho: 79, pas: 88, dri: 83, def: 77, phy: 79 } },
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pascal%20Gross%20Ecuador%20v%20Germany%2025%20June%202026-065.jpg',
+  },
+  'sbc-potm-malen': {
+    player: { id: 'sbc-card-malen', name: 'מאלן', en: 'Donyell Malen', rating: 85, position: 'ST', nation: 'הולנד', league: 'Serie A', club: 'Roma',
+      face: { ovr: 85, pac: 87, sho: 85, pas: 75, dri: 86, def: 39, phy: 70 } },
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Netherlands%20v%20Tunisia%202026%20World%20Cup%20-%2055374906960.jpg',
+  },
+  'sbc-dfg-frattesi': {
+    player: { id: 'sbc-card-frattesi', name: 'פרטסי', en: 'Davide Frattesi', rating: 84, position: 'CM', nation: 'איטליה', league: 'Serie A', club: 'Inter',
+      face: { ovr: 84, pac: 84, sho: 81, pas: 81, dri: 84, def: 77, phy: 78 } },
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Norway%20Italy%20-%20June%202025%20D%2048.jpg',
+  },
+};
+
 function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
   if (nation) return <NationFlag nation={nation} size={size} />;
   if (club) return <ClubBadge club={club} size={size} />;
@@ -257,7 +145,14 @@ function SbcTile({
           {legacyPlayerCard ? (
             <Image source={legacyPlayerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
           ) : playerCard ? (
-            <SbcPlayerCard data={playerCard} />
+            <PortraitCard
+              player={playerCard.player}
+              width={70}
+              heightOverride={92}
+              edition="base"
+              photoOverride={playerCard.photo}
+              faceOverride={playerCard.player.face}
+            />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
           )}
