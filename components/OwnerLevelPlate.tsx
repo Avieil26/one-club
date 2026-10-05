@@ -119,6 +119,21 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
                     <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
                       • Squad שקיבל 3 דירוגים: <XpFigure value="10 XP" />
                     </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • העלאת Pack מאושרת: <XpFigure value="5 XP" /> · עד 5 פעולות בשבוע
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • פרסום מודעה מאושרת ב־Grounds: <XpFigure value="5 XP" /> · עד 5 בשבוע
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • דירוג Squad של שחקן אחר: <XpFigure value="2 XP" /> · עד 5 בשבוע
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • סימון פתרון SBC כ«עבד לי»: <XpFigure value="2 XP" /> לכל פתרון
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • תגובה שעוברת לפרסום: <XpFigure value="1 XP" /> · עד 5 בשבוע
+                    </Text>
                     <Text style={{ color: 'rgba(247,244,234,0.55)', fontFamily: careerFont, fontSize: 12, lineHeight: 19, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
                       משחקונים לא נותנים XP — הם רק לכיף.
                     </Text>
