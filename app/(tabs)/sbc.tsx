@@ -148,10 +148,10 @@ function SbcTile({
             <PortraitCard
               player={playerCard.player}
               width={70}
-              heightOverride={92}
               edition="base"
               photoOverride={playerCard.photo}
               faceOverride={playerCard.player.face}
+              compactStats
             />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
