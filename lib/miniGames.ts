@@ -443,7 +443,7 @@ function factRules(difficulty: number): MarkRule[] {
 
   if (difficulty >= 1) {
     rules.push(
-      factRule('מי זכה בפרס UEFA Men's Player of the Year שלוש פעמים?', [
+      factRule('מי זכה בפרס שחקן השנה לגברים של UEFA שלוש פעמים?', [
         'cristiano-ronaldo', 'cristiano', 'cr7', 'cristiano-ronaldo-7',
       ], 1, 1),
       factRule('מי נבחר לנבחרת השנה של FIFPRO תשע שנים ברציפות?', ['iniesta'], 1, 1),
