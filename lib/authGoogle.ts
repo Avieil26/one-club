@@ -1,11 +1,10 @@
 import { Platform } from 'react-native';
+import * as Linking from 'expo-linking';
+import * as WebBrowser from 'expo-web-browser';
 
-import { requestInAppGoogleAuth } from '@/components/GoogleAuthSheet';
 import { getSupabase } from '@/lib/supabase';
 
-/** App-only return. The phone must never land on the website. */
-const APP_RETURN = 'fc27israel://auth/callback';
-
+/** Build an OAuth return URL that works in native builds and during Expo Go development. */
 function redirectUrl(): string {
   if (Platform.OS === 'web') {
     if (typeof window !== 'undefined' && window.location?.origin) {
@@ -13,7 +12,8 @@ function redirectUrl(): string {
     }
     return 'https://fc27-israel.vercel.app/';
   }
-  return APP_RETURN;
+
+  return Linking.createURL('auth/callback');
 }
 
 function pickParams(url: string): Record<string, string> {
@@ -81,13 +81,13 @@ export async function signInWithGoogleOAuth(): Promise<void> {
   if (error) throw error;
   if (!data.url) throw new Error('לא התקבלה כתובת התחברות מגוגל');
 
-  let returned = '';
-  try {
-    returned = await requestInAppGoogleAuth(data.url);
-  } catch (error) {
-    if (error instanceof Error && error.message) throw error;
+  const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo, {
+    showInRecents: true,
+  });
+
+  if (result.type !== 'success' || !result.url) {
     throw new Error('התחברות עם גוגל בוטלה');
   }
-  if (!returned) throw new Error('התחברות עם גוגל בוטלה');
-  await sessionFromUrl(returned);
+
+  await sessionFromUrl(result.url);
 }
