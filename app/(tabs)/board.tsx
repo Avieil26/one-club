@@ -19,7 +19,7 @@ export default function BoardScreen() {
         grounds: app.grounds,
         comments: app.comments,
       }),
-    [app.user, app.profiles, app.submissions, app.solutions, app.futPosts, app.ratings, app.grounds],
+    [app.user, app.profiles, app.submissions, app.solutions, app.futPosts, app.ratings, app.grounds, app.comments],
   );
 
   return (
