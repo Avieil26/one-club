@@ -231,6 +231,7 @@ function rows(
   score: (profile: Profile) => number,
   xp: (profile: Profile) => number,
   youId: string | null,
+  includeZero = false,
 ): BoardRow[] {
   return profiles
     .map((profile) => {
@@ -246,7 +247,7 @@ function rows(
         you: profile.id === youId,
       };
     })
-    .filter((row) => row.value > 0)
+    .filter((row) => includeZero || row.value > 0)
     .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name, 'he'))
     .slice(0, 20);
 }
@@ -258,7 +259,7 @@ export function communityBoards(
   const youId = user?.id ?? null;
   const points = (profile: Profile) => xpOf(profile.id, submissions, solutions, futPosts, ratings, snap.comments, snap.grounds);
   return {
-    xp: rows(profiles, grounds, points, points, youId),
+    xp: rows(profiles, grounds, points, points, youId, true),
     solvers: rows(profiles, grounds, (profile) => solvedOf(profile.id, submissions, solutions), points, youId),
     supporters: rows(profiles, grounds, (profile) => supportOf(profile.id, solutions, futPosts, ratings), points, youId),
   };
