@@ -17,6 +17,7 @@ export default function BoardScreen() {
         futPosts: app.futPosts,
         ratings: app.ratings,
         grounds: app.grounds,
+        comments: app.comments,
       }),
     [app.user, app.profiles, app.submissions, app.solutions, app.futPosts, app.ratings, app.grounds],
   );
