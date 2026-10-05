@@ -205,16 +205,24 @@ type MarkRule = {
   prompt: string;
   pool: GamePlayer[];
   test: (player: GamePlayer) => boolean;
+  minYes?: number;
+  maxYes?: number;
 };
 
 function ruleRound(rule: MarkRule): MarkRound | null {
   const yes = rule.pool.filter(rule.test);
   const no = rule.pool.filter((player) => !rule.test(player));
-  if (yes.length < 3 || no.length < 5) return null;
-  const takeYes = yes.length >= 4 && Math.random() < 0.45 ? 4 : 3;
+  const minYes = rule.minYes ?? 3;
+  const maxYes = rule.maxYes ?? 4;
+  if (yes.length < minYes || no.length < 9 - Math.min(maxYes, yes.length)) return null;
+
+  const takeYes =
+    yes.length <= maxYes
+      ? yes.length
+      : Math.min(maxYes, Math.max(minYes, Math.random() < 0.45 ? 4 : 3));
   const hits = shuffle(yes).slice(0, takeYes);
   const misses = shuffle(no).slice(0, 9 - hits.length);
-  if (hits.length < 3 || misses.length < 5) return null;
+  if (hits.length < minYes || misses.length < 5) return null;
   return {
     prompt: rule.prompt,
     players: shuffle([
@@ -383,6 +391,121 @@ function iconRules(difficulty: number): MarkRule[] {
   return rules;
 }
 
+function quizMen(): GamePlayer[] {
+  return roster
+    .filter((entry) => isMan(entry) && entry.rating >= 80)
+    .map(toPlayer)
+    .filter((player): player is GamePlayer => Boolean(player));
+}
+
+function mergedWhoPool(): GamePlayer[] {
+  const seen = new Set<string>();
+  const result: GamePlayer[] = [];
+  for (const player of [...quizMen(), ...iconStars()]) {
+    if (seen.has(player.id)) continue;
+    seen.add(player.id);
+    result.push(player);
+  }
+  return result;
+}
+
+function resolveIds(candidates: readonly string[]): GamePlayer[] {
+  const seen = new Set<string>();
+  const result: GamePlayer[] = [];
+  for (const id of candidates) {
+    const player = playerById(id);
+    if (!player || seen.has(player.id)) continue;
+    seen.add(player.id);
+    result.push(player);
+  }
+  return result;
+}
+
+function factRule(
+  prompt: string,
+  candidates: readonly string[],
+  minYes = 1,
+  maxYes = 4,
+): MarkRule {
+  const answers = resolveIds(candidates);
+  const answerIds = new Set(answers.map((player) => player.id));
+  return {
+    prompt,
+    pool: mergedWhoPool(),
+    test: (player) => answerIds.has(player.id),
+    minYes,
+    maxYes,
+  };
+}
+
+function factRules(difficulty: number): MarkRule[] {
+  const rules: MarkRule[] = [];
+
+  if (difficulty >= 1) {
+    rules.push(
+      factRule('מי זכה בפרס שחקן השנה של UEFA שלוש פעמים?', [
+        'cristiano-ronaldo', 'cristiano', 'cr7', 'cristiano-ronaldo-7',
+      ], 1, 1),
+      factRule('מי נבחר לנבחרת השנה של FIFPRO תשע שנים ברציפות?', ['iniesta'], 1, 1),
+      factRule('מי זכה בליגת האלופות עם יותר ממועדון אחד?', [
+        'cristiano-ronaldo', 'cristiano', 'cr7', 'clarence-seedorf',
+      ], 1, 3),
+      factRule('מי זכה ב-6 תארי ליגת האלופות?', ['carvajal', 'luka-modric', 'modric'], 1, 2),
+    );
+  }
+
+  if (difficulty >= 2) {
+    rules.push(
+      factRule('מי מלך ההופעות בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
+      factRule('מי מלך השערים בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
+      factRule('מי השחקן היחיד שכבש בשלושה גמרי ליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
+      factRule('מי היה מלך שערי גביע העולם שלוש פעמים או יותר?', ['klose'], 1, 1),
+      factRule('מי נבחר ל-FIFPRO World 11 גם ב-2024 וגם ב-2025?', [
+        'bellingham', 'mbappe', 'vandijk', 'carvajal',
+      ], 1, 3),
+      factRule('מי נבחר ל-FIFPRO World 11 ב-2025?', [
+        'donnarumma', 'vandijk', 'hakimi', 'nuno', 'bellingham', 'palmer',
+        'pedri', 'vitinha', 'dembele', 'mbappe', 'yamal',
+      ], 1, 4),
+    );
+  }
+
+  if (difficulty >= 3) {
+    rules.push(
+      factRule('מי מחזיק בשיא ההופעות במונדיאל?', ['messi'], 1, 1),
+      factRule('מי כבש בשש מהדורות שונות של גביע העולם?', [
+        'cristiano-ronaldo', 'cristiano', 'cr7',
+      ], 1, 1),
+      factRule('מי כבש ב-9 הופעות רצופות בגביע העולם?', ['messi'], 1, 1),
+      factRule('מי נבחר ל-FIFPRO World 11 תשע פעמים ברצף?', ['iniesta'], 1, 1),
+      factRule('מי זכה בליגת האלופות 5 פעמים?', [
+        'cristiano-ronaldo', 'cristiano', 'cr7', 'benzema', 'kroos',
+      ], 1, 3),
+      factRule('מי שיחק ב-5 טורנירי מונדיאל?', [
+        'messi', 'cristiano-ronaldo', 'cristiano', 'cr7', 'modric', 'neuer',
+      ], 1, 4),
+    );
+  }
+
+  if (difficulty >= 4) {
+    rules.push(
+      factRule('מי זכה גם במונדיאל וגם בליגת האלופות?', [
+        'messi', 'cristiano-ronaldo', 'cristiano', 'cr7', 'modric', 'kroos',
+        'benzema', 'iniesta', 'casemiro', 'varane', 'ronaldinho',
+      ], 1, 4),
+      factRule('מי נבחר ל-FIFPRO World 11 ב-2024?', [
+        'ederson', 'carvajal', 'vandijk', 'rudiger', 'bellingham', 'debruyne',
+        'kroos', 'rodri', 'haaland', 'mbappe', 'vinicius',
+      ], 1, 4),
+      factRule('מי הגיע לשישה גמרי ליגת האלופות?', [
+        'cristiano-ronaldo', 'cristiano', 'cr7', 'carvajal', 'kroos', 'modric',
+      ], 1, 4),
+    );
+  }
+
+  return rules;
+}
+
 function historyRound(except?: string): MarkRound | null {
   const options: { prompt: string; yes: readonly string[]; no: readonly string[] }[] = [
     { prompt: 'סמנו מי שזכה בליגת האלופות', yes: UCL_YES, no: UCL_NO },
@@ -408,7 +531,7 @@ export function makeMarkRound(correctCount = 0, usedPrompts: readonly string[] =
   const difficulty = difficultyForCorrect(correctCount);
   const used = new Set(usedPrompts);
 
-  for (const rule of shuffle([...regularRules(difficulty), ...iconRules(difficulty)])) {
+  for (const rule of shuffle([...factRules(difficulty), ...regularRules(difficulty), ...iconRules(difficulty)])) {
     if (used.has(rule.prompt)) continue;
     const made = ruleRound(rule);
     if (made) return made;
@@ -421,7 +544,7 @@ export function makeMarkRound(correctCount = 0, usedPrompts: readonly string[] =
     }
   }
 
-  for (const rule of shuffle([...regularRules(0), ...regularRules(1), ...regularRules(2), ...iconRules(2)])) {
+  for (const rule of shuffle([...factRules(2), ...regularRules(0), ...regularRules(1), ...regularRules(2), ...iconRules(2)])) {
     if (used.has(rule.prompt)) continue;
     const made = ruleRound(rule);
     if (made) return made;
