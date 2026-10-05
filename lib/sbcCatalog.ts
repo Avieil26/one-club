@@ -2,14 +2,7 @@ import { C, L, N, PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { isOpen } from '@/lib/selectors';
 import type { SbcChallenge } from '@/lib/types';
 
-export const RETIRED_SBC_IDS = new Set([
-  'sbc-upgrade',
-  'sbc-puzzle',
-  'sbc-veiga',
-  'sbc-nusa',
-  'sbc-dfg-1',
-  'sbc-intro-espinoza',
-]);
+export const RETIRED_SBC_IDS = new Set(['sbc-upgrade', 'sbc-puzzle']);
 
 /** Weekly MM set from 17 Sep 2026 — expires 24 Sep 18:00 UTC per EA / FUTBIN. */
 const MM_ENDS = '2026-09-24T18:00:00.000Z';
