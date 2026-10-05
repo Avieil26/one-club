@@ -1,5 +1,6 @@
 import rosterJson from '@/assets/data/players.json';
-import { C, N } from '@/lib/fcPlayers';
+import { C, N, type FcPlayer } from '@/lib/fcPlayers';
+import { ICON_PLAYERS } from '@/lib/iconPlayers';
 import { playerCardMeta } from '@/lib/playerMeta';
 import { playerMedia } from '@/lib/playerMedia';
 import type { RosterEntry } from '@/lib/playerDb';
@@ -15,6 +16,7 @@ export type GamePlayer = {
   rating: number;
   photo: string;
   foot: 'L' | 'R' | null;
+  icon?: boolean;
 };
 
 export type GridPuzzle = {
@@ -69,6 +71,7 @@ const RONALDO_NO = [
 ];
 
 let starsCache: GamePlayer[] | null = null;
+let iconsCache: GamePlayer[] | null = null;
 const resolved = new Map<string, GamePlayer | null>();
 
 function shuffle<T>(items: readonly T[]): T[] {
@@ -100,6 +103,25 @@ function toPlayer(entry: RosterEntry): GamePlayer | null {
     rating: entry.rating,
     photo: media.photo,
     foot: playerCardMeta(entry.id)?.foot ?? null,
+    icon: false,
+  };
+}
+
+function iconToPlayer(entry: FcPlayer): GamePlayer | null {
+  const media = playerMedia(entry.id);
+  if (!media.photo) return null;
+  return {
+    id: entry.id,
+    name: entry.name,
+    en: media.en || entry.en || entry.name,
+    club: entry.club,
+    nation: entry.nation,
+    league: entry.league,
+    position: entry.position,
+    rating: entry.rating,
+    photo: media.photo,
+    foot: playerCardMeta(entry.id)?.foot ?? null,
+    icon: true,
   };
 }
 
@@ -113,10 +135,19 @@ export function starMen(): GamePlayer[] {
   return starsCache;
 }
 
+function iconStars(): GamePlayer[] {
+  if (iconsCache) return iconsCache;
+  iconsCache = ICON_PLAYERS
+    .filter((player) => player.rating >= 80)
+    .map(iconToPlayer)
+    .filter((player): player is GamePlayer => Boolean(player));
+  return iconsCache;
+}
+
 function playerById(id: string): GamePlayer | null {
   if (resolved.has(id)) return resolved.get(id) ?? null;
   const entry = roster.find((item) => item.id === id);
-  const player = entry && isMan(entry) ? toPlayer(entry) : null;
+  const player = entry && isMan(entry) ? toPlayer(entry) : iconStars().find((item) => item.id === id) ?? null;
   resolved.set(id, player);
   return player;
 }
@@ -170,60 +201,241 @@ function careerRound(except?: string): MarkRound | null {
   return { prompt: pick.prompt, players: pick.players };
 }
 
-function attributeRound(except?: string): MarkRound | null {
-  const stars = starMen().filter((player) => player.rating >= 84);
-  const rules: { prompt: string; test: (player: GamePlayer) => boolean }[] = [];
+type MarkRule = {
+  prompt: string;
+  pool: GamePlayer[];
+  test: (player: GamePlayer) => boolean;
+};
 
-  for (const club of new Set(stars.map((player) => player.club))) {
-    rules.push({ prompt: `סמנו מי שמשחק ב${club}`, test: (player) => player.club === club });
-  }
-  for (const nation of new Set(stars.map((player) => player.nation))) {
-    rules.push({ prompt: `סמנו מי שבנבחרת ${nation}`, test: (player) => player.nation === nation });
-  }
-  for (const league of new Set(stars.map((player) => player.league))) {
-    rules.push({ prompt: `סמנו מי שמשחק ב${league}`, test: (player) => player.league === league });
-  }
-  rules.push(
-    { prompt: 'סמנו את החלוצים', test: (player) => ATTACK.has(player.position) },
-    { prompt: 'סמנו את הקיצוניים', test: (player) => WIDE.has(player.position) },
-    { prompt: 'סמנו את הקשרים', test: (player) => MID.has(player.position) },
-    { prompt: 'סמנו את שחקני ההגנה', test: (player) => DEF.has(player.position) },
-    { prompt: 'סמנו מי שרגלו החזקה שמאל', test: (player) => player.foot === 'L' },
-    { prompt: 'סמנו מי שמדורג 88 ומעלה', test: (player) => player.rating >= 88 },
-  );
-
-  for (const rule of shuffle(rules)) {
-    if (rule.prompt === except) continue;
-    const yes = stars.filter(rule.test);
-    const no = stars.filter((player) => !rule.test(player));
-    if (yes.length < 3 || no.length < 5) continue;
-    const take = yes.length >= 4 && Math.random() < 0.5 ? 4 : 3;
-    const hits = shuffle(yes).slice(0, take);
-    const misses = shuffle(no).slice(0, 9 - hits.length);
-    return {
-      prompt: rule.prompt,
-      players: shuffle([
-        ...hits.map((player) => ({ ...player, hit: true })),
-        ...misses.map((player) => ({ ...player, hit: false })),
-      ]),
-    };
-  }
-  return null;
-}
-
-export function makeMarkRound(except?: string): MarkRound {
-  const career = Math.random() < 0.45 ? careerRound(except) : null;
-  const made = career ?? attributeRound(except) ?? careerRound() ?? attributeRound();
-  if (made && made.players.length === 9) return made;
-  const stars = shuffle(starMen().filter((player) => player.rating >= 84));
-  const hits = stars.filter((player) => player.rating >= 88).slice(0, 3);
-  const misses = stars.filter((player) => player.rating < 88).slice(0, 6);
+function ruleRound(rule: MarkRule): MarkRound | null {
+  const yes = rule.pool.filter(rule.test);
+  const no = rule.pool.filter((player) => !rule.test(player));
+  if (yes.length < 3 || no.length < 5) return null;
+  const takeYes = yes.length >= 4 && Math.random() < 0.45 ? 4 : 3;
+  const hits = shuffle(yes).slice(0, takeYes);
+  const misses = shuffle(no).slice(0, 9 - hits.length);
+  if (hits.length < 3 || misses.length < 5) return null;
   return {
-    prompt: 'סמנו מי שמדורג 88 ומעלה',
+    prompt: rule.prompt,
     players: shuffle([
       ...hits.map((player) => ({ ...player, hit: true })),
       ...misses.map((player) => ({ ...player, hit: false })),
     ]),
+  };
+}
+
+function regularRules(difficulty: number): MarkRule[] {
+  const stars = starMen().filter((player) => player.rating >= 84);
+  const rules: MarkRule[] = [];
+  const clubs = [...new Set(stars.map((player) => player.club))];
+  const nations = [...new Set(stars.map((player) => player.nation))];
+  const leagues = [...new Set(stars.map((player) => player.league))];
+  const positions = [...new Set(stars.map((player) => player.position))];
+  const groups: [string, (player: GamePlayer) => boolean][] = [
+    ['החלוצים', (player) => ATTACK.has(player.position)],
+    ['הקיצוניים', (player) => WIDE.has(player.position)],
+    ['הקשרים', (player) => MID.has(player.position)],
+    ['שחקני ההגנה', (player) => DEF.has(player.position)],
+  ];
+
+  if (difficulty === 0) {
+    for (const club of clubs) rules.push({ prompt: `סמנו מי שמשחק ב${club}`, pool: stars, test: (player) => player.club === club });
+    for (const nation of nations) rules.push({ prompt: `סמנו מי שבנבחרת ${nation}`, pool: stars, test: (player) => player.nation === nation });
+    for (const league of leagues) rules.push({ prompt: `סמנו מי שמשחק ב${league}`, pool: stars, test: (player) => player.league === league });
+    for (const [label, test] of groups) rules.push({ prompt: `סמנו את ${label}`, pool: stars, test });
+    for (const position of positions) rules.push({ prompt: `סמנו את שחקני ה-${position}`, pool: stars, test: (player) => player.position === position });
+    rules.push(
+      { prompt: 'סמנו מי שרגלו החזקה שמאל', pool: stars, test: (player) => player.foot === 'L' },
+      { prompt: 'סמנו מי שמדורג 88 ומעלה', pool: stars, test: (player) => player.rating >= 88 },
+    );
+  }
+
+  if (difficulty >= 1) {
+    for (const rating of [86, 88, 90, 92]) {
+      rules.push({ prompt: `סמנו מי שמדורג ${rating} ומעלה`, pool: stars, test: (player) => player.rating >= rating });
+    }
+    for (const club of clubs) {
+      rules.push(
+        { prompt: `סמנו מי שמשחק ב${club} ומדורג 88+`, pool: stars, test: (player) => player.club === club && player.rating >= 88 },
+        { prompt: `סמנו מי שמשחק ב${club} ומדורג 90+`, pool: stars, test: (player) => player.club === club && player.rating >= 90 },
+      );
+    }
+    for (const nation of nations) {
+      rules.push(
+        { prompt: `סמנו מי שבנבחרת ${nation} ומדורג 88+`, pool: stars, test: (player) => player.nation === nation && player.rating >= 88 },
+        { prompt: `סמנו מי שבנבחרת ${nation} ומדורג 90+`, pool: stars, test: (player) => player.nation === nation && player.rating >= 90 },
+      );
+    }
+    for (const league of leagues) {
+      rules.push(
+        { prompt: `סמנו מי שמשחק ב${league} ומדורג 88+`, pool: stars, test: (player) => player.league === league && player.rating >= 88 },
+        { prompt: `סמנו מי שמשחק ב${league} ומדורג 90+`, pool: stars, test: (player) => player.league === league && player.rating >= 90 },
+      );
+    }
+  }
+
+  if (difficulty >= 2) {
+    for (const club of clubs) {
+      for (const [label, test] of groups) {
+        rules.push({
+          prompt: `סמנו מי שמשחק ב${club} והוא ${label}`,
+          pool: stars,
+          test: (player) => player.club === club && test(player),
+        });
+      }
+      rules.push({
+        prompt: `סמנו מי שמשחק ב${club} ורגלו החזקה שמאל`,
+        pool: stars,
+        test: (player) => player.club === club && player.foot === 'L',
+      });
+    }
+
+    for (const nation of nations) {
+      for (const [label, test] of groups) {
+        rules.push({
+          prompt: `סמנו מי שבנבחרת ${nation} והוא ${label}`,
+          pool: stars,
+          test: (player) => player.nation === nation && test(player),
+        });
+      }
+    }
+
+    for (const league of leagues) {
+      for (const [label, test] of groups) {
+        rules.push({
+          prompt: `סמנו מי שמשחק ב${league} והוא ${label}`,
+          pool: stars,
+          test: (player) => player.league === league && test(player),
+        });
+      }
+    }
+
+    for (const rating of [86, 88, 90]) {
+      for (const [label, test] of groups) {
+        rules.push({
+          prompt: `סמנו את ${label} שמדורגים ${rating}+`,
+          pool: stars,
+          test: (player) => player.rating >= rating && test(player),
+        });
+      }
+    }
+  }
+
+  return rules;
+}
+
+function iconRules(difficulty: number): MarkRule[] {
+  const icons = iconStars();
+  const rules: MarkRule[] = [];
+  const nations = [...new Set(icons.map((player) => player.nation))];
+  const positions = [...new Set(icons.map((player) => player.position))];
+
+  if (difficulty >= 2) {
+    rules.push({
+      prompt: 'סמנו את האייקונים',
+      pool: [...starMen().filter((player) => player.rating >= 84), ...icons],
+      test: (player) => Boolean(player.icon),
+    });
+    for (const nation of nations) {
+      rules.push({ prompt: `סמנו את האייקונים מ${nation}`, pool: icons, test: (player) => player.nation === nation });
+    }
+    for (const position of positions) {
+      rules.push({ prompt: `סמנו את האייקונים בעמדת ${position}`, pool: icons, test: (player) => player.position === position });
+    }
+    for (const rating of [86, 88, 90, 92]) {
+      rules.push({ prompt: `סמנו אייקונים בדירוג ${rating}+`, pool: icons, test: (player) => player.rating >= rating });
+    }
+  }
+
+  if (difficulty >= 3) {
+    for (const nation of nations) {
+      for (const rating of [88, 90, 92]) {
+        rules.push({
+          prompt: `סמנו אייקונים מ${nation} בדירוג ${rating}+`,
+          pool: icons,
+          test: (player) => player.nation === nation && player.rating >= rating,
+        });
+      }
+    }
+    for (const position of positions) {
+      for (const rating of [88, 90]) {
+        rules.push({
+          prompt: `סמנו אייקונים בעמדת ${position} בדירוג ${rating}+`,
+          pool: icons,
+          test: (player) => player.position === position && player.rating >= rating,
+        });
+      }
+    }
+  }
+
+  if (difficulty >= 4) {
+    for (const nation of nations) {
+      for (const position of positions) {
+        rules.push({
+          prompt: `סמנו אייקונים מ${nation} בעמדת ${position}`,
+          pool: icons,
+          test: (player) => player.nation === nation && player.position === position,
+        });
+      }
+    }
+  }
+
+  return rules;
+}
+
+function historyRound(except?: string): MarkRound | null {
+  const options: { prompt: string; yes: readonly string[]; no: readonly string[] }[] = [
+    { prompt: 'סמנו מי שזכה בליגת האלופות', yes: UCL_YES, no: UCL_NO },
+    { prompt: 'סמנו מי ששיחק עם מסי', yes: MESSI_YES, no: MESSI_NO },
+    { prompt: 'סמנו מי ששיחק עם רונאלדו', yes: RONALDO_YES, no: RONALDO_NO },
+    { prompt: 'סמנו מי שזכה ביורו 2024', yes: EURO_YES, no: outsiders('ספרד', new Set(EURO_YES)) },
+    { prompt: 'סמנו מי שזכה במונדיאל 2022', yes: WORLD_YES, no: outsiders('ארגנטינה', new Set(WORLD_YES)) },
+  ];
+  const ready = shuffle(options.filter((option) => option.prompt !== except));
+  const pick = ready[0];
+  return pick ? facesFrom(pick.yes, pick.no, 4) : null;
+}
+
+function difficultyForCorrect(correctCount: number): number {
+  if (correctCount < 3) return 0;
+  if (correctCount < 6) return 1;
+  if (correctCount < 10) return 2;
+  if (correctCount < 15) return 3;
+  return 4;
+}
+
+export function makeMarkRound(correctCount = 0, usedPrompts: readonly string[] = []): MarkRound {
+  const difficulty = difficultyForCorrect(correctCount);
+  const used = new Set(usedPrompts);
+
+  for (const rule of shuffle([...regularRules(difficulty), ...iconRules(difficulty)])) {
+    if (used.has(rule.prompt)) continue;
+    const made = ruleRound(rule);
+    if (made) return made;
+  }
+
+  if (difficulty >= 3) {
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      const made = historyRound();
+      if (made && !used.has(made.prompt)) return made;
+    }
+  }
+
+  for (const rule of shuffle([...regularRules(0), ...regularRules(1), ...regularRules(2), ...iconRules(2)])) {
+    if (used.has(rule.prompt)) continue;
+    const made = ruleRound(rule);
+    if (made) return made;
+  }
+
+  const last = historyRound();
+  if (last) return last;
+  return {
+    prompt: 'סמנו מי שמדורג 88 ומעלה',
+    players: ruleRound({
+      prompt: 'fallback',
+      pool: starMen().filter((player) => player.rating >= 84),
+      test: (player) => player.rating >= 88,
+    })?.players ?? [],
   };
 }
 
