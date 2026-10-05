@@ -11,7 +11,6 @@ const QUIET = 'rgba(244,247,242,0.62)';
 
 const LINKS = [
   { href: '/' as const, label: 'בית' },
-  { href: '/champions' as const, label: 'FUT Champions' },
   { href: '/career' as const, label: 'קריירה' },
   { href: '/ultimate' as const, label: 'אולטימייט' },
   { href: '/grounds' as const, label: 'גראונדס' },
@@ -52,12 +51,33 @@ export function SiteNav() {
 
   const accountNode = <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>{progress ? <LevelChip progress={progress} /> : null}{profileNode}</View>;
 
+  const championsButton = (
+    <Pressable
+      accessibilityRole="button"
+      onPress={() => router.push('/champions')}
+      style={{
+        minHeight: 32,
+        paddingHorizontal: isMobile ? 12 : 11,
+        paddingVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: isMobile ? 16 : 9,
+        backgroundColor: 'rgba(224, 45, 55, 0.18)',
+        borderWidth: 1,
+        borderColor: 'rgba(240, 74, 82, 0.55)',
+      }}
+    >
+      <Text style={{ color: '#FF6670', fontWeight: '800', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>
+        FUT Champions
+      </Text>
+    </Pressable>
+  );
+
   const renderLinks = () => LINKS.map((item) => {
     const on = isActive(pathname, item.href);
-    const champions = item.href === '/champions';
     return (
-      <Pressable key={item.href} onPress={() => router.push(item.href)} style={{ minHeight: 32, paddingHorizontal: isMobile ? 12 : 11, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', borderRadius: isMobile ? 16 : 9, backgroundColor: champions ? 'rgba(224, 45, 55, 0.18)' : isMobile && on ? 'rgba(227, 179, 65, 0.16)' : 'transparent', borderWidth: champions || isMobile ? 1 : 0, borderColor: champions ? 'rgba(240, 74, 82, 0.55)' : isMobile && on ? 'rgba(227, 179, 65, 0.45)' : 'transparent' }}>
-        <Text style={{ color: champions ? '#FF6670' : on ? TEXT : QUIET, fontWeight: champions || on ? '800' : '600', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>{item.label}</Text>
+      <Pressable key={item.href} onPress={() => router.push(item.href)} style={{ minHeight: 32, paddingHorizontal: isMobile ? 12 : 11, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', borderRadius: isMobile ? 16 : 9, backgroundColor: isMobile && on ? 'rgba(227, 179, 65, 0.16)' : 'transparent', borderWidth: isMobile ? 1 : 0, borderColor: isMobile && on ? 'rgba(227, 179, 65, 0.45)' : 'transparent' }}>
+        <Text style={{ color: on ? TEXT : QUIET, fontWeight: on ? '800' : '600', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>{item.label}</Text>
         {!isMobile ? <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} /> : null}
       </Pressable>
     );
@@ -66,7 +86,7 @@ export function SiteNav() {
   if (isMobile) {
     return (
       <View style={{ zIndex: 100, elevation: 24, backgroundColor: 'rgba(5, 8, 10, 0.95)', paddingTop: insets.top + 6, paddingBottom: 6, paddingHorizontal: 12, borderBottomWidth: 1, borderBottomColor: 'rgba(227, 179, 65, 0.18)', gap: 6 }}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'space-between' }}>{logoNode}{accountNode}</View>
+        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>{logoNode}{championsButton}{accountNode}</View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 4, paddingVertical: 2 }}>{renderLinks()}</ScrollView>
       </View>
     );
@@ -75,7 +95,7 @@ export function SiteNav() {
   return (
     <View style={{ zIndex: 100, elevation: 24, backgroundColor: 'transparent', paddingTop: mobile ? insets.top + 8 : 10, paddingBottom: 8, paddingHorizontal: 14 }}>
       <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>{logoNode}{renderLinks()}</View>
+        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>{logoNode}{championsButton}{renderLinks()}</View>
         {accountNode}
       </View>
     </View>
