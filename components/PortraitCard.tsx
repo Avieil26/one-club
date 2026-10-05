@@ -283,6 +283,8 @@ export function PortraitCard({
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
+  /** Two-row stat layout for tiny SBC reward cards, preventing stat text collisions. */
+  compactStats?: boolean;
 }) {
   const artId = player.baseId ?? player.id;
   const showDestined = !shell && (edition === 'auto' ? player.edition === 'destined' : edition === 'destined');
@@ -321,6 +323,7 @@ export function PortraitCard({
       photoOverride={photoOverride}
       faceOverride={faceOverride}
       heightOverride={heightOverride}
+      compactStats={compactStats}
     />
   );
 }
@@ -370,6 +373,7 @@ function StandardPortraitCard({
   photoOverride,
   faceOverride,
   heightOverride,
+  compactStats = false,
 }: {
   player: FcPlayer;
   width: number;
@@ -379,6 +383,7 @@ function StandardPortraitCard({
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
+  compactStats?: boolean;
 }) {
   const media = playerMedia(player.baseId ?? player.id);
   const shown = edition === 'auto' ? player.edition : edition;
@@ -543,32 +548,61 @@ function StandardPortraitCard({
                   zIndex: 2,
                 }}
               />
-              <View style={{ flexDirection: 'row', paddingHorizontal: 2, zIndex: 2 }}>
-                {faceRows(position).map((row) => (
-                  <View key={row.label} style={{ flex: 1, alignItems: 'center' }}>
-                    <Text
-                      style={{
-                        color: 'rgba(255,248,232,0.72)',
-                        fontSize: Math.max(6.5, width * 0.036),
-                        fontWeight: '800',
-                        letterSpacing: 0.3,
-                      }}
-                    >
-                      {row.label}
-                    </Text>
-                    <Text
-                      style={{
-                        color: '#FFF8E8',
-                        fontSize: Math.max(10, width * 0.068),
-                        fontWeight: '900',
-                        marginTop: 1,
-                      }}
-                    >
-                      {shell ? '' : (stats?.[row.key] ?? '·')}
-                    </Text>
-                  </View>
-                ))}
-              </View>
+              {compactStats ? (
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 2, zIndex: 2 }}>
+                  {faceRows(position).map((row) => (
+                    <View key={row.label} style={{ width: '33.333%', alignItems: 'center', marginBottom: 1 }}>
+                      <Text
+                        style={{
+                          color: 'rgba(255,248,232,0.72)',
+                          fontSize: Math.max(4.5, width * 0.058),
+                          fontWeight: '800',
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        {row.label}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#FFF8E8',
+                          fontSize: Math.max(8, width * 0.105),
+                          fontWeight: '900',
+                          marginTop: 0,
+                        }}
+                      >
+                        {shell ? '' : (stats?.[row.key] ?? '·')}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              ) : (
+                <View style={{ flexDirection: 'row', paddingHorizontal: 2, zIndex: 2 }}>
+                  {faceRows(position).map((row) => (
+                    <View key={row.label} style={{ flex: 1, alignItems: 'center' }}>
+                      <Text
+                        style={{
+                          color: 'rgba(255,248,232,0.72)',
+                          fontSize: Math.max(6.5, width * 0.036),
+                          fontWeight: '800',
+                          letterSpacing: 0.3,
+                        }}
+                      >
+                        {row.label}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#FFF8E8',
+                          fontSize: Math.max(10, width * 0.068),
+                          fontWeight: '900',
+                          marginTop: 1,
+                        }}
+                      >
+                        {shell ? '' : (stats?.[row.key] ?? '·')}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </>
           ) : null}
 
