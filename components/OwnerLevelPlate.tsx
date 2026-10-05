@@ -106,6 +106,23 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
                       </>
                     )}
                   </Text>
+                  <View style={{ gap: 7, paddingTop: 2 }}>
+                    <Text style={{ color: tone.gradient[0], fontFamily: careerFont, fontSize: 15, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>
+                      איך מרוויחים XP?
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • אתגר Career שאושר: <XpFigure value="25 XP" />
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • פתרון SBC שקיבל 3 סימוני «עבד לי»: <XpFigure value="15 XP" />
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      • Squad שקיבל 3 דירוגים: <XpFigure value="10 XP" />
+                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.55)', fontFamily: careerFont, fontSize: 12, lineHeight: 19, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
+                      משחקונים לא נותנים XP — הם רק לכיף.
+                    </Text>
+                  </View>
                 </View>
               </LinearGradient>
             </View>
