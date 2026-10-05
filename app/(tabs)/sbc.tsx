@@ -88,6 +88,11 @@ const SBC_PLAYER_CARDS: Record<string, SbcPlayerCardData> = {
 
 const SBC_STAT_LABELS = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 
+const PLAYER_REWARD: Record<string, number> = {
+  'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
+  'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
+};
+
 function SbcPlayerCard({ data }: { data: SbcPlayerCardData }) {
   return (
     <View
@@ -159,6 +164,7 @@ function SbcTile({
   const leftClub = nations.length ? undefined : clubs[0];
   const rightClub = nations.length ? undefined : clubs[1];
   const remaining = compactRemaining(challenge.endsAt, now);
+  const legacyPlayerCard = PLAYER_REWARD[challenge.id];
   const playerCard = SBC_PLAYER_CARDS[challenge.id];
 
   return (
@@ -193,7 +199,9 @@ function SbcTile({
           <SideMark club={rightClub} nation={rightNation} size={36} />
         </View>
         <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
-          {playerCard ? (
+          {legacyPlayerCard ? (
+            <Image source={legacyPlayerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
+          ) : playerCard ? (
             <SbcPlayerCard data={playerCard} />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
