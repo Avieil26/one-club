@@ -444,19 +444,18 @@ function factRules(difficulty: number): MarkRule[] {
   if (difficulty >= 1) {
     rules.push(
       factRule('מי זכה בפרס שחקן השנה לגברים של UEFA שלוש פעמים?', [
-        'cristiano-ronaldo', 'cristiano', 'cr7', 'cristiano-ronaldo-7',
+        'ea-20801-cristiano-ronaldo',
       ], 1, 1),
-      factRule('מי נבחר לנבחרת השנה של FIFPRO תשע שנים ברציפות?', ['iniesta'], 1, 1),
+      factRule('מי נבחר לנבחרת השנה של FIFPRO תשע שנים ברציפות?', ['icon-iniesta'], 1, 1),
       factRule('מי זכה בליגת האלופות עם יותר ממועדון אחד?', [
-        'cristiano-ronaldo', 'cristiano', 'cr7', 'clarence-seedorf',
+        'ea-20801-cristiano-ronaldo',
       ], 1, 3),
-      factRule('מי זכה ב-6 תארי ליגת האלופות?', ['carvajal', 'luka-modric', 'modric'], 1, 2),
     );
   }
 
   if (difficulty >= 2) {
     rules.push(
-      factRule('מי מלך ההופעות בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
+      factRule('מי מלך ההופעות בכל הזמנים בליגת האלופות?', ['ea-20801-cristiano-ronaldo'], 1, 1),
       factRule('מי מלך השערים בכל הזמנים בליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
       factRule('מי השחקן היחיד שכבש בשלושה גמרי ליגת האלופות?', ['cristiano-ronaldo', 'cristiano', 'cr7'], 1, 1),
       factRule('מי נבחר ל-FIFPRO World 11 גם ב-2024 וגם ב-2025?', [
@@ -476,7 +475,7 @@ function factRules(difficulty: number): MarkRule[] {
         'cristiano-ronaldo', 'cristiano', 'cr7',
       ], 1, 1),
       factRule('מי כבש ב-9 הופעות רצופות בגביע העולם?', ['messi'], 1, 1),
-      factRule('מי נבחר ל-FIFPRO World 11 תשע פעמים ברצף?', ['iniesta'], 1, 1),
+      factRule('מי נבחר ל-FIFPRO World 11 תשע פעמים ברצף?', ['icon-iniesta'], 1, 1),
       factRule('מי זכה בליגת האלופות 5 פעמים?', [
         'cristiano-ronaldo', 'cristiano', 'cr7', 'benzema', 'kroos',
       ], 1, 3),
@@ -489,15 +488,13 @@ function factRules(difficulty: number): MarkRule[] {
   if (difficulty >= 4) {
     rules.push(
       factRule('מי זכה גם במונדיאל וגם בליגת האלופות?', [
-        'messi', 'modric', 'kroos', 'iniesta', 'varane', 'ronaldinho',
+        'messi', 'icon-raphael-varane', 'icon-ronaldinho', 'icon-iniesta',
       ], 1, 4),
       factRule('מי נבחר ל-FIFPRO World 11 ב-2024?', [
         'ederson', 'carvajal', 'vandijk', 'rudiger', 'bellingham', 'debruyne',
         'kroos', 'rodri', 'haaland', 'mbappe', 'vinicius',
       ], 1, 4),
-      factRule('מי הגיע לשישה גמרי ליגת האלופות?', [
-        'cristiano-ronaldo', 'cristiano', 'cr7', 'carvajal', 'kroos', 'modric',
-      ], 1, 4),
+      factRule('מי כבש בשלושה גמרי ליגת האלופות?', ['ea-20801-cristiano-ronaldo'], 1, 1),
     );
   }
 
