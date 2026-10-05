@@ -252,7 +252,7 @@ function rows(
 }
 
 export function communityBoards(
-  snap: Pick<Snapshot, 'user' | 'profiles' | 'submissions' | 'solutions' | 'futPosts' | 'ratings' | 'grounds'>,
+  snap: Pick<Snapshot, 'user' | 'profiles' | 'submissions' | 'solutions' | 'futPosts' | 'ratings' | 'grounds' | 'comments'>,
 ): CommunityBoards {
   const { profiles, submissions, solutions, futPosts, ratings, grounds, user } = snap;
   const youId = user?.id ?? null;
