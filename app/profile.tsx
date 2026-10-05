@@ -17,8 +17,9 @@ export default function ProfileScreen() {
   const app = useApp();
   const router = useRouter();
   const badges = app.user ? badgesFor(app.user, app.grounds) : [];
-  const followers = app.user ? app.follows.filter((item) => item.followingId === app.user.id).length : 0;
-  const following = app.user ? app.follows.filter((item) => item.followerId === app.user.id).length : 0;
+  const userId = app.user?.id;
+  const followers = userId ? app.follows.filter((item) => item.followingId === userId).length : 0;
+  const following = userId ? app.follows.filter((item) => item.followerId === userId).length : 0;
   const progress = xpProgress(app.user ? communityXp(app.user.id, app) : 0);
   const [rawUri, setRawUri] = useState<string | null>(null);
   const [cropOpen, setCropOpen] = useState(false);
