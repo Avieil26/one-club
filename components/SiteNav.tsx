@@ -199,7 +199,6 @@ export function SiteNav() {
       >
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
           {logoNode}
-          {championsButton}
           {renderLinks()}
         </View>
         {accountNode}
