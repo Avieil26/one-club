@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { signInWithGoogleOAuth } from '@/lib/authGoogle';
+import { getAuthRedirectUrl, signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
 import { catalogChallenge, mergeOfficialSbcs, RETIRED_SBC_IDS } from '@/lib/sbcCatalog';
 import { decodeSolution, encodeSolution, proofImages, readSquad } from '@/lib/sbcSolution';
@@ -443,7 +443,8 @@ async function readSnapshot(): Promise<Snapshot> {
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
   if (session) {
     if (!profiles.some((profile) => profile.id === session.user.id)) {
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      // The profile trigger normally creates this row immediately; retry once without
+      // adding an artificial delay to every authenticated startup.
       profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
     }
     const meta = (session.user.user_metadata ?? {}) as Record<string, unknown>;
@@ -499,7 +500,11 @@ async function readSnapshot(): Promise<Snapshot> {
       rows<WorkedRow>('sbc_worked'),
       rowsOptional<WorkedRow>('sbc_failed'),
       squadLikes(),
-      latestAvatars(profiles.map((profile) => profile.id)),
+      latestAvatars(
+        session && !profiles.find((profile) => profile.id === session.user.id)?.avatarUrl
+          ? [session.user.id]
+          : [],
+      ),
       messageRows(),
     ]);
   if (uploaded.size) {
@@ -600,6 +605,7 @@ export function createRemoteBackend(): Backend {
             display_name: displayName,
             terms_accepted_at: new Date().toISOString(),
           },
+          emailRedirectTo: getAuthRedirectUrl(),
         },
       });
       if (error) authFail(error);
