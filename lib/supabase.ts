@@ -6,8 +6,16 @@ import { Platform } from 'react-native';
 
 let client: SupabaseClient | null = null;
 
+// The publishable key is safe for client apps. Keep env overrides for local/EAS
+// configuration, but fall back to the production Supabase project so a standalone
+// APK cannot silently switch to the local/demo backend when build env is missing.
+const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL || 'https://hxjgphhcspzjnkkzdmpk.supabase.co';
+const SUPABASE_KEY =
+  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ||
+  'sb_publishable_MAR4aEVulBg1EnssPRZvhw_BzMF295U';
+
 export function isSupabaseConfigured(): boolean {
-  return Boolean(process.env.EXPO_PUBLIC_SUPABASE_URL && process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY);
+  return Boolean(SUPABASE_URL && SUPABASE_KEY);
 }
 
 export function getSupabase(): SupabaseClient {
@@ -15,7 +23,7 @@ export function getSupabase(): SupabaseClient {
     throw new Error('שרת Supabase לא הוגדר');
   }
   if (!client) {
-    client = createClient(process.env.EXPO_PUBLIC_SUPABASE_URL!, process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!, {
+    client = createClient(SUPABASE_URL, SUPABASE_KEY, {
       auth: {
         storage: AsyncStorage,
         autoRefreshToken: true,
