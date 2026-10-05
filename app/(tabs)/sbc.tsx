@@ -101,7 +101,7 @@ function SbcTile({
         </View>
         <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
           {playerCard ? (
-            <Image source={playerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
+            <SbcPlayerRewardCard {...playerCard} width={70} />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
           )}
