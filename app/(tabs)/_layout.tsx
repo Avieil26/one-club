@@ -31,6 +31,7 @@ export default function TabLayout() {
       <Tabs.Screen name="index" options={{ title: 'בית', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⌂" color={color} focused={focused} /> }} />
       <Tabs.Screen name="career" options={{ title: 'קריירה', tabBarActiveTintColor: colors.career, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="★" color={color} focused={focused} /> }} />
       <Tabs.Screen name="ultimate" options={{ title: 'אולטימייט', tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="●" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="champions" options={{ title: 'FUT Champions', href: null }} />
       <Tabs.Screen name="grounds" options={{ title: 'גראונדס', tabBarActiveTintColor: colors.green, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="☰" color={color} focused={focused} /> }} />
       <Tabs.Screen name="sbc" options={{ title: 'SBC', tabBarActiveTintColor: colors.copper, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▦" color={color} focused={focused} /> }} />
       <Tabs.Screen name="games" options={{ title: 'משחקונים', tabBarActiveTintColor: '#E23B57', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="✦" color={color} focused={focused} /> }} />
