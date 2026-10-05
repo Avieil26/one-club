@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { NationFlag } from '@/components/NationFlag';
@@ -37,10 +38,102 @@ function compactRemaining(iso: string | null, now: number) {
   return `${Math.max(1, Math.floor(diff / 60_000))}m`;
 }
 
-const PLAYER_REWARD: Record<string, number> = {
-  'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
-  'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
+type SbcPlayerCardData = {
+  rating: number;
+  position: string;
+  name: string;
+  photo: string;
+  stats: [number, number, number, number, number, number];
 };
+
+// Current FC27 player SBC rewards. The card is rendered into the exact same
+// 70x92 slot previously occupied by the pack artwork.
+const SBC_PLAYER_CARDS: Record<string, SbcPlayerCardData> = {
+  'sbc-potm-olise': {
+    rating: 91, position: 'RW', name: 'OLISE',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg/500px-Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg',
+    stats: [84, 83, 90, 92, 48, 70],
+  },
+  'sbc-potm-raphinha': {
+    rating: 89, position: 'ST', name: 'RAPHINHA',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg/500px-Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg',
+    stats: [92, 87, 86, 88, 55, 77],
+  },
+  'sbc-dfg-tarciane': {
+    rating: 84, position: 'CB', name: 'TARCIANE',
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dash%20preseason%202025%20-%2013.jpg',
+    stats: [80, 45, 74, 70, 84, 87],
+  },
+  'sbc-dfg-akliouche': {
+    rating: 85, position: 'CAM', name: 'AKLIOUCHE',
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maghnes%20Akliouche%20France%20v%20Senegal%2016%20June%202026-512.jpg',
+    stats: [84, 83, 86, 89, 55, 70],
+  },
+  'sbc-potm-gross': {
+    rating: 84, position: 'CDM', name: 'GROSS',
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pascal%20Gross%20Ecuador%20v%20Germany%2025%20June%202026-065.jpg',
+    stats: [76, 79, 88, 83, 77, 79],
+  },
+  'sbc-potm-malen': {
+    rating: 85, position: 'ST', name: 'MALEN',
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Netherlands%20v%20Tunisia%202026%20World%20Cup%20-%2055374906960.jpg',
+    stats: [87, 85, 75, 86, 39, 70],
+  },
+  'sbc-dfg-frattesi': {
+    rating: 84, position: 'CM', name: 'FRATTESI',
+    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Norway%20Italy%20-%20June%202025%20D%2048.jpg',
+    stats: [84, 81, 81, 84, 77, 78],
+  },
+};
+
+const SBC_STAT_LABELS = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
+
+function SbcPlayerCard({ data }: { data: SbcPlayerCardData }) {
+  return (
+    <View
+      style={{
+        width: 70,
+        height: 92,
+        borderRadius: 8,
+        overflow: 'hidden',
+        borderWidth: 1,
+        borderColor: 'rgba(238,207,105,0.9)',
+        backgroundColor: '#0C1820',
+      }}
+    >
+      <LinearGradient
+        colors={['#174D49', '#0E2D30', '#D0A532']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+      />
+      <View style={{ position: 'absolute', top: 3, left: 4, zIndex: 4 }}>
+        <Text style={{ color: '#FFF4CF', fontSize: 13, lineHeight: 14, fontWeight: '900' }}>{data.rating}</Text>
+        <Text style={{ color: '#FFF4CF', fontSize: 8, lineHeight: 9, fontWeight: '900' }}>{data.position}</Text>
+      </View>
+      <Image
+        source={{ uri: data.photo }}
+        resizeMode="cover"
+        accessibilityIgnoresInvertColors
+        style={{ width: 54, height: 51, marginLeft: 15, marginTop: 3, borderRadius: 6, backgroundColor: 'rgba(0,0,0,0.2)' }}
+      />
+      <View style={{ paddingHorizontal: 3, marginTop: 1, zIndex: 3 }}>
+        <Text numberOfLines={1} style={{ color: '#FFF9E7', fontSize: 7.5, lineHeight: 9, fontWeight: '900', textAlign: 'center', letterSpacing: 0.3 }}>
+          {data.name}
+        </Text>
+        <View style={{ height: 1, backgroundColor: 'rgba(255,245,205,0.52)', marginHorizontal: 6, marginVertical: 2 }} />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          {data.stats.map((value, index) => (
+            <View key={SBC_STAT_LABELS[index]} style={{ alignItems: 'center', width: 10.5 }}>
+              <Text style={{ color: 'rgba(255,249,231,0.78)', fontSize: 4.2, lineHeight: 5.5, fontWeight: '800' }}>{SBC_STAT_LABELS[index]}</Text>
+              <Text style={{ color: '#FFF9E7', fontSize: 7.6, lineHeight: 8, fontWeight: '900' }}>{value}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
+}
 
 function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
   if (nation) return <NationFlag nation={nation} size={size} />;
@@ -66,7 +159,7 @@ function SbcTile({
   const leftClub = nations.length ? undefined : clubs[0];
   const rightClub = nations.length ? undefined : clubs[1];
   const remaining = compactRemaining(challenge.endsAt, now);
-  const playerCard = PLAYER_REWARD[challenge.id];
+  const playerCard = SBC_PLAYER_CARDS[challenge.id];
 
   return (
     <Pressable
@@ -101,7 +194,7 @@ function SbcTile({
         </View>
         <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
           {playerCard ? (
-            <Image source={playerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
+            <SbcPlayerCard data={playerCard} />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
           )}
