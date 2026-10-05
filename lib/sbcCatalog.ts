@@ -2,7 +2,14 @@ import { C, L, N, PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { isOpen } from '@/lib/selectors';
 import type { SbcChallenge } from '@/lib/types';
 
-export const RETIRED_SBC_IDS = new Set(['sbc-upgrade', 'sbc-puzzle']);
+export const RETIRED_SBC_IDS = new Set([
+  'sbc-upgrade',
+  'sbc-puzzle',
+  'sbc-veiga',
+  'sbc-nusa',
+  'sbc-dfg-1',
+  'sbc-intro-espinoza',
+]);
 
 /** Weekly MM set from 17 Sep 2026 — expires 24 Sep 18:00 UTC per EA / FUTBIN. */
 const MM_ENDS = '2026-09-24T18:00:00.000Z';
@@ -12,6 +19,14 @@ const UPGRADE_83_ENDS = '2026-09-29T18:00:00.000Z';
 const UPGRADE_79_ENDS = '2026-09-28T18:00:00.000Z';
 /** International-break Marquee Matchups. Expires 1 Oct 2026 18:00 UTC. */
 const MM_INTL_ENDS = '2026-10-01T18:00:00.000Z';
+
+const OLISE_ENDS = '2026-10-29T15:00:00.000Z';
+const RAPHINHA_ENDS = '2026-10-30T16:00:00.000Z';
+const TARCIANE_ENDS = '2026-10-11T17:00:00.000Z';
+const AKLIOUCHE_ENDS = '2026-10-09T17:00:00.000Z';
+const GROSS_ENDS = '2026-10-30T11:00:00.000Z';
+const MALEN_ENDS = '2026-10-29T13:00:00.000Z';
+const FRATTESI_ENDS = '2026-10-06T17:00:00.000Z';
 
 export const NATION_DRILL_SQUAD: Record<string, string> = {
   gk: 'alisson',
@@ -128,6 +143,120 @@ const SILVER_UPGRADE_SQUAD: Record<string, string> = {
 };
 
 export const officialChallenges: SbcChallenge[] = [
+  {
+    id: 'sbc-dfg-akliouche',
+    title: 'Destined For Glory · Maghnes Akliouche',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Maghnes Akliouche 85 CAM. נתוני קלף: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.',
+    endsAt: AKLIOUCHE_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Maghnes Akliouche 85 CAM',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.france],
+    createdAt: '2026-10-01T17:00:00.000Z',
+  },
+  {
+    id: 'sbc-dfg-tarciane',
+    title: 'Destined For Glory · Tarciane',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Tarciane 84 CB. נתוני קלף: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.',
+    endsAt: TARCIANE_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Tarciane 84 CB',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.brazil],
+    createdAt: '2026-10-01T17:00:00.000Z',
+  },
+  {
+    id: 'sbc-potm-raphinha',
+    title: 'LaLiga POTM · Raphinha',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Raphinha 89 ST. נתוני קלף: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.',
+    endsAt: RAPHINHA_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Raphinha 89 ST',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.brazil],
+    createdAt: '2026-10-02T16:00:00.000Z',
+  },
+  {
+    id: 'sbc-potm-gross',
+    title: 'Premier League POTM · Pascal Groß',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Pascal Groß 84 CDM. נתוני קלף: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.',
+    endsAt: GROSS_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Pascal Groß 84 CDM',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.germany],
+    createdAt: '2026-10-01T11:00:00.000Z',
+  },
+  {
+    id: 'sbc-potm-olise',
+    title: 'Bundesliga POTM · Michael Olise',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Michael Olise 91 RW. נתוני קלף: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.',
+    endsAt: OLISE_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Michael Olise 91 RW',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.france],
+    createdAt: '2026-10-01T15:00:00.000Z',
+  },
+  {
+    id: 'sbc-potm-malen',
+    title: 'Serie A POTM · Donyell Malen',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Donyell Malen 85 ST. נתוני קלף: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.',
+    endsAt: MALEN_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Donyell Malen 85 ST',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.netherlands],
+    createdAt: '2026-10-01T13:00:00.000Z',
+  },
+  {
+    id: 'sbc-dfg-frattesi',
+    title: 'Destined For Glory · Davide Frattesi',
+    kind: 'classic',
+    requirements: 'פרס שחקן SBC: Davide Frattesi 84 CM. נתוני קלף: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.',
+    endsAt: FRATTESI_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Davide Frattesi 84 CM',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.italy],
+    createdAt: '2026-10-01T17:00:00.000Z',
+  },
+
+
   {
     id: 'sbc-mm-italy',
     title: 'מרקי מאצ׳אפס · איטליה נגד בלגיה',
