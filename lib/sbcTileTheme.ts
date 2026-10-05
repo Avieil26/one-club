@@ -16,6 +16,10 @@ const BY_ID: Record<string, SbcTileTheme> = {
   'sbc-potm-raphinha': { colors: ['#1A0D0F', '#5A1F26', '#D3B23B'], accent: '#FFE7A8', pack: 'gold', packLabel: '', badgeText: '89', badgeTone: 'gold' },
   'sbc-potm-gross': { colors: ['#1A0D0F', '#4A1F27', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '84', badgeTone: 'gold' },
   'sbc-potm-olise': { colors: ['#0B1B1A', '#174D49', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '91', badgeTone: 'gold' },
+  'sbc-dfg-tarciane': { colors: ['#0A1B18', '#0F5A49', '#2AAE8A'], accent: '#9FF8D8', pack: 'otw', packLabel: '', badgeText: '84', badgeTone: 'teal' },
+  'sbc-dfg-akliouche': { colors: ['#0A1B18', '#174D49', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '85', badgeTone: 'gold' },
+  'sbc-potm-gross': { colors: ['#1A0D0F', '#4A1F27', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '84', badgeTone: 'gold' },
+  'sbc-potm-raphinha': { colors: ['#1A0D0F', '#5A1F26', '#D3B23B'], accent: '#FFE7A8', pack: 'gold', packLabel: '', badgeText: '89', badgeTone: 'gold' },
   'sbc-potm-malen': { colors: ['#1A0D0F', '#4A2026', '#D3B23B'], accent: '#FFE7A8', pack: 'gold', packLabel: '', badgeText: '85', badgeTone: 'gold' },
   'sbc-dfg-frattesi': { colors: ['#071A18', '#0E574A', '#D3B23B'], accent: '#A7FFE8', pack: 'otw', packLabel: '', badgeText: '84', badgeTone: 'teal' },
   'sbc-mm-italy': {
@@ -246,7 +250,14 @@ const FALLBACK_STREAM: SbcTileTheme = {
   badgeTone: 'teal',
 };
 
-const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+const FACE: Record<string, {   'sbc-potm-olise': { en: 'Michael Olise', category: 'BUNDESLIGA POTM', edge: '#C9A227', rank: 0 },
+  'sbc-dfg-tarciane': { en: 'Tarciane', category: 'DESTINED FOR GLORY', edge: '#14B8A6', rank: 1 },
+  'sbc-dfg-akliouche': { en: 'Maghnes Akliouche', category: 'DESTINED FOR GLORY', edge: '#C9A227', rank: 2 },
+  'sbc-potm-gross': { en: 'Pascal Groß', category: 'PREMIER LEAGUE POTM', edge: '#CF081F', rank: 3 },
+  'sbc-potm-raphinha': { en: 'Raphinha', category: 'LALIGA POTM', edge: '#CF081F', rank: 4 },
+  'sbc-potm-malen': { en: 'Donyell Malen', category: 'SERIE A POTM', edge: '#CF081F', rank: 5 },
+  'sbc-dfg-frattesi': { en: 'Davide Frattesi', category: 'DESTINED FOR GLORY', edge: '#14B8A6', rank: 6 },
+en: string; category: string; edge: string; rank: number }> = {
   'sbc-potm-olise': { en: 'Michael Olise', category: 'BUNDESLIGA POTM', edge: '#C9A227', rank: 0 },
   'sbc-dfg-tarciane': { en: 'Tarciane', category: 'DESTINED FOR GLORY', edge: '#14B8A6', rank: 1 },
   'sbc-dfg-akliouche': { en: 'Maghnes Akliouche', category: 'DESTINED FOR GLORY', edge: '#C9A227', rank: 2 },
