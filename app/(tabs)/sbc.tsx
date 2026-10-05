@@ -99,39 +99,95 @@ function SbcPlayerCard({ data }: { data: SbcPlayerCardData }) {
       style={{
         width: 70,
         height: 92,
-        borderRadius: 8,
+        borderRadius: 10,
         overflow: 'hidden',
-        borderWidth: 1,
-        borderColor: 'rgba(238,207,105,0.9)',
-        backgroundColor: '#0C1820',
+        borderWidth: 1.2,
+        borderColor: '#D7B64C',
+        backgroundColor: '#081214',
+        shadowColor: '#000',
+        shadowOpacity: 0.42,
+        shadowRadius: 6,
+        shadowOffset: { width: 0, height: 3 },
+        elevation: 5,
       }}
     >
       <LinearGradient
-        colors={['#174D49', '#0E2D30', '#D0A532']}
+        colors={['#0B2926', '#123F3B', '#0B1719', '#6E5314']}
+        locations={[0, 0.38, 0.72, 1]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
       />
-      <View style={{ position: 'absolute', top: 3, left: 4, zIndex: 4 }}>
-        <Text style={{ color: '#FFF4CF', fontSize: 13, lineHeight: 14, fontWeight: '900' }}>{data.rating}</Text>
-        <Text style={{ color: '#FFF4CF', fontSize: 8, lineHeight: 9, fontWeight: '900' }}>{data.position}</Text>
-      </View>
-      <Image
-        source={{ uri: data.photo }}
-        resizeMode="cover"
-        accessibilityIgnoresInvertColors
-        style={{ width: 54, height: 51, marginLeft: 15, marginTop: 3, borderRadius: 6, backgroundColor: 'rgba(0,0,0,0.2)' }}
+      <LinearGradient
+        colors={['rgba(255,255,255,0.28)', 'rgba(255,255,255,0)']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0.8 }}
+        style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 22 }}
       />
-      <View style={{ paddingHorizontal: 3, marginTop: 1, zIndex: 3 }}>
-        <Text numberOfLines={1} style={{ color: '#FFF9E7', fontSize: 7.5, lineHeight: 9, fontWeight: '900', textAlign: 'center', letterSpacing: 0.3 }}>
+      <View style={{ position: 'absolute', top: 4, left: 5, zIndex: 5 }}>
+        <Text style={{ color: '#FFF3CA', fontSize: 15, lineHeight: 15, fontWeight: '900' }}>{data.rating}</Text>
+        <Text style={{ color: '#FFF3CA', fontSize: 7.5, lineHeight: 8, fontWeight: '900', letterSpacing: 0.4 }}>{data.position}</Text>
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          top: 2,
+          right: 2,
+          width: 56,
+          height: 56,
+          borderTopRightRadius: 8,
+          borderBottomLeftRadius: 24,
+          overflow: 'hidden',
+          opacity: 0.98,
+        }}
+      >
+        <Image
+          source={{ uri: data.photo }}
+          resizeMode="cover"
+          accessibilityIgnoresInvertColors
+          style={{ width: 56, height: 56, backgroundColor: 'rgba(0,0,0,0.08)' }}
+        />
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          left: 4,
+          right: 4,
+          bottom: 3,
+          paddingTop: 4,
+          borderTopWidth: 1,
+          borderTopColor: 'rgba(255,241,188,0.42)',
+        }}
+      >
+        <Text
+          numberOfLines={1}
+          style={{
+            color: '#FFF9E7',
+            fontSize: 7.2,
+            lineHeight: 8,
+            fontWeight: '900',
+            textAlign: 'center',
+            letterSpacing: 0.45,
+          }}
+        >
           {data.name}
         </Text>
-        <View style={{ height: 1, backgroundColor: 'rgba(255,245,205,0.52)', marginHorizontal: 6, marginVertical: 2 }} />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          {data.stats.map((value, index) => (
-            <View key={SBC_STAT_LABELS[index]} style={{ alignItems: 'center', width: 10.5 }}>
-              <Text style={{ color: 'rgba(255,249,231,0.78)', fontSize: 4.2, lineHeight: 5.5, fontWeight: '800' }}>{SBC_STAT_LABELS[index]}</Text>
-              <Text style={{ color: '#FFF9E7', fontSize: 7.6, lineHeight: 8, fontWeight: '900' }}>{value}</Text>
+        <View style={{ marginTop: 3, gap: 1.5 }}>
+          {[0, 1].map((row) => (
+            <View key={row} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              {[0, 1, 2].map((col) => {
+                const index = row * 3 + col;
+                return (
+                  <View key={index} style={{ width: 19.2, alignItems: 'center' }}>
+                    <Text style={{ color: 'rgba(255,249,231,0.7)', fontSize: 4.1, lineHeight: 5, fontWeight: '800' }}>
+                      {SBC_STAT_LABELS[index]}
+                    </Text>
+                    <Text style={{ color: '#FFF9E7', fontSize: 7.2, lineHeight: 7.5, fontWeight: '900' }}>
+                      {data.stats[index]}
+                    </Text>
+                  </View>
+                );
+              })}
             </View>
           ))}
         </View>
@@ -139,7 +195,6 @@ function SbcPlayerCard({ data }: { data: SbcPlayerCardData }) {
     </View>
   );
 }
-
 function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
   if (nation) return <NationFlag nation={nation} size={size} />;
   if (club) return <ClubBadge club={club} size={size} />;
