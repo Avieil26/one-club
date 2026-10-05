@@ -14,6 +14,7 @@ const LINKS = [
   { href: '/' as const, label: 'בית' },
   { href: '/career' as const, label: 'קריירה' },
   { href: '/ultimate' as const, label: 'אולטימייט' },
+  { href: '/champions' as const, label: 'FUT Champions' },
   { href: '/grounds' as const, label: 'גראונדס' },
   { href: '/sbc' as const, label: 'SBC' },
   { href: '/games' as const, label: 'משחקונים' },
@@ -96,28 +97,6 @@ export function SiteNav() {
     </View>
   );
 
-  const championsButton = (
-    <Pressable
-      accessibilityRole="button"
-      onPress={() => router.push('/champions')}
-      style={{
-        minHeight: 32,
-        paddingHorizontal: isMobile ? 12 : 11,
-        paddingVertical: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: isMobile ? 16 : 9,
-        backgroundColor: 'rgba(224, 45, 55, 0.18)',
-        borderWidth: 1,
-        borderColor: 'rgba(240, 74, 82, 0.55)',
-      }}
-    >
-      <Text style={{ color: '#FF6670', fontWeight: '800', fontSize: isMobile ? 13.5 : 15, textAlign: 'center' }}>
-        FUT Champions
-      </Text>
-    </Pressable>
-  );
-
   const renderLinks = () =>
     LINKS.map((item) => {
       const on = isActive(pathname, item.href);
@@ -178,7 +157,6 @@ export function SiteNav() {
           }}
         >
           {logoNode}
-          {championsButton}
           {accountNode}
         </View>
 
