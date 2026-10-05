@@ -271,6 +271,7 @@ export function PortraitCard({
   photoOverride,
   faceOverride,
   heightOverride,
+  compactStats,
 }: {
   player: FcPlayer;
   width?: number;
