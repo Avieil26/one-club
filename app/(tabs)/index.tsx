@@ -1,4 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Animated, Image, Pressable, Text, View, type ImageSourcePropType } from 'react-native';
@@ -16,12 +17,13 @@ import { openChallenges } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
 const doors: {
-  href: '/career' | '/ultimate' | '/grounds' | '/sbc' | '/market';
+  href: '/career' | '/ultimate' | '/champions' | '/grounds' | '/sbc' | '/market';
   label: string;
   hint: string;
   accent: string;
   gradient: [string, string, string];
-  logo: ImageSourcePropType;
+  logo?: ImageSourcePropType;
+  icon?: keyof typeof Ionicons.glyphMap;
 }[] = [
   {
     href: '/career',
@@ -38,6 +40,14 @@ const doors: {
     accent: '#E3B341',
     gradient: ['#0A0804', '#1C160A', '#3A2E12'],
     logo: require('@/assets/images/door-ultimate.png'),
+  },
+  {
+    href: '/champions',
+    label: 'FUT Champions',
+    hint: 'תחרות, פרסים וטקטיקות',
+    accent: '#F04A52',
+    gradient: ['#16070A', '#3A0B12', '#6A1019'],
+    icon: 'trophy',
   },
   {
     href: '/grounds',
@@ -132,7 +142,13 @@ function DoorButton({
               shadowOffset: { width: 0, height: 0 },
             }}
           >
-            <Image source={door.logo} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+            {door.logo ? (
+              <Image source={door.logo} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+            ) : (
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name={door.icon ?? 'trophy'} size={32} color={door.accent} />
+              </View>
+            )}
           </View>
           <Text style={{ color: door.accent, fontSize: 12, fontWeight: '800', letterSpacing: 1.2 }}>
             {String(index + 1).padStart(2, '0')}
