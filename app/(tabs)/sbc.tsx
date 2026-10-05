@@ -5,6 +5,7 @@ import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native'
 import { ClubBadge } from '@/components/ClubBadge';
 import { NationFlag } from '@/components/NationFlag';
 import { SbcRewardPack } from '@/components/SbcRewardPack';
+import { SbcPlayerRewardCard } from '@/components/SbcPlayerRewardCard';
 import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
 import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
@@ -37,9 +38,14 @@ function compactRemaining(iso: string | null, now: number) {
   return `${Math.max(1, Math.floor(diff / 60_000))}m`;
 }
 
-const PLAYER_REWARD: Record<string, number> = {
-  'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
-  'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
+const PLAYER_REWARD: Record<string, Parameters<typeof SbcPlayerRewardCard>[0]> = {
+  'sbc-nusa': { playerId: 'nusa', name: 'NUSA', rating: 85, position: 'LW', nation: 'נורווגיה', club: 'Red Bull Salzburg', foot: 'R', skillMoves: 4, weakFoot: 4, pac: 88, sho: 80, pas: 78, dri: 88, def: 50, phy: 72, rarity: 'DESTINED' },
+  'sbc-veiga': { playerId: 'veiga', name: 'VEIGA', rating: 84, position: 'CB', nation: 'פורטוגל', club: 'Villarreal', foot: 'L', skillMoves: 3, weakFoot: 4, pac: 80, sho: 66, pas: 77, dri: 78, def: 83, phy: 87, rarity: 'DESTINED' },
+  'sbc-olise': { playerId: 'olise', name: 'OLISE', rating: 91, position: 'RW', nation: 'צרפת', club: 'Bayern Munich', foot: 'L', skillMoves: 5, weakFoot: 3, pac: 84, sho: 83, pas: 90, dri: 92, def: 48, phy: 70, rarity: 'POTM' },
+  'sbc-gross': { playerId: 'ea-190765-pascal-gro', name: 'GROSS', rating: 84, position: 'CDM', nation: 'גרמניה', club: 'Brighton', foot: 'R', skillMoves: 3, weakFoot: 4, pac: 76, sho: 79, pas: 88, dri: 83, def: 77, phy: 79, rarity: 'POTM' },
+  'sbc-raphinha': { playerId: 'raphinha', name: 'RAPHINHA', rating: 89, position: 'ST', nation: 'ברזיל', club: 'Barcelona', foot: 'L', skillMoves: 4, weakFoot: 4, pac: 92, sho: 87, pas: 86, dri: 88, def: 55, phy: 77, rarity: 'POTM' },
+  'sbc-akliouche': { playerId: 'ea-264862-maghnes-akliouche', name: 'AKLIOUCHE', rating: 85, position: 'CAM', nation: 'צרפת', club: 'PSG', foot: 'L', skillMoves: 4, weakFoot: 3, pac: 84, sho: 83, pas: 86, dri: 89, def: 55, phy: 70, rarity: 'DESTINED' },
+  'sbc-malen': { playerId: 'ea-231447-donyell-malen', name: 'MALEN', rating: 85, position: 'ST', nation: 'הולנד', club: 'Roma', foot: 'R', skillMoves: 4, weakFoot: 4, pac: 87, sho: 85, pas: 75, dri: 86, def: 39, phy: 70, rarity: 'POTM' },
 };
 
 function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
@@ -101,7 +107,7 @@ function SbcTile({
         </View>
         <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
           {playerCard ? (
-            <Image source={playerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
+            <SbcPlayerRewardCard {...playerCard} width={70} />
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
           )}
