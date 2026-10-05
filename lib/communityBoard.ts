@@ -1,4 +1,4 @@
-import type { CareerSubmission, FutPost, FutRating, GroundsPost, Profile, SbcSolution, Snapshot } from '@/lib/types';
+import type { CareerSubmission, Comment, FutPost, FutRating, GroundsPost, Profile, SbcSolution, Snapshot } from '@/lib/types';
 
 /** Cumulative XP required to stand on each level. Level 1 is 0 and level 50 is 4,000. */
 export function xpToReach(level: number): number {
@@ -57,9 +57,12 @@ export function xpProgress(xp: number): XpProgress {
 
 export function communityXp(
   userId: string,
-  snap: Pick<Snapshot, 'submissions' | 'solutions' | 'futPosts' | 'ratings'>,
+  snap: Pick<
+    Snapshot,
+    'submissions' | 'solutions' | 'futPosts' | 'ratings' | 'comments' | 'grounds'
+  >,
 ): number {
-  return xpOf(userId, snap.submissions, snap.solutions, snap.futPosts, snap.ratings);
+  return xpOf(userId, snap.submissions, snap.solutions, snap.futPosts, snap.ratings, snap.comments, snap.grounds);
 }
 
 const MONTHS = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
@@ -112,7 +115,7 @@ function confirmedSolutions(solutions: SbcSolution[], userId: string): SbcSoluti
 function squadXp(posts: FutPost[], ratings: FutRating[], userId: string): number {
   const earned: string[] = [];
   for (const post of posts) {
-    if (post.userId !== userId || post.kind !== 'squad') continue;
+    if (post.userId !== userId || post.kind !== 'squad' || post.status !== 'approved') continue;
     const marks = ratings
       .filter((rating) => rating.postId === post.id && rating.userId !== userId)
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
@@ -130,10 +133,76 @@ function squadXp(posts: FutPost[], ratings: FutRating[], userId: string): number
   return xp;
 }
 
-function xpOf(userId: string, submissions: CareerSubmission[], solutions: SbcSolution[], posts: FutPost[], ratings: FutRating[]): number {
+function weekCount<T extends { createdAt: string }>(items: T[], userId: string, isMine: (item: T) => boolean): number {
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    if (!isMine(item)) continue;
+    const key = weekKey(item.createdAt);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  let total = 0;
+  for (const count of counts.values()) total += Math.min(count, 5);
+  return total;
+}
+
+function communityActivityXp(
+  userId: string,
+  posts: FutPost[],
+  ratings: FutRating[],
+  comments: Comment[],
+  grounds: GroundsPost[],
+  solutions: SbcSolution[],
+): number {
+  const approvedPacks = weekCount(
+    posts.filter((post) => post.kind === 'pack' && post.status === 'approved'),
+    userId,
+    (post) => post.userId === userId,
+  ) * 5;
+
+  const approvedGrounds = weekCount(
+    grounds.filter((post) => post.levelStatus === 'approved'),
+    userId,
+    (post) => post.userId === userId,
+  ) * 5;
+
+  const ratingsGiven = weekCount(
+    ratings,
+    userId,
+    (rating) => {
+      if (rating.userId !== userId) return false;
+      const post = posts.find((item) => item.id === rating.postId);
+      return Boolean(post && post.userId !== userId && post.kind === 'squad' && post.status === 'approved');
+    },
+  ) * 2;
+
+  const commentsGiven = weekCount(
+    comments,
+    userId,
+    (comment) => comment.userId === userId && comment.status === 'visible',
+  );
+
+  const workedSolutions = solutions.filter(
+    (solution) => solution.userId !== userId && solution.workedUserIds.includes(userId),
+  ).length * 2;
+
+  return approvedPacks + approvedGrounds + ratingsGiven + commentsGiven + workedSolutions;
+}
+
+function xpOf(
+  userId: string,
+  submissions: CareerSubmission[],
+  solutions: SbcSolution[],
+  posts: FutPost[],
+  ratings: FutRating[],
+  comments: Comment[],
+  grounds: GroundsPost[],
+): number {
   const proofs = approvedChallenges(submissions, userId) * 25;
-  const solved = solutions.filter((item) => item.userId === userId && item.workedUserIds.length >= 3).length * 15;
-  return proofs + solved + squadXp(posts, ratings, userId);
+  const solved = solutions.filter(
+    (item) => item.userId === userId && item.status === 'approved' && item.workedUserIds.length >= 3,
+  ).length * 15;
+  const activity = communityActivityXp(userId, posts, ratings, comments, grounds, solutions);
+  return proofs + solved + squadXp(posts, ratings, userId) + activity;
 }
 
 function solvedOf(userId: string, submissions: CareerSubmission[], solutions: SbcSolution[]): number {
@@ -187,7 +256,7 @@ export function communityBoards(
 ): CommunityBoards {
   const { profiles, submissions, solutions, futPosts, ratings, grounds, user } = snap;
   const youId = user?.id ?? null;
-  const points = (profile: Profile) => xpOf(profile.id, submissions, solutions, futPosts, ratings);
+  const points = (profile: Profile) => xpOf(profile.id, submissions, solutions, futPosts, ratings, snap.comments, snap.grounds);
   return {
     xp: rows(profiles, grounds, points, points, youId),
     solvers: rows(profiles, grounds, (profile) => solvedOf(profile.id, submissions, solutions), points, youId),
