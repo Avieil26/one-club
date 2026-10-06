@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 
 import { sessionFromUrl } from '@/lib/authGoogle';
 import { useApp } from '@/lib/store';
@@ -36,7 +36,7 @@ export default function Index() {
   }, [app, oauthReturn, router]);
 
   if (!oauthReturn) {
-    return <></>;
+    return <Redirect href="/(tabs)" />;
   }
 
   if (error) {
