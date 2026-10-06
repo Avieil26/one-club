@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { Backend } from '@/lib/localBackend';
 import { createLocalBackend } from '@/lib/localBackend';
 import { createRemoteBackend } from '@/lib/remoteBackend';
-import { isSupabaseConfigured } from '@/lib/supabase';
+import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 import type {
   NewCareerSubmission,
   NewChallenge,
@@ -67,6 +67,40 @@ const EMPTY: Snapshot = {
 
 const AppContext = createContext<AppValue | null>(null);
 
+async function recoverRemoteSnapshot(): Promise<Snapshot> {
+  const empty: Snapshot = { ...EMPTY, mode: 'remote' };
+  try {
+    const { data } = await getSupabase().auth.getSession();
+    const session = data.session;
+    if (!session) return empty;
+
+    const meta = (session.user.user_metadata ?? {}) as Record<string, unknown>;
+    const fullName =
+      typeof meta.full_name === 'string'
+        ? meta.full_name
+        : typeof meta.name === 'string'
+          ? meta.name
+          : typeof meta.display_name === 'string'
+            ? meta.display_name
+            : null;
+    const avatar = typeof meta.avatar_url === 'string' ? meta.avatar_url : null;
+    const user = {
+      id: session.user.id,
+      displayName: fullName?.trim() || session.user.email?.split('@')[0] || 'שחקן',
+      email: session.user.email ?? undefined,
+      avatarUrl: avatar,
+      isAdmin: false,
+      approvedCount: 0,
+      reputation: 0,
+      createdAt: session.user.created_at ?? new Date().toISOString(),
+    };
+    return { ...empty, user, profiles: [user] };
+  } catch (error) {
+    console.error('[AppProvider] failed to recover authenticated snapshot', error);
+    return empty;
+  }
+}
+
 export function AppProvider({ children }: { children: ReactNode }) {
   const backend = useMemo<Backend>(() => (isSupabaseConfigured() ? createRemoteBackend() : createLocalBackend()), []);
   const [snap, setSnap] = useState<Snapshot>(EMPTY);
@@ -75,16 +109,34 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let alive = true;
-    backend.init().then((next) => {
-      if (!alive) return;
-      setSnap(next);
-      setReady(true);
-    });
-    const unsubscribe = backend.subscribe(() => {
-      backend.reload().then((next) => {
-        if (alive) setSnap(next);
+
+    void backend
+      .init()
+      .then((next) => {
+        if (!alive) return;
+        setSnap(next);
+        setReady(true);
+      })
+      .catch(async (error) => {
+        console.error('[AppProvider] backend.init failed', error);
+        if (!alive) return;
+        setSnap(await recoverRemoteSnapshot());
+        setReady(true);
       });
+
+    const unsubscribe = backend.subscribe(() => {
+      void backend
+        .reload()
+        .then((next) => {
+          if (alive) setSnap(next);
+        })
+        .catch(async (error) => {
+          console.error('[AppProvider] backend.reload failed', error);
+          if (!alive) return;
+          setSnap(await recoverRemoteSnapshot());
+        });
     });
+
     return () => {
       alive = false;
       unsubscribe();
