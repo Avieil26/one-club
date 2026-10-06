@@ -68,6 +68,34 @@ const EMPTY: Snapshot = {
 
 const AppContext = createContext<AppValue | null>(null);
 
+const BACKEND_TIMEOUT_MS = 20_000;
+
+function withBackendTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      reject(new Error(`${label} לא הגיב בתוך 20 שניות`));
+    }, BACKEND_TIMEOUT_MS);
+
+    promise.then(
+      (value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (error) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        reject(error);
+      },
+    );
+  });
+}
+
 export function AppProvider({ children }: { children: ReactNode }) {
   const backend = useMemo<Backend>(() => (isSupabaseConfigured() ? createRemoteBackend() : createLocalBackend()), []);
   const [snap, setSnap] = useState<Snapshot>(EMPTY);
@@ -77,8 +105,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let alive = true;
-    void backend
-      .init()
+    void withBackendTimeout(backend.init(), 'טעינת הנתונים')
       .then((next) => {
         if (!alive) return;
         setSnap(next);
@@ -92,8 +119,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       });
 
     const unsubscribe = backend.subscribe(() => {
-      void backend
-        .reload()
+      void withBackendTimeout(backend.reload(), 'רענון הנתונים')
         .then((next) => {
           if (!alive) return;
           setSnap(next);
@@ -160,7 +186,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     refresh: async () => {
       setBusy(true);
       try {
-        const next = await backend.reload();
+        const next = await withBackendTimeout(backend.reload(), 'רענון הנתונים');
         setSnap(next);
         setLoadError(null);
       } catch (error) {
