@@ -164,7 +164,11 @@ function Gate({ children }: { children: React.ReactNode }) {
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
     const onLegal = segments[0] === 'legal';
     const onAuthCallback = segments[0] === 'auth';
-    if (!user && !onAuth && !onLegal && !onAuthCallback) router.replace('/register');
+    const onWebAuthReturn =
+      Platform.OS === 'web' &&
+      typeof window !== 'undefined' &&
+      /[?&#](?:code|access_token|refresh_token|error|error_description)=/.test(window.location.href);
+    if (!user && !onAuth && !onLegal && !onAuthCallback && !onWebAuthReturn) router.replace('/register');
     if (user && onAuth) router.replace('/(tabs)');
   }, [ready, user, segments, router]);
 
