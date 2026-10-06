@@ -572,11 +572,9 @@ export function createRemoteBackend(): Backend {
       };
 
       const { data } = supabase.auth.onAuthStateChange((event) => {
-        // The explicit OAuth callback and the public methods already refresh the
-        // app snapshot after auth changes. Avoid a second backend reload on the
-        // same event, and never call Supabase while the auth callback lock is held.
-        if (event === 'SIGNED_IN') return;
-        if (event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
+        // OAuth callback and explicit auth methods already refresh the app snapshot.
+        // Only sign-out requires a background snapshot reload here.
+        if (event !== 'SIGNED_OUT') return;
         queueReload();
       });
       const channel = supabase
