@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, DevSettings, I18nManager, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
-import { DarkTheme, Stack, ThemeProvider, type ErrorBoundaryProps, useRouter, useSegments } from 'expo-router';
+import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View } from 'react-native';
+import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Updates from 'expo-updates';
@@ -15,17 +15,7 @@ import { colors } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
 
-export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
-  return (
-    <View style={{ flex: 1, backgroundColor: '#05080A', alignItems: 'center', justifyContent: 'center', padding: 28 }}>
-      <Text style={{ color: '#F3F5F7', fontSize: 22, fontWeight: '900', marginBottom: 8, textAlign: 'center' }}>1 CLUB — שגיאת מערכת</Text>
-      <Text style={{ color: '#AAB4BE', fontSize: 12, lineHeight: 18, textAlign: 'center', maxWidth: 760 }}>{error.message || 'שגיאה לא מזוהה'}</Text>
-      <Pressable onPress={retry} style={{ marginTop: 16, backgroundColor: '#D82F3C', borderRadius: 10, paddingHorizontal: 20, paddingVertical: 11 }}>
-        <Text style={{ color: '#FFFFFF', fontSize: 12, fontWeight: '900' }}>נסה שוב</Text>
-      </Pressable>
-    </View>
-  );
-}
+export { ErrorBoundary } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
 
