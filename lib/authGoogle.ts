@@ -8,9 +8,9 @@ import { getSupabase } from '@/lib/supabase';
 function redirectUrl(): string {
   if (Platform.OS === 'web') {
     if (typeof window !== 'undefined' && window.location?.origin) {
-      return `${window.location.origin}/auth/callback`;
+      return `${window.location.origin}/`;
     }
-    return 'https://fc27-israel.vercel.app/auth/callback';
+    return 'https://fc27-israel.vercel.app/';
   }
 
   return Linking.createURL('auth/callback');
@@ -33,7 +33,7 @@ function pickParams(url: string): Record<string, string> {
   return params;
 }
 
-export async function sessionFromUrl(url: string): Promise<void> {
+async function sessionFromUrl(url: string): Promise<void> {
   const params = pickParams(url);
   if (params.error || params.error_description) {
     throw new Error(params.error_description || params.error || 'ההתחברות עם גוגל נכשלה');
