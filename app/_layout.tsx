@@ -132,7 +132,9 @@ function Gate({ children }: { children: React.ReactNode }) {
     if (!ready) return;
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
     const onLegal = segments[0] === 'legal';
-    if (!user && !onAuth && !onLegal) router.replace('/register');
+    const onChampionsPreview = segments[0] === '(tabs)' && segments[1] === 'champions';
+
+    if (!user && !onAuth && !onLegal && !onChampionsPreview) router.replace('/register');
     if (user && onAuth) router.replace('/(tabs)');
   }, [ready, user, segments, router]);
 
@@ -159,6 +161,7 @@ function Gate({ children }: { children: React.ReactNode }) {
       </View>
     );
   }
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <View style={{ flex: 1 }}>{children}</View>
