@@ -54,7 +54,7 @@ const TEKKZ = {
 
 export function ErrorBoundary({ error, retry }: { error: Error; retry: () => void }) {
   return (
-    <Screen scene="champions" showNav={false}>
+    <View style={{ flex: 1, minHeight: 500, backgroundColor: '#070609', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <View style={styles.runtimeError}>
         <Ionicons name="alert-circle-outline" size={52} color="#FF6871" />
         <Text style={styles.runtimeErrorTitle}>FUT Champions לא נטען</Text>
@@ -63,7 +63,7 @@ export function ErrorBoundary({ error, retry }: { error: Error; retry: () => voi
           <Text style={styles.retryText}>נסה שוב</Text>
         </Pressable>
       </View>
-    </Screen>
+    </View>
   );
 }
 
