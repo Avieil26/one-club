@@ -19,11 +19,14 @@ type Player = {
   number: string;
   cqp: string;
   note: string;
+  buildUp: string;
+  defensiveApproach: string;
+  lineHeight: string;
   settings: [string, string][];
 };
 
 const PLAYERS: Player[] = [
-{ id: 'tekkz', name: 'TEKKZ', country: '🇬🇧', platform: 'PS5', record: 'לא פורסם', winRate: 'לא פורסם', formation: '4-4-1-1 (2)', role: 'Pro Player', accent: '#E13B42', number: '7', cqp: 'לא פורסם', note: 'Short Passing · High · Line Height 65', settings: [['Formation','4-4-1-1 (2)'],['Build Up Style','Short Passing'],['Defensive Approach','High'],['Line Height','65'],['RM Role','Inside Forward · Balanced'],['CM Role','Deep-Lying Playmaker · Build-Up'],['CAM Role','Playmaker · Balanced'],['ST Role','Advanced Forward · Attack']] },
+{ id: 'tekkz', name: 'TEKKZ', country: '🇬🇧', platform: 'PS5', record: 'לא פורסם', winRate: 'לא פורסם', formation: '4-4-1-1 (2)', role: 'Pro Player', accent: '#E13B42', number: '7', cqp: 'לא פורסם', note: 'Short Passing · High · Line Height 65', buildUp: 'Short Passing', defensiveApproach: 'High', lineHeight: '65', settings: [['Formation','4-4-1-1 (2)'],['Build Up Style','Short Passing'],['Defensive Approach','High'],['Line Height','65'],['RM Role','Inside Forward · Balanced'],['CM Role','Deep-Lying Playmaker · Build-Up'],['CAM Role','Playmaker · Balanced'],['ST Role','Advanced Forward · Attack']] },
 ];
 
 const TIPS = [
