@@ -201,7 +201,7 @@ export default function ChampionsScreen() {
           <Text style={styles.comingSoonStatus}>בקרוב</Text>
           <Text style={styles.comingSoonMessage}>
             מרכז FUT Champions החדש נמצא בהכנה.
-            {'\\n'}
+            {'\n'}
             הוא ייפתח באתר לאחר שהגרסה הסופית תהיה מוכנה.
           </Text>
         </View>
