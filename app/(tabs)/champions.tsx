@@ -52,6 +52,21 @@ const TEKKZ = {
   ],
 };
 
+export function ErrorBoundary({ error, retry }: { error: Error; retry: () => void }) {
+  return (
+    <Screen scene="champions" showNav={false}>
+      <View style={styles.runtimeError}>
+        <Ionicons name="alert-circle-outline" size={52} color="#FF6871" />
+        <Text style={styles.runtimeErrorTitle}>FUT Champions לא נטען</Text>
+        <Text style={styles.runtimeErrorBody}>{error.message || 'שגיאת מערכת לא מזוהה'}</Text>
+        <Pressable onPress={retry} style={styles.retryButton}>
+          <Text style={styles.retryText}>נסה שוב</Text>
+        </Pressable>
+      </View>
+    </Screen>
+  );
+}
+
 const PITCH_POSITIONS = [
   ['ST', 50, 10],
   ['CAM', 50, 30],
@@ -643,4 +658,9 @@ const styles = StyleSheet.create({
   uploadButton: { flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 6, borderRadius: 10, borderWidth: 1, borderColor: 'rgba(255,75,85,.28)', backgroundColor: 'rgba(255,50,65,.05)', padding: 10 },
   uploadText: { color: '#FF747B', fontSize: 10, fontWeight: '900' },
   disabled: { opacity: .55 },
+  runtimeError: { minHeight: 420, alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: '#080E14', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,73,84,.25)', padding: 28 },
+  runtimeErrorTitle: { color: '#F3F5F7', fontSize: 22, fontWeight: '900', textAlign: 'center' },
+  runtimeErrorBody: { color: '#AAB4BE', fontSize: 12, lineHeight: 18, textAlign: 'center', maxWidth: 760 },
+  retryButton: { backgroundColor: '#D82F3C', borderRadius: 10, paddingHorizontal: 20, paddingVertical: 11, marginTop: 8 },
+  retryText: { color: '#fff', fontSize: 12, fontWeight: '900' },
 });
