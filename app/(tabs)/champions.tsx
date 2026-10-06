@@ -222,7 +222,7 @@ export default function ChampionsScreen() {
   );
 
   return (
-    <Screen scene="ultimate" refreshing={busy} onRefresh={loadCommunity} maxWidth={desktop ? 1420 : 1120}>
+    <Screen scene="champions" refreshing={busy} onRefresh={loadCommunity} maxWidth={desktop ? 1420 : 1120}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
       {header}
 
