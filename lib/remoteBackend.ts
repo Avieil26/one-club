@@ -564,7 +564,13 @@ export function createRemoteBackend(): Backend {
     reload: readSnapshot,
     subscribe(onChange) {
       const supabase = getSupabase();
-      const { data } = supabase.auth.onAuthStateChange(() => onChange());
+      const { data } = supabase.auth.onAuthStateChange((event) => {
+        // Supabase auth callbacks run while the auth lock is held. Do not start
+        // another Supabase call synchronously here; defer the reload to the next
+        // macrotask to avoid the documented auth deadlock.
+        if (event !== 'SIGNED_IN' && event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
+        setTimeout(() => onChange(), 0);
+      });
       const channel = supabase
         .channel('direct-messages')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, () => onChange())
