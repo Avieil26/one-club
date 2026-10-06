@@ -8,9 +8,9 @@ import { getSupabase } from '@/lib/supabase';
 function redirectUrl(): string {
   if (Platform.OS === 'web') {
     if (typeof window !== 'undefined' && window.location?.origin) {
-      return `${window.location.origin}/`;
+      return `${window.location.origin}/auth/callback`;
     }
-    return 'https://fc27-israel.vercel.app/';
+    return 'https://fc27-israel.vercel.app/auth/callback';
   }
 
   return Linking.createURL('auth/callback');
