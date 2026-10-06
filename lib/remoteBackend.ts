@@ -441,11 +441,11 @@ async function readSnapshot(): Promise<Snapshot> {
     );
   }
 
-  let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
+  let profiles = (await rowsOptional<ProfileRow>('profiles')).map(mapProfile);
   if (session) {
     if (!profiles.some((profile) => profile.id === session.user.id)) {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
+      profiles = (await rowsOptional<ProfileRow>('profiles')).map(mapProfile);
     }
     const meta = (session.user.user_metadata ?? {}) as Record<string, unknown>;
     const googleName =
