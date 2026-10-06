@@ -577,10 +577,11 @@ export function createRemoteBackend(): Backend {
       };
 
       const { data } = supabase.auth.onAuthStateChange((event) => {
-        // Supabase auth callbacks run while the auth lock is held. Do not start
-        // another Supabase call synchronously here; defer the reload to the next
-        // macrotask to avoid the documented auth deadlock.
-        if (event !== 'SIGNED_IN' && event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
+        // The explicit OAuth callback and the public methods already refresh the
+        // app snapshot after auth changes. Avoid a second backend reload on the
+        // same event, and never call Supabase while the auth callback lock is held.
+        if (event === 'SIGNED_IN') return;
+        if (event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
         queueReload();
       });
       const channel = supabase
