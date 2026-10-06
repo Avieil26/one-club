@@ -442,6 +442,7 @@ async function readSnapshot(): Promise<Snapshot> {
 
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
   if (session) {
+    profiles = profiles.map((profile) => profile.id === session.user.id ? { ...profile, email: session.user.email ?? profile.email } : profile);
     if (!profiles.some((profile) => profile.id === session.user.id)) {
       await new Promise((resolve) => setTimeout(resolve, 400));
       profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
