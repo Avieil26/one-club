@@ -143,7 +143,7 @@ function Gate({ children }: { children: React.ReactNode }) {
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
     const onLegal = segments[0] === 'legal';
     if (!user && !onAuth && !onLegal) router.replace('/register');
-    if (user && onAuth) router.replace('/(tabs)');
+    if (user && onAuth) router.replace('/');
   }, [ready, user, segments, router]);
 
   useEffect(() => {
