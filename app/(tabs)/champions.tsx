@@ -490,7 +490,7 @@ export default function ChampionsScreen() {
     <Screen scene="champions" showNav={false} maxWidth={2000}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
-      <View style={styles.chrome}>
+      <View style={[styles.chrome, { marginTop: mobile ? -14 : -28, marginHorizontal: mobile ? -12 : -24 }]}>
         <View style={styles.topbar}>
           <View style={styles.topbarActions}>
             <Pressable style={styles.userChip} onPress={() => router.push('/profile' as any)}>
@@ -599,7 +599,7 @@ export default function ChampionsScreen() {
 }
 
 const styles = StyleSheet.create({
-  chrome: { gap: 0, marginTop: -28, marginHorizontal: -24, width: 'calc(100% + 48px)' as any },
+  chrome: { gap: 0, width: '100%' },
   topbar: {
     minHeight: 70,
     backgroundColor: 'rgba(5,8,12,.92)',
