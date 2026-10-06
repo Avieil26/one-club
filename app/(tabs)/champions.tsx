@@ -41,11 +41,7 @@ const settingsRows = [
   ['Analog Sprint', 'Off'],
 ];
 
-const communityFallback = [
-  { id: 'f1', title: 'לחץ גבוה אחרי איבוד', body: 'עובד מצוין כשהיריב בונה לאט. שמרו את ה-CAM קרוב לחלוץ.', formation: '4-2-3-1', platform: 'xbox' as PlatformId, user: 'ZizouFC', votes: 342 },
-  { id: 'f2', title: '4-3-1-2 מאוזן', body: 'מערך יציב למשחקי Champions ארוכים. לא לפתוח את הקווים מוקדם מדי.', formation: '4-3-1-2', platform: 'xbox' as PlatformId, user: 'TikiTakaKing', votes: 298 },
-  { id: 'f3', title: '4-4-1-1 לסגירת משחק', body: 'אחרי יתרון של שער: הורידו עומק ושמרו את ה-CM באמצע.', formation: '4-4-1-1', platform: 'ps5' as PlatformId, user: 'FutChris', votes: 241 },
-];
+const communityFallback: never[] = [];
 
 function Controller({ platform }: { platform: PlatformId }) {
   return (
@@ -111,7 +107,7 @@ export default function ChampionsScreen() {
       user: app.profiles.find((p) => p.id === item.user_id)?.displayName ?? 'שחקן',
       votes: 0,
     }));
-    return [...remote, ...communityFallback.filter((f) => !remote.some((r) => r.title === f.title))];
+    return remote;
   }, [items, app.profiles]);
 
   async function vote(id: string) {
@@ -287,9 +283,9 @@ export default function ChampionsScreen() {
           </View>
 
           <Panel>
-            <SectionTitle icon="people-outline" title="הטקטיקות המובילות בקהילה" subtitle="הכי שימושיות והכי מדורגות השבוע." />
+            <SectionTitle icon="people-outline" title="שחקני הקהילה" subtitle="הטקטיקות שיועלו על ידי שחקני FC27 בישראל יופיעו כאן." />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12, paddingVertical: 2 }}>
-              {community.slice(0, 3).map((item) => (
+              {community.length ? community.slice(0, 3).map((item) => (
                 <View key={item.id} style={styles.communityCard}>
                   <View style={styles.miniPitch}><Text style={styles.miniFormation}>{item.formation ?? 'TIP'}</Text></View>
                   <View style={{ flex: 1 }}>
@@ -302,7 +298,7 @@ export default function ChampionsScreen() {
                     <Text style={styles.voteText}>{voted.includes(item.id) ? 'אהבתי' : 'מועיל'}</Text>
                   </Pressable>
                 </View>
-              ))}
+              )) : <View style={{ paddingVertical: 28, alignItems: 'center', width: '100%' }}><Ionicons name="people-outline" size={30} color="#59636D" /><Text style={{ color: '#7F8993', fontSize: 14, fontWeight: '800', marginTop: 8, textAlign: 'center' }}>עדיין אין תוכן של שחקני הקהילה</Text><Text style={{ color: '#59636D', fontSize: 11, marginTop: 4, textAlign: 'center' }}>ברגע ששחקן יעלה טקטיקה או טיפ, הוא יופיע כאן.</Text></View>}
             </ScrollView>
           </Panel>
         </>
