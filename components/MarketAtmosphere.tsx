@@ -1,12 +1,12 @@
 import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export type SceneId = 'home' | 'career' | 'ultimate' | 'champions' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
+export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
 
 const SCENES: Record<
   SceneId,
   {
-    source: number | null;
+    source: number;
     tint: [string, string, string];
     wash: string;
     vignette: [string, string, string, string];
@@ -26,13 +26,6 @@ const SCENES: Record<
     wash: 'rgba(8,14,22,0.22)',
     vignette: ['rgba(0,0,0,0.25)', 'transparent', 'transparent', 'rgba(0,0,0,0.50)'],
     base: '#070D14',
-  },
-  champions: {
-    source: null,
-    tint: ['rgba(90, 0, 10, 0.82)', 'rgba(32, 4, 8, 0.72)', 'rgba(3, 5, 9, 0.92)'],
-    wash: 'rgba(126, 8, 18, 0.22)',
-    vignette: ['rgba(2,0,0,0.15)', 'transparent', 'transparent', 'rgba(0,0,0,0.78)'],
-    base: '#070609',
   },
   ultimate: {
     source: require('@/assets/images/scene-ultimate.png'),
@@ -105,21 +98,11 @@ export function SceneAtmosphere({ scene }: { scene: SceneId }) {
         { zIndex: 0, elevation: 0, backgroundColor: config.base, overflow: 'hidden' },
       ]}
     >
-      {config.source ? (
-        <Image
-          source={config.source}
-          resizeMode="cover"
-          style={{ position: 'absolute', top: 0, left: 0, width: Math.max(width, 1), height: Math.max(height, 1) }}
-        />
-      ) : null}
-      {scene === 'champions' ? (
-        <>
-          <View style={{ position: 'absolute', width: width * 1.45, height: 160, top: height * 0.04, left: -width * 0.18, backgroundColor: 'rgba(176, 19, 32, 0.18)', transform: [{ rotate: '-16deg' }] }} />
-          <View style={{ position: 'absolute', width: width * 1.35, height: 110, top: height * 0.28, right: -width * 0.22, backgroundColor: 'rgba(230, 34, 51, 0.12)', transform: [{ rotate: '-16deg' }] }} />
-          <View style={{ position: 'absolute', width: width * 1.15, height: 90, top: height * 0.68, left: -width * 0.16, backgroundColor: 'rgba(173, 12, 27, 0.16)', transform: [{ rotate: '-16deg' }] }} />
-          <LinearGradient colors={['transparent', 'rgba(214, 22, 42, 0.15)', 'transparent']} start={{x:0,y:0.3}} end={{x:1,y:0.7}} style={StyleSheet.absoluteFill} />
-        </>
-      ) : null}
+      <Image
+        source={config.source}
+        resizeMode="cover"
+        style={{ position: 'absolute', top: 0, left: 0, width: Math.max(width, 1), height: Math.max(height, 1) }}
+      />
       <LinearGradient colors={config.tint} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
       <LinearGradient colors={config.vignette} locations={[0, 0.18, 0.55, 1]} style={StyleSheet.absoluteFill} />
       {config.wash !== 'transparent' ? (
