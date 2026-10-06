@@ -33,7 +33,7 @@ function pickParams(url: string): Record<string, string> {
   return params;
 }
 
-async function sessionFromUrl(url: string): Promise<void> {
+export async function sessionFromUrl(url: string): Promise<void> {
   const params = pickParams(url);
   if (params.error || params.error_description) {
     throw new Error(params.error_description || params.error || 'ההתחברות עם גוגל נכשלה');
