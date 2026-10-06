@@ -166,12 +166,6 @@ function authFail(error: { message: string }): never {
   throw new Error('ההתחברות נכשלה. נסו שוב.');
 }
 
-async function rows<T>(table: string): Promise<T[]> {
-  const { data, error } = await getSupabase().from(table).select('*');
-  if (error) fail(error);
-  return (data ?? []) as T[];
-}
-
 async function messageRows(): Promise<DirectMessage[]> {
   const { data, error } = await getSupabase()
     .from('direct_messages')
