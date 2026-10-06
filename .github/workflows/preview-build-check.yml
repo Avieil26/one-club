@@ -27,9 +27,10 @@ jobs:
           SERVER_PID=$!
           trap "kill $SERVER_PID" EXIT
           sleep 2
-          cat >/tmp/fc27-auth-smoke.mjs <<'EOF'
-          import { chromium } from 'playwright';
+          cat >/tmp/fc27-auth-smoke.cjs <<'EOF'
+          const { chromium } = require('playwright');
 
+          (async () => {
           const browser = await chromium.launch({ headless: true });
           const page = await browser.newPage();
 
@@ -103,5 +104,9 @@ jobs:
 
           console.log('AUTH_SHELL_SMOKE_PASS');
           await browser.close();
+          })().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+          });
           EOF
-          node /tmp/fc27-auth-smoke.mjs
+          NODE_PATH="$PWD/node_modules" node /tmp/fc27-auth-smoke.cjs
