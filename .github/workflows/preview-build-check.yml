@@ -19,7 +19,7 @@ jobs:
       - run: npx tsc --noEmit
       - run: npx expo export -p web
 
-      - name: Browser smoke test for authenticated shell
+      - name: Browser smoke test for authenticated shell and OAuth callback
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
@@ -31,34 +31,26 @@ jobs:
           const { chromium } = require('playwright');
 
           (async () => {
-          const browser = await chromium.launch({ headless: true });
-          const page = await browser.newPage();
-
-          const errors = [];
-          page.on('pageerror', (error) => errors.push("PAGEERROR: " + error.message));
-          page.on('console', (message) => {
-            if (message.type() === 'error') errors.push("CONSOLE: " + message.text());
-          });
-
-          await page.addInitScript(() => {
+            const sessionUserId = '00000000-0000-0000-0000-000000000001';
             const now = Math.floor(Date.now() / 1000);
-            const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' })).replace(/=/g, '');
-            const payload = btoa(JSON.stringify({
-              sub: '00000000-0000-0000-0000-000000000001',
+            const header = Buffer.from(JSON.stringify({ alg: 'none', typ: 'JWT' })).toString('base64url');
+            const payload = Buffer.from(JSON.stringify({
+              sub: sessionUserId,
               email: 'smoke@example.com',
               role: 'authenticated',
               exp: now + 3600,
               aud: 'authenticated',
-            })).replace(/=/g, '');
-            const token = header + "." + payload + ".";
-            localStorage.setItem('sb-hxjgphhcspzjnkkzdmpk-auth-token', JSON.stringify({
+            })).toString('base64url');
+            const token = header + '.' + payload + '.';
+
+            const session = {
               access_token: token,
               refresh_token: 'smoke-refresh-token',
               expires_in: 3600,
               expires_at: now + 3600,
               token_type: 'bearer',
               user: {
-                id: '00000000-0000-0000-0000-000000000001',
+                id: sessionUserId,
                 aud: 'authenticated',
                 role: 'authenticated',
                 email: 'smoke@example.com',
@@ -66,44 +58,81 @@ jobs:
                 app_metadata: { provider: 'google', providers: ['google'] },
                 created_at: new Date().toISOString(),
               },
-            }));
-          });
+            };
 
-          await page.route('**://*.supabase.co/**', async (route) => {
-            const url = route.request().url();
-            if (url.includes('/auth/v1/')) {
-              await route.fulfill({
-                status: 200,
-                contentType: 'application/json',
-                body: JSON.stringify({ access_token: '', refresh_token: '', user: null }),
+            async function setupSupabase(page) {
+              await page.route('**://*.supabase.co/**', async (route) => {
+                const url = route.request().url();
+                if (url.includes('/auth/v1/token')) {
+                  await route.fulfill({
+                    status: 200,
+                    contentType: 'application/json',
+                    body: JSON.stringify(session),
+                  });
+                  return;
+                }
+                if (url.includes('/auth/v1/')) {
+                  await route.fulfill({
+                    status: 200,
+                    contentType: 'application/json',
+                    body: JSON.stringify({ access_token: session.access_token, refresh_token: session.refresh_token, user: session.user }),
+                  });
+                  return;
+                }
+                await route.fulfill({
+                  status: 200,
+                  contentType: 'application/json',
+                  body: JSON.stringify([]),
+                });
               });
-              return;
             }
-            await route.fulfill({
-              status: 200,
-              contentType: 'application/json',
-              body: JSON.stringify([]),
-            });
-          });
 
-          await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
-          await page.waitForTimeout(1500);
+            async function assertVisibleApp(page, label) {
+              await page.waitForTimeout(1800);
+              const bodyText = await page.locator('body').innerText();
+              const bodyHtml = await page.locator('body').innerHTML();
+              if (bodyHtml.trim().length < 500) {
+                throw new Error(label + ': effectively blank document');
+              }
+              if (!/1 CLUB|המגרש|קריירה|SBC|מרקט/.test(bodyText)) {
+                throw new Error(label + ': expected app UI not found. Body: ' + bodyText.slice(0, 1200));
+              }
+            }
 
-          const bodyText = await page.locator('body').innerText();
-          const bodyHtml = await page.locator('body').innerHTML();
+            async function assertNoErrors(page, label) {
+              const errors = [];
+              page.on('pageerror', (error) => errors.push(label + ' PAGEERROR: ' + error.message));
+              page.on('console', (message) => {
+                if (message.type() === 'error') errors.push(label + ' CONSOLE: ' + message.text());
+              });
+              return errors;
+            }
 
-          if (bodyHtml.trim().length < 500) {
-            throw new Error('Authenticated shell rendered an effectively blank document');
-          }
-          if (!/1 CLUB|המגרש|קריירה|SBC|מרקט/.test(bodyText)) {
-            throw new Error('Authenticated shell did not render expected app text. Body: ' + bodyText.slice(0, 1000));
-          }
-          if (errors.length) {
-            throw new Error(errors.join('\\n'));
-          }
+            const browser = await chromium.launch({ headless: true });
 
-          console.log('AUTH_SHELL_SMOKE_PASS');
-          await browser.close();
+            const callbackPage = await browser.newPage();
+            const callbackErrors = await assertNoErrors(callbackPage, 'callback');
+            await setupSupabase(callbackPage);
+            await callbackPage.goto('http://127.0.0.1:4173/?code=smoke-code&state=smoke-state', { waitUntil: 'networkidle' });
+            await assertVisibleApp(callbackPage, 'OAuth callback');
+            if (callbackErrors.length) throw new Error(callbackErrors.join('\n'));
+
+            const shellPage = await browser.newPage();
+            const shellErrors = await assertNoErrors(shellPage, 'authenticated');
+            await shellPage.addInitScript(({ session }) => {
+              localStorage.setItem(
+                'sb-hxjgphhcspzjnkkzdmpk-auth-token',
+                JSON.stringify(session),
+              );
+            }, { session });
+            await setupSupabase(shellPage);
+            await shellPage.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+            await assertVisibleApp(shellPage, 'Authenticated shell');
+            if (shellErrors.length) throw new Error(shellErrors.join('\n'));
+
+            console.log('OAUTH_CALLBACK_SMOKE_PASS');
+            console.log('AUTH_SHELL_SMOKE_PASS');
+            await browser.close();
           })().catch((error) => {
             console.error(error);
             process.exitCode = 1;
