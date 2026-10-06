@@ -104,7 +104,7 @@ function SectionTitle({ icon, title, subtitle }: { icon: keyof typeof Ionicons.g
 export default function ChampionsScreen() {
   const app = useApp();
   const { width } = useWindowDimensions();
-  const canViewChampions = app.user?.email?.trim().toLowerCase() === 'avielinapurkar717@gmail.com';
+  const canViewChampions = app.user?.isAdmin === true;
   const desktop = width >= 1050;
   const [tab, setTab] = useState<Kind>('champions');
   const [platform, setPlatform] = useState<PlatformId>('xbox');
