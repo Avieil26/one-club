@@ -249,14 +249,11 @@ export default function ChampionsScreen() {
             <Panel style={[styles.rewardsPanel, desktop && { flex: .95 }]}>
               <SectionTitle icon="gift-outline" title="פרסים" subtitle="התגמול משתנה לפי הדירוג הסופי שלך." />
               <View style={styles.rewardGrid}>
-                {rewards.map((reward) => (
-                  <View key={reward.rank} style={[styles.rewardCard, { borderColor: reward.tone + '88' }]}>
+                {rewardTypes.map((reward) => (
+                  <View key={reward.title} style={[styles.rewardCard, { borderColor: reward.tone + '88' }]}>
                     <Ionicons name={reward.icon as keyof typeof Ionicons.glyphMap} size={34} color={reward.tone} />
-                    <Text style={styles.rewardRank}>{reward.rank}</Text>
-                    <Text style={styles.rewardItem}>Champions Player Item</Text>
-                    <Text style={styles.rewardItem}>Player Pick (1 of 3)</Text>
-                    <Text style={styles.rewardCoins}>{reward.coins} Coins</Text>
-                    <View style={styles.token}><Text>+ {reward.tokens} Champions Tokens</Text></View>
+                    <Text style={styles.rewardRank}>{reward.title}</Text>
+                    <Text style={styles.rewardItem}>{reward.body}</Text>
                   </View>
                 ))}
               </View>
@@ -347,7 +344,7 @@ export default function ChampionsScreen() {
 
       {tab === 'rewards' ? (
         <Panel>
-          <SectionTitle icon="gift-outline" title="מסלול הפרסים" subtitle="היעדים החשובים לפי התוצאה שלך." />
+          <SectionTitle icon="gift-outline" title="מסלול הפרסים" subtitle="סוגי הפרסים שקיימים ב־FC27 Champions; הכמויות המדויקות נקבעות לפי האירוע ומוצגות במשחק." />
           <View style={styles.rewardGrid}>{rewardTypes.map((r) => <View key={r.title} style={[styles.rewardCard, { borderColor: r.tone + '88' }]}><Ionicons name={r.icon as any} size={42} color={r.tone}/><Text style={styles.rewardRank}>{r.title}</Text><Text style={styles.rewardItem}>{r.body}</Text></View>)}</View>
         </Panel>
       ) : null}
