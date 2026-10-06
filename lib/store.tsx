@@ -19,6 +19,7 @@ import type {
 type AppValue = Snapshot & {
   ready: boolean;
   busy: boolean;
+  loadError: string | null;
   signInDemo: (profileId: string) => Promise<void>;
   signInNamed: (name: string) => Promise<void>;
   signInEmail: (email: string, password: string) => Promise<void>;
@@ -72,19 +73,38 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [snap, setSnap] = useState<Snapshot>(EMPTY);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
-    backend.init().then((next) => {
-      if (!alive) return;
-      setSnap(next);
-      setReady(true);
-    });
-    const unsubscribe = backend.subscribe(() => {
-      backend.reload().then((next) => {
-        if (alive) setSnap(next);
+    void backend
+      .init()
+      .then((next) => {
+        if (!alive) return;
+        setSnap(next);
+        setLoadError(null);
+        setReady(true);
+      })
+      .catch((error) => {
+        if (!alive) return;
+        setLoadError(error instanceof Error ? error.message : 'טעינת הנתונים נכשלה');
+        setReady(true);
       });
+
+    const unsubscribe = backend.subscribe(() => {
+      void backend
+        .reload()
+        .then((next) => {
+          if (!alive) return;
+          setSnap(next);
+          setLoadError(null);
+        })
+        .catch((error) => {
+          if (!alive) return;
+          setLoadError(error instanceof Error ? error.message : 'רענון הנתונים נכשל');
+        });
     });
+
     return () => {
       alive = false;
       unsubscribe();
@@ -106,6 +126,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     ...snap,
     ready,
     busy,
+    loadError,
     signInDemo: (profileId) => run(() => backend.signInDemo(profileId), setSnap).then(() => undefined),
     signInNamed: (name) => run(() => backend.signInNamed(name), setSnap).then(() => undefined),
     signInEmail: (email, password) => run(() => backend.signInEmail(email, password), setSnap).then(() => undefined),
