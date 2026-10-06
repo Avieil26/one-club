@@ -430,7 +430,9 @@ export default function ChampionsScreen() {
                   </View>
                 ))}
               </ScrollView>
-            ) : (
+            )}
+
+      {tab === 'community' && (
               <View style={styles.emptyState}>
                 <Ionicons name="people-outline" size={28} color="#68737F" />
                 <Text style={styles.emptyTitle}>עדיין אין פרופילי Champions בקהילה</Text>
@@ -498,9 +500,7 @@ export default function ChampionsScreen() {
             </View>
           )}
         </>
-      )}
-
-      {showComposer ? (
+      )}      {showComposer ? (
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
