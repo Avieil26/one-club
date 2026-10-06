@@ -104,6 +104,7 @@ function SectionTitle({ icon, title, subtitle }: { icon: keyof typeof Ionicons.g
 export default function ChampionsScreen() {
   const app = useApp();
   const { width } = useWindowDimensions();
+  const canViewChampions = app.user?.email?.trim().toLowerCase() === 'avielinapurkar717@gmail.com';
   const desktop = width >= 1050;
   const [tab, setTab] = useState<Kind>('champions');
   const [platform, setPlatform] = useState<PlatformId>('xbox');
@@ -127,7 +128,14 @@ export default function ChampionsScreen() {
     setVoted((votes ?? []).map((v) => v.content_id));
   }
 
-  useEffect(() => { void loadCommunity(); }, [app.user?.id]);
+  useEffect(() => {
+    if (!canViewChampions) {
+      setItems([]);
+      setVoted([]);
+      return;
+    }
+    void loadCommunity();
+  }, [app.user?.id, canViewChampions]);
 
   const community = useMemo(() => {
     const remote = items.map((item) => ({
@@ -181,6 +189,24 @@ export default function ChampionsScreen() {
     } catch (e) {
       Alert.alert('הפרסום נכשל', e instanceof Error ? e.message : 'נסו שוב.');
     } finally { setBusy(false); }
+  }
+
+  if (!canViewChampions) {
+    return (
+      <View style={styles.comingSoonContainer}>
+        <Stack.Screen options={{ title: 'FUT Champions' }} />
+        <View style={styles.comingSoonCard}>
+          <Text style={styles.comingSoonIcon}>🏆</Text>
+          <Text style={styles.comingSoonTitle}>FUT Champions</Text>
+          <Text style={styles.comingSoonStatus}>בקרוב</Text>
+          <Text style={styles.comingSoonMessage}>
+            מרכז FUT Champions החדש נמצא בהכנה.
+            {'\\n'}
+            הוא ייפתח באתר לאחר שהגרסה הסופית תהיה מוכנה.
+          </Text>
+        </View>
+      </View>
+    );
   }
 
   const header = (
