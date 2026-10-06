@@ -559,31 +559,25 @@ export function createRemoteBackend(): Backend {
     reload: readSnapshot,
     subscribe(onChange) {
       const supabase = getSupabase();
-      let queued = false;
       let timer: ReturnType<typeof setTimeout> | null = null;
       const queueReload = () => {
-        if (queued) return;
-        queued = true;
+        if (timer) return;
         timer = setTimeout(() => {
-          queued = false;
           timer = null;
           onChange();
         }, 0);
       };
 
-      const { data } = supabase.auth.onAuthStateChange((event) => {
-        // OAuth callback and explicit auth methods already refresh the app snapshot.
-        // Only sign-out requires a background snapshot reload here.
-        if (event !== 'SIGNED_OUT') return;
-        queueReload();
-      });
+      // Auth changes are handled explicitly by auth methods and AppProvider.init().
+      // Avoid an auth listener entirely: Supabase auth callbacks may hold an
+      // internal lock while firing, so reloading the backend from that callback
+      // can deadlock a subsequent getSession() call.
       const channel = supabase
         .channel('direct-messages')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, queueReload)
         .subscribe();
       return () => {
         if (timer) clearTimeout(timer);
-        data.subscription.unsubscribe();
         void supabase.removeChannel(channel);
       };
     },
