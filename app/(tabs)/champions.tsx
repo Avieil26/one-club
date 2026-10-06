@@ -1,180 +1,818 @@
 import { useMemo, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { Stack } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Stack, useRouter } from 'expo-router';
+import {
+  Image,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import { Screen } from '@/components/ui';
+import { useApp } from '@/lib/store';
 
-type Player = {
-  id: string;
-  name: string;
-  country: string;
-  platform: 'PS5' | 'Xbox';
-  record: string;
-  winRate: string;
-  formation: string;
-  role: string;
-  accent: string;
-  number: string;
-  cqp: string;
-  note: string;
-  buildUp: string;
-  defensiveApproach: string;
-  lineHeight: string;
-  settings: [string, string][];
-};
+type IconName = keyof typeof Ionicons.glyphMap;
+type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'tactics' | 'controller';
 
-const PLAYERS: Player[] = [
-{ id: 'tekkz', name: 'TEKKZ', country: '🇬🇧', platform: 'PS5', record: 'לא פורסם', winRate: 'לא פורסם', formation: '4-4-1-1 (2)', role: 'Pro Player', accent: '#E13B42', number: '7', cqp: 'לא פורסם', note: 'Short Passing · High · Line Height 65', buildUp: 'Short Passing', defensiveApproach: 'High', lineHeight: '65', settings: [['Formation','4-4-1-1 (2)'],['Build Up Style','Short Passing'],['Defensive Approach','High'],['Line Height','65'],['RM Role','Inside Forward · Balanced'],['CM Role','Deep-Lying Playmaker · Build-Up'],['CAM Role','Playmaker · Balanced'],['ST Role','Advanced Forward · Attack']] },
+type TekkzRole = [string, string];
+
+const NAV: { id: SectionId; label: string; short: string; icon: IconName }[] = [
+  { id: 'center', label: 'מרכז Champions', short: 'Champions מרכז', icon: 'trophy-outline' },
+  { id: 'community', label: 'שחקני הקהילה', short: 'שחקני הקהילה', icon: 'people-outline' },
+  { id: 'rewards', label: 'פרסים', short: 'פרסים', icon: 'gift-outline' },
+  { id: 'tekkz', label: 'TEKKZ Pro', short: 'TEKKZ Pro', icon: 'star-outline' },
+  { id: 'tactics', label: 'טקטיקות והרכבים', short: 'טקטיקות', icon: 'git-network-outline' },
+  { id: 'controller', label: 'הגדרות שלט', short: 'שלטים', icon: 'game-controller-outline' },
 ];
 
-const TIPS = [
-  ['01','אל תמהר לשנות מערך','הישאר עם המבנה שמייצר לך מצבים לפני שאתה משנה הוראות.'],
-  ['02','שמור שחקן אחד מאחור','במעברים מהירים ההגנה שלך נשארת מאוזנת.'],
-  ['03','שחק לפי קצב היריב','לפעמים ניצחון ב-Champions מגיע מניהול קצב ולא מעוד התקפה.'],
+const TEKKZ_ROLES: TekkzRole[] = [
+  ['GK', 'Defend'],
+  ['RB', 'Balanced'],
+  ['CB', 'Defend'],
+  ['CB', 'Defend'],
+  ['LB', 'Balanced'],
+  ['RM', 'Inside Forward · Balanced'],
+  ['CM', 'Deep-Lying Playmaker · Build-Up'],
+  ['CM', 'Deep-Lying Playmaker · Build-Up'],
+  ['LM', 'Inside Forward · Balanced'],
+  ['CAM', 'Playmaker · Balanced'],
+  ['ST', 'Advanced Forward · Attack'],
 ];
 
-function PlayerPortrait({ player, large = false }: { player: Player; large?: boolean }) {
-  return (
-    <LinearGradient colors={['#1A1B22','#0D1118','#251017']} style={[styles.portrait, large && styles.portraitLarge, { borderColor: player.accent + '66' }]}>
-      <View style={[styles.portraitGlow, { backgroundColor: player.accent + '26' }]} />
-      <View style={styles.portraitHead}><Text style={[styles.portraitInitial, large && styles.portraitInitialLarge]}>{player.name.slice(0,1)}</Text></View>
-      <View style={styles.portraitShoulders}><Text style={styles.portraitNumber}>{player.number}</Text></View>
-      <View style={styles.portraitTag}><Text style={styles.portraitTagText}>PRO</Text></View>
-    </LinearGradient>
-  );
-}
+const CONTROLLER_ROWS = [
+  ['Competitive Preset', 'On'],
+  ['Auto Shots', 'Off'],
+  ['Shot Assistance', 'Semi'],
+  ['Through Pass Assistance', 'Assisted'],
+  ['Player Switching', 'Right Stick'],
+  ['Analog Sprint', 'Off'],
+] as const;
 
-function MiniPitch({ formation }: { formation: string }) {
-  const dots = [['50%','10%'],['24%','27%'],['76%','27%'],['50%','38%'],['34%','53%'],['66%','53%'],['13%','72%'],['38%','70%'],['62%','70%'],['87%','72%'],['50%','91%']];
+const TOP_LINKS = [
+  ['בית', '/'],
+  ['קריירה', '/career'],
+  ['אולטימייט', '/ultimate'],
+  ['FUT Champions', '/champions'],
+  ['SBC', '/sbc'],
+  ['משחקונים', '/games'],
+  ['לוח', '/board'],
+] as const;
+
+function Panel({ children, style }: { children: React.ReactNode; style?: object }) {
   return (
-    <View style={styles.miniPitch}>
-      <View style={styles.pitchHalf} />
-      {dots.map(([left, top], index) => <View key={index} style={[styles.pitchDot, { left: left as `${number}%`, top: top as `${number}%` }]} />)}
-      <View style={styles.pitchLabel}><Text style={styles.pitchLabelText}>{formation}</Text></View>
+    <View style={[styles.panel, style]}>
+      <LinearGradient
+        colors={['rgba(13,14,20,.97)', 'rgba(7,9,14,.98)']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={StyleSheet.absoluteFillObject}
+      />
+      {children}
     </View>
   );
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
-  return <View style={styles.metric}><Text style={styles.metricValue}>{value}</Text><Text style={styles.metricLabel}>{label}</Text></View>;
+function SectionHeading({
+  eyebrow,
+  title,
+  subtitle,
+  icon,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  icon: IconName;
+}) {
+  return (
+    <View style={styles.sectionHeading}>
+      <View style={styles.sectionHeadingIcon}>
+        <Ionicons name={icon} size={18} color="#F55760" />
+      </View>
+      <View style={styles.sectionHeadingText}>
+        {eyebrow ? <Text style={styles.sectionEyebrow}>{eyebrow}</Text> : null}
+        <Text style={styles.sectionTitle}>{title}</Text>
+        {subtitle ? <Text style={styles.sectionSubtitle}>{subtitle}</Text> : null}
+      </View>
+    </View>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+  tone = 'gold',
+  note,
+}: {
+  label: string;
+  value: string;
+  tone?: 'gold' | 'red' | 'green';
+  note: string;
+}) {
+  return (
+    <View style={styles.metricCard}>
+      <Text style={styles.metricLabel}>{label}</Text>
+      <Text style={[styles.metricValue, tone === 'green' && styles.metricGreen, tone === 'red' && styles.metricRed]}>
+        {value}
+      </Text>
+      <Text style={styles.metricNote}>{note}</Text>
+      <View style={styles.metricBar}>
+        <View
+          style={[
+            styles.metricBarFill,
+            tone === 'red' && styles.metricBarRed,
+            tone === 'green' && styles.metricBarGreen,
+          ]}
+        />
+      </View>
+    </View>
+  );
+}
+
+function MiniPitch({ formation, compact = false }: { formation: string; compact?: boolean }) {
+  const positions = [
+    ['50%', '10%'],
+    ['24%', '28%'],
+    ['76%', '28%'],
+    ['50%', '39%'],
+    ['34%', '53%'],
+    ['66%', '53%'],
+    ['13%', '72%'],
+    ['38%', '71%'],
+    ['62%', '71%'],
+    ['87%', '72%'],
+    ['50%', '91%'],
+  ];
+
+  return (
+    <View style={[styles.pitch, compact && styles.pitchCompact]}>
+      <View style={styles.pitchMidline} />
+      <View style={styles.pitchBoxTop} />
+      <View style={styles.pitchBoxBottom} />
+      {positions.map(([left, top], index) => (
+        <View
+          key={index}
+          style={[
+            styles.pitchDot,
+            compact && styles.pitchDotCompact,
+            { left: left as any, top: top as any },
+          ]}
+        />
+      ))}
+      <View style={styles.pitchBadge}>
+        <Text style={styles.pitchBadgeText}>{formation}</Text>
+      </View>
+    </View>
+  );
+}
+
+function TekkzCard({ selected, compact = false }: { selected: boolean; compact?: boolean }) {
+  return (
+    <View style={[styles.tekkzCard, selected && styles.tekkzCardSelected, compact && styles.tekkzCardCompact]}>
+      <View style={styles.cardTopLine}>
+        <View style={styles.sourceBadge}>
+          <Ionicons name="checkmark-circle" size={14} color="#68E09B" />
+          <Text style={styles.sourceBadgeText}>VERIFIED SOURCE</Text>
+        </View>
+        <Text style={styles.proBadgeText}>TEKKZ PRO</Text>
+      </View>
+      <View style={styles.playerCardBody}>
+        <View style={styles.playerPortrait}>
+          <View style={styles.playerHead}>
+            <Text style={styles.playerInitial}>T</Text>
+          </View>
+          <View style={styles.playerShirt}>
+            <Text style={styles.playerNumber}>7</Text>
+          </View>
+        </View>
+        <View style={styles.playerCardCopy}>
+          <View style={styles.nameRow}>
+            <Text style={styles.playerName}>TEKKZ</Text>
+            <Text style={styles.playerCountry}>🇬🇧</Text>
+          </View>
+          <Text style={styles.playerRole}>EA FC 27 · Pro Player</Text>
+          <Text style={styles.playerFormation}>4-4-1-1 (2)</Text>
+          <Text style={styles.playerSetup}>Short Passing · High · Line Height 65</Text>
+        </View>
+        <MiniPitch formation="4-4-1-1 (2)" compact />
+      </View>
+      <View style={styles.cardMetaRow}>
+        <View style={styles.cardMetaItem}>
+          <Ionicons name="game-controller-outline" size={15} color="#BBC3CB" />
+          <Text style={styles.cardMetaText}>הגדרות שלט</Text>
+        </View>
+        <View style={styles.cardMetaItem}>
+          <Ionicons name="git-network-outline" size={15} color="#BBC3CB" />
+          <Text style={styles.cardMetaText}>טקטיקה</Text>
+        </View>
+        <View style={styles.cardMetaItem}>
+          <Ionicons name="document-text-outline" size={15} color="#BBC3CB" />
+          <Text style={styles.cardMetaText}>מקור חיצוני</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function EmptyCommunity() {
+  return (
+    <Panel style={styles.emptyPanel}>
+      <View style={styles.emptyIcon}>
+        <Ionicons name="people-outline" size={25} color="#68737D" />
+      </View>
+      <Text style={styles.emptyTitle}>שחקני הקהילה</Text>
+      <Text style={styles.emptyText}>כרגע אין שחקני קהילה או טקטיקות שהועלו ואושרו.</Text>
+      <Text style={styles.emptyHint}>כששחקן יעלה תוכן ויאושר, הוא יופיע כאן.</Text>
+    </Panel>
+  );
 }
 
 export default function ChampionsScreen() {
+  const app = useApp();
+  const router = useRouter();
   const { width } = useWindowDimensions();
-  const desktop = width >= 1100;
-  const [section, setSection] = useState<'center' | 'community'>('community');
-  const [selectedId, setSelectedId] = useState('tekkz');
-  const [platform, setPlatform] = useState<'ALL' | 'PS5' | 'Xbox'>('ALL');
-  const visiblePlayers = useMemo(() => platform === 'ALL' ? PLAYERS : PLAYERS.filter((p) => p.platform === platform), [platform]);
-  const selected = PLAYERS.find((p) => p.id === selectedId) ?? PLAYERS[0];
+  const mobile = width < 900;
+  const [section, setSection] = useState<SectionId>('center');
+
+  const canView = app.user?.isAdmin === true;
+
+  const selectSection = (id: SectionId) => setSection(id);
+
+  const content = useMemo(() => {
+    if (section === 'community') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading icon="people-outline" eyebrow="COMMUNITY HUB" title="שחקני הקהילה" subtitle="תוכן אמיתי של שחקני FC27 יופיע כאן לאחר אישור." />
+          <EmptyCommunity />
+        </View>
+      );
+    }
+
+    if (section === 'rewards') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading icon="gift-outline" eyebrow="REWARD TRACK" title="מסלול הפרסים" subtitle="הסוגים מוצגים כאן; הכמויות המדויקות יופיעו לפי האירוע והדירוג." />
+          <View style={styles.rewardGrid}>
+            {[
+              ['Champions Player Item', 'פריט שחקן Champions', 'diamond', '#D8AA4A'],
+              ['Player Pick', 'בחירת שחקן', 'star', '#F4D16A'],
+              ['Champions Tokens', 'טוקנים ל־Champions', 'pricetag-outline', '#70C7FF'],
+            ].map(([title, body, icon, tone]) => (
+              <Panel key={title}>
+                <Ionicons name={icon as IconName} size={28} color={tone} />
+                <Text style={styles.rewardTitle}>{title}</Text>
+                <Text style={styles.rewardBody}>{body}</Text>
+              </Panel>
+            ))}
+          </View>
+        </View>
+      );
+    }
+
+    if (section === 'tekkz') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="TEKKZ · נתוני FC27" subtitle="הצגה של נתוני setup שנבדקו ממקור חיצוני, בלי Record / CQP / Rank לא מאומתים." />
+          <View style={styles.tekkzDetailGrid}>
+            <Panel style={styles.tekkzDetailMain}>
+              <View style={styles.detailTopRow}>
+                <View>
+                  <Text style={styles.detailKicker}>VERIFIED SETUP</Text>
+                  <Text style={styles.detailName}>TEKKZ 🇬🇧</Text>
+                  <Text style={styles.detailSub}>PS5 · 4-4-1-1 (2) · Pro Player</Text>
+                </View>
+                <View style={styles.goldPill}>
+                  <Ionicons name="checkmark-circle" size={15} color="#70E5A1" />
+                  <Text style={styles.goldPillText}>FUTSettings</Text>
+                </View>
+              </View>
+              <View style={styles.detailFacts}>
+                <View style={styles.detailFact}><Text style={styles.detailFactValue}>Short Passing</Text><Text style={styles.detailFactLabel}>BUILD UP STYLE</Text></View>
+                <View style={styles.detailFact}><Text style={styles.detailFactValue}>High</Text><Text style={styles.detailFactLabel}>DEFENSIVE APPROACH</Text></View>
+                <View style={styles.detailFact}><Text style={styles.detailFactValue}>65</Text><Text style={styles.detailFactLabel}>LINE HEIGHT</Text></View>
+              </View>
+              <View style={styles.roleGrid}>
+                {TEKKZ_ROLES.map(([position, role], index) => (
+                  <View key={position + index} style={styles.roleChip}>
+                    <Text style={styles.rolePosition}>{position}</Text>
+                    <Text style={styles.roleText}>{role}</Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={styles.sourceNote}>מקור חיצוני: FUTSettings · EA SPORTS FC 27</Text>
+            </Panel>
+            <Panel style={styles.tekkzPitchPanel}>
+              <Text style={styles.pitchTitle}>הטקטיקה של TEKKZ</Text>
+              <Text style={styles.pitchSub}>4-4-1-1 (2)</Text>
+              <MiniPitch formation="4-4-1-1 (2)" />
+            </Panel>
+          </View>
+        </View>
+      );
+    }
+
+    if (section === 'tactics') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading icon="git-network-outline" eyebrow="TACTICS LIBRARY" title="טקטיקות והרכבים" subtitle="מערכים, תפקידי שחקנים ונתוני setup שניתנים לאימות." />
+          <View style={styles.tacticGrid}>
+            <Panel style={styles.tacticPanel}>
+              <Text style={styles.tacticTitle}>TEKKZ · 4-4-1-1 (2)</Text>
+              <Text style={styles.tacticSub}>Short Passing · High · Line Height 65</Text>
+              <MiniPitch formation="4-4-1-1 (2)" />
+            </Panel>
+            <Panel style={styles.tacticPanel}>
+              <Text style={styles.tacticTitle}>תפקידי מפתח</Text>
+              {TEKKZ_ROLES.slice(5).map(([position, role], index) => (
+                <View key={position + index} style={styles.tacticRow}>
+                  <Text style={styles.tacticValue}>{role}</Text>
+                  <Text style={styles.tacticLabel}>{position}</Text>
+                </View>
+              ))}
+            </Panel>
+          </View>
+        </View>
+      );
+    }
+
+    if (section === 'controller') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading icon="game-controller-outline" eyebrow="CONTROLLER LAB" title="הגדרות שלט" subtitle="הגדרות תחרותיות כלליות; נתוני שלט ספציפיים ל־TEKKZ יוצגו רק אחרי אימות." />
+          <View style={styles.controllerGrid}>
+            <Panel style={styles.controllerPanel}>
+              <View style={styles.controllerPreview}>
+                <Text style={styles.controllerGlyph}>🎮</Text>
+                <Text style={styles.controllerName}>PlayStation 5 · DualSense</Text>
+              </View>
+            </Panel>
+            <Panel style={styles.controllerSettings}>
+              {CONTROLLER_ROWS.map(([label, value]) => (
+                <View key={label} style={styles.settingRow}>
+                  <Text style={styles.settingValue}>{value}</Text>
+                  <Text style={styles.settingLabel}>{label}</Text>
+                </View>
+              ))}
+            </Panel>
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.contentStack}>
+        <View style={styles.smallMetaStrip}>
+          <Text style={styles.metaMuted}>Standalone Preview</Text>
+          <Text style={styles.metaMuted}>CQP — / 1,000</Text>
+          <Text style={styles.metaMuted}>MATCH FINALS 15</Text>
+          <Text style={styles.metaMuted}>Season 1</Text>
+        </View>
+
+        <View style={[styles.centerRow, mobile && styles.centerRowMobile]}>
+          <Panel style={styles.rankPanel}>
+            <View style={styles.rankRing}>
+              <Text style={styles.rankRingLabel}>RANK</Text>
+              <Text style={styles.rankRingValue}>—</Text>
+            </View>
+            <View style={styles.rankCopy}>
+              <Text style={styles.rankSeason}>SEASON 1 · הסטטוס שלך</Text>
+              <Text style={styles.rankTitle}>נתונים אישיים</Text>
+              <Text style={styles.rankStatus}>יופיעו כאן לאחר שיחוברו לנתוני המשחק.</Text>
+              <Text style={styles.nextTargetLabel}>NEXT TARGET</Text>
+              <Text style={styles.nextTargetValue}>נתוני דירוג · CQP לפי חשבון</Text>
+              <View style={styles.longBar}><View style={styles.longBarFill} /></View>
+            </View>
+          </Panel>
+
+          <Panel style={styles.progressPanel}>
+            <View style={styles.progressHeader}>
+              <View>
+                <Text style={styles.progressEyebrow}>CHAMPIONS PROGRESS</Text>
+                <Text style={styles.progressTitle}>המסלול שלך לדרגה הבאה</Text>
+                <Text style={styles.progressSub}>15 משחקי Finals · Form, Rank ו־CQP במקום אחד.</Text>
+              </View>
+              <View style={styles.progressIcon}><Ionicons name="trophy-outline" size={21} color="#F6CC5E" /></View>
+            </View>
+
+            <View style={styles.progressStats}>
+              <View style={styles.progressTile}>
+                <Text style={styles.tileLabel}>CQP</Text>
+                <Text style={styles.tileValue}>—</Text>
+                <Text style={styles.tileNote}>/ 1,000</Text>
+              </View>
+              <View style={styles.progressTile}>
+                <Text style={styles.tileLabel}>FORM</Text>
+                <Text style={styles.tileValue}>—</Text>
+                <Text style={styles.tileNote}>נתוני משחק</Text>
+              </View>
+              <View style={styles.progressTile}>
+                <Text style={styles.tileLabel}>המאזן שלך</Text>
+                <Text style={styles.tileValue}>—</Text>
+                <Text style={styles.tileNote}>ניצחונות / הפסדים</Text>
+              </View>
+            </View>
+
+            <View style={styles.progressBottomRow}>
+              <Text style={styles.progressTarget}>CQP לפי חשבון</Text>
+              <View style={styles.progressBarLarge}><View style={styles.progressBarLargeFill} /></View>
+              <Text style={styles.progressTarget}>15 Finals</Text>
+            </View>
+          </Panel>
+        </View>
+
+        <View style={styles.contentGrid}>
+          <Panel style={styles.tacticPreview}>
+            <SectionHeading icon="git-network-outline" title="הטקטיקה שלך" subtitle="מבנה לדוגמה · נתונים אישיים יוזנו בעתיד." />
+            <View style={styles.tacticInside}>
+              <MiniPitch formation="4-2-3-1" />
+              <View style={styles.tacticInfo}>
+                {[
+                  ['Build Up Style', 'Balanced'],
+                  ['Defensive Approach', 'Balanced'],
+                  ['Width', '50'],
+                  ['Depth', '50'],
+                ].map(([name, value]) => (
+                  <View key={name} style={styles.settingRow}>
+                    <Text style={styles.settingValue}>{value}</Text>
+                    <Text style={styles.settingLabel}>{name}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </Panel>
+
+          <Panel style={styles.controllerHomePanel}>
+            <SectionHeading icon="game-controller-outline" title="Controller Lab" subtitle="הגדרות תחרותיות למשחק נקי ויציב." />
+            <View style={styles.controllerHomeBody}>
+              <View style={styles.controllerCircle}><Text style={styles.controllerGlyph}>🎮</Text></View>
+              <View style={styles.controllerHomeRows}>
+                {CONTROLLER_ROWS.slice(0, 4).map(([name, value]) => (
+                  <View key={name} style={styles.settingRow}>
+                    <Text style={styles.settingValue}>{value}</Text>
+                    <Text style={styles.settingLabel}>{name}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </Panel>
+        </View>
+
+        <Panel>
+          <SectionHeading icon="star-outline" eyebrow="PRO SETUP" title="TEKKZ Pro" subtitle="מערך והגדרות שפורסמו ונבדקו ממקור חיצוני." />
+          <TekkzCard selected />
+          <Text style={styles.sourceNote}>TEKKZ · 4-4-1-1 (2) · Short Passing · High · Line Height 65 · FUTSettings</Text>
+        </Panel>
+
+        <EmptyCommunity />
+      </View>
+    );
+  }, [mobile, section]);
+
+  if (!canView) {
+    return (
+      <Screen scene="champions" showNav={false}>
+        <Stack.Screen options={{ title: 'FUT Champions' }} />
+        <View style={styles.comingSoon}>
+          <Text style={styles.comingSoonIcon}>🏆</Text>
+          <Text style={styles.comingSoonTitle}>FUT Champions</Text>
+          <Text style={styles.comingSoonStatus}>בקרוב</Text>
+          <Text style={styles.comingSoonText}>מרכז FUT Champions החדש נמצא בהכנה.</Text>
+        </View>
+      </Screen>
+    );
+  }
 
   return (
-    <Screen scene="champions" maxWidth={1500}>
+    <Screen scene="champions" showNav={false} maxWidth={1600}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
-      <View style={styles.page}>
-        <LinearGradient colors={['#18070B','#351019','#090D12']} start={{x:0,y:0}} end={{x:1,y:1}} style={styles.hero}>
-          <View style={styles.heroNoise} />
-          <View style={styles.heroTop}>
-            <View style={styles.crest}><Ionicons name="trophy" size={34} color="#F8D36A" /><Text style={styles.crestMini}>FUT</Text></View>
-            <View style={styles.heroCopy}>
-              <Text style={styles.eyebrow}>COMPETE  ·  IMPROVE  ·  WIN</Text>
-              <Text style={styles.heroTitle}>FUT CHAMPIONS</Text>
-              <Text style={styles.heroSubtitle}>המסע שלך. התוצאות שלך. הפרסים שלך.</Text>
-              <View style={styles.heroStats}>
-                <View style={styles.heroStat}><Ionicons name="trophy-outline" size={16} color="#F5C95C" /><Text style={styles.heroStatText}>15 משחקים</Text></View>
-                <View style={styles.heroStat}><Ionicons name="flash-outline" size={16} color="#F5C95C" /><Text style={styles.heroStatText}>פרסים מעולים</Text></View>
-                <View style={styles.heroStat}><Ionicons name="git-network-outline" size={16} color="#F5C95C" /><Text style={styles.heroStatText}>טקטיקות מוכחות</Text></View>
-              </View>
-            </View>
-            <View style={styles.season}>
-              <Text style={styles.seasonLabel}>העונה הנוכחית</Text>
-              <Text style={styles.seasonTime}>מרכז תוכן מקצועי ל־FC27</Text>
-              <View style={styles.seasonRow}><View><Text style={styles.seasonValue}>15</Text><Text style={styles.seasonCaption}>MATCHES</Text></View><View><Text style={styles.seasonValue}>FC27</Text><Text style={styles.seasonCaption}>CURRENT GAME</Text></View></View>
-              <View style={styles.seasonBar}><View style={styles.seasonFill} /></View><Text style={styles.seasonProgress}>נתוני מאזן אישי יוצגו רק כשיהיו זמינים</Text>
+
+      <View style={styles.chrome}>
+        <View style={styles.topbar}>
+          <View style={styles.topbarBrand}>
+            <Image source={require('@/assets/images/brand-1club.png')} style={styles.brandLogo} />
+            <View>
+              <Text style={styles.brandTitle}>FC27 ISRAEL</Text>
+              <Text style={styles.brandSub}>ULTIMATE HUB</Text>
             </View>
           </View>
-          <View style={styles.tabBar}>
-            <Pressable onPress={() => setSection('center')} style={[styles.topTab, section === 'center' && styles.topTabOn]}><Ionicons name="trophy-outline" size={17} color={section === 'center' ? '#fff' : '#9FA8B3'} /><Text style={[styles.topTabText, section === 'center' && styles.topTabTextOn]}>מרכז Champions</Text></Pressable>
-            <Pressable onPress={() => setSection('community')} style={[styles.topTab, section === 'community' && styles.topTabOn]}><Ionicons name="people-outline" size={17} color={section === 'community' ? '#fff' : '#9FA8B3'} /><Text style={[styles.topTabText, section === 'community' && styles.topTabTextOn]}>שחקני הקהילה</Text></Pressable>
+
+          <View style={styles.topbarLinks}>
+            {TOP_LINKS.map(([label, href]) => (
+              <Pressable key={href} onPress={() => router.push(href as any)} style={styles.topbarLink}>
+                <Text style={[styles.topbarLinkText, label === 'FUT Champions' && styles.topbarLinkActive]}>{label}</Text>
+                {label === 'FUT Champions' ? <View style={styles.topbarUnderline} /> : null}
+              </Pressable>
+            ))}
           </View>
-        </LinearGradient>
 
-        {section === 'community' ? (
-          <>
-            <View style={styles.toolbar}>
-              <View style={styles.searchFake}><Ionicons name="search-outline" size={18} color="#77818C" /><Text style={styles.searchText}>חפש שחקנים, שמות משתמשים...</Text></View>
-              <View style={styles.filters}>
-                {(['ALL','PS5','Xbox'] as const).map((item) => <Pressable key={item} onPress={() => setPlatform(item)} style={[styles.filter, platform === item && styles.filterOn]}><Text style={[styles.filterText, platform === item && styles.filterTextOn]}>{item === 'ALL' ? 'כל הפלטפורמות' : item}</Text></Pressable>)}
-                <View style={styles.sort}><Ionicons name="swap-vertical-outline" size={15} color="#88929E" /><Text style={styles.sortText}>הכי חדשים</Text></View>
-              </View>
-            </View>
-            <View style={styles.sectionHeading}>
-              <View><Text style={styles.sectionHeadingTitle}>שחקן מקצועי · TEKKZ</Text><Text style={styles.sectionHeadingSub}>מערך והגדרות שפורסמו במקור חיצוני</Text></View>
-              <View style={styles.livePill}><View style={styles.liveDot} /><Text style={styles.liveText}>VERIFIED SOURCE</Text></View>
-            </View>
-
-            <ScrollView horizontal={!desktop} showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.playerGrid, desktop && styles.playerGridDesktop]}>
-              {visiblePlayers.map((player) => (
-                <Pressable key={player.id} onPress={() => setSelectedId(player.id)} style={[styles.playerCard, selectedId === player.id && styles.playerCardSelected, desktop && { width: '32.2%' }]}>
-                  <LinearGradient colors={['#11161D','#090D13']} style={styles.playerCardInner}>
-                    <View style={styles.cardTopRow}>
-                      <View style={[styles.platformBadge,{borderColor:player.accent+'66'}]}><Text style={styles.platformBadgeText}>{player.platform}</Text></View>
-                      <Text style={styles.proLabel}>PRO</Text>
-                    </View>
-                    <View style={styles.cardMainRow}>
-                      <PlayerPortrait player={player} />
-                      <View style={styles.cardMiddle}>
-                        <View style={styles.cardNameRow}><View><Text style={styles.playerName}>{player.name}</Text><Text style={styles.playerRole}>EA FC 27 | Pro Player</Text></View><Text style={styles.country}>{player.country}</Text></View>
-                        <Text style={styles.cardRecord}>{player.formation}</Text>
-                        <Text style={styles.cardFormation}>{player.note}</Text>
-                        <Text style={styles.cardPreset}>הגדרות וטקטיקה ממקור מאומת</Text>
-                      </View>
-                      <View style={styles.cardPitchWrap}><MiniPitch formation={player.formation} /></View>
-                    </View>
-                    <View style={styles.cardMetaRow}>
-                      <View style={styles.cardMetaItem}><Ionicons name="game-controller-outline" size={15} color="#B7C0C9"/><Text style={styles.cardMetaText}>הגדרות שלט</Text></View>
-                      <View style={styles.cardMetaItem}><Ionicons name="bulb-outline" size={15} color="#B7C0C9"/><Text style={styles.cardMetaText}>טיפים</Text></View>
-                      <View style={styles.cardMetaItem}><Ionicons name="document-text-outline" size={15} color="#B7C0C9"/><Text style={styles.cardMetaText}>קוד טקטיקה</Text></View>
-                      <View style={styles.arrowCircle}><Ionicons name="chevron-back" size={17} color="#fff" /></View>
-                    </View>
-                    <View style={styles.sourceRow}><Text style={styles.sourceText}>מקור: FUTSettings · FC27</Text><Text style={styles.updatedText}>נתוני מקור חיצוני</Text></View>
-                  </LinearGradient>
-                </Pressable>
-              ))}
-            </ScrollView>
-
-            <View style={[styles.detailWrap, desktop && styles.detailWrapDesktop]}>
-              <View style={[styles.detailMain, desktop && {flex:1.35}]}>
-                <LinearGradient colors={['#12171E','#0A0F15']} style={styles.detailCard}>
-                  <View style={styles.detailHeader}><View><Text style={styles.detailKicker}>הגדרות השחקן</Text><Text style={styles.detailName}>{selected.name} <Text style={styles.detailCountry}>{selected.country}</Text></Text><Text style={styles.detailSub}>{selected.platform} · {selected.formation} · {selected.role}</Text></View><View style={styles.selectedBadge}><Ionicons name="checkmark-circle" size={17} color="#65DC9A" /><Text style={styles.selectedBadgeText}>נבחר</Text></View></View>
-                  <View style={styles.detailBody}><PlayerPortrait player={selected} large /><View style={styles.detailStats}><View style={styles.statTiles}><View style={styles.statTile}><Text style={styles.statTileValue}>{selected.formation}</Text><Text style={styles.statTileLabel}>FORMATION</Text></View><View style={styles.statTile}><Text style={styles.statTileValue}>{selected.buildUp ?? "—"}</Text><Text style={styles.statTileLabel}>BUILD UP STYLE</Text></View><View style={styles.statTile}><Text style={styles.statTileValue}>{selected.lineHeight ?? "—"}</Text><Text style={styles.statTileLabel}>LINE HEIGHT</Text></View></View><View style={styles.settingsBox}><View style={styles.settingsHeader}><Ionicons name="settings-outline" size={18} color="#F0C95E" /><Text style={styles.settingsTitle}>הגדרות הטקטיקה של {selected.name}</Text></View>{selected.settings.map(([name,value], index) => <View key={name + index} style={styles.settingRow}><Text style={styles.settingValue}>{value}</Text><Text style={styles.settingName}>{name}</Text></View>)}</View><View style={styles.controllerBox}><View style={styles.settingsHeader}><Ionicons name="game-controller-outline" size={18} color="#F0C95E" /><Text style={styles.settingsTitle}>הגדרות שלט</Text></View><Text style={styles.controllerEmptyTitle}>הגדרות השלט של TEKKZ טרם פורסמו במקור שבדקנו.</Text><Text style={styles.controllerEmptyText}>נציג כאן רק נתונים שניתן לאמת.</Text></View></View></View></View>
-                </LinearGradient>
-              </View>
-              <View style={[styles.pitchCard, desktop && {width:360}]}>
-                <View style={styles.pitchHeader}><Text style={styles.pitchTitle}>הטקטיקה של {selected.name}</Text><Text style={styles.pitchFormation}>{selected.formation}</Text></View>
-                <MiniPitch formation={selected.formation} />
-                <View style={styles.pitchMeta}><Text style={styles.pitchMetaLabel}>תפקידי מפתח</Text><Text style={styles.pitchMetaValue}>ST · CAM · CDM · CB</Text></View>
-                <Pressable style={styles.primaryBtn} onPress={() => {}}><Ionicons name="eye-outline" size={17} color="#fff" /><Text style={styles.primaryBtnText}>צפה בטקטיקה המלאה</Text></Pressable>
-              </View>
-            </View>
-          </>
-        ) : (
-          <View style={styles.centerGrid}>
-            <LinearGradient colors={['#151B23','#0B1016']} style={styles.centerCard}><Text style={styles.centerKicker}>FUT CHAMPIONS CENTER</Text><Text style={styles.centerTitle}>הטורניר שלך מתחיל כאן</Text><Text style={styles.centerText}>מעקב, טקטיקות, מקורות מקצועיים ותוכן לקהילת FC27 — הכל במקום אחד.</Text><View style={styles.centerStats}><Metric label="משחקי Finals" value="15" /><Metric label="מקור מקצועי" value="TEKKZ" /><Metric label="FC27" value="EA" /></View><View style={styles.goalBar}><View style={styles.goalFill} /></View><Text style={styles.goalText}>מרכז Champions מוכן לתוכן מקצועי</Text></LinearGradient>
-            <View style={styles.tipPanel}><Text style={styles.tipPanelTitle}>טיפים מקצועיים</Text>{TIPS.map(([no,title,body]) => <View key={no} style={styles.tipRow}><Text style={styles.tipNo}>{no}</Text><View style={{flex:1}}><Text style={styles.tipTitle}>{title}</Text><Text style={styles.tipBody}>{body}</Text></View></View>)}</View>
+          <View style={styles.topbarActions}>
+            <Pressable style={styles.actionBubble}><Ionicons name="search-outline" size={18} color="#C1CAD2" /></Pressable>
+            <Pressable style={styles.actionBubble}><Ionicons name="notifications-outline" size={18} color="#C1CAD2" /></Pressable>
+            <Pressable style={styles.userChip} onPress={() => router.push('/profile' as any)}>
+              <View style={styles.userAvatar}><Text style={styles.userAvatarText}>{(app.user?.displayName || 'U').slice(0, 1)}</Text></View>
+              <Text style={styles.userName}>{app.user?.displayName || 'User'}</Text>
+            </Pressable>
           </View>
-        )}
+        </View>
 
-        <View style={styles.communityEmptyPanel}><View style={styles.communityEmptyIcon}><Ionicons name="people-outline" size={24} color="#6B7681" /></View><Text style={styles.communityEmptyTitle}>שחקני הקהילה</Text><Text style={styles.communityEmptyText}>כרגע אין שחקני קהילה או טקטיקות שהועלו ואושרו.</Text><Text style={styles.communityEmptyHint}>כששחקן יעלה תוכן ויאושר, הוא יופיע כאן.</Text></View>
+        <View style={styles.mainLayout}>
+          <View style={styles.sidebar}>
+            <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
+            {NAV.map((item, index) => (
+              <Pressable
+                key={item.id}
+                onPress={() => selectSection(item.id)}
+                style={[styles.sidebarItem, section === item.id && styles.sidebarItemActive]}
+              >
+                <Text style={styles.sidebarIndex}>{String(index + 1).padStart(2, '0')}</Text>
+                <Text style={[styles.sidebarLabel, section === item.id && styles.sidebarLabelActive]}>{item.label}</Text>
+                <Ionicons name={item.icon} size={18} color={section === item.id ? '#F5F7FA' : '#88939E'} />
+              </Pressable>
+            ))}
+            <View style={styles.sidebarTagline}>
+              <Text style={styles.sidebarTaglineTop}>PLAY</Text>
+              <Text style={styles.sidebarTaglineMiddle}>IMPROVE</Text>
+              <Text style={styles.sidebarTaglineBottom}>WIN</Text>
+              <View style={styles.eaBadge}><Text style={styles.eaBadgeText}>EA</Text><Text style={styles.eaBadgeSports}>SPORTS</Text></View>
+            </View>
+          </View>
 
-        <View style={styles.footer}><Text style={styles.footerTitle}>PREVIEW BUILD · FUT CHAMPIONS</Text><Text style={styles.footerText}>התוכן המקצועי בעמוד מוצג רק עם נתונים שניתן לאמת; תוכן קהילה יופיע לאחר אישור.</Text></View>
+          <View style={styles.main}>
+            <LinearGradient
+              colors={['rgba(112,5,17,.97)', 'rgba(27,5,10,.98)', 'rgba(7,10,15,.98)']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.hero}
+            >
+              <View style={styles.heroGlowOne} />
+              <View style={styles.heroGlowTwo} />
+
+              <View style={styles.heroTop}>
+                <View style={styles.heroStats}>
+                  <MetricCard label="FINAL STATUS" value="READY" tone="green" note="Preview content" />
+                  <MetricCard label="CQP PROGRESS" value="—" tone="gold" note="מתוך 1,000 · נתונים אישיים" />
+                  <MetricCard label="המאזן שלי" value="—" tone="red" note="נתוני W/L יופיעו כאן" />
+                </View>
+
+                <View style={styles.heroTitleWrap}>
+                  <Text style={styles.heroEyebrow}>COMPETE · IMPROVE · WIN</Text>
+                  <Text style={styles.heroTitle}>FUT CHAMPIONS</Text>
+                  <Text style={styles.heroSubtitle}>המסע שלך. התוצאות שלך. הפרסים שלך.</Text>
+                  <View style={styles.heroInfoRow}>
+                    <View><Text style={styles.heroInfoBig}>DUAL</Text><Text style={styles.heroInfoSmall}>CONTROLLER LAB</Text></View>
+                    <View><Text style={styles.heroInfoBig}>PRO</Text><Text style={styles.heroInfoSmall}>TACTICS LIBRARY</Text></View>
+                    <View><Text style={styles.heroInfoBig}>CQP</Text><Text style={styles.heroInfoSmall}>QUALIFICATION</Text></View>
+                    <View><Text style={styles.heroInfoBig}>15</Text><Text style={styles.heroInfoSmall}>MATCH FINALS</Text></View>
+                  </View>
+                </View>
+
+                <View style={styles.heroCrest}>
+                  <Ionicons name="trophy" size={34} color="#F6D36A" />
+                  <Text style={styles.heroCrestText}>FUT</Text>
+                </View>
+              </View>
+
+              <View style={styles.tabBar}>
+                {NAV.map((item) => (
+                  <Pressable
+                    key={item.id}
+                    onPress={() => selectSection(item.id)}
+                    style={[styles.heroTab, section === item.id && styles.heroTabActive]}
+                  >
+                    <Ionicons name={item.icon} size={15} color={section === item.id ? '#fff' : '#8D99A4'} />
+                    <Text style={[styles.heroTabText, section === item.id && styles.heroTabTextActive]}>{item.short}</Text>
+                  </Pressable>
+                ))}
+              </View>
+            </LinearGradient>
+
+            <View style={styles.contentArea}>{content}</View>
+          </View>
+        </View>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  page:{gap:16,paddingBottom:28}, hero:{borderRadius:24,borderWidth:1,borderColor:'rgba(230,70,82,.38)',overflow:'hidden',minHeight:340}, heroNoise:{position:'absolute',width:560,height:560,borderRadius:280,right:-180,top:-170,backgroundColor:'rgba(244,48,63,.11)'}, heroTop:{padding:26,flexDirection:'row-reverse',alignItems:'center',gap:22}, crest:{width:92,height:108,borderRadius:26,borderWidth:1,borderColor:'rgba(238,191,81,.65)',backgroundColor:'rgba(20,8,11,.78)',alignItems:'center',justifyContent:'center',gap:4}, crestMini:{color:'#F7D878',fontSize:12,fontWeight:'900',letterSpacing:2}, heroCopy:{flex:1,alignItems:'flex-end',gap:5}, eyebrow:{color:'#E2A6AA',fontSize:11,fontWeight:'900',letterSpacing:2}, heroTitle:{color:'#FFF7EA',fontSize:44,lineHeight:49,fontWeight:'900',letterSpacing:1.2,textAlign:'right'}, heroSubtitle:{color:'#E7C5C8',fontSize:16,fontWeight:'700',textAlign:'right'}, heroStats:{flexDirection:'row-reverse',gap:16,marginTop:10,flexWrap:'wrap'}, heroStat:{flexDirection:'row-reverse',gap:6,alignItems:'center'}, heroStatText:{color:'#B1B9C2',fontSize:12}, season:{width:250,borderRadius:18,borderWidth:1,borderColor:'rgba(255,255,255,.11)',backgroundColor:'rgba(4,8,12,.76)',padding:17}, seasonLabel:{color:'#E4E7EC',fontSize:13,fontWeight:'800',textAlign:'right'}, seasonTime:{color:'#E65B63',fontSize:12,fontWeight:'800',textAlign:'right',marginTop:2}, seasonRow:{flexDirection:'row-reverse',justifyContent:'space-between',marginTop:14}, seasonValue:{color:'#fff',fontSize:25,fontWeight:'900',textAlign:'right'}, seasonCaption:{color:'#707A86',fontSize:10,fontWeight:'800',textAlign:'right'}, seasonBar:{height:6,borderRadius:4,backgroundColor:'#23161A',overflow:'hidden',marginTop:14}, seasonFill:{width:'75%',height:'100%',borderRadius:4,backgroundColor:'#E33D49'}, seasonProgress:{color:'#8A939E',fontSize:11,fontWeight:'700',textAlign:'right',marginTop:6}, tabBar:{flexDirection:'row-reverse',borderTopWidth:1,borderTopColor:'rgba(255,255,255,.10)',marginTop:4}, topTab:{flex:1,minHeight:58,justifyContent:'center',alignItems:'center',flexDirection:'row-reverse',gap:8,borderLeftWidth:1,borderLeftColor:'rgba(255,255,255,.07)'}, topTabOn:{backgroundColor:'#E13A45'}, topTabText:{color:'#9FA8B2',fontSize:14,fontWeight:'800'}, topTabTextOn:{color:'#fff'}, toolbar:{flexDirection:'row-reverse',alignItems:'center',gap:10,flexWrap:'wrap',justifyContent:'space-between'}, searchFake:{minHeight:46,flex:1,minWidth:250,borderRadius:14,borderWidth:1,borderColor:'rgba(255,255,255,.09)',backgroundColor:'#0F141B',flexDirection:'row-reverse',alignItems:'center',gap:8,paddingHorizontal:14}, searchText:{color:'#6F7883',fontSize:13,textAlign:'right',flex:1}, filters:{flexDirection:'row-reverse',alignItems:'center',gap:7,flexWrap:'wrap'}, filter:{minHeight:42,paddingHorizontal:13,borderRadius:12,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'#0F141B',justifyContent:'center'}, filterOn:{borderColor:'rgba(225,58,69,.65)',backgroundColor:'rgba(225,58,69,.13)'}, filterText:{color:'#818B95',fontSize:12,fontWeight:'800'}, filterTextOn:{color:'#FFD7D9'}, sort:{minHeight:42,paddingHorizontal:12,borderRadius:12,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'#0F141B',flexDirection:'row-reverse',alignItems:'center',gap:5}, sortText:{color:'#8B95A0',fontSize:12,fontWeight:'700'}, sectionHeading:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'flex-end',gap:12}, sectionHeadingTitle:{color:'#F4F6F8',fontSize:22,fontWeight:'900',textAlign:'right'}, sectionHeadingSub:{color:'#6F7A86',fontSize:12,fontWeight:'600',textAlign:'right',marginTop:3}, livePill:{flexDirection:'row-reverse',alignItems:'center',gap:7,borderWidth:1,borderColor:'rgba(101,220,154,.25)',borderRadius:999,paddingHorizontal:11,paddingVertical:7,backgroundColor:'rgba(101,220,154,.06)'}, liveDot:{width:7,height:7,borderRadius:4,backgroundColor:'#65DC9A'}, liveText:{color:'#8BD5A9',fontSize:10,fontWeight:'900',letterSpacing:1}, playerGrid:{gap:12,paddingVertical:2}, playerGridDesktop:{flexDirection:'row-reverse',flexWrap:'wrap'}, playerCard:{width:300,borderRadius:20,overflow:'hidden',borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'#0C1117'}, playerCardSelected:{borderColor:'rgba(225,58,69,.72)',shadowColor:'#E13A45',shadowOpacity:.22,shadowRadius:14,shadowOffset:{width:0,height:6}}, playerCardInner:{padding:12,gap:10,minHeight:350}, cardTopRow:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center'}, platformBadge:{borderWidth:1,borderRadius:9,paddingHorizontal:8,paddingVertical:5,backgroundColor:'rgba(255,255,255,.03)'}, platformBadgeText:{color:'#C2C9D0',fontSize:10,fontWeight:'900'}, proLabel:{color:'#C76A70',fontSize:9,fontWeight:'900',letterSpacing:1.2}, portrait:{height:112,width:112,borderRadius:14,borderWidth:1,overflow:'hidden',position:'relative',alignItems:'center',justifyContent:'flex-end'}, portraitLarge:{height:235,width:172}, portraitGlow:{position:'absolute',width:190,height:190,borderRadius:95,top:-70,right:-55}, portraitHead:{width:86,height:86,borderRadius:43,backgroundColor:'rgba(221,182,160,.92)',alignItems:'center',justifyContent:'center',borderWidth:4,borderColor:'rgba(255,255,255,.22)'}, portraitInitial:{color:'#2E2020',fontSize:34,fontWeight:'900'}, portraitInitialLarge:{fontSize:44}, portraitShoulders:{width:150,height:72,marginTop:-6,borderRadius:30,backgroundColor:'#171B23',borderTopWidth:2,borderTopColor:'rgba(255,255,255,.11)',alignItems:'center',justifyContent:'center'}, portraitNumber:{color:'rgba(230,235,242,.22)',fontSize:48,fontWeight:'900'}, portraitTag:{position:'absolute',left:9,top:9,borderRadius:7,paddingHorizontal:7,paddingVertical:4,backgroundColor:'#E13A45'}, portraitTagText:{color:'#fff',fontSize:9,fontWeight:'900',letterSpacing:1}, cardMainRow:{flexDirection:'row-reverse',gap:10,alignItems:'stretch'},cardMiddle:{flex:1,minWidth:0,justifyContent:'space-between'},cardPitchWrap:{width:108},cardNameRow:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center',gap:6},cardRecord:{color:'#F5F7F9',fontSize:19,fontWeight:'900',textAlign:'right',marginTop:4},cardFormation:{color:'#AAB4BE',fontSize:11,fontWeight:'800',textAlign:'right',marginTop:1},cardPreset:{color:'#77828D',fontSize:9,lineHeight:13,textAlign:'right',marginTop:4},cardMetaRow:{flexDirection:'row-reverse',alignItems:'center',borderTopWidth:1,borderTopColor:'rgba(255,255,255,.07)',borderBottomWidth:1,borderBottomColor:'rgba(255,255,255,.07)',minHeight:43},cardMetaItem:{flex:1,flexDirection:'row-reverse',alignItems:'center',justifyContent:'center',gap:4,borderLeftWidth:1,borderLeftColor:'rgba(255,255,255,.06)',minHeight:34},cardMetaText:{color:'#9EA8B3',fontSize:9,fontWeight:'800'},cardMetaCount:{color:'#6F7984',fontSize:9},sourceRow:{flexDirection:'row-reverse',justifyContent:'space-between',gap:8,paddingTop:2},sourceText:{color:'#626D78',fontSize:8,textAlign:'right'},updatedText:{color:'#626D78',fontSize:8,textAlign:'left'}, nameRow:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center',gap:10}, playerName:{color:'#F6F8FB',fontSize:20,fontWeight:'900',textAlign:'right'}, playerRole:{color:'#747E89',fontSize:10,fontWeight:'700',marginTop:2,textAlign:'right'}, country:{fontSize:18}, recordRow:{flexDirection:'row-reverse',justifyContent:'space-between',gap:8}, metric:{flex:1}, metricValue:{color:'#F6F8FB',fontSize:15,fontWeight:'900',textAlign:'right'}, metricLabel:{color:'#68737E',fontSize:9,fontWeight:'800',textAlign:'right',marginTop:2}, cardBottom:{flexDirection:'row-reverse',alignItems:'center',gap:10,borderTopWidth:1,borderTopColor:'rgba(255,255,255,.07)',paddingTop:10}, cardBottomLabel:{color:'#D6DCE2',fontSize:10,fontWeight:'800',textAlign:'right'}, cardBottomValue:{color:'#68727C',fontSize:9,lineHeight:14,marginTop:2,textAlign:'right'}, arrowCircle:{width:32,height:32,borderRadius:16,backgroundColor:'#1B222C',alignItems:'center',justifyContent:'center'}, detailWrap:{gap:12}, detailWrapDesktop:{flexDirection:'row-reverse',alignItems:'stretch'}, detailMain:{minWidth:0}, detailCard:{borderRadius:20,borderWidth:1,borderColor:'rgba(255,255,255,.08)',padding:18,gap:16}, detailHeader:{flexDirection:'row-reverse',alignItems:'center',justifyContent:'space-between',gap:16}, detailKicker:{color:'#8B95A0',fontSize:10,fontWeight:'800',textAlign:'right'}, detailName:{color:'#F7F8FA',fontSize:24,fontWeight:'900',textAlign:'right',marginTop:2}, detailCountry:{fontSize:16}, detailSub:{color:'#6B7580',fontSize:11,fontWeight:'700',textAlign:'right',marginTop:2}, selectedBadge:{flexDirection:'row-reverse',alignItems:'center',gap:6,backgroundColor:'rgba(101,220,154,.08)',borderWidth:1,borderColor:'rgba(101,220,154,.24)',borderRadius:10,paddingHorizontal:9,paddingVertical:7}, selectedBadgeText:{color:'#90D5AA',fontSize:10,fontWeight:'900'}, detailBody:{gap:14}, detailStats:{gap:10,flex:1}, cqpBox:{borderRadius:14,backgroundColor:'#0A0F14',borderWidth:1,borderColor:'rgba(255,255,255,.06)',padding:12}, cqpLabel:{color:'#BFC7CF',fontSize:10,fontWeight:'900',textAlign:'right'}, cqpValue:{color:'#F3CF61',fontSize:22,fontWeight:'900',textAlign:'right',marginTop:2}, cqpBar:{height:5,borderRadius:4,backgroundColor:'#2A2418',overflow:'hidden',marginTop:9}, cqpFill:{width:'100%',height:'100%',backgroundColor:'#E8BD48'}, statTiles:{flexDirection:'row-reverse',gap:9}, statTile:{flex:1,borderRadius:12,borderWidth:1,borderColor:'rgba(255,255,255,.06)',backgroundColor:'#0B1016',paddingVertical:10,paddingHorizontal:8}, statTileValue:{color:'#F5F7F9',fontSize:14,fontWeight:'900',textAlign:'right'}, statTileLabel:{color:'#68727C',fontSize:8,fontWeight:'800',textAlign:'right',marginTop:2}, settingsBox:{borderRadius:16,borderWidth:1,borderColor:'rgba(255,255,255,.07)',backgroundColor:'#0A0F14',padding:13}, settingsHeader:{flexDirection:'row-reverse',gap:7,alignItems:'center',marginBottom:5}, settingsTitle:{color:'#DCE2E7',fontSize:13,fontWeight:'900',textAlign:'right'}, settingRow:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center',paddingVertical:8,borderBottomWidth:1,borderBottomColor:'rgba(255,255,255,.045)'}, settingName:{color:'#6E7883',fontSize:10,fontWeight:'700',textAlign:'right'}, settingValue:{color:'#DCE2E7',fontSize:11,fontWeight:'900',textAlign:'right'}, pitchCard:{width:'100%',borderRadius:20,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'#0B1016',padding:17,gap:12}, pitchHeader:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center',gap:10}, pitchTitle:{color:'#E9EDF1',fontSize:14,fontWeight:'900',textAlign:'right'}, pitchFormation:{color:'#F0C95E',fontSize:11,fontWeight:'900'}, miniPitch:{height:245,borderRadius:16,overflow:'hidden',position:'relative',backgroundColor:'#12352A',borderWidth:1,borderColor:'rgba(143,208,168,.24)'}, pitchHalf:{position:'absolute',left:0,right:0,top:'50%',height:1,backgroundColor:'rgba(255,255,255,.23)'}, pitchDot:{position:'absolute',width:15,height:15,borderRadius:8,marginLeft:-7,marginTop:-7,backgroundColor:'#E6C65A',borderWidth:2,borderColor:'#FFF3A2'}, pitchLabel:{position:'absolute',bottom:8,left:8,borderRadius:9,backgroundColor:'rgba(4,11,8,.68)',paddingHorizontal:8,paddingVertical:5}, pitchLabelText:{color:'#CFEAD8',fontSize:9,fontWeight:'800'}, pitchMeta:{flexDirection:'row-reverse',justifyContent:'space-between',alignItems:'center',gap:12}, pitchMetaLabel:{color:'#68737E',fontSize:10,fontWeight:'800'}, pitchMetaValue:{color:'#DDE3E7',fontSize:10,fontWeight:'900'}, primaryBtn:{height:44,borderRadius:12,backgroundColor:'#E13A45',alignItems:'center',justifyContent:'center',flexDirection:'row-reverse',gap:8}, primaryBtnText:{color:'#fff',fontSize:12,fontWeight:'900'}, centerGrid:{flexDirection:'row-reverse',gap:12,flexWrap:'wrap'}, centerCard:{flexGrow:1,minWidth:300,borderRadius:20,borderWidth:1,borderColor:'rgba(255,255,255,.08)',padding:22,gap:10}, centerKicker:{color:'#D85C64',fontSize:10,fontWeight:'900',letterSpacing:1.5,textAlign:'right'}, centerTitle:{color:'#F7F8FA',fontSize:26,fontWeight:'900',textAlign:'right'}, centerText:{color:'#7E8894',fontSize:13,lineHeight:20,textAlign:'right'}, centerStats:{flexDirection:'row-reverse',gap:22,marginTop:12,justifyContent:'flex-start'}, goalBar:{height:7,borderRadius:5,overflow:'hidden',backgroundColor:'#25171A',marginTop:8}, goalFill:{width:'60%',height:'100%',backgroundColor:'#E13A45'}, goalText:{color:'#8D969F',fontSize:10,fontWeight:'800',textAlign:'right'}, tipPanel:{width:360,flexGrow:1,borderRadius:20,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'#0A0F14',padding:18,gap:10}, tipPanelTitle:{color:'#EDEFF2',fontSize:18,fontWeight:'900',textAlign:'right',marginBottom:2}, tipRow:{flexDirection:'row-reverse',gap:10,paddingVertical:11,borderTopWidth:1,borderTopColor:'rgba(255,255,255,.06)'}, tipNo:{color:'#E13A45',fontSize:11,fontWeight:'900'}, tipTitle:{color:'#DAE0E5',fontSize:12,fontWeight:'900',textAlign:'right'}, tipBody:{color:'#717B86',fontSize:10,lineHeight:15,marginTop:2,textAlign:'right'}, footer:{paddingTop:10,alignItems:'center',gap:3}, footerTitle:{color:'#5B6671',fontSize:9,fontWeight:'900',letterSpacing:1.5}, footerText:{color:'#46515C',fontSize:10,textAlign:'center'}  controllerBox:{borderRadius:16,borderWidth:1,borderColor:'rgba(255,255,255,.07)',backgroundColor:'#0A0F14',padding:14,gap:8,marginTop:10},controllerEmptyTitle:{color:'#DCE2E7',fontSize:12,fontWeight:'900',textAlign:'right'},controllerEmptyText:{color:'#68737E',fontSize:10,lineHeight:16,textAlign:'right'},communityEmptyPanel:{borderRadius:20,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'rgba(10,15,20,.86)',padding:24,alignItems:'center',gap:7,marginTop:4},communityEmptyIcon:{width:48,height:48,borderRadius:16,borderWidth:1,borderColor:'rgba(255,255,255,.08)',backgroundColor:'rgba(255,255,255,.025)',alignItems:'center',justifyContent:'center'},communityEmptyTitle:{color:'#EDEFF2',fontSize:18,fontWeight:'900',textAlign:'center'},communityEmptyText:{color:'#7B8691',fontSize:12,fontWeight:'700',textAlign:'center'},communityEmptyHint:{color:'#56616C',fontSize:10,fontWeight:'700',textAlign:'center'},
+  chrome: { gap: 0 },
+  topbar: {
+    minHeight: 68,
+    backgroundColor: 'rgba(5,8,12,.92)',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,.08)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 18,
+    gap: 18,
+    direction: 'ltr',
+  },
+  topbarBrand: { flexDirection: 'row', alignItems: 'center', gap: 9, minWidth: 210 },
+  brandLogo: { width: 38, height: 38, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.18)' },
+  brandTitle: { color: '#F7F5EF', fontSize: 18, fontWeight: '900', lineHeight: 18 },
+  brandSub: { color: '#838E99', fontSize: 9, fontWeight: '900', letterSpacing: 2, marginTop: 2 },
+  topbarLinks: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20 },
+  topbarLink: { minHeight: 68, justifyContent: 'center', alignItems: 'center', position: 'relative', paddingHorizontal: 5 },
+  topbarLinkText: { color: '#7E8994', fontSize: 12, fontWeight: '700' },
+  topbarLinkActive: { color: '#F3F5F8' },
+  topbarUnderline: { position: 'absolute', bottom: 0, height: 2, width: 110, backgroundColor: '#F1BE4C', borderRadius: 2 },
+  topbarActions: { minWidth: 220, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', gap: 8, direction: 'ltr' },
+  actionBubble: { width: 42, height: 42, borderRadius: 22, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0F171F', alignItems: 'center', justifyContent: 'center' },
+  userChip: { height: 44, paddingHorizontal: 9, paddingLeft: 8, borderRadius: 22, backgroundColor: '#0F171F', borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', flexDirection: 'row', alignItems: 'center', gap: 8 },
+  userAvatar: { width: 31, height: 31, borderRadius: 16, backgroundColor: '#273241', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#9AA6B1' },
+  userAvatarText: { color: '#F2D8B4', fontWeight: '900', fontSize: 12 },
+  userName: { color: '#DDE2E8', fontSize: 12, fontWeight: '800' },
+  mainLayout: { flexDirection: 'row', alignItems: 'stretch', direction: 'ltr' },
+  sidebar: { width: 210, backgroundColor: 'rgba(5,8,12,.72)', borderRightWidth: 1, borderRightColor: 'rgba(255,255,255,.06)', paddingTop: 20, paddingHorizontal: 12, minHeight: 780, direction: 'rtl' },
+  sidebarTitle: { color: '#79858F', fontSize: 11, fontWeight: '900', letterSpacing: 1.6, textAlign: 'center', marginBottom: 15 },
+  sidebarItem: { minHeight: 52, borderRadius: 13, paddingHorizontal: 11, marginBottom: 9, backgroundColor: 'rgba(9,12,17,.50)', borderWidth: 1, borderColor: 'rgba(255,255,255,.03)', flexDirection: 'row', alignItems: 'center', gap: 9 },
+  sidebarItemActive: { backgroundColor: 'rgba(221,23,45,.72)', borderColor: 'rgba(255,86,103,.82)', shadowColor: '#E43043', shadowOpacity: .22, shadowRadius: 12, shadowOffset: { width: 0, height: 5 } },
+  sidebarIndex: { color: '#65717D', fontSize: 9, fontWeight: '800', width: 19 },
+  sidebarLabel: { flex: 1, color: '#9AA6B1', fontSize: 12, fontWeight: '800', textAlign: 'right' },
+  sidebarLabelActive: { color: '#fff' },
+  sidebarTagline: { marginTop: 'auto' as any, alignItems: 'center', paddingTop: 86, paddingBottom: 28 },
+  sidebarTaglineTop: { color: '#F46670', fontSize: 26, fontStyle: 'italic', fontWeight: '900', lineHeight: 25 },
+  sidebarTaglineMiddle: { color: '#FAF8F2', fontSize: 26, fontStyle: 'italic', fontWeight: '900', lineHeight: 25 },
+  sidebarTaglineBottom: { color: '#FAF8F2', fontSize: 26, fontStyle: 'italic', fontWeight: '900', lineHeight: 25 },
+  eaBadge: { marginTop: 17, width: 51, height: 51, borderRadius: 26, backgroundColor: '#F3F5F7', alignItems: 'center', justifyContent: 'center' },
+  eaBadgeText: { color: '#1B2026', fontSize: 13, fontWeight: '900', lineHeight: 12 },
+  eaBadgeSports: { color: '#1B2026', fontSize: 7, fontWeight: '900' },
+
+  main: { flex: 1, minWidth: 0, direction: 'rtl' },
+  hero: { minHeight: 338, margin: 17, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
+  heroGlowOne: { position: 'absolute', width: 500, height: 500, borderRadius: 250, right: -160, top: -190, backgroundColor: 'rgba(238,37,56,.15)' },
+  heroGlowTwo: { position: 'absolute', width: 360, height: 360, borderRadius: 180, left: -160, bottom: -190, backgroundColor: 'rgba(214,33,53,.11)' },
+  heroTop: { padding: 25, flexDirection: 'row', alignItems: 'center', gap: 20, direction: 'ltr', minHeight: 266 },
+  heroStats: { width: 540, flexDirection: 'row', gap: 10, alignItems: 'stretch' },
+  metricCard: { flex: 1, minHeight: 150, borderRadius: 17, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(4,8,12,.55)', padding: 15, justifyContent: 'center' },
+  metricLabel: { color: '#6D7883', fontSize: 10, fontWeight: '900', textAlign: 'right' },
+  metricValue: { color: '#F2CC64', fontSize: 31, fontWeight: '900', textAlign: 'right', marginTop: 11 },
+  metricGreen: { color: '#63E59F' },
+  metricRed: { color: '#FF6673' },
+  metricNote: { color: '#86919C', fontSize: 9, fontWeight: '700', lineHeight: 14, textAlign: 'right', marginTop: 2 },
+  metricBar: { height: 6, borderRadius: 4, backgroundColor: '#1C2430', marginTop: 14, overflow: 'hidden' },
+  metricBarFill: { height: '100%', width: '55%', backgroundColor: '#F2C95F' },
+  metricBarRed: { backgroundColor: '#E33C4A', width: '30%' },
+  metricBarGreen: { backgroundColor: '#62E29B', width: '80%' },
+
+  heroTitleWrap: { flex: 1, alignItems: 'flex-end', justifyContent: 'center', minWidth: 260 },
+  heroEyebrow: { color: '#E0A5AA', fontSize: 10, fontWeight: '900', letterSpacing: 2.3, textAlign: 'right' },
+  heroTitle: { color: '#FFF7EB', fontSize: 60, lineHeight: 62, fontWeight: '900', letterSpacing: 1.2, textAlign: 'right', textShadowColor: 'rgba(255,59,76,.23)', textShadowOffset: { width: 0, height: 4 }, textShadowRadius: 13 },
+  heroSubtitle: { color: '#EBC9CC', fontSize: 16, fontWeight: '800', textAlign: 'right' },
+  heroInfoRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 22, marginTop: 19 },
+  heroInfoBig: { color: '#F6F7F8', fontSize: 21, fontWeight: '900', textAlign: 'right' },
+  heroInfoSmall: { color: '#7A858F', fontSize: 8, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right', marginTop: 1 },
+  heroCrest: { width: 100, height: 120, borderRadius: 28, borderWidth: 1, borderColor: 'rgba(239,194,83,.62)', backgroundColor: 'rgba(40,8,14,.72)', alignItems: 'center', justifyContent: 'center', gap: 4 },
+  heroCrestText: { color: '#F8D36B', fontSize: 11, fontWeight: '900', letterSpacing: 2 },
+  tabBar: { minHeight: 66, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,.10)', flexDirection: 'row', gap: 5, paddingHorizontal: 9, direction: 'rtl' },
+  heroTab: { flex: 1, minHeight: 54, marginTop: 6, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(6,10,15,.72)', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6, paddingHorizontal: 4 },
+  heroTabActive: { backgroundColor: '#E13C49', borderColor: '#FF6570', shadowColor: '#E13C49', shadowOpacity: .18, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } },
+  heroTabText: { color: '#8D99A4', fontSize: 10, fontWeight: '900', textAlign: 'center' },
+  heroTabTextActive: { color: '#fff' },
+  contentArea: { paddingHorizontal: 17, paddingBottom: 48 },
+  contentStack: { gap: 13 },
+  smallMetaStrip: { height: 33, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 24, direction: 'rtl' },
+  metaMuted: { color: '#65717C', fontSize: 10, fontWeight: '800' },
+
+  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: 10, direction: 'rtl' },
+  sectionHeadingIcon: { width: 35, height: 35, borderRadius: 11, backgroundColor: 'rgba(224,56,72,.10)', borderWidth: 1, borderColor: 'rgba(224,56,72,.20)', alignItems: 'center', justifyContent: 'center' },
+  sectionHeadingText: { flex: 1 },
+  sectionEyebrow: { color: '#C78B43', fontSize: 8, fontWeight: '900', letterSpacing: 1.5, textAlign: 'right' },
+  sectionTitle: { color: '#EEF1F4', fontSize: 18, fontWeight: '900', textAlign: 'right' },
+  sectionSubtitle: { color: '#75808B', fontSize: 10, fontWeight: '700', marginTop: 2, textAlign: 'right' },
+
+  centerRow: { flexDirection: 'row-reverse', gap: 14, alignItems: 'stretch' },
+  centerRowMobile: { flexDirection: 'column' },
+  rankPanel: { flex: 0.88, minHeight: 250, padding: 19, flexDirection: 'row-reverse', alignItems: 'center', gap: 17 },
+  rankRing: { width: 132, height: 132, borderRadius: 66, borderWidth: 8, borderColor: '#F0C85E', alignItems: 'center', justifyContent: 'center', backgroundColor: '#10151D' },
+  rankRingLabel: { color: '#BCA76A', fontSize: 9, fontWeight: '900', letterSpacing: 1, marginBottom: 3 },
+  rankRingValue: { color: '#F8E18B', fontSize: 39, fontWeight: '900' },
+  rankCopy: { flex: 1, alignItems: 'flex-end', gap: 4 },
+  rankSeason: { color: '#8D98A3', fontSize: 9, fontWeight: '800' },
+  rankTitle: { color: '#F2F4F7', fontSize: 25, fontWeight: '900', textAlign: 'right', marginTop: 3 },
+  rankStatus: { color: '#7B8692', fontSize: 11, lineHeight: 18, textAlign: 'right', maxWidth: 340 },
+  nextTargetLabel: { color: '#D9B653', fontSize: 9, fontWeight: '900', letterSpacing: 1.1, marginTop: 13 },
+  nextTargetValue: { color: '#CBD2D8', fontSize: 11, fontWeight: '800', textAlign: 'right' },
+  longBar: { width: '100%', height: 8, borderRadius: 5, backgroundColor: '#1C2430', overflow: 'hidden', marginTop: 8 },
+  longBarFill: { height: '100%', width: '28%', backgroundColor: '#E63242' },
+
+  progressPanel: { flex: 1.34, minHeight: 250, padding: 19 },
+  progressHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', direction: 'rtl' },
+  progressEyebrow: { color: '#E1BD58', fontSize: 8, fontWeight: '900', letterSpacing: 1.5, textAlign: 'right' },
+  progressTitle: { color: '#EEF1F3', fontSize: 27, fontWeight: '900', textAlign: 'right', marginTop: 3 },
+  progressSub: { color: '#6D7883', fontSize: 10, fontWeight: '700', textAlign: 'right', marginTop: 1 },
+  progressIcon: { width: 39, height: 39, borderRadius: 13, backgroundColor: 'rgba(234,195,85,.08)', borderWidth: 1, borderColor: 'rgba(234,195,85,.25)', alignItems: 'center', justifyContent: 'center' },
+  progressStats: { flexDirection: 'row-reverse', gap: 10, marginTop: 16 },
+  progressTile: { flex: 1, minHeight: 100, borderRadius: 15, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(8,12,18,.72)', padding: 12 },
+  tileLabel: { color: '#6D7884', fontSize: 9, fontWeight: '900', textAlign: 'right' },
+  tileValue: { color: '#F4CF64', fontSize: 28, fontWeight: '900', textAlign: 'right', marginTop: 10 },
+  tileNote: { color: '#7D8894', fontSize: 9, fontWeight: '700', textAlign: 'right', marginTop: 2 },
+  progressBottomRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 9, marginTop: 13 },
+  progressTarget: { color: '#89949F', fontSize: 9, fontWeight: '800', whiteSpace: 'nowrap' as any },
+  progressBarLarge: { flex: 1, height: 8, borderRadius: 5, backgroundColor: '#1A2430', overflow: 'hidden' },
+  progressBarLargeFill: { width: '55%', height: '100%', backgroundColor: '#E43B4A' },
+
+  contentGrid: { flexDirection: 'row-reverse', gap: 13 },
+  tacticPreview: { flex: 1 },
+  controllerHomePanel: { flex: 1 },
+  tacticInside: { flexDirection: 'row-reverse', gap: 13, alignItems: 'stretch', marginTop: 7 },
+  tacticInfo: { flex: 1, justifyContent: 'center' },
+  controllerHomeBody: { flexDirection: 'row-reverse', gap: 13, alignItems: 'center', marginTop: 10 },
+  controllerCircle: { width: 94, height: 94, borderRadius: 47, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0B1118', alignItems: 'center', justifyContent: 'center' },
+  controllerHomeRows: { flex: 1 },
+
+  pitch: { flex: 1, minHeight: 252, backgroundColor: '#103622', borderRadius: 16, borderWidth: 1, borderColor: 'rgba(135,202,160,.32)', overflow: 'hidden', position: 'relative' },
+  pitchCompact: { width: 128, flex: 0, minHeight: 145, borderRadius: 13 },
+  pitchMidline: { position: 'absolute', left: 9, right: 9, top: '50%', height: 1, backgroundColor: 'rgba(255,255,255,.20)' },
+  pitchBoxTop: { position: 'absolute', left: '25%', right: '25%', top: '7%', height: '20%', borderWidth: 1, borderColor: 'rgba(255,255,255,.17)', borderBottomWidth: 0 },
+  pitchBoxBottom: { position: 'absolute', left: '25%', right: '25%', bottom: '7%', height: '20%', borderWidth: 1, borderColor: 'rgba(255,255,255,.17)', borderTopWidth: 0 },
+  pitchDot: { position: 'absolute', width: 17, height: 17, borderRadius: 9, marginLeft: -8, marginTop: -8, backgroundColor: '#E5C75C', borderWidth: 2, borderColor: '#FFF2A4' },
+  pitchDotCompact: { width: 11, height: 11, borderRadius: 6, marginLeft: -5, marginTop: -5 },
+  pitchBadge: { position: 'absolute', left: 9, bottom: 9, borderRadius: 9, backgroundColor: 'rgba(6,12,10,.73)', paddingHorizontal: 8, paddingVertical: 5 },
+  pitchBadgeText: { color: '#D7EBDE', fontSize: 9, fontWeight: '900' },
+
+  panel: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
+  settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
+  settingLabel: { color: '#6E7984', fontSize: 10, fontWeight: '800', textAlign: 'right', flex: 1 },
+  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },
+
+  tekkzCard: { borderRadius: 18, borderWidth: 1, borderColor: 'rgba(225,58,69,.23)', backgroundColor: 'rgba(7,11,16,.86)', padding: 14, gap: 10 },
+  tekkzCardSelected: { borderColor: 'rgba(225,58,69,.53)' },
+  tekkzCardCompact: { minHeight: 0 },
+  cardTopLine: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
+  sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
+  sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },
+  proBadgeText: { color: '#E3B25A', fontSize: 9, fontWeight: '900', letterSpacing: 1.2 },
+  playerCardBody: { flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch' },
+  playerPortrait: { width: 112, minHeight: 122, borderRadius: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,.09)', backgroundColor: '#151A22', overflow: 'hidden', alignItems: 'center', justifyContent: 'flex-end' },
+  playerHead: { width: 62, height: 62, borderRadius: 31, backgroundColor: '#D8B39C', alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: 'rgba(255,255,255,.18)', marginBottom: -2 },
+  playerInitial: { color: '#30231F', fontSize: 27, fontWeight: '900' },
+  playerShirt: { width: 92, height: 49, borderRadius: 23, backgroundColor: '#181D26', borderTopWidth: 2, borderTopColor: '#303746', alignItems: 'center', justifyContent: 'center' },
+  playerNumber: { color: 'rgba(239,242,247,.26)', fontSize: 31, fontWeight: '900' },
+  playerCardCopy: { flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+  nameRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
+  playerName: { color: '#F3F5F7', fontSize: 22, fontWeight: '900', textAlign: 'right' },
+  playerCountry: { fontSize: 16 },
+  playerRole: { color: '#7E8994', fontSize: 10, fontWeight: '700', marginTop: 2, textAlign: 'right' },
+  playerFormation: { color: '#F1CB63', fontSize: 15, fontWeight: '900', marginTop: 8, textAlign: 'right' },
+  playerSetup: { color: '#A3ACB6', fontSize: 10, fontWeight: '700', marginTop: 3, textAlign: 'right' },
+  cardMetaRow: { minHeight: 42, borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'rgba(255,255,255,.06)', flexDirection: 'row-reverse', alignItems: 'stretch' },
+  cardMetaItem: { flex: 1, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 4, borderLeftWidth: 1, borderLeftColor: 'rgba(255,255,255,.05)' },
+  cardMetaText: { color: '#8D98A3', fontSize: 9, fontWeight: '800' },
+
+  tekkzDetailGrid: { flexDirection: 'row-reverse', gap: 13 },
+  tekkzDetailMain: { flex: 1.3 },
+  tekkzPitchPanel: { width: 360 },
+  detailTopRow: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'flex-start' },
+  detailKicker: { color: '#C99547', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
+  detailName: { color: '#F4F6F8', fontSize: 27, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  detailSub: { color: '#717C87', fontSize: 10, fontWeight: '800', textAlign: 'right', marginTop: 2 },
+  goldPill: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', paddingHorizontal: 9, paddingVertical: 6 },
+  goldPillText: { color: '#86D7A9', fontSize: 9, fontWeight: '900' },
+  detailFacts: { flexDirection: 'row-reverse', gap: 9, marginTop: 13 },
+  detailFact: { flex: 1, borderRadius: 13, backgroundColor: 'rgba(5,9,14,.74)', borderWidth: 1, borderColor: 'rgba(255,255,255,.06)', padding: 12 },
+  detailFactValue: { color: '#F4F5F7', fontSize: 13, fontWeight: '900', textAlign: 'right' },
+  detailFactLabel: { color: '#6A7580', fontSize: 8, fontWeight: '900', textAlign: 'right', marginTop: 4 },
+  roleGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 7, marginTop: 11 },
+  roleChip: { flexGrow: 1, minWidth: 145, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.06)', backgroundColor: 'rgba(5,9,14,.72)', paddingHorizontal: 9, paddingVertical: 8 },
+  rolePosition: { color: '#E95A63', fontSize: 8, fontWeight: '900', textAlign: 'right' },
+  roleText: { color: '#D5DADF', fontSize: 9, fontWeight: '800', textAlign: 'right', marginTop: 2 },
+
+  sourceNote: { color: '#5E6974', fontSize: 9, fontWeight: '700', textAlign: 'right', marginTop: 2 },
+  rewardGrid: { flexDirection: 'row-reverse', gap: 13 },
+  rewardTitle: { color: '#F2F4F6', fontSize: 15, fontWeight: '900', textAlign: 'right' },
+  rewardBody: { color: '#798590', fontSize: 10, fontWeight: '700', textAlign: 'right' },
+
+  emptyPanel: { minHeight: 190, alignItems: 'center', justifyContent: 'center' },
+  emptyIcon: { width: 48, height: 48, borderRadius: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: 'rgba(255,255,255,.02)', alignItems: 'center', justifyContent: 'center' },
+  emptyTitle: { color: '#EDEFF2', fontSize: 18, fontWeight: '900', marginTop: 7, textAlign: 'center' },
+  emptyText: { color: '#77838E', fontSize: 11, fontWeight: '700', textAlign: 'center', marginTop: 2 },
+  emptyHint: { color: '#545F69', fontSize: 9, fontWeight: '700', textAlign: 'center', marginTop: 3 },
+
+  tacticGrid: { flexDirection: 'row-reverse', gap: 13 },
+  tacticPanel: { flex: 1 },
+  tacticTitle: { color: '#EEF1F4', fontSize: 18, fontWeight: '900', textAlign: 'right' },
+  tacticSub: { color: '#72808A', fontSize: 10, fontWeight: '700', textAlign: 'right', marginBottom: 9 },
+  tacticRow: { minHeight: 39, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)' },
+  tacticLabel: { color: '#6B7681', fontSize: 9, fontWeight: '800' },
+  tacticValue: { color: '#DFE4E8', fontSize: 10, fontWeight: '900', textAlign: 'right' },
+
+  controllerGrid: { flexDirection: 'row-reverse', gap: 13 },
+  controllerPanel: { width: 360, alignItems: 'center', justifyContent: 'center', minHeight: 330 },
+  controllerPreview: { alignItems: 'center', justifyContent: 'center', gap: 12 },
+  controllerGlyph: { fontSize: 65 },
+  controllerName: { color: '#D9DEE4', fontSize: 12, fontWeight: '900', textAlign: 'center' },
+  controllerSettings: { flex: 1, minHeight: 330 },
+
+  comingSoon: { flex: 1, minHeight: 700, alignItems: 'center', justifyContent: 'center', gap: 7 },
+  comingSoonIcon: { fontSize: 40 },
+  comingSoonTitle: { color: '#F2F4F7', fontSize: 27, fontWeight: '900' },
+  comingSoonStatus: { color: '#F04A56', fontSize: 18, fontWeight: '900' },
+  comingSoonText: { color: '#85919C', fontSize: 13, fontWeight: '700' },
 });
+
