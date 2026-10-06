@@ -110,19 +110,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let alive = true;
 
-    void backend
-      .init()
-      .then((next) => {
-        if (!alive) return;
-        setSnap(next);
-        setReady(true);
-      })
-      .catch(async (error) => {
-        console.error('[AppProvider] backend.init failed', error);
-        if (!alive) return;
-        setSnap(await recoverRemoteSnapshot());
-        setReady(true);
-      });
+    async function boot() {
+      // Restore the Auth session first. Do not block the whole router on
+      // secondary database/storage reads after a successful login.
+      const immediate = isSupabaseConfigured() ? await recoverRemoteSnapshot() : EMPTY;
+      if (!alive) return;
+      setSnap(immediate);
+      setReady(true);
+
+      try {
+        const next = await backend.init();
+        if (alive) setSnap(next);
+      } catch (error) {
+        // The app is already usable from the Auth snapshot. Secondary data can
+        // fail without turning the whole application into a blank screen.
+        console.error('[AppProvider] background backend.init failed', error);
+      }
+    }
+
+    void boot();
 
     const unsubscribe = backend.subscribe(() => {
       void backend
@@ -133,7 +139,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         .catch(async (error) => {
           console.error('[AppProvider] backend.reload failed', error);
           if (!alive) return;
-          setSnap(await recoverRemoteSnapshot());
+          const recovered = await recoverRemoteSnapshot();
+          if (recovered.user) setSnap(recovered);
         });
     });
 
