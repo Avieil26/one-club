@@ -177,8 +177,9 @@ async function messageRows(): Promise<DirectMessage[]> {
     .from('direct_messages')
     .select('id,from_user_id,to_user_id,body,created_at');
   if (error) {
-    if (error.code === 'PGRST205' || error.code === '42P01') return [];
-    fail(error);
+    // Direct messages are optional for the initial app snapshot. Never block
+    // the authenticated shell because this secondary table is unavailable.
+    return [];
   }
   return (data ?? []).map((row) => ({
     id: row.id,
@@ -488,15 +489,15 @@ async function readSnapshot(): Promise<Snapshot> {
   }
   const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, uploaded, directMessages] =
     await Promise.all([
-      rows<ChallengeRow>('career_challenges'),
-      rows<SubmissionRow>('career_submissions'),
-      rows<FutRow>('fut_posts'),
-      rows<RatingRow>('fut_ratings'),
-      rows<CommentRow>('comments'),
-      rows<GroundsRow>('grounds_posts'),
-      rows<SbcRow>('sbc_challenges'),
-      rows<SolutionRow>('sbc_solutions'),
-      rows<WorkedRow>('sbc_worked'),
+      rowsOptional<ChallengeRow>('career_challenges'),
+      rowsOptional<SubmissionRow>('career_submissions'),
+      rowsOptional<FutRow>('fut_posts'),
+      rowsOptional<RatingRow>('fut_ratings'),
+      rowsOptional<CommentRow>('comments'),
+      rowsOptional<GroundsRow>('grounds_posts'),
+      rowsOptional<SbcRow>('sbc_challenges'),
+      rowsOptional<SolutionRow>('sbc_solutions'),
+      rowsOptional<WorkedRow>('sbc_worked'),
       rowsOptional<WorkedRow>('sbc_failed'),
       squadLikes(),
       latestAvatars(profiles.map((profile) => profile.id)),
