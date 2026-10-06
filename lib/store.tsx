@@ -157,7 +157,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     voteSolution: (solutionId, vote) => run(() => backend.voteSolution(solutionId, vote), setSnap).then(() => undefined),
     setAvatar: (uri) => run(() => backend.setAvatar(uri), setSnap).then(() => undefined),
     saveSquad: (squad) => run(() => backend.saveSquad(squad), setSnap).then(() => undefined),
-    refresh: () => run(() => backend.reload(), setSnap).then(() => undefined),
+    refresh: async () => {
+      setBusy(true);
+      try {
+        const next = await backend.reload();
+        setSnap(next);
+        setLoadError(null);
+      } catch (error) {
+        setLoadError(error instanceof Error ? error.message : 'רענון הנתונים נכשל');
+        throw error;
+      } finally {
+        setBusy(false);
+      }
+    },
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
