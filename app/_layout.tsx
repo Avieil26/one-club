@@ -130,22 +130,10 @@ function Gate({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
-    const first = segments[0];
-    const onAuth = first === 'login' || first === 'register';
-    const onLegal = first === 'legal';
-    const onRoot = !first || first === 'index';
-
-    if (!user && !onAuth && !onLegal) {
-      router.replace('/register');
-      return;
-    }
-
-    // Google returns to "/" on web. Once the session is restored, move the
-    // authenticated user into the actual tab navigator instead of leaving the
-    // root index screen mounted.
-    if (user && (onAuth || onRoot)) {
-      router.replace('/(tabs)');
-    }
+    const onAuth = segments[0] === 'login' || segments[0] === 'register';
+    const onLegal = segments[0] === 'legal';
+    if (!user && !onAuth && !onLegal) router.replace('/register');
+    if (user && onAuth) router.replace('/(tabs)');
   }, [ready, user, segments, router]);
 
   useEffect(() => {
