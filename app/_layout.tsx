@@ -153,7 +153,7 @@ export default function RootLayout() {
 }
 
 function Gate({ children }: { children: React.ReactNode }) {
-  const { ready, user } = useApp();
+  const { ready, user, loadError, refresh } = useApp();
   const segments = useSegments();
   const router = useRouter();
   const fromLogin = useRef(segments[0] === 'login' || segments[0] === 'register');
@@ -188,6 +188,40 @@ function Gate({ children }: { children: React.ReactNode }) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator color={colors.green} />
+      </View>
+    );
+  }
+  if (loadError) {
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <View
+          style={{
+            width: '100%',
+            maxWidth: 560,
+            borderRadius: 18,
+            borderWidth: 1,
+            borderColor: 'rgba(240,113,100,0.45)',
+            backgroundColor: '#111815',
+            padding: 22,
+            gap: 14,
+          }}
+        >
+          <Text style={{ color: colors.text, fontSize: 24, fontWeight: '900', textAlign: 'right' }}>
+            טעינת הנתונים נכשלה
+          </Text>
+          <Text style={{ color: colors.danger, fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
+            {loadError}
+          </Text>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => {
+              void refresh().catch(() => {});
+            }}
+            style={{ minHeight: 46, borderRadius: 10, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center' }}
+          >
+            <Text style={{ color: colors.goldInk, fontWeight: '900', fontSize: 15 }}>רענון ונסו שוב</Text>
+          </Pressable>
+        </View>
       </View>
     );
   }
