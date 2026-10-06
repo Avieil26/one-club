@@ -564,18 +564,31 @@ export function createRemoteBackend(): Backend {
     reload: readSnapshot,
     subscribe(onChange) {
       const supabase = getSupabase();
+      let queued = false;
+      let timer: ReturnType<typeof setTimeout> | null = null;
+      const queueReload = () => {
+        if (queued) return;
+        queued = true;
+        timer = setTimeout(() => {
+          queued = false;
+          timer = null;
+          onChange();
+        }, 0);
+      };
+
       const { data } = supabase.auth.onAuthStateChange((event) => {
         // Supabase auth callbacks run while the auth lock is held. Do not start
         // another Supabase call synchronously here; defer the reload to the next
         // macrotask to avoid the documented auth deadlock.
         if (event !== 'SIGNED_IN' && event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
-        setTimeout(() => onChange(), 0);
+        queueReload();
       });
       const channel = supabase
         .channel('direct-messages')
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, () => onChange())
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, queueReload)
         .subscribe();
       return () => {
+        if (timer) clearTimeout(timer);
         data.subscription.unsubscribe();
         void supabase.removeChannel(channel);
       };
