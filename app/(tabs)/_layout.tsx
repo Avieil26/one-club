@@ -1,8 +1,25 @@
 import { Tabs } from 'expo-router';
-import { Platform, Text, View, type ColorValue } from 'react-native';
+import { Platform, Pressable, Text, View, type ColorValue } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
+
+
+function ScreenErrorBoundary({ error, retry }: import('expo-router').ErrorBoundaryProps) {
+  return (
+    <View style={{ flex: 1, backgroundColor: '#07090D', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <Text style={{ color: '#F3F5F7', fontSize: 20, fontWeight: '900', textAlign: 'center' }}>המסך לא נטען</Text>
+      <Text style={{ color: '#AAB4BE', fontSize: 12, lineHeight: 18, textAlign: 'center', marginTop: 8, maxWidth: 720 }}>{error.message || 'שגיאה לא מזוהה'}</Text>
+      <Pressable onPress={retry} style={{ marginTop: 14, backgroundColor: '#D82F3C', borderRadius: 10, paddingHorizontal: 18, paddingVertical: 10 }}>
+        <Text style={{ color: '#fff', fontSize: 12, fontWeight: '900' }}>נסה שוב</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+export const unstable_settings = {
+  screenErrorBoundary: ScreenErrorBoundary,
+};
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
