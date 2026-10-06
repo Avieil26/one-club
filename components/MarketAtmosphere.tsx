@@ -1,7 +1,7 @@
-import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
+export type SceneId = 'home' | 'career' | 'ultimate' | 'champions' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
 
 const SCENES: Record<
   SceneId,
@@ -33,6 +33,13 @@ const SCENES: Record<
     wash: 'rgba(16,12,6,0.28)',
     vignette: ['rgba(0,0,0,0.48)', 'transparent', 'transparent', 'rgba(0,0,0,0.76)'],
     base: '#05080A',
+  },
+  champions: {
+    source: require('@/assets/images/scene-ultimate.png'),
+    tint: ['rgba(54,0,8,0.78)', 'rgba(132,0,12,0.54)', 'rgba(10,2,5,0.91)'],
+    wash: 'rgba(110,0,12,0.24)',
+    vignette: ['rgba(0,0,0,0.28)', 'transparent', 'transparent', 'rgba(0,0,0,0.74)'],
+    base: '#120306',
   },
   grounds: {
     source: require('@/assets/images/scene-grounds.png'),
@@ -89,6 +96,7 @@ const SCENES: Record<
 export function SceneAtmosphere({ scene }: { scene: SceneId }) {
   const config = SCENES[scene];
   const { width, height } = useWindowDimensions();
+  const web = Platform.OS === 'web';
 
   return (
     <View
