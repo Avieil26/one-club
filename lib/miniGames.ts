@@ -511,7 +511,8 @@ function historyRound(except?: string): MarkRound | null {
   ];
   const ready = shuffle(options.filter((option) => option.prompt !== except));
   const pick = ready[0];
-  return pick ? facesFrom(pick.yes, pick.no, 4) : null;
+  const players = pick ? facesFrom(pick.yes, pick.no, 4) : null;
+  return players ? { prompt: pick.prompt, players } : null;
 }
 
 function difficultyForCorrect(correctCount: number): number {
