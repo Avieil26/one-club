@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, DevSettings, I18nManager, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -15,7 +15,38 @@ import { colors } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
 
-export { ErrorBoundary } from 'expo-router';
+export function ErrorBoundary({ error, retry }: { error: Error; retry: () => void }) {
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <View
+        style={{
+          width: '100%',
+          maxWidth: 560,
+          borderRadius: 18,
+          borderWidth: 1,
+          borderColor: 'rgba(240,113,100,0.45)',
+          backgroundColor: '#111815',
+          padding: 22,
+          gap: 14,
+        }}
+      >
+        <Text style={{ color: '#F4F7F2', fontSize: 24, fontWeight: '900', textAlign: 'right' }}>
+          שגיאה בטעינת המסך
+        </Text>
+        <Text style={{ color: '#F07164', fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
+          {error?.message || 'שגיאה לא ידועה'}
+        </Text>
+        <Pressable
+          accessibilityRole="button"
+          onPress={retry}
+          style={{ minHeight: 46, borderRadius: 10, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Text style={{ color: colors.goldInk, fontWeight: '900', fontSize: 15 }}>נסו שוב</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -132,7 +163,8 @@ function Gate({ children }: { children: React.ReactNode }) {
     if (!ready) return;
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
     const onLegal = segments[0] === 'legal';
-    if (!user && !onAuth && !onLegal) router.replace('/register');
+    const onAuthCallback = segments[0] === 'auth';
+    if (!user && !onAuth && !onLegal && !onAuthCallback) router.replace('/register');
     if (user && onAuth) router.replace('/(tabs)');
   }, [ready, user, segments, router]);
 
