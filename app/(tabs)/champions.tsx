@@ -498,7 +498,9 @@ export default function ChampionsScreen() {
             </View>
           )}
         </>
-      )}      {showComposer ? (
+      )}
+
+      {showComposer ? (
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
@@ -557,7 +559,7 @@ export default function ChampionsScreen() {
             </Pressable>
           </Panel>
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }
