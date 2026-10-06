@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -66,7 +66,7 @@ const PITCH_POSITIONS = [
   ['GK', 50, 90],
 ] as const;
 
-function Panel({ children, style }: { children: React.ReactNode; style?: object }) {
+function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
     <View style={[styles.panel, style]}>
       <LinearGradient
@@ -569,7 +569,6 @@ const styles = StyleSheet.create({
   sourcePill: { alignSelf: 'flex-end', color: '#72E1A1', fontSize: 9, fontWeight: '900', backgroundColor: 'rgba(103,228,154,.07)', borderWidth: 1, borderColor: 'rgba(103,228,154,.18)', borderRadius: 13, paddingHorizontal: 9, paddingVertical: 6 },
   contentRow: { gap: 12 },
   contentRowDesktop: { flexDirection: 'row-reverse' },
-  tacticCard: { flex: 1.2, minWidth: 640 },
   tacticColumns: { flexDirection: 'row-reverse', gap: 14 },
   pitchColumn: { flex: 1.05, minWidth: 320 },
   rolesColumn: { flex: .95, minWidth: 285 },
