@@ -262,7 +262,7 @@ export default function ChampionsScreen() {
               ['Player Pick', 'בחירת שחקן', 'star', '#F4D16A'],
               ['Champions Tokens', 'טוקנים ל־Champions', 'pricetag-outline', '#70C7FF'],
             ].map(([title, body, icon, tone]) => (
-              <Panel key={title}>
+              <Panel key={title} style={styles.rewardCard}>
                 <Ionicons name={icon as IconName} size={28} color={tone} />
                 <Text style={styles.rewardTitle}>{title}</Text>
                 <Text style={styles.rewardBody}>{body}</Text>
@@ -487,18 +487,18 @@ export default function ChampionsScreen() {
   }
 
   return (
-    <Screen scene="champions" showNav={false} maxWidth={1600}>
+    <Screen scene="champions" showNav={false} maxWidth={2000}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.chrome}>
         <View style={styles.topbar}>
           <View style={styles.topbarActions}>
-            <Pressable style={styles.actionBubble}><Ionicons name="search-outline" size={18} color="#C1CAD2" /></Pressable>
-            <Pressable style={styles.actionBubble}><Ionicons name="notifications-outline" size={18} color="#C1CAD2" /></Pressable>
             <Pressable style={styles.userChip} onPress={() => router.push('/profile' as any)}>
               <View style={styles.userAvatar}><Text style={styles.userAvatarText}>{(app.user?.displayName || 'U').slice(0, 1)}</Text></View>
               <Text style={styles.userName}>{app.user?.displayName || 'User'}</Text>
             </Pressable>
+            <Pressable style={styles.actionBubble}><Ionicons name="notifications-outline" size={18} color="#C1CAD2" /></Pressable>
+            <Pressable style={styles.actionBubble}><Ionicons name="search-outline" size={18} color="#C1CAD2" /></Pressable>
           </View>
 
           <View style={styles.topbarLinks}>
@@ -713,7 +713,7 @@ const styles = StyleSheet.create({
   tileValue: { color: '#F4CF64', fontSize: 28, fontWeight: '900', textAlign: 'right', marginTop: 10 },
   tileNote: { color: '#7D8894', fontSize: 9, fontWeight: '700', textAlign: 'right', marginTop: 2 },
   progressBottomRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 9, marginTop: 13 },
-  progressTarget: { color: '#89949F', fontSize: 9, fontWeight: '800', whiteSpace: 'nowrap' as any },
+  progressTarget: { color: '#89949F', fontSize: 9, fontWeight: '800' },
   progressBarLarge: { flex: 1, height: 8, borderRadius: 5, backgroundColor: '#1A2430', overflow: 'hidden' },
   progressBarLargeFill: { width: '55%', height: '100%', backgroundColor: '#E43B4A' },
 
