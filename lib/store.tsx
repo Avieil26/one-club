@@ -75,28 +75,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let alive = true;
-    backend.init()
-      .then((next) => {
-        if (!alive) return;
-        setSnap(next);
-        setReady(true);
-      })
-      .catch((error) => {
-        console.error('AppProvider initialization failed', error);
-        if (!alive) return;
-        setSnap(EMPTY);
-        setReady(true);
-      });
-
+    backend.init().then((next) => {
+      if (!alive) return;
+      setSnap(next);
+      setReady(true);
+    });
     const unsubscribe = backend.subscribe(() => {
-      backend
-        .reload()
-        .then((next) => {
-          if (alive) setSnap(next);
-        })
-        .catch((error) => {
-          console.error('AppProvider reload failed', error);
-        });
+      backend.reload().then((next) => {
+        if (alive) setSnap(next);
+      });
     });
     return () => {
       alive = false;
