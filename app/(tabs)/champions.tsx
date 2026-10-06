@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
@@ -63,7 +63,7 @@ const TOP_LINKS = [
   ['לוח', '/board'],
 ] as const;
 
-function Panel({ children, style }: { children: React.ReactNode; style?: object }) {
+function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
     <View style={[styles.panel, style]}>
       <LinearGradient
@@ -492,12 +492,13 @@ export default function ChampionsScreen() {
 
       <View style={styles.chrome}>
         <View style={styles.topbar}>
-          <View style={styles.topbarBrand}>
-            <Image source={require('@/assets/images/brand-1club.png')} style={styles.brandLogo} />
-            <View>
-              <Text style={styles.brandTitle}>FC27 ISRAEL</Text>
-              <Text style={styles.brandSub}>ULTIMATE HUB</Text>
-            </View>
+          <View style={styles.topbarActions}>
+            <Pressable style={styles.actionBubble}><Ionicons name="search-outline" size={18} color="#C1CAD2" /></Pressable>
+            <Pressable style={styles.actionBubble}><Ionicons name="notifications-outline" size={18} color="#C1CAD2" /></Pressable>
+            <Pressable style={styles.userChip} onPress={() => router.push('/profile' as any)}>
+              <View style={styles.userAvatar}><Text style={styles.userAvatarText}>{(app.user?.displayName || 'U').slice(0, 1)}</Text></View>
+              <Text style={styles.userName}>{app.user?.displayName || 'User'}</Text>
+            </Pressable>
           </View>
 
           <View style={styles.topbarLinks}>
@@ -509,13 +510,12 @@ export default function ChampionsScreen() {
             ))}
           </View>
 
-          <View style={styles.topbarActions}>
-            <Pressable style={styles.actionBubble}><Ionicons name="search-outline" size={18} color="#C1CAD2" /></Pressable>
-            <Pressable style={styles.actionBubble}><Ionicons name="notifications-outline" size={18} color="#C1CAD2" /></Pressable>
-            <Pressable style={styles.userChip} onPress={() => router.push('/profile' as any)}>
-              <View style={styles.userAvatar}><Text style={styles.userAvatarText}>{(app.user?.displayName || 'U').slice(0, 1)}</Text></View>
-              <Text style={styles.userName}>{app.user?.displayName || 'User'}</Text>
-            </Pressable>
+          <View style={styles.topbarBrand}>
+            <Image source={require('@/assets/images/brand-1club.png')} style={styles.brandLogo} />
+            <View>
+              <Text style={styles.brandTitle}>FC27 ISRAEL</Text>
+              <Text style={styles.brandSub}>ULTIMATE HUB</Text>
+            </View>
           </View>
         </View>
 
