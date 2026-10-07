@@ -20,6 +20,7 @@ const AKLIOUCHE_ENDS = '2026-10-09T17:00:00.000Z';
 const GROSS_ENDS = '2026-10-30T11:00:00.000Z';
 const MALEN_ENDS = '2026-10-29T13:00:00.000Z';
 const FRATTESI_ENDS = '2026-10-06T17:00:00.000Z';
+const PINA_ENDS = null;
 
 export const NATION_DRILL_SQUAD: Record<string, string> = {
   gk: 'alisson',
@@ -136,6 +137,54 @@ const SILVER_UPGRADE_SQUAD: Record<string, string> = {
 };
 
 export const officialChallenges: SbcChallenge[] = [
+  {
+    id: 'sbc-potm-pina',
+    title: 'Liga F POTM · קלאודיה פינה',
+    kind: 'streamlined',
+    requirements: 'פרס שחקן SBC: Claudia Pina 89 LW. שחקנית החודש של Liga F לחודש ספטמבר.',
+    endsAt: PINA_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Claudia Pina 89 LW',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [N.spain],
+    createdAt: '2026-10-06T18:00:00.000Z',
+  },
+  {
+    id: 'sbc-upgrade-80x5',
+    title: 'שדרוג 5×80+',
+    kind: 'streamlined',
+    requirements: 'שדרוג פעיל: חבילה עם 5 שחקני זהב בדירוג 80 ומעלה.',
+    endsAt: null,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: '5× שחקני זהב 80+',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [],
+    createdAt: '2026-10-06T18:00:00.000Z',
+  },
+  {
+    id: 'sbc-upgrade-79x3',
+    title: 'שדרוג 3×79+',
+    kind: 'streamlined',
+    requirements: 'שדרוג פעיל: חבילה עם 3 שחקני זהב בדירוג 79 ומעלה.',
+    endsAt: null,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: '3× שחקני זהב 79+',
+    previewFormation: null,
+    previewSquad: null,
+    clubs: [],
+    nations: [],
+    createdAt: '2026-10-06T18:00:00.000Z',
+  },
   {
     id: 'sbc-dfg-akliouche',
     title: 'Destined For Glory · Maghnes Akliouche',
@@ -387,12 +436,12 @@ export const officialChallenges: SbcChallenge[] = [
     id: 'sbc-totw-upgrade',
     title: 'שדרוג TOTW',
     kind: 'streamlined',
-    requirements: 'מגישים פריטים ומקבלים חבילה עם שחקן TOTW מהסבב 1 או 2.',
+    requirements: 'מגישים פריטים ומקבלים חבילה עם שחקן TOTW מהסבבים 1–3.',
     endsAt: null,
     createdBy: 'admin',
     targetScore: null,
     rules: null,
-    reward: 'חבילת TOTW 1–2',
+    reward: 'חבילת TOTW 1–3',
     clubs: [],
     createdAt: '2026-09-25T18:00:00.000Z',
   },
