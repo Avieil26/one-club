@@ -233,6 +233,108 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
   );
 }
 
+function OtwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
+  const height = Math.round(width * DESTINED_RATIO);
+  const data = otwFor(player.baseId ?? player.id);
+  const face = data?.face ?? player.face;
+  const [failed, setFailed] = useState(false);
+  const uri = OTW_REMOTE_ART[player.baseId ?? player.id];
+  const statRows = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const name = (player.en || player.name || '').trim().split(' ').pop()?.toUpperCase() || player.name.toUpperCase();
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        borderRadius: width * 0.075,
+        overflow: 'hidden',
+        backgroundColor: '#0B0810',
+        borderWidth: 1.5,
+        borderColor: '#D56BFF',
+        shadowColor: '#D946EF',
+        shadowOpacity: 0.42,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 7 },
+        elevation: 8,
+      }}
+    >
+      <LinearGradient
+        colors={['#26133B', '#110C20', '#07070D']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ flex: 1, padding: Math.max(5, width * 0.03) }}
+      >
+        <LinearGradient
+          colors={['rgba(255,255,255,0.16)', 'transparent', 'rgba(217,70,239,0.12)']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        />
+        <View style={{ flex: 1, borderRadius: width * 0.055, overflow: 'hidden', backgroundColor: '#0A0910' }}>
+          <LinearGradient
+            colors={['rgba(217,70,239,0.18)', 'transparent', 'rgba(0,0,0,0.58)']}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, height: height * 0.58, zIndex: 2 }}
+          />
+          <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 5, padding: width * 0.055, gap: 1 }}>
+            <Text style={{ color: '#F7E9FF', fontSize: Math.max(14, width * 0.19), fontWeight: '900', lineHeight: Math.max(15, width * 0.19) }}>
+              {player.rating}
+            </Text>
+            <Text style={{ color: '#E5B5FF', fontSize: Math.max(7, width * 0.065), fontWeight: '900', letterSpacing: 0.8 }}>
+              {player.position}
+            </Text>
+          </View>
+          <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.055, zIndex: 5, paddingHorizontal: width * 0.04, paddingVertical: width * 0.018, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(255,214,255,0.6)', backgroundColor: 'rgba(12,6,19,0.78)' }}>
+            <Text style={{ color: '#FFD6FF', fontSize: Math.max(6, width * 0.05), fontWeight: '900', letterSpacing: 1.1 }}>OTW</Text>
+          </View>
+          {uri && !failed ? (
+            <Image
+              source={{ uri }}
+              onError={() => setFailed(true)}
+              resizeMode="contain"
+              accessibilityIgnoresInvertColors
+              style={{ position: 'absolute', left: width * 0.02, right: width * 0.02, top: height * 0.04, width: width * 0.96, height: height * 0.64 }}
+            />
+          ) : null}
+          <LinearGradient
+            colors={['transparent', 'rgba(7,7,13,0.25)', '#07070D']}
+            locations={[0, 0.35, 1]}
+            style={{ position: 'absolute', left: 0, right: 0, top: height * 0.42, height: height * 0.27, zIndex: 3 }}
+          />
+          <View style={{ position: 'absolute', left: width * 0.08, right: width * 0.08, top: height * 0.61, zIndex: 6 }}>
+            <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(11, width * 0.1), fontWeight: '900', textAlign: 'center', letterSpacing: 1.1 }}>
+              {name}
+            </Text>
+            <View style={{ height: 1.5, marginTop: 4, backgroundColor: '#D56BFF', opacity: 0.82 }} />
+            <Text style={{ color: '#C9B8D4', fontSize: Math.max(5.5, width * 0.045), fontWeight: '700', textAlign: 'center', marginTop: 3 }}>
+              {player.club}
+            </Text>
+          </View>
+          <View style={{ position: 'absolute', left: width * 0.055, right: width * 0.055, bottom: height * 0.075, flexDirection: 'row', zIndex: 7 }}>
+            {statRows.map(([label, value]) => (
+              <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+                <Text style={{ color: '#C995F6', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.2 }}>{label}</Text>
+                <Text style={{ color: '#FFF8FF', fontSize: Math.max(8, width * 0.062), fontWeight: '900' }}>{value ?? '·'}</Text>
+              </View>
+            ))}
+          </View>
+          <View style={{ position: 'absolute', bottom: width * 0.035, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+            <NationFlag nation={player.nation} size={Math.max(11, width * 0.085)} />
+          </View>
+        </View>
+      </LinearGradient>
+    </View>
+  );
+}
+
 function DestinedPortraitCard({ art, width }: { art: number; width: number }) {
   return (
     <Image
@@ -356,7 +458,7 @@ export function PortraitCard({
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
     const otwArt = OTW_REMOTE_ART[artId];
-    if (otwArt) return <RemoteCardArt uri={otwArt} width={width} />;
+    if (otwArt) return <OtwPortraitCard player={player} width={width} />;
   }
   const aura = glow && shownEdition === 'totw' ? totwAura() : undefined;
   if (shownEdition === 'totw') {
