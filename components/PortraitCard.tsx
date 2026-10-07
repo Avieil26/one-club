@@ -9,7 +9,7 @@ import { ShieldPortrait } from '@/components/ShieldPortrait';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia, type FaceStats } from '@/lib/playerMedia';
 import { HERO_ART } from '@/lib/heroArt';
-import { totwFor } from '@/lib/specialCards';
+import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
 
 export const PORTRAIT_RATIO = 1.6;
@@ -32,6 +32,27 @@ const DESTINED_ART: Record<string, number> = {
   'ea-246688-saud-abdulhamid': require('@/assets/images/cards/abdulhamid-destined.png'),
   'ea-241736-yann-aurel-bisseck': require('@/assets/images/cards/bisseck-destined.png'),
 };
+const DESTINED_REMOTE_ART: Record<string, string> = {
+  upamecano: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50561206.webp',
+  diani: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50559009.webp',
+  'caicedo-w': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50604801.webp',
+  mbeumo: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67351878.webp',
+  lookman: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50562547.webp',
+  haaland: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67347949.webp',
+  kiwior: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50597341.webp',
+  'ea-275029-ibrahim-maza': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50606677.webp',
+  gordon: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67351828.webp',
+  'ea-277846-nico-paz': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67386710.webp',
+  'ea-223697-robin-gosens': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50555345.webp',
+  cucurella: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50570879.webp',
+  mckennie: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67347608.webp',
+  'ea-254121-charlie-cresswell': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50585769.webp',
+};
+
+const OTW_REMOTE_ART: Record<string, string> = {
+  'ea-264947-nicole-anyomi': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50596595.webp',
+};
+
 const DESTINED_RATIO = 1152 / 864;
 const TOTW_RATIO = 1152 / 864;
 
@@ -174,6 +195,17 @@ function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number
   );
 }
 
+function RemoteCardArt({ uri, width }: { uri: string; width: number }) {
+  return (
+    <Image
+      source={{ uri }}
+      resizeMode="contain"
+      accessibilityIgnoresInvertColors
+      style={{ width, height: Math.round(width * DESTINED_RATIO) }}
+    />
+  );
+}
+
 function DestinedPortraitCard({ art, width }: { art: number; width: number }) {
   return (
     <Image
@@ -276,7 +308,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -291,7 +323,14 @@ export function PortraitCard({
   const showDestined = !shell && (edition === 'auto' ? player.edition === 'destined' : edition === 'destined');
   const destined = showDestined ? DESTINED_ART[artId] : undefined;
   if (destined) return <DestinedPortraitCard art={destined} width={width} />;
+  const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
+  if (destinedRemote) return <RemoteCardArt uri={destinedRemote} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  const otw = shownEdition === 'otw' ? otwFor(artId) : null;
+  if (shownEdition === 'otw') {
+    const otwArt = OTW_REMOTE_ART[artId];
+    if (otwArt) return <RemoteCardArt uri={otwArt} width={width} />;
+  }
   const aura = glow && shownEdition === 'totw' ? totwAura() : undefined;
   if (shownEdition === 'totw') {
     const totwArt = TOTW_ART[artId];
