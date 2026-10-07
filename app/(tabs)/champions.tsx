@@ -925,15 +925,6 @@ export default function ChampionsScreen() {
           </Panel>
           <Panel>
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
-            <View style={styles.communitySquadBlock}>
-            <Text style={styles.communitySquadTitle}>הקבוצה בפוסט</Text>
-            <Text style={styles.communitySquadHint}>בנה את הקבוצה שלך באמת עם שחקני האתר, 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-            <Pressable style={styles.uploadButton} onPress={() => openSquadBuilder()}>
-              <Ionicons name="football-outline" size={17} color="#fff" />
-              <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
-            </Pressable>
-            {communitySquad ? <Text style={styles.communitySquadSaved}>סגל הפוסט · {communitySquad.formation} · {Object.keys(communitySquad.slots ?? {}).length} בהרכב · {(communitySquad.bench ?? []).length} מחליפים</Text> : null}
-          </View>
           <Pressable style={styles.publishConfirm} onPress={() => void saveChampionsProfile()} disabled={saving}><Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שמור את העמוד שלי'}</Text></Pressable>
             <View style={styles.rewardMiniGrid}>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
@@ -1047,9 +1038,9 @@ export default function ChampionsScreen() {
                         <View style={styles.communitySquadBlock}>
               <Text style={styles.communitySquadTitle}>הקבוצה של הפוסט</Text>
               <Text style={styles.communitySquadHint}>בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-              <Pressable style={styles.uploadButton} onPress={() => router.push('/squad')}>
+              <Pressable style={styles.uploadButton} onPress={() => openSquadBuilder()}>
                 <Ionicons name="football-outline" size={17} color="#fff" />
-                <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
+                <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
               </Pressable>
               {app.user?.squad ? (
                 <Text style={styles.communitySquadSaved}>
