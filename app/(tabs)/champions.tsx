@@ -576,9 +576,9 @@ function CommunitySquadBuilder({
   );
 }
 
-function TekkzCard({ selected }: { selected?: boolean }) {
+function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; compact?: boolean }) {
   const { width } = useWindowDimensions();
-  const compact = width < 1050;
+  const compact = compactProp ?? width < 1050;
   return (
     <View style={[styles.tekkzCard, compact && styles.tekkzCardCompact, selected && styles.tekkzCardSelected]}>
       <View style={[styles.tekkzCardImageWrap, compact && styles.tekkzCardCompactImage]}>
@@ -1116,11 +1116,11 @@ export default function ChampionsScreen() {
         </View>
 
         <View style={[styles.twoCol, mobile && styles.oneCol]}>
-          <Panel>
+          <Panel style={styles.snapshotPanel}>
             <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle="TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר." />
             <TekkzCard compact />
           </Panel>
-          <Panel>
+          <Panel style={styles.snapshotPanel}>
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
           
             <View style={styles.rewardMiniGrid}>
@@ -1562,8 +1562,9 @@ const styles = StyleSheet.create({
   saveRunButton: { minHeight: 42, width: '100%', borderRadius: 11, backgroundColor: '#D9303F', alignItems: 'center', justifyContent: 'center', marginTop: 2 },
   saveRunButtonText: { color: '#fff', fontWeight: '900', fontSize: 12 },
   liveStats: { flexDirection: 'row-reverse', gap: 10, marginTop: 14 },
-  twoCol: { flexDirection: 'row-reverse', gap: 13 },
+  twoCol: { flexDirection: 'row-reverse', gap: 13, width: '100%', minWidth: 0 },
   oneCol: { flexDirection: 'column' },
+  snapshotPanel: { flex: 1, minWidth: 0, width: 0 as any },
   rewardMiniGrid: { flexDirection: 'row-reverse', gap: 9 },
   rewardMini: { flex: 1, minHeight: 78, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.06)', backgroundColor: '#0B1016', alignItems: 'center', justifyContent: 'center' },
   rewardMiniValue: { color: '#F4CF64', fontSize: 18, fontWeight: '900' },
