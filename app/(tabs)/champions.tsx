@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { Alert, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 
 import { Screen } from '@/components/ui';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
@@ -10,6 +10,7 @@ import { getSupabase } from '@/lib/supabase';
 import { pickImages } from '@/lib/images';
 import { useApp } from '@/lib/store';
 import type { PlatformId } from '@/lib/types';
+import { FORMATIONS, formationById } from '@/lib/chemistry';
 
 type IconName = keyof typeof Ionicons.glyphMap;
 type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'tactics' | 'controller';
@@ -24,6 +25,8 @@ const NAV: { id: SectionId; label: string; icon: IconName }[] = [
   { id: 'tactics', label: 'טקטיקות והרכבים', icon: 'git-network-outline' },
   { id: 'controller', label: 'הגדרות שלט', icon: 'game-controller-outline' },
 ];
+
+const FUT_CHAMPIONS_LOGO_URL = 'https://www.fifplay.com/img/public/fut-champions-logo.png';
 
 const TEKKZ_IMAGE_URL =
   'https://images.ctfassets.net/lz8ubpsr15g3/5Z7Z6NZx6FOizy9NaLmq91/9cbc5311ccc70ad286b5147bf5b2e987/Tekkz_01.png?fm=webp&h=700&q=80&w=900';
@@ -222,39 +225,85 @@ function MetricCard({
 }
 
 function MiniPitch({ formation, compact = false }: { formation: string; compact?: boolean }) {
-  const positions = [
-    ['50%', '10%'],
-    ['24%', '28%'],
-    ['76%', '28%'],
-    ['50%', '39%'],
-    ['34%', '53%'],
-    ['66%', '53%'],
-    ['13%', '72%'],
-    ['38%', '71%'],
-    ['62%', '71%'],
-    ['87%', '72%'],
-    ['50%', '91%'],
-  ];
-
+  const active = FORMATIONS.find((item) => item.label === formation) ?? formationById('433');
   return (
     <View style={[styles.pitch, compact && styles.pitchCompact]}>
       <View style={styles.pitchMidline} />
+      <View style={styles.pitchCircle} />
       <View style={styles.pitchBoxTop} />
       <View style={styles.pitchBoxBottom} />
-      {positions.map(([left, top], index) => (
-        <View
-          key={index}
-          style={[
-            styles.pitchDot,
-            compact && styles.pitchDotCompact,
-            { left: left as any, top: top as any },
-          ]}
-        />
-      ))}
+      <View style={styles.pitchGoalTop} />
+      <View style={styles.pitchGoalBottom} />
+      {active.lines.flatMap((line, rowIndex) =>
+        line.map((slot, index) => {
+          const x = line.length === 1 ? 0.5 : 0.12 + (index / Math.max(1, line.length - 1)) * 0.76;
+          const y = active.lines.length === 1 ? 0.5 : 0.08 + (rowIndex / Math.max(1, active.lines.length - 1)) * 0.84;
+          const size = compact ? 23 : 32;
+          return (
+            <View key={slot.id} style={{
+              position: 'absolute',
+              left: String(x * 100) + '%',
+              top: String(y * 100) + '%',
+              width: size,
+              height: size,
+              marginLeft: -size / 2,
+              marginTop: -size / 2,
+              borderRadius: size / 2,
+              backgroundColor: '#E6C75A',
+              borderWidth: 2,
+              borderColor: '#FFF0A5',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Text style={{ color: '#231909', fontSize: compact ? 6 : 7, fontWeight: '900' }}>{slot.position}</Text>
+            </View>
+          );
+        }),
+      )}
       <View style={styles.pitchBadge}>
-        <Text style={styles.pitchBadgeText}>{formation}</Text>
+        <Text style={styles.pitchBadgeText}>{active.label}</Text>
       </View>
     </View>
+  );
+}
+
+function FormationPickerModal({
+  visible,
+  selected,
+  onClose,
+  onSelect,
+}: {
+  visible: boolean;
+  selected: string;
+  onClose: () => void;
+  onSelect: (formation: string) => void;
+}) {
+  const { width } = useWindowDimensions();
+  const mobile = width < 720;
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+      <View style={styles.modalBackdrop}>
+        <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
+          <View style={styles.modalHeader}>
+            <View style={styles.modalHeaderCopy}>
+              <Text style={styles.modalKicker}>FC27 FORMATIONS</Text>
+              <Text style={styles.modalTitle}>בחר מערך</Text>
+              <Text style={styles.modalHint}>כל המערכים במקום אחד. בחר מערך והחלון ייסגר.</Text>
+            </View>
+            <Pressable onPress={onClose} style={styles.modalClose}><Ionicons name="close" size={19} color="#fff" /></Pressable>
+          </View>
+          <ScrollView style={styles.formationGridScroll} contentContainerStyle={styles.formationGrid}>
+            {FORMATIONS.map((item) => (
+              <Pressable key={item.id} onPress={() => { onSelect(item.label); onClose(); }}
+                style={[styles.formationOption, mobile ? styles.formationOptionMobile : styles.formationOptionDesktop, selected === item.label && styles.formationOptionActive]}>
+                <Text style={[styles.formationOptionText, selected === item.label && styles.formationOptionTextActive]}>{item.label}</Text>
+                {selected === item.label ? <Ionicons name="checkmark-circle" size={15} color="#fff" /> : null}
+              </Pressable>
+            ))}
+          </ScrollView>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
@@ -379,6 +428,7 @@ function EmptyCommunity() {
 
 export default function ChampionsScreen() {
   const app = useApp();
+  const router = useRouter();
   const { width } = useWindowDimensions();
   const mobile = width < 900;
 
@@ -401,11 +451,11 @@ export default function ChampionsScreen() {
   const [formation, setFormation] = useState('4-4-1-1 (2)');
   const [saving, setSaving] = useState(false);
   const [composerImages, setComposerImages] = useState<string[]>([]);
-  const [squadImages, setSquadImages] = useState<string[]>([]);
   const [controllerImages, setControllerImages] = useState<string[]>([]);
   const [buildUp, setBuildUp] = useState<(typeof BUILD_UP_STYLES)[number]>('Balanced');
   const [defensive, setDefensive] = useState<(typeof DEFENSIVE_APPROACHES)[number]>('Balanced');
   const [lineHeight, setLineHeight] = useState('60');
+  const [formationPickerOpen, setFormationPickerOpen] = useState(false);
 
   const canView = true;
 
@@ -503,10 +553,6 @@ export default function ChampionsScreen() {
     try { setComposerImages(await pickImages(3)); } catch (error) { Alert.alert('העלאת תמונה', error instanceof Error ? error.message : 'לא הצלחנו לבחור תמונה.'); }
   }
 
-  async function pickSquadImages() {
-    try { setSquadImages(await pickImages(3)); } catch (error) { Alert.alert('העלאת קבוצה', error instanceof Error ? error.message : 'לא הצלחנו לבחור תמונה.'); }
-  }
-
   async function pickControllerImages() {
     try { setControllerImages(await pickImages(3)); } catch (error) { Alert.alert('העלאת הגדרות שלט', error instanceof Error ? error.message : 'לא הצלחנו לבחור תמונה.'); }
   }
@@ -521,15 +567,12 @@ export default function ChampionsScreen() {
         const { uploadProofs } = await import('@/lib/supabase');
         return uploadProofs(app.user!.id, images, folder);
       };
-      const [squadUris, controllerUris] = await Promise.all([
-        upload(squadImages, 'champions-squad'),
-        upload(controllerImages, 'champions-controller'),
-      ]);
+      const controllerUris = await upload(controllerImages, 'champions-controller');
       const { error } = await supabase.from('champions_profiles').upsert({
         user_id: app.user.id,
         custom_image_uri: null,
         use_avatar: true,
-        squad_image_uris: squadUris,
+        squad_image_uris: [],
         controller_image_uris: controllerUris,
         controller_platform: platform,
         formation,
@@ -625,6 +668,16 @@ export default function ChampionsScreen() {
         <View style={styles.contentStack}>
           <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
             subtitle="בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות." />
+          <View style={styles.rewardLogoStrip}>
+            <View style={styles.rewardLogoText}>
+              <Text style={styles.rewardLogoEyebrow}>EA SPORTS FC 27</Text>
+              <Text style={styles.rewardLogoTitle}>FUT CHAMPIONS</Text>
+              <Text style={styles.rewardLogoSub}>CHAMPIONS TOKENS</Text>
+            </View>
+            <View style={styles.rewardLogoFrame}>
+              <Image source={{ uri: FUT_CHAMPIONS_LOGO_URL }} resizeMode="contain" style={styles.rewardLogoImage} />
+            </View>
+          </View>
           <Panel style={styles.rewardSelectorPanel}>
             <View style={[styles.rewardSelectorTop, mobile && styles.columnOnMobile]}>
               <View>
@@ -751,38 +804,32 @@ export default function ChampionsScreen() {
     }
 
     if (section === 'tactics') {
+      const selectedFormationData = FORMATIONS.find((item) => item.label === formation) ?? FORMATIONS[0];
       return (
         <View style={styles.contentStack}>
-          <SectionHeading
-            icon="git-network-outline"
-            eyebrow="TACTICS LIBRARY"
-            title="טקטיקות והרכבים"
-            subtitle="ספריית הטקטיקות של FC27: כל 29 מערכי Ultimate Team, Build-Up, Defensive Approach ו־Player Roles במקום אחד."
-          />
+          <SectionHeading icon="git-network-outline" eyebrow="TACTICS LAB" title="טקטיקות והרכבים"
+            subtitle="בחר מערך מתוך חלון מסודר. המגרש מתחלף מיד לפי המערך שבחרת." />
           <Panel>
-            <View style={styles.tacticsHeader}>
-              <View>
-                <Text style={styles.tacticTitle}>TEKKZ · 4-4-1-1 (2)</Text>
-                <Text style={styles.tacticSub}>Short Passing · High · Line Height 65</Text>
-                <Text style={styles.sourceNote}>קוד: GJgwMwH%QEao · מקור: FUTSettings</Text>
+            <View style={[styles.tacticsHero, mobile && styles.oneCol]}>
+              <View style={styles.tacticsPitchWrap}><MiniPitch formation={formation} /></View>
+              <View style={styles.tacticsControls}>
+                <Text style={styles.tacticsKicker}>ACTIVE FORMATION</Text>
+                <Text style={styles.tacticsBigTitle}>{selectedFormationData.label}</Text>
+                <Text style={styles.tacticsBody}>אין יותר רשימה אופקית. לוחצים על בחירת מערך ונפתח חלון נקי עם כל המערכים, בלי לגעת בכותרת או בהסבר.</Text>
+                <Pressable style={styles.formationSelectCard} onPress={() => setFormationPickerOpen(true)}>
+                  <View style={styles.formationSelectCopy}>
+                    <Text style={styles.formationSelectLabel}>FORMATION</Text>
+                    <Text style={styles.formationSelectValue}>{selectedFormationData.label}</Text>
+                  </View>
+                  <Ionicons name="chevron-down" size={18} color="#F4CF64" />
+                </Pressable>
+                <Text style={styles.tacticsControlLabel}>BUILD-UP STYLE</Text>
+                <View style={styles.selectorRow}>{BUILD_UP_STYLES.map((item) => <Pressable key={item} onPress={() => setBuildUp(item)} style={[styles.selectorChip, buildUp === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
+                <Text style={styles.tacticsControlLabel}>DEFENSIVE APPROACH</Text>
+                <View style={styles.selectorRow}>{DEFENSIVE_APPROACHES.map((item) => <Pressable key={item} onPress={() => setDefensive(item)} style={[styles.selectorChip, defensive === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
+                <Text style={styles.tacticsControlLabel}>LINE HEIGHT · {lineHeight}</Text>
+                <View style={styles.selectorRow}>{['40','50','60','70','80'].map((item) => <Pressable key={item} onPress={() => setLineHeight(item)} style={[styles.selectorChip, lineHeight === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
               </View>
-              <View style={styles.sourceBadge}>
-                <Ionicons name="checkmark-circle" size={14} color="#68E09B" />
-                <Text style={styles.sourceBadgeText}>VERIFIED</Text>
-              </View>
-            </View>
-            <View style={styles.formationScroller}><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.formationRow}>{FC27_FORMATIONS.map((item) => <Pressable key={item} onPress={() => setFormation(item)} style={[styles.formationChip, formation === item && styles.formationChipActive]}><Text style={[styles.formationChipText, formation === item && styles.formationChipTextActive]}>{item}</Text></Pressable>)}</ScrollView></View>
-            <MiniPitch formation={formation} />
-            <View style={styles.selectorRow}>{BUILD_UP_STYLES.map((item) => <Pressable key={item} onPress={() => setBuildUp(item)} style={[styles.selectorChip, buildUp === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
-            <View style={styles.selectorRow}>{DEFENSIVE_APPROACHES.map((item) => <Pressable key={item} onPress={() => setDefensive(item)} style={[styles.selectorChip, defensive === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
-            <Text style={styles.sourceNote}>Build-Up: {buildUp} · Defensive Approach: {defensive} · Line Height: {lineHeight}</Text>
-            <View style={styles.roleGrid}>
-              {TEKKZ_ROLES.map(([position, role], index) => (
-                <View key={position + index} style={styles.roleChip}>
-                  <Text style={styles.rolePosition}>{position}</Text>
-                  <Text style={styles.roleText}>{role}</Text>
-                </View>
-              ))}
             </View>
           </Panel>
         </View>
@@ -838,8 +885,16 @@ export default function ChampionsScreen() {
           </Panel>
           <Panel>
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
-            <Pressable style={styles.uploadButton} onPress={() => void pickSquadImages()}><Ionicons name="images-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{squadImages.length ? `${squadImages.length} תמונות נבחרו` : 'העלה את הקבוצה שלך'}</Text></Pressable>
-            <Pressable style={styles.publishConfirm} onPress={() => void saveChampionsProfile()} disabled={saving}><Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שמור את העמוד שלי'}</Text></Pressable>
+            <View style={styles.communitySquadBlock}>
+            <Text style={styles.communitySquadTitle}>הקבוצה בפוסט</Text>
+            <Text style={styles.communitySquadHint}>בנה את הקבוצה שלך באמת עם שחקני האתר, 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
+            <Pressable style={styles.uploadButton} onPress={() => router.push('/squad')}>
+              <Ionicons name="football-outline" size={17} color="#fff" />
+              <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
+            </Pressable>
+            {app.user?.squad ? <Text style={styles.communitySquadSaved}>סגל שמור · {app.user.squad.formation} · {Object.keys(app.user.squad.slots).length} בהרכב · {app.user.squad.bench.length} מחליפים</Text> : null}
+          </View>
+          <Pressable style={styles.publishConfirm} onPress={() => void saveChampionsProfile()} disabled={saving}><Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שמור את העמוד שלי'}</Text></Pressable>
             <View style={styles.rewardMiniGrid}>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{personalReward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
@@ -867,6 +922,13 @@ export default function ChampionsScreen() {
     section,
     selectedReward,
     selectedWins,
+    formation,
+    buildUp,
+    defensive,
+    lineHeight,
+    formationPickerOpen,
+    composerImages,
+    router,
   ]);
 
   if (!canView) {
@@ -925,6 +987,7 @@ export default function ChampionsScreen() {
       </View>
 
       {showComposer ? (
+        <Modal visible transparent animationType="fade" onRequestClose={() => setShowComposer(false)}>
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
@@ -932,7 +995,13 @@ export default function ChampionsScreen() {
               <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
             </View>
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.formationRow}>{FC27_FORMATIONS.map((item) => <Pressable key={item} onPress={() => setFormation(item)} style={[styles.formationChip, formation === item && styles.formationChipActive]}><Text style={[styles.formationChipText, formation === item && styles.formationChipTextActive]}>{item}</Text></Pressable>)}</ScrollView>
+            <Pressable style={styles.formationSelectCard} onPress={() => setFormationPickerOpen(true)}>
+  <View style={styles.formationSelectCopy}>
+    <Text style={styles.formationSelectLabel}>FORMATION</Text>
+    <Text style={styles.formationSelectValue}>{formation}</Text>
+  </View>
+  <Ionicons name="chevron-down" size={18} color="#F4CF64" />
+</Pressable>
             <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
             <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
             <View style={styles.platformRow}>
@@ -944,7 +1013,10 @@ export default function ChampionsScreen() {
             </Pressable>
           </Panel>
         </View>
+        </Modal>
       ) : null}
+
+      <FormationPickerModal visible={formationPickerOpen} selected={formation} onClose={() => setFormationPickerOpen(false)} onSelect={setFormation} />
     </Screen>
   );
 }
@@ -1279,6 +1351,40 @@ const styles = StyleSheet.create({
 
   columnOnMobile: { flexDirection: 'column' },
   storeEmptyBox: { minHeight: 210, alignItems: 'center', justifyContent: 'center', borderRadius: 16, backgroundColor: 'rgba(4,7,11,.50)', gap: 10 },
+  pitchCircle: { position: 'absolute', left: '50%', top: '50%', width: 58, height: 58, marginLeft: -29, marginTop: -29, borderRadius: 29, borderWidth: 1, borderColor: 'rgba(255,255,255,.18)' },
+  pitchGoalTop: { position: 'absolute', left: '39%', right: '39%', top: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderBottomWidth: 0 },
+  pitchGoalBottom: { position: 'absolute', left: '39%', right: '39%', bottom: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderTopWidth: 0 },
+  oneCol: { flexDirection: 'column' },
+  tacticsHero: { flexDirection: 'row-reverse', gap: 16, alignItems: 'stretch' },
+  tacticsPitchWrap: { flex: 1.15, minWidth: 340 },
+  tacticsControls: { flex: .85, minWidth: 290, justifyContent: 'center', alignItems: 'flex-end', gap: 7 },
+  tacticsKicker: { color: '#C89748', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
+  tacticsBigTitle: { color: '#F5F7F9', fontSize: 31, fontWeight: '900', textAlign: 'right' },
+  tacticsBody: { color: '#7A8691', fontSize: 10, lineHeight: 16, fontWeight: '700', textAlign: 'right', maxWidth: 470 },
+  formationSelectCard: { width: '100%', minHeight: 57, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(242,200,89,.28)', backgroundColor: '#0A1017', paddingHorizontal: 12, flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 6 },
+  formationSelectCopy: { flex: 1, alignItems: 'flex-end' },
+  formationSelectLabel: { color: '#6F7A84', fontSize: 7, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' },
+  formationSelectValue: { color: '#F3D36A', fontSize: 16, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  tacticsControlLabel: { width: '100%', color: '#7D8993', fontSize: 8, fontWeight: '900', textAlign: 'right', marginTop: 6 },
+  rewardLogoStrip: { minHeight: 145, borderRadius: 18, borderWidth: 1, borderColor: 'rgba(223,46,62,.36)', backgroundColor: 'rgba(22,6,10,.72)', padding: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 13 },
+  rewardLogoText: { flex: 1, alignItems: 'flex-end' },
+  rewardLogoEyebrow: { color: '#D1AD5A', fontSize: 8, fontWeight: '900', letterSpacing: 1.3, textAlign: 'right' },
+  rewardLogoTitle: { color: '#FFF0F2', fontSize: 29, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  rewardLogoSub: { color: '#FF4D5A', fontSize: 9, fontWeight: '900', letterSpacing: 1, textAlign: 'right', marginTop: 3 },
+  rewardLogoFrame: { width: 128, height: 128, borderRadius: 22, borderWidth: 1, borderColor: 'rgba(241,198,88,.25)', backgroundColor: 'rgba(55,8,15,.42)', alignItems: 'center', justifyContent: 'center' },
+  rewardLogoImage: { width: 115, height: 115 },
+  communitySquadBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(7,11,16,.66)', padding: 11, gap: 5, marginTop: 8 },
+  communitySquadTitle: { color: '#E8EDF1', fontSize: 13, fontWeight: '900', textAlign: 'right' },
+  communitySquadHint: { color: '#717D88', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
+  communitySquadSaved: { color: '#E3C765', fontSize: 8, fontWeight: '900', textAlign: 'right' },
+  formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .56, shadowRadius: 28, shadowOffset: { width: 0, height: 18 } },
+  formationPickerMobile: { width: '96%', padding: 13 },
+  modalHeaderCopy: { flex: 1, alignItems: 'flex-end' },
+  modalClose: { width: 35, height: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', alignItems: 'center', justifyContent: 'center' },
+  formationGridScroll: { marginTop: 12 },
+  formationGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, paddingBottom: 8 },
+  formationOption: { minHeight: 47, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0D131B', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 6 },
+  formationPickerOptionDesktop: { width: '31.8%' },
 
 });
 
