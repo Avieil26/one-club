@@ -1,18 +1,14 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
 
 import { Screen } from '@/components/ui';
+import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
+import { getSupabase } from '@/lib/supabase';
 import { useApp } from '@/lib/store';
+import type { PlatformId } from '@/lib/types';
 
 type IconName = keyof typeof Ionicons.glyphMap;
 type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'tactics' | 'controller';
@@ -50,6 +46,99 @@ const CONTROLLER_ROWS = [
   ['Player Switching', 'Right Stick'],
   ['Analog Sprint', 'Off'],
 ] as const;
+
+
+type ChampionsRun = {
+  matchesPlayed: number;
+  wins: number;
+  losses: number;
+  cqp: number;
+  rank: number | null;
+  updatedAt?: string;
+};
+
+type CommunityItem = {
+  id: string;
+  user_id: string;
+  kind: 'tactic' | 'tip' | 'guide';
+  title: string;
+  body: string;
+  formation: string | null;
+  platform: PlatformId;
+  settings: Record<string, string>;
+  image_uris: string[];
+  featured: boolean;
+  created_at: string;
+};
+
+type RewardTier = {
+  wins: number;
+  rank: string;
+  coins: number;
+  tokens: number;
+};
+
+type TokenReward = {
+  title: string;
+  details: string;
+  tokens: number;
+  visual: PackVisual;
+  packLabel?: string;
+  tradeable?: boolean;
+};
+
+const REWARD_TIERS: RewardTier[] = [
+  { wins: 0, rank: 'לא מדורג', coins: 0, tokens: 0 },
+  { wins: 1, rank: 'Contender V', coins: 0, tokens: 15 },
+  { wins: 2, rank: 'Contender IV', coins: 0, tokens: 20 },
+  { wins: 3, rank: 'Contender III', coins: 0, tokens: 30 },
+  { wins: 4, rank: 'Contender II', coins: 0, tokens: 40 },
+  { wins: 5, rank: 'Contender I', coins: 2500, tokens: 50 },
+  { wins: 6, rank: 'Champions V', coins: 5000, tokens: 60 },
+  { wins: 7, rank: 'Champions IV', coins: 10000, tokens: 75 },
+  { wins: 8, rank: 'Champions III', coins: 15000, tokens: 90 },
+  { wins: 9, rank: 'Champions II', coins: 25000, tokens: 110 },
+  { wins: 10, rank: 'Champions I', coins: 35000, tokens: 135 },
+  { wins: 11, rank: 'Elite V', coins: 50000, tokens: 165 },
+  { wins: 12, rank: 'Elite IV', coins: 75000, tokens: 215 },
+  { wins: 13, rank: 'Elite III', coins: 105000, tokens: 275 },
+  { wins: 14, rank: 'Elite II', coins: 145000, tokens: 350 },
+  { wins: 15, rank: 'Elite I', coins: 250000, tokens: 450 },
+];
+
+const TOKEN_STORE: TokenReward[] = [
+  { title: '2x 77+ Gold Players Pack', details: '2 Gold Player Items rated 77+', tokens: 5, visual: 'gold-small', packLabel: '77+', tradeable: true },
+  { title: '10x 75+ Gold Players Pack', details: '10 Gold Player Items rated 75+', tokens: 15, visual: 'rare-75', packLabel: '75+', tradeable: false },
+  { title: '1 of 5 83+ Gold Player Pick', details: 'Choose 1 of 5 Gold Players rated 83+', tokens: 15, visual: 'pick', packLabel: '83+', tradeable: true },
+  { title: '5x 82+ Gold Players Pack', details: '5 Gold Player Items rated 82+', tokens: 25, visual: 'gold', packLabel: '82+', tradeable: true },
+  { title: '10x 80+ Gold Players Pack', details: '10 Gold Player Items rated 80+', tokens: 25, visual: 'gold', packLabel: '80+', tradeable: true },
+  { title: 'TOTW Player Pack', details: '1 active Team of the Week Player', tokens: 25, visual: 'gold', packLabel: 'TOTW', tradeable: true },
+  { title: '20x 81+ Gold Players Pack', details: '20 Gold Player Items rated 81+', tokens: 50, visual: 'gold', packLabel: '81+', tradeable: true },
+  { title: '1 of 4 85+ Gold Player Pick', details: 'Choose 1 of 4 Gold Players rated 85+', tokens: 50, visual: 'pick', packLabel: '85+', tradeable: false },
+  { title: '1 of 5 FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3', tokens: 50, visual: 'pick', packLabel: 'TOTW', tradeable: false },
+  { title: '2x 86+ Gold Players Pack', details: '2 Gold Player Items rated 86+', tokens: 75, visual: 'gold-jumbo', packLabel: '86+', tradeable: true },
+  { title: '10x 83+ Gold Players Pack', details: '10 Gold Player Items rated 83+', tokens: 75, visual: 'gold', packLabel: '83+', tradeable: true },
+  { title: '10x 84+ Gold Players Pack', details: '10 Gold Player Items rated 84+', tokens: 100, visual: 'gold', packLabel: '84+', tradeable: false },
+  { title: '1 of 5 82+ FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3 rated 82+', tokens: 100, visual: 'pick', packLabel: 'TOTW', tradeable: true },
+  { title: '5x 86+ Gold Players Pack', details: '5 Gold Player Items rated 86+', tokens: 125, visual: 'gold-jumbo', packLabel: '86+', tradeable: false },
+  { title: '3x 88+ Gold Players Pack', details: '3 Gold Player Items rated 88+', tokens: 200, visual: 'gold-giant', packLabel: '88+', tradeable: true },
+];
+
+const PREVIEW_RUN: ChampionsRun = {
+  matchesPlayed: 15,
+  wins: 9,
+  losses: 6,
+  cqp: 750,
+  rank: 4,
+};
+
+function rewardForWins(wins: number) {
+  return REWARD_TIERS[Math.max(0, Math.min(15, wins))];
+}
+
+function formatCoins(value: number) {
+  return new Intl.NumberFormat('en-US').format(Math.max(0, value));
+}
 
 function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
@@ -206,6 +295,49 @@ function TekkzCard({ selected, compact = false }: { selected: boolean; compact?:
   );
 }
 
+
+function PlatformPill({
+  value,
+  selected,
+  onPress,
+}: {
+  value: 'xbox' | 'ps5';
+  selected: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable onPress={onPress} style={[styles.platformPill, selected && styles.platformPillActive]}>
+      <Image
+        source={value === 'xbox' ? require('@/assets/images/logo-xbox.png') : require('@/assets/images/logo-playstation.png')}
+        resizeMode="contain"
+        style={styles.platformLogo}
+      />
+      <Text style={[styles.platformPillText, selected && styles.platformPillTextActive]}>
+        {value === 'xbox' ? 'Xbox' : 'PlayStation'}
+      </Text>
+    </Pressable>
+  );
+}
+
+function RewardStoreCard({ item }: { item: TokenReward }) {
+  return (
+    <View style={styles.storeCard}>
+      <View style={styles.storeVisual}>
+        <SbcRewardPack visual={item.visual} size={64} label={item.packLabel} />
+      </View>
+      <View style={styles.storeCopy}>
+        <Text style={styles.storeTitle}>{item.title}</Text>
+        <Text style={styles.storeDetails}>{item.details}</Text>
+        <Text style={styles.storeTradeable}>{item.tradeable ? 'TRADEABLE' : 'UNTRADEABLE'}</Text>
+      </View>
+      <View style={styles.storeCost}>
+        <Text style={styles.storeCostValue}>{item.tokens}</Text>
+        <Text style={styles.storeCostLabel}>TOKENS</Text>
+      </View>
+    </View>
+  );
+}
+
 function EmptyCommunity() {
   return (
     <Panel style={styles.emptyPanel}>
@@ -219,64 +351,174 @@ function EmptyCommunity() {
   );
 }
 
+
 export default function ChampionsScreen() {
   const app = useApp();
   const { width } = useWindowDimensions();
   const mobile = width < 900;
-  const [section, setSection] = useState<SectionId>('center');
+
+  const [section, setSection] = useState<SectionId>('tekkz');
+  const [platform, setPlatform] = useState<'xbox' | 'ps5'>('xbox');
+
+  // The approved reference is only a Preview fallback. Once the user saves a run,
+  // these values come from Supabase and persist for that account.
+  const [run, setRun] = useState<ChampionsRun>(PREVIEW_RUN);
+  const [editingRun, setEditingRun] = useState(false);
+  const [draftWins, setDraftWins] = useState(String(PREVIEW_RUN.wins));
+  const [draftLosses, setDraftLosses] = useState(String(PREVIEW_RUN.losses));
+  const [draftMatches, setDraftMatches] = useState(String(PREVIEW_RUN.matchesPlayed));
+  const [draftCqp, setDraftCqp] = useState(String(PREVIEW_RUN.cqp));
+
+  const [community, setCommunity] = useState<CommunityItem[]>([]);
+  const [showComposer, setShowComposer] = useState(false);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [formation, setFormation] = useState('4-4-1-1 (2)');
+  const [saving, setSaving] = useState(false);
 
   const canView = app.user?.isAdmin === true;
 
-  const selectSection = (id: SectionId) => setSection(id);
+  async function loadLiveData() {
+    if (!app.user?.id) return;
+    const supabase = getSupabase();
+
+    const [runResult, communityResult] = await Promise.all([
+      supabase
+        .from('champions_runs')
+        .select('matches_played,wins,losses,cqp,rank,updated_at')
+        .eq('user_id', app.user.id)
+        .maybeSingle(),
+      supabase
+        .from('champions_content')
+        .select('id,user_id,kind,title,body,formation,platform,settings,image_uris,featured,created_at')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false })
+        .limit(30),
+    ]);
+
+    if (!runResult.error && runResult.data) {
+      const next: ChampionsRun = {
+        matchesPlayed: Number(runResult.data.matches_played),
+        wins: Number(runResult.data.wins),
+        losses: Number(runResult.data.losses),
+        cqp: Number(runResult.data.cqp),
+        rank: runResult.data.rank == null ? null : Number(runResult.data.rank),
+        updatedAt: runResult.data.updated_at,
+      };
+      setRun(next);
+      setDraftWins(String(next.wins));
+      setDraftLosses(String(next.losses));
+      setDraftMatches(String(next.matchesPlayed));
+      setDraftCqp(String(next.cqp));
+    } else {
+      setRun(PREVIEW_RUN);
+    }
+
+    if (!communityResult.error) {
+      setCommunity((communityResult.data ?? []) as CommunityItem[]);
+    }
+  }
+
+  useEffect(() => {
+    if (canView) void loadLiveData();
+  }, [app.user?.id, canView]);
+
+  async function saveRun() {
+    if (!app.user?.id) return;
+
+    const wins = Math.max(0, Math.min(15, Number(draftWins) || 0));
+    const losses = Math.max(0, Math.min(15, Number(draftLosses) || 0));
+    const requestedMatches = Math.max(0, Math.min(15, Number(draftMatches) || 0));
+    const matchesPlayed = Math.max(wins + losses, requestedMatches);
+    const cqp = Math.max(0, Number(draftCqp) || 0);
+
+    if (matchesPlayed > 15 || wins + losses > 15) {
+      Alert.alert('נתונים לא תקינים', 'WINS + LOSSES חייבים להיות עד 15.');
+      return;
+    }
+
+    setSaving(true);
+    const savedAt = new Date().toISOString();
+
+    const { error } = await getSupabase().from('champions_runs').upsert({
+      user_id: app.user.id,
+      matches_played: matchesPlayed,
+      wins,
+      losses,
+      cqp,
+      rank: run.rank,
+      updated_at: savedAt,
+    });
+
+    setSaving(false);
+
+    if (error) {
+      Alert.alert('השמירה נכשלה', 'לא הצלחנו לשמור את נתוני ה־Champions שלך.');
+      return;
+    }
+
+    setRun({ matchesPlayed, wins, losses, cqp, rank: run.rank, updatedAt: savedAt });
+    setEditingRun(false);
+  }
+
+  async function publish() {
+    if (!app.user?.id) {
+      Alert.alert('צריך להתחבר', 'כדי להעלות תוכן צריך להתחבר.');
+      return;
+    }
+
+    if (title.trim().length < 2 || body.trim().length < 2) {
+      Alert.alert('חסר תוכן', 'מלא כותרת והסבר קצר.');
+      return;
+    }
+
+    setSaving(true);
+    const { error } = await getSupabase().from('champions_content').insert({
+      user_id: app.user.id,
+      kind: 'tactic',
+      title: title.trim(),
+      body: body.trim(),
+      formation: formation.trim() || null,
+      platform,
+      settings: {},
+      image_uris: [],
+      status: 'pending',
+      featured: false,
+    });
+    setSaving(false);
+
+    if (error) {
+      Alert.alert('העלאה נכשלה', 'נסה שוב.');
+      return;
+    }
+
+    setTitle('');
+    setBody('');
+    setFormation('4-4-1-1 (2)');
+    setShowComposer(false);
+    Alert.alert('נשלח לבדיקה', 'הטקטיקה תופיע בקהילת Champions רק לאחר אישור.');
+  }
+
+  const reward = rewardForWins(run.wins);
+  const form = run.wins - run.losses;
+  const availableRewards = useMemo(
+    () => TOKEN_STORE.filter((item) => item.tokens <= reward.tokens),
+    [reward.tokens],
+  );
 
   const content = useMemo(() => {
-    if (section === 'community') {
-      return (
-        <View style={styles.contentStack}>
-          <SectionHeading icon="people-outline" eyebrow="COMMUNITY HUB" title="שחקני הקהילה" subtitle="תוכן אמיתי של שחקני FC27 יופיע כאן לאחר אישור." />
-          <EmptyCommunity />
-        </View>
-      );
-    }
-
-    if (section === 'rewards') {
-      return (
-        <View style={styles.contentStack}>
-          <SectionHeading icon="gift-outline" eyebrow="REWARD TRACK" title="מסלול הפרסים" subtitle="הסוגים מוצגים כאן; הכמויות המדויקות יופיעו לפי האירוע והדירוג." />
-          <View style={styles.rewardGrid}>
-            {[
-              ['Champions Player Item', 'פריט שחקן Champions', 'diamond', '#D8AA4A'],
-              ['Player Pick', 'בחירת שחקן', 'star', '#F4D16A'],
-              ['Champions Tokens', 'טוקנים ל־Champions', 'pricetag-outline', '#70C7FF'],
-            ].map(([title, body, icon, tone]) => (
-              <Panel key={title} style={styles.rewardCard}>
-                <Ionicons name={icon as IconName} size={28} color={tone} />
-                <Text style={styles.rewardTitle}>{title}</Text>
-                <Text style={styles.rewardBody}>{body}</Text>
-              </Panel>
-            ))}
-          </View>
-        </View>
-      );
-    }
-
     if (section === 'tekkz') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="TEKKZ · נתוני FC27" subtitle="הצגה של נתוני setup שנבדקו ממקור חיצוני, בלי Record / CQP / Rank לא מאומתים." />
-          <View style={styles.tekkzDetailGrid}>
+          <SectionHeading
+            icon="star-outline"
+            eyebrow="TEKKZ PRO"
+            title="TEKKZ · נתוני FC27"
+            subtitle="ה־setup המאומת של TEKKZ הוא ברירת המחדל. אין כאן Record או CQP מומצאים."
+          />
+          <TekkzCard selected />
+          <View style={[styles.tekkzDetailGrid, mobile && styles.oneCol]}>
             <Panel style={styles.tekkzDetailMain}>
-              <View style={styles.detailTopRow}>
-                <View>
-                  <Text style={styles.detailKicker}>VERIFIED SETUP</Text>
-                  <Text style={styles.detailName}>TEKKZ 🇬🇧</Text>
-                  <Text style={styles.detailSub}>PS5 · 4-4-1-1 (2) · Pro Player</Text>
-                </View>
-                <View style={styles.goldPill}>
-                  <Ionicons name="checkmark-circle" size={15} color="#70E5A1" />
-                  <Text style={styles.goldPillText}>FUTSettings</Text>
-                </View>
-              </View>
               <View style={styles.detailFacts}>
                 <View style={styles.detailFact}><Text style={styles.detailFactValue}>Short Passing</Text><Text style={styles.detailFactLabel}>BUILD UP STYLE</Text></View>
                 <View style={styles.detailFact}><Text style={styles.detailFactValue}>High</Text><Text style={styles.detailFactLabel}>DEFENSIVE APPROACH</Text></View>
@@ -290,7 +532,7 @@ export default function ChampionsScreen() {
                   </View>
                 ))}
               </View>
-              <Text style={styles.sourceNote}>מקור חיצוני: FUTSettings · קוד GJgwMwH%QEao</Text>
+              <Text style={styles.sourceNote}>מקור: FUTSettings · קוד GJgwMwH%QEao</Text>
             </Panel>
             <Panel style={styles.tekkzPitchPanel}>
               <Text style={styles.pitchTitle}>הטקטיקה של TEKKZ</Text>
@@ -302,26 +544,59 @@ export default function ChampionsScreen() {
       );
     }
 
-    if (section === 'tactics') {
+    if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="git-network-outline" eyebrow="TACTICS LIBRARY" title="טקטיקות והרכבים" subtitle="מערכים, תפקידי שחקנים ונתוני setup שניתנים לאימות." />
-          <View style={styles.tacticGrid}>
-            <Panel style={styles.tacticPanel}>
-              <Text style={styles.tacticTitle}>TEKKZ · 4-4-1-1 (2)</Text>
-              <Text style={styles.tacticSub}>Short Passing · High · Line Height 65</Text>
-              <MiniPitch formation="4-4-1-1 (2)" />
-            </Panel>
-            <Panel style={styles.tacticPanel}>
-              <Text style={styles.tacticTitle}>תפקידי מפתח</Text>
-              {TEKKZ_ROLES.slice(5).map(([position, role], index) => (
-                <View key={position + index} style={styles.tacticRow}>
-                  <Text style={styles.tacticValue}>{role}</Text>
-                  <Text style={styles.tacticLabel}>{position}</Text>
-                </View>
+          <SectionHeading
+            icon="gift-outline"
+            eyebrow="CHAMPIONS REWARDS"
+            title="הפרסים לפי מספר הניצחונות"
+            subtitle="בחר מספר ניצחונות כדי לראות את הפרס הרשמי, ואז מוצגות רק חבילות ה־Token Store שאתה יכול להרשות לעצמך."
+          />
+          <Panel>
+            <Text style={styles.selectorTitle}>ניצחונות: {run.wins} / 15</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.winSelector}>
+              {Array.from({ length: 16 }, (_, wins) => (
+                <Pressable
+                  key={wins}
+                  onPress={() => setRun((current) => ({
+                    ...current,
+                    wins,
+                    losses: Math.max(0, current.matchesPlayed - wins),
+                  }))}
+                  style={[styles.winChip, run.wins === wins && styles.winChipActive]}
+                >
+                  <Text style={[styles.winChipValue, run.wins === wins && styles.winChipValueActive]}>{wins}</Text>
+                  <Text style={[styles.winChipLabel, run.wins === wins && styles.winChipLabelActive]}>W</Text>
+                </Pressable>
               ))}
-            </Panel>
-          </View>
+            </ScrollView>
+            <View style={styles.rewardSummaryGrid}>
+              <MetricCard label="REWARD RANK" value={reward.rank} tone="gold" note={String(run.wins) + ' wins'} />
+              <MetricCard label="COINS" value={formatCoins(reward.coins)} tone="gold" note="Season 1 reward" />
+              <MetricCard label="CHAMPIONS TOKENS" value={String(reward.tokens)} tone="red" note="Spend in Token Store" />
+              <MetricCard label="MY CQP" value={formatCoins(run.cqp)} tone="green" note="הנקודות שנשמרו לחשבון" />
+            </View>
+          </Panel>
+
+          <Panel>
+            <View style={styles.storeHeader}>
+              <View>
+                <Text style={styles.storeHeaderEyebrow}>CHAMPIONS TOKEN STORE</Text>
+                <Text style={styles.storeHeaderTitle}>רק החבילות שאתה יכול לקנות</Text>
+                <Text style={styles.storeHeaderSub}>{reward.tokens} Tokens זמינים · הצעות יקרות יותר מוסתרות.</Text>
+              </View>
+              <View style={styles.tokenBadge}>
+                <Text style={styles.tokenBadgeValue}>{reward.tokens}</Text>
+                <Text style={styles.tokenBadgeLabel}>TOKENS</Text>
+              </View>
+            </View>
+            {availableRewards.length ? (
+              availableRewards.map((item) => <RewardStoreCard key={item.title + String(item.tokens)} item={item} />)
+            ) : (
+              <Text style={styles.storeEmpty}>אין עדיין מספיק Tokens לחבילה מהחנות.</Text>
+            )}
+          </Panel>
         </View>
       );
     }
@@ -329,135 +604,181 @@ export default function ChampionsScreen() {
     if (section === 'controller') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="game-controller-outline" eyebrow="CONTROLLER LAB" title="הגדרות שלט" subtitle="הגדרות תחרותיות כלליות; נתוני שלט ספציפיים ל־TEKKZ יוצגו רק אחרי אימות." />
-          <View style={styles.controllerGrid}>
-            <Panel style={styles.controllerPanel}>
-              <View style={styles.controllerPreview}>
-                <Text style={styles.controllerGlyph}>🎮</Text>
-                <Text style={styles.controllerName}>PlayStation 5 · DualSense</Text>
+          <SectionHeading
+            icon="game-controller-outline"
+            eyebrow="CONTROLLER LAB"
+            title="הגדרות שלט"
+            subtitle="Xbox ו־PlayStation עם הלוגואים והנכסים שכבר קיימים באתר."
+          />
+          <Panel>
+            <View style={styles.platformRow}>
+              <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
+              <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
+            </View>
+            <View style={styles.controllerHero}>
+              <Image
+                source={platform === 'xbox' ? require('@/assets/images/platform-xbox.png') : require('@/assets/images/platform-ps5.png')}
+                resizeMode="contain"
+                style={styles.controllerImage}
+              />
+              <View style={styles.controllerCopy}>
+                <Text style={styles.controllerTitle}>{platform === 'xbox' ? 'Xbox Series X|S' : 'PlayStation 5 · DualSense'}</Text>
+                <Text style={styles.controllerSub}>הגדרות תחרותיות ל־FC27 · {platform === 'xbox' ? 'Xbox' : 'PlayStation'}</Text>
               </View>
-            </Panel>
-            <Panel style={styles.controllerSettings}>
-              {CONTROLLER_ROWS.map(([label, value]) => (
-                <View key={label} style={styles.settingRow}>
-                  <Text style={styles.settingValue}>{value}</Text>
-                  <Text style={styles.settingLabel}>{label}</Text>
+            </View>
+            {CONTROLLER_ROWS.map(([label, value]) => (
+              <View key={label} style={styles.settingRow}>
+                <Text style={styles.settingValue}>{value}</Text>
+                <Text style={styles.settingLabel}>{label}</Text>
+              </View>
+            ))}
+          </Panel>
+        </View>
+      );
+    }
+
+    if (section === 'community') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading
+            icon="people-outline"
+            eyebrow="COMMUNITY HUB"
+            title="שחקני הקהילה"
+            subtitle="רק טקטיקות שאושרו מופיעות כאן. בהתחלה האזור נשאר ריק."
+          />
+          <View style={styles.communityHeader}>
+            <Text style={styles.communityCount}>{String(community.length)} פריטים מאושרים</Text>
+            {app.user ? (
+              <Pressable style={styles.publishButton} onPress={() => setShowComposer(true)}>
+                <Text style={styles.publishButtonText}>העלה טקטיקה</Text>
+              </Pressable>
+            ) : null}
+          </View>
+          {community.length ? (
+            community.map((item) => (
+              <Panel key={item.id}>
+                <Text style={styles.communityItemTitle}>{item.title}</Text>
+                <Text style={styles.communityItemMeta}>
+                  {item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation' : item.platform}
+                </Text>
+                <Text style={styles.communityItemBody}>{item.body}</Text>
+              </Panel>
+            ))
+          ) : <EmptyCommunity />}
+        </View>
+      );
+    }
+
+    if (section === 'tactics') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading
+            icon="git-network-outline"
+            eyebrow="TACTICS LIBRARY"
+            title="טקטיקות והרכבים"
+            subtitle="רק setup שנבדק. בשלב הראשון מוצג TEKKZ, ומידע קהילתי מתווסף רק לאחר אישור."
+          />
+          <Panel>
+            <View style={styles.tacticsHeader}>
+              <View>
+                <Text style={styles.tacticTitle}>TEKKZ · 4-4-1-1 (2)</Text>
+                <Text style={styles.tacticSub}>Short Passing · High · Line Height 65</Text>
+                <Text style={styles.sourceNote}>קוד: GJgwMwH%QEao · מקור: FUTSettings</Text>
+              </View>
+              <View style={styles.sourceBadge}>
+                <Ionicons name="checkmark-circle" size={14} color="#68E09B" />
+                <Text style={styles.sourceBadgeText}>VERIFIED</Text>
+              </View>
+            </View>
+            <MiniPitch formation="4-4-1-1 (2)" />
+            <View style={styles.roleGrid}>
+              {TEKKZ_ROLES.map(([position, role], index) => (
+                <View key={position + index} style={styles.roleChip}>
+                  <Text style={styles.rolePosition}>{position}</Text>
+                  <Text style={styles.roleText}>{role}</Text>
                 </View>
               ))}
-            </Panel>
-          </View>
+            </View>
+          </Panel>
         </View>
       );
     }
 
     return (
       <View style={styles.contentStack}>
-        <View style={styles.smallMetaStrip}>
-          <Text style={styles.metaMuted}>Standalone Preview</Text>
-          <Text style={styles.metaMuted}>CQP 750 / 1,000</Text>
-          <Text style={styles.metaMuted}>MATCH FINALS 15</Text>
-          <Text style={styles.metaMuted}>Season 1</Text>
-        </View>
-
-        <View style={[styles.centerRow, mobile && styles.centerRowMobile]}>
-          <Panel style={styles.rankPanel}>
-            <View style={styles.rankRing}>
-              <Text style={styles.rankRingLabel}>RANK</Text>
-              <Text style={styles.rankRingValue}>4</Text>
-            </View>
-            <View style={styles.rankCopy}>
-              <Text style={styles.rankSeason}>SEASON 1 · הסטטוס שלך</Text>
-              <Text style={styles.rankTitle}>דרגה 4</Text>
-              <Text style={styles.rankStatus}>Finals מוכן · נותרו עוד 6 ימים לסיום העונה</Text>
-              <Text style={styles.nextTargetLabel}>NEXT TARGET</Text>
-              <Text style={styles.nextTargetValue}>Elite 3 · 250 CQP</Text>
-              <View style={styles.longBar}><View style={styles.longBarFill} /></View>
-            </View>
-          </Panel>
-
-          <Panel style={styles.progressPanel}>
-            <View style={styles.progressHeader}>
-              <View>
-                <Text style={styles.progressEyebrow}>CHAMPIONS PROGRESS</Text>
-                <Text style={styles.progressTitle}>המסלול שלך לדרגה הבאה</Text>
-                <Text style={styles.progressSub}>15 משחקי Finals · Form, Rank ו־CQP במקום אחד.</Text>
-              </View>
-              <View style={styles.progressIcon}><Ionicons name="trophy-outline" size={21} color="#F6CC5E" /></View>
-            </View>
-
-            <View style={styles.progressStats}>
-              <View style={styles.progressTile}>
-                <Text style={styles.tileLabel}>CQP</Text>
-                <Text style={styles.tileValue}>750</Text>
-                <Text style={styles.tileNote}>/ 1,000</Text>
-              </View>
-              <View style={styles.progressTile}>
-                <Text style={styles.tileLabel}>FORM</Text>
-                <Text style={styles.tileValue}>3+</Text>
-                <Text style={styles.tileNote}>POSITIVE RUN</Text>
-              </View>
-              <View style={styles.progressTile}>
-                <Text style={styles.tileLabel}>המאזן שלך</Text>
-                <Text style={styles.tileValue}>6 - 9</Text>
-                <Text style={styles.tileNote}>6 LOSSES · 9 WINS</Text>
-              </View>
-            </View>
-
-            <View style={styles.progressBottomRow}>
-              <Text style={styles.progressTarget}>CQP 250 ליעד הבא</Text>
-              <View style={styles.progressBarLarge}><View style={styles.progressBarLargeFill} /></View>
-              <Text style={styles.progressTarget}>15 Finals</Text>
-            </View>
-          </Panel>
-        </View>
-
-        <View style={styles.contentGrid}>
-          <Panel style={styles.tacticPreview}>
-            <SectionHeading icon="git-network-outline" title="הטקטיקה שלך" subtitle="מבנה לדוגמה · נתונים אישיים יוזנו בעתיד." />
-            <View style={styles.tacticInside}>
-              <MiniPitch formation="4-2-3-1" />
-              <View style={styles.tacticInfo}>
-                {[
-                  ['Build Up Style', 'Balanced'],
-                  ['Defensive Approach', 'Balanced'],
-                  ['Width', '50'],
-                  ['Depth', '50'],
-                ].map(([name, value]) => (
-                  <View key={name} style={styles.settingRow}>
-                    <Text style={styles.settingValue}>{value}</Text>
-                    <Text style={styles.settingLabel}>{name}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          </Panel>
-
-          <Panel style={styles.controllerHomePanel}>
-            <SectionHeading icon="game-controller-outline" title="Controller Lab" subtitle="הגדרות תחרותיות למשחק נקי ויציב." />
-            <View style={styles.controllerHomeBody}>
-              <View style={styles.controllerCircle}><Text style={styles.controllerGlyph}>🎮</Text></View>
-              <View style={styles.controllerHomeRows}>
-                {CONTROLLER_ROWS.slice(0, 4).map(([name, value]) => (
-                  <View key={name} style={styles.settingRow}>
-                    <Text style={styles.settingValue}>{value}</Text>
-                    <Text style={styles.settingLabel}>{name}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          </Panel>
-        </View>
+        <SectionHeading
+          icon="trophy-outline"
+          eyebrow="MY CHAMPIONS"
+          title="העמוד שלי"
+          subtitle="כל משתמש מקבל run משלו. הנתונים נשמרים לחשבון ולא נשארים רנדומליים בין כניסות."
+        />
 
         <Panel>
-          <SectionHeading icon="star-outline" eyebrow="PRO SETUP" title="TEKKZ Pro" subtitle="מערך והגדרות שפורסמו ונבדקו ממקור חיצוני." />
-          <TekkzCard selected />
-          <Text style={styles.sourceNote}>TEKKZ · 4-4-1-1 (2) · Short Passing · High · Line Height 65 · קוד GJgwMwH%QEao · FUTSettings</Text>
+          <View style={styles.personalHeader}>
+            <View>
+              <Text style={styles.personalTitle}>{app.user?.displayName || 'השחקן שלי'}</Text>
+              <Text style={styles.personalSub}>
+                {run.matchesPlayed} / 15 משחקים · Form {form >= 0 ? '+' : ''}{form} · CQP {formatCoins(run.cqp)}
+              </Text>
+            </View>
+            <Pressable style={styles.editButton} onPress={() => setEditingRun((value) => !value)}>
+              <Ionicons name="create-outline" size={15} color="#fff" />
+              <Text style={styles.editButtonText}>{editingRun ? 'סגור' : 'עדכן נתונים'}</Text>
+            </Pressable>
+          </View>
+
+          {editingRun ? (
+            <View style={styles.editGrid}>
+              <View style={styles.inputBlock}><Text style={styles.inputLabel}>WINS</Text><TextInput value={draftWins} onChangeText={setDraftWins} keyboardType="numeric" style={styles.numberInput} /></View>
+              <View style={styles.inputBlock}><Text style={styles.inputLabel}>LOSSES</Text><TextInput value={draftLosses} onChangeText={setDraftLosses} keyboardType="numeric" style={styles.numberInput} /></View>
+              <View style={styles.inputBlock}><Text style={styles.inputLabel}>MATCHES</Text><TextInput value={draftMatches} onChangeText={setDraftMatches} keyboardType="numeric" style={styles.numberInput} /></View>
+              <View style={styles.inputBlock}><Text style={styles.inputLabel}>CQP</Text><TextInput value={draftCqp} onChangeText={setDraftCqp} keyboardType="numeric" style={styles.numberInput} /></View>
+              <Pressable style={styles.saveRunButton} onPress={() => void saveRun()} disabled={saving}>
+                <Text style={styles.saveRunButtonText}>{saving ? 'שומר…' : 'שמור את ה־Champions שלי'}</Text>
+              </Pressable>
+            </View>
+          ) : null}
+
+          <View style={styles.liveStats}>
+            <MetricCard label="FINAL STATUS" value={run.matchesPlayed >= 15 ? 'READY' : 'LIVE'} tone="green" note={run.matchesPlayed >= 15 ? 'Finals complete' : 'Live run'} />
+            <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="נתון חי של החשבון" />
+            <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
+          </View>
         </Panel>
 
-        <EmptyCommunity />
+        <View style={[styles.twoCol, mobile && styles.oneCol]}>
+          <Panel>
+            <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle="TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר." />
+            <TekkzCard compact />
+          </Panel>
+          <Panel>
+            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(reward.tokens) + ' Champions Tokens'} />
+            <View style={styles.rewardMiniGrid}>
+              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(reward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
+              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{reward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
+              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(run.cqp)}</Text><Text style={styles.rewardMiniLabel}>MY CQP</Text></View>
+            </View>
+          </Panel>
+        </View>
       </View>
     );
-  }, [mobile, section]);
+  }, [
+    app.user?.displayName,
+    app.user?.id,
+    community,
+    draftCqp,
+    draftLosses,
+    draftMatches,
+    draftWins,
+    editingRun,
+    form,
+    mobile,
+    platform,
+    reward,
+    run,
+    saving,
+    section,
+  ]);
 
   if (!canView) {
     return (
@@ -474,77 +795,86 @@ export default function ChampionsScreen() {
   }
 
   return (
-    <Screen scene="champions" showNav maxWidth={2000}>
+    <Screen scene="champions" showNav refreshing={saving} onRefresh={loadLiveData} maxWidth={1700}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.mainLayout}>
-          <View style={styles.sidebar}>
-            <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
-            {NAV.map((item, index) => (
-              <Pressable
-                key={item.id}
-                onPress={() => selectSection(item.id)}
-                style={[styles.sidebarItem, section === item.id && styles.sidebarItemActive]}
-              >
-                <Text style={styles.sidebarIndex}>{String(index + 1).padStart(2, '0')}</Text>
-                <Text style={[styles.sidebarLabel, section === item.id && styles.sidebarLabelActive]}>{item.label}</Text>
-                <Ionicons name={item.icon} size={18} color={section === item.id ? '#F5F7FA' : '#88939E'} />
-              </Pressable>
-            ))}
-          </View>
-
-          <View style={styles.main}>
-            <LinearGradient
-              colors={['rgba(112,5,17,.97)', 'rgba(27,5,10,.98)', 'rgba(7,10,15,.98)']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.hero}
-            >
-              <View style={styles.heroGlowOne} />
-              <View style={styles.heroGlowTwo} />
-
-              <View style={styles.heroTop}>
-                <View style={styles.heroStats}>
-                  <MetricCard label="FINAL STATUS" value="READY" tone="green" note="Preview content" />
-                  <MetricCard label="CQP PROGRESS" value="750" tone="gold" note="מתוך 1,000 · נשארו 250" />
-                  <MetricCard label="המאזן שלי" value="6 - 9" tone="red" note="6 הפסדים · 9 ניצחונות" />
-                </View>
-
-                <View style={styles.heroTitleWrap}>
-                  <Text style={styles.heroEyebrow}>COMPETE · IMPROVE · WIN</Text>
-                  <Text style={styles.heroTitle}>FUT CHAMPIONS</Text>
-                  <Text style={styles.heroSubtitle}>המסע שלך. התוצאות שלך. הפרסים שלך.</Text>
-                  <View style={styles.heroInfoRow}>
-                    <View><Text style={styles.heroInfoBig}>DUAL</Text><Text style={styles.heroInfoSmall}>CONTROLLER LAB</Text></View>
-                    <View><Text style={styles.heroInfoBig}>PRO</Text><Text style={styles.heroInfoSmall}>TACTICS LIBRARY</Text></View>
-                    <View><Text style={styles.heroInfoBig}>CQP</Text><Text style={styles.heroInfoSmall}>QUALIFICATION</Text></View>
-                    <View><Text style={styles.heroInfoBig}>15</Text><Text style={styles.heroInfoSmall}>MATCH FINALS</Text></View>
-                  </View>
-                </View>
-
-                <View style={styles.heroCrest}>
-                  <Ionicons name="trophy" size={34} color="#F6D36A" />
-                  <Text style={styles.heroCrestText}>FUT</Text>
-                </View>
-              </View>
-
-              <View style={styles.tabBar}>
-                {NAV.map((item) => (
-                  <Pressable
-                    key={item.id}
-                    onPress={() => selectSection(item.id)}
-                    style={[styles.heroTab, section === item.id && styles.heroTabActive]}
-                  >
-                    <Ionicons name={item.icon} size={15} color={section === item.id ? '#fff' : '#8D99A4'} />
-                    <Text style={[styles.heroTabText, section === item.id && styles.heroTabTextActive]}>{item.short}</Text>
-                  </Pressable>
-                ))}
-              </View>
-            </LinearGradient>
-
-            <View style={styles.contentArea}>{content}</View>
-          </View>
+        <View style={styles.sidebar}>
+          <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
+          {NAV.map((item, index) => (
+            <Pressable key={item.id} onPress={() => setSection(item.id)} style={[styles.sidebarItem, section === item.id && styles.sidebarItemActive]}>
+              <Text style={styles.sidebarIndex}>{String(index + 1).padStart(2, '0')}</Text>
+              <Text style={[styles.sidebarLabel, section === item.id && styles.sidebarLabelActive]}>{item.label}</Text>
+              <Ionicons name={item.icon} size={18} color={section === item.id ? '#F5F7FA' : '#88939E'} />
+            </Pressable>
+          ))}
         </View>
+
+        <View style={styles.main}>
+          <LinearGradient
+            colors={['rgba(112,5,17,.62)', 'rgba(27,5,10,.73)', 'rgba(7,10,15,.86)']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.hero}
+          >
+            <View style={styles.heroGlowOne} />
+            <View style={styles.heroGlowTwo} />
+            <View style={styles.heroTop}>
+              <View style={styles.heroStats}>
+                <MetricCard label="FINAL STATUS" value={run.matchesPlayed >= 15 ? 'READY' : 'LIVE'} tone="green" note="Live account data" />
+                <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="הנתון שלך" />
+                <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
+              </View>
+              <View style={styles.heroTitleWrap}>
+                <Text style={styles.heroEyebrow}>COMPETE · IMPROVE · WIN</Text>
+                <Text style={styles.heroTitle}>FUT CHAMPIONS</Text>
+                <Text style={styles.heroSubtitle}>המסע שלך. התוצאות שלך. הפרסים שלך.</Text>
+                <View style={styles.heroInfoRow}>
+                  <View><Text style={styles.heroInfoBig}>DUAL</Text><Text style={styles.heroInfoSmall}>CONTROLLER LAB</Text></View>
+                  <View><Text style={styles.heroInfoBig}>PRO</Text><Text style={styles.heroInfoSmall}>TEKKZ SETUP</Text></View>
+                  <View><Text style={styles.heroInfoBig}>CQP</Text><Text style={styles.heroInfoSmall}>QUALIFICATION</Text></View>
+                  <View><Text style={styles.heroInfoBig}>15</Text><Text style={styles.heroInfoSmall}>MATCH FINALS</Text></View>
+                </View>
+              </View>
+              <View style={styles.heroCrest}>
+                <Image source={require('@/assets/crests/championship.png')} resizeMode="contain" style={styles.heroCrestImage} />
+              </View>
+            </View>
+
+            <View style={styles.tabBar}>
+              {NAV.map((item) => (
+                <Pressable key={item.id} onPress={() => setSection(item.id)} style={[styles.heroTab, section === item.id && styles.heroTabActive]}>
+                  <Ionicons name={item.icon} size={15} color={section === item.id ? '#fff' : '#8D99A4'} />
+                  <Text style={[styles.heroTabText, section === item.id && styles.heroTabTextActive]}>{item.short}</Text>
+                </Pressable>
+              ))}
+            </View>
+          </LinearGradient>
+
+          <View style={styles.contentArea}>{content}</View>
+        </View>
+      </View>
+
+      {showComposer ? (
+        <View style={styles.modalBackdrop}>
+          <Panel style={styles.composer}>
+            <View style={styles.composerHeader}>
+              <Text style={styles.composerTitle}>העלה טקטיקה משלך</Text>
+              <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
+            </View>
+            <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
+            <TextInput value={formation} onChangeText={setFormation} placeholder="מערך" placeholderTextColor="#6f7984" style={styles.textInput} />
+            <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
+            <View style={styles.platformRow}>
+              <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
+              <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
+            </View>
+            <Pressable style={styles.publishConfirm} onPress={() => void publish()} disabled={saving}>
+              <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לאישור'}</Text>
+            </Pressable>
+          </Panel>
+        </View>
+      ) : null}
     </Screen>
   );
 }
@@ -559,7 +889,7 @@ const styles = StyleSheet.create({
   sidebarLabel: { flex: 1, color: '#9AA6B1', fontSize: 12, fontWeight: '800', textAlign: 'right' },
   sidebarLabelActive: { color: '#fff' },
   main: { flex: 1, minWidth: 0, direction: 'rtl' },
-  hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
+  heroLegacy: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
   heroGlowOne: { position: 'absolute', width: 500, height: 500, borderRadius: 250, right: -160, top: -190, backgroundColor: 'rgba(238,37,56,.15)' },
   heroGlowTwo: { position: 'absolute', width: 360, height: 360, borderRadius: 180, left: -160, bottom: -190, backgroundColor: 'rgba(214,33,53,.11)' },
   heroTop: { padding: 28, flexDirection: 'row', alignItems: 'center', gap: 20, direction: 'ltr', minHeight: 266 },
@@ -651,7 +981,7 @@ const styles = StyleSheet.create({
   pitchBadge: { position: 'absolute', left: 9, bottom: 9, borderRadius: 9, backgroundColor: 'rgba(6,12,10,.73)', paddingHorizontal: 8, paddingVertical: 5 },
   pitchBadgeText: { color: '#D7EBDE', fontSize: 9, fontWeight: '900' },
 
-  panel: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
+  panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
   settingLabel: { color: '#6E7984', fontSize: 10, fontWeight: '800', textAlign: 'right', flex: 1 },
   settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },
@@ -729,5 +1059,81 @@ const styles = StyleSheet.create({
   comingSoonTitle: { color: '#F2F4F7', fontSize: 27, fontWeight: '900' },
   comingSoonStatus: { color: '#F04A56', fontSize: 18, fontWeight: '900' },
   comingSoonText: { color: '#85919C', fontSize: 13, fontWeight: '700' },
+  panel: { position: 'relative', overflow: 'hidden', backgroundColor: 'rgba(9,13,19,.58)', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
+  hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
+  metricBarFill: { height: '100%', width: '75%', backgroundColor: '#F2C95F' },
+  winSelector: { gap: 7, paddingVertical: 9, flexDirection: 'row-reverse' },
+  winChip: { width: 48, height: 48, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', alignItems: 'center', justifyContent: 'center' },
+  winChipActive: { backgroundColor: '#D93140', borderColor: '#FF6370' },
+  winChipValue: { color: '#DCE2E7', fontSize: 15, fontWeight: '900' },
+  winChipValueActive: { color: '#fff' },
+  winChipLabel: { color: '#67737E', fontSize: 7, fontWeight: '900' },
+  winChipLabelActive: { color: '#FECFD3' },
+  rewardSummaryGrid: { flexDirection: 'row-reverse', gap: 10, marginTop: 12, flexWrap: 'wrap' },
+  selectorTitle: { color: '#F0F3F6', fontSize: 15, fontWeight: '900', textAlign: 'right' },
+  storeHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
+  storeHeaderEyebrow: { color: '#D7B351', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
+  storeHeaderTitle: { color: '#F2F4F6', fontSize: 20, fontWeight: '900', textAlign: 'right' },
+  storeHeaderSub: { color: '#78848F', fontSize: 10, fontWeight: '700', textAlign: 'right', marginTop: 2 },
+  tokenBadge: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: '#E8BF4E', backgroundColor: '#0D1419', alignItems: 'center', justifyContent: 'center' },
+  tokenBadgeValue: { color: '#F4D26B', fontSize: 24, fontWeight: '900' },
+  tokenBadgeLabel: { color: '#7F8993', fontSize: 7, fontWeight: '900' },
+  storeCard: { flexDirection: 'row-reverse', alignItems: 'center', gap: 12, paddingVertical: 12, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,.06)' },
+  storeVisual: { width: 82, alignItems: 'center', justifyContent: 'center' },
+  storeCopy: { flex: 1, alignItems: 'flex-end' },
+  storeTitle: { color: '#EFF2F5', fontSize: 13, fontWeight: '900', textAlign: 'right' },
+  storeDetails: { color: '#808B96', fontSize: 10, fontWeight: '700', textAlign: 'right', marginTop: 3 },
+  storeTradeable: { color: '#7FBE98', fontSize: 8, fontWeight: '900', marginTop: 4 },
+  storeCost: { minWidth: 70, alignItems: 'center', justifyContent: 'center' },
+  storeCostValue: { color: '#F2CF62', fontSize: 20, fontWeight: '900' },
+  storeCostLabel: { color: '#727D87', fontSize: 7, fontWeight: '900' },
+  storeEmpty: { color: '#6F7B86', fontSize: 11, fontWeight: '800', textAlign: 'right', paddingVertical: 18 },
+  platformRow: { flexDirection: 'row-reverse', gap: 8, marginBottom: 12 },
+  platformPill: { minHeight: 42, paddingHorizontal: 13, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', flexDirection: 'row-reverse', alignItems: 'center', gap: 7 },
+  platformPillActive: { borderColor: 'rgba(234,195,85,.62)', backgroundColor: 'rgba(234,195,85,.08)' },
+  platformLogo: { width: 22, height: 22 },
+  platformPillText: { color: '#7F8A95', fontSize: 11, fontWeight: '900' },
+  platformPillTextActive: { color: '#F4D26B' },
+  controllerHero: { flexDirection: 'row-reverse', alignItems: 'center', gap: 16, paddingVertical: 8 },
+  controllerImage: { width: 160, height: 112 },
+  controllerCopy: { flex: 1, alignItems: 'flex-end' },
+  controllerTitle: { color: '#EFF2F5', fontSize: 20, fontWeight: '900', textAlign: 'right' },
+  controllerSub: { color: '#78848F', fontSize: 10, fontWeight: '700', marginTop: 2, textAlign: 'right' },
+  communityHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
+  communityCount: { color: '#78848F', fontSize: 10, fontWeight: '800' },
+  publishButton: { backgroundColor: '#D92F3B', borderRadius: 11, paddingHorizontal: 12, paddingVertical: 9 },
+  publishButtonText: { color: '#fff', fontWeight: '900', fontSize: 10 },
+  communityItemTitle: { color: '#F1F4F7', fontSize: 16, fontWeight: '900', textAlign: 'right' },
+  communityItemMeta: { color: '#6F7B86', fontSize: 9, fontWeight: '800', textAlign: 'right', marginTop: 3 },
+  communityItemBody: { color: '#9AA5AF', fontSize: 11, lineHeight: 18, textAlign: 'right', marginTop: 7 },
+  personalHeader: { flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
+  personalTitle: { color: '#F1F4F7', fontSize: 23, fontWeight: '900', textAlign: 'right' },
+  personalSub: { color: '#77838E', fontSize: 10, fontWeight: '800', marginTop: 3, textAlign: 'right' },
+  editButton: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, backgroundColor: '#D9303F', borderRadius: 11, paddingHorizontal: 11, paddingVertical: 8 },
+  editButtonText: { color: '#fff', fontSize: 10, fontWeight: '900' },
+  editGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 10, marginTop: 10 },
+  inputBlock: { minWidth: 150, flex: 1, gap: 5 },
+  inputLabel: { color: '#788490', fontSize: 8, fontWeight: '900', textAlign: 'right' },
+  numberInput: { minHeight: 42, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0A1017', color: '#fff', paddingHorizontal: 12, textAlign: 'right', fontWeight: '900' },
+  saveRunButton: { minHeight: 42, width: '100%', borderRadius: 11, backgroundColor: '#D9303F', alignItems: 'center', justifyContent: 'center', marginTop: 2 },
+  saveRunButtonText: { color: '#fff', fontWeight: '900', fontSize: 12 },
+  liveStats: { flexDirection: 'row-reverse', gap: 10, marginTop: 14 },
+  twoCol: { flexDirection: 'row-reverse', gap: 13 },
+  oneCol: { flexDirection: 'column' },
+  rewardMiniGrid: { flexDirection: 'row-reverse', gap: 9 },
+  rewardMini: { flex: 1, minHeight: 78, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.06)', backgroundColor: '#0B1016', alignItems: 'center', justifyContent: 'center' },
+  rewardMiniValue: { color: '#F4CF64', fontSize: 18, fontWeight: '900' },
+  rewardMiniLabel: { color: '#6C7782', fontSize: 8, fontWeight: '900', marginTop: 2 },
+  tacticsHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 },
+  tacticTitle: { color: '#EEF1F4', fontSize: 20, fontWeight: '900', textAlign: 'right' },
+  tacticSub: { color: '#7A8690', fontSize: 10, fontWeight: '800', textAlign: 'right', marginTop: 3 },
+  sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
+  sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },
+  heroCrestImage: { width: 82, height: 96 },
+  textInput: { minHeight: 44, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0A1017', color: '#fff', paddingHorizontal: 12, fontSize: 13, textAlign: 'right' },
+  textArea: { minHeight: 100, textAlignVertical: 'top' },
+  publishConfirm: { minHeight: 46, borderRadius: 11, backgroundColor: '#D92F3B', alignItems: 'center', justifyContent: 'center' },
+  publishConfirmText: { color: '#fff', fontSize: 12, fontWeight: '900' },
+
 });
 
