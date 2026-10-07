@@ -15,14 +15,17 @@ type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'tactics' | 'con
 
 type TekkzRole = [string, string];
 
-const NAV: { id: SectionId; label: string; short: string; icon: IconName }[] = [
-  { id: 'center', label: 'מרכז Champions', short: 'Champions מרכז', icon: 'trophy-outline' },
-  { id: 'community', label: 'שחקני הקהילה', short: 'שחקני הקהילה', icon: 'people-outline' },
-  { id: 'rewards', label: 'פרסים', short: 'פרסים', icon: 'gift-outline' },
-  { id: 'tekkz', label: 'TEKKZ Pro', short: 'TEKKZ Pro', icon: 'star-outline' },
-  { id: 'tactics', label: 'טקטיקות והרכבים', short: 'טקטיקות', icon: 'git-network-outline' },
-  { id: 'controller', label: 'הגדרות שלט', short: 'שלטים', icon: 'game-controller-outline' },
+const NAV: { id: SectionId; label: string; icon: IconName }[] = [
+  { id: 'tekkz', label: 'TEKKZ Pro', icon: 'star-outline' },
+  { id: 'center', label: 'העמוד שלי', icon: 'trophy-outline' },
+  { id: 'rewards', label: 'פרסים', icon: 'gift-outline' },
+  { id: 'community', label: 'שחקני הקהילה', icon: 'people-outline' },
+  { id: 'tactics', label: 'טקטיקות והרכבים', icon: 'git-network-outline' },
+  { id: 'controller', label: 'הגדרות שלט', icon: 'game-controller-outline' },
 ];
+
+const TEKKZ_IMAGE_URL =
+  'https://images.ctfassets.net/lz8ubpsr15g3/5Z7Z6NZx6FOizy9NaLmq91/9cbc5311ccc70ad286b5147bf5b2e987/Tekkz_01.png?fm=webp&h=700&q=80&w=900';
 
 const TEKKZ_ROLES: TekkzRole[] = [
   ['GK', 'Defend'],
@@ -88,22 +91,22 @@ type TokenReward = {
 };
 
 const REWARD_TIERS: RewardTier[] = [
-  { wins: 0, rank: 'לא מדורג', coins: 0, tokens: 0 },
-  { wins: 1, rank: 'Contender V', coins: 0, tokens: 15 },
-  { wins: 2, rank: 'Contender IV', coins: 0, tokens: 20 },
-  { wins: 3, rank: 'Contender III', coins: 0, tokens: 30 },
-  { wins: 4, rank: 'Contender II', coins: 0, tokens: 40 },
-  { wins: 5, rank: 'Contender I', coins: 2500, tokens: 50 },
-  { wins: 6, rank: 'Champions V', coins: 5000, tokens: 60 },
-  { wins: 7, rank: 'Champions IV', coins: 10000, tokens: 75 },
-  { wins: 8, rank: 'Champions III', coins: 15000, tokens: 90 },
-  { wins: 9, rank: 'Champions II', coins: 25000, tokens: 110 },
-  { wins: 10, rank: 'Champions I', coins: 35000, tokens: 135 },
-  { wins: 11, rank: 'Elite V', coins: 50000, tokens: 165 },
-  { wins: 12, rank: 'Elite IV', coins: 75000, tokens: 215 },
-  { wins: 13, rank: 'Elite III', coins: 105000, tokens: 275 },
-  { wins: 14, rank: 'Elite II', coins: 145000, tokens: 350 },
-  { wins: 15, rank: 'Elite I', coins: 250000, tokens: 450 },
+  { wins: 0, rank: 'לא מדורג', coins: 0, tokens: 0, cqp: 0 },
+  { wins: 1, rank: 'Contender V', coins: 0, tokens: 15, cqp: 0 },
+  { wins: 2, rank: 'Contender IV', coins: 0, tokens: 20, cqp: 50 },
+  { wins: 3, rank: 'Contender III', coins: 0, tokens: 30, cqp: 100 },
+  { wins: 4, rank: 'Contender II', coins: 0, tokens: 40, cqp: 150 },
+  { wins: 5, rank: 'Contender I', coins: 2500, tokens: 50, cqp: 200 },
+  { wins: 6, rank: 'Champions V', coins: 5000, tokens: 60, cqp: 300 },
+  { wins: 7, rank: 'Champions IV', coins: 10000, tokens: 75, cqp: 350 },
+  { wins: 8, rank: 'Champions III', coins: 15000, tokens: 90, cqp: 400 },
+  { wins: 9, rank: 'Champions II', coins: 25000, tokens: 110, cqp: 450 },
+  { wins: 10, rank: 'Champions I', coins: 35000, tokens: 135, cqp: 500 },
+  { wins: 11, rank: 'Elite V', coins: 50000, tokens: 165, cqp: 600 },
+  { wins: 12, rank: 'Elite IV', coins: 75000, tokens: 215, cqp: 700 },
+  { wins: 13, rank: 'Elite III', coins: 105000, tokens: 275, cqp: 800 },
+  { wins: 14, rank: 'Elite II', coins: 145000, tokens: 350, cqp: 900 },
+  { wins: 15, rank: 'Elite I', coins: 250000, tokens: 450, cqp: 1000 },
 ];
 
 const TOKEN_STORE: TokenReward[] = [
@@ -115,22 +118,17 @@ const TOKEN_STORE: TokenReward[] = [
   { title: 'TOTW Player Pack', details: '1 active Team of the Week Player', tokens: 25, visual: 'gold', packLabel: 'TOTW', tradeable: true },
   { title: '20x 81+ Gold Players Pack', details: '20 Gold Player Items rated 81+', tokens: 50, visual: 'gold', packLabel: '81+', tradeable: true },
   { title: '1 of 4 85+ Gold Player Pick', details: 'Choose 1 of 4 Gold Players rated 85+', tokens: 50, visual: 'pick', packLabel: '85+', tradeable: false },
-  { title: '1 of 5 FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3', tokens: 50, visual: 'pick', packLabel: 'TOTW', tradeable: false },
+  { title: '1 of 5 FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3', tokens: 50, visual: 'pick', packLabel: 'TOTW 3', tradeable: false },
   { title: '2x 86+ Gold Players Pack', details: '2 Gold Player Items rated 86+', tokens: 75, visual: 'gold-jumbo', packLabel: '86+', tradeable: true },
   { title: '10x 83+ Gold Players Pack', details: '10 Gold Player Items rated 83+', tokens: 75, visual: 'gold', packLabel: '83+', tradeable: true },
   { title: '10x 84+ Gold Players Pack', details: '10 Gold Player Items rated 84+', tokens: 100, visual: 'gold', packLabel: '84+', tradeable: false },
-  { title: '1 of 5 82+ FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3 rated 82+', tokens: 100, visual: 'pick', packLabel: 'TOTW', tradeable: true },
+  { title: '1 of 5 82+ FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3 rated 82+', tokens: 100, visual: 'pick', packLabel: '82+ TOTW', tradeable: false },
+  { title: 'Frontline Flair', details: 'Evolution · 1 purchase', tokens: 100, visual: null, tradeable: false },
   { title: '5x 86+ Gold Players Pack', details: '5 Gold Player Items rated 86+', tokens: 125, visual: 'gold-jumbo', packLabel: '86+', tradeable: false },
   { title: '3x 88+ Gold Players Pack', details: '3 Gold Player Items rated 88+', tokens: 200, visual: 'gold-giant', packLabel: '88+', tradeable: true },
+  { title: 'Uppercut Jump Punch', details: 'Cosmetic · 1 purchase', tokens: 15, visual: null, tradeable: false },
+  { title: 'FC24 TBD', details: 'Cosmetic reward · 1 purchase', tokens: 25, visual: null, tradeable: false },
 ];
-
-const PREVIEW_RUN: ChampionsRun = {
-  matchesPlayed: 15,
-  wins: 9,
-  losses: 6,
-  cqp: 750,
-  rank: 4,
-};
 
 function rewardForWins(wins: number) {
   return REWARD_TIERS[Math.max(0, Math.min(15, wins))];
@@ -247,48 +245,45 @@ function MiniPitch({ formation, compact = false }: { formation: string; compact?
   );
 }
 
-function TekkzCard({ selected, compact = false }: { selected: boolean; compact?: boolean }) {
+function TekkzCard({ selected }: { selected?: boolean }) {
   return (
-    <View style={[styles.tekkzCard, selected && styles.tekkzCardSelected, compact && styles.tekkzCardCompact]}>
-      <View style={styles.cardTopLine}>
-        <View style={styles.sourceBadge}>
-          <Ionicons name="checkmark-circle" size={14} color="#68E09B" />
-          <Text style={styles.sourceBadgeText}>VERIFIED SOURCE</Text>
+    <View style={[styles.tekkzCard, selected && styles.tekkzCardSelected]}>
+      <View style={styles.tekkzCardImageWrap}>
+        <Image source={{ uri: TEKKZ_IMAGE_URL }} resizeMode="cover" style={styles.tekkzCardImage} />
+        <LinearGradient colors={['transparent', 'rgba(4,7,10,.93)']} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={StyleSheet.absoluteFillObject} />
+        <View style={styles.tekkzCardImageText}>
+          <Text style={styles.tekkzCardKicker}>FC27 PRO PLAYER</Text>
+          <Text style={styles.tekkzCardName}>TEKKZ</Text>
         </View>
-        <Text style={styles.proBadgeText}>TEKKZ PRO</Text>
       </View>
-      <View style={styles.playerCardBody}>
-        <View style={styles.playerPortrait}>
-          <View style={styles.playerHead}>
-            <Text style={styles.playerInitial}>T</Text>
+      <View style={styles.tekkzCardBody}>
+        <View style={styles.tekkzCardTop}>
+          <View style={styles.verifyBadge}>
+            <Ionicons name="checkmark-circle" size={14} color="#6ADD9C" />
+            <Text style={styles.verifyBadgeText}>VERIFIED PRO SOURCE</Text>
           </View>
-          <View style={styles.playerShirt}>
-            <Text style={styles.playerNumber}>7</Text>
+          <Text style={styles.proBadgeText}>DH TEKKZ · FC27</Text>
+        </View>
+        <Text style={styles.tekkzCardTitle}>ה־Champions setup של TEKKZ</Text>
+        <Text style={styles.tekkzCardSub}>4-4-1-1 (2) · Short Passing · High · Line Height 65</Text>
+        <View style={styles.tekkzFactRow}>
+          <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>4-4-1-1 (2)</Text><Text style={styles.tekkzFactLabel}>FORMATION</Text></View>
+          <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>Short Passing</Text><Text style={styles.tekkzFactLabel}>BUILD UP</Text></View>
+          <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>High · 65</Text><Text style={styles.tekkzFactLabel}>DEFENSIVE LINE</Text></View>
+        </View>
+        <View style={styles.tekkzChallenge}>
+          <View style={styles.tekkzChallengeIcon}><Ionicons name="flame" size={18} color="#F3CF62" /></View>
+          <View style={styles.tekkzChallengeCopy}>
+            <Text style={styles.tekkzChallengeKicker}>LATEST CHALLENGE</Text>
+            <Text style={styles.tekkzChallengeTitle}>15-0 · BRONZE SQUAD</Text>
+            <Text style={styles.tekkzChallengeText}>הסרטון/אתגר שסיפקת לפרופיל של TEKKZ: 15-0 עם קבוצת ברונזה.</Text>
           </View>
         </View>
-        <View style={styles.playerCardCopy}>
-          <View style={styles.nameRow}>
-            <Text style={styles.playerName}>TEKKZ</Text>
-            <Text style={styles.playerCountry}>🇬🇧</Text>
-          </View>
-          <Text style={styles.playerRole}>EA FC 27 · Pro Player</Text>
-          <Text style={styles.playerFormation}>4-4-1-1 (2)</Text>
-          <Text style={styles.playerSetup}>Short Passing · High · Line Height 65</Text>
-        </View>
-        <MiniPitch formation="4-4-1-1 (2)" compact />
-      </View>
-      <View style={styles.cardMetaRow}>
-        <View style={styles.cardMetaItem}>
-          <Ionicons name="game-controller-outline" size={15} color="#BBC3CB" />
-          <Text style={styles.cardMetaText}>הגדרות שלט</Text>
-        </View>
-        <View style={styles.cardMetaItem}>
-          <Ionicons name="git-network-outline" size={15} color="#BBC3CB" />
-          <Text style={styles.cardMetaText}>טקטיקה</Text>
-        </View>
-        <View style={styles.cardMetaItem}>
-          <Ionicons name="document-text-outline" size={15} color="#BBC3CB" />
-          <Text style={styles.cardMetaText}>מקור חיצוני</Text>
+        <Text style={styles.sourceNote}>מקור הטקטיקה: FUTSettings · קוד GJgwMwH%QEao</Text>
+        <View style={styles.tekkzMiniMeta}>
+          <View style={styles.tekkzMiniMetaItem}><Ionicons name="git-network-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>TACTICS</Text></View>
+          <View style={styles.tekkzMiniMetaItem}><Ionicons name="flame-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>15-0 CHALLENGE</Text></View>
+          <View style={styles.tekkzMiniMetaItem}><Ionicons name="person-circle-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>PRO PROFILE</Text></View>
         </View>
       </View>
     </View>
@@ -319,21 +314,37 @@ function PlatformPill({
   );
 }
 
+function TokenIcon({ size = 22 }: { size?: number }) {
+  return (
+    <View style={[styles.tokenIcon, { width: size, height: size, borderRadius: size / 2 }]}>
+      <Ionicons name="trophy" size={Math.max(11, size * 0.48)} color="#181208" />
+    </View>
+  );
+}
+
 function RewardStoreCard({ item }: { item: TokenReward }) {
+  const isPack = item.visual != null;
   return (
     <View style={styles.storeCard}>
       <View style={styles.storeVisual}>
-        <SbcRewardPack visual={item.visual} size={64} label={item.packLabel} />
+        {isPack ? (
+          <SbcRewardPack visual={item.visual!} size={106} label={item.packLabel} />
+        ) : (
+          <View style={styles.utilityRewardVisual}>
+            <View style={styles.utilityRewardCircle}>
+              <Ionicons name={item.kind === 'evolution' ? 'sparkles-outline' : (item.icon || 'gift-outline')} size={32} color="#F4CF64" />
+            </View>
+            <Text style={styles.utilityRewardKind}>{item.kind === 'evolution' ? 'EVOLUTION' : 'COSMETIC'}</Text>
+          </View>
+        )}
       </View>
-      <View style={styles.storeCopy}>
-        <Text style={styles.storeTitle}>{item.title}</Text>
+      <View style={styles.storeBody}>
+        <View style={styles.storeTypePill}><Text style={styles.storeTypeText}>{item.kind === 'pack' ? 'PACK' : item.kind === 'evolution' ? 'EVOLUTION' : 'COSMETIC'}</Text></View>
+        <Text style={styles.storeCardTitle}>{item.title}</Text>
         <Text style={styles.storeDetails}>{item.details}</Text>
-        <Text style={styles.storeTradeable}>{item.tradeable ? 'TRADEABLE' : 'UNTRADEABLE'}</Text>
+        {item.kind === 'pack' ? <Text style={styles.storeTradeable}>{item.tradeable ? 'TRADEABLE' : 'UNTRADEABLE'}</Text> : null}
       </View>
-      <View style={styles.storeCost}>
-        <Text style={styles.storeCostValue}>{item.tokens}</Text>
-        <Text style={styles.storeCostLabel}>TOKENS</Text>
-      </View>
+      <View style={styles.storeCostBox}><TokenIcon size={29} /><Text style={styles.storeCost}>{item.tokens}</Text></View>
     </View>
   );
 }
@@ -360,14 +371,14 @@ export default function ChampionsScreen() {
   const [section, setSection] = useState<SectionId>('tekkz');
   const [platform, setPlatform] = useState<'xbox' | 'ps5'>('xbox');
 
-  // The approved reference is only a Preview fallback. Once the user saves a run,
-  // these values come from Supabase and persist for that account.
-  const [run, setRun] = useState<ChampionsRun>(PREVIEW_RUN);
+  // Personal run data belongs only to the signed-in account.
+  const [run, setRun] = useState<ChampionsRun>({ matchesPlayed: 0, wins: 0, losses: 0, cqp: 0, rank: null });
+  const [selectedWins, setSelectedWins] = useState(0);
   const [editingRun, setEditingRun] = useState(false);
-  const [draftWins, setDraftWins] = useState(String(PREVIEW_RUN.wins));
-  const [draftLosses, setDraftLosses] = useState(String(PREVIEW_RUN.losses));
-  const [draftMatches, setDraftMatches] = useState(String(PREVIEW_RUN.matchesPlayed));
-  const [draftCqp, setDraftCqp] = useState(String(PREVIEW_RUN.cqp));
+  const [draftWins, setDraftWins] = useState('0');
+  const [draftLosses, setDraftLosses] = useState('0');
+  const [draftMatches, setDraftMatches] = useState('0');
+  const [draftCqp, setDraftCqp] = useState('0');
 
   const [community, setCommunity] = useState<CommunityItem[]>([]);
   const [showComposer, setShowComposer] = useState(false);
@@ -406,12 +417,19 @@ export default function ChampionsScreen() {
         updatedAt: runResult.data.updated_at,
       };
       setRun(next);
+      setSelectedWins(next.wins);
       setDraftWins(String(next.wins));
       setDraftLosses(String(next.losses));
       setDraftMatches(String(next.matchesPlayed));
       setDraftCqp(String(next.cqp));
     } else {
-      setRun(PREVIEW_RUN);
+      const empty = { matchesPlayed: 0, wins: 0, losses: 0, cqp: 0, rank: null };
+      setRun(empty);
+      setSelectedWins(0);
+      setDraftWins('0');
+      setDraftLosses('0');
+      setDraftMatches('0');
+      setDraftCqp('0');
     }
 
     if (!communityResult.error) {
@@ -499,47 +517,36 @@ export default function ChampionsScreen() {
     Alert.alert('נשלח לבדיקה', 'הטקטיקה תופיע בקהילת Champions רק לאחר אישור.');
   }
 
-  const reward = rewardForWins(run.wins);
+  const selectedReward = rewardForWins(selectedWins);
+  const personalReward = rewardForWins(run.wins);
   const form = run.wins - run.losses;
   const availableRewards = useMemo(
-    () => TOKEN_STORE.filter((item) => item.tokens <= reward.tokens),
-    [reward.tokens],
+    () => TOKEN_STORE.filter((item) => item.tokens <= selectedReward.tokens),
+    [selectedReward.tokens],
   );
 
   const content = useMemo(() => {
     if (section === 'tekkz') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading
-            icon="star-outline"
-            eyebrow="TEKKZ PRO"
-            title="TEKKZ · נתוני FC27"
-            subtitle="ה־setup המאומת של TEKKZ הוא ברירת המחדל. אין כאן Record או CQP מומצאים."
-          />
+          <SectionTitle icon="star-outline" eyebrow="TEKKZ PRO" title="הפרופיל של TEKKZ"
+            subtitle="כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״." />
           <TekkzCard selected />
-          <View style={[styles.tekkzDetailGrid, mobile && styles.oneCol]}>
-            <Panel style={styles.tekkzDetailMain}>
-              <View style={styles.detailFacts}>
-                <View style={styles.detailFact}><Text style={styles.detailFactValue}>Short Passing</Text><Text style={styles.detailFactLabel}>BUILD UP STYLE</Text></View>
-                <View style={styles.detailFact}><Text style={styles.detailFactValue}>High</Text><Text style={styles.detailFactLabel}>DEFENSIVE APPROACH</Text></View>
-                <View style={styles.detailFact}><Text style={styles.detailFactValue}>65</Text><Text style={styles.detailFactLabel}>LINE HEIGHT</Text></View>
+          <Panel style={styles.tekkzDetailsPanel}>
+            <View style={[styles.tekkzDetailsGrid, mobile && styles.columnOnMobile]}>
+              <View style={styles.tekkzDetailsCopy}>
+                <Text style={styles.tekkzDetailsKicker}>TACTICAL DNA</Text>
+                <Text style={styles.tekkzDetailsTitle}>4-4-1-1 (2)</Text>
+                <Text style={styles.tekkzDetailsSub}>Short Passing · High · Line Height 65</Text>
+                <Text style={styles.sourceNote}>FUTSettings · GJgwMwH%QEao</Text>
               </View>
-              <View style={styles.roleGrid}>
-                {TEKKZ_ROLES.map(([position, role], index) => (
-                  <View key={position + index} style={styles.roleChip}>
-                    <Text style={styles.rolePosition}>{position}</Text>
-                    <Text style={styles.roleText}>{role}</Text>
-                  </View>
-                ))}
+              <View style={styles.tekkzDetailsPills}>
+                <View style={styles.detailPill}><Text style={styles.detailPillValue}>Short Passing</Text><Text style={styles.detailPillLabel}>BUILD UP</Text></View>
+                <View style={styles.detailPill}><Text style={styles.detailPillValue}>High</Text><Text style={styles.detailPillLabel}>DEFENSIVE APPROACH</Text></View>
+                <View style={styles.detailPill}><Text style={styles.detailPillValue}>65</Text><Text style={styles.detailPillLabel}>LINE HEIGHT</Text></View>
               </View>
-              <Text style={styles.sourceNote}>מקור: FUTSettings · קוד GJgwMwH%QEao</Text>
-            </Panel>
-            <Panel style={styles.tekkzPitchPanel}>
-              <Text style={styles.pitchTitle}>הטקטיקה של TEKKZ</Text>
-              <Text style={styles.pitchSub}>4-4-1-1 (2)</Text>
-              <MiniPitch formation="4-4-1-1 (2)" />
-            </Panel>
-          </View>
+            </View>
+          </Panel>
         </View>
       );
     }
@@ -547,54 +554,57 @@ export default function ChampionsScreen() {
     if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading
-            icon="gift-outline"
-            eyebrow="CHAMPIONS REWARDS"
-            title="הפרסים לפי מספר הניצחונות"
-            subtitle="בחר מספר ניצחונות כדי לראות את הפרס הרשמי, ואז מוצגות רק חבילות ה־Token Store שאתה יכול להרשות לעצמך."
-          />
-          <Panel>
-            <Text style={styles.selectorTitle}>ניצחונות: {run.wins} / 15</Text>
+          <SectionTitle icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
+            subtitle="בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות." />
+          <Panel style={styles.rewardSelectorPanel}>
+            <View style={[styles.rewardSelectorTop, mobile && styles.columnOnMobile]}>
+              <View>
+                <Text style={styles.rewardSelectorKicker}>SELECT RESULT</Text>
+                <Text style={styles.rewardSelectorTitle}>{selectedWins} WINS · {selectedReward.rank}</Text>
+              </View>
+              <View style={styles.rewardTokensPill}>
+                <TokenIcon size={28} />
+                <Text style={styles.rewardTokensValue}>{selectedReward.tokens}</Text>
+                <Text style={styles.rewardTokensLabel}>CHAMPIONS TOKENS</Text>
+              </View>
+            </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.winSelector}>
               {Array.from({ length: 16 }, (_, wins) => (
-                <Pressable
-                  key={wins}
-                  onPress={() => setRun((current) => ({
-                    ...current,
-                    wins,
-                    losses: Math.max(0, current.matchesPlayed - wins),
-                  }))}
-                  style={[styles.winChip, run.wins === wins && styles.winChipActive]}
-                >
-                  <Text style={[styles.winChipValue, run.wins === wins && styles.winChipValueActive]}>{wins}</Text>
-                  <Text style={[styles.winChipLabel, run.wins === wins && styles.winChipLabelActive]}>W</Text>
+                <Pressable key={wins} onPress={() => setSelectedWins(wins)} style={[styles.winChip, selectedWins === wins && styles.winChipActive]}>
+                  <Text style={[styles.winChipValue, selectedWins === wins && styles.winChipValueActive]}>{wins}</Text>
+                  <Text style={[styles.winChipLabel, selectedWins === wins && styles.winChipLabelActive]}>WINS</Text>
                 </Pressable>
               ))}
             </ScrollView>
-            <View style={styles.rewardSummaryGrid}>
-              <MetricCard label="REWARD RANK" value={reward.rank} tone="gold" note={String(run.wins) + ' wins'} />
-              <MetricCard label="COINS" value={formatCoins(reward.coins)} tone="gold" note="Season 1 reward" />
-              <MetricCard label="CHAMPIONS TOKENS" value={String(reward.tokens)} tone="red" note="Spend in Token Store" />
-              <MetricCard label="MY CQP" value={formatCoins(run.cqp)} tone="green" note="הנקודות שנשמרו לחשבון" />
+            <View style={[styles.rewardInfoGrid, mobile && styles.columnOnMobile]}>
+              <MetricCard label="REWARD RANK" value={selectedReward.rank} tone="gold" note={selectedWins + ' wins'} />
+              <MetricCard label="COINS" value={formatCoins(selectedReward.coins)} tone="gold" note="Direct FUT Coins" />
+              <MetricCard label="CHAMPIONS TOKENS" value={String(selectedReward.tokens)} tone="red" note="Spend in Token Store" />
+              <MetricCard label="CQP EARNED" value={String(selectedReward.cqp)} tone="green" note="From this Finals run" />
             </View>
           </Panel>
-
           <Panel>
-            <View style={styles.storeHeader}>
-              <View>
-                <Text style={styles.storeHeaderEyebrow}>CHAMPIONS TOKEN STORE</Text>
-                <Text style={styles.storeHeaderTitle}>רק החבילות שאתה יכול לקנות</Text>
-                <Text style={styles.storeHeaderSub}>{reward.tokens} Tokens זמינים · הצעות יקרות יותר מוסתרות.</Text>
+            <View style={[styles.storeHeader, mobile && styles.columnOnMobile]}>
+              <View style={styles.storeHeaderCopy}>
+                <Text style={styles.storeKicker}>CHAMPIONS TOKEN STORE</Text>
+                <Text style={styles.storeTitleBig}>מה אפשר לקנות עם {selectedReward.tokens} Tokens</Text>
+                <Text style={styles.storeSub}>3 כרטיסים בשורה במחשב, עם Pack Art אמיתי. מוצגים רק פריטים עד כמות ה־Tokens שבחרת.</Text>
               </View>
-              <View style={styles.tokenBadge}>
-                <Text style={styles.tokenBadgeValue}>{reward.tokens}</Text>
-                <Text style={styles.tokenBadgeLabel}>TOKENS</Text>
+              <View style={styles.bigTokenBalance}>
+                <TokenIcon size={46} />
+                <Text style={styles.bigTokenValue}>{selectedReward.tokens}</Text>
+                <Text style={styles.bigTokenLabel}>AVAILABLE</Text>
               </View>
             </View>
             {availableRewards.length ? (
-              availableRewards.map((item) => <RewardStoreCard key={item.title + String(item.tokens)} item={item} />)
+              <View style={[styles.storeGrid, mobile && styles.storeGridMobile]}>
+                {availableRewards.map((item) => <RewardStoreCard key={item.title + String(item.tokens)} item={item} />)}
+              </View>
             ) : (
-              <Text style={styles.storeEmpty}>אין עדיין מספיק Tokens לחבילה מהחנות.</Text>
+              <View style={styles.storeEmptyBox}>
+                <TokenIcon size={36} />
+                <Text style={styles.storeEmpty}>אין מספיק Champions Tokens להצעה הראשונה בחנות.</Text>
+              </View>
             )}
           </Panel>
         </View>
@@ -752,9 +762,9 @@ export default function ChampionsScreen() {
             <TekkzCard compact />
           </Panel>
           <Panel>
-            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(reward.tokens) + ' Champions Tokens'} />
+            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
             <View style={styles.rewardMiniGrid}>
-              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(reward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
+              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{reward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(run.cqp)}</Text><Text style={styles.rewardMiniLabel}>MY CQP</Text></View>
             </View>
@@ -798,6 +808,9 @@ export default function ChampionsScreen() {
     <Screen scene="champions" showNav refreshing={saving} onRefresh={loadLiveData} maxWidth={1700}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
+      <View style={styles.pageRoot}>
+        <Image source={require('@/assets/images/scene-ultimate.png')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
+        <View style={styles.backgroundSoftener} pointerEvents="none" />
       <View style={styles.mainLayout}>
         <View style={styles.sidebar}>
           <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
@@ -811,48 +824,25 @@ export default function ChampionsScreen() {
         </View>
 
         <View style={styles.main}>
-          <LinearGradient
-            colors={['rgba(112,5,17,.62)', 'rgba(27,5,10,.73)', 'rgba(7,10,15,.86)']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.hero}
-          >
-            <View style={styles.heroGlowOne} />
-            <View style={styles.heroGlowTwo} />
-            <View style={styles.heroTop}>
-              <View style={styles.heroStats}>
-                <MetricCard label="FINAL STATUS" value={run.matchesPlayed >= 15 ? 'READY' : 'LIVE'} tone="green" note="Live account data" />
-                <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="הנתון שלך" />
-                <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
-              </View>
-              <View style={styles.heroTitleWrap}>
-                <Text style={styles.heroEyebrow}>COMPETE · IMPROVE · WIN</Text>
-                <Text style={styles.heroTitle}>FUT CHAMPIONS</Text>
-                <Text style={styles.heroSubtitle}>המסע שלך. התוצאות שלך. הפרסים שלך.</Text>
-                <View style={styles.heroInfoRow}>
-                  <View><Text style={styles.heroInfoBig}>DUAL</Text><Text style={styles.heroInfoSmall}>CONTROLLER LAB</Text></View>
-                  <View><Text style={styles.heroInfoBig}>PRO</Text><Text style={styles.heroInfoSmall}>TEKKZ SETUP</Text></View>
-                  <View><Text style={styles.heroInfoBig}>CQP</Text><Text style={styles.heroInfoSmall}>QUALIFICATION</Text></View>
-                  <View><Text style={styles.heroInfoBig}>15</Text><Text style={styles.heroInfoSmall}>MATCH FINALS</Text></View>
-                </View>
-              </View>
-              <View style={styles.heroCrest}>
-                <Image source={require('@/assets/crests/championship.png')} resizeMode="contain" style={styles.heroCrestImage} />
-              </View>
+          <View style={styles.sectionBar}>
+            <View style={styles.sectionBarTitleWrap}>
+              <Text style={styles.sectionBarEyebrow}>FC27 · FUT CHAMPIONS</Text>
+              <Text style={styles.sectionBarTitle}>{NAV.find((item) => item.id === section)?.label}</Text>
             </View>
-
-            <View style={styles.tabBar}>
+            <View style={styles.sectionBarTabs}>
               {NAV.map((item) => (
-                <Pressable key={item.id} onPress={() => setSection(item.id)} style={[styles.heroTab, section === item.id && styles.heroTabActive]}>
-                  <Ionicons name={item.icon} size={15} color={section === item.id ? '#fff' : '#8D99A4'} />
-                  <Text style={[styles.heroTabText, section === item.id && styles.heroTabTextActive]}>{item.short}</Text>
+                <Pressable key={item.id} onPress={() => setSection(item.id)} style={[styles.sectionTab, section === item.id && styles.sectionTabActive]}>
+                  <Ionicons name={item.icon} size={15} color={section === item.id ? '#fff' : '#89949F'} />
+                  <Text style={[styles.sectionTabText, section === item.id && styles.sectionTabTextActive]}>{item.label}</Text>
                 </Pressable>
               ))}
             </View>
-          </LinearGradient>
+          </View>
 
           <View style={styles.contentArea}>{content}</View>
         </View>
+      </View>
+
       </View>
 
       {showComposer ? (
@@ -880,8 +870,11 @@ export default function ChampionsScreen() {
 }
 
 const styles = StyleSheet.create({
-  mainLayout: { flexDirection: 'row', alignItems: 'stretch', direction: 'ltr' },
-  sidebar: { width: 230, backgroundColor: 'rgba(5,8,12,.72)', borderRightWidth: 1, borderRightColor: 'rgba(255,255,255,.06)', paddingTop: 22, paddingHorizontal: 12, minHeight: 900, direction: 'rtl' },
+  pageRoot: { position: 'relative', minHeight: 980, overflow: 'hidden', paddingHorizontal: 22, paddingVertical: 18 },
+  backgroundImage: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '100%', height: '100%', opacity: 1 },
+  backgroundSoftener: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,.08)' },
+  mainLayout: { flexDirection: 'row-reverse', alignItems: 'stretch', gap: 17 },
+  sidebar: { width: 245, backgroundColor: 'rgba(5,8,12,.56)', borderRightWidth: 1, borderRightColor: 'rgba(255,255,255,.06)', paddingTop: 22, paddingHorizontal: 12, minHeight: 900, direction: 'rtl' },
   sidebarTitle: { color: '#79858F', fontSize: 11, fontWeight: '900', letterSpacing: 1.6, textAlign: 'center', marginBottom: 15 },
   sidebarItem: { minHeight: 52, borderRadius: 13, paddingHorizontal: 11, marginBottom: 9, backgroundColor: 'rgba(9,12,17,.50)', borderWidth: 1, borderColor: 'rgba(255,255,255,.03)', flexDirection: 'row', alignItems: 'center', gap: 9 },
   sidebarItemActive: { backgroundColor: 'rgba(221,23,45,.72)', borderColor: 'rgba(255,86,103,.82)', shadowColor: '#E43043', shadowOpacity: .22, shadowRadius: 12, shadowOffset: { width: 0, height: 5 } },
@@ -889,14 +882,23 @@ const styles = StyleSheet.create({
   sidebarLabel: { flex: 1, color: '#9AA6B1', fontSize: 12, fontWeight: '800', textAlign: 'right' },
   sidebarLabelActive: { color: '#fff' },
   main: { flex: 1, minWidth: 0, direction: 'rtl' },
+  sectionBar: { gap: 12, marginBottom: 12 },
+  sectionBarTitleWrap: { alignItems: 'flex-end', paddingHorizontal: 4 },
+  sectionBarEyebrow: { color: '#D7B653', fontSize: 8, fontWeight: '900', letterSpacing: 1.5, textAlign: 'right' },
+  sectionBarTitle: { color: '#F6F7F9', fontSize: 25, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  sectionBarTabs: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 7 },
+  sectionTab: { minHeight: 42, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.09)', backgroundColor: 'rgba(5,8,12,.54)', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
+  sectionTabActive: { backgroundColor: 'rgba(216,47,64,.62)', borderColor: 'rgba(255,99,112,.68)' },
+  sectionTabText: { color: '#808B95', fontSize: 9, fontWeight: '900' },
+  sectionTabTextActive: { color: '#fff' },
   heroLegacy: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
   heroGlowOne: { position: 'absolute', width: 500, height: 500, borderRadius: 250, right: -160, top: -190, backgroundColor: 'rgba(238,37,56,.15)' },
   heroGlowTwo: { position: 'absolute', width: 360, height: 360, borderRadius: 180, left: -160, bottom: -190, backgroundColor: 'rgba(214,33,53,.11)' },
   heroTop: { padding: 28, flexDirection: 'row', alignItems: 'center', gap: 20, direction: 'ltr', minHeight: 266 },
   heroStats: { width: 555, flexDirection: 'row', gap: 10, alignItems: 'stretch' },
-  metricCard: { flex: 1, minHeight: 166, borderRadius: 17, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(4,8,12,.55)', padding: 15, justifyContent: 'center' },
+  metricCard: { flex: 1, minHeight: 101, borderRadius: 17, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(4,8,12,.55)', padding: 15, justifyContent: 'center' },
   metricLabel: { color: '#6D7883', fontSize: 10, fontWeight: '900', textAlign: 'right' },
-  metricValue: { color: '#F2CC64', fontSize: 31, fontWeight: '900', textAlign: 'right', marginTop: 11 },
+  metricValue: { color: '#F2CC64', fontSize: 24, fontWeight: '900', textAlign: 'right', marginTop: 11 },
   metricGreen: { color: '#63E59F' },
   metricRed: { color: '#FF6673' },
   metricNote: { color: '#86919C', fontSize: 9, fontWeight: '700', lineHeight: 14, textAlign: 'right', marginTop: 2 },
@@ -984,16 +986,10 @@ const styles = StyleSheet.create({
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
   settingLabel: { color: '#6E7984', fontSize: 10, fontWeight: '800', textAlign: 'right', flex: 1 },
-  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },
-
-  tekkzCard: { borderRadius: 18, borderWidth: 1, borderColor: 'rgba(225,58,69,.23)', backgroundColor: 'rgba(7,11,16,.86)', padding: 14, gap: 10 },
-  tekkzCardSelected: { borderColor: 'rgba(225,58,69,.53)' },
-  tekkzCardCompact: { minHeight: 0 },
+  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },  tekkzCardCompact: { minHeight: 0 },
   cardTopLine: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
-  sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },
-  proBadgeText: { color: '#E3B25A', fontSize: 9, fontWeight: '900', letterSpacing: 1.2 },
-  playerCardBody: { flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch' },
+  sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },  playerCardBody: { flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch' },
   playerPortrait: { width: 112, minHeight: 122, borderRadius: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,.09)', backgroundColor: '#151A22', overflow: 'hidden', alignItems: 'center', justifyContent: 'flex-end' },
   playerHead: { width: 62, height: 62, borderRadius: 31, backgroundColor: '#D8B39C', alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: 'rgba(255,255,255,.18)', marginBottom: -2 },
   playerInitial: { color: '#30231F', fontSize: 27, fontWeight: '900' },
@@ -1060,15 +1056,7 @@ const styles = StyleSheet.create({
   comingSoonStatus: { color: '#F04A56', fontSize: 18, fontWeight: '900' },
   comingSoonText: { color: '#85919C', fontSize: 13, fontWeight: '700' },
   panel: { position: 'relative', overflow: 'hidden', backgroundColor: 'rgba(9,13,19,.58)', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
-  hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
-  winSelector: { gap: 7, paddingVertical: 9, flexDirection: 'row-reverse' },
-  winChip: { width: 48, height: 48, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', alignItems: 'center', justifyContent: 'center' },
-  winChipActive: { backgroundColor: '#D93140', borderColor: '#FF6370' },
-  winChipValue: { color: '#DCE2E7', fontSize: 15, fontWeight: '900' },
-  winChipValueActive: { color: '#fff' },
-  winChipLabel: { color: '#67737E', fontSize: 7, fontWeight: '900' },
-  winChipLabelActive: { color: '#FECFD3' },
-  rewardSummaryGrid: { flexDirection: 'row-reverse', gap: 10, marginTop: 12, flexWrap: 'wrap' },
+  hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },  winChip: { width: 48, height: 48, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', alignItems: 'center', justifyContent: 'center' },  winChipValue: { color: '#DCE2E7', fontSize: 15, fontWeight: '900' },  winChipLabel: { color: '#67737E', fontSize: 7, fontWeight: '900' },  rewardSummaryGrid: { flexDirection: 'row-reverse', gap: 10, marginTop: 12, flexWrap: 'wrap' },
   selectorTitle: { color: '#F0F3F6', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   storeHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
   storeHeaderEyebrow: { color: '#D7B351', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
@@ -1076,15 +1064,9 @@ const styles = StyleSheet.create({
   storeHeaderSub: { color: '#78848F', fontSize: 10, fontWeight: '700', textAlign: 'right', marginTop: 2 },
   tokenBadge: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: '#E8BF4E', backgroundColor: '#0D1419', alignItems: 'center', justifyContent: 'center' },
   tokenBadgeValue: { color: '#F4D26B', fontSize: 24, fontWeight: '900' },
-  tokenBadgeLabel: { color: '#7F8993', fontSize: 7, fontWeight: '900' },
-  storeCard: { flexDirection: 'row-reverse', alignItems: 'center', gap: 12, paddingVertical: 12, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,.06)' },
-  storeVisual: { width: 82, alignItems: 'center', justifyContent: 'center' },
+  tokenBadgeLabel: { color: '#7F8993', fontSize: 7, fontWeight: '900' },  storeVisual: { width: 82, alignItems: 'center', justifyContent: 'center' },
   storeCopy: { flex: 1, alignItems: 'flex-end' },
-  storeTitle: { color: '#EFF2F5', fontSize: 13, fontWeight: '900', textAlign: 'right' },
-  storeDetails: { color: '#808B96', fontSize: 10, fontWeight: '700', textAlign: 'right', marginTop: 3 },
-  storeTradeable: { color: '#7FBE98', fontSize: 8, fontWeight: '900', marginTop: 4 },
-  storeCost: { minWidth: 70, alignItems: 'center', justifyContent: 'center' },
-  storeCostValue: { color: '#F2CF62', fontSize: 20, fontWeight: '900' },
+  storeTitle: { color: '#EFF2F5', fontSize: 13, fontWeight: '900', textAlign: 'right' },  storeTradeable: { color: '#7FBE98', fontSize: 8, fontWeight: '900', marginTop: 4 },  storeCostValue: { color: '#F2CF62', fontSize: 20, fontWeight: '900' },
   storeCostLabel: { color: '#727D87', fontSize: 7, fontWeight: '900' },
   storeEmpty: { color: '#6F7B86', fontSize: 11, fontWeight: '800', textAlign: 'right', paddingVertical: 18 },
   platformRow: { flexDirection: 'row-reverse', gap: 8, marginBottom: 12 },
@@ -1136,6 +1118,72 @@ const styles = StyleSheet.create({
   composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39' },
   composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
+
+  tekkzCard: { borderRadius: 22, borderWidth: 1, borderColor: 'rgba(239,58,71,.48)', backgroundColor: 'rgba(4,7,11,.64)', overflow: 'hidden', flexDirection: 'row-reverse', minHeight: 430 },
+  tekkzCardSelected: { borderColor: 'rgba(244,207,100,.48)' },
+  tekkzCardImageWrap: { width: '37%', minWidth: 270, minHeight: 430, position: 'relative', backgroundColor: '#10151B', overflow: 'hidden' },
+  tekkzCardImage: { width: '100%', height: '100%' },
+  tekkzCardImageText: { position: 'absolute', left: 18, right: 18, bottom: 15 },
+  tekkzCardKicker: { color: '#EEC764', fontSize: 7, fontWeight: '900', letterSpacing: 1.5 },
+  tekkzCardName: { color: '#fff', fontSize: 42, fontWeight: '900', letterSpacing: 1.3 },
+  tekkzCardBody: { flex: 1, padding: 25, gap: 10, justifyContent: 'center', alignItems: 'flex-end' },
+  tekkzCardTop: { width: '100%', flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
+  verifyBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(105,217,154,.24)', backgroundColor: 'rgba(105,217,154,.06)', paddingHorizontal: 9, paddingVertical: 6 },
+  verifyBadgeText: { color: '#7FD8A4', fontSize: 7, fontWeight: '900', letterSpacing: .8 },
+  proBadgeText: { color: '#DAB95D', fontSize: 8, fontWeight: '900', letterSpacing: 1.1 },
+  tekkzCardTitle: { color: '#F4F6F8', fontSize: 30, fontWeight: '900', textAlign: 'right' },
+  tekkzCardSub: { color: '#A7B0B9', fontSize: 11, fontWeight: '800', textAlign: 'right', lineHeight: 18 },
+  tekkzFactRow: { width: '100%', flexDirection: 'row-reverse', gap: 8 },
+  tekkzFact: { flex: 1, minHeight: 72, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.60)', padding: 10 },
+  tekkzFactValue: { color: '#F1F4F6', fontSize: 12, fontWeight: '900', textAlign: 'right' },
+  tekkzFactLabel: { color: '#69747F', fontSize: 7, fontWeight: '900', textAlign: 'right', marginTop: 4, letterSpacing: .7 },
+  tekkzChallenge: { width: '100%', borderRadius: 15, borderWidth: 1, borderColor: 'rgba(244,207,100,.20)', backgroundColor: 'rgba(26,19,9,.52)', padding: 12, flexDirection: 'row-reverse', gap: 10, alignItems: 'center' },
+  tekkzChallengeIcon: { width: 38, height: 38, borderRadius: 12, backgroundColor: 'rgba(244,207,100,.09)', alignItems: 'center', justifyContent: 'center' },
+  tekkzChallengeCopy: { flex: 1, alignItems: 'flex-end' },
+  tekkzChallengeKicker: { color: '#9E8958', fontSize: 7, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' },
+  tekkzChallengeTitle: { color: '#F4CF64', fontSize: 16, fontWeight: '900', textAlign: 'right', marginTop: 1 },
+  tekkzChallengeText: { color: '#8E98A1', fontSize: 9, fontWeight: '700', lineHeight: 15, textAlign: 'right', marginTop: 2 },
+  tekkzMiniMeta: { width: '100%', minHeight: 39, borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'rgba(255,255,255,.06)', flexDirection: 'row-reverse' },
+  tekkzMiniMetaItem: { flex: 1, flexDirection: 'row-reverse', justifyContent: 'center', alignItems: 'center', gap: 4 },
+  tekkzMiniMetaText: { color: '#75808B', fontSize: 7, fontWeight: '900' },
+  tekkzDetailsPanel: { minHeight: 150 },
+  tekkzDetailsGrid: { flexDirection: 'row-reverse', gap: 13, alignItems: 'stretch' },
+  tekkzDetailsCopy: { flex: 1, alignItems: 'flex-end', justifyContent: 'center' },
+  tekkzDetailsKicker: { color: '#D6B55D', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
+  tekkzDetailsTitle: { color: '#F2F4F6', fontSize: 24, fontWeight: '900', textAlign: 'right' },
+  tekkzDetailsSub: { color: '#929DA7', fontSize: 10, fontWeight: '800', textAlign: 'right', marginTop: 3 },
+  tekkzDetailsPills: { flex: 1.5, flexDirection: 'row-reverse', gap: 8 },
+  detailPill: { flex: 1, minHeight: 80, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.58)', padding: 11, justifyContent: 'center' },
+  detailPillValue: { color: '#EAEFF2', fontSize: 11, fontWeight: '900', textAlign: 'right' },
+  detailPillLabel: { color: '#69747F', fontSize: 7, fontWeight: '900', textAlign: 'right', marginTop: 4 },
+  rewardSelectorPanel: { minHeight: 285 },
+  rewardSelectorTop: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
+  rewardSelectorKicker: { color: '#AC874D', fontSize: 8, fontWeight: '900', letterSpacing: 1.3, textAlign: 'right' },
+  rewardSelectorTitle: { color: '#F4F6F8', fontSize: 26, fontWeight: '900', textAlign: 'right', marginTop: 3 },
+  rewardTokensPill: { minHeight: 54, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(244,207,100,.26)', backgroundColor: 'rgba(29,20,8,.58)', paddingHorizontal: 12, flexDirection: 'row-reverse', alignItems: 'center', gap: 7 },
+  rewardTokensValue: { color: '#F4CF64', fontSize: 21, fontWeight: '900' },
+  rewardTokensLabel: { color: '#7F858D', fontSize: 7, fontWeight: '900', letterSpacing: .8 },
+  winSelector: { flexDirection: 'row-reverse', gap: 7, paddingVertical: 14 },  winChipActive: { backgroundColor: '#D72F40', borderColor: '#FF6A73', shadowColor: '#E43B4B', shadowOpacity: .23, shadowRadius: 10 },  winChipValueActive: { color: '#fff' },  winChipLabelActive: { color: '#FFDDE0' },
+  rewardInfoGrid: { flexDirection: 'row-reverse', gap: 10 },
+  storeHeaderCopy: { flex: 1, alignItems: 'flex-end' },
+  storeKicker: { color: '#F0C85E', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
+  storeTitleBig: { color: '#F4F6F8', fontSize: 22, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  storeSub: { color: '#7E8994', fontSize: 10, fontWeight: '700', lineHeight: 16, textAlign: 'right', marginTop: 3, maxWidth: 760 },
+  bigTokenBalance: { width: 116, height: 116, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(244,207,100,.24)', backgroundColor: 'rgba(24,17,8,.56)', alignItems: 'center', justifyContent: 'center', gap: 2 },
+  bigTokenValue: { color: '#F4CF64', fontSize: 29, fontWeight: '900' },
+  bigTokenLabel: { color: '#7D858D', fontSize: 7, fontWeight: '900', letterSpacing: 1 },
+  storeGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 13 },
+  storeGridMobile: { flexDirection: 'column' },
+  storeCard: { width: '32.3%', minHeight: 315, borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.09)', backgroundColor: 'rgba(5,8,12,.74)', overflow: 'hidden', padding: 11, gap: 9 },  storeBody: { flex: 1, alignItems: 'flex-end' },
+  storeTypePill: { borderRadius: 999, borderWidth: 1, borderColor: 'rgba(244,207,100,.15)', backgroundColor: 'rgba(244,207,100,.05)', paddingHorizontal: 7, paddingVertical: 4 },
+  storeTypeText: { color: '#BCA86B', fontSize: 6, fontWeight: '900', letterSpacing: 1 },
+  storeCardTitle: { color: '#EFF2F5', fontSize: 13, fontWeight: '900', textAlign: 'right', lineHeight: 17, marginTop: 6 },
+  storeDetails: { color: '#78848F', fontSize: 9, fontWeight: '700', lineHeight: 14, textAlign: 'right', marginTop: 3 },  storeCostBox: { minHeight: 43, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,.06)', flexDirection: 'row-reverse', alignItems: 'center', gap: 7, justifyContent: 'flex-end', paddingTop: 8 },
+  storeCost: { color: '#F4CF64', fontSize: 21, fontWeight: '900' },
+  tokenIcon: { backgroundColor: '#E9C153', borderWidth: 2, borderColor: '#FFF0A4', alignItems: 'center', justifyContent: 'center' },
+  utilityRewardVisual: { alignItems: 'center', justifyContent: 'center', gap: 7 },
+  utilityRewardCircle: { width: 76, height: 76, borderRadius: 38, borderWidth: 1, borderColor: 'rgba(244,207,100,.34)', backgroundColor: 'rgba(244,207,100,.08)', alignItems: 'center', justifyContent: 'center' },
+  utilityRewardKind: { color: '#807A67', fontSize: 7, fontWeight: '900', letterSpacing: 1.1 },
 
 });
 
