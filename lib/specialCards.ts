@@ -75,6 +75,32 @@ export function totwFor(baseId: string): {
   };
 }
 
+const OTW_CARDS: Record<string, {
+  rating: number;
+  position: string;
+  face: Face;
+  positions?: string[];
+  playstyles?: { name: string; plus: boolean }[];
+}> = {
+  'ea-264947-nicole-anyomi': {
+    rating: 84,
+    position: 'ST',
+    face: { ovr: 84, pac: 90, sho: 82, pas: 74, dri: 84, def: 55, phy: 83 },
+    positions: ['ST', 'LM', 'CAM', 'LW'],
+    playstyles: [
+      { name: 'Low Driven Shot', plus: false },
+      { name: 'Jockey', plus: false },
+      { name: 'Technical', plus: false },
+      { name: 'Trickster', plus: false },
+      { name: 'Quick Step', plus: false },
+    ],
+  },
+};
+
+export function otwFor(baseId: string) {
+  return OTW_CARDS[baseId] ?? null;
+}
+
 export const SOLO_TOTW: FcPlayer[] = totw
   .filter((row) => !row.baseId && row.id)
   .map((row) => ({
