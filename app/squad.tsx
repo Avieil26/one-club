@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
@@ -20,11 +21,12 @@ export default function SquadBuilderScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ returnTo?: string; formation?: string }>();
   const saved = app.user?.squad ?? null;
+  const isCommunityBuilder = params.returnTo === 'champions-community';
   const requestedFormation = typeof params.formation === 'string' && isFormationId(params.formation) ? params.formation : null;
   const initialFormation = requestedFormation ?? (saved?.formation && isFormationId(saved.formation) ? saved.formation : '433');
   const [formationId, setFormationId] = useState<FormationId>(initialFormation);
-  const [slots, setSlots] = useState<Record<string, string>>(saved?.slots ?? {});
-  const [bench, setBench] = useState<string[]>(saved?.bench ?? []);
+  const [slots, setSlots] = useState<Record<string, string>>(isCommunityBuilder ? {} : (saved?.slots ?? {}));
+  const [bench, setBench] = useState<string[]>(isCommunityBuilder ? [] : (saved?.bench ?? []));
   const [active, setActive] = useState<string | null>(null);
   const [benchHold, setBenchHold] = useState<string | null>(null);
   const [addingBench, setAddingBench] = useState(false);
@@ -141,6 +143,12 @@ export default function SquadBuilderScreen() {
       return;
     }
     try {
+      if (isCommunityBuilder) {
+        await AsyncStorage.setItem(`champions-community-squad:${app.user!.id}`, JSON.stringify(squad));
+        Alert.alert('הסגל נשמר לפוסט', 'הקבוצה נשמרה רק לטקטיקה שאתה מעלה לקהילה.');
+        router.replace({ pathname: '/champions', params: { communityDraft: 'saved' } });
+        return;
+      }
       await app.saveSquad(squad);
       Alert.alert('הסגל נשמר', 'הקבוצה מופיעה בפרופיל.');
       router.replace(params.returnTo === 'champions' ? '/champions' : '/profile');
