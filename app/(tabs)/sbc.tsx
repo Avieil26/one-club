@@ -56,6 +56,11 @@ const SBC_PLAYER_CARDS: Record<string, { player: FcPlayer; photo: string }> = {
       face: { ovr: 89, pac: 92, sho: 87, pas: 86, dri: 88, def: 55, phy: 77 } },
     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg/500px-Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg',
   },
+  'sbc-potm-pina': {
+    player: { id: 'ea-262531-claudia-pina', name: 'קלאודיה פינה', en: 'Claudia Pina', rating: 89, position: 'LW', nation: 'ספרד', league: 'Liga F Moeve', club: 'ברצלונה',
+      face: { ovr: 89, pac: 91, sho: 89, pas: 84, dri: 88, def: 45, phy: 73 } },
+    photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p262531.png',
+  },
   'sbc-dfg-tarciane': {
     player: { id: 'sbc-card-tarciane', name: 'טארסיאני', en: 'Tarciane', rating: 84, position: 'CB', nation: 'ברזיל', league: 'NWSL', club: 'Houston Dash',
       face: { ovr: 84, pac: 80, sho: 45, pas: 74, dri: 70, def: 84, phy: 87 } },
