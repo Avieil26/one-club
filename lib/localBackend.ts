@@ -35,7 +35,8 @@ export type Backend = {
   createFutPost(input: NewFutPost): Promise<Snapshot>;
   rateFut(postId: string, fit: number, fun: number, creativity: number): Promise<Snapshot>;
   toggleFutLike(postId: string): Promise<Snapshot>;
-  addComment(input: NewComment): Promise<{ snap: Snapshot; held: boolean }>;
+  toggleCommentLike(commentId: string): Promise<Snapshot>;
+  addComment(input: NewComment & { parentId?: string | null }): Promise<{ snap: Snapshot; held: boolean }>;
   reportComment(commentId: string): Promise<Snapshot>;
   moderateComment(commentId: string, action: 'visible' | 'remove'): Promise<Snapshot>;
   createGrounds(input: NewGrounds): Promise<Snapshot>;
@@ -89,6 +90,7 @@ export function createLocalBackend(): Backend {
       if (!db.follows) db.follows = [];
       if (!db.messages) db.messages = [];
       if (!db.futLikes) db.futLikes = [];
+      if (!db.commentLikes) db.commentLikes = [];
       db.groundsPosts = (db.groundsPosts ?? []).map((post) => ({
         ...post,
         playerLevel: post.playerLevel ?? (post.skillRating && post.skillRating <= 50 ? post.skillRating : 10),
@@ -160,6 +162,11 @@ export function createLocalBackend(): Backend {
     async toggleFutLike(postId) {
       if (!db.futLikes) db.futLikes = [];
       logic.toggleFutLike(db, postId);
+      return commit();
+    },
+    async toggleCommentLike(commentId) {
+      if (!db.commentLikes) db.commentLikes = [];
+      logic.toggleCommentLike(db, commentId);
       return commit();
     },
     async addComment(input) {
