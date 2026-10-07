@@ -190,7 +190,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
       {!failed && media.photo ? (
         <Image
           source={{ uri: media.photo }}
-          resizeMode="cover"
+          resizeMode="contain"
           onError={() => setFailed(true)}
           accessibilityIgnoresInvertColors
           style={{
