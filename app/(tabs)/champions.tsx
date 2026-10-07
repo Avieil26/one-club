@@ -85,7 +85,8 @@ type TokenReward = {
   title: string;
   details: string;
   tokens: number;
-  visual: PackVisual;
+  kind?: 'pack' | 'cosmetic' | 'evolution';
+  visual?: PackVisual;
   packLabel?: string;
   tradeable?: boolean;
 };
