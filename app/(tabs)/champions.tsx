@@ -809,7 +809,7 @@ export default function ChampionsScreen() {
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.pageRoot}>
-        <Image source={require('@/assets/images/scene-ultimate.png')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
+        <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
         <View style={styles.backgroundSoftener} pointerEvents="none" />
       <View style={styles.mainLayout}>
         <View style={styles.sidebar}>
