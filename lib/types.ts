@@ -90,6 +90,7 @@ export type Comment = {
   preset: CommentPreset | null;
   body: string;
   status: CommentStatus;
+  parentId: string | null;
   createdAt: string;
 };
 
@@ -216,6 +217,7 @@ export type Database = {
   futRatings: FutRating[];
   futLikes: FutLike[];
   comments: Comment[];
+  commentLikes: { commentId: string; userId: string }[];
   groundsPosts: GroundsPost[];
   sbcChallenges: SbcChallenge[];
   sbcSolutions: SbcSolution[];
@@ -234,6 +236,7 @@ export type Snapshot = {
   ratings: FutRating[];
   likes: FutLike[];
   comments: Comment[];
+  commentLikes: { commentId: string; userId: string }[];
   grounds: GroundsPost[];
   sbcChallenges: SbcChallenge[];
   solutions: SbcSolution[];
