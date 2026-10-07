@@ -6,31 +6,6 @@ import rows from '@/assets/data/marketPrices.json';
 let table = rows as unknown as Record<string, [number, number]>;
 let started = false;
 const listeners = new Set<() => void>();
-const TOTW4_ZERO_IDS = new Set([
-  'putellas--totw',
-  'bellingham--totw',
-  'ea-241846-ewa-pajor--totw',
-  'donnarumma--totw',
-  'debinha--totw',
-  'hemp--totw',
-  'debruyne--totw',
-  'lewandowski--totw',
-  'ea-210514-joao-cancelo--totw',
-  'marmoush--totw',
-  'ea-260908-milos-kerkez--totw',
-  'ea-227381-janine-sonis--totw',
-  'ea-79532-mariam-toloba--totw',
-  'ea-73014-cornelia-kramer--totw',
-  'ea-245902-troy-parrott--totw',
-  'ea-242000-konstantinos-mavropanos--totw',
-  'ea-221491-nico-elvedi--totw',
-  'ea-269701-nathaniel-brown--totw',
-  'ea-210602-salem-al-dawsari--totw',
-  'ea-273563-annabel-schasching--totw',
-  'ea-73865-cavan-sullivan--totw',
-  'ea-259114-ole-romeny--totw',
-  'totw4-orri-oskarsson',
-]);
 
 function pricesUrl() {
   if (Platform.OS === 'web' && typeof window !== 'undefined' && window.location?.origin) {
@@ -74,10 +49,10 @@ export function useMarketPrices() {
 
 export type MarketPrice = { console?: number; pc?: number };
 
-/** Real market price for a card that can be bought. Challenge rewards are absent. */
+/** Real market price for a card that can be bought. TOTW cards with no live listing are explicitly shown as 0. */
 export function marketQuote(id: string): MarketPrice | null {
   const row = table[id];
   if (row) return { console: row[0], pc: row[1] };
-  if (id.endsWith('--totw') || id.startsWith('totw4-')) return { console: 0, pc: 0 };
+  if (id.endsWith('--totw')) return { console: 0, pc: 0 };
   return null;
 }
