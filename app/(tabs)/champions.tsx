@@ -691,7 +691,6 @@ export default function ChampionsScreen() {
             subtitle="Xbox ו־PlayStation עם הלוגואים והנכסים שכבר קיימים באתר."
           />
           <Panel>
-            <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
             <View style={styles.platformRow}>
               <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
@@ -935,6 +934,7 @@ export default function ChampionsScreen() {
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.formationRow}>{FC27_FORMATIONS.map((item) => <Pressable key={item} onPress={() => setFormation(item)} style={[styles.formationChip, formation === item && styles.formationChipActive]}><Text style={[styles.formationChipText, formation === item && styles.formationChipTextActive]}>{item}</Text></Pressable>)}</ScrollView>
             <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
+            <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
             <View style={styles.platformRow}>
               <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
