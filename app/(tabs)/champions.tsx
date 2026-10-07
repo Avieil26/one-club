@@ -577,9 +577,11 @@ function CommunitySquadBuilder({
 }
 
 function TekkzCard({ selected }: { selected?: boolean }) {
+  const { width } = useWindowDimensions();
+  const compact = width < 1050;
   return (
-    <View style={[styles.tekkzCard, selected && styles.tekkzCardSelected]}>
-      <View style={styles.tekkzCardImageWrap}>
+    <View style={[styles.tekkzCard, compact && styles.tekkzCardCompact, selected && styles.tekkzCardSelected]}>
+      <View style={[styles.tekkzCardImageWrap, compact && styles.tekkzCardCompactImage]}>
         <Image source={{ uri: TEKKZ_IMAGE_URL }} resizeMode="cover" style={styles.tekkzCardImage} />
         <LinearGradient colors={['transparent', 'rgba(4,7,10,.93)']} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={StyleSheet.absoluteFillObject} />
         <View style={styles.tekkzCardImageText}>
@@ -587,7 +589,7 @@ function TekkzCard({ selected }: { selected?: boolean }) {
           <Text style={styles.tekkzCardName}>TEKKZ</Text>
         </View>
       </View>
-      <View style={styles.tekkzCardBody}>
+      <View style={[styles.tekkzCardBody, compact && styles.tekkzCardCompactBody]}>
         <View style={styles.tekkzCardTop}>
           <View style={styles.verifyBadge}>
             <Ionicons name="checkmark-circle" size={14} color="#6ADD9C" />
@@ -1321,7 +1323,7 @@ const styles = StyleSheet.create({
   pageRoot: { position: 'relative', minHeight: 980, overflow: 'hidden', paddingHorizontal: 22, paddingVertical: 18 },
   backgroundImage: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '100%', height: '100%', opacity: 1 },
   backgroundSoftener: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,.08)' },
-  mainLayout: { flexDirection: 'row-reverse', alignItems: 'stretch', gap: 17 },
+  mainLayout: { width: '100%', minWidth: 0, flexDirection: 'row-reverse', alignItems: 'stretch', gap: 17 },
   sidebar: { width: 245, backgroundColor: 'rgba(5,8,12,.56)', borderRightWidth: 1, borderRightColor: 'rgba(255,255,255,.06)', paddingTop: 22, paddingHorizontal: 12, minHeight: 900, direction: 'rtl' },
   sidebarTitle: { color: '#79858F', fontSize: 11, fontWeight: '900', letterSpacing: 1.6, textAlign: 'center', marginBottom: 15 },
   sidebarItem: { minHeight: 52, borderRadius: 13, paddingHorizontal: 11, marginBottom: 9, backgroundColor: 'rgba(9,12,17,.50)', borderWidth: 1, borderColor: 'rgba(255,255,255,.03)', flexDirection: 'row', alignItems: 'center', gap: 9 },
@@ -1329,7 +1331,7 @@ const styles = StyleSheet.create({
   sidebarIndex: { color: '#65717D', fontSize: 9, fontWeight: '800', width: 19 },
   sidebarLabel: { flex: 1, color: '#9AA6B1', fontSize: 12, fontWeight: '800', textAlign: 'right' },
   sidebarLabelActive: { color: '#fff' },
-  main: { flex: 1, minWidth: 0, direction: 'rtl' },
+  main: { flex: 1, minWidth: 0, width: 0 as any, direction: 'rtl' },
   sectionBar: { gap: 12, marginBottom: 12 },
   sectionBarTitleWrap: { alignItems: 'flex-end', paddingHorizontal: 4 },
   sectionBarEyebrow: { color: '#D7B653', fontSize: 8, fontWeight: '900', letterSpacing: 1.5, textAlign: 'right' },
@@ -1369,7 +1371,7 @@ const styles = StyleSheet.create({
   heroTabActive: { backgroundColor: '#E13C49', borderColor: '#FF6570', shadowColor: '#E13C49', shadowOpacity: .18, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } },
   heroTabText: { color: '#8D99A4', fontSize: 10, fontWeight: '900', textAlign: 'center' },
   heroTabTextActive: { color: '#fff' },
-  contentArea: { paddingHorizontal: 24, paddingBottom: 48 },
+  contentArea: { width: '100%', minWidth: 0, paddingHorizontal: 24, paddingBottom: 48 },
   contentStack: { gap: 13 },
   smallMetaStrip: { height: 42, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 24, direction: 'rtl' },
   metaMuted: { color: '#65717C', fontSize: 10, fontWeight: '800' },
@@ -1583,22 +1585,23 @@ const styles = StyleSheet.create({
   composerHeaderActions: { flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
-  tekkzCard: { borderRadius: 22, borderWidth: 1, borderColor: 'rgba(239,58,71,.48)', backgroundColor: 'rgba(4,7,11,.64)', overflow: 'hidden', flexDirection: 'row-reverse', minHeight: 430 },
+  tekkzCard: { width: '100%', maxWidth: '100%', minWidth: 0, borderRadius: 22, borderWidth: 1, borderColor: 'rgba(239,58,71,.48)', backgroundColor: 'rgba(4,7,11,.64)', overflow: 'hidden', flexDirection: 'row-reverse', minHeight: 430 },
+  tekkzCardCompact: { flexDirection: 'column', minHeight: 0 },
   tekkzCardSelected: { borderColor: 'rgba(244,207,100,.48)' },
-  tekkzCardImageWrap: { width: '37%', minWidth: 270, minHeight: 430, position: 'relative', backgroundColor: '#10151B', overflow: 'hidden' },
+  tekkzCardImageWrap: { width: '37%', minWidth: 0, flexShrink: 1, minHeight: 430, position: 'relative', backgroundColor: '#10151B', overflow: 'hidden' },
   tekkzCardImage: { width: '100%', height: '100%' },
   tekkzCardImageText: { position: 'absolute', left: 18, right: 18, bottom: 15 },
   tekkzCardKicker: { color: '#EEC764', fontSize: 7, fontWeight: '900', letterSpacing: 1.5 },
   tekkzCardName: { color: '#fff', fontSize: 42, fontWeight: '900', letterSpacing: 1.3 },
-  tekkzCardBody: { flex: 1, padding: 25, gap: 10, justifyContent: 'center', alignItems: 'flex-end' },
+  tekkzCardBody: { flex: 1, minWidth: 0, width: 0 as any, padding: 25, gap: 10, justifyContent: 'center', alignItems: 'flex-end' },
   tekkzCardTop: { width: '100%', flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   verifyBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(105,217,154,.24)', backgroundColor: 'rgba(105,217,154,.06)', paddingHorizontal: 9, paddingVertical: 6 },
   verifyBadgeText: { color: '#7FD8A4', fontSize: 7, fontWeight: '900', letterSpacing: .8 },
   proBadgeText: { color: '#DAB95D', fontSize: 8, fontWeight: '900', letterSpacing: 1.1 },
   tekkzCardTitle: { color: '#F4F6F8', fontSize: 30, fontWeight: '900', textAlign: 'right' },
   tekkzCardSub: { color: '#A7B0B9', fontSize: 11, fontWeight: '800', textAlign: 'right', lineHeight: 18 },
-  tekkzFactRow: { width: '100%', flexDirection: 'row-reverse', gap: 8 },
-  tekkzFact: { flex: 1, minHeight: 72, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.60)', padding: 10 },
+  tekkzFactRow: { width: '100%', minWidth: 0, flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8 },
+  tekkzFact: { flex: 1, minWidth: 0, minHeight: 72, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.60)', padding: 10 },
   tekkzFactValue: { color: '#F1F4F6', fontSize: 12, fontWeight: '900', textAlign: 'right' },
   tekkzFactLabel: { color: '#69747F', fontSize: 7, fontWeight: '900', textAlign: 'right', marginTop: 4, letterSpacing: .7 },
   tekkzChallenge: { width: '100%', borderRadius: 15, borderWidth: 1, borderColor: 'rgba(244,207,100,.20)', backgroundColor: 'rgba(26,19,9,.52)', padding: 12, flexDirection: 'row-reverse', gap: 10, alignItems: 'center' },
@@ -1607,17 +1610,17 @@ const styles = StyleSheet.create({
   tekkzChallengeKicker: { color: '#9E8958', fontSize: 7, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' },
   tekkzChallengeTitle: { color: '#F4CF64', fontSize: 16, fontWeight: '900', textAlign: 'right', marginTop: 1 },
   tekkzChallengeText: { color: '#8E98A1', fontSize: 9, fontWeight: '700', lineHeight: 15, textAlign: 'right', marginTop: 2 },
-  tekkzMiniMeta: { width: '100%', minHeight: 39, borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'rgba(255,255,255,.06)', flexDirection: 'row-reverse' },
-  tekkzMiniMetaItem: { flex: 1, flexDirection: 'row-reverse', justifyContent: 'center', alignItems: 'center', gap: 4 },
+  tekkzMiniMeta: { width: '100%', minWidth: 0, minHeight: 39, borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'rgba(255,255,255,.06)', flexDirection: 'row-reverse', flexWrap: 'wrap' },
+  tekkzMiniMetaItem: { flex: 1, minWidth: 0, flexDirection: 'row-reverse', justifyContent: 'center', alignItems: 'center', gap: 4 },
   tekkzMiniMetaText: { color: '#75808B', fontSize: 7, fontWeight: '900' },
   tekkzDetailsPanel: { minHeight: 150 },
-  tekkzDetailsGrid: { flexDirection: 'row-reverse', gap: 13, alignItems: 'stretch' },
-  tekkzDetailsCopy: { flex: 1, alignItems: 'flex-end', justifyContent: 'center' },
+  tekkzDetailsGrid: { minWidth: 0, flexDirection: 'row-reverse', gap: 13, alignItems: 'stretch' },
+  tekkzDetailsCopy: { flex: 1, minWidth: 0, alignItems: 'flex-end', justifyContent: 'center' },
   tekkzDetailsKicker: { color: '#D6B55D', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
   tekkzDetailsTitle: { color: '#F2F4F6', fontSize: 24, fontWeight: '900', textAlign: 'right' },
   tekkzDetailsSub: { color: '#929DA7', fontSize: 10, fontWeight: '800', textAlign: 'right', marginTop: 3 },
-  tekkzDetailsPills: { flex: 1.5, flexDirection: 'row-reverse', gap: 8 },
-  detailPill: { flex: 1, minHeight: 80, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.58)', padding: 11, justifyContent: 'center' },
+  tekkzDetailsPills: { flex: 1.5, minWidth: 0, flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8 },
+  detailPill: { flex: 1, minWidth: 0, minHeight: 80, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.07)', backgroundColor: 'rgba(5,8,12,.58)', padding: 11, justifyContent: 'center' },
   detailPillValue: { color: '#EAEFF2', fontSize: 11, fontWeight: '900', textAlign: 'right' },
   detailPillLabel: { color: '#69747F', fontSize: 7, fontWeight: '900', textAlign: 'right', marginTop: 4 },
   rewardSelectorPanel: { minHeight: 285 },
@@ -1650,6 +1653,8 @@ const styles = StyleSheet.create({
   utilityRewardKind: { color: '#807A67', fontSize: 7, fontWeight: '900', letterSpacing: 1.1 },
 
   columnOnMobile: { flexDirection: 'column' },
+  tekkzCardCompactImage: { width: '100%', minHeight: 250, height: 250 },
+  tekkzCardCompactBody: { width: '100%', minWidth: 0, padding: 18 },
   storeEmptyBox: { minHeight: 210, alignItems: 'center', justifyContent: 'center', borderRadius: 16, backgroundColor: 'rgba(4,7,11,.50)', gap: 10 },
   pitchCircle: { position: 'absolute', left: '50%', top: '50%', width: 58, height: 58, marginLeft: -29, marginTop: -29, borderRadius: 29, borderWidth: 1, borderColor: 'rgba(255,255,255,.18)' },
   pitchGoalTop: { position: 'absolute', left: '39%', right: '39%', top: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderBottomWidth: 0 },
