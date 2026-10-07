@@ -77,6 +77,19 @@ function toCardMeta(row: MetaRow | undefined): CardMeta | null {
   return { foot: row.foot, skillMoves: row.sm, weakFoot: row.wf, stats };
 }
 
+const OTW_META: Record<string, MetaRow> = {
+  'ea-264947-nicole-anyomi': {
+    foot: 'R',
+    sm: 4,
+    wf: 4,
+    attrs: [90,90,81,85,84,80,75,60,71,72,72,82,64,64,84,84,78,86,84,79,45,85,45,59,64,95,85,88,64],
+  },
+};
+
+export function otwCardMeta(id: string): CardMeta | null {
+  return toCardMeta(OTW_META[id]);
+}
+
 export function playerCardMeta(id: string): CardMeta | null {
   return toCardMeta(heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
 }
