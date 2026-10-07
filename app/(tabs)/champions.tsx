@@ -16,7 +16,7 @@ import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { FORMATIONS, formationById } from '@/lib/chemistry';
 
 type IconName = keyof typeof Ionicons.glyphMap;
-type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'tactics' | 'controller';
+type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'controller';
 
 type TekkzRole = [string, string];
 
@@ -25,7 +25,6 @@ const NAV: { id: SectionId; label: string; icon: IconName }[] = [
   { id: 'center', label: 'העמוד שלי', icon: 'trophy-outline' },
   { id: 'rewards', label: 'פרסים', icon: 'gift-outline' },
   { id: 'community', label: 'שחקני הקהילה', icon: 'people-outline' },
-  { id: 'tactics', label: 'טקטיקות והרכבים', icon: 'git-network-outline' },
   { id: 'controller', label: 'הגדרות שלט', icon: 'game-controller-outline' },
 ];
 
@@ -599,13 +598,12 @@ function TekkzCard({ selected }: { selected?: boolean }) {
         <View style={styles.tekkzChallenge}>
           <View style={styles.tekkzChallengeIcon}><Ionicons name="flame" size={18} color="#F3CF62" /></View>
           <View style={styles.tekkzChallengeCopy}>
-            <Text style={styles.tekkzChallengeKicker}>LATEST CHALLENGE</Text>
-            <Text style={styles.tekkzChallengeTitle}>15-0 · BRONZE SQUAD</Text>
-            <Text style={styles.tekkzChallengeText}>הסרטון/אתגר שסיפקת לפרופיל של TEKKZ: 15-0 עם קבוצת ברונזה.</Text>
+            <Text style={styles.tekkzChallengeKicker}>הישג אחרון</Text>
+            <Text style={styles.tekkzChallengeTitle}>15-0 · קבוצת ברונזה</Text>
+            <Text style={styles.tekkzChallengeText}>מאזן מושלם של 15 ניצחונות מתוך 15 משחקים עם קבוצת ברונזה.</Text>
           </View>
         </View>
-        <Text style={styles.sourceNote}>מקור הטקטיקה: FUTSettings · קוד GJgwMwH%QEao</Text>
-        <View style={styles.tekkzMiniMeta}>
+                <View style={styles.tekkzMiniMeta}>
           <View style={styles.tekkzMiniMetaItem}><Ionicons name="git-network-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>TACTICS</Text></View>
           <View style={styles.tekkzMiniMetaItem}><Ionicons name="flame-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>15-0 CHALLENGE</Text></View>
           <View style={styles.tekkzMiniMetaItem}><Ionicons name="person-circle-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>PRO PROFILE</Text></View>
@@ -962,8 +960,7 @@ export default function ChampionsScreen() {
                 <Text style={styles.tekkzDetailsKicker}>TACTICAL DNA</Text>
                 <Text style={styles.tekkzDetailsTitle}>4-4-1-1 (2)</Text>
                 <Text style={styles.tekkzDetailsSub}>Short Passing · High · Line Height 65</Text>
-                <Text style={styles.sourceNote}>FUTSettings · GJgwMwH%QEao</Text>
-              </View>
+                              </View>
               <View style={styles.tekkzDetailsPills}>
                 <View style={styles.detailPill}><Text style={styles.detailPillValue}>Short Passing</Text><Text style={styles.detailPillLabel}>BUILD UP</Text></View>
                 <View style={styles.detailPill}><Text style={styles.detailPillValue}>High</Text><Text style={styles.detailPillLabel}>DEFENSIVE APPROACH</Text></View>
@@ -1132,39 +1129,6 @@ export default function ChampionsScreen() {
               </Panel>
             );
           }) : <EmptyCommunity />}
-        </View>
-      );
-    }
-
-    if (section === 'tactics') {
-      const selectedFormationData = FORMATIONS.find((item) => item.label === formation) ?? FORMATIONS[0];
-      return (
-        <View style={styles.contentStack}>
-          <SectionHeading icon="git-network-outline" eyebrow="TACTICS LAB" title="טקטיקות והרכבים"
-            subtitle="בחר מערך מתוך חלון מסודר. המגרש מתחלף מיד לפי המערך שבחרת." />
-          <Panel>
-            <View style={[styles.tacticsHero, mobile && styles.oneCol]}>
-              <View style={styles.tacticsPitchWrap}><MiniPitch formation={formation} /></View>
-              <View style={styles.tacticsControls}>
-                <Text style={styles.tacticsKicker}>ACTIVE FORMATION</Text>
-                <Text style={styles.tacticsBigTitle}>{selectedFormationData.label}</Text>
-                <Text style={styles.tacticsBody}>אין יותר רשימה אופקית. לוחצים על בחירת מערך ונפתח חלון נקי עם כל המערכים, בלי לגעת בכותרת או בהסבר.</Text>
-                <Pressable style={styles.formationSelectCard} onPress={() => setFormationPickerOpen(true)}>
-                  <View style={styles.formationSelectCopy}>
-                    <Text style={styles.formationSelectLabel}>FORMATION</Text>
-                    <Text style={styles.formationSelectValue}>{selectedFormationData.label}</Text>
-                  </View>
-                  <Ionicons name="chevron-down" size={18} color="#F4CF64" />
-                </Pressable>
-                <Text style={styles.tacticsControlLabel}>BUILD-UP STYLE</Text>
-                <View style={styles.selectorRow}>{BUILD_UP_STYLES.map((item) => <Pressable key={item} onPress={() => setBuildUp(item)} style={[styles.selectorChip, buildUp === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
-                <Text style={styles.tacticsControlLabel}>DEFENSIVE APPROACH</Text>
-                <View style={styles.selectorRow}>{DEFENSIVE_APPROACHES.map((item) => <Pressable key={item} onPress={() => setDefensive(item)} style={[styles.selectorChip, defensive === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
-                <Text style={styles.tacticsControlLabel}>LINE HEIGHT · {lineHeight}</Text>
-                <View style={styles.selectorRow}>{['40','50','60','70','80'].map((item) => <Pressable key={item} onPress={() => setLineHeight(item)} style={[styles.selectorChip, lineHeight === item && styles.selectorChipActive]}><Text style={styles.selectorChipText}>{item}</Text></Pressable>)}</View>
-              </View>
-            </View>
-          </Panel>
         </View>
       );
     }
