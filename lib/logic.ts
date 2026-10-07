@@ -183,7 +183,7 @@ export function toggleFutLike(db: Database, postId: string) {
   else db.futLikes.push({ postId, userId: user.id });
 }
 
-export function addComment(db: Database, input: NewComment): boolean {
+export function addComment(db: Database, input: NewComment & { parentId?: string | null }): boolean {
   const user = mustUser(db);
   const body = input.body.trim();
   if (body.length > 120) throw new Error('תגובה יכולה להכיל עד 120 תווים');
@@ -199,6 +199,7 @@ export function addComment(db: Database, input: NewComment): boolean {
     preset: input.preset,
     body,
     status,
+    parentId: input.parentId ?? null,
     createdAt: nowIso(),
   });
   return status === 'hidden_pending';
@@ -208,6 +209,15 @@ function targetExists(db: Database, type: NewComment['targetType'], id: string):
   if (type === 'fut_post') return db.futPosts.some((item) => item.id === id);
   if (type === 'career_submission') return db.careerSubmissions.some((item) => item.id === id && item.status === 'approved');
   return db.sbcSolutions.some((item) => item.id === id && item.status === 'approved');
+}
+
+export function toggleCommentLike(db: Database, commentId: string) {
+  const user = mustUser(db);
+  if (!db.comments.some((item) => item.id === commentId)) throw new Error('התגובה לא נמצאה');
+  if (!db.commentLikes) db.commentLikes = [];
+  const index = db.commentLikes.findIndex((like) => like.commentId === commentId && like.userId === user.id);
+  if (index >= 0) db.commentLikes.splice(index, 1);
+  else db.commentLikes.push({ commentId, userId: user.id });
 }
 
 export function reportComment(db: Database, commentId: string) {
