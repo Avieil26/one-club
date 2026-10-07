@@ -1,6 +1,6 @@
 import { destinedEdition } from '@/lib/destinedEditions';
 import { DB_PLAYERS } from '@/lib/playerDb';
-import { totwFor } from '@/lib/specialCards';
+import { otwFor, totwFor } from '@/lib/specialCards';
 
 export type PlayStyle = { name: string; plus: boolean };
 
@@ -16,7 +16,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw';
+  edition?: 'destined' | 'hero' | 'totw' | 'otw';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
@@ -160,6 +160,25 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         league: promo.league || player.league,
       });
     }
+    const otw = otwFor(player.id);
+    if (otw) {
+      cards.push({
+        ...player,
+        id: `${player.id}--otw`,
+        edition: 'otw',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        rating: otw.rating,
+        position: otw.position,
+        face: otw.face,
+        ...(otw.positions?.length ? { positions: otw.positions } : {}),
+        ...(otw.playstyles?.length ? { playstyles: otw.playstyles } : {}),
+      });
+    }
+
     const totw = totwFor(player.id);
     if (totw) {
       cards.push({
