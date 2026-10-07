@@ -72,8 +72,21 @@ create table if not exists public.comments (
   preset text check (preset in ('respect', 'nice', 'smart', 'funny')),
   body text not null default '',
   status text not null check (status in ('visible', 'hidden_pending')),
+  parent_id uuid references public.comments(id) on delete cascade,
   created_at timestamptz not null default now()
 );
+
+create table if not exists public.comment_likes (
+  comment_id uuid not null references public.comments(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (comment_id, user_id)
+);
+
+alter table public.comment_likes enable row level security;
+drop policy if exists comment_likes_read on public.comment_likes;
+create policy comment_likes_read on public.comment_likes for select to authenticated using (true);
+grant select on public.comment_likes to authenticated;
 
 create table if not exists public.grounds_posts (
   id uuid primary key default gen_random_uuid(),
