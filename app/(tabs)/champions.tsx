@@ -280,6 +280,7 @@ function FormationPickerModal({
 }) {
   const { width } = useWindowDimensions();
   const mobile = width < 720;
+  if (!visible) return null;
   return (
     <View style={styles.modalBackdrop}>
         <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
