@@ -768,7 +768,7 @@ export default function ChampionsScreen() {
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
             <View style={styles.rewardMiniGrid}>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
-              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{reward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
+              <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{personalReward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(run.cqp)}</Text><Text style={styles.rewardMiniLabel}>MY CQP</Text></View>
             </View>
           </Panel>
@@ -786,11 +786,13 @@ export default function ChampionsScreen() {
     editingRun,
     form,
     mobile,
+    personalReward,
     platform,
-    reward,
     run,
     saving,
     section,
+    selectedReward,
+    selectedWins,
   ]);
 
   if (!canView) {
