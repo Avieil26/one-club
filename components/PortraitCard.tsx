@@ -68,7 +68,7 @@ const DESTINED_REMOTE_FALLBACK: Record<string, string> = {
 };
 
 const OTW_REMOTE_ART: Record<string, string> = {
-  'ea-264947-nicole-anyomi': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50596595.webp',
+  'ea-264947-nicole-anyomi': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50596595.acf6c24bd5d6e98a42d8e80d4757d6a74bf7ce8d8ff9dce9c0e0cb2bd39ca702.webp',
 };
 
 const DESTINED_RATIO = 1152 / 864;
