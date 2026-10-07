@@ -143,9 +143,9 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
             writingDirection: hasAmount ? 'ltr' : 'rtl',
           }}
         >
-          {amount ? coins(amount) : 'אין מחיר'}
+          {hasAmount ? coins(amount as number) : 'אין מחיר'}
         </Text>
-        {amount ? <Coin size={compact ? 18 : 24} /> : null}
+        {hasAmount ? <Coin size={compact ? 18 : 24} /> : null}
       </View>
     </View>
   );
