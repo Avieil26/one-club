@@ -155,6 +155,91 @@ function webRimStyle() {
   return { filter: `url("${base}#totw-rim")` } as object;
 }
 
+function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
+  const height = Math.round(width * TOTW_RATIO);
+  const id = player.baseId ?? player.id;
+  const media = playerMedia(id);
+  const face = player.face ?? media.face;
+  const stats = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const name = surname(media.en || player.name || id);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: width * 0.08,
+        backgroundColor: '#111018',
+        shadowColor: '#C084FC',
+        shadowOpacity: 0.78,
+        shadowRadius: 11,
+        shadowOffset: { width: 0, height: 5 },
+        elevation: 10,
+      }}
+    >
+      <Image
+        source={require('@/assets/images/cards/totw-shell.png')}
+        resizeMode="stretch"
+        style={{ position: 'absolute', inset: 0, width, height }}
+      />
+      {!failed && media.photo ? (
+        <Image
+          source={{ uri: media.photo }}
+          resizeMode="cover"
+          onError={() => setFailed(true)}
+          accessibilityIgnoresInvertColors
+          style={{
+            position: 'absolute',
+            left: width * 0.19,
+            top: height * 0.07,
+            width: width * 0.62,
+            height: height * 0.48,
+            transform: [{ scale: 1.06 }],
+          }}
+        />
+      ) : null}
+      <LinearGradient
+        colors={['transparent', 'rgba(9,7,14,0.18)', '#09070E']}
+        locations={[0.38, 0.66, 1]}
+        style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
+      />
+      <View style={{ position: 'absolute', top: height * 0.12, left: width * 0.11, zIndex: 4 }}>
+        <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, width * 0.19), lineHeight: Math.max(16, width * 0.19), fontWeight: '900' }}>{player.rating}</Text>
+        <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, width * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+      </View>
+      <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
+        <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
+      </View>
+      <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
+        <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
+        <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
+        <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+      </View>
+      <View style={{ position: 'absolute', left: width * 0.055, right: width * 0.055, bottom: height * 0.10, flexDirection: 'row', zIndex: 6 }}>
+        {stats.map(([label, value]) => (
+          <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ color: '#C084FC', fontSize: Math.max(5, width * 0.04), fontWeight: '800' }}>{label}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.061), fontWeight: '900' }}>{value ?? '·'}</Text>
+          </View>
+        ))}
+      </View>
+      <View style={{ position: 'absolute', bottom: height * 0.035, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+        <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
+      </View>
+    </View>
+  );
+}
+
 function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number; width: number; glow?: boolean; sign?: string }) {
   const height = Math.round(width * TOTW_RATIO);
   const card = (
@@ -467,6 +552,7 @@ export function PortraitCard({
       const autograph = glow && totwFinish(artId) === 'pristine' ? surname(player.en || player.name || '') : '';
       return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} />;
     }
+    return <DynamicTotwPortraitCard player={player} width={width} />;
   }
   if (shownEdition === 'hero') {
     const heroArt = HERO_ART[player.id];
