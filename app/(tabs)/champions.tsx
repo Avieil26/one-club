@@ -762,11 +762,6 @@ export default function ChampionsScreen() {
 
     if (!communityResult.error) setCommunity((communityResult.data ?? []) as CommunityItem[]);
     if (!myContentResult.error) setMyContent((myContentResult.data ?? []) as CommunityItem[]);
-    if (!profileResult.error && profileResult.data) {
-      const profile = profileResult.data as any;
-      setControllerSettings((profile.controller_settings ?? {}) as Partial<Record<ControllerSettingKey, string>>);
-      if (profile.controller_platform === 'xbox' || profile.controller_platform === 'ps5') setPlatform(profile.controller_platform);
-    }
   }
 
   useEffect(() => {
