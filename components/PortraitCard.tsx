@@ -33,20 +33,38 @@ const DESTINED_ART: Record<string, number> = {
   'ea-241736-yann-aurel-bisseck': require('@/assets/images/cards/bisseck-destined.png'),
 };
 const DESTINED_REMOTE_ART: Record<string, string> = {
-  upamecano: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50561206.webp',
-  diani: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50559009.webp',
-  'caicedo-w': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50604801.webp',
-  mbeumo: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67351878.webp',
-  lookman: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50562547.webp',
-  haaland: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67347949.webp',
-  kiwior: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50597341.webp',
-  'ea-275029-ibrahim-maza': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50606677.webp',
-  gordon: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67351828.webp',
-  'ea-277846-nico-paz': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67386710.webp',
-  'ea-223697-robin-gosens': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50555345.webp',
-  cucurella: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50570879.webp',
-  mckennie: 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-67347608.webp',
-  'ea-254121-charlie-cresswell': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto/2026/player-item-social-small/27-50585769.webp',
+  'upamecano': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50561206.webp',
+  'diani': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50559009.webp',
+  'caicedo-w': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50604801.webp',
+  'mbeumo': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50574662.webp',
+  'lookman': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50562547.webp',
+  'haaland': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570733.webp',
+  'kiwior': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50597341.webp',
+  'ea-275029-ibrahim-maza': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50606677.webp',
+  'gordon': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50574612.webp',
+  'ea-277846-nico-paz': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50609494.webp',
+  'ea-223697-robin-gosens': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50555345.webp',
+  'ea-270857-mateus-fernandes': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50602505.webp',
+  'cucurella': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570879.webp',
+  'mckennie': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570392.webp',
+  'ea-254121-charlie-cresswell': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50585769.webp',
+};
+const DESTINED_REMOTE_FALLBACK: Record<string, string> = {
+  'upamecano': 'https://assets.fodder.gg/renders/50561206.webp',
+  'diani': 'https://assets.fodder.gg/renders/50559009.webp',
+  'caicedo-w': 'https://assets.fodder.gg/renders/50604801.webp',
+  'mbeumo': 'https://assets.fodder.gg/renders/50574662.webp',
+  'lookman': 'https://assets.fodder.gg/renders/50562547.webp',
+  'haaland': 'https://assets.fodder.gg/renders/50570733.webp',
+  'kiwior': 'https://assets.fodder.gg/renders/50597341.webp',
+  'ea-275029-ibrahim-maza': 'https://assets.fodder.gg/renders/50606677.webp',
+  'gordon': 'https://assets.fodder.gg/renders/50574612.webp',
+  'ea-277846-nico-paz': 'https://assets.fodder.gg/renders/50609494.webp',
+  'ea-223697-robin-gosens': 'https://assets.fodder.gg/renders/50555345.webp',
+  'ea-270857-mateus-fernandes': 'https://assets.fodder.gg/renders/50602505.webp',
+  'cucurella': 'https://assets.fodder.gg/renders/50570879.webp',
+  'mckennie': 'https://assets.fodder.gg/renders/50570392.webp',
+  'ea-254121-charlie-cresswell': 'https://assets.fodder.gg/renders/50585769.webp',
 };
 
 const OTW_REMOTE_ART: Record<string, string> = {
@@ -195,13 +213,22 @@ function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number
   );
 }
 
-function RemoteCardArt({ uri, width }: { uri: string; width: number }) {
-  return (
+function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?: string; width: number }) {
+  const [sourceUri, setSourceUri] = useState(uri);
+  const [failed, setFailed] = useState(false);
+  const height = Math.round(width * DESTINED_RATIO);
+  return failed ? (
+    <View style={{ width, height, alignSelf: 'center' }} />
+  ) : (
     <Image
-      source={{ uri }}
+      source={{ uri: sourceUri }}
+      onError={() => {
+        if (fallbackUri && sourceUri !== fallbackUri) setSourceUri(fallbackUri);
+        else setFailed(true);
+      }}
       resizeMode="contain"
       accessibilityIgnoresInvertColors
-      style={{ width, height: Math.round(width * DESTINED_RATIO) }}
+      style={{ width, height }}
     />
   );
 }
@@ -324,7 +351,7 @@ export function PortraitCard({
   const destined = showDestined ? DESTINED_ART[artId] : undefined;
   if (destined) return <DestinedPortraitCard art={destined} width={width} />;
   const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
-  if (destinedRemote) return <RemoteCardArt uri={destinedRemote} width={width} />;
+  if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
