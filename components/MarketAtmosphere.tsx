@@ -35,11 +35,12 @@ const SCENES: Record<
     base: '#05080A',
   },
   champions: {
-    source: require('@/assets/images/scene-ultimate.png'),
-    tint: ['rgba(54,0,8,0.78)', 'rgba(132,0,12,0.54)', 'rgba(10,2,5,0.91)'],
-    wash: 'rgba(110,0,12,0.24)',
-    vignette: ['rgba(0,0,0,0.28)', 'transparent', 'transparent', 'rgba(0,0,0,0.74)'],
-    base: '#120306',
+    // Exact Champions background supplied for this Preview.
+    source: require('@/assets/images/champions-bg.jpg'),
+    tint: ['rgba(10,0,2,0.10)', 'rgba(12,0,2,0.03)', 'rgba(0,0,0,0.28)'],
+    wash: 'transparent',
+    vignette: ['rgba(0,0,0,0.10)', 'transparent', 'transparent', 'rgba(0,0,0,0.42)'],
+    base: '#090102',
   },
   grounds: {
     source: require('@/assets/images/scene-grounds.png'),
