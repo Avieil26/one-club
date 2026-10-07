@@ -309,7 +309,7 @@ function FormationPickerModal({
               <Text style={styles.modalTitle}>בחר מערך</Text>
               <Text style={styles.modalHint}>כל המערכים במקום אחד. בחר מערך והחלון ייסגר.</Text>
             </View>
-            <Pressable onPress={onClose} style={styles.modalClose}><Ionicons name="close" size={19} color="#fff" /></Pressable>
+            <Pressable onPress={onClose} style={styles.modalClose} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
           </View>
           <ScrollView style={styles.formationGridScroll} contentContainerStyle={styles.formationGrid}>
             {FORMATIONS.map((item) => (
@@ -459,7 +459,7 @@ function CommunitySquadBuilder({
             <Text style={styles.squadBuilderTitle}>בנה את הקבוצה לפוסט</Text>
             <Text style={styles.squadBuilderHint}>הקבוצה הזו שייכת לפוסט בלבד. היא לא נוגעת בקבוצה האישית שלך.</Text>
           </View>
-          <Pressable style={styles.modalClose} onPress={onClose}><Ionicons name="close" size={19} color="#fff" /></Pressable>
+          <Pressable style={styles.modalClose} onPress={onClose} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
         </View>
 
         <ScrollView style={styles.squadBuilderScroll} contentContainerStyle={styles.squadBuilderContent}>
@@ -686,7 +686,7 @@ function EmptyCommunity() {
 
 export default function ChampionsScreen() {
   const app = useApp();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const mobile = width < 900;
 
   const [section, setSection] = useState<SectionId>('center');
@@ -1211,12 +1211,13 @@ export default function ChampionsScreen() {
 
       {showComposer ? (
         <View style={styles.modalBackdrop}>
-          <Panel style={styles.composer}>
+          <Panel style={[styles.composer, { height: Math.min(height * 0.9, 760) }]}>
+
             <View style={styles.composerHeader}>
               <Text style={styles.composerTitle}>העלה טקטיקה לקהילה</Text>
-              <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
+              <Pressable style={styles.modalClose} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
             </View>
-            <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} showsVerticalScrollIndicator={false}>
+            <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} showsVerticalScrollIndicator persistentScrollbar={false}>
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
             <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
               <View style={styles.formationSelectCopy}>
@@ -1561,10 +1562,10 @@ const styles = StyleSheet.create({
   pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
   modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.88)', padding: 18, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
-  composer: { maxWidth: 620, maxHeight: '90%', width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648 },
-  composerScroll: { marginTop: 10, maxHeight: 520 },
-  composerScrollContent: { gap: 9, paddingBottom: 2 },
-  composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
+  composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648, paddingBottom: 10 },
+  composerScroll: { flex: 1, minHeight: 0, marginTop: 10 },
+  composerScrollContent: { gap: 9, paddingBottom: 22 },
+  composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 10 },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
   tekkzCard: { borderRadius: 22, borderWidth: 1, borderColor: 'rgba(239,58,71,.48)', backgroundColor: 'rgba(4,7,11,.64)', overflow: 'hidden', flexDirection: 'row-reverse', minHeight: 430 },
@@ -1663,7 +1664,8 @@ const styles = StyleSheet.create({
   formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .70, shadowRadius: 32, shadowOffset: { width: 0, height: 18 }, zIndex: 2147483648, elevation: 2147483648 },
   formationPickerMobile: { width: '96%', padding: 13 },
   modalHeaderCopy: { flex: 1, alignItems: 'flex-end' },
-  modalClose: { width: 35, height: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', alignItems: 'center', justifyContent: 'center' },
+  modalClose: { width: 35, height: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  modalCloseX: { color: '#FFFFFF', fontSize: 24, lineHeight: 27, fontWeight: '700', textAlign: 'center', marginTop: -1 },
   formationGridScroll: { marginTop: 12 },
   formationGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, paddingBottom: 8 },
   formationOption: { minHeight: 47, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0D131B', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 6 },
@@ -1679,7 +1681,7 @@ const styles = StyleSheet.create({
   modalTitle: { color: '#F5F7F9', fontSize: 22, fontWeight: '900', textAlign: 'right', marginTop: 2 },
   modalHint: { color: '#74808B', fontSize: 9, lineHeight: 14, fontWeight: '700', textAlign: 'right', marginTop: 4 },
   formationPickerOptionMobile: { width: '48.2%' },
-  communitySquadBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(221,48,65,.20)', backgroundColor: 'rgba(8,12,17,.58)', padding: 11, gap: 5, marginTop: 4 },
+  communitySquadBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(221,48,65,.20)', backgroundColor: 'rgba(8,12,17,.58)', padding: 12, gap: 7, marginTop: 4 },
   communitySquadTitle: { color: '#E9EDF1', fontSize: 12, fontWeight: '900', textAlign: 'right' },
   communitySquadHint: { color: '#727E89', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
   communitySquadSaved: { color: '#E6C969', fontSize: 8, fontWeight: '900', textAlign: 'right' },
@@ -1724,7 +1726,7 @@ const styles = StyleSheet.create({
   builderSave: { minHeight: 46, borderRadius: 12, backgroundColor: '#D53043', alignItems: 'center', justifyContent: 'center', flexDirection: 'row-reverse', gap: 6, marginTop: 3 },
   builderSaveText: { color: '#fff', fontSize: 11, fontWeight: '900' },
 
-  controllerSettingsToggle: { minHeight: 58, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(216,47,66,.22)', backgroundColor: 'rgba(10,15,21,.78)', paddingHorizontal: 12, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
+  controllerSettingsToggle: { minHeight: 54, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(216,47,66,.22)', backgroundColor: 'rgba(10,15,21,.78)', paddingHorizontal: 12, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
   controllerSettingsToggleCopy: { flex: 1, alignItems: 'flex-end' },
   controllerSettingsToggleTitle: { color: '#EFF3F5', fontSize: 11, fontWeight: '900', textAlign: 'right' },
   controllerSettingsToggleSub: { color: '#75808B', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right', marginTop: 2 },
