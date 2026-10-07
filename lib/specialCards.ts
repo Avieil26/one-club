@@ -101,6 +101,7 @@ export function otwFor(baseId: string) {
   return OTW_CARDS[baseId] ?? null;
 }
 
+/** Only truly standalone TOTW rows live here; TOTW rows with baseId are generated once by withPromoCards(). */
 export const SOLO_TOTW: FcPlayer[] = totw
   .filter((row) => Boolean(row.id) && !row.baseId)
   .map((row) => ({
@@ -114,18 +115,4 @@ export const SOLO_TOTW: FcPlayer[] = totw
     club: row.club || 'TOTW',
     edition: 'totw' as const,
     face: row.face,
-  }));
-  .filter((row) => Boolean(row.id) && (!row.baseId || row.id!.startsWith('totw4-')))
-  .map((row) => ({
-    id: row.id!,
-    name: row.name || row.en || row.id!,
-    en: row.en,
-    rating: row.rating,
-    position: row.position,
-    nation: row.nation || '',
-    league: row.league || 'TOTW',
-    club: row.club || 'TOTW',
-    edition: 'totw' as const,
-    face: row.face,
-    ...(row.id && TOTW4_BASE_IDS[row.id] ? { baseId: TOTW4_BASE_IDS[row.id] } : {}),
   }));
