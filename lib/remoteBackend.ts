@@ -104,6 +104,7 @@ type CommentRow = {
   body: string;
   status: CommentStatus;
   created_at: string;
+  parent_id?: string | null;
 };
 type GroundsRow = {
   id: string;
@@ -230,6 +231,7 @@ function mapSubmission(row: SubmissionRow): CareerSubmission {
     note: row.note,
     imageUris: row.image_uris ?? [],
     status: row.status,
+    parentId: row.parent_id ?? null,
     createdAt: row.created_at,
   };
 }
@@ -365,6 +367,12 @@ async function latestAvatars(userIds: string[]): Promise<Map<string, string>> {
   return found;
 }
 
+async function commentLikes(): Promise<{ commentId: string; userId: string }[]> {
+  const { data, error } = await getSupabase().from('comment_likes').select('comment_id, user_id');
+  if (error) return [];
+  return (data ?? []).map((row) => ({ commentId: row.comment_id as string, userId: row.user_id as string }));
+}
+
 async function squadLikes(): Promise<{ postId: string; userId: string }[]> {
   const supabase = getSupabase();
   const primary = await supabase.from('fut_likes').select('post_id, user_id');
@@ -429,6 +437,7 @@ async function readSnapshot(): Promise<Snapshot> {
         futRatings: [],
         futLikes: [],
         comments: [],
+        commentLikes: [],
         groundsPosts: [],
         sbcChallenges: mergeOfficialSbcs([]),
         sbcSolutions: [],
@@ -487,7 +496,7 @@ async function readSnapshot(): Promise<Snapshot> {
       profiles = [...profiles, demoProfile];
     }
   }
-  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, uploaded, directMessages] =
+  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, commentLikeRows, uploaded, directMessages] =
     await Promise.all([
       rows<ChallengeRow>('career_challenges'),
       rows<SubmissionRow>('career_submissions'),
@@ -500,6 +509,7 @@ async function readSnapshot(): Promise<Snapshot> {
       rows<WorkedRow>('sbc_worked'),
       rowsOptional<WorkedRow>('sbc_failed'),
       squadLikes(),
+      commentLikes(),
       latestAvatars(profiles.map((profile) => profile.id)),
       messageRows(),
     ]);
@@ -527,6 +537,7 @@ async function readSnapshot(): Promise<Snapshot> {
     futRatings: ratings.map(mapRating),
     futLikes: likes,
     comments: comments.map(mapComment),
+    commentLikes: commentLikeRows,
     groundsPosts: grounds.map(mapGrounds),
     sbcChallenges: sbcChallenges.length ? mergeOfficialSbcs(sbcChallenges.map(mapSbc)) : seed.sbcChallenges,
     sbcSolutions: solutions
@@ -693,12 +704,17 @@ export function createRemoteBackend(): Backend {
       }
       return readSnapshot();
     },
-    async addComment(input: NewComment) {
+    async toggleCommentLike(commentId) {
+      await call('toggle_comment_like', { p_comment: commentId });
+      return readSnapshot();
+    },
+    async addComment(input: NewComment & { parentId?: string | null }) {
       const { data, error } = await getSupabase().rpc('add_comment', {
         p_target_type: input.targetType,
         p_target: input.targetId,
         p_preset: input.preset,
         p_body: input.body,
+        p_parent: input.parentId ?? null,
       });
       if (error) fail(error);
       return { snap: await readSnapshot(), held: data === 'held' };
