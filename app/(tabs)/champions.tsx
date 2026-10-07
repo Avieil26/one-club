@@ -123,7 +123,7 @@ const TOKEN_STORE: TokenReward[] = [
   { title: '10x 83+ Gold Players Pack', details: '10 Gold Player Items rated 83+', tokens: 75, visual: 'gold', packLabel: '83+', tradeable: true },
   { title: '10x 84+ Gold Players Pack', details: '10 Gold Player Items rated 84+', tokens: 100, visual: 'gold', packLabel: '84+', tradeable: false },
   { title: '1 of 5 82+ FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3 rated 82+', tokens: 100, visual: 'pick', packLabel: '82+ TOTW', tradeable: false },
-  { title: 'Frontline Flair', details: 'Evolution · 1 purchase', tokens: 100, visual: null, tradeable: false },
+  { title: 'Frontline Flair', details: 'Evolution · 1 purchase', tokens: 100, tradeable: false },
   { title: '5x 86+ Gold Players Pack', details: '5 Gold Player Items rated 86+', tokens: 125, visual: 'gold-jumbo', packLabel: '86+', tradeable: false },
   { title: '3x 88+ Gold Players Pack', details: '3 Gold Player Items rated 88+', tokens: 200, visual: 'gold-giant', packLabel: '88+', tradeable: true },
   { title: 'Uppercut Jump Punch', details: 'Cosmetic · 1 purchase', tokens: 15, visual: null, tradeable: false },
