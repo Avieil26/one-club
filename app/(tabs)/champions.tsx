@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,11 +17,11 @@ type TekkzRole = [string, string];
 
 const NAV: { id: SectionId; label: string; icon: IconName }[] = [
   { id: 'tekkz', label: 'TEKKZ Pro', icon: 'star-outline' },
-  { id: 'center', label: '׳”׳¢׳׳•׳“ ׳©׳׳™', icon: 'trophy-outline' },
-  { id: 'rewards', label: '׳₪׳¨׳¡׳™׳', icon: 'gift-outline' },
-  { id: 'community', label: '׳©׳—׳§׳ ׳™ ׳”׳§׳”׳™׳׳”', icon: 'people-outline' },
-  { id: 'tactics', label: '׳˜׳§׳˜׳™׳§׳•׳× ׳•׳”׳¨׳›׳‘׳™׳', icon: 'git-network-outline' },
-  { id: 'controller', label: '׳”׳’׳“׳¨׳•׳× ׳©׳׳˜', icon: 'game-controller-outline' },
+  { id: 'center', label: 'העמוד שלי', icon: 'trophy-outline' },
+  { id: 'rewards', label: 'פרסים', icon: 'gift-outline' },
+  { id: 'community', label: 'שחקני הקהילה', icon: 'people-outline' },
+  { id: 'tactics', label: 'טקטיקות והרכבים', icon: 'git-network-outline' },
+  { id: 'controller', label: 'הגדרות שלט', icon: 'game-controller-outline' },
 ];
 
 const TEKKZ_IMAGE_URL =
@@ -33,12 +33,12 @@ const TEKKZ_ROLES: TekkzRole[] = [
   ['CB', 'Defend'],
   ['CB', 'Defend'],
   ['LB', 'Balanced'],
-  ['RM', 'Inside Forward ֲ· Balanced'],
-  ['CM', 'Deep-Lying Playmaker ֲ· Build-Up'],
-  ['CM', 'Deep-Lying Playmaker ֲ· Build-Up'],
-  ['LM', 'Inside Forward ֲ· Balanced'],
-  ['CAM', 'Playmaker ֲ· Balanced'],
-  ['ST', 'Advanced Forward ֲ· Attack'],
+  ['RM', 'Inside Forward · Balanced'],
+  ['CM', 'Deep-Lying Playmaker · Build-Up'],
+  ['CM', 'Deep-Lying Playmaker · Build-Up'],
+  ['LM', 'Inside Forward · Balanced'],
+  ['CAM', 'Playmaker · Balanced'],
+  ['ST', 'Advanced Forward · Attack'],
 ];
 
 const CONTROLLER_ROWS = [
@@ -94,7 +94,7 @@ type TokenReward = {
 };
 
 const REWARD_TIERS: RewardTier[] = [
-  { wins: 0, rank: '׳׳ ׳׳“׳•׳¨׳’', coins: 0, tokens: 0, cqp: 0 },
+  { wins: 0, rank: 'לא מדורג', coins: 0, tokens: 0, cqp: 0 },
   { wins: 1, rank: 'Contender V', coins: 0, tokens: 15, cqp: 0 },
   { wins: 2, rank: 'Contender IV', coins: 0, tokens: 20, cqp: 50 },
   { wins: 3, rank: 'Contender III', coins: 0, tokens: 30, cqp: 100 },
@@ -126,11 +126,11 @@ const TOKEN_STORE: TokenReward[] = [
   { title: '10x 83+ Gold Players Pack', details: '10 Gold Player Items rated 83+', tokens: 75, visual: 'gold', packLabel: '83+', tradeable: true },
   { title: '10x 84+ Gold Players Pack', details: '10 Gold Player Items rated 84+', tokens: 100, visual: 'gold', packLabel: '84+', tradeable: false },
   { title: '1 of 5 82+ FUT Champions TOTW 3 Player Pick', details: 'Choose 1 of 5 FUT Champions TOTW 3 rated 82+', tokens: 100, visual: 'pick', packLabel: '82+ TOTW', tradeable: false },
-  { title: 'Frontline Flair', details: 'Evolution ֲ· 1 purchase', tokens: 100, tradeable: false },
+  { title: 'Frontline Flair', details: 'Evolution · 1 purchase', tokens: 100, tradeable: false },
   { title: '5x 86+ Gold Players Pack', details: '5 Gold Player Items rated 86+', tokens: 125, visual: 'gold-jumbo', packLabel: '86+', tradeable: false },
   { title: '3x 88+ Gold Players Pack', details: '3 Gold Player Items rated 88+', tokens: 200, visual: 'gold-giant', packLabel: '88+', tradeable: true },
-  { title: 'Uppercut Jump Punch', details: 'Cosmetic ֲ· 1 purchase', tokens: 15, tradeable: false },
-  { title: 'FC24 TBD', details: 'Cosmetic reward ֲ· 1 purchase', tokens: 25, tradeable: false },
+  { title: 'Uppercut Jump Punch', details: 'Cosmetic · 1 purchase', tokens: 15, tradeable: false },
+  { title: 'FC24 TBD', details: 'Cosmetic reward · 1 purchase', tokens: 25, tradeable: false },
 ];
 
 function rewardForWins(wins: number) {
@@ -265,24 +265,24 @@ function TekkzCard({ selected }: { selected?: boolean }) {
             <Ionicons name="checkmark-circle" size={14} color="#6ADD9C" />
             <Text style={styles.verifyBadgeText}>VERIFIED PRO SOURCE</Text>
           </View>
-          <Text style={styles.proBadgeText}>DH TEKKZ ֲ· FC27</Text>
+          <Text style={styles.proBadgeText}>DH TEKKZ · FC27</Text>
         </View>
-        <Text style={styles.tekkzCardTitle}>׳”ײ¾Champions setup ׳©׳ TEKKZ</Text>
-        <Text style={styles.tekkzCardSub}>4-4-1-1 (2) ֲ· Short Passing ֲ· High ֲ· Line Height 65</Text>
+        <Text style={styles.tekkzCardTitle}>ה־Champions setup של TEKKZ</Text>
+        <Text style={styles.tekkzCardSub}>4-4-1-1 (2) · Short Passing · High · Line Height 65</Text>
         <View style={styles.tekkzFactRow}>
           <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>4-4-1-1 (2)</Text><Text style={styles.tekkzFactLabel}>FORMATION</Text></View>
           <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>Short Passing</Text><Text style={styles.tekkzFactLabel}>BUILD UP</Text></View>
-          <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>High ֲ· 65</Text><Text style={styles.tekkzFactLabel}>DEFENSIVE LINE</Text></View>
+          <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>High · 65</Text><Text style={styles.tekkzFactLabel}>DEFENSIVE LINE</Text></View>
         </View>
         <View style={styles.tekkzChallenge}>
           <View style={styles.tekkzChallengeIcon}><Ionicons name="flame" size={18} color="#F3CF62" /></View>
           <View style={styles.tekkzChallengeCopy}>
             <Text style={styles.tekkzChallengeKicker}>LATEST CHALLENGE</Text>
-            <Text style={styles.tekkzChallengeTitle}>15-0 ֲ· BRONZE SQUAD</Text>
-            <Text style={styles.tekkzChallengeText}>׳”׳¡׳¨׳˜׳•׳/׳׳×׳’׳¨ ׳©׳¡׳™׳₪׳§׳× ׳׳₪׳¨׳•׳₪׳™׳ ׳©׳ TEKKZ: 15-0 ׳¢׳ ׳§׳‘׳•׳¦׳× ׳‘׳¨׳•׳ ׳–׳”.</Text>
+            <Text style={styles.tekkzChallengeTitle}>15-0 · BRONZE SQUAD</Text>
+            <Text style={styles.tekkzChallengeText}>הסרטון/אתגר שסיפקת לפרופיל של TEKKZ: 15-0 עם קבוצת ברונזה.</Text>
           </View>
         </View>
-        <Text style={styles.sourceNote}>׳׳§׳•׳¨ ׳”׳˜׳§׳˜׳™׳§׳”: FUTSettings ֲ· ׳§׳•׳“ GJgwMwH%QEao</Text>
+        <Text style={styles.sourceNote}>מקור הטקטיקה: FUTSettings · קוד GJgwMwH%QEao</Text>
         <View style={styles.tekkzMiniMeta}>
           <View style={styles.tekkzMiniMetaItem}><Ionicons name="git-network-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>TACTICS</Text></View>
           <View style={styles.tekkzMiniMetaItem}><Ionicons name="flame-outline" size={14} color="#818B95" /><Text style={styles.tekkzMiniMetaText}>15-0 CHALLENGE</Text></View>
@@ -359,9 +359,9 @@ function EmptyCommunity() {
       <View style={styles.emptyIcon}>
         <Ionicons name="people-outline" size={25} color="#68737D" />
       </View>
-      <Text style={styles.emptyTitle}>׳©׳—׳§׳ ׳™ ׳”׳§׳”׳™׳׳”</Text>
-      <Text style={styles.emptyText}>׳›׳¨׳’׳¢ ׳׳™׳ ׳©׳—׳§׳ ׳™ ׳§׳”׳™׳׳” ׳׳• ׳˜׳§׳˜׳™׳§׳•׳× ׳©׳”׳•׳¢׳׳• ׳•׳׳•׳©׳¨׳•.</Text>
-      <Text style={styles.emptyHint}>׳›׳©׳©׳—׳§׳ ׳™׳¢׳׳” ׳×׳•׳›׳ ׳•׳™׳׳•׳©׳¨, ׳”׳•׳ ׳™׳•׳₪׳™׳¢ ׳›׳׳.</Text>
+      <Text style={styles.emptyTitle}>שחקני הקהילה</Text>
+      <Text style={styles.emptyText}>כרגע אין שחקני קהילה או טקטיקות שהועלו ואושרו.</Text>
+      <Text style={styles.emptyHint}>כששחקן יעלה תוכן ויאושר, הוא יופיע כאן.</Text>
     </Panel>
   );
 }
@@ -455,7 +455,7 @@ export default function ChampionsScreen() {
     const cqp = Math.max(0, Number(draftCqp) || 0);
 
     if (matchesPlayed > 15 || wins + losses > 15) {
-      Alert.alert('׳ ׳×׳•׳ ׳™׳ ׳׳ ׳×׳§׳™׳ ׳™׳', 'WINS + LOSSES ׳—׳™׳™׳‘׳™׳ ׳׳”׳™׳•׳× ׳¢׳“ 15.');
+      Alert.alert('נתונים לא תקינים', 'WINS + LOSSES חייבים להיות עד 15.');
       return;
     }
 
@@ -475,7 +475,7 @@ export default function ChampionsScreen() {
     setSaving(false);
 
     if (error) {
-      Alert.alert('׳”׳©׳׳™׳¨׳” ׳ ׳›׳©׳׳”', '׳׳ ׳”׳¦׳׳—׳ ׳• ׳׳©׳׳•׳¨ ׳׳× ׳ ׳×׳•׳ ׳™ ׳”ײ¾Champions ׳©׳׳.');
+      Alert.alert('השמירה נכשלה', 'לא הצלחנו לשמור את נתוני ה־Champions שלך.');
       return;
     }
 
@@ -485,12 +485,12 @@ export default function ChampionsScreen() {
 
   async function publish() {
     if (!app.user?.id) {
-      Alert.alert('׳¦׳¨׳™׳ ׳׳”׳×׳—׳‘׳¨', '׳›׳“׳™ ׳׳”׳¢׳׳•׳× ׳×׳•׳›׳ ׳¦׳¨׳™׳ ׳׳”׳×׳—׳‘׳¨.');
+      Alert.alert('צריך להתחבר', 'כדי להעלות תוכן צריך להתחבר.');
       return;
     }
 
     if (title.trim().length < 2 || body.trim().length < 2) {
-      Alert.alert('׳—׳¡׳¨ ׳×׳•׳›׳', '׳׳׳ ׳›׳•׳×׳¨׳× ׳•׳”׳¡׳‘׳¨ ׳§׳¦׳¨.');
+      Alert.alert('חסר תוכן', 'מלא כותרת והסבר קצר.');
       return;
     }
 
@@ -510,7 +510,7 @@ export default function ChampionsScreen() {
     setSaving(false);
 
     if (error) {
-      Alert.alert('׳”׳¢׳׳׳” ׳ ׳›׳©׳׳”', '׳ ׳¡׳” ׳©׳•׳‘.');
+      Alert.alert('העלאה נכשלה', 'נסה שוב.');
       return;
     }
 
@@ -518,7 +518,7 @@ export default function ChampionsScreen() {
     setBody('');
     setFormation('4-4-1-1 (2)');
     setShowComposer(false);
-    Alert.alert('׳ ׳©׳׳— ׳׳‘׳“׳™׳§׳”', '׳”׳˜׳§׳˜׳™׳§׳” ׳×׳•׳₪׳™׳¢ ׳‘׳§׳”׳™׳׳× Champions ׳¨׳§ ׳׳׳—׳¨ ׳׳™׳©׳•׳¨.');
+    Alert.alert('נשלח לבדיקה', 'הטקטיקה תופיע בקהילת Champions רק לאחר אישור.');
   }
 
   const selectedReward = rewardForWins(selectedWins);
@@ -533,16 +533,16 @@ export default function ChampionsScreen() {
     if (section === 'tekkz') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="׳”׳₪׳¨׳•׳₪׳™׳ ׳©׳ TEKKZ"
-            subtitle="׳›׳׳ ׳ ׳׳¦׳׳™׳ ׳¨׳§ ׳”׳ ׳×׳•׳ ׳™׳ ׳©׳ TEKKZ. ׳”׳׳׳–׳, ׳”ײ¾CQP ׳•׳”ײ¾Progress ׳©׳׳ ׳ ׳׳¦׳׳™׳ ׳‘׳´׳”׳¢׳׳•׳“ ׳©׳׳™׳´." />
+          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="הפרופיל של TEKKZ"
+            subtitle="כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״." />
           <TekkzCard selected />
           <Panel style={styles.tekkzDetailsPanel}>
             <View style={[styles.tekkzDetailsGrid, mobile && styles.columnOnMobile]}>
               <View style={styles.tekkzDetailsCopy}>
                 <Text style={styles.tekkzDetailsKicker}>TACTICAL DNA</Text>
                 <Text style={styles.tekkzDetailsTitle}>4-4-1-1 (2)</Text>
-                <Text style={styles.tekkzDetailsSub}>Short Passing ֲ· High ֲ· Line Height 65</Text>
-                <Text style={styles.sourceNote}>FUTSettings ֲ· GJgwMwH%QEao</Text>
+                <Text style={styles.tekkzDetailsSub}>Short Passing · High · Line Height 65</Text>
+                <Text style={styles.sourceNote}>FUTSettings · GJgwMwH%QEao</Text>
               </View>
               <View style={styles.tekkzDetailsPills}>
                 <View style={styles.detailPill}><Text style={styles.detailPillValue}>Short Passing</Text><Text style={styles.detailPillLabel}>BUILD UP</Text></View>
@@ -558,13 +558,13 @@ export default function ChampionsScreen() {
     if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="׳”׳₪׳¨׳¡׳™׳ ׳׳₪׳™ ׳׳¡׳₪׳¨ ׳”׳ ׳™׳¦׳—׳•׳ ׳•׳×"
-            subtitle="׳‘׳—׳¨ ׳׳¡׳₪׳¨ ׳ ׳™׳¦׳—׳•׳ ׳•׳×. ׳”׳‘׳—׳™׳¨׳” ׳”׳™׳ ׳×׳¦׳•׳’׳” ׳‘׳׳‘׳“ ׳•׳׳ ׳׳©׳ ׳” ׳׳× ׳”ײ¾run ׳”׳׳™׳©׳™. ׳™׳•׳¦׳’׳• Coins, CQP, Tokens ׳•׳”׳”׳¦׳¢׳•׳× ׳©׳׳×׳” ׳™׳›׳•׳ ׳׳§׳ ׳•׳×." />
+          <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
+            subtitle="בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות." />
           <Panel style={styles.rewardSelectorPanel}>
             <View style={[styles.rewardSelectorTop, mobile && styles.columnOnMobile]}>
               <View>
                 <Text style={styles.rewardSelectorKicker}>SELECT RESULT</Text>
-                <Text style={styles.rewardSelectorTitle}>{selectedWins} WINS ֲ· {selectedReward.rank}</Text>
+                <Text style={styles.rewardSelectorTitle}>{selectedWins} WINS · {selectedReward.rank}</Text>
               </View>
               <View style={styles.rewardTokensPill}>
                 <TokenIcon size={28} />
@@ -591,8 +591,8 @@ export default function ChampionsScreen() {
             <View style={[styles.storeHeader, mobile && styles.columnOnMobile]}>
               <View style={styles.storeHeaderCopy}>
                 <Text style={styles.storeKicker}>CHAMPIONS TOKEN STORE</Text>
-                <Text style={styles.storeTitleBig}>׳׳” ׳׳₪׳©׳¨ ׳׳§׳ ׳•׳× ׳¢׳ {selectedReward.tokens} Tokens</Text>
-                <Text style={styles.storeSub}>3 ׳›׳¨׳˜׳™׳¡׳™׳ ׳‘׳©׳•׳¨׳” ׳‘׳׳—׳©׳‘, ׳¢׳ Pack Art ׳׳׳™׳×׳™. ׳׳•׳¦׳’׳™׳ ׳¨׳§ ׳₪׳¨׳™׳˜׳™׳ ׳¢׳“ ׳›׳׳•׳× ׳”ײ¾Tokens ׳©׳‘׳—׳¨׳×.</Text>
+                <Text style={styles.storeTitleBig}>מה אפשר לקנות עם {selectedReward.tokens} Tokens</Text>
+                <Text style={styles.storeSub}>3 כרטיסים בשורה במחשב, עם Pack Art אמיתי. מוצגים רק פריטים עד כמות ה־Tokens שבחרת.</Text>
               </View>
               <View style={styles.bigTokenBalance}>
                 <TokenIcon size={46} />
@@ -607,7 +607,7 @@ export default function ChampionsScreen() {
             ) : (
               <View style={styles.storeEmptyBox}>
                 <TokenIcon size={36} />
-                <Text style={styles.storeEmpty}>׳׳™׳ ׳׳¡׳₪׳™׳§ Champions Tokens ׳׳”׳¦׳¢׳” ׳”׳¨׳׳©׳•׳ ׳” ׳‘׳—׳ ׳•׳×.</Text>
+                <Text style={styles.storeEmpty}>אין מספיק Champions Tokens להצעה הראשונה בחנות.</Text>
               </View>
             )}
           </Panel>
@@ -621,8 +621,8 @@ export default function ChampionsScreen() {
           <SectionHeading
             icon="game-controller-outline"
             eyebrow="CONTROLLER LAB"
-            title="׳”׳’׳“׳¨׳•׳× ׳©׳׳˜"
-            subtitle="Xbox ׳•ײ¾PlayStation ׳¢׳ ׳”׳׳•׳’׳•׳׳™׳ ׳•׳”׳ ׳›׳¡׳™׳ ׳©׳›׳‘׳¨ ׳§׳™׳™׳׳™׳ ׳‘׳׳×׳¨."
+            title="הגדרות שלט"
+            subtitle="Xbox ו־PlayStation עם הלוגואים והנכסים שכבר קיימים באתר."
           />
           <Panel>
             <View style={styles.platformRow}>
@@ -636,8 +636,8 @@ export default function ChampionsScreen() {
                 style={styles.controllerImage}
               />
               <View style={styles.controllerCopy}>
-                <Text style={styles.controllerTitle}>{platform === 'xbox' ? 'Xbox Series X|S' : 'PlayStation 5 ֲ· DualSense'}</Text>
-                <Text style={styles.controllerSub}>׳”׳’׳“׳¨׳•׳× ׳×׳—׳¨׳•׳×׳™׳•׳× ׳ײ¾FC27 ֲ· {platform === 'xbox' ? 'Xbox' : 'PlayStation'}</Text>
+                <Text style={styles.controllerTitle}>{platform === 'xbox' ? 'Xbox Series X|S' : 'PlayStation 5 · DualSense'}</Text>
+                <Text style={styles.controllerSub}>הגדרות תחרותיות ל־FC27 · {platform === 'xbox' ? 'Xbox' : 'PlayStation'}</Text>
               </View>
             </View>
             {CONTROLLER_ROWS.map(([label, value]) => (
@@ -657,14 +657,14 @@ export default function ChampionsScreen() {
           <SectionHeading
             icon="people-outline"
             eyebrow="COMMUNITY HUB"
-            title="׳©׳—׳§׳ ׳™ ׳”׳§׳”׳™׳׳”"
-            subtitle="׳¨׳§ ׳˜׳§׳˜׳™׳§׳•׳× ׳©׳׳•׳©׳¨׳• ׳׳•׳₪׳™׳¢׳•׳× ׳›׳׳. ׳‘׳”׳×׳—׳׳” ׳”׳׳–׳•׳¨ ׳ ׳©׳׳¨ ׳¨׳™׳§."
+            title="שחקני הקהילה"
+            subtitle="רק טקטיקות שאושרו מופיעות כאן. בהתחלה האזור נשאר ריק."
           />
           <View style={styles.communityHeader}>
-            <Text style={styles.communityCount}>{String(community.length)} ׳₪׳¨׳™׳˜׳™׳ ׳׳׳•׳©׳¨׳™׳</Text>
+            <Text style={styles.communityCount}>{String(community.length)} פריטים מאושרים</Text>
             {app.user ? (
               <Pressable style={styles.publishButton} onPress={() => setShowComposer(true)}>
-                <Text style={styles.publishButtonText}>׳”׳¢׳׳” ׳˜׳§׳˜׳™׳§׳”</Text>
+                <Text style={styles.publishButtonText}>העלה טקטיקה</Text>
               </Pressable>
             ) : null}
           </View>
@@ -673,7 +673,7 @@ export default function ChampionsScreen() {
               <Panel key={item.id}>
                 <Text style={styles.communityItemTitle}>{item.title}</Text>
                 <Text style={styles.communityItemMeta}>
-                  {item.formation || '׳׳׳ ׳׳¢׳¨׳'} ֲ· {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation' : item.platform}
+                  {item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation' : item.platform}
                 </Text>
                 <Text style={styles.communityItemBody}>{item.body}</Text>
               </Panel>
@@ -689,15 +689,15 @@ export default function ChampionsScreen() {
           <SectionHeading
             icon="git-network-outline"
             eyebrow="TACTICS LIBRARY"
-            title="׳˜׳§׳˜׳™׳§׳•׳× ׳•׳”׳¨׳›׳‘׳™׳"
-            subtitle="׳¨׳§ setup ׳©׳ ׳‘׳“׳§. ׳‘׳©׳׳‘ ׳”׳¨׳׳©׳•׳ ׳׳•׳¦׳’ TEKKZ, ׳•׳׳™׳“׳¢ ׳§׳”׳™׳׳×׳™ ׳׳×׳•׳•׳¡׳£ ׳¨׳§ ׳׳׳—׳¨ ׳׳™׳©׳•׳¨."
+            title="טקטיקות והרכבים"
+            subtitle="רק setup שנבדק. בשלב הראשון מוצג TEKKZ, ומידע קהילתי מתווסף רק לאחר אישור."
           />
           <Panel>
             <View style={styles.tacticsHeader}>
               <View>
-                <Text style={styles.tacticTitle}>TEKKZ ֲ· 4-4-1-1 (2)</Text>
-                <Text style={styles.tacticSub}>Short Passing ֲ· High ֲ· Line Height 65</Text>
-                <Text style={styles.sourceNote}>׳§׳•׳“: GJgwMwH%QEao ֲ· ׳׳§׳•׳¨: FUTSettings</Text>
+                <Text style={styles.tacticTitle}>TEKKZ · 4-4-1-1 (2)</Text>
+                <Text style={styles.tacticSub}>Short Passing · High · Line Height 65</Text>
+                <Text style={styles.sourceNote}>קוד: GJgwMwH%QEao · מקור: FUTSettings</Text>
               </View>
               <View style={styles.sourceBadge}>
                 <Ionicons name="checkmark-circle" size={14} color="#68E09B" />
@@ -723,21 +723,21 @@ export default function ChampionsScreen() {
         <SectionHeading
           icon="trophy-outline"
           eyebrow="MY CHAMPIONS"
-          title="׳”׳¢׳׳•׳“ ׳©׳׳™"
-          subtitle="׳›׳ ׳׳©׳×׳׳© ׳׳§׳‘׳ run ׳׳©׳׳•. ׳”׳ ׳×׳•׳ ׳™׳ ׳ ׳©׳׳¨׳™׳ ׳׳—׳©׳‘׳•׳ ׳•׳׳ ׳ ׳©׳׳¨׳™׳ ׳¨׳ ׳“׳•׳׳׳™׳™׳ ׳‘׳™׳ ׳›׳ ׳™׳¡׳•׳×."
+          title="העמוד שלי"
+          subtitle="כל משתמש מקבל run משלו. הנתונים נשמרים לחשבון ולא נשארים רנדומליים בין כניסות."
         />
 
         <Panel>
           <View style={styles.personalHeader}>
             <View>
-              <Text style={styles.personalTitle}>{app.user?.displayName || '׳”׳©׳—׳§׳ ׳©׳׳™'}</Text>
+              <Text style={styles.personalTitle}>{app.user?.displayName || 'השחקן שלי'}</Text>
               <Text style={styles.personalSub}>
-                {run.matchesPlayed} / 15 ׳׳©׳—׳§׳™׳ ֲ· Form {form >= 0 ? '+' : ''}{form} ֲ· CQP {formatCoins(run.cqp)}
+                {run.matchesPlayed} / 15 משחקים · Form {form >= 0 ? '+' : ''}{form} · CQP {formatCoins(run.cqp)}
               </Text>
             </View>
             <Pressable style={styles.editButton} onPress={() => setEditingRun((value) => !value)}>
               <Ionicons name="create-outline" size={15} color="#fff" />
-              <Text style={styles.editButtonText}>{editingRun ? '׳¡׳’׳•׳¨' : '׳¢׳“׳›׳ ׳ ׳×׳•׳ ׳™׳'}</Text>
+              <Text style={styles.editButtonText}>{editingRun ? 'סגור' : 'עדכן נתונים'}</Text>
             </Pressable>
           </View>
 
@@ -748,25 +748,25 @@ export default function ChampionsScreen() {
               <View style={styles.inputBlock}><Text style={styles.inputLabel}>MATCHES</Text><TextInput value={draftMatches} onChangeText={setDraftMatches} keyboardType="numeric" style={styles.numberInput} /></View>
               <View style={styles.inputBlock}><Text style={styles.inputLabel}>CQP</Text><TextInput value={draftCqp} onChangeText={setDraftCqp} keyboardType="numeric" style={styles.numberInput} /></View>
               <Pressable style={styles.saveRunButton} onPress={() => void saveRun()} disabled={saving}>
-                <Text style={styles.saveRunButtonText}>{saving ? '׳©׳•׳׳¨ג€¦' : '׳©׳׳•׳¨ ׳׳× ׳”ײ¾Champions ׳©׳׳™'}</Text>
+                <Text style={styles.saveRunButtonText}>{saving ? 'שומר…' : 'שמור את ה־Champions שלי'}</Text>
               </Pressable>
             </View>
           ) : null}
 
           <View style={styles.liveStats}>
             <MetricCard label="FINAL STATUS" value={run.matchesPlayed >= 15 ? 'READY' : 'LIVE'} tone="green" note={run.matchesPlayed >= 15 ? 'Finals complete' : 'Live run'} />
-            <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="׳ ׳×׳•׳ ׳—׳™ ׳©׳ ׳”׳—׳©׳‘׳•׳" />
-            <MetricCard label="׳”׳׳׳–׳ ׳©׳׳™" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' ׳”׳₪׳¡׳“׳™׳ ֲ· ' + String(run.wins) + ' ׳ ׳™׳¦׳—׳•׳ ׳•׳×'} />
+            <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="נתון חי של החשבון" />
+            <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
           </View>
         </Panel>
 
         <View style={[styles.twoCol, mobile && styles.oneCol]}>
           <Panel>
-            <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle="TEKKZ ׳”׳•׳ ׳‘׳¨׳™׳¨׳× ׳”׳׳—׳“׳ ׳¢׳“ ׳©׳™׳© ׳×׳•׳›׳ ׳§׳”׳™׳׳×׳™ ׳׳׳•׳©׳¨." />
+            <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle="TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר." />
             <TekkzCard compact />
           </Panel>
           <Panel>
-            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="׳”׳₪׳¨׳¡ ׳©׳ ׳”׳¨׳™׳¦׳”" subtitle={String(run.wins) + ' wins ֲ· ' + String(personalReward.tokens) + ' Champions Tokens'} />
+            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
             <View style={styles.rewardMiniGrid}>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{personalReward.tokens}</Text><Text style={styles.rewardMiniLabel}>TOKENS</Text></View>
@@ -801,10 +801,10 @@ export default function ChampionsScreen() {
       <Screen scene="champions" showNav>
         <Stack.Screen options={{ title: 'FUT Champions' }} />
         <View style={styles.comingSoon}>
-          <Text style={styles.comingSoonIcon}>נ†</Text>
+          <Text style={styles.comingSoonIcon}>🏆</Text>
           <Text style={styles.comingSoonTitle}>FUT Champions</Text>
-          <Text style={styles.comingSoonStatus}>׳‘׳§׳¨׳•׳‘</Text>
-          <Text style={styles.comingSoonText}>׳׳¨׳›׳– FUT Champions ׳”׳—׳“׳© ׳ ׳׳¦׳ ׳‘׳”׳›׳ ׳”.</Text>
+          <Text style={styles.comingSoonStatus}>בקרוב</Text>
+          <Text style={styles.comingSoonText}>מרכז FUT Champions החדש נמצא בהכנה.</Text>
         </View>
       </Screen>
     );
@@ -815,7 +815,7 @@ export default function ChampionsScreen() {
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.pageRoot}>
-        <Image source={require('@/assets/images/champions.jpg')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
+        <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
         <View style={styles.backgroundSoftener} pointerEvents="none" />
       <View style={styles.mainLayout}>
         <View style={styles.sidebar}>
@@ -832,7 +832,7 @@ export default function ChampionsScreen() {
         <View style={styles.main}>
           <View style={styles.sectionBar}>
             <View style={styles.sectionBarTitleWrap}>
-              <Text style={styles.sectionBarEyebrow}>FC27 ֲ· FUT CHAMPIONS</Text>
+              <Text style={styles.sectionBarEyebrow}>FC27 · FUT CHAMPIONS</Text>
               <Text style={styles.sectionBarTitle}>{NAV.find((item) => item.id === section)?.label}</Text>
             </View>
             <View style={styles.sectionBarTabs}>
@@ -855,18 +855,18 @@ export default function ChampionsScreen() {
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
-              <Text style={styles.composerTitle}>׳”׳¢׳׳” ׳˜׳§׳˜׳™׳§׳” ׳׳©׳׳</Text>
+              <Text style={styles.composerTitle}>העלה טקטיקה משלך</Text>
               <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
             </View>
-            <TextInput value={title} onChangeText={setTitle} placeholder="׳›׳•׳×׳¨׳×" placeholderTextColor="#6f7984" style={styles.textInput} />
-            <TextInput value={formation} onChangeText={setFormation} placeholder="׳׳¢׳¨׳" placeholderTextColor="#6f7984" style={styles.textInput} />
-            <TextInput value={body} onChangeText={setBody} placeholder="׳”׳¡׳‘׳¨ ׳§׳¦׳¨ ׳¢׳ ׳”׳˜׳§׳˜׳™׳§׳”" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
+            <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
+            <TextInput value={formation} onChangeText={setFormation} placeholder="מערך" placeholderTextColor="#6f7984" style={styles.textInput} />
+            <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
             <View style={styles.platformRow}>
               <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
             </View>
             <Pressable style={styles.publishConfirm} onPress={() => void publish()} disabled={saving}>
-              <Text style={styles.publishConfirmText}>{saving ? '׳©׳•׳׳¨ג€¦' : '׳©׳׳— ׳׳׳™׳©׳•׳¨'}</Text>
+              <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לאישור'}</Text>
             </Pressable>
           </Panel>
         </View>
