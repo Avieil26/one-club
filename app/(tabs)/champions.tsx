@@ -530,7 +530,7 @@ export default function ChampionsScreen() {
     if (section === 'tekkz') {
       return (
         <View style={styles.contentStack}>
-          <SectionTitle icon="star-outline" eyebrow="TEKKZ PRO" title="הפרופיל של TEKKZ"
+          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="הפרופיל של TEKKZ"
             subtitle="כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״." />
           <TekkzCard selected />
           <Panel style={styles.tekkzDetailsPanel}>
@@ -555,7 +555,7 @@ export default function ChampionsScreen() {
     if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
-          <SectionTitle icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
+          <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
             subtitle="בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות." />
           <Panel style={styles.rewardSelectorPanel}>
             <View style={[styles.rewardSelectorTop, mobile && styles.columnOnMobile]}>
@@ -1185,6 +1185,9 @@ const styles = StyleSheet.create({
   utilityRewardVisual: { alignItems: 'center', justifyContent: 'center', gap: 7 },
   utilityRewardCircle: { width: 76, height: 76, borderRadius: 38, borderWidth: 1, borderColor: 'rgba(244,207,100,.34)', backgroundColor: 'rgba(244,207,100,.08)', alignItems: 'center', justifyContent: 'center' },
   utilityRewardKind: { color: '#807A67', fontSize: 7, fontWeight: '900', letterSpacing: 1.1 },
+
+  columnOnMobile: { flexDirection: 'column' },
+  storeEmptyBox: { minHeight: 210, alignItems: 'center', justifyContent: 'center', borderRadius: 16, backgroundColor: 'rgba(4,7,11,.50)', gap: 10 },
 
 });
 
