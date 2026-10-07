@@ -126,8 +126,8 @@ const TOKEN_STORE: TokenReward[] = [
   { title: 'Frontline Flair', details: 'Evolution · 1 purchase', tokens: 100, tradeable: false },
   { title: '5x 86+ Gold Players Pack', details: '5 Gold Player Items rated 86+', tokens: 125, visual: 'gold-jumbo', packLabel: '86+', tradeable: false },
   { title: '3x 88+ Gold Players Pack', details: '3 Gold Player Items rated 88+', tokens: 200, visual: 'gold-giant', packLabel: '88+', tradeable: true },
-  { title: 'Uppercut Jump Punch', details: 'Cosmetic · 1 purchase', tokens: 15, visual: null, tradeable: false },
-  { title: 'FC24 TBD', details: 'Cosmetic reward · 1 purchase', tokens: 25, visual: null, tradeable: false },
+  { title: 'Uppercut Jump Punch', details: 'Cosmetic · 1 purchase', tokens: 15, tradeable: false },
+  { title: 'FC24 TBD', details: 'Cosmetic reward · 1 purchase', tokens: 25, tradeable: false },
 ];
 
 function rewardForWins(wins: number) {
