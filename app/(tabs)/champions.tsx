@@ -689,7 +689,7 @@ export default function ChampionsScreen() {
   const { width } = useWindowDimensions();
   const mobile = width < 900;
 
-  const [section, setSection] = useState<SectionId>('tekkz');
+  const [section, setSection] = useState<SectionId>('center');
   const [platform, setPlatform] = useState<'xbox' | 'ps5'>('xbox');
 
   // Personal run data belongs only to the signed-in account.
@@ -713,6 +713,7 @@ export default function ChampionsScreen() {
   const [squadBuilderOpen, setSquadBuilderOpen] = useState(false);
   const [composerFormationPickerOpen, setComposerFormationPickerOpen] = useState(false);
   const [controllerSettings, setControllerSettings] = useState<Partial<Record<ControllerSettingKey, string>>>({});
+  const [showControllerSettings, setShowControllerSettings] = useState(false);
   const [myContent, setMyContent] = useState<CommunityItem[]>([]);
   const [buildUp, setBuildUp] = useState<(typeof BUILD_UP_STYLES)[number]>('Balanced');
   const [defensive, setDefensive] = useState<(typeof DEFENSIVE_APPROACHES)[number]>('Balanced');
@@ -993,7 +994,7 @@ export default function ChampionsScreen() {
           <View style={styles.communityHeader}>
             <Text style={styles.communityCount}>{String(community.length)} פריטים מאושרים</Text>
             {app.user ? (
-              <Pressable style={styles.publishButton} onPress={() => { setComposerFormation(''); setCommunitySquad(null); setControllerSettings({}); setShowComposer(true); }}>
+              <Pressable style={styles.publishButton} onPress={() => { setComposerFormation(''); setCommunitySquad(null); setControllerSettings({}); setShowControllerSettings(false); setShowComposer(true); }}>
                 <Text style={styles.publishButtonText}>העלה טקטיקה</Text>
               </Pressable>
             ) : null}
@@ -1215,22 +1216,21 @@ export default function ChampionsScreen() {
               <Text style={styles.composerTitle}>העלה טקטיקה לקהילה</Text>
               <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
             </View>
+            <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} showsVerticalScrollIndicator={false}>
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
             <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
-  <View style={styles.formationSelectCopy}>
-    <Text style={styles.formationSelectLabel}>FORMATION</Text>
-    <Text style={styles.formationSelectValue}>{composerFormation || 'בחר מערך'}</Text>
-  </View>
-  <Ionicons name="chevron-down" size={18} color="#F4CF64" />
-</Pressable>
+              <View style={styles.formationSelectCopy}>
+                <Text style={styles.formationSelectLabel}>FORMATION</Text>
+                <Text style={styles.formationSelectValue}>{composerFormation || 'בחר מערך'}</Text>
+              </View>
+              <Ionicons name="chevron-down" size={18} color="#F4CF64" />
+            </Pressable>
             <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
-                        <View style={styles.communitySquadBlock}>
+
+            <View style={styles.communitySquadBlock}>
               <Text style={styles.communitySquadTitle}>הקבוצה של הפוסט</Text>
               <Text style={styles.communitySquadHint}>בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-              <Pressable
-                style={[styles.uploadButton, !composerFormation && styles.uploadButtonDisabled]}
-                onPress={() => openSquadBuilder()}
-              >
+              <Pressable style={[styles.uploadButton, !composerFormation && styles.uploadButtonDisabled]} onPress={() => openSquadBuilder()}>
                 <Ionicons name="football-outline" size={17} color="#fff" />
                 <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
               </Pressable>
@@ -1243,37 +1243,46 @@ export default function ChampionsScreen() {
               )}
             </View>
 
-<View style={styles.communityControllerBlock}>
-              <View style={styles.controllerShareHeader}>
-                <View style={styles.controllerShareCopy}>
-                  <Text style={styles.controllerShareTitle}>הגדרות שלט לפוסט</Text>
-                  <Text style={styles.controllerShareSub}>אופציונלי. הוסף את הגדרות השלט שלך כדי שהן יופיעו יחד עם הקבוצה והטקטיקה.</Text>
+            <View style={styles.communityControllerBlock}>
+              <Pressable style={styles.controllerSettingsToggle} onPress={() => setShowControllerSettings((value) => !value)}>
+                <View style={styles.controllerSettingsToggleCopy}>
+                  <Text style={styles.controllerSettingsToggleTitle}>הגדרות שלט לפוסט</Text>
+                  <Text style={styles.controllerSettingsToggleSub}>
+                    אופציונלי · {Object.keys(controllerSettings).length ? `${Object.keys(controllerSettings).length} הגדרות נבחרו` : 'לא הוגדרו הגדרות'}
+                  </Text>
                 </View>
-              </View>
-              <View style={styles.controllerSettingsGrid}>
-                {CONTROLLER_SETTINGS.map((item) => (
-                  <View key={item.key} style={styles.controllerField}>
-                    <Text style={styles.controllerFieldLabel}>{item.label}</Text>
-                    <View style={styles.controllerOptions}>
-                      {item.options.map((value) => {
-                        const active = controllerSettings[item.key] === value;
-                        return (
-                          <Pressable
-                            key={value}
-                            onPress={() => setControllerSettings((current) => ({ ...current, [item.key]: value }))}
-                            style={[styles.controllerOption, active && styles.controllerOptionActive]}
-                          >
-                            <Text style={[styles.controllerOptionText, active && styles.controllerOptionTextActive]}>{value}</Text>
-                          </Pressable>
-                        );
-                      })}
+                <Ionicons name={showControllerSettings ? 'chevron-up' : 'chevron-down'} size={18} color="#F4CF64" />
+              </Pressable>
+
+              {showControllerSettings ? (
+                <View style={styles.controllerSettingsGrid}>
+                  {CONTROLLER_SETTINGS.map((item) => (
+                    <View key={item.key} style={styles.controllerField}>
+                      <Text style={styles.controllerFieldLabel}>{item.label}</Text>
+                      <View style={styles.controllerOptions}>
+                        {item.options.map((value) => {
+                          const active = controllerSettings[item.key] === value;
+                          return (
+                            <Pressable
+                              key={value}
+                              onPress={() => setControllerSettings((current) => ({ ...current, [item.key]: value }))}
+                              style={[styles.controllerOption, active && styles.controllerOptionActive]}
+                            >
+                              <Text style={[styles.controllerOptionText, active && styles.controllerOptionTextActive]}>{value}</Text>
+                            </Pressable>
+                          );
+                        })}
+                      </View>
                     </View>
-                  </View>
-                ))}
-              </View>
+                  ))}
+                </View>
+              ) : null}
             </View>
 
-<Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
+            <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}>
+              <Ionicons name="image-outline" size={17} color="#fff" />
+              <Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text>
+            </Pressable>
             <View style={styles.platformRow}>
               <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
@@ -1281,7 +1290,8 @@ export default function ChampionsScreen() {
             <Pressable style={styles.publishConfirm} onPress={() => void publish()} disabled={saving}>
               <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לבדיקה'}</Text>
             </Pressable>
-          </Panel>
+          </ScrollView>
+</Panel>
         </View>
       ) : null}
 
@@ -1551,7 +1561,9 @@ const styles = StyleSheet.create({
   pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
   modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.88)', padding: 18, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
-  composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648 },
+  composer: { maxWidth: 620, maxHeight: '90%', width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648 },
+  composerScroll: { marginTop: 10, maxHeight: 520 },
+  composerScrollContent: { gap: 9, paddingBottom: 2 },
   composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
@@ -1712,6 +1724,10 @@ const styles = StyleSheet.create({
   builderSave: { minHeight: 46, borderRadius: 12, backgroundColor: '#D53043', alignItems: 'center', justifyContent: 'center', flexDirection: 'row-reverse', gap: 6, marginTop: 3 },
   builderSaveText: { color: '#fff', fontSize: 11, fontWeight: '900' },
 
+  controllerSettingsToggle: { minHeight: 58, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(216,47,66,.22)', backgroundColor: 'rgba(10,15,21,.78)', paddingHorizontal: 12, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
+  controllerSettingsToggleCopy: { flex: 1, alignItems: 'flex-end' },
+  controllerSettingsToggleTitle: { color: '#EFF3F5', fontSize: 11, fontWeight: '900', textAlign: 'right' },
+  controllerSettingsToggleSub: { color: '#75808B', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right', marginTop: 2 },
   controllerShareHeader: { flexDirection: 'row-reverse', alignItems: 'center', gap: 13, marginTop: 10 },
   controllerShareCopy: { flex: 1, alignItems: 'flex-end' },
   controllerShareTitle: { color: '#EFF3F5', fontSize: 19, fontWeight: '900', textAlign: 'right' },
