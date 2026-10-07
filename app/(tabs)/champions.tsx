@@ -900,7 +900,7 @@ export default function ChampionsScreen() {
             <View style={styles.communitySquadBlock}>
             <Text style={styles.communitySquadTitle}>הקבוצה בפוסט</Text>
             <Text style={styles.communitySquadHint}>בנה את הקבוצה שלך באמת עם שחקני האתר, 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-            <Pressable style={styles.uploadButton} onPress={() => router.push('/squad')}>
+            <Pressable style={styles.uploadButton} onPress={() => router.push({ pathname: '/squad', params: { returnTo: 'champions' } })}>
               <Ionicons name="football-outline" size={17} color="#fff" />
               <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
             </Pressable>
