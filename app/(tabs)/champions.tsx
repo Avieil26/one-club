@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
@@ -281,8 +281,7 @@ function FormationPickerModal({
   const { width } = useWindowDimensions();
   const mobile = width < 720;
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <View style={styles.modalBackdrop}>
+    <View style={styles.modalBackdrop}>
         <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
           <View style={styles.modalHeader}>
             <View style={styles.modalHeaderCopy}>
@@ -303,7 +302,6 @@ function FormationPickerModal({
           </ScrollView>
         </View>
       </View>
-    </Modal>
   );
 }
 
@@ -1016,7 +1014,6 @@ export default function ChampionsScreen() {
       </View>
 
       {showComposer ? (
-        <Modal visible transparent animationType="fade" onRequestClose={() => setShowComposer(false)}>
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
@@ -1056,7 +1053,6 @@ export default function ChampionsScreen() {
             </Pressable>
           </Panel>
         </View>
-        </Modal>
       ) : null}
 
       <FormationPickerModal visible={formationPickerOpen} selected={formation} onClose={() => setFormationPickerOpen(false)} onSelect={setFormation} />
@@ -1193,7 +1189,7 @@ const styles = StyleSheet.create({
   selectorRow: { flexDirection: 'row-reverse', gap: 7, marginTop: 9, flexWrap: 'wrap' },
   selectorChip: { borderRadius: 9, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: 'rgba(5,8,12,.6)', paddingHorizontal: 10, paddingVertical: 7 },
   selectorChipActive: { borderColor: '#E53A4A', backgroundColor: 'rgba(229,58,74,.18)' },
-  selectorChipText: { color: '#B4BDC5', fontSize: 9, fontWeight: '800' },
+  selectorChipText: { color: '#FFFFFF', fontSize: 9, fontWeight: '900' },
   uploadButton: { minHeight: 44, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(226,45,61,.16)', paddingHorizontal: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 10 },
   uploadButtonText: { color: '#F3F5F7', fontSize: 10, fontWeight: '900' },
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
@@ -1327,8 +1323,8 @@ const styles = StyleSheet.create({
 
   pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
-  modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 999999, elevation: 999999, backgroundColor: 'rgba(0,0,0,.82)', padding: 18, justifyContent: 'center' } as any),
-  composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39' },
+  modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.88)', padding: 18, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
+  composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648 },
   composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
@@ -1425,7 +1421,7 @@ const styles = StyleSheet.create({
   communitySquadTitle: { color: '#E8EDF1', fontSize: 13, fontWeight: '900', textAlign: 'right' },
   communitySquadHint: { color: '#717D88', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
   communitySquadSaved: { color: '#E3C765', fontSize: 8, fontWeight: '900', textAlign: 'right' },
-  formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .56, shadowRadius: 28, shadowOffset: { width: 0, height: 18 } },
+  formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .70, shadowRadius: 32, shadowOffset: { width: 0, height: 18 }, zIndex: 2147483648, elevation: 2147483648 },
   formationPickerMobile: { width: '96%', padding: 13 },
   modalHeaderCopy: { flex: 1, alignItems: 'flex-end' },
   modalClose: { width: 35, height: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', alignItems: 'center', justifyContent: 'center' },
