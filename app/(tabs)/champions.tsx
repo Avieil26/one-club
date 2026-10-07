@@ -6,7 +6,7 @@ import { Stack } from 'expo-router';
 
 import { Screen } from '@/components/ui';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
-import { getSupabase } from '@/lib/supabase';
+import { getSupabase, uploadProofs } from '@/lib/supabase';
 import { pickImages } from '@/lib/images';
 import { useApp } from '@/lib/store';
 import type { PlatformId, ProfileSquad } from '@/lib/types';
@@ -896,24 +896,43 @@ export default function ChampionsScreen() {
     }
 
     setSaving(true);
-    const { error } = await getSupabase().from('champions_content').insert({
-      user_id: app.user.id,
-      kind: 'tactic',
-      title: title.trim(),
-      body: body.trim(),
-      formation: composerFormation.trim() || null,
-      platform,
-      settings: {
-        buildUp,
-        defensive,
-        lineHeight,
-        squad: communitySquad ?? null,
-      },
-      image_uris: composerImages,
-      status: 'pending',
-      featured: false,
-    });
-    setSaving(false);
+    try {
+      const imageUris = composerImages.length
+        ? await uploadProofs(app.user.id, composerImages, 'champions-tactics')
+        : [];
+      const { error } = await getSupabase().from('champions_content').insert({
+        user_id: app.user.id,
+        kind: 'tactic',
+        title: title.trim(),
+        body: body.trim(),
+        formation: composerFormation.trim() || null,
+        platform,
+        settings: {
+          buildUp,
+          defensive,
+          lineHeight,
+          squad: communitySquad ?? null,
+        },
+        image_uris: imageUris,
+        status: 'pending',
+        featured: false,
+      });
+      if (error) throw error;
+
+      setTitle('');
+      setBody('');
+      setComposerFormation('');
+      setComposerImages([]);
+      setCommunitySquad(null);
+      setSquadBuilderOpen(false);
+      setShowComposer(false);
+      await loadLiveData();
+      Alert.alert('נשלח לבדיקה', 'הטקטיקה נשמרה בעמוד שלך כ־Pending ותופיע בקהילה רק לאחר אישור.');
+    } catch (error) {
+      Alert.alert('העלאה נכשלה', error instanceof Error ? error.message : 'נסה שוב.');
+    } finally {
+      setSaving(false);
+    }
 
     if (error) {
       Alert.alert('העלאה נכשלה', 'נסה שוב.');
