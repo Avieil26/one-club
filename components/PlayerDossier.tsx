@@ -579,6 +579,35 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         </View>
       )}
 
+      {viewingOtw && personId === 'ea-264947-nicole-anyomi' ? (
+        <View
+          style={{
+            padding: 16,
+            borderRadius: 16,
+            borderWidth: 1,
+            borderColor: 'rgba(213,107,255,0.45)',
+            backgroundColor: 'rgba(39,18,55,0.72)',
+            gap: 5,
+          }}
+        >
+          <Text style={{ color: '#E8B9FF', fontSize: 11, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' }}>
+            HOW TO UNLOCK
+          </Text>
+          <Text style={{ color: '#FFFFFF', fontSize: 16, fontWeight: '900', textAlign: 'right' }}>
+            Nicole Anyomi · Ones to Watch
+          </Text>
+          <Text style={{ color: '#E7DDEF', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
+            זו לא SBC ולא קלף שנקנה במרקט.
+          </Text>
+          <Text style={{ color: '#FFD6FF', fontSize: 14, fontWeight: '900', textAlign: 'right' }}>
+            Premium Season 1 · Level 7 · 7,000 SP
+          </Text>
+          <Text style={{ color: '#B8A5C4', fontSize: 11, textAlign: 'right' }}>
+            צריך גישה ל־Premium Pass כדי לקבל את פרס Level 7.
+          </Text>
+        </View>
+      ) : null}
+
       {/* POTENTIAL TOGGLE IN ULTIMATE DOSSIER */}
       {meta && (card.rating < 88) ? (
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.03)', padding: 12, borderRadius: 14, borderWidth: 1, borderColor: showPotential ? '#38bdf8' : 'rgba(255,255,255,0.08)' }}>
