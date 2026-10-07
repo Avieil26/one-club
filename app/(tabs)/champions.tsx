@@ -6,6 +6,8 @@ import { Stack } from 'expo-router';
 
 import { Screen } from '@/components/ui';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
+import { SquadPitch } from '@/components/SquadPitch';
+import { PortraitCard } from '@/components/PortraitCard';
 import { getSupabase, uploadProofs } from '@/lib/supabase';
 import { pickImages } from '@/lib/images';
 import { useApp } from '@/lib/store';
@@ -1524,8 +1526,8 @@ const styles = StyleSheet.create({
   selectorChip: { borderRadius: 9, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: 'rgba(5,8,12,.6)', paddingHorizontal: 10, paddingVertical: 7 },
   selectorChipActive: { borderColor: '#E53A4A', backgroundColor: 'rgba(229,58,74,.18)' },
   selectorChipText: { color: '#FFFFFF', fontSize: 9, fontWeight: '900' },
-  uploadButton: { minHeight: 44, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(226,45,61,.16)', paddingHorizontal: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 10 },,
-  uploadButtonDisabled: { opacity: 0.45 }
+  uploadButton: { minHeight: 44, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(226,45,61,.16)', paddingHorizontal: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 10 },
+  uploadButtonDisabled: { opacity: 0.45 },
   uploadButtonText: { color: '#F3F5F7', fontSize: 10, fontWeight: '900' },
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
@@ -1764,6 +1766,9 @@ const styles = StyleSheet.create({
   formationGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, paddingBottom: 8 },
   formationOption: { minHeight: 47, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0D131B', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 6 },
   formationPickerOptionDesktop: { width: '31.8%' },
+  formationOptionDesktop: { width: '31.8%' },
+  formationOptionMobile: { width: '48.2%' },
+  formationOptionActive: { backgroundColor: 'rgba(214,45,62,.20)', borderColor: '#E24A59' },
   formationOptionText: { color: '#F4F6F8', fontSize: 10, fontWeight: '900' },
   formationOptionTextActive: { color: '#FFFFFF' },
   selectorChipText: { color: '#F0F3F6', fontSize: 9, fontWeight: '900' },
@@ -1833,9 +1838,12 @@ const styles = StyleSheet.create({
   controllerOptionActive: { backgroundColor: 'rgba(214,45,62,.22)', borderColor: '#E14A59' },
   controllerOptionText: { color: '#E0E5E8', fontSize: 8, fontWeight: '900' },
   controllerOptionTextActive: { color: '#fff' },
+  controllerShareButtonText: { color: '#fff', fontSize: 10, fontWeight: '900' },
   controllerShareButton: { minHeight: 48, borderRadius: 12, backgroundColor: '#D62F42', alignItems: 'center', justifyContent: 'center', flexDirection: 'row-reverse', gap: 7, marginTop: 12 },
   controllerShareButtonDisabled: { backgroundColor: '#4A2328' },
 
+  communityImages: { flexDirection: 'row-reverse', gap: 8, paddingTop: 10, paddingBottom: 2 },
+  communityImage: { width: 220, height: 130, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)' },
   communityControllerGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 7, marginTop: 10 },
   communityControllerChip: { minWidth: 190, flexGrow: 1, borderRadius: 10, borderWidth: 1, borderColor: 'rgba(216,47,66,.14)', backgroundColor: 'rgba(216,47,66,.05)', padding: 9 },
   communityControllerValue: { color: '#F0D26A', fontSize: 9, fontWeight: '900', textAlign: 'right' },
