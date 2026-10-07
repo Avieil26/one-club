@@ -16,7 +16,7 @@ import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { FORMATIONS, formationById } from '@/lib/chemistry';
 
 type IconName = keyof typeof Ionicons.glyphMap;
-type SectionId = 'center' | 'community' | 'rewards' | 'tekkz' | 'controller';
+type SectionId = 'center' | 'community' | 'rewards' | 'tekkz';
 
 type TekkzRole = [string, string];
 
@@ -25,7 +25,6 @@ const NAV: { id: SectionId; label: string; icon: IconName }[] = [
   { id: 'center', label: 'העמוד שלי', icon: 'trophy-outline' },
   { id: 'rewards', label: 'פרסים', icon: 'gift-outline' },
   { id: 'community', label: 'שחקני הקהילה', icon: 'people-outline' },
-  { id: 'controller', label: 'הגדרות שלט', icon: 'game-controller-outline' },
 ];
 
 const FUT_CHAMPIONS_LOGO_URL = 'https://www.fifplay.com/img/public/fut-champions-logo.png';
@@ -730,11 +729,10 @@ export default function ChampionsScreen() {
     }
 
     const supabase = getSupabase();
-    const [runResult, communityResult, myContentResult, profileResult] = await Promise.all([
+    const [runResult, communityResult, myContentResult] = await Promise.all([
       supabase.from('champions_runs').select('matches_played,wins,losses,cqp,rank,updated_at').eq('user_id', app.user.id).maybeSingle(),
       supabase.from('champions_content').select('id,user_id,kind,title,body,formation,platform,settings,image_uris,featured,status,created_at').eq('status', 'approved').order('created_at', { ascending: false }).limit(30),
       supabase.from('champions_content').select('id,user_id,kind,title,body,formation,platform,settings,image_uris,featured,status,created_at').eq('user_id', app.user.id).order('created_at', { ascending: false }).limit(30),
-      supabase.from('champions_profiles').select('controller_platform,controller_settings').eq('user_id', app.user.id).maybeSingle(),
     ]);
 
     if (!runResult.error && runResult.data) {
@@ -831,62 +829,6 @@ export default function ChampionsScreen() {
     setSquadBuilderOpen(false);
   }
 
-  async function saveControllerSettings() {
-    if (!app.user?.id) {
-      Alert.alert('צריך להתחבר', 'התחבר כדי לשמור ולשתף את ההגדרות.');
-      return;
-    }
-    const filled = CONTROLLER_SETTINGS.filter((item) => controllerSettings[item.key]?.trim()).length;
-    if (filled < 6) {
-      Alert.alert('חסרות הגדרות', 'בחר לפחות 6 מתוך 10 ההגדרות. כרגע נבחרו ' + filled + '.');
-      return;
-    }
-    setSaving(true);
-    try {
-      const supabase = getSupabase();
-      const now = new Date().toISOString();
-      const { error: profileError } = await supabase.from('champions_profiles').upsert({
-        user_id: app.user.id,
-        custom_image_uri: null,
-        use_avatar: true,
-        squad_image_uris: [],
-        controller_image_uris: [],
-        controller_platform: platform,
-        controller_settings: controllerSettings,
-        formation,
-        build_up_style: buildUp,
-        defensive_approach: defensive,
-        line_height: Math.max(0, Math.min(100, Number(lineHeight) || 60)),
-        roles: {},
-        about: '',
-        updated_at: now,
-      });
-      if (profileError) throw profileError;
-
-      const summary = CONTROLLER_SETTINGS.filter((item) => controllerSettings[item.key])
-        .map((item) => item.label + ': ' + controllerSettings[item.key]).join(' · ');
-      const { error: postError } = await supabase.from('champions_content').insert({
-        user_id: app.user.id,
-        kind: 'guide',
-        title: 'הגדרות שלט · ' + (platform === 'xbox' ? 'Xbox' : 'PlayStation 5'),
-        body: summary,
-        formation: null,
-        platform,
-        settings: { category: 'controller', controllerPlatform: platform, controllerSettings },
-        image_uris: [],
-        status: 'pending',
-        featured: false,
-      });
-      if (postError) throw postError;
-      await loadLiveData();
-      Alert.alert('נשמר', 'ההגדרות נשמרו בעמוד שלך ונשלחו לבדיקה לפני פרסום בקהילה.');
-    } catch (error) {
-      Alert.alert('השמירה נכשלה', error instanceof Error ? error.message : 'נסה שוב.');
-    } finally {
-      setSaving(false);
-    }
-  }
-
   async function publish() {
     if (!app.user?.id) {
       Alert.alert('צריך להתחבר', 'כדי להעלות תוכן צריך להתחבר.');
@@ -915,6 +857,10 @@ export default function ChampionsScreen() {
           defensive,
           lineHeight,
           squad: communitySquad,
+          controllerPlatform: platform,
+          controllerSettings: Object.fromEntries(
+            Object.entries(controllerSettings).filter(([, value]) => Boolean(value)),
+          ),
         },
         image_uris: imageUris,
         status: 'pending',
@@ -928,6 +874,7 @@ export default function ChampionsScreen() {
       setComposerFormation('');
       setComposerImages([]);
       setCommunitySquad(null);
+      setControllerSettings({});
       setSquadBuilderOpen(false);
       setShowComposer(false);
       await loadLiveData();
@@ -1043,54 +990,6 @@ export default function ChampionsScreen() {
       );
     }
 
-    if (section === 'controller') {
-      const filled = CONTROLLER_SETTINGS.filter((item) => controllerSettings[item.key]).length;
-      return (
-        <View style={styles.contentStack}>
-          <SectionHeading icon="game-controller-outline" eyebrow="CONTROLLER SHARE" title="הגדרות שלט"
-            subtitle="בחר Sony PlayStation 5 או Xbox ומלא לפחות 6 מתוך 10 הגדרות. אין כאן העלאת תמונה." />
-          <Panel>
-            <View style={styles.platformRow}>
-              <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
-              <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
-            </View>
-            <View style={styles.controllerShareHeader}>
-              <View style={styles.controllerShareCopy}>
-                <Text style={styles.controllerShareTitle}>{platform === 'xbox' ? 'Xbox Controller' : 'PlayStation 5 Controller'}</Text>
-                <Text style={styles.controllerShareSub}>בחר ערכים מתוך הגדרות FC27. ההגדרות נשמרות בעמוד ה־Champions ומשותפות לקהילה רק אחרי אישור.</Text>
-              </View>
-              <Image source={platform === 'xbox' ? require('@/assets/images/platform-xbox.png') : require('@/assets/images/platform-ps5.png')} resizeMode="contain" style={styles.controllerShareImage} />
-            </View>
-            <View style={styles.controllerProgress}>
-              <Text style={styles.controllerProgressValue}>{filled}/10</Text>
-              <Text style={styles.controllerProgressText}>מולאו · מינימום 6</Text>
-            </View>
-            <View style={styles.controllerSettingsGrid}>
-              {CONTROLLER_SETTINGS.map((item) => (
-                <View key={item.key} style={styles.controllerField}>
-                  <Text style={styles.controllerFieldLabel}>{item.label}</Text>
-                  <View style={styles.controllerOptions}>
-                    {item.options.map((value) => {
-                      const active = controllerSettings[item.key] === value;
-                      return (
-                        <Pressable key={value} onPress={() => setControllerSettings((current) => ({ ...current, [item.key]: value }))} style={[styles.controllerOption, active && styles.controllerOptionActive]}>
-                          <Text style={[styles.controllerOptionText, active && styles.controllerOptionTextActive]}>{value}</Text>
-                        </Pressable>
-                      );
-                    })}
-                  </View>
-                </View>
-              ))}
-            </View>
-            <Pressable disabled={filled < 6 || saving} style={[styles.controllerShareButton, filled < 6 && styles.controllerShareButtonDisabled]} onPress={() => void saveControllerSettings()}>
-              <Ionicons name="share-social-outline" size={18} color="#fff" />
-              <Text style={styles.controllerShareButtonText}>{filled < 6 ? 'בחר לפחות ' + (6 - filled) + ' הגדרות נוספות' : (saving ? 'שומר…' : 'שמור ושתף את הגדרות השלט')}</Text>
-            </Pressable>
-          </Panel>
-        </View>
-      );
-    }
-
     if (section === 'community') {
       return (
         <View style={styles.contentStack}>
@@ -1099,21 +998,22 @@ export default function ChampionsScreen() {
           <View style={styles.communityHeader}>
             <Text style={styles.communityCount}>{String(community.length)} פריטים מאושרים</Text>
             {app.user ? (
-              <Pressable style={styles.publishButton} onPress={() => { setComposerFormation(''); setCommunitySquad(null); setShowComposer(true); }}>
+              <Pressable style={styles.publishButton} onPress={() => { setComposerFormation(''); setCommunitySquad(null); setControllerSettings({}); setShowComposer(true); }}>
                 <Text style={styles.publishButtonText}>העלה טקטיקה</Text>
               </Pressable>
             ) : null}
           </View>
           {community.length ? community.map((item) => {
-            const controller = item.settings?.category === 'controller';
+            const controllerSettings = item.settings?.controllerSettings ?? {};
+            const hasControllerSettings = Object.keys(controllerSettings).length > 0;
             return (
               <Panel key={item.id}>
                 <Text style={styles.communityItemTitle}>{item.title}</Text>
-                <Text style={styles.communityItemMeta}>{controller ? 'הגדרות שלט' : (item.formation || 'ללא מערך')} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
+                <Text style={styles.communityItemMeta}>{item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
                 <Text style={styles.communityItemBody}>{item.body}</Text>
-                {controller ? (
+                {hasControllerSettings ? (
                   <View style={styles.communityControllerGrid}>
-                    {Object.entries(item.settings?.controllerSettings ?? {}).map(([key, value]) => {
+                    {Object.entries(controllerSettings).map(([key, value]) => {
                       const definition = CONTROLLER_SETTINGS.find((entry) => entry.key === key);
                       return definition ? <View key={key} style={styles.communityControllerChip}><Text style={styles.communityControllerValue}>{String(value)}</Text><Text style={styles.communityControllerLabel}>{definition.label}</Text></View> : null;
                     })}
@@ -1179,7 +1079,8 @@ export default function ChampionsScreen() {
           <Panel>
             <SectionHeading icon="albums-outline" eyebrow="MY CHAMPIONS CONTENT" title="מה שהעליתי" subtitle="כל טקטיקה והגדרות שלט שלך מופיעים כאן מיד כ־Pending, ולאחר אישור כ־Approved." />
             {myContent.length ? myContent.map((item) => {
-              const controller = item.settings?.category === 'controller';
+              const controllerSettings = item.settings?.controllerSettings ?? {};
+              const hasControllerSettings = Object.keys(controllerSettings).length > 0;
               return (
                 <View key={item.id} style={styles.myUploadedCard}>
                   <View style={styles.myUploadedTop}>
@@ -1188,11 +1089,11 @@ export default function ChampionsScreen() {
                       <Text style={styles.statusBadgeText}>{item.status === 'approved' ? 'מאושר' : item.status === 'rejected' ? 'נדחה' : 'ממתין לאישור'}</Text>
                     </View>
                   </View>
-                  <Text style={styles.myUploadedMeta}>{controller ? 'הגדרות שלט' : (item.formation || 'ללא מערך')} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
+                  <Text style={styles.myUploadedMeta}>{item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
                   <Text style={styles.myUploadedBody}>{item.body}</Text>
-                  {controller ? (
+                  {hasControllerSettings ? (
                     <View style={styles.communityControllerGrid}>
-                      {Object.entries(item.settings?.controllerSettings ?? {}).map(([key, value]) => {
+                      {Object.entries(controllerSettings).map(([key, value]) => {
                         const definition = CONTROLLER_SETTINGS.find((entry) => entry.key === key);
                         return definition ? <View key={key} style={styles.communityControllerChip}><Text style={styles.communityControllerValue}>{String(value)}</Text><Text style={styles.communityControllerLabel}>{definition.label}</Text></View> : null;
                       })}
@@ -1345,6 +1246,36 @@ export default function ChampionsScreen() {
               ) : (
                 <Text style={styles.communitySquadSaved}>בחר מערך ואז בנה את הסגל לפוסט.</Text>
               )}
+            </View>
+
+<View style={styles.communityControllerBlock}>
+              <View style={styles.controllerShareHeader}>
+                <View style={styles.controllerShareCopy}>
+                  <Text style={styles.controllerShareTitle}>הגדרות שלט לפוסט</Text>
+                  <Text style={styles.controllerShareSub}>אופציונלי. הוסף את הגדרות השלט שלך כדי שהן יופיעו יחד עם הקבוצה והטקטיקה.</Text>
+                </View>
+              </View>
+              <View style={styles.controllerSettingsGrid}>
+                {CONTROLLER_SETTINGS.map((item) => (
+                  <View key={item.key} style={styles.controllerField}>
+                    <Text style={styles.controllerFieldLabel}>{item.label}</Text>
+                    <View style={styles.controllerOptions}>
+                      {item.options.map((value) => {
+                        const active = controllerSettings[item.key] === value;
+                        return (
+                          <Pressable
+                            key={value}
+                            onPress={() => setControllerSettings((current) => ({ ...current, [item.key]: value }))}
+                            style={[styles.controllerOption, active && styles.controllerOptionActive]}
+                          >
+                            <Text style={[styles.controllerOptionText, active && styles.controllerOptionTextActive]}>{value}</Text>
+                          </Pressable>
+                        );
+                      })}
+                    </View>
+                  </View>
+                ))}
+              </View>
             </View>
 
 <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
