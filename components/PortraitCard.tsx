@@ -419,7 +419,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
