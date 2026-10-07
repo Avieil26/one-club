@@ -81,7 +81,7 @@ type CommunityItem = {
   body: string;
   formation: string | null;
   platform: PlatformId;
-  settings: Record<string, string>;
+  settings: Record<string, any>;
   image_uris: string[];
   featured: boolean;
   created_at: string;
@@ -567,7 +567,14 @@ export default function ChampionsScreen() {
         const { uploadProofs } = await import('@/lib/supabase');
         return uploadProofs(app.user!.id, images, folder);
       };
-      const controllerUris = await upload(controllerImages, 'champions-controller');
+      const existing = await supabase
+        .from('champions_profiles')
+        .select('controller_image_uris')
+        .eq('user_id', app.user.id)
+        .maybeSingle();
+      const controllerUris = controllerImages.length
+        ? await upload(controllerImages, 'champions-controller')
+        : (existing.data?.controller_image_uris ?? []);
       const { error } = await supabase.from('champions_profiles').upsert({
         user_id: app.user.id,
         custom_image_uri: null,
@@ -609,7 +616,12 @@ export default function ChampionsScreen() {
       body: body.trim(),
       formation: formation.trim() || null,
       platform,
-      settings: {},
+      settings: {
+        buildUp,
+        defensive,
+        lineHeight,
+        squad: app.user?.squad ?? null,
+      },
       image_uris: composerImages,
       status: 'pending',
       featured: false,
@@ -1003,7 +1015,21 @@ export default function ChampionsScreen() {
   <Ionicons name="chevron-down" size={18} color="#F4CF64" />
 </Pressable>
             <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
-            <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
+                        <View style={styles.communitySquadBlock}>
+              <Text style={styles.communitySquadTitle}>הקבוצה של הפוסט</Text>
+              <Text style={styles.communitySquadHint}>בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
+              <Pressable style={styles.uploadButton} onPress={() => router.push('/squad')}>
+                <Ionicons name="football-outline" size={17} color="#fff" />
+                <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
+              </Pressable>
+              {app.user?.squad ? (
+                <Text style={styles.communitySquadSaved}>
+                  {app.user.squad.formation} · {Object.keys(app.user.squad.slots).length} בהרכב · {app.user.squad.bench.length} מחליפים
+                </Text>
+              ) : null}
+            </View>
+
+<Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
             <View style={styles.platformRow}>
               <PlatformPill value="xbox" selected={platform === 'xbox'} onPress={() => setPlatform('xbox')} />
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
@@ -1354,7 +1380,6 @@ const styles = StyleSheet.create({
   pitchCircle: { position: 'absolute', left: '50%', top: '50%', width: 58, height: 58, marginLeft: -29, marginTop: -29, borderRadius: 29, borderWidth: 1, borderColor: 'rgba(255,255,255,.18)' },
   pitchGoalTop: { position: 'absolute', left: '39%', right: '39%', top: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderBottomWidth: 0 },
   pitchGoalBottom: { position: 'absolute', left: '39%', right: '39%', bottom: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderTopWidth: 0 },
-  oneCol: { flexDirection: 'column' },
   tacticsHero: { flexDirection: 'row-reverse', gap: 16, alignItems: 'stretch' },
   tacticsPitchWrap: { flex: 1.15, minWidth: 340 },
   tacticsControls: { flex: .85, minWidth: 290, justifyContent: 'center', alignItems: 'flex-end', gap: 7 },
@@ -1385,6 +1410,15 @@ const styles = StyleSheet.create({
   formationGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, paddingBottom: 8 },
   formationOption: { minHeight: 47, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0D131B', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 6 },
   formationPickerOptionDesktop: { width: '31.8%' },
+  modalHeader: { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 10 },
+  modalKicker: { color: '#D2AA57', fontSize: 8, fontWeight: '900', letterSpacing: 1.3, textAlign: 'right' },
+  modalTitle: { color: '#F5F7F9', fontSize: 22, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  modalHint: { color: '#74808B', fontSize: 9, lineHeight: 14, fontWeight: '700', textAlign: 'right', marginTop: 4 },
+  formationPickerOptionMobile: { width: '48.2%' },
+  communitySquadBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(221,48,65,.20)', backgroundColor: 'rgba(8,12,17,.58)', padding: 11, gap: 5, marginTop: 4 },
+  communitySquadTitle: { color: '#E9EDF1', fontSize: 12, fontWeight: '900', textAlign: 'right' },
+  communitySquadHint: { color: '#727E89', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
+  communitySquadSaved: { color: '#E6C969', fontSize: 8, fontWeight: '900', textAlign: 'right' },
 
 });
 
