@@ -44,8 +44,9 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
   const [mode, setMode] = useState<'console' | 'pc'>('console');
   const [open, setOpen] = useState(false);
   const amount = mode === 'console' ? consolePrice : pc;
+  const hasAmount = typeof amount === 'number';
 
-  const digits = amount ? String(amount).length : 0;
+  const digits = hasAmount ? String(amount).length : 0;
   const calcPriceSize = compact
     ? digits >= 7
       ? 16
@@ -135,11 +136,11 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
           minimumFontScale={0.65}
           style={{
             flexShrink: 1,
-            color: amount ? '#F7F7F7' : '#8E96A3',
-            fontSize: amount ? calcPriceSize : 14,
+            color: hasAmount ? '#F7F7F7' : '#8E96A3',
+            fontSize: hasAmount ? calcPriceSize : 14,
             fontWeight: '900',
             letterSpacing: 0.2,
-            writingDirection: amount ? 'ltr' : 'rtl',
+            writingDirection: hasAmount ? 'ltr' : 'rtl',
           }}
         >
           {amount ? coins(amount) : 'אין מחיר'}
