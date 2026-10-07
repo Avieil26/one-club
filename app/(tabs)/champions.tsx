@@ -64,10 +64,10 @@ const CONTROLLER_SETTINGS: { key: ControllerSettingKey; label: string; options: 
   { key: 'throughPass', label: 'Through Pass Assistance', options: ['Assisted', 'Semi', 'Manual'] },
   { key: 'groundPass', label: 'Ground Pass Assistance', options: ['Assisted', 'Manual'] },
   { key: 'shot', label: 'Shot Assistance', options: ['Assisted', 'Precision', 'Manual'] },
-  { key: 'defending', label: 'Defending', options: ['Tactical Defending', 'Advanced Defending'] },
-  { key: 'autoSwitch', label: 'Auto Switching', options: ['Air Balls and Loose Balls', 'Automatic', 'None'] },
+  { key: 'defending', label: 'Defending', options: ['Advanced Defending', 'Tactical Defending'] },
+  { key: 'autoSwitch', label: 'Auto Switching', options: ['Air Balls and Loose Balls', 'Manual', 'Only on Air Balls', 'Automatic', 'Only on Loose Balls'] },
   { key: 'autoMove', label: 'Auto Switching Move Assistance', options: ['None', 'Low', 'High'] },
-  { key: 'rightStick', label: 'Right Stick Switching', options: ['Classic'] },
+  { key: 'rightStick', label: 'Right Stick Switching', options: ['Classic', 'Player Rotation', 'Adaptive'] },
   { key: 'rightStickRef', label: 'Right Stick Switching Reference', options: ['Player Relative', 'Ball Relative'] },
   { key: 'analogSprint', label: 'Analog Sprint', options: ['On', 'Off'] },
 ];
@@ -827,6 +827,7 @@ export default function ChampionsScreen() {
 
   function saveCommunitySquad(next: ProfileSquad) {
     setCommunitySquad(next);
+    setComposerFormation(formationById(next.formation).label);
     setSquadBuilderOpen(false);
   }
 
@@ -1146,7 +1147,7 @@ export default function ChampionsScreen() {
                 <Text style={styles.tacticsKicker}>ACTIVE FORMATION</Text>
                 <Text style={styles.tacticsBigTitle}>{selectedFormationData.label}</Text>
                 <Text style={styles.tacticsBody}>אין יותר רשימה אופקית. לוחצים על בחירת מערך ונפתח חלון נקי עם כל המערכים, בלי לגעת בכותרת או בהסבר.</Text>
-                <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
+                <Pressable style={styles.formationSelectCard} onPress={() => setFormationPickerOpen(true)}>
                   <View style={styles.formationSelectCopy}>
                     <Text style={styles.formationSelectLabel}>FORMATION</Text>
                     <Text style={styles.formationSelectValue}>{selectedFormationData.label}</Text>
