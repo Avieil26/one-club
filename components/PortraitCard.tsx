@@ -179,12 +179,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
         alignSelf: 'center',
         overflow: 'hidden',
         borderRadius: width * 0.08,
-        backgroundColor: '#111018',
-        shadowColor: '#C084FC',
-        shadowOpacity: 0.78,
-        shadowRadius: 11,
-        shadowOffset: { width: 0, height: 5 },
-        elevation: 10,
+        backgroundColor: 'transparent',
       }}
     >
       <Image
@@ -200,16 +195,15 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
           accessibilityIgnoresInvertColors
           style={{
             position: 'absolute',
-            left: width * 0.19,
-            top: height * 0.07,
-            width: width * 0.62,
-            height: height * 0.48,
-            transform: [{ scale: 1.06 }],
+            left: width * 0.15,
+            top: height * 0.075,
+            width: width * 0.70,
+            height: height * 0.47,
           }}
         />
       ) : null}
       <LinearGradient
-        colors={['transparent', 'rgba(9,7,14,0.18)', '#09070E']}
+        colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
         locations={[0.38, 0.66, 1]}
         style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
       />
@@ -225,15 +219,15 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
         <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
         <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
       </View>
-      <View style={{ position: 'absolute', left: width * 0.055, right: width * 0.055, bottom: height * 0.10, flexDirection: 'row', zIndex: 6 }}>
+      <View style={{ position: 'absolute', left: width * 0.075, right: width * 0.075, bottom: height * 0.105, flexDirection: 'row', zIndex: 6 }}>
         {stats.map(([label, value]) => (
           <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ color: '#C084FC', fontSize: Math.max(5, width * 0.04), fontWeight: '800' }}>{label}</Text>
-            <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.061), fontWeight: '900' }}>{value ?? '·'}</Text>
+            <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, width * 0.034), fontWeight: '800' }}>{label}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, width * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
           </View>
         ))}
       </View>
-      <View style={{ position: 'absolute', bottom: height * 0.035, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+      <View style={{ position: 'absolute', bottom: height * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
         <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
       </View>
     </View>
