@@ -304,6 +304,10 @@ function FormationPickerModal({
     <View style={styles.modalBackdrop}>
         <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
           <View style={styles.modalHeader}>
+            <Pressable onPress={onClose} style={styles.modalBackButton} accessibilityRole="button" accessibilityLabel="חזרה">
+              <Ionicons name="arrow-back" size={16} color="#fff" />
+              <Text style={styles.modalBackButtonText}>חזרה</Text>
+            </Pressable>
             <View style={styles.modalHeaderCopy}>
               <Text style={styles.modalKicker}>FC27 FORMATIONS</Text>
               <Text style={styles.modalTitle}>בחר מערך</Text>
@@ -454,6 +458,10 @@ function CommunitySquadBuilder({
     <View style={styles.squadOverlay}>
       <View style={styles.squadBuilderPanel}>
         <View style={styles.squadBuilderHeader}>
+          <Pressable style={styles.modalBackButton} onPress={onClose} accessibilityRole="button" accessibilityLabel="חזרה להעלאת טקטיקה">
+            <Ionicons name="arrow-back" size={16} color="#fff" />
+            <Text style={styles.modalBackButtonText}>חזרה</Text>
+          </Pressable>
           <View style={styles.squadBuilderHeaderCopy}>
             <Text style={styles.modalKicker}>COMMUNITY SQUAD BUILDER</Text>
             <Text style={styles.squadBuilderTitle}>בנה את הקבוצה לפוסט</Text>
@@ -1214,6 +1222,12 @@ export default function ChampionsScreen() {
           <Panel style={[styles.composer, { height: Math.min(height * 0.9, 760) }]}>
 
             <View style={styles.composerHeader}>
+              <View style={styles.composerHeaderActions}>
+                <Pressable style={styles.modalBackButton} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel="חזרה לשחקני הקהילה">
+                  <Ionicons name="arrow-back" size={16} color="#fff" />
+                  <Text style={styles.modalBackButtonText}>חזרה</Text>
+                </Pressable>
+              </View>
               <Text style={styles.composerTitle}>העלה טקטיקה לקהילה</Text>
               <Pressable style={styles.modalClose} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
             </View>
@@ -1566,6 +1580,7 @@ const styles = StyleSheet.create({
   composerScroll: { flex: 1, minHeight: 0, marginTop: 10 },
   composerScrollContent: { gap: 9, paddingBottom: 22 },
   composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 10 },
+  composerHeaderActions: { flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
   tekkzCard: { borderRadius: 22, borderWidth: 1, borderColor: 'rgba(239,58,71,.48)', backgroundColor: 'rgba(4,7,11,.64)', overflow: 'hidden', flexDirection: 'row-reverse', minHeight: 430 },
@@ -1664,6 +1679,8 @@ const styles = StyleSheet.create({
   formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .70, shadowRadius: 32, shadowOffset: { width: 0, height: 18 }, zIndex: 2147483648, elevation: 2147483648 },
   formationPickerMobile: { width: '96%', padding: 13 },
   modalHeaderCopy: { flex: 1, alignItems: 'flex-end' },
+  modalBackButton: { minHeight: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', paddingHorizontal: 10, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 5, flexShrink: 0 },
+  modalBackButtonText: { color: '#F5F7F9', fontSize: 9, fontWeight: '900' },
   modalClose: { width: 35, height: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   modalCloseX: { color: '#FFFFFF', fontSize: 24, lineHeight: 27, fontWeight: '700', textAlign: 'center', marginTop: -1 },
   formationGridScroll: { marginTop: 12 },
