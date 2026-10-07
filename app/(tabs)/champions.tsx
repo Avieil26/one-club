@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { Stack, useRouter } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { Screen } from '@/components/ui';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
@@ -426,6 +427,7 @@ function EmptyCommunity() {
 export default function ChampionsScreen() {
   const app = useApp();
   const router = useRouter();
+  const params = useLocalSearchParams<{ communityDraft?: string }>();
   const { width } = useWindowDimensions();
   const mobile = width < 900;
 
@@ -449,6 +451,7 @@ export default function ChampionsScreen() {
   const [saving, setSaving] = useState(false);
   const [composerImages, setComposerImages] = useState<string[]>([]);
   const [controllerImages, setControllerImages] = useState<string[]>([]);
+  const [communitySquad, setCommunitySquad] = useState<any>(null);
   const [buildUp, setBuildUp] = useState<(typeof BUILD_UP_STYLES)[number]>('Balanced');
   const [defensive, setDefensive] = useState<(typeof DEFENSIVE_APPROACHES)[number]>('Balanced');
   const [lineHeight, setLineHeight] = useState('60');
@@ -509,6 +512,13 @@ export default function ChampionsScreen() {
     if (canView) void loadLiveData();
   }, [app.user?.id, canView]);
 
+  useEffect(() => {
+    if (!app.user?.id || params.communityDraft !== 'saved') return;
+    AsyncStorage.getItem(`champions-community-squad:${app.user.id}`)
+      .then((raw) => { if (!raw) return; try { setCommunitySquad(JSON.parse(raw)); } catch {} })
+      .catch(() => undefined);
+  }, [app.user?.id, params.communityDraft]);
+
   async function saveRun() {
     if (!app.user?.id) return;
 
@@ -565,7 +575,7 @@ export default function ChampionsScreen() {
     setSquadFormationPickerOpen(false);
     router.push({
       pathname: '/squad',
-      params: { returnTo: 'champions', formation: selected.id },
+      params: { returnTo: 'champions-community', formation: selected.id },
     });
   }
 
@@ -636,7 +646,7 @@ export default function ChampionsScreen() {
         buildUp,
         defensive,
         lineHeight,
-        squad: app.user?.squad ?? null,
+        squad: communitySquad ?? null,
       },
       image_uris: composerImages,
       status: 'pending',
@@ -653,6 +663,8 @@ export default function ChampionsScreen() {
     setBody('');
     setFormation('4-2-1-3');
     setComposerImages([]);
+    setCommunitySquad(null);
+    await AsyncStorage.removeItem(`champions-community-squad:${app.user.id}`);
     setShowComposer(false);
     Alert.alert('נשלח לבדיקה', 'הטקטיקה תופיע בקהילת Champions רק לאחר אישור.');
   }
@@ -918,9 +930,9 @@ export default function ChampionsScreen() {
             <Text style={styles.communitySquadHint}>בנה את הקבוצה שלך באמת עם שחקני האתר, 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
             <Pressable style={styles.uploadButton} onPress={() => openSquadBuilder()}>
               <Ionicons name="football-outline" size={17} color="#fff" />
-              <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
+              <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
             </Pressable>
-            {app.user?.squad ? <Text style={styles.communitySquadSaved}>סגל שמור · {app.user.squad.formation} · {Object.keys(app.user.squad.slots).length} בהרכב · {app.user.squad.bench.length} מחליפים</Text> : null}
+            {communitySquad ? <Text style={styles.communitySquadSaved}>סגל הפוסט · {communitySquad.formation} · {Object.keys(communitySquad.slots ?? {}).length} בהרכב · {(communitySquad.bench ?? []).length} מחליפים</Text> : null}
           </View>
           <Pressable style={styles.publishConfirm} onPress={() => void saveChampionsProfile()} disabled={saving}><Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שמור את העמוד שלי'}</Text></Pressable>
             <View style={styles.rewardMiniGrid}>
@@ -956,6 +968,8 @@ export default function ChampionsScreen() {
     lineHeight,
     formationPickerOpen,
     composerImages,
+    communitySquad,
+    params.communityDraft,
     router,
   ]);
 
