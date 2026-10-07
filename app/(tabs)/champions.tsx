@@ -723,9 +723,13 @@ export default function ChampionsScreen() {
   const canView = true;
 
   async function loadLiveData() {
-    if (!app.user?.id) return;
-    const supabase = getSupabase();
+    if (!app.user?.id) {
+      setCommunity([]);
+      setMyContent([]);
+      return;
+    }
 
+    const supabase = getSupabase();
     const [runResult, communityResult, myContentResult, profileResult] = await Promise.all([
       supabase.from('champions_runs').select('matches_played,wins,losses,cqp,rank,updated_at').eq('user_id', app.user.id).maybeSingle(),
       supabase.from('champions_content').select('id,user_id,kind,title,body,formation,platform,settings,image_uris,featured,status,created_at').eq('status', 'approved').order('created_at', { ascending: false }).limit(30),
@@ -758,14 +762,12 @@ export default function ChampionsScreen() {
       setDraftCqp('0');
     }
 
-    if (!communityResult.error) {
-      setCommunity((communityResult.data ?? []) as CommunityItem[]);
+    if (!communityResult.error) setCommunity((communityResult.data ?? []) as CommunityItem[]);
     if (!myContentResult.error) setMyContent((myContentResult.data ?? []) as CommunityItem[]);
     if (!profileResult.error && profileResult.data) {
       const profile = profileResult.data as any;
       setControllerSettings((profile.controller_settings ?? {}) as Partial<Record<ControllerSettingKey, string>>);
       if (profile.controller_platform === 'xbox' || profile.controller_platform === 'ps5') setPlatform(profile.controller_platform);
-    }
     }
   }
 
@@ -889,7 +891,6 @@ export default function ChampionsScreen() {
       Alert.alert('צריך להתחבר', 'כדי להעלות תוכן צריך להתחבר.');
       return;
     }
-
     if (!composerFormation || title.trim().length < 2 || body.trim().length < 2) {
       Alert.alert('חסר תוכן', composerFormation ? 'מלא כותרת והסבר קצר.' : 'בחר מערך לפני שליחת הטקטיקה.');
       return;
@@ -900,23 +901,25 @@ export default function ChampionsScreen() {
       const imageUris = composerImages.length
         ? await uploadProofs(app.user.id, composerImages, 'champions-tactics')
         : [];
+
       const { error } = await getSupabase().from('champions_content').insert({
         user_id: app.user.id,
         kind: 'tactic',
         title: title.trim(),
         body: body.trim(),
-        formation: composerFormation.trim() || null,
+        formation: composerFormation.trim(),
         platform,
         settings: {
           buildUp,
           defensive,
           lineHeight,
-          squad: communitySquad ?? null,
+          squad: communitySquad,
         },
         image_uris: imageUris,
         status: 'pending',
         featured: false,
       });
+
       if (error) throw error;
 
       setTitle('');
@@ -933,21 +936,6 @@ export default function ChampionsScreen() {
     } finally {
       setSaving(false);
     }
-
-    if (error) {
-      Alert.alert('העלאה נכשלה', 'נסה שוב.');
-      return;
-    }
-
-    setTitle('');
-    setBody('');
-    setComposerFormation('');
-    setComposerImages([]);
-    setCommunitySquad(null);
-    setSquadBuilderOpen(false);
-    setShowComposer(false);
-    await loadLiveData();
-    Alert.alert('נשלח לבדיקה', 'הטקטיקה תופיע בקהילת Champions רק לאחר אישור.');
   }
 
   const selectedReward = rewardForWins(selectedWins);
@@ -1376,15 +1364,20 @@ export default function ChampionsScreen() {
                         <View style={styles.communitySquadBlock}>
               <Text style={styles.communitySquadTitle}>הקבוצה של הפוסט</Text>
               <Text style={styles.communitySquadHint}>בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-              <Pressable style={styles.uploadButton} onPress={() => openSquadBuilder()}>
+              <Pressable
+                style={[styles.uploadButton, !composerFormation && styles.uploadButtonDisabled]}
+                onPress={() => openSquadBuilder()}
+              >
                 <Ionicons name="football-outline" size={17} color="#fff" />
                 <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
               </Pressable>
-              {app.user?.squad ? (
+              {communitySquad ? (
                 <Text style={styles.communitySquadSaved}>
-                  {app.user.squad.formation} · {Object.keys(app.user.squad.slots).length} בהרכב · {app.user.squad.bench.length} מחליפים
+                  {communitySquad.formation} · {Object.keys(communitySquad.slots).length} בהרכב · {communitySquad.bench.length} מחליפים
                 </Text>
-              ) : null}
+              ) : (
+                <Text style={styles.communitySquadSaved}>בחר מערך ואז בנה את הסגל לפוסט.</Text>
+              )}
             </View>
 
 <Pressable style={styles.uploadButton} onPress={() => void pickComposerImages()}><Ionicons name="image-outline" size={17} color="#fff" /><Text style={styles.uploadButtonText}>{composerImages.length ? `${composerImages.length} תמונות נבחרו` : 'העלה צילום של הטקטיקה / הקבוצה'}</Text></Pressable>
@@ -1530,7 +1523,8 @@ const styles = StyleSheet.create({
   selectorChip: { borderRadius: 9, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: 'rgba(5,8,12,.6)', paddingHorizontal: 10, paddingVertical: 7 },
   selectorChipActive: { borderColor: '#E53A4A', backgroundColor: 'rgba(229,58,74,.18)' },
   selectorChipText: { color: '#FFFFFF', fontSize: 9, fontWeight: '900' },
-  uploadButton: { minHeight: 44, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(226,45,61,.16)', paddingHorizontal: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 10 },
+  uploadButton: { minHeight: 44, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: 'rgba(226,45,61,.16)', paddingHorizontal: 13, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 10 },,
+  uploadButtonDisabled: { opacity: 0.45 }
   uploadButtonText: { color: '#F3F5F7', fontSize: 10, fontWeight: '900' },
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
