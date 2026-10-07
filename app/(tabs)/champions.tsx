@@ -454,6 +454,7 @@ export default function ChampionsScreen() {
   const [defensive, setDefensive] = useState<(typeof DEFENSIVE_APPROACHES)[number]>('Balanced');
   const [lineHeight, setLineHeight] = useState('60');
   const [formationPickerOpen, setFormationPickerOpen] = useState(false);
+  const [squadFormationPickerOpen, setSquadFormationPickerOpen] = useState(false);
 
   const canView = true;
 
@@ -549,6 +550,24 @@ export default function ChampionsScreen() {
 
   async function pickComposerImages() {
     try { setComposerImages(await pickImages(3)); } catch (error) { Alert.alert('העלאת תמונה', error instanceof Error ? error.message : 'לא הצלחנו לבחור תמונה.'); }
+  }
+
+  function openSquadBuilder() {
+    if (!app.user) {
+      Alert.alert('צריך להתחבר', 'התחבר כדי לבנות את הקבוצה שלך.');
+      return;
+    }
+    setSquadFormationPickerOpen(true);
+  }
+
+  function chooseSquadFormation(label: string) {
+    const selected = FORMATIONS.find((item) => item.label === label) ?? FORMATIONS[0];
+    setFormation(selected.label);
+    setSquadFormationPickerOpen(false);
+    router.push({
+      pathname: '/squad',
+      params: { returnTo: 'champions', formation: selected.id },
+    });
   }
 
   async function pickControllerImages() {
@@ -898,7 +917,7 @@ export default function ChampionsScreen() {
             <View style={styles.communitySquadBlock}>
             <Text style={styles.communitySquadTitle}>הקבוצה בפוסט</Text>
             <Text style={styles.communitySquadHint}>בנה את הקבוצה שלך באמת עם שחקני האתר, 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
-            <Pressable style={styles.uploadButton} onPress={() => router.push({ pathname: '/squad', params: { returnTo: 'champions' } })}>
+            <Pressable style={styles.uploadButton} onPress={() => openSquadBuilder()}>
               <Ionicons name="football-outline" size={17} color="#fff" />
               <Text style={styles.uploadButtonText}>{app.user?.squad ? 'עריכת הקבוצה שלי' : 'בניית הקבוצה שלי'}</Text>
             </Pressable>
@@ -1001,7 +1020,7 @@ export default function ChampionsScreen() {
         <View style={styles.modalBackdrop}>
           <Panel style={styles.composer}>
             <View style={styles.composerHeader}>
-              <Text style={styles.composerTitle}>העלה טקטיקה משלך</Text>
+              <Text style={styles.composerTitle}>העלה טקטיקה לקהילה</Text>
               <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
             </View>
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
@@ -1033,7 +1052,7 @@ export default function ChampionsScreen() {
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
             </View>
             <Pressable style={styles.publishConfirm} onPress={() => void publish()} disabled={saving}>
-              <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לאישור'}</Text>
+              <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לבדיקה'}</Text>
             </Pressable>
           </Panel>
         </View>
@@ -1041,6 +1060,12 @@ export default function ChampionsScreen() {
       ) : null}
 
       <FormationPickerModal visible={formationPickerOpen} selected={formation} onClose={() => setFormationPickerOpen(false)} onSelect={setFormation} />
+      <FormationPickerModal
+        visible={squadFormationPickerOpen}
+        selected={formation}
+        onClose={() => setSquadFormationPickerOpen(false)}
+        onSelect={chooseSquadFormation}
+      />
     </Screen>
   );
 }
@@ -1302,7 +1327,7 @@ const styles = StyleSheet.create({
 
   pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
-  modalBackdrop: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 100, backgroundColor: 'rgba(0,0,0,.72)', padding: 18, justifyContent: 'center' },
+  modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 999999, elevation: 999999, backgroundColor: 'rgba(0,0,0,.82)', padding: 18, justifyContent: 'center' } as any),
   composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39' },
   composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
@@ -1408,6 +1433,9 @@ const styles = StyleSheet.create({
   formationGrid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, paddingBottom: 8 },
   formationOption: { minHeight: 47, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0D131B', paddingHorizontal: 11, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 6 },
   formationPickerOptionDesktop: { width: '31.8%' },
+  formationOptionText: { color: '#F4F6F8', fontSize: 10, fontWeight: '900' },
+  formationOptionTextActive: { color: '#FFFFFF' },
+  selectorChipText: { color: '#F0F3F6', fontSize: 9, fontWeight: '900' },
   modalHeader: { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 10 },
   modalKicker: { color: '#D2AA57', fontSize: 8, fontWeight: '900', letterSpacing: 1.3, textAlign: 'right' },
   modalTitle: { color: '#F5F7F9', fontSize: 22, fontWeight: '900', textAlign: 'right', marginTop: 2 },
