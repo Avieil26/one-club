@@ -101,33 +101,20 @@ export function otwFor(baseId: string) {
   return OTW_CARDS[baseId] ?? null;
 }
 
-const TOTW4_BASE_IDS: Record<string, string> = {
-  "totw4-alexia-putellas": "putellas",
-  "totw4-jude-bellingham": "bellingham",
-  "totw4-ewa-pajor": "ea-241846-ewa-pajor",
-  "totw4-gianluigi-donnarumma": "donnarumma",
-  "totw4-debinha": "debinha",
-  "totw4-lauren-hemp": "hemp",
-  "totw4-kevin-de-bruyne": "debruyne",
-  "totw4-robert-lewandowski": "lewandowski",
-  "totw4-joao-cancelo": "ea-210514-joao-cancelo",
-  "totw4-omar-marmoush": "marmoush",
-  "totw4-milos-kerkez": "ea-260908-milos-kerkez",
-  "totw4-janine-sonis": "ea-227381-janine-sonis",
-  "totw4-mariam-toloba": "ea-79532-mariam-toloba",
-  "totw4-cornelia-kramer": "ea-73014-cornelia-kramer",
-  "totw4-troy-parrott": "ea-245902-troy-parrott",
-  "totw4-konstantinos-mavropanos": "ea-242000-konstantinos-mavropanos",
-  "totw4-nico-elvedi": "ea-221491-nico-elvedi",
-  "totw4-ciaron-brown": "ea-242541-ciaron-brown",
-  "totw4-salem-al-dawsari": "ea-210602-salem-al-dawsari",
-  "totw4-orri-oskarsson": "ea-269186-orri-oskarsson",
-  "totw4-ole-romeny": "ea-259114-ole-romeny",
-  "totw4-cavan-sullivan": "ea-73865-cavan-sullivan",
-  "totw4-annabel-schasching": "ea-273563-annabel-schasching"
-};
-
 export const SOLO_TOTW: FcPlayer[] = totw
+  .filter((row) => Boolean(row.id) && !row.baseId)
+  .map((row) => ({
+    id: row.id!,
+    name: row.name || row.en || row.id!,
+    en: row.en,
+    rating: row.rating,
+    position: row.position,
+    nation: row.nation || '',
+    league: row.league || 'TOTW',
+    club: row.club || 'TOTW',
+    edition: 'totw' as const,
+    face: row.face,
+  }));
   .filter((row) => Boolean(row.id) && (!row.baseId || row.id!.startsWith('totw4-')))
   .map((row) => ({
     id: row.id!,
