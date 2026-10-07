@@ -32,7 +32,8 @@ type AppValue = Snapshot & {
   createFutPost: (input: NewFutPost) => Promise<void>;
   rateFut: (postId: string, fit: number, fun: number, creativity: number) => Promise<void>;
   toggleFutLike: (postId: string) => Promise<void>;
-  addComment: (input: NewComment) => Promise<boolean>;
+  toggleCommentLike: (commentId: string) => Promise<void>;
+  addComment: (input: NewComment & { parentId?: string | null }) => Promise<boolean>;
   reportComment: (commentId: string) => Promise<void>;
   moderateComment: (commentId: string, action: 'visible' | 'remove') => Promise<void>;
   createGrounds: (input: NewGrounds) => Promise<void>;
@@ -58,6 +59,7 @@ const EMPTY: Snapshot = {
   ratings: [],
   likes: [],
   comments: [],
+  commentLikes: [],
   grounds: [],
   sbcChallenges: [],
   solutions: [],
@@ -121,6 +123,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     rateFut: (postId, fit, fun, creativity) =>
       run(() => backend.rateFut(postId, fit, fun, creativity), setSnap).then(() => undefined),
     toggleFutLike: (postId) => run(() => backend.toggleFutLike(postId), setSnap).then(() => undefined),
+    toggleCommentLike: (commentId) => run(() => backend.toggleCommentLike(commentId), setSnap).then(() => undefined),
     addComment: (input) => run(() => backend.addComment(input), (result) => setSnap(result.snap)).then((result) => result.held),
     reportComment: (commentId) => run(() => backend.reportComment(commentId), setSnap).then(() => undefined),
     moderateComment: (commentId, action) =>
