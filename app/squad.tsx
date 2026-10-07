@@ -18,11 +18,11 @@ const BENCH_MAX = 7;
 export default function SquadBuilderScreen() {
   const app = useApp();
   const router = useRouter();
-  const params = useLocalSearchParams<{ returnTo?: string }>();
+  const params = useLocalSearchParams<{ returnTo?: string; formation?: string }>();
   const saved = app.user?.squad ?? null;
-  const [formationId, setFormationId] = useState<FormationId>(
-    saved?.formation && isFormationId(saved.formation) ? saved.formation : '433',
-  );
+  const requestedFormation = typeof params.formation === 'string' && isFormationId(params.formation) ? params.formation : null;
+  const initialFormation = requestedFormation ?? (saved?.formation && isFormationId(saved.formation) ? saved.formation : '433');
+  const [formationId, setFormationId] = useState<FormationId>(initialFormation);
   const [slots, setSlots] = useState<Record<string, string>>(saved?.slots ?? {});
   const [bench, setBench] = useState<string[]>(saved?.bench ?? []);
   const [active, setActive] = useState<string | null>(null);
