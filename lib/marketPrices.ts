@@ -49,6 +49,6 @@ export type MarketPrice = { console?: number; pc?: number };
 export function marketQuote(id: string): MarketPrice | null {
   const row = table[id];
   if (row) return { console: row[0], pc: row[1] };
-  if (id.startsWith('totw4-')) return { console: 0, pc: 0 };
+  if (id.endsWith('--totw') || id.startsWith('totw4-')) return { console: 0, pc: 0 };
   return null;
 }
