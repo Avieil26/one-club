@@ -144,7 +144,7 @@ function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
     <View style={[styles.panel, style]}>
       <LinearGradient
-        colors={['rgba(13,14,20,.97)', 'rgba(7,9,14,.98)']}
+        colors={['rgba(13,14,20,.76)', 'rgba(7,9,14,.84)']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={StyleSheet.absoluteFillObject}
@@ -1061,7 +1061,6 @@ const styles = StyleSheet.create({
   comingSoonText: { color: '#85919C', fontSize: 13, fontWeight: '700' },
   panel: { position: 'relative', overflow: 'hidden', backgroundColor: 'rgba(9,13,19,.58)', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },
-  metricBarFill: { height: '100%', width: '75%', backgroundColor: '#F2C95F' },
   winSelector: { gap: 7, paddingVertical: 9, flexDirection: 'row-reverse' },
   winChip: { width: 48, height: 48, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', alignItems: 'center', justifyContent: 'center' },
   winChipActive: { backgroundColor: '#D93140', borderColor: '#FF6370' },
@@ -1125,15 +1124,18 @@ const styles = StyleSheet.create({
   rewardMiniValue: { color: '#F4CF64', fontSize: 18, fontWeight: '900' },
   rewardMiniLabel: { color: '#6C7782', fontSize: 8, fontWeight: '900', marginTop: 2 },
   tacticsHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 },
-  tacticTitle: { color: '#EEF1F4', fontSize: 20, fontWeight: '900', textAlign: 'right' },
-  tacticSub: { color: '#7A8690', fontSize: 10, fontWeight: '800', textAlign: 'right', marginTop: 3 },
-  sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
-  sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },
   heroCrestImage: { width: 82, height: 96 },
   textInput: { minHeight: 44, borderRadius: 11, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0A1017', color: '#fff', paddingHorizontal: 12, fontSize: 13, textAlign: 'right' },
   textArea: { minHeight: 100, textAlignVertical: 'top' },
   publishConfirm: { minHeight: 46, borderRadius: 11, backgroundColor: '#D92F3B', alignItems: 'center', justifyContent: 'center' },
   publishConfirmText: { color: '#fff', fontSize: 12, fontWeight: '900' },
+
+  pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
+  pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
+  modalBackdrop: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 100, backgroundColor: 'rgba(0,0,0,.72)', padding: 18, justifyContent: 'center' },
+  composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39' },
+  composerHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
+  composerTitle: { color: '#fff', fontSize: 20, fontWeight: '900' },
 
 });
 
