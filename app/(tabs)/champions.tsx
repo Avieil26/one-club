@@ -1151,7 +1151,7 @@ const styles = StyleSheet.create({
   controllerCircle: { width: 94, height: 94, borderRadius: 47, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#0B1118', alignItems: 'center', justifyContent: 'center' },
   controllerHomeRows: { flex: 1 },
 
-  pitch: { flex: 1, minHeight: 252, backgroundColor: '#103622', borderRadius: 16, borderWidth: 1, borderColor: 'rgba(135,202,160,.32)', overflow: 'hidden', position: 'relative' },
+  pitch: { flex: 1, minHeight: 500, backgroundColor: '#103622', borderRadius: 20, borderWidth: 1, borderColor: 'rgba(135,202,160,.38)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 18, shadowOffset: { width: 0, height: 8 } },
   pitchCompact: { width: 128, flex: 0, minHeight: 145, borderRadius: 13 },
   pitchMidline: { position: 'absolute', left: 9, right: 9, top: '50%', height: 1, backgroundColor: 'rgba(255,255,255,.20)' },
   pitchBoxTop: { position: 'absolute', left: '25%', right: '25%', top: '7%', height: '20%', borderWidth: 1, borderColor: 'rgba(255,255,255,.17)', borderBottomWidth: 0 },
