@@ -45,7 +45,11 @@ async function loadRemotePrices() {
     if (!res.ok) return;
     const next = (await res.json()) as Record<string, [number, number]>;
     if (!next || typeof next !== 'object' || Object.keys(next).length < 1000) return;
+    const seeded = rows as unknown as Record<string, [number, number]>;
     table = next;
+    for (const [id, value] of Object.entries(seeded)) {
+      if (value[0] === 0 && value[1] === 0 && !Object.prototype.hasOwnProperty.call(table, id)) table[id] = value;
+    }
     listeners.forEach((listener) => listener());
   } catch {
     /* Keep the saved snapshot when the daily list is unavailable. */
