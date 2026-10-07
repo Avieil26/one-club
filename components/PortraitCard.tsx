@@ -190,7 +190,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
       <Image
         source={require('@/assets/images/cards/totw-shell.png')}
         resizeMode="stretch"
-        style={{ position: 'absolute', inset: 0, width, height }}
+        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width, height }}
       />
       {!failed && media.photo ? (
         <Image
