@@ -90,6 +90,7 @@ type TokenReward = {
   visual?: PackVisual;
   packLabel?: string;
   tradeable?: boolean;
+  icon?: IconName;
 };
 
 const REWARD_TIERS: RewardTier[] = [
