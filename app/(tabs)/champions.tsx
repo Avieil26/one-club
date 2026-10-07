@@ -79,6 +79,7 @@ type RewardTier = {
   rank: string;
   coins: number;
   tokens: number;
+  cqp: number;
 };
 
 type TokenReward = {
@@ -325,6 +326,7 @@ function TokenIcon({ size = 22 }: { size?: number }) {
 
 function RewardStoreCard({ item }: { item: TokenReward }) {
   const isPack = item.visual != null;
+  const kind = isPack ? 'pack' : item.kind ?? (item.title === 'Frontline Flair' ? 'evolution' : 'cosmetic');
   return (
     <View style={styles.storeCard}>
       <View style={styles.storeVisual}>
@@ -340,10 +342,10 @@ function RewardStoreCard({ item }: { item: TokenReward }) {
         )}
       </View>
       <View style={styles.storeBody}>
-        <View style={styles.storeTypePill}><Text style={styles.storeTypeText}>{item.kind === 'pack' ? 'PACK' : item.kind === 'evolution' ? 'EVOLUTION' : 'COSMETIC'}</Text></View>
+        <View style={styles.storeTypePill}><Text style={styles.storeTypeText}>{kind === 'pack' ? 'PACK' : kind === 'evolution' ? 'EVOLUTION' : 'COSMETIC'}</Text></View>
         <Text style={styles.storeCardTitle}>{item.title}</Text>
         <Text style={styles.storeDetails}>{item.details}</Text>
-        {item.kind === 'pack' ? <Text style={styles.storeTradeable}>{item.tradeable ? 'TRADEABLE' : 'UNTRADEABLE'}</Text> : null}
+        {kind === 'pack' ? <Text style={styles.storeTradeable}>{item.tradeable ? 'TRADEABLE' : 'UNTRADEABLE'}</Text> : null}
       </View>
       <View style={styles.storeCostBox}><TokenIcon size={29} /><Text style={styles.storeCost}>{item.tokens}</Text></View>
     </View>
