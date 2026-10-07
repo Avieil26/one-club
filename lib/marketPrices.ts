@@ -48,9 +48,7 @@ export type MarketPrice = { console?: number; pc?: number };
 /** Real market price for a card that can be bought. Challenge rewards are absent. */
 export function marketQuote(id: string): MarketPrice | null {
   const row = table[id];
-  if (!row) return null;
-  const quote: MarketPrice = {};
-  if (row[0] > 0) quote.console = row[0];
-  if (row[1] > 0) quote.pc = row[1];
-  return quote.console || quote.pc ? quote : null;
+  if (row) return { console: row[0], pc: row[1] };
+  if (id.startsWith('totw4-')) return { console: 0, pc: 0 };
+  return null;
 }
