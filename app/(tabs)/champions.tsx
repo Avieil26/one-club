@@ -687,8 +687,6 @@ function EmptyCommunity() {
 
 export default function ChampionsScreen() {
   const app = useApp();
-  const router = useRouter();
-  const params = useLocalSearchParams<{ communityDraft?: string }>();
   const { width } = useWindowDimensions();
   const mobile = width < 900;
 
@@ -774,13 +772,6 @@ export default function ChampionsScreen() {
   useEffect(() => {
     if (canView) void loadLiveData();
   }, [app.user?.id, canView]);
-
-  useEffect(() => {
-    if (!app.user?.id || params.communityDraft !== 'saved') return;
-    AsyncStorage.getItem(`champions-community-squad:${app.user.id}`)
-      .then((raw) => { if (!raw) return; try { setCommunitySquad(JSON.parse(raw)); } catch {} })
-      .catch(() => undefined);
-  }, [app.user?.id, params.communityDraft]);
 
   async function saveRun() {
     if (!app.user?.id) return;
@@ -1289,7 +1280,8 @@ export default function ChampionsScreen() {
     controllerSettings,
     myContent,
     squadBuilderOpen,
-  ]);
+
+    composerFormationPickerOpen,  ]);
 
   if (!canView) {
     return (
@@ -1354,7 +1346,7 @@ export default function ChampionsScreen() {
               <Pressable onPress={() => setShowComposer(false)}><Ionicons name="close" size={21} color="#fff" /></Pressable>
             </View>
             <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
-            <Pressable style={styles.formationSelectCard} onPress={() => setFormationPickerOpen(true)}>
+            <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
   <View style={styles.formationSelectCopy}>
     <Text style={styles.formationSelectLabel}>FORMATION</Text>
     <Text style={styles.formationSelectValue}>{composerFormation || 'בחר מערך'}</Text>
