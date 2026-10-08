@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 
 import { Screen } from '@/components/ui';
+import { ChampionsLeaderboard } from '@/components/ChampionsLeaderboard';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
 import { SquadPitch } from '@/components/SquadPitch';
 import { PortraitCard } from '@/components/PortraitCard';
@@ -1080,6 +1081,8 @@ export default function ChampionsScreen() {
             <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
           </View>
         </Panel>
+
+        <ChampionsLeaderboard />
 
         <View style={styles.myContentPanel}>
           <Panel>
