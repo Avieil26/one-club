@@ -16,12 +16,7 @@ export function openChallenges(list: CareerChallenge[], at = Date.now()): Career
 export function openSbcChallenges(list: SbcChallenge[], at = Date.now()): SbcChallenge[] {
   return list
     .filter((challenge) => isOpen(challenge, at))
-    .sort((a, b) => {
-      const aEnd = a.endsAt ?? '9999';
-      const bEnd = b.endsAt ?? '9999';
-      if (aEnd !== bEnd) return aEnd.localeCompare(bEnd);
-      return b.createdAt.localeCompare(a.createdAt);
-    });
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || (b.endsAt ?? '9999').localeCompare(a.endsAt ?? '9999'));
 }
 
 export type RatingSummary = {
