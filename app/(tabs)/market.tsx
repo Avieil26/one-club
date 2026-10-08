@@ -19,9 +19,11 @@ import { useColumns } from '@/components/TileGrid';
 import { Button, colors, Muted, Title } from '@/components/ui';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
+import { catalogChallenge } from '@/lib/sbcCatalog';
 import { EMPTY_FILTERS, filtersActive, playerMatches, type PlayerFilters } from '@/lib/playerFilter';
 
 const PAGE_SIZE = 36;
+const PATATI_SBC_COST = catalogChallenge('sbc-patati-foundations')?.estimatedCostCoins ?? null;
 
 type SearchEntry = {
   player: FcPlayer;
@@ -345,6 +347,28 @@ export default function MarketScreen() {
                 style={{ width: cardWidth, alignItems: 'center' }}
               >
                 <PortraitCard player={player} width={cardWidth} />
+                {player.id === 'patati--foundations' && PATATI_SBC_COST ? (
+                  <View
+                    style={{
+                      marginTop: -4,
+                      width: '88%',
+                      minHeight: 30,
+                      paddingHorizontal: 9,
+                      paddingVertical: 5,
+                      borderRadius: 10,
+                      backgroundColor: 'rgba(5,23,19,0.97)',
+                      borderWidth: 1,
+                      borderColor: 'rgba(128,245,218,0.32)',
+                      flexDirection: 'row-reverse',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 7,
+                    }}
+                  >
+                    <Text style={{ color: '#92F1D7', fontSize: 9, fontWeight: '900', letterSpacing: 0.7 }}>SBC · PATATI</Text>
+                    <Text style={{ color: '#FFFFFF', fontSize: 11, fontWeight: '900' }}>≈{(PATATI_SBC_COST / 1000).toFixed(2)}K</Text>
+                  </View>
+                ) : null}
               </Pressable>
             ))}
             {Array.from({ length: columns - row.length }).map((_, index) => (
