@@ -157,6 +157,10 @@ function webRimStyle() {
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * TOTW_RATIO);
+  const shellWidth = Math.round(width * 1.08);
+  const shellHeight = Math.round(height * 1.08);
+  const overlayOffsetX = Math.round((shellWidth - width) / 2);
+  const overlayOffsetY = Math.round((shellHeight - height) / 2);
   const id = player.baseId ?? player.id;
   const media = playerMedia(id);
   const face = player.face ?? media.face;
@@ -174,66 +178,76 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
   return (
     <View
       style={{
-        width,
-        height,
+        width: shellWidth,
+        height: shellHeight,
         alignSelf: 'center',
-        overflow: 'visible',
-        borderRadius: width * 0.08,
+        overflow: 'hidden',
+        borderRadius: shellWidth * 0.08,
         backgroundColor: 'transparent',
       }}
     >
       <Image
         source={require('@/assets/images/cards/totw-shell.png')}
         resizeMode="stretch"
-        style={{ position: 'absolute', top: -height * 0.04, left: -width * 0.04, width: width * 1.08, height: height * 1.08 }}
+        style={{ position: 'absolute', top: 0, left: 0, width: shellWidth, height: shellHeight }}
       />
-      {!failed && media.photo ? (
-        <Image
-          source={{ uri: media.photo }}
-          resizeMode="contain"
-          onError={() => setFailed(true)}
-          accessibilityIgnoresInvertColors
-          style={{
-            position: 'absolute',
-            left: width * 0.15,
-            top: height * 0.075,
-            width: width * 0.70,
-            height: height * 0.47,
-          }}
+
+      <View
+        style={{
+          position: 'absolute',
+          left: overlayOffsetX,
+          top: overlayOffsetY,
+          width,
+          height,
+        }}
+      >
+        {!failed && media.photo ? (
+          <Image
+            source={{ uri: media.photo }}
+            resizeMode="contain"
+            onError={() => setFailed(true)}
+            accessibilityIgnoresInvertColors
+            style={{
+              position: 'absolute',
+              left: width * 0.15,
+              top: height * 0.075,
+              width: width * 0.70,
+              height: height * 0.47,
+            }}
+          />
+        ) : null}
+        <LinearGradient
+          colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
+          locations={[0.38, 0.66, 1]}
+          style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
         />
-      ) : null}
-      <LinearGradient
-        colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
-        locations={[0.38, 0.66, 1]}
-        style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
-      />
-      <View style={{ position: 'absolute', top: height * 0.12, left: width * 0.11, zIndex: 4 }}>
-        <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, width * 0.19), lineHeight: Math.max(16, width * 0.19), fontWeight: '900' }}>{player.rating}</Text>
-        <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, width * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
-      </View>
-      <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
-        <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
-      </View>
-      <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
-        <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
-        <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
-        <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
-      </View>
-      <View style={{ position: 'absolute', left: width * 0.075, right: width * 0.075, bottom: height * 0.105, flexDirection: 'row', zIndex: 6 }}>
-        {stats.map(([label, value]) => (
-          <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, width * 0.034), fontWeight: '800' }}>{label}</Text>
-            <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, width * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
-          </View>
-        ))}
-      </View>
-      <View style={{ position: 'absolute', bottom: height * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
-        <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
+        <View style={{ position: 'absolute', top: height * 0.12, left: width * 0.11, zIndex: 4 }}>
+          <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, width * 0.19), lineHeight: Math.max(16, width * 0.19), fontWeight: '900' }}>{player.rating}</Text>
+          <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, width * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+        </View>
+        <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
+          <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
+        </View>
+        <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
+          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
+          <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
+          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+        </View>
+        <View style={{ position: 'absolute', left: width * 0.075, right: width * 0.075, bottom: height * 0.105, flexDirection: 'row', zIndex: 6 }}>
+          {stats.map(([label, value]) => (
+            <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, width * 0.034), fontWeight: '800' }}>{label}</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, width * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={{ position: 'absolute', bottom: height * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+          <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
+        </View>
       </View>
     </View>
   );
 }
-
 function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number; width: number; glow?: boolean; sign?: string }) {
   const height = Math.round(width * TOTW_RATIO);
   const card = (
