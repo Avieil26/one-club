@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useRouter } from 'expo-router';
 
 import { CommunityBoards } from '@/components/CommunityBoards';
 import { Screen } from '@/components/ui';
@@ -7,6 +8,7 @@ import { useApp } from '@/lib/store';
 
 export default function BoardScreen() {
   const app = useApp();
+  const router = useRouter();
   const boards = useMemo(
     () =>
       communityBoards({
@@ -24,7 +26,7 @@ export default function BoardScreen() {
 
   return (
     <Screen scene="board" maxWidth={1180}>
-      <CommunityBoards boards={boards} />
+      <CommunityBoards boards={boards} onOpenProfile={(userId) => router.push(`/player/${userId}`)} />
     </Screen>
   );
 }
