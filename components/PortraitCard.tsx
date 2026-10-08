@@ -157,7 +157,12 @@ function webRimStyle() {
 }
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
-  const height = Math.round(width * TOTW_RATIO);
+  // TOTW 4 uses the same visual language as the existing gold TOTW card:
+  // a little more breathing room, a centered player render, a left metadata rail,
+  // and a fixed lower band for the name + six face stats.
+  const cardWidth = Math.round(width * 1.08);
+  const height = Math.round(cardWidth * TOTW_RATIO);
+  const s = cardWidth / 864;
   const id = player.baseId ?? player.id;
   const media = playerMedia(id);
   const face = player.face ?? media.face;
@@ -173,26 +178,49 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
   const [failed, setFailed] = useState(false);
 
   return (
-    <View style={{ width, height, alignSelf: 'center', position: 'relative' }}>
+    <View style={{ width: cardWidth, height, alignSelf: 'center', position: 'relative' }}>
       <Image
         source={require('@/assets/images/cards/totw-shell.png')}
         resizeMode="contain"
         accessibilityIgnoresInvertColors
-        style={{ position: 'absolute', left: 0, top: 0, width, height }}
+        style={{ position: 'absolute', left: 0, top: 0, width: cardWidth, height }}
       />
 
-      <View style={{ position: 'absolute', left: width * 0.15, top: height * 0.145, width: width * 0.20, zIndex: 5, alignItems: 'center' }}>
-        <Text style={{ color: '#F0CB72', fontSize: Math.max(16, width * 0.18), lineHeight: Math.max(17, width * 0.18), fontWeight: '900', letterSpacing: -0.8 }}>
+      {/* Rating + position — kept on the same vertical rail as the reference card. */}
+      <View style={{ position: 'absolute', left: 151 * s, top: 150 * s, width: 190 * s, height: 132 * s, zIndex: 8, alignItems: 'center' }}>
+        <Text
+          style={{
+            color: '#F0CB72',
+            fontSize: Math.max(26, 118 * s),
+            lineHeight: Math.max(28, 118 * s),
+            fontWeight: '900',
+            letterSpacing: -1.1,
+            textAlign: 'center',
+          }}
+        >
           {player.rating}
         </Text>
-        <Text style={{ color: '#F0CB72', fontSize: Math.max(8, width * 0.063), lineHeight: Math.max(9, width * 0.063), fontWeight: '900', letterSpacing: 0.7 }}>
+        <Text
+          style={{
+            color: '#F0CB72',
+            fontSize: Math.max(10, 40 * s),
+            lineHeight: Math.max(11, 40 * s),
+            fontWeight: '900',
+            letterSpacing: 0.7,
+            textAlign: 'center',
+            marginTop: -2 * s,
+          }}
+        >
           {player.position}
         </Text>
       </View>
 
-      <View style={{ position: 'absolute', left: width * 0.18, top: height * 0.305, width: width * 0.17, zIndex: 6, alignItems: 'center', gap: Math.max(5, width * 0.015) }}>
-        <NationFlag nation={player.nation} size={Math.max(14, width * 0.11)} />
-        <ClubBadge club={player.club} size={Math.max(20, width * 0.14)} />
+      {/* Nation and club sit below the rating rail and never compete with the player render. */}
+      <View style={{ position: 'absolute', left: 184 * s, top: 352 * s, width: 124 * s, zIndex: 9, alignItems: 'center' }}>
+        <NationFlag nation={player.nation} size={Math.max(20, 92 * s)} />
+      </View>
+      <View style={{ position: 'absolute', left: 176 * s, top: 438 * s, width: 140 * s, zIndex: 9, alignItems: 'center' }}>
+        <ClubBadge club={player.club} size={Math.max(26, 112 * s)} />
       </View>
 
       {!failed && media.photo ? (
@@ -201,30 +229,83 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
           resizeMode="contain"
           onError={() => setFailed(true)}
           accessibilityIgnoresInvertColors
-          style={{ position: 'absolute', left: width * 0.29, top: height * 0.095, width: width * 0.58, height: height * 0.56, zIndex: 3 }}
+          style={{
+            position: 'absolute',
+            left: 190 * s,
+            top: 150 * s,
+            width: 565 * s,
+            height: 610 * s,
+            zIndex: 3,
+          }}
         />
       ) : null}
 
+      {/* Soft fade keeps the lower edge of the render inside the dark card instead of colliding with the name. */}
       <LinearGradient
-        colors={['transparent', 'rgba(6,5,4,0.10)', '#060504']}
-        locations={[0, 0.56, 1]}
-        style={{ position: 'absolute', left: width * 0.24, right: width * 0.10, top: height * 0.455, height: height * 0.21, zIndex: 4 }}
+        colors={['transparent', 'rgba(6,5,4,0.08)', '#060504']}
+        locations={[0, 0.55, 1]}
+        style={{
+          position: 'absolute',
+          left: 185 * s,
+          right: 92 * s,
+          top: 615 * s,
+          height: 160 * s,
+          zIndex: 5,
+        }}
         pointerEvents="none"
       />
 
-      <View style={{ position: 'absolute', left: width * 0.15, right: width * 0.11, top: height * 0.665, zIndex: 7, alignItems: 'center' }}>
-        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.68} style={{ color: '#F0CB72', fontSize: Math.max(13, width * 0.085), fontWeight: '900', letterSpacing: 0.8, textAlign: 'center' }}>
+      <View style={{ position: 'absolute', left: 150 * s, right: 110 * s, top: 726 * s, height: 82 * s, zIndex: 10, alignItems: 'center', justifyContent: 'center' }}>
+        <Text
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          minimumFontScale={0.58}
+          style={{
+            color: '#F0CB72',
+            fontSize: Math.max(18, 64 * s),
+            lineHeight: Math.max(20, 70 * s),
+            fontWeight: '900',
+            letterSpacing: 1.2,
+            textAlign: 'center',
+          }}
+        >
           {name}
         </Text>
       </View>
 
-      <View style={{ position: 'absolute', left: width * 0.13, right: width * 0.12, top: height * 0.775, flexDirection: 'row', zIndex: 7 }}>
+      <View
+        style={{
+          position: 'absolute',
+          left: 126 * s,
+          right: 112 * s,
+          top: 840 * s,
+          height: 108 * s,
+          flexDirection: 'row',
+          zIndex: 10,
+          alignItems: 'flex-start',
+        }}
+      >
         {stats.map(([label, value]) => (
           <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ color: '#E8C36A', fontSize: Math.max(6, width * 0.039), fontWeight: '900', letterSpacing: 0.15 }}>
+            <Text
+              style={{
+                color: '#D4B56A',
+                fontSize: Math.max(7, 22 * s),
+                lineHeight: Math.max(8, 24 * s),
+                fontWeight: '900',
+                letterSpacing: 0.1,
+              }}
+            >
               {label}
             </Text>
-            <Text style={{ color: '#F5D67F', fontSize: Math.max(9, width * 0.067), lineHeight: Math.max(10, width * 0.070), fontWeight: '900' }}>
+            <Text
+              style={{
+                color: '#F5D67F',
+                fontSize: Math.max(13, 54 * s),
+                lineHeight: Math.max(15, 58 * s),
+                fontWeight: '900',
+              }}
+            >
               {value ?? '·'}
             </Text>
           </View>
