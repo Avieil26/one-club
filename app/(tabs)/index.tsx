@@ -278,6 +278,7 @@ export default function HomeScreen() {
               name={displayName(profiles, featured.userId)}
               body={featured.body}
               avatarUrl={profiles.find((profile) => profile.id === featured.userId)?.avatarUrl}
+              userId={featured.userId}
             />
             <Muted>{featuredLikes ? `${featuredLikes} לייקים` : 'עדיין בלי לייקים'}</Muted>
           </Card>
