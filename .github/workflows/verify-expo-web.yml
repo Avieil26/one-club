@@ -1,0 +1,64 @@
+name: Verify Expo Web
+
+on:
+  push:
+    branches:
+      - preview/fut-champions-premium
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Export Expo Web
+        run: npx expo export --platform web
+
+      - name: Install Playwright
+        run: npm install --no-save playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke test exported app
+        run: |
+          npx serve dist -l 4173 > /tmp/expo-serve.log 2>&1 &
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            const errors = [];
+            page.on('pageerror', (err) => errors.push('PAGEERROR: ' + err.message));
+            page.on('console', (msg) => {
+              if (msg.type() === 'error') errors.push('CONSOLE: ' + msg.text());
+            });
+            const response = await page.goto('http://127.0.0.1:4173', { waitUntil: 'networkidle', timeout: 30000 });
+            await page.waitForTimeout(3000);
+            const text = await page.locator('body').innerText();
+            console.log('HTTP_STATUS=' + (response ? response.status() : 'none'));
+            console.log('BODY_TEXT_LENGTH=' + text.trim().length);
+            console.log('BODY_TEXT_HEAD=' + JSON.stringify(text.trim().slice(0, 300)));
+            if (!response || response.status() >= 400) throw new Error('Bad HTTP response');
+            if (text.trim().length < 40) throw new Error('Blank/near-blank app body');
+            if (errors.length) {
+              console.error(errors.join('\n'));
+              throw new Error('Browser console errors detected');
+            }
+            await browser.close();
+          })().catch((err) => {
+            console.error(err.stack || err);
+            process.exit(1);
+          });
+          NODE
