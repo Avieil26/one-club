@@ -177,7 +177,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
         width,
         height,
         alignSelf: 'center',
-        overflow: 'hidden',
+        overflow: 'visible',
         borderRadius: width * 0.08,
         backgroundColor: 'transparent',
       }}
@@ -185,7 +185,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
       <Image
         source={require('@/assets/images/cards/totw-shell.png')}
         resizeMode="stretch"
-        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width, height }}
+        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width, height, transform: [{ scale: 1.10 }] }}
       />
       {!failed && media.photo ? (
         <Image
