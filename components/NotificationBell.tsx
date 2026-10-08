@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Animated, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
+import { Animated, Platform, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { ProfileFace } from '@/components/ProfileFace';
@@ -33,13 +33,14 @@ function timeLabel(value: string) {
 export function NotificationBell() {
   const app = useApp();
   const router = useRouter();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<NotificationRow[]>([]);
   const [loading, setLoading] = useState(false);
   const progress = useRef(new Animated.Value(0)).current;
   const unread = items.filter((item) => !item.read_at).length;
-  const panelWidth = Math.min(360, Math.max(280, width - 28));
+  const panelWidth = Math.min(320, Math.max(260, width - 24));
+  const panelMaxHeight = Math.min(500, Math.max(260, height - 88));
 
   async function load() {
     if (!app.user?.id || !isSupabaseConfigured()) {
@@ -118,11 +119,12 @@ export function NotificationBell() {
       <Animated.View
         pointerEvents={open ? 'auto' : 'none'}
         style={{
-          position: 'absolute',
-          top: 43,
-          right: 0,
+          position: Platform.OS === 'web' ? 'fixed' : 'absolute',
+          top: Platform.OS === 'web' ? 52 : 43,
+          right: Platform.OS === 'web' ? 12 : -8,
           width: panelWidth,
-          maxHeight: progress.interpolate({ inputRange: [0, 1], outputRange: [0, 500] }),
+          maxHeight: progress.interpolate({ inputRange: [0, 1], outputRange: [0, panelMaxHeight] }),
+          zIndex: 999,
           opacity: progress,
           overflow: 'hidden',
           borderRadius: 18,
@@ -146,7 +148,7 @@ export function NotificationBell() {
           </Pressable>
         </View>
 
-        <ScrollView nestedScrollEnabled style={{ maxHeight: 405 }} contentContainerStyle={{ padding: 8, gap: 6 }}>
+        <ScrollView nestedScrollEnabled style={{ maxHeight: Math.max(220, panelMaxHeight - 82) }} contentContainerStyle={{ padding: 8, gap: 6 }}>
           {loading ? (
             <View style={{ paddingVertical: 22, alignItems: 'center' }}><Ionicons name="sync-outline" size={18} color="#7C8994" /></View>
           ) : items.length ? items.map((item) => {
