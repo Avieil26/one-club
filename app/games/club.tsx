@@ -3,6 +3,7 @@ import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-n
 import { Stack } from 'expo-router';
 
 import { ClubBadge } from '@/components/ClubBadge';
+import { submitGameScore } from '@/lib/gameScores';
 import { Screen } from '@/components/ui';
 import { careerFont } from '@/lib/careerCardTheme';
 import { nextClubQuestion, type ClubQuestion } from '@/lib/clubQuiz';
@@ -45,6 +46,10 @@ export default function ClubGameScreen() {
     }, 900);
     return () => clearTimeout(timer);
   }, [pick, question, over, used, lives]);
+
+  useEffect(() => {
+    if (over) void submitGameScore('club', score);
+  }, [over, score]);
 
   function choose(club: string) {
     if (!question || pick || over) return;
