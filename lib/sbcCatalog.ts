@@ -180,7 +180,7 @@ export const officialChallenges: SbcChallenge[] = [
     targetScore: 85000,
     rules: null,
     reward: 'Max 86 Base Hero Pack',
-    estimatedCostCoins: 72050,
+    estimatedCostCoins: 53300,
     clubs: [],
     createdAt: '2026-10-08T17:00:00.000Z',
   },
