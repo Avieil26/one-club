@@ -20,7 +20,13 @@ const AKLIOUCHE_ENDS = '2026-10-09T17:00:00.000Z';
 const GROSS_ENDS = '2026-10-30T11:00:00.000Z';
 const MALEN_ENDS = '2026-10-29T13:00:00.000Z';
 const FRATTESI_ENDS = '2026-10-06T17:00:00.000Z';
-const PINA_ENDS = null;
+const PINA_ENDS = '2026-11-03T17:00:00.000Z';
+const MAX_HERO_ENDS = '2026-10-14T17:00:00.000Z';
+const TOTW_UPGRADE_ENDS = '2026-10-09T17:00:00.000Z';
+const DFG_CHALLENGE_4_ENDS = '2026-10-10T17:00:00.000Z';
+const MM_CURRENT_ENDS = '2026-10-08T17:00:00.000Z';
+const UPGRADE_5X80_ENDS = '2026-10-13T17:00:00.000Z';
+const UPGRADE_3X79_ENDS = '2026-10-12T17:00:00.000Z';
 
 export const NATION_DRILL_SQUAD: Record<string, string> = {
   gk: 'alisson',
@@ -138,13 +144,40 @@ const SILVER_UPGRADE_SQUAD: Record<string, string> = {
 
 export const officialChallenges: SbcChallenge[] = [
   {
+    id: 'sbc-dfg-challenge-4',
+    title: 'Destined For Glory · אתגר 4',
+    kind: 'classic',
+    requirements: 'Destined For Glory Challenge 4. פרס: חבילת שחקני אלקטרום קטנה.',
+    endsAt: DFG_CHALLENGE_4_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Small Electrum Players Pack',
+    clubs: [],
+    createdAt: '2026-10-07T17:00:00.000Z',
+  },
+  {
+    id: 'sbc-mm-current',
+    title: 'מרקי מאצ׳אפס · סבב אוקטובר',
+    kind: 'classic',
+    requirements: 'Marquee Matchups: ארבעה אתגרי משחקים בינלאומיים. פרס קבוצתי: Jumbo Gold Pack.',
+    endsAt: MM_CURRENT_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Jumbo Gold Pack',
+    clubs: [],
+    createdAt: '2026-10-01T17:00:00.000Z',
+  },
+
+  {
     id: 'sbc-max-86-base-hero-pack-patati',
     title: 'Max 86 Base Hero Pack · Patati',
     kind: 'streamlined',
-    requirements: 'Max 86 Base Hero Pack — אתגר חבילה חדש של Patati.',
-    endsAt: null,
+    requirements: 'Max. 86 Base Hero Upgrade: מגיעים ל־85,000 Item Score. מינימום דירוג שחקן 45, בלי כימיה ובלי מערך. פרס: חבילת Base Hero אקראית עד דירוג 86.',
+    endsAt: MAX_HERO_ENDS,
     createdBy: 'admin',
-    targetScore: null,
+    targetScore: 85000,
     rules: null,
     reward: 'Max 86 Base Hero Pack',
     clubs: [],
@@ -186,7 +219,7 @@ export const officialChallenges: SbcChallenge[] = [
     title: 'שדרוג 5×80+',
     kind: 'streamlined',
     requirements: 'שדרוג פעיל: חבילה עם 5 שחקני זהב בדירוג 80 ומעלה.',
-    endsAt: null,
+    endsAt: UPGRADE_5X80_ENDS,
     createdBy: 'admin',
     targetScore: null,
     rules: null,
@@ -202,7 +235,7 @@ export const officialChallenges: SbcChallenge[] = [
     title: 'שדרוג 3×79+',
     kind: 'streamlined',
     requirements: 'שדרוג פעיל: חבילה עם 3 שחקני זהב בדירוג 79 ומעלה.',
-    endsAt: null,
+    endsAt: UPGRADE_3X79_ENDS,
     createdBy: 'admin',
     targetScore: null,
     rules: null,
@@ -465,9 +498,9 @@ export const officialChallenges: SbcChallenge[] = [
     title: 'שדרוג TOTW',
     kind: 'streamlined',
     requirements: 'מגישים פריטים ומקבלים חבילה עם שחקן TOTW מהסבבים 1–3.',
-    endsAt: null,
+    endsAt: TOTW_UPGRADE_ENDS,
     createdBy: 'admin',
-    targetScore: null,
+    targetScore: 12000,
     rules: null,
     reward: 'חבילת TOTW 1–3',
     clubs: [],
