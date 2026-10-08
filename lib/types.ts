@@ -178,6 +178,8 @@ export type SbcChallenge = {
   rules: SquadRules | null;
   createdAt: string;
   reward?: string | null;
+  /** Current approximate coin cost shown for SBCs without a fixed Item Score price. */
+  estimatedCostCoins?: number | null;
   clubs?: string[];
   /** Nation pair for an international SBC, shown as flags on the card. */
   nations?: string[];
