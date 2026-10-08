@@ -1,6 +1,6 @@
 import rosterJson from '@/assets/data/players.json';
 import { ICON_PLAYERS } from '@/lib/iconPlayers';
-import { HERO_PLAYERS, SOLO_TOTW } from '@/lib/specialCards';
+import { HERO_PLAYERS, SQUAD_FOUNDATIONS_PLAYERS, SOLO_TOTW } from '@/lib/specialCards';
 import type { FcPlayer, PlayStyle } from '@/lib/fcPlayers';
 
 export type RosterFace = {
@@ -59,6 +59,7 @@ export const DB_PLAYERS: FcPlayer[] = [
   ...regularPlayers.filter((player) => !iconIds.has(player.id)),
   ...ICON_PLAYERS,
   ...HERO_PLAYERS,
+  ...SQUAD_FOUNDATIONS_PLAYERS,
   ...SOLO_TOTW,
 ].sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name, 'he'));
 
