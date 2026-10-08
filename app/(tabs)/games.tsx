@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 
+import { GameLeaderboard } from '@/components/GameLeaderboard';
 import { Screen } from '@/components/ui';
 import { careerFont } from '@/lib/careerCardTheme';
 import { portraitByEnglish } from '@/lib/clubQuiz';
@@ -90,6 +91,7 @@ export default function GamesScreen() {
         </LinearGradient>
       </Pressable>
       </View>
+      <GameLeaderboard />
     </Screen>
   );
 }
