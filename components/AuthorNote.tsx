@@ -1,9 +1,11 @@
-import { Text, View } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import { ProfileFace } from '@/components/ProfileFace';
 import { colors } from '@/components/ui';
 
-export function AuthorNote({ name, body, avatarUrl }: { name: string; body: string; avatarUrl?: string | null }) {
+export function AuthorNote({ name, body, avatarUrl, userId }: { name: string; body: string; avatarUrl?: string | null; userId?: string }) {
+  const router = useRouter();
   const words = body.trim();
   if (!words) return null;
   return (
@@ -19,12 +21,16 @@ export function AuthorNote({ name, body, avatarUrl }: { name: string; body: stri
         borderColor: 'rgba(186, 206, 230, 0.28)',
       }}
     >
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+      <Pressable
+        disabled={!userId}
+        onPress={() => userId && router.push(`/player/${userId}`)}
+        style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}
+      >
         <ProfileFace name={name} uri={avatarUrl} size={40} />
         <Text style={{ color: '#F4F7F2', fontSize: 15, fontWeight: '600', textAlign: 'right', writingDirection: 'rtl' }}>
           {name} כתב
         </Text>
-      </View>
+      </Pressable>
       <Text
         style={{
           color: colors.text,
