@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Animated, Pressable, Text, View } from 'react-native';
 
@@ -38,6 +38,26 @@ const ANSWERS: Record<string, string> = {
   'איך מחפשים שחקנים ומפרסמים מודעה בגראונדס?': 'בוחרים פלטפורמה וסוג חיפוש בגראונדס, ואז אפשר לפתוח מודעה חדשה עם הפרטים של השחקן והמשחק.',
   'איך עוקבים, שולחים הודעה ומתקשרים עם שחקנים אחרים?': 'נכנסים לפרופיל הציבורי של שחקן, ומשם אפשר לעקוב אחריו או לפתוח שיחת הודעות בתוך 1 Club.',
 };
+
+function FaqItem({ question, answer, expanded, onPress }: { question: string; answer: string; expanded: boolean; onPress: () => void }) {
+  const progress = useRef(new Animated.Value(expanded ? 1 : 0)).current;
+  useEffect(() => {
+    Animated.timing(progress, { toValue: expanded ? 1 : 0, duration: 220, useNativeDriver: false }).start();
+  }, [expanded, progress]);
+  return (
+    <Pressable accessibilityRole="button" onPress={onPress} style={styles.question}>
+      <View style={{ flex: 1, minWidth: 0 }}>
+        <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 8 }}>
+          <Text style={[styles.questionText, { flex: 1 }]}>{question}</Text>
+          <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color="#E8C46A" />
+        </View>
+        <Animated.View style={{ maxHeight: progress.interpolate({ inputRange: [0, 1], outputRange: [0, 140] }), opacity: progress, overflow: 'hidden' }}>
+          <Text style={styles.answer}>{answer}</Text>
+        </Animated.View>
+      </View>
+    </Pressable>
+  );
+}
 
 function FaqItem({ question, answer, expanded, onPress }: { question: string; answer: string; expanded: boolean; onPress: () => void }) {
   const progress = useRef(new Animated.Value(expanded ? 1 : 0)).current;
