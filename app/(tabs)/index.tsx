@@ -196,7 +196,7 @@ export default function HomeScreen() {
           1 CLUB
         </Text>
         <Title>{user ? user.displayName : 'המגרש'}</Title>
-        <Muted>הקהילה הישראלית ל־1 Club. אתר מעריצים עצמאי ולא קשור ל־EA.</Muted>
+        <Muted>הקהילה הישראלית ל־EA FC 27. אתר מעריצים עצמאי ולא קשור ל־EA.</Muted>
       </Rise>
       <Rise index={1}>
         <FutzBetaDownload />
