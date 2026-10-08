@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Image, Platform, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Path } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -157,12 +156,7 @@ function webRimStyle() {
 }
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
-  // TOTW 4 uses the same visual language as the existing gold TOTW card:
-  // a little more breathing room, a centered player render, a left metadata rail,
-  // and a fixed lower band for the name + six face stats.
-  const cardWidth = Math.round(width * 1.08);
-  const height = Math.round(cardWidth * TOTW_RATIO);
-  const s = cardWidth / 864;
+  const height = Math.round(width * TOTW_RATIO);
   const id = player.baseId ?? player.id;
   const media = playerMedia(id);
   const face = player.face ?? media.face;
@@ -174,55 +168,25 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
     ['DEF', face?.def],
     ['PHY', face?.phy],
   ] as const;
-  const name = surname(media.en || player.en || player.name || id);
+  const name = surname(media.en || player.name || id);
   const [failed, setFailed] = useState(false);
 
   return (
-    <View style={{ width: cardWidth, height, alignSelf: 'center', position: 'relative' }}>
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: width * 0.08,
+        backgroundColor: 'transparent',
+      }}
+    >
       <Image
         source={require('@/assets/images/cards/totw-shell.png')}
-        resizeMode="contain"
-        accessibilityIgnoresInvertColors
-        style={{ position: 'absolute', left: 0, top: 0, width: cardWidth, height }}
+        resizeMode="stretch"
+        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width, height }}
       />
-
-      {/* Rating + position — kept on the same vertical rail as the reference card. */}
-      <View style={{ position: 'absolute', left: 151 * s, top: 150 * s, width: 190 * s, height: 132 * s, zIndex: 8, alignItems: 'center' }}>
-        <Text
-          style={{
-            color: '#F0CB72',
-            fontSize: Math.max(26, 118 * s),
-            lineHeight: Math.max(28, 118 * s),
-            fontWeight: '900',
-            letterSpacing: -1.1,
-            textAlign: 'center',
-          }}
-        >
-          {player.rating}
-        </Text>
-        <Text
-          style={{
-            color: '#F0CB72',
-            fontSize: Math.max(10, 40 * s),
-            lineHeight: Math.max(11, 40 * s),
-            fontWeight: '900',
-            letterSpacing: 0.7,
-            textAlign: 'center',
-            marginTop: -2 * s,
-          }}
-        >
-          {player.position}
-        </Text>
-      </View>
-
-      {/* Nation and club sit below the rating rail and never compete with the player render. */}
-      <View style={{ position: 'absolute', left: 184 * s, top: 352 * s, width: 124 * s, zIndex: 9, alignItems: 'center' }}>
-        <NationFlag nation={player.nation} size={Math.max(20, 92 * s)} />
-      </View>
-      <View style={{ position: 'absolute', left: 176 * s, top: 438 * s, width: 140 * s, zIndex: 9, alignItems: 'center' }}>
-        <ClubBadge club={player.club} size={Math.max(26, 112 * s)} />
-      </View>
-
       {!failed && media.photo ? (
         <Image
           source={{ uri: media.photo }}
@@ -231,85 +195,40 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
           accessibilityIgnoresInvertColors
           style={{
             position: 'absolute',
-            left: 190 * s,
-            top: 150 * s,
-            width: 565 * s,
-            height: 610 * s,
-            zIndex: 3,
+            left: width * 0.15,
+            top: height * 0.075,
+            width: width * 0.70,
+            height: height * 0.47,
           }}
         />
       ) : null}
-
-      {/* Soft fade keeps the lower edge of the render inside the dark card instead of colliding with the name. */}
       <LinearGradient
-        colors={['transparent', 'rgba(6,5,4,0.08)', '#060504']}
-        locations={[0, 0.55, 1]}
-        style={{
-          position: 'absolute',
-          left: 185 * s,
-          right: 92 * s,
-          top: 615 * s,
-          height: 160 * s,
-          zIndex: 5,
-        }}
-        pointerEvents="none"
+        colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
+        locations={[0.38, 0.66, 1]}
+        style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
       />
-
-      <View style={{ position: 'absolute', left: 150 * s, right: 110 * s, top: 726 * s, height: 82 * s, zIndex: 10, alignItems: 'center', justifyContent: 'center' }}>
-        <Text
-          numberOfLines={1}
-          adjustsFontSizeToFit
-          minimumFontScale={0.58}
-          style={{
-            color: '#F0CB72',
-            fontSize: Math.max(18, 64 * s),
-            lineHeight: Math.max(20, 70 * s),
-            fontWeight: '900',
-            letterSpacing: 1.2,
-            textAlign: 'center',
-          }}
-        >
-          {name}
-        </Text>
+      <View style={{ position: 'absolute', top: height * 0.12, left: width * 0.11, zIndex: 4 }}>
+        <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, width * 0.19), lineHeight: Math.max(16, width * 0.19), fontWeight: '900' }}>{player.rating}</Text>
+        <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, width * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
       </View>
-
-      <View
-        style={{
-          position: 'absolute',
-          left: 126 * s,
-          right: 112 * s,
-          top: 840 * s,
-          height: 108 * s,
-          flexDirection: 'row',
-          zIndex: 10,
-          alignItems: 'flex-start',
-        }}
-      >
+      <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
+        <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
+      </View>
+      <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
+        <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
+        <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
+        <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+      </View>
+      <View style={{ position: 'absolute', left: width * 0.075, right: width * 0.075, bottom: height * 0.105, flexDirection: 'row', zIndex: 6 }}>
         {stats.map(([label, value]) => (
           <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-            <Text
-              style={{
-                color: '#D4B56A',
-                fontSize: Math.max(7, 22 * s),
-                lineHeight: Math.max(8, 24 * s),
-                fontWeight: '900',
-                letterSpacing: 0.1,
-              }}
-            >
-              {label}
-            </Text>
-            <Text
-              style={{
-                color: '#F5D67F',
-                fontSize: Math.max(13, 54 * s),
-                lineHeight: Math.max(15, 58 * s),
-                fontWeight: '900',
-              }}
-            >
-              {value ?? '·'}
-            </Text>
+            <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, width * 0.034), fontWeight: '800' }}>{label}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, width * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
           </View>
         ))}
+      </View>
+      <View style={{ position: 'absolute', bottom: height * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+        <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
       </View>
     </View>
   );
