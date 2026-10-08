@@ -155,38 +155,16 @@ function webRimStyle() {
   return { filter: `url("${base}#totw-rim")` } as object;
 }
 
-function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
-  const height = Math.round(width * TOTW_RATIO);
-  const id = player.baseId ?? player.id;
-  const media = playerMedia(id);
-  const face = player.face ?? media.face;
-  const stats = [
-    ['PAC', face?.pac],
-    ['SHO', face?.sho],
-    ['PAS', face?.pas],
-    ['DRI', face?.dri],
-    ['DEF', face?.def],
-    ['PHY', face?.phy],
-  ] as const;
-  const name = surname(media.en || player.name || id);
-  const [failed, setFailed] = useState(false);
+      <View
+        style={{
+          position: 'absolute',
+          left: overlayOffsetX,
+          top: overlayOffsetY,
+          width,
+          height,
+        }}
+      >
 
-  return (
-    <View
-      style={{
-        width,
-        height,
-        alignSelf: 'center',
-        overflow: 'hidden',
-        borderRadius: width * 0.08,
-        backgroundColor: 'transparent',
-      }}
-    >
-      <Image
-        source={require('@/assets/images/cards/totw-shell.png')}
-        resizeMode="stretch"
-        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width, height }}
-      />
       {!failed && media.photo ? (
         <Image
           source={{ uri: media.photo }}
@@ -233,7 +211,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
     </View>
   );
 }
-
+</View>
 function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number; width: number; glow?: boolean; sign?: string }) {
   const height = Math.round(width * TOTW_RATIO);
   const card = (
