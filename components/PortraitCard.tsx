@@ -157,8 +157,8 @@ function webRimStyle() {
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const baseHeight = Math.round(width * TOTW_RATIO);
-  const shellWidth = Math.round(width * 1.28);
-  const shellHeight = Math.round(baseHeight * 1.28);
+  const shellWidth = Math.round(width * 1.38);
+  const shellHeight = Math.round(baseHeight * 1.38);
   const contentWidth = width;
   const contentHeight = baseHeight;
   const overlayOffsetX = Math.round((shellWidth - contentWidth) / 2);
@@ -217,11 +217,6 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
             }}
           />
         ) : null}
-        <LinearGradient
-          colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
-          locations={[0.38, 0.66, 1]}
-          style={{ position: 'absolute', left: 0, right: 0, top: contentHeight * 0.34, height: contentHeight * 0.34 }}
-        />
         <View style={{ position: 'absolute', top: contentHeight * 0.12, left: contentWidth * 0.11, zIndex: 4 }}>
           <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, contentWidth * 0.19), lineHeight: Math.max(16, contentWidth * 0.19), fontWeight: '900' }}>{player.rating}</Text>
           <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, contentWidth * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
