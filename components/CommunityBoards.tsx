@@ -115,7 +115,7 @@ function BoardRowView({ row, place, mark, onOpenProfile }: { row: BoardRow; plac
         {mark === 'heart' ? <HeartMark size={14} /> : null}
         <Text style={{ color: '#f3f5f7', fontFamily: careerFont, fontSize: 16, fontWeight: '800', writingDirection: 'ltr' }}>{value}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
