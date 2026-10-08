@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 import { careerFont } from '@/lib/careerCardTheme';
 import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
@@ -44,13 +45,16 @@ export function ChampionsLeaderboard() {
         setRows(
           error
             ? []
-            : (data ?? []).map((row) => ({
-                userId: row.user_id,
-                wins: Number(row.wins) || 0,
-                losses: Number(row.losses) || 0,
-                cqp: Number(row.cqp) || 0,
-                rank: row.rank == null ? null : Number(row.rank),
-              })),
+            : (data ?? [])
+                .filter((row) => row.user_id !== app.user?.id)
+                .slice(0, 10)
+                .map((row) => ({
+                  userId: row.user_id,
+                  wins: Number(row.wins) || 0,
+                  losses: Number(row.losses) || 0,
+                  cqp: Number(row.cqp) || 0,
+                  rank: row.rank == null ? null : Number(row.rank),
+                })),
         );
       })
       .finally(() => {
@@ -59,13 +63,13 @@ export function ChampionsLeaderboard() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [app.user?.id]);
 
   return (
     <View style={styles.panel}>
       <Text style={styles.kicker}>CHAMPIONS LEADERBOARD</Text>
       <Text style={styles.title}>טבלת החודש</Text>
-      <Text style={styles.subtitle}>מדורגת לפי CQP, ואז לפי ניצחונות. מתחלפת בתחילת כל חודש.</Text>
+      <Text style={styles.subtitle}>מדורגת לפי CQP · נקודות העפלה ל־Champions, ואז לפי ניצחונות. מתחלפת בתחילת כל חודש.</Text>
       {loading ? (
         <View style={styles.loading}><ActivityIndicator color="#E8C46A" /></View>
       ) : rows.length ? (
@@ -76,8 +80,13 @@ export function ChampionsLeaderboard() {
             return (
               <Pressable key={row.userId} onPress={() => router.push('/player/' + row.userId)} style={[styles.row, mine && styles.rowMine]}>
                 <Text style={styles.place}>{index + 1}</Text>
+                {profile?.avatarUrl ? (
+                  <Image source={{ uri: profile.avatarUrl }} style={styles.avatar} />
+                ) : (
+                  <View style={styles.avatarFallback}><Ionicons name="person" size={15} color="#8E99A4" /></View>
+                )}
                 <View style={styles.nameBlock}>
-                  <Text numberOfLines={1} style={styles.name}>{profile?.displayName ?? 'שחקן'}{mine ? ' · אתה' : ''}</Text>
+                  <Text numberOfLines={1} style={styles.name}>{profile?.displayName ?? 'שחקן'}</Text>
                   <Text style={styles.record}>{row.wins}-{row.losses}{row.rank != null ? ' · ' + row.rank : ''}</Text>
                 </View>
                 <Text style={styles.cqp}>{row.cqp.toLocaleString('en-US')}</Text>
@@ -100,6 +109,8 @@ const styles = {
   loading: { paddingVertical: 18, alignItems: 'center' as const },
   row: { minHeight: 52, borderRadius: 11, paddingHorizontal: 9, flexDirection: 'row-reverse' as const, alignItems: 'center' as const, gap: 9, backgroundColor: 'rgba(255,255,255,.025)' },
   rowMine: { backgroundColor: 'rgba(235,201,98,.08)', borderWidth: 1, borderColor: 'rgba(235,201,98,.20)' },
+  avatar: { width: 30, height: 30, borderRadius: 15, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#151C24' },
+  avatarFallback: { width: 30, height: 30, borderRadius: 15, borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', backgroundColor: '#151C24', alignItems: 'center' as const, justifyContent: 'center' as const },
   place: { width: 24, color: '#BEC7CF', fontFamily: careerFont, fontSize: 14, fontWeight: '900' as const, textAlign: 'center' as const },
   nameBlock: { flex: 1, minWidth: 0 },
   name: { color: '#F2F5F7', fontFamily: careerFont, fontSize: 12, fontWeight: '900' as const, textAlign: 'right' as const },
