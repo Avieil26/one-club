@@ -11,6 +11,8 @@ export type SbcTileTheme = {
 };
 
 const BY_ID: Record<string, SbcTileTheme> = {
+  'sbc-max-86-base-hero-upgrade': { colors: ['#160B2A', '#4C2B73', '#D7B24A'], accent: '#FFF0B5', pack: 'gold', packLabel: 'HERO', badgeText: '86', badgeTone: 'gold' },
+  'sbc-patati-foundations': { colors: ['#1C0C16', '#6E263D', '#C9A13C'], accent: '#FFF0B5', pack: 'gold', packLabel: 'FOUNDATIONS', badgeText: '84', badgeTone: 'gold' },
   'sbc-potm-olise': { colors: ['#0B1B1A', '#174D49', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '91', badgeTone: 'gold' },
   'sbc-dfg-tarciane': { colors: ['#0A1B18', '#0F5A49', '#2AAE8A'], accent: '#9FF8D8', pack: 'otw', packLabel: '', badgeText: '84', badgeTone: 'teal' },
   'sbc-dfg-akliouche': { colors: ['#0A1B18', '#174D49', '#C9A227'], accent: '#FFE8A1', pack: 'gold', packLabel: '', badgeText: '85', badgeTone: 'gold' },
