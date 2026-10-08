@@ -157,8 +157,8 @@ function webRimStyle() {
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * TOTW_RATIO);
-  const shellWidth = Math.round(width * 1.18);
-  const shellHeight = Math.round(height * 1.18);
+  const shellWidth = Math.round(width * 1.24);
+  const shellHeight = Math.round(height * 1.24);
   const overlayOffsetX = Math.round((shellWidth - width) / 2);
   const overlayOffsetY = Math.round((shellHeight - height) / 2);
   const id = player.baseId ?? player.id;
@@ -227,6 +227,18 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
         <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
           <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
         </View>
+        <LinearGradient
+          colors={['rgba(8,6,4,0)', 'rgba(8,6,4,0.96)', 'rgba(8,6,4,0)']}
+          locations={[0, 0.5, 1]}
+          style={{
+            position: 'absolute',
+            left: width * 0.055,
+            right: width * 0.055,
+            top: height * 0.535,
+            height: height * 0.22,
+            zIndex: 4,
+          }}
+        />
         <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
           <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
           <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
@@ -571,7 +583,7 @@ export function PortraitCard({
     const totwArt = TOTW_ART[artId];
     if (totwArt) {
       const autograph = glow && totwFinish(artId) === 'pristine' ? surname(player.en || player.name || '') : '';
-      return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} scale={1.18} />;
+      return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} scale={1.24} />;
     }
     return <DynamicTotwPortraitCard player={player} width={width} />;
   }
