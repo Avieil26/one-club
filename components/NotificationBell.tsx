@@ -62,10 +62,6 @@ export function NotificationBell() {
   }, [app.user?.id]);
 
   useEffect(() => {
-    void load();
-  }, [app.user?.id]);
-
-  useEffect(() => {
     if (!open || !app.user?.id) return;
     void load();
     const timer = setInterval(() => void load(), 15000);
