@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import type { ReactNode } from 'react';
-import { Image, Platform, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
+import { Image, Platform, Pressable, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgGradient, Path, Polygon, Stop } from 'react-native-svg';
 
 import { ProfileFace } from '@/components/ProfileFace';
@@ -74,10 +74,12 @@ function Rank({ place }: { place: number }) {
   return <Text style={{ color: '#d5dbe3', fontFamily: careerFont, fontSize: 15, fontWeight: '700' }}>{place}</Text>;
 }
 
-function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
+function BoardRowView({ row, place, mark, onOpenProfile }: { row: BoardRow; place: number; mark?: 'check' | 'heart'; onOpenProfile?: (userId: string) => void }) {
   const value = row.value.toLocaleString('en-US');
   return (
-    <View
+    <Pressable
+      disabled={!onOpenProfile}
+      onPress={() => onOpenProfile?.(row.userId)}
       style={{
         minHeight: 58,
         paddingHorizontal: 6,
@@ -124,6 +126,7 @@ function Column({
   valueLabel,
   rows,
   mark,
+  onOpenProfile,
 }: {
   title: string;
   color: string;
@@ -131,6 +134,7 @@ function Column({
   valueLabel: string;
   rows: BoardRow[];
   mark?: 'check' | 'heart';
+  onOpenProfile?: (userId: string) => void;
 }) {
   return (
     <View style={{ flex: 1, minWidth: 0 }}>
@@ -146,7 +150,7 @@ function Column({
         <Text style={[head, { width: 84, textAlign: 'left' }]}>{valueLabel}</Text>
       </View>
       {rows.length ? (
-        rows.map((row, index) => <BoardRowView key={row.userId} row={row} place={index + 1} mark={mark} />)
+        rows.map((row, index) => <BoardRowView key={row.userId} row={row} place={index + 1} mark={mark} onOpenProfile={onOpenProfile} />)
       ) : (
         <Text style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 13, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl', paddingVertical: 16 }}>
           עוד אין כאן אף אחד
@@ -164,7 +168,7 @@ const head = {
   textAlign: 'center' as const,
 };
 
-export function CommunityBoards({ boards }: { boards: BoardData }) {
+export function CommunityBoards({ boards, onOpenProfile }: { boards: BoardData; onOpenProfile?: (userId: string) => void }) {
   const { width } = useWindowDimensions();
   const sideBySide = width >= 980;
   return (
@@ -185,9 +189,9 @@ export function CommunityBoards({ boards }: { boards: BoardData }) {
         />
       </View>
       <View style={{ flexDirection: sideBySide ? 'row' : 'column', direction: 'rtl', gap: sideBySide ? 28 : 36, alignItems: 'stretch' }}>
-        <Column title="הכי הרבה XP" color="#f7f8fa" icon={<HexMark />} valueLabel="XP" rows={boards.xp} />
-        <Column title="פותרים" color="#5ee6a0" icon={<CheckMark />} valueLabel="פתרונות" rows={boards.solvers} mark="check" />
-        <Column title="מפרגנים" color="#ff5d73" icon={<HeartMark />} valueLabel="אישורים" rows={boards.supporters} mark="heart" />
+        <Column title="הכי הרבה XP" color="#f7f8fa" icon={<HexMark />} valueLabel="XP" rows={boards.xp} onOpenProfile={onOpenProfile} />
+        <Column title="פותרים" color="#5ee6a0" icon={<CheckMark />} valueLabel="פתרונות" rows={boards.solvers} mark="check" onOpenProfile={onOpenProfile} />
+        <Column title="מפרגנים" color="#ff5d73" icon={<HeartMark />} valueLabel="אישורים" rows={boards.supporters} mark="heart" onOpenProfile={onOpenProfile} />
       </View>
     </View>
   );
