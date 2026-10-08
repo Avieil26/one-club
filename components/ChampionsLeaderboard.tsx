@@ -46,8 +46,7 @@ export function ChampionsLeaderboard() {
           error
             ? []
             : (data ?? [])
-                .filter((row) => row.user_id !== app.user?.id)
-                .slice(0, 10)
+.slice(0, 10)
                 .map((row) => ({
                   userId: row.user_id,
                   wins: Number(row.wins) || 0,
