@@ -17,7 +17,6 @@ const LINKS = [
   { href: '/grounds' as const, label: 'גראונדס' },
   { href: '/sbc' as const, label: 'SBC' },
   { href: '/games' as const, label: 'משחקונים' },
-  { href: '/updates' as const, label: 'עדכונים' },
   { href: '/board' as const, label: 'לוח' },
   { href: '/market' as const, label: 'שחקנים' },
 ];
