@@ -96,7 +96,7 @@ export default function PlayerProfileScreen() {
 
           {!mine && app.user ? (
             <View style={{ flexDirection: 'row', gap: 10 }}>
-              <Button label={iFollow ? 'עוקב' : 'עקוב'} variant={iFollow ? 'ghost' : 'default'} onPress={toggleFollow} disabled={app.busy} />
+              <Button label={iFollow ? 'עוקב' : 'עקוב'} variant={iFollow ? 'ghost' : 'primary'} onPress={toggleFollow} disabled={app.busy} />
               <Button label="הודעה" onPress={() => router.push(`/grounds/chat/${id}`)} disabled={app.busy} />
             </View>
           ) : null}
