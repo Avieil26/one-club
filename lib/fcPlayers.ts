@@ -27,6 +27,15 @@ export type FcPlayer = {
   regularPosition?: string;
   regularClub?: string;
   regularLeague?: string;
+  /** Optional detailed identity data for special cards. */
+  foot?: 'L' | 'R';
+  weakFoot?: number;
+  skillMoves?: number;
+  accelerate?: string;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
+  roles?: string[];
 };
 
 export const N = {
