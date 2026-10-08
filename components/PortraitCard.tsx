@@ -159,8 +159,10 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
   const baseHeight = Math.round(width * TOTW_RATIO);
   const shellWidth = Math.round(width * 1.28);
   const shellHeight = Math.round(baseHeight * 1.28);
-  const contentWidth = shellWidth;
-  const contentHeight = shellHeight;
+  const contentWidth = width;
+  const contentHeight = baseHeight;
+  const overlayOffsetX = Math.round((shellWidth - contentWidth) / 2);
+  const overlayOffsetY = Math.round((shellHeight - contentHeight) / 2);
   const id = player.baseId ?? player.id;
   const media = playerMedia(id);
   const face = player.face ?? media.face;
@@ -194,10 +196,10 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
       <View
         style={{
           position: 'absolute',
-          left: 0,
-          top: 0,
-          width: shellWidth,
-          height: shellHeight,
+          left: overlayOffsetX,
+          top: overlayOffsetY,
+          width: contentWidth,
+          height: contentHeight,
         }}
       >
         {!failed && media.photo ? (
@@ -208,10 +210,10 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
             accessibilityIgnoresInvertColors
             style={{
               position: 'absolute',
-              left: contentWidth * 0.10,
-              top: contentHeight * 0.065,
-              width: contentWidth * 0.80,
-              height: contentHeight * 0.49,
+              left: contentWidth * 0.15,
+              top: contentHeight * 0.075,
+              width: contentWidth * 0.70,
+              height: contentHeight * 0.47,
             }}
           />
         ) : null}
