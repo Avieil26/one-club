@@ -46,7 +46,14 @@ export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
   nation: 'ברזיל',
   league: 'Eredivisie',
   club: 'AZ',
+  edition: 'squadFoundations',
   face: { ovr: 84, pac: 90, sho: 82, pas: 77, dri: 84, def: 40, phy: 75 },
+  positions: ['RW', 'RM'],
+  playstyles: [
+    { name: 'Incisive Pass', plus: false },
+    { name: 'Inventive', plus: false },
+    { name: 'Technical', plus: false },
+  ],
 }];
 
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
