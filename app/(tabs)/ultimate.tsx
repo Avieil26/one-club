@@ -64,7 +64,7 @@ export default function UltimateScreen() {
               <Pressable accessibilityRole="button" onPress={() => router.push(`/ultimate/${post.id}`)} style={{ gap: 10 }}>
                 <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
                   <PlatformMark id={post.platform} size={42} />
-                  <View style={{ flex: 1, gap: 2 }}>
+                  <Pressable onPress={() => router.push(`/player/${post.userId}`)} style={{ flex: 1, gap: 2 }}>
                     <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: 'right' }}>
                       {displayName(app.profiles, post.userId)}
                     </Text>
@@ -74,7 +74,7 @@ export default function UltimateScreen() {
                       {post.playerName ? ` · ${post.playerName}` : ''}
                       {post.packRarity ? ` · ${rarityLabel(post.packRarity)}` : ''}
                     </Muted>
-                  </View>
+                  </Pressable>
                 </View>
                 <SquadPhoto uris={post.imageUris} expandable={false} />
               </Pressable>
@@ -82,6 +82,7 @@ export default function UltimateScreen() {
                 name={displayName(app.profiles, post.userId)}
                 body={post.body}
                 avatarUrl={app.profiles.find((profile) => profile.id === post.userId)?.avatarUrl}
+                userId={post.userId}
               />
               {post.kind === 'squad' ? (
                 <SquadLike count={likes.length} liked={liked} disabled={app.busy} onPress={() => like(post.id)} />
