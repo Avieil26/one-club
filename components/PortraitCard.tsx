@@ -155,6 +155,7 @@ function webRimStyle() {
   return { filter: `url("${base}#totw-rim")` } as object;
 }
 
+// DIAGNOSTIC ONLY: no runtime change.
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * TOTW_RATIO);
   const id = player.baseId ?? player.id;
