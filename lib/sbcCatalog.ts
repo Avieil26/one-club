@@ -195,7 +195,7 @@ export const officialChallenges: SbcChallenge[] = [
     targetScore: null,
     rules: null,
     reward: 'Patati 84 RW',
-    estimatedCostCoins: 11150,
+    estimatedCostCoins: 7800,
     clubs: ['AZ'],
     nations: [N.brazil],
     createdAt: '2026-10-08T16:30:00.000Z',
