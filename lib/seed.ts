@@ -45,7 +45,7 @@ export function seedDatabase(): Database {
     profiles: [
       {
         id: 'admin',
-        displayName: 'אביאל',
+        displayName: '1 CLUB BOSS',
         isAdmin: true,
         approvedCount: 6,
         reputation: 48,
