@@ -3,6 +3,7 @@ import { Image, Platform, Pressable, ScrollView, Text, useWindowDimensions, View
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { LevelChip } from '@/components/OwnerLevelPlate';
+import { NotificationBell } from '@/components/NotificationBell';
 import { communityXp, xpProgress } from '@/lib/communityBoard';
 import { useApp } from '@/lib/store';
 
@@ -50,7 +51,7 @@ export function SiteNav() {
     </Pressable>
   );
 
-  const accountNode = <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>{progress ? <LevelChip progress={progress} /> : null}{profileNode}</View>;
+  const accountNode = <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>{progress ? <LevelChip progress={progress} /> : null}<NotificationBell />{profileNode}</View>;
 
   const championsButton = (
     <Pressable
