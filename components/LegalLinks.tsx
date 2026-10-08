@@ -23,6 +23,9 @@ export function LegalLinks() {
           </View>
         ))}
       </View>
+      <Pressable accessibilityRole="link" onPress={() => router.push('/faq')} style={{ minHeight: 32, justifyContent: 'center', paddingHorizontal: 6 }}>
+        <Text style={{ color: colors.muted, fontWeight: '700', fontSize: 12 }}>❓ שאלות ותשובות</Text>
+      </Pressable>
       <Text
         style={{
           color: 'rgba(197, 213, 200, 0.45)',
