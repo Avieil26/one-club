@@ -37,6 +37,18 @@ type TotwRow = {
 const heroes = heroesFile as HeroRow[];
 const totw = totwFile as TotwRow[];
 
+export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
+  id: 'patati--foundations',
+  name: 'Patati',
+  en: 'Weslley Patati',
+  rating: 84,
+  position: 'RW',
+  nation: 'ברזיל',
+  league: 'Eredivisie',
+  club: 'AZ',
+  face: { ovr: 84, pac: 90, sho: 82, pas: 77, dri: 84, def: 40, phy: 75 },
+}];
+
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
   id: hero.id,
   name: hero.name,
