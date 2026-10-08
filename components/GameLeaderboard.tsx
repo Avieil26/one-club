@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import { careerFont } from '@/lib/careerCardTheme';
 import { currentGamePeriod, GAME_LABELS, loadGameLeaderboard, type GameId, type GameLeaderboardRow } from '@/lib/gameScores';
@@ -17,6 +18,7 @@ function periodLabel(period: string) {
 
 export function GameLeaderboard() {
   const app = useApp();
+  const router = useRouter();
   const [game, setGame] = useState<GameId>('who');
   const [rows, setRows] = useState<GameLeaderboardRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -80,7 +82,7 @@ export function GameLeaderboard() {
               <Pressable
                 key={row.userId}
                 disabled={!profile}
-                onPress={() => profile && undefined}
+                onPress={() => profile && router.push('/player/' + row.userId)}
                 style={[styles.row, mine && styles.rowMine]}
               >
                 <Text style={styles.place}>{index + 1}</Text>
