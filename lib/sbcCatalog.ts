@@ -138,6 +138,20 @@ const SILVER_UPGRADE_SQUAD: Record<string, string> = {
 
 export const officialChallenges: SbcChallenge[] = [
   {
+    id: 'sbc-max-86-base-hero-pack-patati',
+    title: 'Max 86 Base Hero Pack · Patati',
+    kind: 'streamlined',
+    requirements: 'Max 86 Base Hero Pack — אתגר חבילה חדש של Patati.',
+    endsAt: null,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'Max 86 Base Hero Pack',
+    clubs: [],
+    createdAt: '2026-10-08T18:00:00.000Z',
+  },
+
+  {
     id: 'sbc-potm-pina',
     title: 'Liga F POTM · קלאודיה פינה',
     kind: 'streamlined',
