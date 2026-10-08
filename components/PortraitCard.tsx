@@ -229,7 +229,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
           <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
           <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
         </View>
-        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', zIndex: 6 }}>
+        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', direction: 'ltr', zIndex: 6 }}>
           {stats.map(([label, value]) => (
             <View key={label} style={{ flex: 1, alignItems: 'center' }}>
               <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, contentWidth * 0.034), fontWeight: '800' }}>{label}</Text>
