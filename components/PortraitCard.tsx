@@ -156,9 +156,11 @@ function webRimStyle() {
 }
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
-  const height = Math.round(width * TOTW_RATIO);
+  const baseHeight = Math.round(width * TOTW_RATIO);
   const shellWidth = Math.round(width * 1.28);
-  const shellHeight = Math.round(height * 1.28);
+  const shellHeight = Math.round(baseHeight * 1.28);
+  const contentWidth = shellWidth;
+  const contentHeight = shellHeight;
   const id = player.baseId ?? player.id;
   const media = playerMedia(id);
   const face = player.face ?? media.face;
@@ -206,40 +208,40 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
             accessibilityIgnoresInvertColors
             style={{
               position: 'absolute',
-              left: width * 0.10,
-              top: height * 0.065,
-              width: width * 0.80,
-              height: height * 0.49,
+              left: contentWidth * 0.10,
+              top: contentHeight * 0.065,
+              width: contentWidth * 0.80,
+              height: contentHeight * 0.49,
             }}
           />
         ) : null}
         <LinearGradient
           colors={['transparent', 'rgba(9,7,14,0.12)', '#09070E']}
           locations={[0.38, 0.66, 1]}
-          style={{ position: 'absolute', left: 0, right: 0, top: height * 0.34, height: height * 0.34 }}
+          style={{ position: 'absolute', left: 0, right: 0, top: contentHeight * 0.34, height: contentHeight * 0.34 }}
         />
-        <View style={{ position: 'absolute', top: height * 0.12, left: width * 0.11, zIndex: 4 }}>
-          <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, width * 0.19), lineHeight: Math.max(16, width * 0.19), fontWeight: '900' }}>{player.rating}</Text>
-          <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, width * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+        <View style={{ position: 'absolute', top: contentHeight * 0.12, left: contentWidth * 0.11, zIndex: 4 }}>
+          <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, contentWidth * 0.19), lineHeight: Math.max(16, contentWidth * 0.19), fontWeight: '900' }}>{player.rating}</Text>
+          <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, contentWidth * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
         </View>
-        <View style={{ position: 'absolute', top: height * 0.095, right: width * 0.1, zIndex: 4, alignItems: 'center' }}>
-          <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, width * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
+        <View style={{ position: 'absolute', top: contentHeight * 0.095, right: contentWidth * 0.1, zIndex: 4, alignItems: 'center' }}>
+          <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, contentWidth * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
         </View>
-        <View style={{ position: 'absolute', top: height * 0.60, left: width * 0.10, right: width * 0.10, zIndex: 5, alignItems: 'center' }}>
-          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
+        <View style={{ position: 'absolute', top: contentHeight * 0.60, left: contentWidth * 0.10, right: contentWidth * 0.10, zIndex: 5, alignItems: 'center' }}>
+          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, contentWidth * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
           <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
-          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, width * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
         </View>
-        <View style={{ position: 'absolute', left: width * 0.075, right: width * 0.075, bottom: height * 0.105, flexDirection: 'row', zIndex: 6 }}>
+        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', zIndex: 6 }}>
           {stats.map(([label, value]) => (
             <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, width * 0.034), fontWeight: '800' }}>{label}</Text>
-              <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, width * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
+              <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, contentWidth * 0.034), fontWeight: '800' }}>{label}</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, contentWidth * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
             </View>
           ))}
         </View>
-        <View style={{ position: 'absolute', bottom: height * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
-          <NationFlag nation={player.nation} size={Math.max(11, width * 0.082)} />
+        <View style={{ position: 'absolute', bottom: contentHeight * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+          <NationFlag nation={player.nation} size={Math.max(11, contentWidth * 0.082)} />
         </View>
       </View>
     </View>
