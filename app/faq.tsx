@@ -59,3 +59,67 @@ function FaqItem({ question, answer, expanded, onPress }: { question: string; an
   );
 }
 
+
+export default function FaqScreen() {
+  const [active, setActive] = useState<string | null>(null);
+
+  return (
+    <Screen scene="home">
+      <View style={{ width: '100%', maxWidth: 900, alignSelf: 'center', gap: 16 }}>
+        <View style={{ gap: 5, alignItems: 'flex-end' }}>
+          <Text style={{ color: '#F7F4EA', fontSize: 34, fontWeight: '900', fontFamily: careerFont, textAlign: 'right' }}>
+            שאלות ותשובות
+          </Text>
+          <Text style={{ color: 'rgba(244,247,242,0.58)', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
+            פותחים שאלה כדי לראות את התשובה באנימציה חלקה.
+          </Text>
+        </View>
+
+        {CATEGORIES.map((category) => (
+          <View key={category.title} style={{ gap: 8 }}>
+            <Text style={{ color: '#E8C46A', fontSize: 15, fontWeight: '900', textAlign: 'right' }}>
+              {category.title}
+            </Text>
+            {category.questions.map((question) => (
+              <FaqItem
+                key={question}
+                question={question}
+                answer={ANSWERS[question] ?? 'המידע עדיין בבנייה.'}
+                expanded={active === question}
+                onPress={() => setActive((current) => current === question ? null : question)}
+              />
+            ))}
+          </View>
+        ))}
+      </View>
+    </Screen>
+  );
+}
+
+const styles = {
+  question: {
+    width: '100%',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(227,179,65,0.16)',
+    backgroundColor: 'rgba(10,15,19,0.90)',
+    paddingHorizontal: 14,
+    paddingVertical: 13,
+  },
+  questionText: {
+    color: '#F1F4F5',
+    fontSize: 14,
+    fontWeight: '800',
+    textAlign: 'right' as const,
+    lineHeight: 20,
+  },
+  answer: {
+    color: 'rgba(244,247,242,0.66)',
+    fontSize: 12,
+    fontWeight: '600',
+    lineHeight: 19,
+    textAlign: 'right' as const,
+    paddingTop: 10,
+    paddingBottom: 2,
+  },
+};
