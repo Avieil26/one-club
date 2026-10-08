@@ -198,7 +198,7 @@ function pictureOf(meta: Record<string, unknown>): string | null {
 function mapProfile(row: ProfileRow): Profile {
   return {
     id: row.id,
-    displayName: row.display_name,
+    displayName: row.is_admin ? '1 CLUB BOSS' : row.display_name,
     avatarUrl: row.avatar_url || null,
     isAdmin: row.is_admin,
     approvedCount: row.approved_count,
@@ -486,7 +486,7 @@ async function readSnapshot(): Promise<Snapshot> {
         return {
           ...profile,
           email: session.user.email ?? undefined,
-          displayName: googleName?.trim() || profile.displayName,
+          displayName: profile.isAdmin ? '1 CLUB BOSS' : (googleName?.trim() || profile.displayName),
           avatarUrl: googlePicture || profile.avatarUrl || null,
         };
       });
