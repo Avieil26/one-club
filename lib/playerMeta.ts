@@ -77,6 +77,22 @@ function toCardMeta(row: MetaRow | undefined): CardMeta | null {
   return { foot: row.foot, skillMoves: row.sm, weakFoot: row.wf, stats };
 }
 
+const SQUAD_FOUNDATIONS_META: Record<string, MetaRow> = {
+  'patati--foundations': {
+    foot: 'L',
+    sm: 4,
+    wf: 3,
+    attrs: [
+      90, 90,
+      85, 82, 85, 80, 82, 80,
+      79, 75, 55, 81, 70, 82,
+      88, 86, 80, 85, 83, 75,
+      35, 55, 40, 40, 39,
+      81, 83, 75, 61,
+    ],
+  },
+};
+
 const OTW_META: Record<string, MetaRow> = {
   'ea-264947-nicole-anyomi': {
     foot: 'R',
@@ -91,7 +107,7 @@ export function otwCardMeta(id: string): CardMeta | null {
 }
 
 export function playerCardMeta(id: string): CardMeta | null {
-  return toCardMeta(heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
+  return toCardMeta(SQUAD_FOUNDATIONS_META[id] ?? heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
 }
 
 export function totwCardMeta(id: string): CardMeta | null {
