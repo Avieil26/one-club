@@ -190,7 +190,7 @@ export const officialChallenges: SbcChallenge[] = [
     title: 'Squad Foundations · Patati',
     kind: 'classic',
     requirements: 'Patati 84 RW · RM++ · 4★ סקיל / 3★ וויק פוט. 90 PAC, 82 SHO, 77 PAS, 84 DRI, 40 DEF, 75 PHY.',
-    endsAt: '2026-10-15T18:00:00.000Z',
+    endsAt: '2026-10-15T17:00:00.000Z',
     createdBy: 'admin',
     targetScore: null,
     rules: null,
