@@ -34,6 +34,8 @@ export function NotificationBell() {
   const app = useApp();
   const router = useRouter();
   const { width, height } = useWindowDimensions();
+  const triggerRef = useRef<View>(null);
+  const [panelLeft, setPanelLeft] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<NotificationRow[]>([]);
   const [loading, setLoading] = useState(false);
@@ -41,6 +43,21 @@ export function NotificationBell() {
   const unread = items.filter((item) => !item.read_at).length;
   const panelWidth = Math.min(320, Math.max(260, width - 24));
   const panelMaxHeight = Math.min(500, Math.max(260, height - 88));
+
+  useEffect(() => {
+    if (!open || Platform.OS !== 'web') {
+      setPanelLeft(null);
+      return;
+    }
+    const measure = () => {
+      triggerRef.current?.measureInWindow((x, _y, triggerWidth) => {
+        const next = Math.max(12, Math.min(x + triggerWidth - panelWidth, width - panelWidth - 12));
+        setPanelLeft(next);
+      });
+    };
+    const timer = setTimeout(measure, 0);
+    return () => clearTimeout(timer);
+  }, [open, panelWidth, width]);
 
   async function load() {
     if (!app.user?.id || !isSupabaseConfigured()) {
@@ -92,7 +109,7 @@ export function NotificationBell() {
   }
 
   return (
-    <View style={{ position: 'relative', zIndex: 120 }}>
+    <View ref={triggerRef} style={{ position: 'relative', zIndex: 120, overflow: 'visible' }}>
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={unread ? 'התראות, ' + unread + ' חדשות' : 'התראות'}
@@ -121,8 +138,11 @@ export function NotificationBell() {
         style={{
           position: Platform.OS === 'web' ? 'fixed' : 'absolute',
           top: Platform.OS === 'web' ? 52 : 43,
-          right: Platform.OS === 'web' ? 12 : -8,
+          ...(Platform.OS === 'web'
+            ? { left: panelLeft ?? Math.max(12, width - panelWidth - 12) }
+            : { right: 36 }),
           width: panelWidth,
+          maxWidth: Math.max(240, width - 24),
           maxHeight: progress.interpolate({ inputRange: [0, 1], outputRange: [0, panelMaxHeight] }),
           zIndex: 999,
           opacity: progress,
