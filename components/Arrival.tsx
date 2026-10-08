@@ -33,7 +33,7 @@ export function Arrival({ name, onDone }: { name: string; onDone?: () => void })
         style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, alignItems: 'center', justifyContent: 'center' }}>
       <Animated.View style={{ alignItems: 'center', gap: 8, transform: [{ scale }] }}>
         <View style={{ width: 140, height: 140, borderRadius: 70, borderWidth: 1, borderColor: 'rgba(227,179,65,0.45)', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: colors.text, fontSize: 28, fontWeight: '800' }}>FC27</Text>
+          <Text style={{ color: colors.text, fontSize: 28, fontWeight: '800' }}>1 CLUB</Text>
         </View>
         <Text style={{ color: colors.gold, fontSize: 16, fontWeight: '700', marginTop: 12 }}>נכנסים למגרש</Text>
         <Text style={{ color: colors.muted, fontSize: 15 }}>{name}</Text>
