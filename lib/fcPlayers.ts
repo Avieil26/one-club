@@ -16,7 +16,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
