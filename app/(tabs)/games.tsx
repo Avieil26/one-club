@@ -78,7 +78,7 @@ export default function GamesScreen() {
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/draft')}>
         <LinearGradient colors={['rgba(16,48,36,0.94)', 'rgba(8,16,12,0.92)']} style={styles.draft}>
           <View style={styles.draftCopy}>
-            <Text style={styles.goldKicker}>כמו ב־FC 27</Text>
+            <Text style={styles.goldKicker}>מצב דראפט</Text>
             <Text style={styles.draftTitle}>דראפט</Text>
             <Text style={styles.draftBody}>מערך, קפטן, וחמישה קלפים לכל עמדה.</Text>
           </View>
