@@ -52,47 +52,35 @@ function formatCoins(value: number | null | undefined) {
 }
 
 function SbcHeroShell({ width }: { width: number }) {
-  const height = Math.round(width * 1.35);
+  const height = Math.round(width * 1.48);
   return (
-    <View style={{ width, height, borderRadius: width * 0.13, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,224,140,0.72)', shadowColor: '#D8A93A', shadowOpacity: 0.42, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 8 }}>
-      <LinearGradient colors={['#120D24', '#4B2A6D', '#D0A43C']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ flex: 1, padding: 7 }}>
-        <View style={{ flex: 1, borderRadius: width * 0.10, overflow: 'hidden', backgroundColor: 'rgba(17,10,31,0.72)', borderWidth: 1, borderColor: 'rgba(255,233,169,0.34)' }}>
-          <Text style={{ color: '#FFF0B5', fontSize: Math.max(9, width * 0.11), fontWeight: '900', textAlign: 'center', marginTop: 6, letterSpacing: 1.5 }}>HERO</Text>
-          <Text style={{ color: 'rgba(255,255,255,0.56)', fontSize: Math.max(5, width * 0.048), fontWeight: '800', textAlign: 'center', marginTop: 1, letterSpacing: 0.8 }}>BASE • MAX 86</Text>
+    <View style={{ width, height, borderRadius: width * 0.14, overflow: 'hidden', borderWidth: 1.5, borderColor: '#C9F7EA', shadowColor: '#43E0BF', shadowOpacity: 0.3, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 7 }}>
+      <LinearGradient
+        colors={['#120E28', '#30205A', '#7557A8']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ flex: 1, padding: 5 }}
+      >
+        <View style={{ flex: 1, borderRadius: width * 0.105, overflow: 'hidden', backgroundColor: 'rgba(8,10,20,0.45)', borderWidth: 1, borderColor: 'rgba(237,224,255,0.25)' }}>
+          <View style={{ position: 'absolute', top: -width * 0.08, right: -width * 0.12, width: width * 0.66, height: width * 0.66, borderRadius: width, borderWidth: 1, borderColor: 'rgba(220,210,255,0.14)' }} />
+          <View style={{ position: 'absolute', top: height * 0.12, left: -width * 0.28, width: width * 1.25, height: 1, backgroundColor: 'rgba(168,247,228,0.22)', transform: [{ rotate: '-28deg' }] }} />
+          <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.11), fontWeight: '900', textAlign: 'center', letterSpacing: 1.2, marginTop: 7 }}>
+            HERO
+          </Text>
+          <Text style={{ color: 'rgba(228,220,255,0.68)', fontSize: Math.max(5, width * 0.048), fontWeight: '800', textAlign: 'center', letterSpacing: 1 }}>
+            MAX 86
+          </Text>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <View style={{ width: width * 0.52, height: width * 0.62, borderRadius: width * 0.25, borderWidth: 2, borderColor: 'rgba(255,229,152,0.20)', backgroundColor: 'rgba(255,219,125,0.05)', transform: [{ rotate: '-4deg' }] }} />
-            <View style={{ position: 'absolute', width: width * 0.76, height: 1, backgroundColor: 'rgba(255,239,183,0.24)', transform: [{ rotate: '-26deg' }] }} />
+            <View style={{ width: width * 0.43, height: width * 0.48, borderRadius: width * 0.16, borderWidth: 1.5, borderColor: 'rgba(221,246,255,0.18)', backgroundColor: 'rgba(170,237,255,0.035)', transform: [{ rotate: '-7deg' }] }} />
+            <View style={{ position: 'absolute', width: width * 0.9, height: 1.5, backgroundColor: 'rgba(242,231,255,0.12)', transform: [{ rotate: '-31deg' }] }} />
+            <Text style={{ position: 'absolute', color: 'rgba(239,234,255,0.76)', fontSize: Math.max(6, width * 0.055), fontWeight: '900', letterSpacing: 0.8 }}>
+              BASE HERO PACK
+            </Text>
           </View>
-          <Text style={{ color: 'rgba(255,239,183,0.55)', fontSize: Math.max(5, width * 0.046), fontWeight: '800', textAlign: 'center', paddingBottom: 7 }}>EMPTY HERO CARD</Text>
-        </View>
-      </LinearGradient>
-    </View>
-  );
-}
-
-function PatatiSbcCard({ width }: { width: number }) {
-  const height = Math.round(width * 1.35);
-  return (
-    <View style={{ width, height, borderRadius: width * 0.13, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(242,207,93,0.72)', shadowColor: '#8F3A49', shadowOpacity: 0.5, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 8 }}>
-      <LinearGradient colors={['#1E0E1A', '#7B2639', '#C79B37']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ flex: 1, padding: 6 }}>
-        <View style={{ flex: 1, borderRadius: width * 0.10, overflow: 'hidden', backgroundColor: 'rgba(18,11,17,0.72)' }}>
-          <View style={{ position: 'absolute', top: 5, left: 5, zIndex: 3 }}>
-            <Text style={{ color: '#FFF0B5', fontSize: Math.max(11, width * 0.15), fontWeight: '900' }}>84</Text>
-            <Text style={{ color: '#F7EAC8', fontSize: Math.max(6, width * 0.06), fontWeight: '900' }}>RW</Text>
-          </View>
-          <Image source={{ uri: 'https://www.az.nl/media/rwqf013h/smiling-soccer-player-in-red-29082025114432.png?height=584&rxy=0.44428969359331477%2C0.003865979381443299&v=1dc1b257ac4ccd0&width=584' }} resizeMode="contain" style={{ width: '100%', height: '60%', marginTop: 8 }} />
-          <Text numberOfLines={1} style={{ color: '#FFF9E7', fontSize: Math.max(8, width * 0.084), fontWeight: '900', letterSpacing: 0.6, textAlign: 'center' }}>PATATI</Text>
-          <Text style={{ color: 'rgba(255,243,211,0.64)', fontSize: Math.max(5, width * 0.043), fontWeight: '800', textAlign: 'center', marginTop: 1 }}>SQUAD FOUNDATIONS</Text>
-          <View style={{ flexDirection: 'row', paddingHorizontal: 4, paddingTop: 4 }}>
-            {[
-              ['PAC', 90], ['SHO', 82], ['PAS', 77],
-              ['DRI', 84], ['DEF', 40], ['PHY', 75],
-            ].map(([label, value]) => (
-              <View key={String(label)} style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={{ color: 'rgba(255,239,202,0.62)', fontSize: Math.max(4, width * 0.037), fontWeight: '800' }}>{label}</Text>
-                <Text style={{ color: '#FFF9E7', fontSize: Math.max(6, width * 0.055), fontWeight: '900' }}>{value}</Text>
-              </View>
-            ))}
+          <View style={{ alignItems: 'center', paddingBottom: 7 }}>
+            <Text style={{ color: '#9FF5DB', fontSize: Math.max(5, width * 0.045), fontWeight: '900', letterSpacing: 0.9 }}>
+              UNTRADEABLE
+            </Text>
           </View>
         </View>
       </LinearGradient>
@@ -208,11 +196,27 @@ function SbcTile({
         <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
           <SideMark club={rightClub} nation={rightNation} size={36} />
         </View>
-        <View style={{ marginRight: 8, width: 88, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ marginRight: 6, width: 86, alignItems: 'center', justifyContent: 'center', overflow: 'visible' }}>
           {challenge.id === 'sbc-max-86-base-hero-upgrade' ? (
-            <SbcHeroShell width={84} />
+            <SbcHeroShell width={76} />
           ) : challenge.id === 'sbc-patati-foundations' ? (
-            <PatatiSbcCard width={84} />
+            <PortraitCard
+              player={{
+                id: 'patati--foundations',
+                name: 'Patati',
+                en: 'Weslley Patati',
+                rating: 84,
+                position: 'RW',
+                nation: 'ברזיל',
+                league: 'Eredivisie',
+                club: 'AZ',
+                edition: 'squadFoundations',
+                face: { ovr: 84, pac: 90, sho: 82, pas: 77, dri: 84, def: 40, phy: 75 },
+              }}
+              width={74}
+              edition="squadFoundations"
+              compactStats
+            />
           ) : legacyPlayerCard ? (
             <Image source={legacyPlayerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
           ) : playerCard ? (
