@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Platform, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { ClubBadge } from '@/components/ClubBadge';
@@ -518,9 +518,8 @@ function surname(en: string) {
 function SquadFoundationsPortraitCard({ player, width, compact = false }: { player: FcPlayer; width: number; compact?: boolean }) {
   const media = playerMedia(player.id);
   const face = player.face ?? media.face;
-  const height = Math.round(width * (compact ? 1.50 : 1.56));
-  const photoH = Math.round(height * (compact ? 0.53 : 0.55));
-  const name = 'PATATI';
+  const height = Math.round(width * (compact ? 1.53 : 1.61));
+  const photoHeight = Math.round(height * (compact ? 0.49 : 0.51));
   const statRows = [
     ['PAC', face?.pac],
     ['SHO', face?.sho],
@@ -529,7 +528,6 @@ function SquadFoundationsPortraitCard({ player, width, compact = false }: { play
     ['DEF', face?.def],
     ['PHY', face?.phy],
   ] as const;
-  const [failed, setFailed] = useState(false);
 
   return (
     <View
@@ -538,96 +536,124 @@ function SquadFoundationsPortraitCard({ player, width, compact = false }: { play
         height,
         alignSelf: 'center',
         overflow: 'hidden',
-        borderRadius: width * 0.12,
-        backgroundColor: '#071312',
-        borderWidth: compact ? 1.2 : 1.6,
-        borderColor: '#5CF2D2',
-        shadowColor: '#2FE8C3',
-        shadowOpacity: 0.38,
-        shadowRadius: compact ? 6 : 12,
-        shadowOffset: { width: 0, height: compact ? 2 : 6 },
-        elevation: compact ? 5 : 9,
+        borderRadius: width * 0.11,
+        borderWidth: compact ? 1.1 : 1.7,
+        borderColor: '#CFFFF3',
+        backgroundColor: '#071B18',
+        shadowColor: '#49DDBE',
+        shadowOpacity: compact ? 0.22 : 0.32,
+        shadowRadius: compact ? 5 : 12,
+        shadowOffset: { width: 0, height: compact ? 2 : 7 },
+        elevation: compact ? 4 : 8,
       }}
     >
       <LinearGradient
-        colors={['#36E0BF', '#0B8A77', '#061B18']}
+        colors={['#0B5449', '#0E7665', '#0A302B', '#041513']}
+        locations={[0, 0.32, 0.69, 1]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        style={StyleSheet.absoluteFillObject}
       />
-      <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: height * 0.30, backgroundColor: 'rgba(0,0,0,0.22)' }} />
-      <View style={{ position: 'absolute', top: height * 0.035, right: -width * 0.08, width: width * 0.72, height: width * 0.025, backgroundColor: 'rgba(127,255,226,0.48)', transform: [{ rotate: '-22deg' }] }} />
-      <View style={{ position: 'absolute', top: height * 0.18, right: -width * 0.05, width: width * 0.58, height: width * 0.016, backgroundColor: 'rgba(220,255,247,0.20)', transform: [{ rotate: '-22deg' }] }} />
+      <LinearGradient
+        colors={['rgba(243,255,252,0.18)', 'transparent', 'rgba(67,250,211,0.11)']}
+        start={{ x: 0.1, y: 0 }}
+        end={{ x: 0.95, y: 1 }}
+        style={StyleSheet.absoluteFillObject}
+      />
+      <View style={{ position: 'absolute', left: -width * 0.18, top: height * 0.10, width: width * 1.05, height: width * 0.045, backgroundColor: 'rgba(222,255,247,0.12)', transform: [{ rotate: '-23deg' }] }} />
+      <View style={{ position: 'absolute', right: -width * 0.22, top: height * 0.30, width: width * 1.12, height: width * 0.03, backgroundColor: 'rgba(71,255,216,0.11)', transform: [{ rotate: '-23deg' }] }} />
+      <View style={{ position: 'absolute', top: -width * 0.10, right: -width * 0.13, width: width * 0.70, height: width * 0.70, borderRadius: width, borderWidth: 1, borderColor: 'rgba(216,255,247,0.16)' }} />
 
-      <View style={{ position: 'absolute', top: width * 0.04, left: width * 0.06, zIndex: 4 }}>
-        <Text style={{ color: '#F7FFFD', fontSize: compact ? width * 0.17 : width * 0.19, lineHeight: compact ? width * 0.17 : width * 0.19, fontWeight: '900' }}>
-          {player.rating}
-        </Text>
-        <Text style={{ color: '#E7FFF9', fontSize: compact ? width * 0.06 : width * 0.065, fontWeight: '900', letterSpacing: 0.6 }}>
-          {player.position}
-        </Text>
+      <View style={{ position: 'absolute', top: compact ? width * 0.035 : width * 0.045, left: compact ? width * 0.055 : width * 0.065, right: compact ? width * 0.055 : width * 0.065, flexDirection: 'row', direction: 'ltr', alignItems: 'flex-start', justifyContent: 'space-between', zIndex: 6 }}>
+        <View>
+          <Text style={{ color: '#F5FFFC', fontSize: compact ? width * 0.16 : width * 0.18, lineHeight: compact ? width * 0.16 : width * 0.18, fontWeight: '900', letterSpacing: -0.7 }}>{player.rating}</Text>
+          <Text style={{ color: '#A9F9E7', fontSize: Math.max(6, width * 0.055), lineHeight: Math.max(7, width * 0.065), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+        </View>
+        <View style={{ alignItems: 'flex-end' }}>
+          <Text style={{ color: '#E7FFFA', fontSize: Math.max(5.5, width * 0.044), fontWeight: '900', letterSpacing: 1.5 }}>SQUAD FOUNDATIONS</Text>
+          <Text style={{ color: 'rgba(235,255,251,0.56)', fontSize: Math.max(4.5, width * 0.033), fontWeight: '800', letterSpacing: 0.7 }}>84 OVR · PLAYER ITEM</Text>
+        </View>
       </View>
 
-      <View style={{ height: photoH, marginTop: width * 0.01, overflow: 'hidden', alignItems: 'center', justifyContent: 'flex-end' }}>
-        {!failed ? (
+      <View style={{ height: photoHeight, marginTop: compact ? width * 0.005 : width * 0.012, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden' }}>
+        {media.photo ? (
           <Image
             source={{ uri: media.photo }}
             resizeMode="contain"
             accessibilityIgnoresInvertColors
-            onError={() => setFailed(true)}
             style={{
-              width: width * 0.88,
-              height: photoH * 1.02,
-              marginBottom: -height * 0.015,
+              width: width * (compact ? 0.94 : 0.96),
+              height: photoHeight * 1.10,
+              marginBottom: -height * 0.008,
+              ...(Platform.OS === 'web' ? ({ objectFit: 'contain', objectPosition: 'center 13%' } as object) : {}),
             }}
           />
         ) : null}
         <LinearGradient
-          colors={['transparent', 'rgba(3,14,13,0.82)']}
+          colors={['transparent', 'rgba(3,19,16,0.90)']}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
-          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: photoH * 0.34 }}
+          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: photoHeight * 0.28 }}
         />
       </View>
 
-      <View style={{ paddingHorizontal: width * 0.065, marginTop: -width * 0.005, zIndex: 4 }}>
-        <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: compact ? width * 0.085 : width * 0.10, fontWeight: '900', textAlign: 'center', letterSpacing: 0.8 }}>
-          {name}
-        </Text>
-        {!compact ? (
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.07, marginTop: width * 0.018 }}>
-            <NationFlag nation={player.nation} size={Math.max(12, width * 0.10)} />
-            <ClubBadge club={player.club} size={Math.max(14, width * 0.11)} />
+      <View
+        style={{
+          marginHorizontal: compact ? width * 0.055 : width * 0.05,
+          marginTop: -width * 0.004,
+          borderRadius: width * 0.045,
+          overflow: 'hidden',
+          zIndex: 7,
+          borderWidth: 1,
+          borderColor: 'rgba(251,255,253,0.72)',
+        }}
+      >
+        <LinearGradient
+          colors={['#F7FFFC', '#BEEFE0']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{ paddingHorizontal: compact ? width * 0.035 : width * 0.04, paddingVertical: compact ? width * 0.024 : width * 0.032 }}
+        >
+          <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 7 }}>
+            <View style={{ flex: 1, minWidth: 0, alignItems: 'flex-end' }}>
+              <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7} style={{ color: '#061715', fontSize: compact ? Math.max(8.2, width * 0.093) : Math.max(13, width * 0.108), lineHeight: compact ? Math.max(9, width * 0.105) : Math.max(15, width * 0.12), fontWeight: '900', letterSpacing: 0.55 }}>PATATI</Text>
+              <Text numberOfLines={1} style={{ color: '#315950', fontSize: compact ? Math.max(4.5, width * 0.038) : Math.max(6, width * 0.045), fontWeight: '800', marginTop: 2 }}>RW · RM++ · LEFT FOOT</Text>
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'center', gap: 3 }}>
+              <ClubBadge club={player.club} size={compact ? Math.max(16, width * 0.17) : Math.max(23, width * 0.13)} />
+              {!compact ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.075)} /> : null}
+            </View>
           </View>
-        ) : null}
+          {!compact ? (
+            <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 5, marginTop: 6 }}>
+              <Text style={{ color: '#24544A', fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>4★ SKILLS</Text>
+              <Text style={{ color: '#24544A', fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>3★ WEAK FOOT</Text>
+              <Text style={{ color: '#0A3F34', backgroundColor: '#8FECD3', borderRadius: 999, paddingHorizontal: 7, paddingVertical: 3, fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>RM++</Text>
+            </View>
+          ) : null}
+        </LinearGradient>
       </View>
 
-      <View style={{ height: 1, marginHorizontal: width * 0.09, marginTop: compact ? width * 0.02 : width * 0.025, marginBottom: compact ? width * 0.012 : width * 0.018, backgroundColor: 'rgba(210,255,244,0.42)' }} />
-
-      <View style={{ flexDirection: 'row', direction: 'ltr', paddingHorizontal: width * 0.045, zIndex: 4 }}>
-        {statRows.map(([label, value]) => (
-          <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ color: 'rgba(228,255,249,0.72)', fontSize: compact ? Math.max(4.5, width * 0.037) : Math.max(5.5, width * 0.041), fontWeight: '800', letterSpacing: 0.15 }}>
-              {label}
-            </Text>
-            <Text style={{ color: '#FFFFFF', fontSize: compact ? Math.max(7, width * 0.058) : Math.max(8.5, width * 0.066), fontWeight: '900' }}>
-              {value ?? '·'}
-            </Text>
+      <View style={{ marginTop: compact ? width * 0.018 : width * 0.022, paddingHorizontal: compact ? width * 0.055 : width * 0.06, gap: compact ? 5 : 6, zIndex: 7 }}>
+        {(compact ? [statRows.slice(0, 3), statRows.slice(3)] : [statRows]).map((row, rowIndex) => (
+          <View key={rowIndex} style={{ flexDirection: 'row', direction: 'ltr', gap: compact ? 3 : 5 }}>
+            {row.map(([label, value]) => (
+              <View key={label} style={{ flex: 1, minWidth: 0, alignItems: 'center', borderRadius: 7, backgroundColor: compact ? 'rgba(2,17,14,0.48)' : 'rgba(3,21,18,0.34)', borderWidth: 1, borderColor: 'rgba(206,255,244,0.13)', paddingVertical: compact ? 3 : 4 }}>
+                <Text style={{ color: '#A7F7E4', fontSize: compact ? Math.max(4.5, width * 0.034) : Math.max(5.5, width * 0.036), fontWeight: '900', letterSpacing: 0.25 }}>{label}</Text>
+                <Text style={{ color: '#FFFFFF', fontSize: compact ? Math.max(7.4, width * 0.058) : Math.max(8.5, width * 0.064), lineHeight: compact ? Math.max(9, width * 0.067) : Math.max(10, width * 0.073), fontWeight: '900' }}>{value ?? '·'}</Text>
+              </View>
+            ))}
           </View>
         ))}
       </View>
 
       <View style={{ flex: 1 }} />
-
-      <View style={{ alignItems: 'center', paddingBottom: compact ? width * 0.028 : width * 0.036 }}>
-        <Text style={{ color: '#9BFFE7', fontSize: compact ? Math.max(4.5, width * 0.038) : Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.2 }}>
-          SQUAD FOUNDATIONS
-        </Text>
+      <View style={{ alignItems: 'center', paddingTop: compact ? 4 : 6, paddingBottom: compact ? width * 0.022 : width * 0.029 }}>
+        <Text style={{ color: '#BDF8E9', fontSize: Math.max(4.5, width * 0.034), fontWeight: '900', letterSpacing: 1.1 }}>UNTRADEABLE · SQUAD FOUNDATIONS</Text>
       </View>
     </View>
   );
 }
-
 function totwAura() {
   if (Platform.OS === 'web') return webRimStyle();
   return {
