@@ -1,4 +1,4 @@
-import { Alert, Text, View } from 'react-native';
+import { Alert, Pressable, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { LevelChip } from '@/components/OwnerLevelPlate';
@@ -46,14 +46,29 @@ export default function PlayerProfileScreen() {
         <Muted>הפרופיל לא נמצא</Muted>
       ) : (
         <View style={{ gap: 14 }}>
-          <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 14 }}>
-            <LevelChip progress={progress} />
-            <View style={{ flex: 1, gap: 4 }}>
-              <Title>{name}</Title>
-              <Muted>{progress.xp.toLocaleString('en-US')} XP · רמה {progress.level} · {profile.reputation} מוניטין</Muted>
-              <Muted>{profile.approvedCount} אישורים · {followers} עוקבים · {following} עוקב</Muted>
+          <View style={{ borderRadius: 22, padding: 16, backgroundColor: 'rgba(9,14,19,0.96)', borderWidth: 1, borderColor: 'rgba(227,179,65,0.30)', gap: 14 }}>
+            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 14 }}>
+              <ProfileFace name={name} uri={profile.avatarUrl} size={82} />
+              <View style={{ flex: 1, gap: 5, alignItems: 'flex-end' }}>
+                <Title>{name}</Title>
+                <Muted>שחקן קהילה · רמה {progress.level} · {progress.xp.toLocaleString('en-US')} XP</Muted>
+                <Muted>{profile.reputation} מוניטין · {followers} עוקבים · {following} עוקב</Muted>
+              </View>
+              <LevelChip progress={progress} />
             </View>
-            <ProfileFace name={name} uri={profile.avatarUrl} size={76} />
+            <View style={{ flexDirection: 'row-reverse', gap: 8 }}>
+              {[
+                ['XP', xp],
+                ['אישורים', approvedSubmissions],
+                ['פוסטים', futPosts],
+                ['SBC', sbcSolutions],
+              ].map(([label, value]) => (
+                <View key={String(label)} style={{ flex: 1, minWidth: 70, paddingVertical: 10, borderRadius: 13, backgroundColor: 'rgba(255,255,255,0.035)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.07)', alignItems: 'center' }}>
+                  <Text style={{ color: colors.text, fontSize: 18, fontWeight: '900' }}>{Number(value).toLocaleString('en-US')}</Text>
+                  <Text style={{ color: colors.muted, fontSize: 10, fontWeight: '800' }}>{label}</Text>
+                </View>
+              ))}
+            </View>
           </View>
 
           {post ? (
