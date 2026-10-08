@@ -17,6 +17,7 @@ const LINKS = [
   { href: '/sbc' as const, label: 'SBC' },
   { href: '/games' as const, label: 'משחקונים' },
   { href: '/updates' as const, label: 'עדכונים' },
+  { href: '/champions-leaderboard' as const, label: 'טבלת Champions' },
   { href: '/board' as const, label: 'לוח' },
   { href: '/market' as const, label: 'שחקנים' },
 ];
