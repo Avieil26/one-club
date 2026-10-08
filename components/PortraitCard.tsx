@@ -515,6 +515,119 @@ function surname(en: string) {
 }
 
 /** Same TOTW card. A short purple rim follows the shield, the way FUTBIN shows the second look. */
+function SquadFoundationsPortraitCard({ player, width, compact = false }: { player: FcPlayer; width: number; compact?: boolean }) {
+  const media = playerMedia(player.id);
+  const face = player.face ?? media.face;
+  const height = Math.round(width * (compact ? 1.50 : 1.56));
+  const photoH = Math.round(height * (compact ? 0.53 : 0.55));
+  const name = 'PATATI';
+  const statRows = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: width * 0.12,
+        backgroundColor: '#071312',
+        borderWidth: compact ? 1.2 : 1.6,
+        borderColor: '#5CF2D2',
+        shadowColor: '#2FE8C3',
+        shadowOpacity: 0.38,
+        shadowRadius: compact ? 6 : 12,
+        shadowOffset: { width: 0, height: compact ? 2 : 6 },
+        elevation: compact ? 5 : 9,
+      }}
+    >
+      <LinearGradient
+        colors={['#36E0BF', '#0B8A77', '#061B18']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+      />
+      <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: height * 0.30, backgroundColor: 'rgba(0,0,0,0.22)' }} />
+      <View style={{ position: 'absolute', top: height * 0.035, right: -width * 0.08, width: width * 0.72, height: width * 0.025, backgroundColor: 'rgba(127,255,226,0.48)', transform: [{ rotate: '-22deg' }] }} />
+      <View style={{ position: 'absolute', top: height * 0.18, right: -width * 0.05, width: width * 0.58, height: width * 0.016, backgroundColor: 'rgba(220,255,247,0.20)', transform: [{ rotate: '-22deg' }] }} />
+
+      <View style={{ position: 'absolute', top: width * 0.04, left: width * 0.06, zIndex: 4 }}>
+        <Text style={{ color: '#F7FFFD', fontSize: compact ? width * 0.17 : width * 0.19, lineHeight: compact ? width * 0.17 : width * 0.19, fontWeight: '900' }}>
+          {player.rating}
+        </Text>
+        <Text style={{ color: '#E7FFF9', fontSize: compact ? width * 0.06 : width * 0.065, fontWeight: '900', letterSpacing: 0.6 }}>
+          {player.position}
+        </Text>
+      </View>
+
+      <View style={{ height: photoH, marginTop: width * 0.01, overflow: 'hidden', alignItems: 'center', justifyContent: 'flex-end' }}>
+        {!failed ? (
+          <Image
+            source={{ uri: media.photo }}
+            resizeMode="contain"
+            accessibilityIgnoresInvertColors
+            onError={() => setFailed(true)}
+            style={{
+              width: width * 0.88,
+              height: photoH * 1.02,
+              marginBottom: -height * 0.015,
+            }}
+          />
+        ) : null}
+        <LinearGradient
+          colors={['transparent', 'rgba(3,14,13,0.82)']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: photoH * 0.34 }}
+        />
+      </View>
+
+      <View style={{ paddingHorizontal: width * 0.065, marginTop: -width * 0.005, zIndex: 4 }}>
+        <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: compact ? width * 0.085 : width * 0.10, fontWeight: '900', textAlign: 'center', letterSpacing: 0.8 }}>
+          {name}
+        </Text>
+        {!compact ? (
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.07, marginTop: width * 0.018 }}>
+            <NationFlag nation={player.nation} size={Math.max(12, width * 0.10)} />
+            <ClubBadge club={player.club} size={Math.max(14, width * 0.11)} />
+          </View>
+        ) : null}
+      </View>
+
+      <View style={{ height: 1, marginHorizontal: width * 0.09, marginTop: compact ? width * 0.02 : width * 0.025, marginBottom: compact ? width * 0.012 : width * 0.018, backgroundColor: 'rgba(210,255,244,0.42)' }} />
+
+      <View style={{ flexDirection: 'row', direction: 'ltr', paddingHorizontal: width * 0.045, zIndex: 4 }}>
+        {statRows.map(([label, value]) => (
+          <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ color: 'rgba(228,255,249,0.72)', fontSize: compact ? Math.max(4.5, width * 0.037) : Math.max(5.5, width * 0.041), fontWeight: '800', letterSpacing: 0.15 }}>
+              {label}
+            </Text>
+            <Text style={{ color: '#FFFFFF', fontSize: compact ? Math.max(7, width * 0.058) : Math.max(8.5, width * 0.066), fontWeight: '900' }}>
+              {value ?? '·'}
+            </Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={{ flex: 1 }} />
+
+      <View style={{ alignItems: 'center', paddingBottom: compact ? width * 0.028 : width * 0.036 }}>
+        <Text style={{ color: '#9BFFE7', fontSize: compact ? Math.max(4.5, width * 0.038) : Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.2 }}>
+          SQUAD FOUNDATIONS
+        </Text>
+      </View>
+    </View>
+  );
+}
+
 function totwAura() {
   if (Platform.OS === 'web') return webRimStyle();
   return {
@@ -540,7 +653,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -558,6 +671,7 @@ export function PortraitCard({
   const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
   if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  if (shownEdition === 'squadFoundations' && !shell) return <SquadFoundationsPortraitCard player={player} width={width} compact={compactStats} />;
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
     const otwArt = OTW_REMOTE_ART[artId];
