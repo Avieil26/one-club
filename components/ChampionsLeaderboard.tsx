@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import { careerFont } from '@/lib/careerCardTheme';
 import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
@@ -20,6 +21,7 @@ function monthStartIso() {
 
 export function ChampionsLeaderboard() {
   const app = useApp();
+  const router = useRouter();
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -72,14 +74,14 @@ export function ChampionsLeaderboard() {
             const profile = app.profiles.find((item) => item.id === row.userId);
             const mine = row.userId === app.user?.id;
             return (
-              <View key={row.userId} style={[styles.row, mine && styles.rowMine]}>
+              <Pressable key={row.userId} onPress={() => router.push('/player/' + row.userId)} style={[styles.row, mine && styles.rowMine]}>
                 <Text style={styles.place}>{index + 1}</Text>
                 <View style={styles.nameBlock}>
                   <Text numberOfLines={1} style={styles.name}>{profile?.displayName ?? 'שחקן'}{mine ? ' · אתה' : ''}</Text>
                   <Text style={styles.record}>{row.wins}-{row.losses}{row.rank != null ? ' · ' + row.rank : ''}</Text>
                 </View>
                 <Text style={styles.cqp}>{row.cqp.toLocaleString('en-US')}</Text>
-              </View>
+              </Pressable>
             );
           })}
         </View>
