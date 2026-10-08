@@ -21,7 +21,7 @@ const photo = (file: string) => `https://upload.wikimedia.org/wikipedia/commons/
 export const PLAYER_MEDIA: Record<string, PlayerMedia> = {
   'patati--foundations': {
     en: 'Weslley Patati',
-    photo: 'https://www.az.nl/media/rwqf013h/smiling-soccer-player-in-red-29082025114432.png?height=584&rxy=0.44428969359331477%2C0.00386597944329077&v=1dc1b257ac4ccd0&width=584',
+    photo: 'https://game-assets.futnext.com/players/50412559.png?v=2027',
     face: { ovr: 84, pac: 90, sho: 82, pas: 77, dri: 84, def: 40, phy: 75 },
     photoFocus: 'bust',
   },
