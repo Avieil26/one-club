@@ -157,8 +157,8 @@ function webRimStyle() {
 
 function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * TOTW_RATIO);
-  const shellWidth = Math.round(width * 1.08);
-  const shellHeight = Math.round(height * 1.08);
+  const shellWidth = Math.round(width * 1.18);
+  const shellHeight = Math.round(height * 1.18);
   const overlayOffsetX = Math.round((shellWidth - width) / 2);
   const overlayOffsetY = Math.round((shellHeight - height) / 2);
   const id = player.baseId ?? player.id;
@@ -571,7 +571,7 @@ export function PortraitCard({
     const totwArt = TOTW_ART[artId];
     if (totwArt) {
       const autograph = glow && totwFinish(artId) === 'pristine' ? surname(player.en || player.name || '') : '';
-      return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} scale={1.08} />;
+      return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} scale={1.18} />;
     }
     return <DynamicTotwPortraitCard player={player} width={width} />;
   }
