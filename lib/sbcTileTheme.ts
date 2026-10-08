@@ -249,6 +249,8 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-max-86-base-hero-upgrade': { en: 'Max 86 Base Hero Pack', category: 'BASE HERO', edge: '#9C7BE0', rank: 0 },
+  'sbc-patati-foundations': { en: 'Patati', category: 'SQUAD FOUNDATIONS', edge: '#2FE8C3', rank: 0 },
   'sbc-potm-olise': { en: 'Michael Olise', category: 'BUNDESLIGA POTM', edge: '#C9A227', rank: 0 },
   'sbc-dfg-tarciane': { en: 'Tarciane', category: 'DESTINED FOR GLORY', edge: '#14B8A6', rank: 1 },
   'sbc-dfg-akliouche': { en: 'Maghnes Akliouche', category: 'DESTINED FOR GLORY', edge: '#C9A227', rank: 2 },
