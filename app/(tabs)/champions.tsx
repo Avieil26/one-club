@@ -17,13 +17,14 @@ import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { FORMATIONS, formationById } from '@/lib/chemistry';
 
 type IconName = keyof typeof Ionicons.glyphMap;
-type SectionId = 'center' | 'community' | 'rewards' | 'tekkz';
+type SectionId = 'center' | 'leaderboard' | 'community' | 'rewards' | 'tekkz';
 
 type TekkzRole = [string, string];
 
 const NAV: { id: SectionId; label: string; icon: IconName }[] = [
   { id: 'tekkz', label: 'TEKKZ Pro', icon: 'star-outline' },
   { id: 'center', label: 'העמוד שלי', icon: 'trophy-outline' },
+  { id: 'leaderboard', label: 'טבלת החודש', icon: 'podium-outline' },
   { id: 'rewards', label: 'פרסים', icon: 'gift-outline' },
   { id: 'community', label: 'שחקני הקהילה', icon: 'people-outline' },
 ];
@@ -926,6 +927,20 @@ export default function ChampionsScreen() {
       );
     }
 
+    if (section === 'leaderboard') {
+      return (
+        <View style={styles.contentStack}>
+          <SectionHeading
+            icon="podium-outline"
+            eyebrow="MONTHLY CHAMPIONS"
+            title="טבלת Champions · החודש"
+            subtitle="טבלת החודש נמצאת בתוך FUT Champions. הדירוג מתחלף אוטומטית בתחילת כל חודש ומוצגים כאן CQP, מאזן ודירוג."
+          />
+          <ChampionsLeaderboard />
+        </View>
+      );
+    }
+
     if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
@@ -1081,8 +1096,6 @@ export default function ChampionsScreen() {
             <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
           </View>
         </Panel>
-
-        <ChampionsLeaderboard />
 
         <View style={styles.myContentPanel}>
           <Panel>
