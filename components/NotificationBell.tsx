@@ -62,24 +62,15 @@ export function NotificationBell() {
   }, [app.user?.id]);
 
   useEffect(() => {
-    if (!app.user?.id || !isSupabaseConfigured()) return;
-    const supabase = getSupabase();
-    // Use a unique Realtime topic per mounted subscription. React can mount/cleanup
-    // effects back-to-back, and Supabase now rejects adding postgres_changes
-    // listeners to a channel that is already joining/subscribed.
-    const channel = supabase
-      .channel('notifications-' + app.user.id + '-' + Math.random().toString(36).slice(2))
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'notifications', filter: 'user_id=eq.' + app.user.id },
-        () => void load(),
-      )
-      .subscribe();
-    return () => {
-      void supabase.removeChannel(channel);
-    };
+    void load();
   }, [app.user?.id]);
 
+  useEffect(() => {
+    if (!open || !app.user?.id) return;
+    void load();
+    const timer = setInterval(() => void load(), 15000);
+    return () => clearInterval(timer);
+  }, [open, app.user?.id]);
   useEffect(() => {
     Animated.timing(progress, { toValue: open ? 1 : 0, duration: 190, useNativeDriver: false }).start();
   }, [open, progress]);
