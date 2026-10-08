@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
-import { Alert, Modal, Pressable, TextInput, View } from 'react-native';
+import { Alert, Modal, Pressable, Text, TextInput, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
 import { Badge, Button, Card, ImageRow, Muted, Screen, Title } from '@/components/ui';
