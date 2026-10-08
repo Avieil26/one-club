@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 
 import { PortraitCard } from '@/components/PortraitCard';
 import { Screen } from '@/components/ui';
+import { submitGameScore } from '@/lib/gameScores';
 import { careerFont } from '@/lib/careerCardTheme';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import {
@@ -192,6 +193,10 @@ export default function DraftScreen() {
   const rating = starters.length ? draftTeamRating(starters.map((player) => player.rating)) : null;
   const bench = [...subs, ...reserves].filter((player): player is FcPlayer => Boolean(player));
   const used = [...Object.values(placed), ...bench].map((player) => player.id);
+
+  useEffect(() => {
+    if (phase === 'done' && rating != null) void submitGameScore('draft', rating * 10 + chemistry);
+  }, [phase, rating, chemistry]);
 
   function showOptions(next: FcPlayer[]) {
     setOptions(next);
