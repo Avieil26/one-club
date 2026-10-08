@@ -181,9 +181,7 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
     }
 
     const totw = totwFor(player.id);
-    const totwId = `${player.id}--totw`;
-    if (totw && !emittedPromoIds.has(totwId)) {
-      emittedPromoIds.add(totwId);
+    if (totw) {
       cards.push({
         ...player,
         id: `${player.id}--totw`,
