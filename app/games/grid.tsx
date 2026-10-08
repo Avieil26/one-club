@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image, Platform, Pressable, Text, TextInput, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
 import { GameEnd, Hearts, RoundNote } from '@/components/MiniGameChrome';
 import { Screen } from '@/components/ui';
+import { submitGameScore } from '@/lib/gameScores';
 import { careerFont } from '@/lib/careerCardTheme';
 import { makeGrid, missLine, searchStars, type GamePlayer, type GridPuzzle } from '@/lib/miniGames';
 
@@ -34,6 +35,10 @@ export default function GridGameScreen() {
   const done = over || won;
   const results = done || !active ? [] : searchStars(query);
   const placed = Object.keys(filled).length;
+
+  useEffect(() => {
+    if (done) void submitGameScore('grid', placed * 100 + lives * 10);
+  }, [done, placed, lives]);
 
   function guess(player: GamePlayer) {
     if (!active || done) return;
