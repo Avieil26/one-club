@@ -54,6 +54,14 @@ export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
     { name: 'Inventive', plus: false },
     { name: 'Technical', plus: false },
   ],
+  foot: 'L',
+  weakFoot: 3,
+  skillMoves: 4,
+  accelerate: 'Explosive',
+  heightCm: 173,
+  weightKg: 59,
+  age: 23,
+  roles: ['RM++'],
 }];
 
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
