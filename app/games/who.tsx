@@ -5,6 +5,7 @@ import { Stack, useRouter } from 'expo-router';
 
 import { GameEnd, Hearts, RoundNote } from '@/components/MiniGameChrome';
 import { Screen } from '@/components/ui';
+import { submitGameScore } from '@/lib/gameScores';
 import { careerFont } from '@/lib/careerCardTheme';
 import { makeMarkRound, missLine, type MarkRound } from '@/lib/miniGames';
 
@@ -31,6 +32,10 @@ export default function WhoGameScreen() {
   useEffect(() => () => {
     if (wait.current) clearTimeout(wait.current);
   }, []);
+
+  useEffect(() => {
+    if (over) void submitGameScore('who', correctCount);
+  }, [over, correctCount]);
 
   const remain = round.players.filter((player) => player.hit && locked[player.id] !== 'hit').length;
 
