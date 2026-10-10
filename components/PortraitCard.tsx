@@ -74,6 +74,23 @@ const OTW_REMOTE_ART: Record<string, string> = {
 const DESTINED_RATIO = 1152 / 864;
 const TOTW_RATIO = 1152 / 864;
 
+/** Standard Future Stars Team 1 card renders hosted by FUT.GG; unmapped cards use our fallback layout. */
+const FUTURE_STARS_REMOTE_ART: Record<string, string> = {
+  'fs-vicky-lopez': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50603094.webp',
+  'fs-rio-ngumoha': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50412024.webp',
+  'fs-myles-lewis-skelly': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50610421.webp',
+  'fs-mika-godts': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50590026.webp',
+  'fs-jacobo-ramon': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50402614.webp',
+  'fs-yoan-bonny': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50591213.webp',
+  'fs-tom-bischof': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50595413.webp',
+  'fs-lewis-hall': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50597775.webp',
+  'fs-lily-yohannes': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50609599.webp',
+  'fs-laura-blindkilde-brown': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50596965.webp',
+  'fs-robin-risser': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50603566.webp',
+  'fs-josh-king': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50402434.webp',
+  'fs-jon-martin': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50608873.webp',
+};
+
 const TOTW_ART: Record<string, number> = {
   raphinha: require('@/assets/images/cards/raphinha-totw-built.png'),
   olise: require('@/assets/images/cards/olise-totw.png'),
@@ -333,6 +350,95 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
       accessibilityIgnoresInvertColors
       style={{ width, height }}
     />
+  );
+}
+
+function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcPlayer; width: number; shell?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  const uri = FUTURE_STARS_REMOTE_ART[player.id];
+  const height = Math.round(width * DESTINED_RATIO);
+
+  if (!shell && uri && !failed) {
+    return (
+      <Image
+        source={{ uri }}
+        onError={() => setFailed(true)}
+        resizeMode="contain"
+        accessibilityIgnoresInvertColors
+        style={{ width, height, alignSelf: 'center' }}
+      />
+    );
+  }
+
+  const face = player.face;
+  const stats = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const name = (player.en || player.name || '').trim().split(' ').pop()?.toUpperCase() || 'FUTURE STARS';
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: width * 0.075,
+        borderWidth: 1.5,
+        borderColor: '#73F0CE',
+        backgroundColor: '#0A1228',
+        shadowColor: '#7C5CFF',
+        shadowOpacity: 0.42,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 5 },
+      }}
+    >
+      <LinearGradient
+        colors={['#32256E', '#121E43', '#07111E']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ flex: 1, padding: Math.max(4, width * 0.04), justifyContent: 'space-between' }}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2 }}>
+          <View>
+            <Text style={{ color: '#F5F0FF', fontSize: Math.max(12, width * 0.17), lineHeight: Math.max(13, width * 0.17), fontWeight: '900' }}>
+              {shell ? '' : player.rating}
+            </Text>
+            <Text style={{ color: '#8CF5DC', fontSize: Math.max(6, width * 0.07), fontWeight: '900' }}>{shell ? '' : player.position}</Text>
+          </View>
+          <View style={{ borderWidth: 1, borderColor: 'rgba(140,245,220,0.65)', borderRadius: 999, paddingHorizontal: Math.max(3, width * 0.025), paddingVertical: 2 }}>
+            <Text style={{ color: '#A8FFE9', fontSize: Math.max(5, width * 0.047), fontWeight: '900', letterSpacing: 0.3 }}>FUTURE STARS</Text>
+          </View>
+        </View>
+
+        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, gap: 3 }}>
+          <Text style={{ color: '#8CF5DC', fontSize: Math.max(20, width * 0.38), fontWeight: '900', opacity: 0.75 }}>✦</Text>
+          {shell ? null : (
+            <>
+              <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.09), fontWeight: '900', textAlign: 'center' }}>{name}</Text>
+              <Text numberOfLines={1} style={{ color: 'rgba(225,233,255,0.8)', fontSize: Math.max(5, width * 0.05), textAlign: 'center' }}>{player.club}</Text>
+              <NationFlag nation={player.nation} size={Math.max(11, width * 0.1)} />
+            </>
+          )}
+        </View>
+
+        {shell ? <View style={{ height: Math.max(14, width * 0.18) }} /> : (
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 1, paddingTop: 3, borderTopWidth: 1, borderTopColor: 'rgba(140,245,220,0.4)' }}>
+            {stats.map(([label, value]) => (
+              <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+                <Text style={{ color: '#8CF5DC', fontSize: Math.max(4.5, width * 0.043), fontWeight: '800' }}>{label}</Text>
+                <Text style={{ color: '#FFFFFF', fontSize: Math.max(6.5, width * 0.06), fontWeight: '900' }}>{value ?? '·'}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </LinearGradient>
+    </View>
   );
 }
 
@@ -679,7 +785,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -697,6 +803,7 @@ export function PortraitCard({
   const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
   if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  if (shownEdition === 'futureStars') return <FutureStarsPortraitCard player={player} width={width} shell={shell} />;
   if (shownEdition === 'squadFoundations' && !shell) return <SquadFoundationsPortraitCard player={player} width={width} compact={compactStats} />;
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
@@ -742,9 +849,13 @@ export function PortraitCard({
 }
 
 /** Empty gold, silver, icon, or OTW card, using the same shape as the player cards. */
-export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw'; width: number }) {
+export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'futureStars'; width: number }) {
   if (kind === 'otw') return <OtwShell width={width} />;
   if (kind === 'totw') return <TotwPortraitCard art={require('@/assets/images/cards/totw-shell.png')} width={width} />;
+  if (kind === 'futureStars') {
+    const player: FcPlayer = { id: 'shell-futureStars', name: ' ', en: ' ', rating: 88, position: 'CM', nation: '', league: '', club: '', edition: 'futureStars' };
+    return <PortraitCard player={player} width={width} shell />;
+  }
   if (kind === 'hero') {
     const player: FcPlayer = {
       id: `shell-${kind}`,
