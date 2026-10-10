@@ -427,7 +427,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
   if (otw && shown !== 'otw') alts.push({ edition: 'otw', label: 'קלף OTW' });
 
-  const foot = meta?.foot;
+  const foot = meta?.foot ?? card.foot;
   const iconPage = !!player.icon;
   const showChem = card.position !== 'GK' && !!meta;
   const chem = showChem ? CHEM_STYLES.find((style) => style.id === chemId) : undefined;
@@ -481,23 +481,30 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} /> : null;
 
-  const skills = meta ? (
+  const detailWeakFoot = meta?.weakFoot ?? card.weakFoot;
+  const detailSkillMoves = meta?.skillMoves ?? card.skillMoves;
+  const skills = detailWeakFoot != null || detailSkillMoves != null ? (
     <View style={{ gap: 12, alignItems: 'flex-end' }}>
-      <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
-        <Stars count={meta.weakFoot} />
-      </View>
-      <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
-          <SkillMark />
-          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+      {detailWeakFoot != null ? (
+        <View style={{ gap: 4, alignItems: 'flex-end' }}>
+          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
+          <Stars count={detailWeakFoot} />
         </View>
-        <Stars count={meta.skillMoves} />
-      </View>
+      ) : null}
+      {detailSkillMoves != null ? (
+        <View style={{ gap: 4, alignItems: 'flex-end' }}>
+          <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
+            <SkillMark />
+            <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+          </View>
+          <Stars count={detailSkillMoves} />
+        </View>
+      ) : null}
     </View>
   ) : (
-    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון רשמי לרגל ולסקיל</Text>
+    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון מאומת לרגל חלשה ולסקיל</Text>
   );
+  const futureStarsStatsUnverified = player.edition === 'futureStars' && Boolean((player as FcPlayer & { attributesStatus?: string }).attributesStatus || !meta);
 
   const accent = iconPage ? '#E8C86A' : '#E3B341';
 
@@ -597,6 +604,14 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           </View>
         </View>
       )}
+
+      {futureStarsStatsUnverified ? (
+        <View style={{ padding: 12, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(198,151,255,0.35)', backgroundColor: 'rgba(72,34,105,0.22)' }}>
+          <Text style={{ color: '#D9C2FF', fontSize: 12, fontWeight: '700', textAlign: 'right' }}>
+            הנתונים המפורטים של הקלף הזה עדיין לא אומתו ממקור מלא; לא נציג ערכים משוערים כאילו הם רשמיים.
+          </Text>
+        </View>
+      ) : null}
 
       {viewingOtw && personId === 'ea-264947-nicole-anyomi' ? (
         <View
