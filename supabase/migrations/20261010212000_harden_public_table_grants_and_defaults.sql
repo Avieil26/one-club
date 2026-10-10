@@ -1,8 +1,7 @@
 -- Harden client privileges in the exposed public schema.
--- Keep SELECT permissions for anon (RLS policies still decide which rows are readable).
--- Keep normal authenticated INSERT/UPDATE/DELETE permissions, where RLS policies allow them.
--- Remove anonymous writes and client-side privileges that should not be available through the Data API.
-
+-- Current tables: preserve SELECT grants and normal authenticated writes; RLS policies
+-- continue to control row access. Remove anonymous writes and unnecessary client DDL
+-- privileges, including PostgreSQL 17's MAINTAIN privilege.
 REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, MAINTAIN
 ON ALL TABLES IN SCHEMA public FROM anon;
 
@@ -12,31 +11,28 @@ ON ALL TABLES IN SCHEMA public FROM authenticated;
 REVOKE ALL PRIVILEGES
 ON ALL SEQUENCES IN SCHEMA public FROM anon;
 
--- All current public tables and both functions inspected for search_path are owned by postgres.
--- Keep future public tables from granting anonymous writes or special table privileges.
+-- Secure defaults for future objects created by postgres in public:
+-- grant no table/sequence/function privileges to API roles implicitly.
+-- Future migrations must GRANT only the exact access their new objects need.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, MAINTAIN ON TABLES FROM anon;
+REVOKE ALL PRIVILEGES ON TABLES FROM anon;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon;
+REVOKE ALL PRIVILEGES ON TABLES FROM authenticated;
 
--- Future tables must not grant TRUNCATE / REFERENCES / TRIGGER to signed-in API users.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE TRUNCATE, REFERENCES, TRIGGER, MAINTAIN ON TABLES FROM authenticated;
+REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon, authenticated;
 
--- Future functions created by postgres should not inherit PostgreSQL's default
--- EXECUTE grant to PUBLIC. Also remove the schema-specific explicit anon grant.
--- Authenticated and service_role retain their existing default grants.
+-- PostgreSQL otherwise grants EXECUTE to PUBLIC by default for new functions.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres
 REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE EXECUTE ON FUNCTIONS FROM anon;
+REVOKE EXECUTE ON FUNCTIONS FROM anon, authenticated;
 
--- Remove mutable search_path warnings from two existing functions.
--- comment_is_blocked only uses PostgreSQL built-ins and constants.
+-- comment_is_blocked only uses built-ins and constants, so pg_catalog is sufficient.
 ALTER FUNCTION public.comment_is_blocked(text) SET search_path = pg_catalog;
 
--- protect_profile calls auth.uid() with an explicit schema qualifier and uses PostgreSQL
--- built-ins; pg_catalog alone is sufficient and prevents public-schema shadowing.
+-- protect_profile calls auth.uid() with its schema explicitly qualified and otherwise
+-- uses built-ins. Pinning pg_catalog alone prevents public-schema shadowing.
 ALTER FUNCTION public.protect_profile() SET search_path = pg_catalog;
