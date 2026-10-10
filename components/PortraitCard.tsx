@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Circle, Line, Path, Polygon } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, G, Line, LinearGradient as SvgLinearGradient, Path, Polygon, Stop } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -357,44 +357,48 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         width,
         height,
         alignSelf: 'center',
-        overflow: 'hidden',
-        borderRadius: width * 0.065,
-        backgroundColor: '#080315',
-        borderColor: '#F0D8FF',
-        borderWidth: 1.6,
-        shadowColor: '#D51BFF',
-        shadowOpacity: 0.82,
-        shadowRadius: width * 0.14,
-        shadowOffset: { width: 0, height: width * 0.04 },
-        elevation: 12,
+        overflow: 'visible',
+        backgroundColor: 'transparent',
       }}
     >
-      <LinearGradient
-        colors={['#9F32FF', '#6819D6', '#3B0B88', '#1A063C', '#080315']}
-        locations={[0, 0.22, 0.48, 0.76, 1]}
-        start={{ x: 0.03, y: 0 }}
-        end={{ x: 0.92, y: 1 }}
-        style={{ flex: 1 }}
-      >
-        <LinearGradient
-          pointerEvents="none"
-          colors={['rgba(255,255,255,0.25)', 'rgba(255,116,245,0.09)', 'rgba(32,0,75,0.08)', 'rgba(255,34,195,0.16)']}
-          locations={[0, 0.22, 0.58, 1]}
-          start={{ x: 0.05, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={StyleSheet.absoluteFill}
-        />
-        <LinearGradient
-          pointerEvents="none"
-          colors={['rgba(255,91,239,0.46)', 'rgba(184,76,255,0.18)', 'transparent']}
-          locations={[0, 0.45, 1]}
-          start={{ x: 1, y: 0 }}
-          end={{ x: 0.12, y: 0.92 }}
-          style={{ position: 'absolute', top: 0, right: 0, width: '88%', height: '67%' }}
-        />
+      <View style={{ flex: 1 }}>
         <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
-          <Path d="M120 4 L184 11 Q220 20 226 55 L224 269 Q221 305 120 349 Q19 305 16 269 L14 55 Q20 20 56 11 Z" fill="none" stroke="#F1DEFF" strokeWidth="3.2" opacity="0.95" />
-          <Path d="M120 12 L179 19 Q212 27 218 59 L216 263 Q212 294 120 338 Q28 294 24 263 L22 59 Q28 27 61 19 Z" fill="none" stroke="#A85CFF" strokeWidth="2.2" opacity="0.95" />
+          <Defs>
+            <SvgLinearGradient id="future-stars-base" x1="0%" y1="0%" x2="100%" y2="100%">
+              <Stop offset="0%" stopColor="#B746FF" />
+              <Stop offset="22%" stopColor="#7D22E8" />
+              <Stop offset="48%" stopColor="#430E9F" />
+              <Stop offset="76%" stopColor="#1C0648" />
+              <Stop offset="100%" stopColor="#080315" />
+            </SvgLinearGradient>
+            <SvgLinearGradient id="future-stars-gloss" x1="0%" y1="0%" x2="100%" y2="100%">
+              <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
+              <Stop offset="24%" stopColor="#FF8AF2" stopOpacity="0.16" />
+              <Stop offset="62%" stopColor="#9E44FF" stopOpacity="0.03" />
+              <Stop offset="100%" stopColor="#FF25D8" stopOpacity="0.2" />
+            </SvgLinearGradient>
+            <ClipPath id="future-stars-card-clip">
+              <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" />
+            </ClipPath>
+          </Defs>
+          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="none" stroke="#F52EFF" strokeWidth="9" opacity="0.28" />
+          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="url(#future-stars-base)" />
+          <G clipPath="url(#future-stars-card-clip)">
+            <Path d="M16 32 L75 7 L109 6 L40 111 L35 169 L17 195 Z" fill="#EAB0FF" opacity="0.25" />
+            <Path d="M224 32 L165 7 L136 6 L205 111 L210 169 L223 195 Z" fill="#FF68E7" opacity="0.23" />
+            <Polygon points="229,21 224,120 189,181 166,165 197,87 178,4" fill="#F047FF" opacity="0.16" />
+            <Path d="M19 77 L78 22 L105 15 M221 77 L162 22 L135 15" fill="none" stroke="#FFFFFF" strokeWidth="1" opacity="0.34" />
+            <Path d="M22 239 L72 280 L120 303 L168 280 L218 239" fill="none" stroke="#FF9BF4" strokeWidth="1.2" opacity="0.5" />
+            <Path d="M24 42 L24 29 Q24 20 37 20 L72 20 M216 42 L216 29 Q216 20 203 20 L168 20" fill="none" stroke="#FFE5FF" strokeWidth="1.5" opacity="0.85" />
+            <Circle cx="120" cy="31" r="3.2" fill="#FFF0FF" />
+            <Circle cx="36" cy="94" r="2" fill="#FFB7FA" />
+            <Circle cx="204" cy="94" r="2" fill="#FFB7FA" />
+            <Polygon points="120,48 124,58 135,59 127,66 129,77 120,71 111,77 113,66 105,59 116,58" fill="#FDE9FF" opacity="0.86" />
+            <Path d="M22 313 L218 313" fill="none" stroke="#E4B0FF" strokeWidth="1.1" opacity="0.8" />
+            <Path d="M37 322 L48 329 L59 322 M181 322 L192 329 L203 322" fill="none" stroke="#FFB6F7" strokeWidth="1.2" opacity="0.95" />
+            <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="url(#future-stars-gloss)" />
+          </G>
+          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="none" stroke="#F8E8FF" strokeWidth="2" opacity="0.95" />
           <Path d="M25 71 L78 21 L108 15 L44 112 L43 161 L25 185 Z" fill="#F2B0FF" opacity="0.23" />
           <Path d="M214 62 L176 22 L151 16 L204 115 L205 160 L218 184 Z" fill="#FF72E5" opacity="0.20" />
           <Polygon points="221,22 216,123 185,184 165,171 194,94 174,17" fill="#EC57FF" opacity="0.10" />
@@ -416,12 +420,12 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
           style={{
             position: 'absolute',
             top: height * 0.1,
-            left: width * 0.05,
-            width: width * 0.9,
-            height: height * 0.63,
+            left: width * 0.075,
+            width: width * 0.85,
+            height: height * 0.61,
             overflow: 'hidden',
-            borderTopLeftRadius: width * 0.25,
-            borderTopRightRadius: width * 0.25,
+            borderTopLeftRadius: width * 0.22,
+            borderTopRightRadius: width * 0.22,
           }}
         >
           {portraitUri ? (
@@ -491,7 +495,7 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
           </Text>
         </View>
 
-        <View style={{ position: 'absolute', top: height * 0.72, left: width * 0.055, right: width * 0.055, flexDirection: 'row', justifyContent: 'space-between', gap: 1 }}>
+        <View style={{ position: 'absolute', top: height * 0.72, left: width * 0.08, right: width * 0.08, flexDirection: 'row', justifyContent: 'space-between', gap: 1 }}>
           {stats.map(([label, value], index) => (
             <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(192,139,255,0.25)' }}>
               <Text style={{ color: '#E6A4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '900', letterSpacing: 0.1 }}>{label}</Text>
@@ -500,12 +504,12 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
           ))}
         </View>
 
-        <View style={{ position: 'absolute', bottom: height * 0.033, left: width * 0.07, right: width * 0.07, alignItems: 'center' }}>
+        <View style={{ position: 'absolute', top: height * 0.84, left: width * 0.12, right: width * 0.12, alignItems: 'center' }}>
           <Text numberOfLines={1} style={{ color: '#F2D4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.1 }}>
             {shell ? '' : meta}
           </Text>
         </View>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
