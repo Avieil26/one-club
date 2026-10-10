@@ -3,10 +3,10 @@
 -- Keep normal authenticated INSERT/UPDATE/DELETE permissions, where RLS policies allow them.
 -- Remove anonymous writes and client-side privileges that should not be available through the Data API.
 
-REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER
+REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, MAINTAIN
 ON ALL TABLES IN SCHEMA public FROM anon;
 
-REVOKE TRUNCATE, REFERENCES, TRIGGER
+REVOKE TRUNCATE, REFERENCES, TRIGGER, MAINTAIN
 ON ALL TABLES IN SCHEMA public FROM authenticated;
 
 REVOKE ALL PRIVILEGES
@@ -15,14 +15,14 @@ ON ALL SEQUENCES IN SCHEMA public FROM anon;
 -- All current public tables and both functions inspected for search_path are owned by postgres.
 -- Keep future public tables from granting anonymous writes or special table privileges.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM anon;
+REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, MAINTAIN ON TABLES FROM anon;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
 REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon;
 
 -- Future tables must not grant TRUNCATE / REFERENCES / TRIGGER to signed-in API users.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM authenticated;
+REVOKE TRUNCATE, REFERENCES, TRIGGER, MAINTAIN ON TABLES FROM authenticated;
 
 -- Future functions created by postgres should not inherit PostgreSQL's default
 -- EXECUTE grant to PUBLIC. Also remove the schema-specific explicit anon grant.
