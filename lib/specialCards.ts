@@ -40,6 +40,7 @@ const totw = totwFile as TotwRow[];
 
 type FutureStarsRow = {
   id: string;
+  baseId?: string;
   itemId?: number;
   en: string;
   name: string;
@@ -50,12 +51,21 @@ type FutureStarsRow = {
   club: string;
   face: Face;
   positions?: string[];
+  foot?: 'L' | 'R';
+  skillMoves?: number;
+  weakFoot?: number;
+  accelerate?: string;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
+  attributes?: Record<string, number>;
 };
 
 const futureStars = futureStarsFile as FutureStarsRow[];
 
 export const FUTURE_STARS_PLAYERS: FcPlayer[] = futureStars.map((row) => ({
   id: row.id,
+  ...(row.baseId ? { baseId: row.baseId } : {}),
   en: row.en,
   name: row.name,
   rating: row.rating,
@@ -66,6 +76,13 @@ export const FUTURE_STARS_PLAYERS: FcPlayer[] = futureStars.map((row) => ({
   edition: 'futureStars',
   face: row.face,
   ...(row.positions?.length ? { positions: row.positions } : {}),
+  ...(row.foot ? { foot: row.foot } : {}),
+  ...(row.skillMoves != null ? { skillMoves: row.skillMoves } : {}),
+  ...(row.weakFoot != null ? { weakFoot: row.weakFoot } : {}),
+  ...(row.accelerate ? { accelerate: row.accelerate } : {}),
+  ...(row.heightCm ? { heightCm: row.heightCm } : {}),
+  ...(row.weightKg ? { weightKg: row.weightKg } : {}),
+  ...(row.age ? { age: row.age } : {}),
 }));
 
 export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
