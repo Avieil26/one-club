@@ -467,14 +467,17 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         </Svg>
       )}
 
-      <LinearGradient
-        pointerEvents="none"
-        colors={['rgba(19,7,47,0)', 'rgba(22,8,50,0.04)', 'rgba(14,5,37,0.66)', '#0D0825']}
-        locations={[0, 0.38, 0.78, 1]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-        style={{ position: 'absolute', top: height * 0.49, left: width * 0.07, width: width * 0.86, height: height * 0.26 }}
-      />
+      <Svg pointerEvents="none" width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
+        <Defs>
+          <SvgLinearGradient id="future-stars-photo-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+            <Stop offset="0%" stopColor="#14082F" stopOpacity="0" />
+            <Stop offset="27%" stopColor="#1B0A42" stopOpacity="0.12" />
+            <Stop offset="59%" stopColor="#170833" stopOpacity="0.72" />
+            <Stop offset="100%" stopColor="#0B071F" stopOpacity="0.96" />
+          </SvgLinearGradient>
+        </Defs>
+        <Path d="M12 204 C48 211 79 220 120 215 C161 220 192 211 228 204 L225 251 C222 282 198 309 120 350 C42 309 18 282 15 251 Z" fill="url(#future-stars-photo-fade)" />
+      </Svg>
 
       <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.105, zIndex: 5, alignItems: 'flex-start' }}>
         <Text style={{ color: '#FFFFFF', fontSize: Math.max(19, width * 0.2), lineHeight: Math.max(21, width * 0.205), fontWeight: '900', letterSpacing: -0.9, textShadowColor: '#180A40', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}>
@@ -485,19 +488,19 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         </Text>
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.675, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
+      <View style={{ position: 'absolute', top: height * 0.63, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
         <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.65} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.112), fontWeight: '900', letterSpacing: 0.1, textAlign: 'center', textShadowColor: '#120520', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}>
           {shell ? '' : name}
         </Text>
         <View style={{ width: '52%', height: 1, backgroundColor: '#E6C97C', opacity: 0.88, marginTop: 2 }} />
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.748, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
+      <View style={{ position: 'absolute', top: height * 0.746, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
         {!shell ? <ClubBadge club={player.club} size={Math.max(12, width * 0.087)} /> : null}
         {!shell ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.08)} /> : null}
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.805, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
+      <View style={{ position: 'absolute', top: height * 0.812, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
         {stats.map(([label, value], index) => (
           <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(238,216,255,0.23)' }}>
             <Text style={{ color: '#F3D98E', fontSize: Math.max(5, width * 0.039), fontWeight: '900', letterSpacing: -0.15 }}>{label}</Text>
