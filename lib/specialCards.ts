@@ -1,5 +1,6 @@
 import heroesFile from '@/assets/data/heroes.json';
 import totwFile from '@/assets/data/totw.json';
+import futureStarsFile from '@/assets/data/futureStars.json';
 
 import type { FcPlayer } from '@/lib/fcPlayers';
 
@@ -36,6 +37,36 @@ type TotwRow = {
 
 const heroes = heroesFile as HeroRow[];
 const totw = totwFile as TotwRow[];
+
+type FutureStarsRow = {
+  id: string;
+  itemId?: number;
+  en: string;
+  name: string;
+  rating: number;
+  position: string;
+  nation: string;
+  league: string;
+  club: string;
+  face: Face;
+  positions?: string[];
+};
+
+const futureStars = futureStarsFile as FutureStarsRow[];
+
+export const FUTURE_STARS_PLAYERS: FcPlayer[] = futureStars.map((row) => ({
+  id: row.id,
+  en: row.en,
+  name: row.name,
+  rating: row.rating,
+  position: row.position,
+  nation: row.nation,
+  league: row.league,
+  club: row.club,
+  edition: 'futureStars',
+  face: row.face,
+  ...(row.positions?.length ? { positions: row.positions } : {}),
+}));
 
 export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
   id: 'patati--foundations',

@@ -1,6 +1,6 @@
 import type { FcPlayer } from '@/lib/fcPlayers';
 
-export type CardKind = 'all' | 'gold' | 'silver' | 'icon' | 'promo' | 'hero' | 'totw';
+export type CardKind = 'all' | 'gold' | 'silver' | 'icon' | 'promo' | 'hero' | 'totw' | 'futureStars';
 
 export type PlayerFilters = {
   kind: CardKind;
@@ -34,13 +34,14 @@ export function filtersActive(filters: PlayerFilters) {
 }
 
 export function playerMatches(player: FcPlayer, filters: PlayerFilters) {
-  const special = Boolean(player.icon) || player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw';
+  const special = Boolean(player.icon) || player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'futureStars';
   if (filters.kind === 'gold' && (special || player.rating < 75)) return false;
   if (filters.kind === 'silver' && (special || player.rating < 65 || player.rating > 74)) return false;
   if (filters.kind === 'icon' && !player.icon) return false;
   if (filters.kind === 'promo' && player.edition !== 'destined') return false;
   if (filters.kind === 'hero' && player.edition !== 'hero') return false;
   if (filters.kind === 'totw' && player.edition !== 'totw') return false;
+  if (filters.kind === 'futureStars' && player.edition !== 'futureStars') return false;
   if (filters.nation && player.nation !== filters.nation) return false;
   if (filters.league && player.league !== filters.league) return false;
   if (filters.club && player.club !== filters.club) return false;

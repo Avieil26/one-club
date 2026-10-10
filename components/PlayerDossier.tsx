@@ -257,8 +257,8 @@ function ago(iso: string) {
   return `לפני ${Math.round(hours / 24)} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' {
-  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw' || player.edition === 'squadFoundations') return player.edition;
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars' {
+  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw' || player.edition === 'squadFoundations' || player.edition === 'futureStars') return player.edition;
   return 'base';
 }
 
@@ -271,7 +271,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const media = playerMedia(personId);
   const baseMeta = playerCardMeta(personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -356,7 +356,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const viewingOtw = edition === 'otw' && (otw != null || player.edition === 'otw');
   const viewingHero = edition === 'hero';
   const viewingFoundations = edition === 'squadFoundations' && player.edition === 'squadFoundations';
-  const card: FcPlayer = viewingPromo
+  const viewingFutureStars = edition === 'futureStars' && player.edition === 'futureStars';
+  const card: FcPlayer = viewingFutureStars
+    ? { ...player, edition: 'futureStars' }
+    : viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
     : viewingTotw
       ? {
@@ -382,7 +385,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             face: undefined,
           };
   const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : viewingOtw ? (otwCardMeta(personId) ?? baseMeta) : baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingOtw ? (card.face ?? media.face) : viewingHero ? player.face : viewingFoundations ? (card.face ?? media.face) : media.face;
+  const face = viewingFutureStars ? (card.face ?? media.face) : viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingOtw ? (card.face ?? media.face) : viewingHero ? player.face : viewingFoundations ? (card.face ?? media.face) : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -412,12 +415,12 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingOtw ? 'otw' : viewingHero ? 'hero' : viewingFoundations ? 'squadFoundations' : 'base';
-  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingOtw ? `${personId}--otw` : personId;
+  const shown = viewingFutureStars ? 'futureStars' : viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingOtw ? 'otw' : viewingHero ? 'hero' : viewingFoundations ? 'squadFoundations' : 'base';
+  const quoteId = viewingFutureStars ? player.id : viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingOtw ? `${personId}--otw` : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
-  const hasRegular = Boolean(player.baseId) || (player.edition !== 'hero' && player.edition !== 'squadFoundations' && !(player.edition === 'totw' && !player.baseId));
+  const hasRegular = player.edition !== 'futureStars' && (Boolean(player.baseId) || (player.edition !== 'hero' && player.edition !== 'squadFoundations' && !(player.edition === 'totw' && !player.baseId)));
   const alts: { edition: 'base' | 'destined' | 'totw' | 'otw' | 'squadFoundations'; label: string }[] = [];
   if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: 'קלף רגיל' });
   if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: 'קלף פרומו' });
