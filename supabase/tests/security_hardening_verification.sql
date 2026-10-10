@@ -92,7 +92,7 @@ checks AS (
       WHERE d.defaclrole = 'postgres'::regrole
         AND n.nspname = 'public'
         AND d.defaclobjtype = 'f'
-        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole)
+        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole, 'service_role'::regrole)
         AND a.privilege_type = 'EXECUTE'
     )
   UNION ALL
