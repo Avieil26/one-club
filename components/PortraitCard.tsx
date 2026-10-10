@@ -123,6 +123,32 @@ const TOTW_ART: Record<string, number> = {
   'ea-276695-shea-charles': require('@/assets/images/cards/ea-276695-shea-charles-totw.png'),
 };
 
+const TOTW4_CARD_IDS = new Set([
+  'olise',
+  'raphinha',
+  'wilson',
+  'marquinhos',
+  'salah',
+  'semenyo',
+  'ea-219683-corentin-tolisso',
+  'ea-264388-moleiro',
+  'ea-223710-vedat-muriqi',
+  'ea-243630-jonathan-david',
+  'ea-261865-miguel-gutierrez',
+  'ea-190765-pascal-gro',
+  'ea-273177-olivia-holdt',
+  'ea-70726-anis-hadj-moussa',
+  'ea-80230-bella-andersson',
+  'ea-188350-marco-reus',
+  'ea-235134-pablo-rosario',
+  'ea-237440-hannes-delcroix',
+  'ea-238071-dujon-sterling',
+  'ea-261861-jack-moylan',
+  'ea-273567-chiara-hahn',
+  'ea-276725-lorenzo-palmisani',
+  'totw-salomon-rodriguez',
+]);
+
 const TOTW_RIM = `<filter id="totw-rim" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
   <feMorphology in="SourceAlpha" operator="dilate" radius="3" result="core"></feMorphology>
   <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="big"></feMorphology>
@@ -224,21 +250,22 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
         <View style={{ position: 'absolute', top: contentHeight * 0.095, right: contentWidth * 0.1, zIndex: 4, alignItems: 'center' }}>
           <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, contentWidth * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
         </View>
-        <View style={{ position: 'absolute', top: contentHeight * 0.60, left: contentWidth * 0.10, right: contentWidth * 0.10, zIndex: 5, alignItems: 'center' }}>
-          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, contentWidth * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
-          <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
-          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+        <View style={{ position: 'absolute', top: contentHeight * 0.56, left: contentWidth * 0.10, right: contentWidth * 0.10, zIndex: 5, alignItems: 'center' }}>
+          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, contentWidth * 0.09), fontWeight: '900', letterSpacing: 1.0 }}>{name}</Text>
+          <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 3, opacity: 0.9 }} />
+          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.04), fontWeight: '700', marginTop: 2 }}>{player.club}</Text>
         </View>
-        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', direction: 'ltr', zIndex: 6 }}>
+        <View style={{ position: 'absolute', top: contentHeight * 0.735, left: 0, right: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: Math.max(10, contentWidth * 0.09), zIndex: 7 }}>
+          {player.club && player.club !== 'TOTW' && player.club !== 'Heroes' ? <ClubBadge club={player.club} size={Math.max(14, contentWidth * 0.10)} /> : null}
+          <NationFlag nation={player.nation} size={Math.max(13, contentWidth * 0.082)} />
+        </View>
+        <View style={{ position: 'absolute', left: contentWidth * 0.055, right: contentWidth * 0.055, bottom: contentHeight * 0.075, flexDirection: 'row', direction: 'ltr', zIndex: 6 }}>
           {stats.map(([label, value]) => (
             <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, contentWidth * 0.034), fontWeight: '800' }}>{label}</Text>
-              <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, contentWidth * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
+              <Text style={{ color: '#C084FC', fontSize: Math.max(5, contentWidth * 0.036), fontWeight: '800' }}>{label}</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, contentWidth * 0.06), fontWeight: '900' }}>{value ?? '·'}</Text>
             </View>
           ))}
-        </View>
-        <View style={{ position: 'absolute', bottom: contentHeight * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
-          <NationFlag nation={player.nation} size={Math.max(11, contentWidth * 0.082)} />
         </View>
       </View>
     </View>
@@ -705,6 +732,8 @@ export function PortraitCard({
   }
   const aura = glow && shownEdition === 'totw' ? totwAura() : undefined;
   if (shownEdition === 'totw') {
+    // TOTW 4 uses one consistent dynamic design; keep older TOTW editions' approved artwork.
+    if (TOTW4_CARD_IDS.has(artId)) return <DynamicTotwPortraitCard player={player} width={width} />;
     const totwArt = TOTW_ART[artId];
     if (totwArt) {
       const autograph = glow && totwFinish(artId) === 'pristine' ? surname(player.en || player.name || '') : '';
