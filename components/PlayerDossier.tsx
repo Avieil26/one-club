@@ -269,7 +269,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const app = useApp();
   const personId = player.baseId ?? player.id;
   const media = playerMedia(personId);
-  const baseMeta = playerCardMeta(personId);
+  const baseMeta = playerCardMeta(player.edition === 'futureStars' ? player.id : personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
   const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars'>(opening(player));
   const [shine, setShine] = useState(false);
