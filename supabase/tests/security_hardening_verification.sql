@@ -66,7 +66,7 @@ checks AS (
       WHERE d.defaclrole = 'postgres'::regrole
         AND n.nspname = 'public'
         AND d.defaclobjtype = 'r'
-        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole)
+        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole, 'service_role'::regrole)
     )
   UNION ALL
   SELECT
@@ -79,7 +79,7 @@ checks AS (
       WHERE d.defaclrole = 'postgres'::regrole
         AND n.nspname = 'public'
         AND d.defaclobjtype = 'S'
-        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole)
+        AND a.grantee IN ('anon'::regrole, 'authenticated'::regrole, 'service_role'::regrole)
     )
   UNION ALL
   SELECT
