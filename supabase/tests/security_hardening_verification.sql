@@ -98,15 +98,18 @@ checks AS (
   UNION ALL
   SELECT
     'PUBLIC has no global default EXECUTE on postgres-owned functions',
-    NOT EXISTS (
+    EXISTS (
       SELECT 1
       FROM pg_default_acl d
-      CROSS JOIN LATERAL aclexplode(d.defaclacl) a
       WHERE d.defaclrole = 'postgres'::regrole
         AND d.defaclnamespace = 0
         AND d.defaclobjtype = 'f'
-        AND a.grantee = 0
-        AND a.privilege_type = 'EXECUTE'
+        AND NOT EXISTS (
+          SELECT 1
+          FROM aclexplode(d.defaclacl) a
+          WHERE a.grantee = 0
+            AND a.privilege_type = 'EXECUTE'
+        )
     )
   UNION ALL
   SELECT
