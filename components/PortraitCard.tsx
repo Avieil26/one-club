@@ -346,160 +346,170 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
   const stats = player.position === 'GK'
     ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
     : ([['PAC', face?.pac], ['SHO', face?.sho], ['PAS', face?.pas], ['DRI', face?.dri], ['DEF', face?.def], ['PHY', face?.phy]] as const);
-  const name = (player.en || player.name || '').trim().toUpperCase();
-  const ink = '#F5E9FF';
-  const mint = '#D9C2FF';
-  const meta = `${player.foot ?? '—'} FOOT   ·   ${player.skillMoves ?? '—'}★ SKILLS   ·   ${player.weakFoot ?? '—'}★ WEAK FOOT`;
+  const name = surname(player.en || player.name || '').toUpperCase();
+  const silhouette = 'M120 7 C113 7 109 15 104 23 C99 31 91 29 82 22 L70 15 C62 12 55 19 47 27 L34 37 C22 41 16 51 13 69 L9 116 L3 132 L12 146 L12 181 L15 251 C18 282 42 309 120 350 C198 309 222 282 225 251 L228 181 L228 146 L237 132 L231 116 L227 69 C224 51 218 41 206 37 L193 27 C185 19 178 12 170 15 L158 22 C149 29 141 31 136 23 C131 15 127 7 120 7 Z';
+  const sparkles = [
+    [26, 67, 1.5], [42, 91, 1], [65, 55, 1.2], [88, 42, 1], [163, 40, 1.1],
+    [189, 57, 1.6], [211, 83, 1], [219, 112, 1.4], [30, 130, 1.1], [22, 177, 1.7],
+    [43, 202, 1], [207, 203, 1.4], [220, 228, 1], [190, 263, 1.1], [164, 287, 1],
+    [71, 278, 1.2], [43, 250, 1], [59, 225, 0.9], [190, 94, 0.9], [35, 157, 1.1],
+    [76, 72, 0.8], [205, 147, 0.9], [181, 221, 0.8], [93, 300, 0.9], [146, 277, 0.8],
+    [27, 219, 0.8], [217, 184, 0.9], [52, 105, 0.8], [177, 67, 0.9], [197, 246, 1],
+  ] as const;
 
   return (
-    <View
-      style={{
-        width,
-        height,
-        alignSelf: 'center',
-        overflow: 'visible',
-        backgroundColor: 'transparent',
-      }}
-    >
-      <View style={{ flex: 1 }}>
-        <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
-          <Defs>
-            <SvgLinearGradient id="future-stars-base" x1="0%" y1="0%" x2="100%" y2="100%">
-              <Stop offset="0%" stopColor="#B746FF" />
-              <Stop offset="22%" stopColor="#7D22E8" />
-              <Stop offset="48%" stopColor="#430E9F" />
-              <Stop offset="76%" stopColor="#1C0648" />
-              <Stop offset="100%" stopColor="#080315" />
-            </SvgLinearGradient>
-            <SvgLinearGradient id="future-stars-gloss" x1="0%" y1="0%" x2="100%" y2="100%">
-              <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
-              <Stop offset="24%" stopColor="#FF8AF2" stopOpacity="0.16" />
-              <Stop offset="62%" stopColor="#9E44FF" stopOpacity="0.03" />
-              <Stop offset="100%" stopColor="#FF25D8" stopOpacity="0.2" />
-            </SvgLinearGradient>
-            <ClipPath id="future-stars-card-clip">
-              <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" />
-            </ClipPath>
-          </Defs>
-          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="none" stroke="#F52EFF" strokeWidth="9" opacity="0.28" />
-          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="url(#future-stars-base)" />
-          <G clipPath="url(#future-stars-card-clip)">
-            <Path d="M16 32 L75 7 L109 6 L40 111 L35 169 L17 195 Z" fill="#EAB0FF" opacity="0.25" />
-            <Path d="M224 32 L165 7 L136 6 L205 111 L210 169 L223 195 Z" fill="#FF68E7" opacity="0.23" />
-            <Polygon points="229,21 224,120 189,181 166,165 197,87 178,4" fill="#F047FF" opacity="0.16" />
-            <Path d="M19 77 L78 22 L105 15 M221 77 L162 22 L135 15" fill="none" stroke="#FFFFFF" strokeWidth="1" opacity="0.34" />
-            <Path d="M22 239 L72 280 L120 303 L168 280 L218 239" fill="none" stroke="#FF9BF4" strokeWidth="1.2" opacity="0.5" />
-            <Path d="M24 42 L24 29 Q24 20 37 20 L72 20 M216 42 L216 29 Q216 20 203 20 L168 20" fill="none" stroke="#FFE5FF" strokeWidth="1.5" opacity="0.85" />
-            <Circle cx="120" cy="31" r="3.2" fill="#FFF0FF" />
-            <Circle cx="36" cy="94" r="2" fill="#FFB7FA" />
-            <Circle cx="204" cy="94" r="2" fill="#FFB7FA" />
-            <Polygon points="120,48 124,58 135,59 127,66 129,77 120,71 111,77 113,66 105,59 116,58" fill="#FDE9FF" opacity="0.86" />
-            <Path d="M22 313 L218 313" fill="none" stroke="#E4B0FF" strokeWidth="1.1" opacity="0.8" />
-            <Path d="M37 322 L48 329 L59 322 M181 322 L192 329 L203 322" fill="none" stroke="#FFB6F7" strokeWidth="1.2" opacity="0.95" />
-            <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="url(#future-stars-gloss)" />
-          </G>
-          <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="none" stroke="#F8E8FF" strokeWidth="2" opacity="0.95" />
-        </Svg>
+    <View style={{ width, height, alignSelf: 'center', overflow: 'visible', backgroundColor: 'transparent' }}>
+      <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
+        <Defs>
+          <SvgLinearGradient id="future-stars-base" x1="0%" y1="0%" x2="90%" y2="100%">
+            <Stop offset="0%" stopColor="#4C147D" />
+            <Stop offset="20%" stopColor="#5023AB" />
+            <Stop offset="44%" stopColor="#32106D" />
+            <Stop offset="68%" stopColor="#241057" />
+            <Stop offset="100%" stopColor="#08071D" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id="future-stars-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#E6F6FF" />
+            <Stop offset="15%" stopColor="#9FA9FF" />
+            <Stop offset="31%" stopColor="#FFF0A9" />
+            <Stop offset="47%" stopColor="#B68A35" />
+            <Stop offset="62%" stopColor="#F6DC92" />
+            <Stop offset="79%" stopColor="#AABEFF" />
+            <Stop offset="100%" stopColor="#F7E7B4" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id="future-stars-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#9D661B" />
+            <Stop offset="19%" stopColor="#FFF0A5" />
+            <Stop offset="34%" stopColor="#C18A29" />
+            <Stop offset="50%" stopColor="#FFF8CE" />
+            <Stop offset="71%" stopColor="#A56A16" />
+            <Stop offset="87%" stopColor="#F3D77E" />
+            <Stop offset="100%" stopColor="#704110" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id="future-stars-gloss" x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.27" />
+            <Stop offset="28%" stopColor="#B6C4FF" stopOpacity="0.08" />
+            <Stop offset="63%" stopColor="#5A20CC" stopOpacity="0.04" />
+            <Stop offset="100%" stopColor="#FA7DFF" stopOpacity="0.17" />
+          </SvgLinearGradient>
+          <ClipPath id="future-stars-card-clip">
+            <Path d={silhouette} />
+          </ClipPath>
+        </Defs>
 
-        <View
-          pointerEvents="none"
-          style={{
-            position: 'absolute',
-            top: height * 0.1,
-            left: width * 0.075,
-            width: width * 0.85,
-            height: height * 0.61,
-            overflow: 'hidden',
-            borderTopLeftRadius: width * 0.22,
-            borderTopRightRadius: width * 0.22,
-          }}
-        >
-          {portraitUri ? (
-            <Image
-              source={{ uri: portraitUri }}
-              resizeMode="cover"
-              accessibilityIgnoresInvertColors
-              style={{ width: '100%', height: '100%' }}
-            />
-          ) : (
-            <Svg width="100%" height="100%" viewBox="0 0 200 240">
-              <Circle cx="100" cy="72" r="37" fill="#9E6BD3" opacity="0.85" />
-              <Path d="M34 229 Q37 139 100 132 Q163 139 166 229 Z" fill="#7941A8" opacity="0.9" />
-              <Path d="M63 54 Q70 20 100 24 Q132 21 138 55" stroke="#E7D4FF" strokeWidth="4" fill="none" opacity="0.55" />
-            </Svg>
-          )}
-          <LinearGradient
-            colors={['rgba(20,0,39,0.01)', 'rgba(37,0,61,0.02)', 'rgba(36,0,57,0.54)', '#19052F']}
-            locations={[0, 0.58, 0.84, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={StyleSheet.absoluteFill}
-          />
-        </View>
-
-        <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.095, alignItems: 'flex-start' }}>
-          <Text style={{ color: '#FFFFFF', fontSize: Math.max(18, width * 0.19), lineHeight: Math.max(20, width * 0.195), fontWeight: '900', letterSpacing: -0.8, textShadowColor: '#F030FF', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 10 }}>
-            {shell ? '' : player.rating}
-          </Text>
-          <Text style={{ color: '#E8C9FF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900' }}>
-            {shell ? '' : player.position}
-          </Text>
-        </View>
-
-        <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.075, alignItems: 'center', gap: 3 }}>
-          <Text style={{ color: '#F8EDFF', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>FUTURE</Text>
-          <Text style={{ color: '#FF9FEB', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>STARS</Text>
-          {!shell ? <ClubBadge club={player.club} size={Math.max(17, width * 0.17)} /> : null}
-          {!shell ? <NationFlag nation={player.nation} size={Math.max(13, width * 0.115)} /> : null}
-        </View>
-
-        <View
-          style={{
-            position: 'absolute',
-            top: height * 0.59,
-            left: width * 0.075,
-            right: width * 0.075,
-            height: height * 0.105,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopWidth: 1,
-            borderTopColor: 'rgba(224,190,255,0.55)',
-            borderBottomWidth: 1,
-            borderBottomColor: 'rgba(224,190,255,0.3)',
-          }}
-        >
-          <Text
-            numberOfLines={1}
-            adjustsFontSizeToFit
-            minimumFontScale={0.65}
-            style={{ color: ink, fontSize: Math.max(8, width * 0.075), fontWeight: '900', letterSpacing: 0.7, textAlign: 'center', textShadowColor: '#7B2DCC', textShadowRadius: 5 }}
-          >
-            {shell ? '' : name}
-          </Text>
-          <Text numberOfLines={1} style={{ color: '#D4B0FA', fontSize: Math.max(5, width * 0.043), fontWeight: '800', letterSpacing: 0.9, marginTop: 1 }}>
-            {shell ? '' : player.club.toUpperCase()}
-          </Text>
-        </View>
-
-        <View style={{ position: 'absolute', top: height * 0.72, left: width * 0.08, right: width * 0.08, flexDirection: 'row', justifyContent: 'space-between', gap: 1 }}>
-          {stats.map(([label, value], index) => (
-            <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(192,139,255,0.25)' }}>
-              <Text style={{ color: '#E6A4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '900', letterSpacing: 0.1 }}>{label}</Text>
-              <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.083), lineHeight: Math.max(10, width * 0.087), fontWeight: '900', textShadowColor: '#8E42D2', textShadowRadius: 4 }}>{shell ? '' : value ?? '—'}</Text>
-            </View>
+        {/* One custom card silhouette; no square plate behind it. */}
+        <Path d={silhouette} fill="none" stroke="#41216E" strokeWidth="12" opacity="0.95" />
+        <Path d={silhouette} fill="url(#future-stars-base)" />
+        <G clipPath="url(#future-stars-card-clip)">
+          <Path d="M-8 42 C39 10 69 29 92 61 C119 99 143 97 178 49 L246 7 L246 124 C205 156 180 170 139 156 C94 139 62 93 -8 119 Z" fill="#9A52FF" opacity="0.15" />
+          <Path d="M-8 199 C42 156 64 183 91 217 C118 251 172 253 245 188 L245 285 C181 341 117 354 48 311 L-8 270 Z" fill="#D459FF" opacity="0.11" />
+          <Path d="M10 57 L49 33 L74 43 L36 99 L20 139 Z" fill="#BBD6FF" opacity="0.11" />
+          <Path d="M230 58 L194 33 L167 42 L207 101 L222 139 Z" fill="#F5D1FF" opacity="0.12" />
+          <Path d="M19 225 C63 253 74 275 120 291 C166 275 177 253 221 225" fill="none" stroke="#B7B9FF" strokeWidth="1.2" opacity="0.28" />
+          {sparkles.map(([cx, cy, r], index) => (
+            <Circle key={index} cx={cx} cy={cy} r={r} fill={index % 3 === 0 ? '#FFF4C1' : '#D8D8FF'} opacity={index % 2 === 0 ? 0.76 : 0.42} />
           ))}
-        </View>
 
-        <View style={{ position: 'absolute', top: height * 0.84, left: width * 0.12, right: width * 0.12, alignItems: 'center' }}>
-          <Text numberOfLines={1} style={{ color: '#F2D4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.1 }}>
-            {shell ? '' : meta}
-          </Text>
-        </View>
+          {/* The signature gold, interwoven globe behind the portrait. */}
+          <Path d="M48 145 C50 109 94 81 143 86 C187 90 218 119 212 150 C206 181 162 205 115 199 C71 193 45 169 48 145 Z" fill="#B87520" opacity="0.12" />
+          <Path d="M48 145 C50 109 94 81 143 86 C187 90 218 119 212 150 C206 181 162 205 115 199 C71 193 45 169 48 145 Z" fill="none" stroke="url(#future-stars-gold)" strokeWidth="2.5" opacity="0.96" />
+          <Path d="M55 121 C93 138 166 144 209 120" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.5" opacity="0.98" />
+          <Path d="M49 143 C93 162 166 168 211 143" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
+          <Path d="M58 164 C98 183 160 185 202 161" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3" opacity="0.92" />
+          <Path d="M78 97 C59 124 62 161 88 186" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
+          <Path d="M103 88 C82 119 86 166 115 198" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4.5" opacity="0.98" />
+          <Path d="M137 87 C117 117 119 165 146 200" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4.5" opacity="0.98" />
+          <Path d="M169 98 C153 122 158 164 179 181" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
+          <Path d="M62 113 C85 150 145 178 196 170" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.1" opacity="0.86" />
+          <Path d="M59 163 C99 137 154 109 200 113" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.1" opacity="0.86" />
+          <Path d="M73 100 C111 128 166 146 204 136" fill="none" stroke="#FFF4BE" strokeWidth="1" opacity="0.75" />
+          <Path d="M72 181 C111 160 159 158 192 174" fill="none" stroke="#FFF4BE" strokeWidth="1.1" opacity="0.7" />
+          <Path d="M42 151 C27 128 31 105 51 91" fill="none" stroke="#C9B7FF" strokeWidth="2.5" opacity="0.65" />
+          <Path d="M208 88 C230 107 233 132 219 154" fill="none" stroke="#C5D4FF" strokeWidth="2.5" opacity="0.7" />
+
+          <Path d="M8 37 L45 15 L69 24 L31 80 L15 116 Z" fill="url(#future-stars-gloss)" />
+          <Path d="M232 37 L195 15 L171 24 L209 80 L225 116 Z" fill="url(#future-stars-gloss)" />
+          <Path d="M8 13 L232 13 L232 355 L8 355 Z" fill="url(#future-stars-gloss)" />
+        </G>
+
+        {/* Iridescent, gold-edged contour follows the exact card shape. */}
+        <Path d={silhouette} fill="none" stroke="#8CA9FF" strokeWidth="5.2" opacity="0.78" />
+        <Path d={silhouette} fill="none" stroke="url(#future-stars-metal)" strokeWidth="2.5" opacity="0.98" />
+        <Path d="M120 14 C111 14 108 24 103 30 C95 35 85 28 77 22 C66 14 57 26 48 34 L35 43 C25 49 22 63 20 81 L17 121 L12 135 L19 145 L19 179 L21 250 C26 279 48 303 120 337 C192 303 214 279 219 250 L221 179 L221 145 L228 135 L223 121 L220 81 C218 63 215 49 205 43 L192 34 C183 26 174 14 163 22 C155 28 145 35 137 30 C132 24 129 14 120 14 Z" fill="none" stroke="#F8E8FF" strokeWidth="0.9" opacity="0.62" />
+
+        {/* Small promo crest at the left, echoing the item mark on FUTBIN cards. */}
+        <Polygon points="13,157 27,148 41,157 27,174" fill="#261263" stroke="#E1D5FF" strokeWidth="1.4" />
+        <Polygon points="19,157 27,152 35,157 27,167" fill="none" stroke="#CBB9FF" strokeWidth="0.9" />
+        <Path d="M27 155 L29 159 L33 159 L30 162 L31 166 L27 164 L23 166 L24 162 L21 159 L25 159 Z" fill="#FFF0A8" />
+
+        {/* Tiny crown accents; no foot, skills or weak-foot text belongs on the artwork. */}
+        <Path d="M120 9 L123 15 L130 16 L125 21 L126 27 L120 24 L114 27 L115 21 L110 16 L117 15 Z" fill="#FFF1B5" stroke="#B77E2A" strokeWidth="0.7" />
+      </Svg>
+
+      {portraitUri ? (
+        <Image
+          source={{ uri: portraitUri }}
+          resizeMode="contain"
+          accessibilityIgnoresInvertColors
+          style={{
+            position: 'absolute',
+            left: width * 0.045,
+            top: height * 0.105,
+            width: width * 0.91,
+            height: height * 0.635,
+          }}
+        />
+      ) : (
+        <Svg width={width * 0.72} height={height * 0.52} viewBox="0 0 200 240" style={{ position: 'absolute', top: height * 0.15, left: width * 0.14 }}>
+          <Circle cx="100" cy="72" r="37" fill="#B49AFF" opacity="0.9" />
+          <Path d="M26 235 Q34 137 100 132 Q166 137 174 235 Z" fill="#7551B0" opacity="0.95" />
+          <Path d="M63 53 Q69 20 100 24 Q132 20 138 55" stroke="#F3DCFF" strokeWidth="4" fill="none" opacity="0.75" />
+        </Svg>
+      )}
+
+      <LinearGradient
+        pointerEvents="none"
+        colors={['rgba(19,7,47,0)', 'rgba(22,8,50,0.04)', 'rgba(14,5,37,0.66)', '#0D0825']}
+        locations={[0, 0.38, 0.78, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={{ position: 'absolute', top: height * 0.49, left: width * 0.07, width: width * 0.86, height: height * 0.26 }}
+      />
+
+      <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.105, zIndex: 5, alignItems: 'flex-start' }}>
+        <Text style={{ color: '#FFFFFF', fontSize: Math.max(19, width * 0.2), lineHeight: Math.max(21, width * 0.205), fontWeight: '900', letterSpacing: -0.9, textShadowColor: '#180A40', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}>
+          {shell ? '' : player.rating}
+        </Text>
+        <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900', letterSpacing: 0.4, textShadowColor: '#180A40', textShadowRadius: 3 }}>
+          {shell ? '' : player.position}
+        </Text>
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.675, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
+        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.65} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.112), fontWeight: '900', letterSpacing: 0.1, textAlign: 'center', textShadowColor: '#120520', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}>
+          {shell ? '' : name}
+        </Text>
+        <View style={{ width: '52%', height: 1, backgroundColor: '#E6C97C', opacity: 0.88, marginTop: 2 }} />
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.748, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
+        {!shell ? <ClubBadge club={player.club} size={Math.max(12, width * 0.087)} /> : null}
+        {!shell ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.08)} /> : null}
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.805, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
+        {stats.map(([label, value], index) => (
+          <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(238,216,255,0.23)' }}>
+            <Text style={{ color: '#F3D98E', fontSize: Math.max(5, width * 0.039), fontWeight: '900', letterSpacing: -0.15 }}>{label}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.066), lineHeight: Math.max(10, width * 0.071), fontWeight: '900', textShadowColor: '#1D0A42', textShadowRadius: 3 }}>
+              {shell ? '' : value ?? '—'}
+            </Text>
+          </View>
+        ))}
       </View>
     </View>
   );
 }
-
 function OtwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * DESTINED_RATIO);
   const data = otwFor(player.baseId ?? player.id);
