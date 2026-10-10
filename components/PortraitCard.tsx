@@ -413,7 +413,8 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
               accessibilityIgnoresInvertColors
               style={{ width: '100%', height: '100%' }}
             />
-          ) : (            <Svg width="100%" height="100%" viewBox="0 0 200 240">
+          ) : (
+            <Svg width="100%" height="100%" viewBox="0 0 200 240">
               <Circle cx="100" cy="72" r="37" fill="#9E6BD3" opacity="0.85" />
               <Path d="M34 229 Q37 139 100 132 Q163 139 166 229 Z" fill="#7941A8" opacity="0.9" />
               <Path d="M63 54 Q70 20 100 24 Q132 21 138 55" stroke="#E7D4FF" strokeWidth="4" fill="none" opacity="0.55" />
