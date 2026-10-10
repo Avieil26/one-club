@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Circle, ClipPath, Defs, G, Line, LinearGradient as SvgLinearGradient, Path, Polygon, Stop } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, Ellipse, G, Line, LinearGradient as SvgLinearGradient, Path, Polygon, RadialGradient as SvgRadialGradient, Stop } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -340,6 +340,8 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
 
 function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcPlayer; width: number; shell?: boolean }) {
   const height = Math.round(width * 1.48);
+  const uid = useId().replace(/:/g, '');
+  const sid = (part: string) => 'fs-' + uid + '-' + part;
   const media = playerMedia(player.baseId ?? player.id);
   const portraitUri = !shell ? media.photo : undefined;
   const face = player.face;
@@ -347,103 +349,86 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
     ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
     : ([['PAC', face?.pac], ['SHO', face?.sho], ['PAS', face?.pas], ['DRI', face?.dri], ['DEF', face?.def], ['PHY', face?.phy]] as const);
   const name = surname(player.en || player.name || '').toUpperCase();
-  const silhouette = 'M120 7 C113 7 109 15 104 23 C99 31 91 29 82 22 L70 15 C62 12 55 19 47 27 L34 37 C22 41 16 51 13 69 L9 116 L3 132 L12 146 L12 181 L15 251 C18 282 42 309 120 350 C198 309 222 282 225 251 L228 181 L228 146 L237 132 L231 116 L227 69 C224 51 218 41 206 37 L193 27 C185 19 178 12 170 15 L158 22 C149 29 141 31 136 23 C131 15 127 7 120 7 Z';
-  const sparkles = [
-    [26, 67, 1.5], [42, 91, 1], [65, 55, 1.2], [88, 42, 1], [163, 40, 1.1],
-    [189, 57, 1.6], [211, 83, 1], [219, 112, 1.4], [30, 130, 1.1], [22, 177, 1.7],
-    [43, 202, 1], [207, 203, 1.4], [220, 228, 1], [190, 263, 1.1], [164, 287, 1],
-    [71, 278, 1.2], [43, 250, 1], [59, 225, 0.9], [190, 94, 0.9], [35, 157, 1.1],
-    [76, 72, 0.8], [205, 147, 0.9], [181, 221, 0.8], [93, 300, 0.9], [146, 277, 0.8],
-    [27, 219, 0.8], [217, 184, 0.9], [52, 105, 0.8], [177, 67, 0.9], [197, 246, 1],
-  ] as const;
+  const shield = 'M120 5 C106 12 96 27 79 25 C63 22 53 29 42 37 C28 46 23 64 20 87 L15 132 L21 145 L18 175 L21 251 C26 286 53 316 120 350 C187 316 214 286 219 251 L222 175 L219 145 L225 132 L220 87 C217 64 212 46 198 37 C187 29 177 22 161 25 C144 27 134 12 120 5 Z';
+  const inset = 'M120 15 C107 21 98 34 81 32 C65 29 57 36 49 43 C38 51 34 68 31 89 L26 132 L31 145 L29 175 L31 248 C36 277 60 304 120 335 C180 304 204 277 209 248 L211 175 L209 145 L214 132 L209 89 C206 68 202 51 191 43 C183 36 175 29 159 32 C142 34 133 21 120 15 Z';
+  const sparkles = [[35,69,1.3],[54,89,0.9],[74,53,1.1],[91,39,0.8],[150,38,0.9],[178,51,1.2],[202,72,1.4],[211,105,0.9],[27,119,1.1],[36,180,1.3],[49,207,0.9],[196,205,1.2],[211,229,0.9],[184,264,1.1],[157,286,0.8],[73,283,1.1],[44,248,1],[62,224,0.8],[188,96,0.8],[33,154,0.9],[80,73,0.8],[205,147,0.8],[174,221,0.8],[94,301,0.8],[144,278,0.8],[28,218,0.8],[214,185,0.8],[52,106,0.8],[174,67,0.8],[197,246,0.9]] as const;
 
   return (
     <View style={{ width, height, alignSelf: 'center', overflow: 'visible', backgroundColor: 'transparent' }}>
       <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
         <Defs>
-          <SvgLinearGradient id="future-stars-base" x1="0%" y1="0%" x2="90%" y2="100%">
-            <Stop offset="0%" stopColor="#4C147D" />
-            <Stop offset="20%" stopColor="#5023AB" />
-            <Stop offset="44%" stopColor="#32106D" />
-            <Stop offset="68%" stopColor="#241057" />
-            <Stop offset="100%" stopColor="#08071D" />
+          <SvgLinearGradient id={sid('base')} x1="0%" y1="0%" x2="92%" y2="100%">
+            <Stop offset="0%" stopColor="#682AA4" />
+            <Stop offset="20%" stopColor="#4D2188" />
+            <Stop offset="44%" stopColor="#2F166A" />
+            <Stop offset="72%" stopColor="#171039" />
+            <Stop offset="100%" stopColor="#08081F" />
           </SvgLinearGradient>
-          <SvgLinearGradient id="future-stars-metal" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#E6F6FF" />
-            <Stop offset="15%" stopColor="#9FA9FF" />
-            <Stop offset="31%" stopColor="#FFF0A9" />
-            <Stop offset="47%" stopColor="#B68A35" />
-            <Stop offset="62%" stopColor="#F6DC92" />
-            <Stop offset="79%" stopColor="#AABEFF" />
-            <Stop offset="100%" stopColor="#F7E7B4" />
+          <SvgLinearGradient id={sid('metal')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#F4DFFF" />
+            <Stop offset="16%" stopColor="#9B7CF2" />
+            <Stop offset="30%" stopColor="#FFF0B7" />
+            <Stop offset="45%" stopColor="#8D69D8" />
+            <Stop offset="61%" stopColor="#F7D98B" />
+            <Stop offset="78%" stopColor="#A6BEFF" />
+            <Stop offset="100%" stopColor="#F4D9FF" />
           </SvgLinearGradient>
-          <SvgLinearGradient id="future-stars-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#9D661B" />
-            <Stop offset="19%" stopColor="#FFF0A5" />
-            <Stop offset="34%" stopColor="#C18A29" />
-            <Stop offset="50%" stopColor="#FFF8CE" />
-            <Stop offset="71%" stopColor="#A56A16" />
-            <Stop offset="87%" stopColor="#F3D77E" />
-            <Stop offset="100%" stopColor="#704110" />
+          <SvgLinearGradient id={sid('gold')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#A56D22" />
+            <Stop offset="21%" stopColor="#FFF2B7" />
+            <Stop offset="40%" stopColor="#C38E3A" />
+            <Stop offset="58%" stopColor="#FFF8D3" />
+            <Stop offset="78%" stopColor="#A66A1E" />
+            <Stop offset="100%" stopColor="#F4D88C" />
           </SvgLinearGradient>
-          <SvgLinearGradient id="future-stars-gloss" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.27" />
-            <Stop offset="28%" stopColor="#B6C4FF" stopOpacity="0.08" />
-            <Stop offset="63%" stopColor="#5A20CC" stopOpacity="0.04" />
-            <Stop offset="100%" stopColor="#FA7DFF" stopOpacity="0.17" />
+          <SvgLinearGradient id={sid('gloss')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
+            <Stop offset="25%" stopColor="#C1A7FF" stopOpacity="0.1" />
+            <Stop offset="61%" stopColor="#6B35D7" stopOpacity="0.02" />
+            <Stop offset="100%" stopColor="#F6B3FF" stopOpacity="0.15" />
           </SvgLinearGradient>
-          <ClipPath id="future-stars-card-clip">
-            <Path d={silhouette} />
-          </ClipPath>
+          <SvgRadialGradient id={sid('glow')} cx="50%" cy="42%" r="65%">
+            <Stop offset="0%" stopColor="#9D5BFF" stopOpacity="0.48" />
+            <Stop offset="63%" stopColor="#6938D2" stopOpacity="0.13" />
+            <Stop offset="100%" stopColor="#10092E" stopOpacity="0" />
+          </SvgRadialGradient>
+          <SvgLinearGradient id={sid('fade')} x1="0%" y1="0%" x2="0%" y2="100%">
+            <Stop offset="0%" stopColor="#201044" stopOpacity="0.02" />
+            <Stop offset="42%" stopColor="#170A37" stopOpacity="0.36" />
+            <Stop offset="100%" stopColor="#08071D" stopOpacity="0.99" />
+          </SvgLinearGradient>
+          <ClipPath id={sid('clip')}><Path d={shield} /></ClipPath>
         </Defs>
 
-        {/* One custom card silhouette; no square plate behind it. */}
-        <Path d={silhouette} fill="none" stroke="#41216E" strokeWidth="12" opacity="0.95" />
-        <Path d={silhouette} fill="url(#future-stars-base)" />
-        <G clipPath="url(#future-stars-card-clip)">
-          <Path d="M-8 42 C39 10 69 29 92 61 C119 99 143 97 178 49 L246 7 L246 124 C205 156 180 170 139 156 C94 139 62 93 -8 119 Z" fill="#9A52FF" opacity="0.15" />
-          <Path d="M-8 199 C42 156 64 183 91 217 C118 251 172 253 245 188 L245 285 C181 341 117 354 48 311 L-8 270 Z" fill="#D459FF" opacity="0.11" />
-          <Path d="M10 57 L49 33 L74 43 L36 99 L20 139 Z" fill="#BBD6FF" opacity="0.11" />
-          <Path d="M230 58 L194 33 L167 42 L207 101 L222 139 Z" fill="#F5D1FF" opacity="0.12" />
-          <Path d="M19 225 C63 253 74 275 120 291 C166 275 177 253 221 225" fill="none" stroke="#B7B9FF" strokeWidth="1.2" opacity="0.28" />
-          {sparkles.map(([cx, cy, r], index) => (
-            <Circle key={index} cx={cx} cy={cy} r={r} fill={index % 3 === 0 ? '#FFF4C1' : '#D8D8FF'} opacity={index % 2 === 0 ? 0.76 : 0.42} />
-          ))}
+        <Path d={shield} fill="#080515" stroke="#6143A8" strokeWidth="9" />
+        <Path d={shield} fill={'url(#' + sid('base') + ')'} />
+        <G clipPath={'url(#' + sid('clip') + ')'}>
+          <Path d="M-10 35 C34 6 69 18 92 49 C121 87 151 90 184 48 L250 4 L250 120 C208 153 180 165 138 149 C94 133 58 91 -10 110 Z" fill="#B26AFF" opacity="0.17" />
+          <Path d="M-10 198 C37 157 68 184 94 218 C123 254 172 251 250 184 L250 285 C180 336 115 354 49 311 L-10 269 Z" fill="#A445FF" opacity="0.13" />
+          <Path d="M18 56 L59 30 L82 41 L40 105 L22 143 Z M222 56 L181 30 L158 41 L200 105 L218 143 Z" fill="#D2C5FF" opacity="0.12" />
+          <Path d="M27 54 L61 32 L83 36 M213 54 L179 32 L157 36" fill="none" stroke="#F9E9FF" strokeWidth="1.2" opacity="0.64" />
 
-          {/* The signature gold, interwoven globe behind the portrait. */}
-          <Path d="M48 145 C50 109 94 81 143 86 C187 90 218 119 212 150 C206 181 162 205 115 199 C71 193 45 169 48 145 Z" fill="#B87520" opacity="0.12" />
-          <Path d="M48 145 C50 109 94 81 143 86 C187 90 218 119 212 150 C206 181 162 205 115 199 C71 193 45 169 48 145 Z" fill="none" stroke="url(#future-stars-gold)" strokeWidth="2.5" opacity="0.96" />
-          <Path d="M55 121 C93 138 166 144 209 120" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.5" opacity="0.98" />
-          <Path d="M49 143 C93 162 166 168 211 143" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
-          <Path d="M58 164 C98 183 160 185 202 161" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3" opacity="0.92" />
-          <Path d="M78 97 C59 124 62 161 88 186" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
-          <Path d="M103 88 C82 119 86 166 115 198" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4.5" opacity="0.98" />
-          <Path d="M137 87 C117 117 119 165 146 200" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4.5" opacity="0.98" />
-          <Path d="M169 98 C153 122 158 164 179 181" fill="none" stroke="url(#future-stars-gold)" strokeWidth="4" opacity="0.95" />
-          <Path d="M62 113 C85 150 145 178 196 170" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.1" opacity="0.86" />
-          <Path d="M59 163 C99 137 154 109 200 113" fill="none" stroke="url(#future-stars-gold)" strokeWidth="3.1" opacity="0.86" />
-          <Path d="M73 100 C111 128 166 146 204 136" fill="none" stroke="#FFF4BE" strokeWidth="1" opacity="0.75" />
-          <Path d="M72 181 C111 160 159 158 192 174" fill="none" stroke="#FFF4BE" strokeWidth="1.1" opacity="0.7" />
-          <Path d="M42 151 C27 128 31 105 51 91" fill="none" stroke="#C9B7FF" strokeWidth="2.5" opacity="0.65" />
-          <Path d="M208 88 C230 107 233 132 219 154" fill="none" stroke="#C5D4FF" strokeWidth="2.5" opacity="0.7" />
-
-          <Path d="M8 37 L45 15 L69 24 L31 80 L15 116 Z" fill="url(#future-stars-gloss)" />
-          <Path d="M232 37 L195 15 L171 24 L209 80 L225 116 Z" fill="url(#future-stars-gloss)" />
-          <Path d="M8 13 L232 13 L232 355 L8 355 Z" fill="url(#future-stars-gloss)" />
+          <Ellipse cx="120" cy="173" rx="82" ry="54" fill={'url(#' + sid('glow') + ')'} />
+          <Ellipse cx="120" cy="173" rx="78" ry="44" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="2.7" opacity="0.98" />
+          <Ellipse cx="120" cy="173" rx="53" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.1" opacity="0.96" />
+          <Ellipse cx="120" cy="173" rx="29" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.5" opacity="0.99" />
+          <Ellipse cx="120" cy="173" rx="15" ry="48" transform="rotate(31 120 173)" fill="none" stroke="#FCECB7" strokeWidth="1" opacity="0.82" />
+          <Path d="M45 160 C80 181 164 182 196 158 M47 179 C86 200 157 201 194 179" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.2" opacity="0.97" />
+          <Path d="M61 131 C88 155 152 187 185 183 M58 194 C90 172 147 145 184 153" fill="none" stroke="#FFF0BC" strokeWidth="1.1" opacity="0.72" />
+          {sparkles.map(([cx, cy, r], index) => <Circle key={index} cx={cx} cy={cy} r={r} fill={index % 3 === 0 ? '#FFF0B5' : '#E0D9FF'} opacity={index % 2 ? 0.46 : 0.8} />)}
+          <Path d="M-5 0 L245 0 L245 355 L-5 355 Z" fill={'url(#' + sid('gloss') + ')'} />
+          <Polygon points="120,42 124,51 134,52 126,59 128,68 120,63 112,68 114,59 106,52 116,51" fill="#FFF0B5" stroke="#B17C32" strokeWidth="1" />
+          <Path d="M18 281 C54 300 89 320 120 334 C151 320 186 300 222 281" fill="none" stroke="#9A7AE5" strokeWidth="1.1" opacity="0.68" />
+          <Path d="M33 290 L48 300 L63 291 M177 291 L192 300 L207 290" fill="none" stroke="#F1D8A0" strokeWidth="1.2" opacity="0.92" />
+          <Path d="M15 136 L28 145 L20 157 L28 171 L16 181 M225 136 L212 145 L220 157 L212 171 L224 181" fill="none" stroke="#F6E7FF" strokeWidth="2.3" opacity="0.92" />
         </G>
-
-        {/* Iridescent, gold-edged contour follows the exact card shape. */}
-        <Path d={silhouette} fill="none" stroke="#8CA9FF" strokeWidth="5.2" opacity="0.78" />
-        <Path d={silhouette} fill="none" stroke="url(#future-stars-metal)" strokeWidth="2.5" opacity="0.98" />
-        <Path d="M120 14 C111 14 108 24 103 30 C95 35 85 28 77 22 C66 14 57 26 48 34 L35 43 C25 49 22 63 20 81 L17 121 L12 135 L19 145 L19 179 L21 250 C26 279 48 303 120 337 C192 303 214 279 219 250 L221 179 L221 145 L228 135 L223 121 L220 81 C218 63 215 49 205 43 L192 34 C183 26 174 14 163 22 C155 28 145 35 137 30 C132 24 129 14 120 14 Z" fill="none" stroke="#F8E8FF" strokeWidth="0.9" opacity="0.62" />
-
-        {/* Small promo crest at the left, echoing the item mark on FUTBIN cards. */}
-        <Polygon points="13,157 27,148 41,157 27,174" fill="#261263" stroke="#E1D5FF" strokeWidth="1.4" />
-        <Polygon points="19,157 27,152 35,157 27,167" fill="none" stroke="#CBB9FF" strokeWidth="0.9" />
-        <Path d="M27 155 L29 159 L33 159 L30 162 L31 166 L27 164 L23 166 L24 162 L21 159 L25 159 Z" fill="#FFF0A8" />
-
-        {/* Tiny crown accents; no foot, skills or weak-foot text belongs on the artwork. */}
-        <Path d="M120 9 L123 15 L130 16 L125 21 L126 27 L120 24 L114 27 L115 21 L110 16 L117 15 Z" fill="#FFF1B5" stroke="#B77E2A" strokeWidth="0.7" />
+        <Path d={shield} fill="none" stroke="#9C7DEB" strokeWidth="7" opacity="0.66" />
+        <Path d={shield} fill="none" stroke={'url(#' + sid('metal') + ')'} strokeWidth="3.3" opacity="0.99" />
+        <Path d={inset} fill="none" stroke="#E0C6FF" strokeWidth="1" opacity="0.72" />
+        <Path d="M120 12 C111 14 107 25 102 28 C91 34 82 23 74 21 C62 18 55 29 45 37 L36 43 C25 50 23 70 22 87 L18 130" fill="none" stroke="#FCF0FF" strokeWidth="1.1" opacity="0.72" />
+        <Polygon points="13,157 27,148 41,157 27,174" fill="#28145C" stroke="#E7D8FF" strokeWidth="1.4" />
+        <Polygon points="19,157 27,152 35,157 27,167" fill="none" stroke="#D6C3FF" strokeWidth="1" />
+        <Path d="M27 155 L29 159 L33 159 L30 162 L31 166 L27 164 L23 166 L24 162 L21 159 L25 159 Z" fill="#FFF0B5" />
       </Svg>
 
       {portraitUri ? (
@@ -451,16 +436,10 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
           source={{ uri: portraitUri }}
           resizeMode="contain"
           accessibilityIgnoresInvertColors
-          style={{
-            position: 'absolute',
-            left: width * 0.045,
-            top: height * 0.105,
-            width: width * 0.91,
-            height: height * 0.635,
-          }}
+          style={{ position: 'absolute', left: width * 0.07, top: height * 0.115, width: width * 0.86, height: height * 0.59 }}
         />
       ) : (
-        <Svg width={width * 0.72} height={height * 0.52} viewBox="0 0 200 240" style={{ position: 'absolute', top: height * 0.15, left: width * 0.14 }}>
+        <Svg width={width * 0.72} height={height * 0.49} viewBox="0 0 200 240" style={{ position: 'absolute', top: height * 0.16, left: width * 0.14 }}>
           <Circle cx="100" cy="72" r="37" fill="#B49AFF" opacity="0.9" />
           <Path d="M26 235 Q34 137 100 132 Q166 137 174 235 Z" fill="#7551B0" opacity="0.95" />
           <Path d="M63 53 Q69 20 100 24 Q132 20 138 55" stroke="#F3DCFF" strokeWidth="4" fill="none" opacity="0.75" />
@@ -469,38 +448,49 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
 
       <Svg pointerEvents="none" width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
         <Defs>
-          <SvgLinearGradient id="future-stars-photo-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <SvgLinearGradient id={sid('photoFade')} x1="0%" y1="0%" x2="0%" y2="100%">
             <Stop offset="0%" stopColor="#14082F" stopOpacity="0" />
-            <Stop offset="27%" stopColor="#1B0A42" stopOpacity="0.12" />
-            <Stop offset="59%" stopColor="#170833" stopOpacity="0.72" />
-            <Stop offset="100%" stopColor="#0B071F" stopOpacity="0.96" />
+            <Stop offset="25%" stopColor="#1B0A42" stopOpacity="0.08" />
+            <Stop offset="63%" stopColor="#160833" stopOpacity="0.67" />
+            <Stop offset="100%" stopColor="#09071F" stopOpacity="0.99" />
           </SvgLinearGradient>
         </Defs>
-        <Path d="M12 204 C48 211 79 220 120 215 C161 220 192 211 228 204 L225 251 C222 282 198 309 120 350 C42 309 18 282 15 251 Z" fill="url(#future-stars-photo-fade)" />
+        <Path d="M20 215 C53 224 84 222 120 218 C156 222 187 224 220 215 L219 251 C214 283 187 313 120 349 C53 313 26 283 21 251 Z" fill={'url(#' + sid('photoFade') + ')'} />
       </Svg>
 
-      <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.105, zIndex: 5, alignItems: 'flex-start' }}>
-        <Text style={{ color: '#FFFFFF', fontSize: Math.max(19, width * 0.2), lineHeight: Math.max(21, width * 0.205), fontWeight: '900', letterSpacing: -0.9, textShadowColor: '#180A40', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}>
+      <View style={{ position: 'absolute', top: height * 0.05, left: width * 0.105, zIndex: 5, alignItems: 'flex-start' }}>
+        <Text style={{ color: '#FFFFFF', fontSize: Math.max(19, width * 0.2), lineHeight: Math.max(21, width * 0.205), fontWeight: '900', letterSpacing: -0.9, textShadowColor: '#16082D', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}>
           {shell ? '' : player.rating}
         </Text>
-        <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900', letterSpacing: 0.4, textShadowColor: '#180A40', textShadowRadius: 3 }}>
+        <Text style={{ color: '#F6E8FF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900', letterSpacing: 0.4, textShadowColor: '#180A40', textShadowRadius: 3 }}>
           {shell ? '' : player.position}
         </Text>
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.63, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
-        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.65} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.112), fontWeight: '900', letterSpacing: 0.1, textAlign: 'center', textShadowColor: '#120520', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}>
-          {shell ? '' : name}
-        </Text>
-        <View style={{ width: '52%', height: 1, backgroundColor: '#E6C97C', opacity: 0.88, marginTop: 2 }} />
+      <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.1, zIndex: 5, alignItems: 'center', gap: 1 }}>
+        <Text style={{ color: '#F8ECFF', fontSize: Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.25 }}>FUTURE</Text>
+        <Text style={{ color: '#D7C0FF', fontSize: Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.25 }}>STARS</Text>
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.746, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
+      <View style={{ position: 'absolute', top: height * 0.675, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
+        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.65} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.11), fontWeight: '900', letterSpacing: 0.15, textAlign: 'center', textShadowColor: '#10051E', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}>
+          {shell ? '' : name}
+        </Text>
+        <LinearGradient
+          colors={['transparent', '#F3D58C', '#FFF4C1', '#F3D58C', 'transparent']}
+          locations={[0, 0.24, 0.5, 0.76, 1]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{ width: '56%', height: 1.2, marginTop: 3 }}
+        />
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.75, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
         {!shell ? <ClubBadge club={player.club} size={Math.max(12, width * 0.087)} /> : null}
         {!shell ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.08)} /> : null}
       </View>
 
-      <View style={{ position: 'absolute', top: height * 0.812, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
+      <View style={{ position: 'absolute', top: height * 0.81, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
         {stats.map(([label, value], index) => (
           <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(238,216,255,0.23)' }}>
             <Text style={{ color: '#F3D98E', fontSize: Math.max(5, width * 0.039), fontWeight: '900', letterSpacing: -0.15 }}>{label}</Text>
