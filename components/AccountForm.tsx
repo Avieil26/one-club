@@ -14,7 +14,6 @@ export function AccountForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [registering, setRegistering] = useState(true);
-  const [staff, setStaff] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [termsError, setTermsError] = useState(false);
 
@@ -170,16 +169,6 @@ export function AccountForm() {
       />
 
       <Button label={registering ? 'יש לי כבר חשבון' : 'להרשמה'} variant="link" onPress={toggleMode} />
-      <Pressable accessibilityRole="button" onPress={() => setStaff((value) => !value)}>
-        <Text style={{ color: colors.muted, textAlign: 'right', fontSize: 13 }}>כניסת צוות</Text>
-      </Pressable>
-      {staff ? (
-        <View style={{ gap: 8 }}>
-          <Button label="אביאל · מנהל" variant="ghost" disabled={app.busy} onPress={() => run(() => app.signInDemo('admin'))} />
-          <Button label="מאיה" variant="ghost" disabled={app.busy} onPress={() => run(() => app.signInDemo('maya'))} />
-          <Button label="נועם" variant="ghost" disabled={app.busy} onPress={() => run(() => app.signInDemo('noam'))} />
-        </View>
-      ) : null}
     </View>
   );
 }

@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
@@ -379,46 +378,13 @@ async function squadLikes(): Promise<{ postId: string; userId: string }[]> {
   }));
 }
 
-const DEMO_PROFILES: Record<string, Profile> = {
-  admin: {
-    id: 'admin',
-    displayName: 'אביאל',
-    isAdmin: true,
-    approvedCount: 6,
-    reputation: 48,
-    createdAt: '2026-09-18T10:00:00.000Z',
-  },
-  maya: {
-    id: 'maya',
-    displayName: 'מאיה',
-    isAdmin: false,
-    approvedCount: 5,
-    reputation: 62,
-    createdAt: '2026-09-18T12:00:00.000Z',
-  },
-  noam: {
-    id: 'noam',
-    displayName: 'נועם',
-    isAdmin: false,
-    approvedCount: 1,
-    reputation: 8,
-    createdAt: '2026-09-19T12:00:00.000Z',
-  },
-};
-
 async function readSnapshot(): Promise<Snapshot> {
   const supabase = getSupabase();
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError) authFail(sessionError);
   const session = sessionData.session;
 
-  let demoId: string | null = null;
-  try {
-    demoId = await AsyncStorage.getItem('fc27_demo_user');
-  } catch {}
-  const demoProfile = demoId ? DEMO_PROFILES[demoId] : null;
-
-  if (!session && !demoProfile) {
+  if (!session) {
     return toSnapshot(
       {
         sessionUserId: null,
@@ -481,10 +447,6 @@ async function readSnapshot(): Promise<Snapshot> {
         };
       });
     }
-  } else if (demoProfile) {
-    if (!profiles.some((profile) => profile.id === demoProfile.id)) {
-      profiles = [...profiles, demoProfile];
-    }
   }
   const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, uploaded, directMessages] =
     await Promise.all([
@@ -516,7 +478,7 @@ async function readSnapshot(): Promise<Snapshot> {
   const social = await loadSocial();
   const seed = seedDatabase();
   const db: Database = {
-    sessionUserId: session ? session.user.id : (demoProfile?.id ?? null),
+    sessionUserId: session?.user.id ?? null,
     profiles: profiles.length ? profiles : seed.profiles,
     careerChallenges: mergeFeaturedCareer(
       challenges.length ? challenges.map(mapChallenge) : seed.careerChallenges,
@@ -574,11 +536,8 @@ export function createRemoteBackend(): Backend {
         void supabase.removeChannel(channel);
       };
     },
-    async signInDemo(profileId) {
-      const profile = DEMO_PROFILES[profileId];
-      if (!profile) throw new Error('הפרופיל לא נמצא');
-      await AsyncStorage.setItem('fc27_demo_user', profileId);
-      return readSnapshot();
+    signInDemo() {
+      return Promise.reject(new Error('כניסת הדגמה אינה זמינה בגרסה הציבורית'));
     },
     signInNamed() {
       return Promise.reject(new Error('בשרת נכנסים עם אימייל וסיסמה'));
@@ -618,7 +577,6 @@ export function createRemoteBackend(): Backend {
       return readSnapshot();
     },
     async signOut() {
-      await AsyncStorage.removeItem('fc27_demo_user');
       const { error } = await getSupabase().auth.signOut();
       if (error) fail(error);
       return readSnapshot();
