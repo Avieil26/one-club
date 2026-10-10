@@ -903,7 +903,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
