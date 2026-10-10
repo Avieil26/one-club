@@ -81,6 +81,7 @@ const FUTURE_STARS_REMOTE_ART: Record<string, string> = {
   'fs-myles-lewis-skelly': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50610421.webp',
   'fs-mika-godts': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50590026.webp',
   'fs-jacobo-ramon': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50402614.webp',
+  'fs-gilberto-mora': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50411047.webp',
   'fs-yoan-bonny': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50591213.webp',
   'fs-tom-bischof': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50595413.webp',
   'fs-lewis-hall': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50597775.webp',
