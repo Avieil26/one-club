@@ -38,5 +38,5 @@ REVOKE EXECUTE ON FUNCTIONS FROM anon;
 ALTER FUNCTION public.comment_is_blocked(text) SET search_path = pg_catalog;
 
 -- protect_profile calls auth.uid() with an explicit schema qualifier and uses PostgreSQL
--- built-ins; pg_catalog first and public second gives a fixed, predictable path.
-ALTER FUNCTION public.protect_profile() SET search_path = pg_catalog, public;
+-- built-ins; pg_catalog alone is sufficient and prevents public-schema shadowing.
+ALTER FUNCTION public.protect_profile() SET search_path = pg_catalog;
