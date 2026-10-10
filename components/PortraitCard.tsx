@@ -399,20 +399,6 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
             <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="url(#future-stars-gloss)" />
           </G>
           <Path d="M12 13 Q12 4 24 4 H216 Q228 4 228 13 L224 258 Q221 301 120 350 Q19 301 16 258 Z" fill="none" stroke="#F8E8FF" strokeWidth="2" opacity="0.95" />
-          <Path d="M25 71 L78 21 L108 15 L44 112 L43 161 L25 185 Z" fill="#F2B0FF" opacity="0.23" />
-          <Path d="M214 62 L176 22 L151 16 L204 115 L205 160 L218 184 Z" fill="#FF72E5" opacity="0.20" />
-          <Polygon points="221,22 216,123 185,184 165,171 194,94 174,17" fill="#EC57FF" opacity="0.10" />
-          <Path d="M33 84 L79 36 L102 28 M207 84 L161 36 L138 28" fill="none" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.38" />
-          <Path d="M33 278 L80 310 L120 329 L160 310 L207 278" fill="none" stroke="#FF9BF4" strokeWidth="1" opacity="0.48" />
-          <Path d="M20 240 L72 280 L120 303 L168 280 L219 240" fill="none" stroke="#DBB7FF" strokeWidth="1.1" opacity="0.4" />
-          <Path d="M33 54 L65 34 L91 31 M207 54 L175 34 L149 31" fill="none" stroke="#F5DFFF" strokeWidth="1.2" opacity="0.7" />
-          <Path d="M22 201 L62 230 M218 201 L178 230" fill="none" stroke="#B777FF" strokeWidth="1.5" opacity="0.65" />
-          <Circle cx="120" cy="31" r="3.2" fill="#F4DEFF" />
-          <Circle cx="36" cy="94" r="2" fill="#D8B3FF" />
-          <Circle cx="204" cy="94" r="2" fill="#D8B3FF" />
-          <Polygon points="120,48 124,58 135,59 127,66 129,77 120,71 111,77 113,66 105,59 116,58" fill="#E9D1FF" opacity="0.72" />
-          <Line x1="22" y1="313" x2="218" y2="313" stroke="#C77CFF" strokeWidth="1" opacity="0.8" />
-          <Path d="M37 322 L48 329 L59 322 M181 322 L192 329 L203 322" fill="none" stroke="#D8B3FF" strokeWidth="1.2" />
         </Svg>
 
         <View
