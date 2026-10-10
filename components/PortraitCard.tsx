@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Svg, { Circle, Line, Path, Polygon, Rect } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -355,32 +356,18 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
 }
 
 function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcPlayer; width: number; shell?: boolean }) {
-  const [failed, setFailed] = useState(false);
-  const uri = FUTURE_STARS_REMOTE_ART[player.id];
-  const height = Math.round(width * DESTINED_RATIO);
-
-  if (!shell && uri && !failed) {
-    return (
-      <Image
-        source={{ uri }}
-        onError={() => setFailed(true)}
-        resizeMode="contain"
-        accessibilityIgnoresInvertColors
-        style={{ width, height, alignSelf: 'center' }}
-      />
-    );
-  }
-
+  const height = Math.round(width * 1.48);
+  const media = playerMedia(player.baseId ?? player.id);
+  const portraitUri = !shell ? media.photo : undefined;
+  const cardRenderUri = !shell && !portraitUri ? FUTURE_STARS_REMOTE_ART[player.id] : undefined;
   const face = player.face;
-  const stats = [
-    ['PAC', face?.pac],
-    ['SHO', face?.sho],
-    ['PAS', face?.pas],
-    ['DRI', face?.dri],
-    ['DEF', face?.def],
-    ['PHY', face?.phy],
-  ] as const;
-  const name = (player.en || player.name || '').trim().split(' ').pop()?.toUpperCase() || 'FUTURE STARS';
+  const stats = player.position === 'GK'
+    ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
+    : ([['PAC', face?.pac], ['SHO', face?.sho], ['PAS', face?.pas], ['DRI', face?.dri], ['DEF', face?.def], ['PHY', face?.phy]] as const);
+  const name = (player.en || player.name || '').trim().toUpperCase();
+  const ink = '#F5E9FF';
+  const mint = '#D9C2FF';
+  const meta = `${player.foot ?? '—'} FOOT   ·   ${player.skillMoves ?? '—'}★ SKILLS   ·   ${player.weakFoot ?? '—'}★ WEAK FOOT`;
 
   return (
     <View
@@ -389,55 +376,148 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         height,
         alignSelf: 'center',
         overflow: 'hidden',
-        borderRadius: width * 0.075,
-        borderWidth: 1.5,
-        borderColor: '#73F0CE',
-        backgroundColor: '#0A1228',
-        shadowColor: '#7C5CFF',
-        shadowOpacity: 0.42,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 5 },
+        borderRadius: width * 0.055,
+        backgroundColor: '#100520',
+        borderColor: '#D4B5FF',
+        borderWidth: 1.4,
+        shadowColor: '#8E35FF',
+        shadowOpacity: 0.65,
+        shadowRadius: width * 0.09,
+        shadowOffset: { width: 0, height: width * 0.035 },
+        elevation: 9,
       }}
     >
       <LinearGradient
-        colors={['#32256E', '#121E43', '#07111E']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{ flex: 1, padding: Math.max(4, width * 0.04), justifyContent: 'space-between' }}
+        colors={['#4B1688', '#271052', '#16072F', '#090719']}
+        locations={[0, 0.3, 0.68, 1]}
+        start={{ x: 0.08, y: 0 }}
+        end={{ x: 0.92, y: 1 }}
+        style={{ flex: 1 }}
       >
-        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2 }}>
-          <View>
-            <Text style={{ color: '#F5F0FF', fontSize: Math.max(12, width * 0.17), lineHeight: Math.max(13, width * 0.17), fontWeight: '900' }}>
-              {shell ? '' : player.rating}
-            </Text>
-            <Text style={{ color: '#8CF5DC', fontSize: Math.max(6, width * 0.07), fontWeight: '900' }}>{shell ? '' : player.position}</Text>
-          </View>
-          <View style={{ borderWidth: 1, borderColor: 'rgba(140,245,220,0.65)', borderRadius: 999, paddingHorizontal: Math.max(3, width * 0.025), paddingVertical: 2 }}>
-            <Text style={{ color: '#A8FFE9', fontSize: Math.max(5, width * 0.047), fontWeight: '900', letterSpacing: 0.3 }}>FUTURE STARS</Text>
-          </View>
-        </View>
+        <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
+          <Path d="M120 4 L184 11 Q220 20 226 55 L224 269 Q221 305 120 349 Q19 305 16 269 L14 55 Q20 20 56 11 Z" fill="none" stroke="#F1DEFF" strokeWidth="3.2" opacity="0.95" />
+          <Path d="M120 12 L179 19 Q212 27 218 59 L216 263 Q212 294 120 338 Q28 294 24 263 L22 59 Q28 27 61 19 Z" fill="none" stroke="#A85CFF" strokeWidth="2.2" opacity="0.95" />
+          <Path d="M25 71 L78 21 L108 15 L44 112 L43 161 L25 185 Z" fill="#C47BFF" opacity="0.11" />
+          <Path d="M214 62 L176 22 L151 16 L204 115 L205 160 L218 184 Z" fill="#F5D9FF" opacity="0.1" />
+          <Path d="M20 240 L72 280 L120 303 L168 280 L219 240" fill="none" stroke="#DBB7FF" strokeWidth="1.1" opacity="0.4" />
+          <Path d="M33 54 L65 34 L91 31 M207 54 L175 34 L149 31" fill="none" stroke="#F5DFFF" strokeWidth="1.2" opacity="0.7" />
+          <Path d="M22 201 L62 230 M218 201 L178 230" fill="none" stroke="#B777FF" strokeWidth="1.5" opacity="0.65" />
+          <Circle cx="120" cy="31" r="3.2" fill="#F4DEFF" />
+          <Circle cx="36" cy="94" r="2" fill="#D8B3FF" />
+          <Circle cx="204" cy="94" r="2" fill="#D8B3FF" />
+          <Polygon points="120,48 124,58 135,59 127,66 129,77 120,71 111,77 113,66 105,59 116,58" fill="#E9D1FF" opacity="0.72" />
+          <Line x1="22" y1="313" x2="218" y2="313" stroke="#C77CFF" strokeWidth="1" opacity="0.8" />
+          <Path d="M37 322 L48 329 L59 322 M181 322 L192 329 L203 322" fill="none" stroke="#D8B3FF" strokeWidth="1.2" />
+          <Rect x="5" y="5" width="230" height="345" fill="none" stroke="#A04BFF" strokeWidth="0.7" opacity="0.5" />
+        </Svg>
 
-        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, gap: 3 }}>
-          <Text style={{ color: '#8CF5DC', fontSize: Math.max(20, width * 0.38), fontWeight: '900', opacity: 0.75 }}>✦</Text>
-          {shell ? null : (
-            <>
-              <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.09), fontWeight: '900', textAlign: 'center' }}>{name}</Text>
-              <Text numberOfLines={1} style={{ color: 'rgba(225,233,255,0.8)', fontSize: Math.max(5, width * 0.05), textAlign: 'center' }}>{player.club}</Text>
-              <NationFlag nation={player.nation} size={Math.max(11, width * 0.1)} />
-            </>
+        <View
+          pointerEvents="none"
+          style={{
+            position: 'absolute',
+            top: height * 0.1,
+            left: width * 0.05,
+            width: width * 0.9,
+            height: height * 0.63,
+            overflow: 'hidden',
+            borderTopLeftRadius: width * 0.23,
+            borderTopRightRadius: width * 0.23,
+          }}
+        >
+          {portraitUri ? (
+            <Image
+              source={{ uri: portraitUri }}
+              resizeMode="cover"
+              accessibilityIgnoresInvertColors
+              style={{ width: '100%', height: '100%' }}
+            />
+          ) : cardRenderUri ? (
+            <Image
+              source={{ uri: cardRenderUri }}
+              resizeMode="cover"
+              accessibilityIgnoresInvertColors
+              style={{
+                position: 'absolute',
+                width: width * 1.52,
+                height: width * 1.52,
+                left: -width * 0.31,
+                top: -height * 0.11,
+              }}
+            />
+          ) : (
+            <Svg width="100%" height="100%" viewBox="0 0 200 240">
+              <Circle cx="100" cy="72" r="37" fill="#9E6BD3" opacity="0.85" />
+              <Path d="M34 229 Q37 139 100 132 Q163 139 166 229 Z" fill="#7941A8" opacity="0.9" />
+              <Path d="M63 54 Q70 20 100 24 Q132 21 138 55" stroke="#E7D4FF" strokeWidth="4" fill="none" opacity="0.55" />
+            </Svg>
           )}
+          <LinearGradient
+            colors={['rgba(21,5,43,0.02)', 'rgba(21,5,43,0.02)', 'rgba(21,5,43,0.55)', '#16072F']}
+            locations={[0, 0.58, 0.84, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={StyleSheet.absoluteFill}
+          />
         </View>
 
-        {shell ? <View style={{ height: Math.max(14, width * 0.18) }} /> : (
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 1, paddingTop: 3, borderTopWidth: 1, borderTopColor: 'rgba(140,245,220,0.4)' }}>
-            {stats.map(([label, value]) => (
-              <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={{ color: '#8CF5DC', fontSize: Math.max(4.5, width * 0.043), fontWeight: '800' }}>{label}</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: Math.max(6.5, width * 0.06), fontWeight: '900' }}>{value ?? '·'}</Text>
-              </View>
-            ))}
-          </View>
-        )}
+        <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.095, alignItems: 'flex-start' }}>
+          <Text style={{ color: '#FFFFFF', fontSize: Math.max(18, width * 0.19), lineHeight: Math.max(20, width * 0.195), fontWeight: '900', letterSpacing: -0.8, textShadowColor: '#6B2AB4', textShadowRadius: 8 }}>
+            {shell ? '' : player.rating}
+          </Text>
+          <Text style={{ color: '#E8C9FF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900' }}>
+            {shell ? '' : player.position}
+          </Text>
+        </View>
+
+        <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.075, alignItems: 'center', gap: 3 }}>
+          <Text style={{ color: '#F8EDFF', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>FUTURE</Text>
+          <Text style={{ color: '#C78AFF', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>STARS</Text>
+          {!shell ? <ClubBadge club={player.club} size={Math.max(17, width * 0.17)} /> : null}
+          {!shell ? <NationFlag nation={player.nation} size={Math.max(13, width * 0.115)} /> : null}
+        </View>
+
+        <View
+          style={{
+            position: 'absolute',
+            top: height * 0.59,
+            left: width * 0.075,
+            right: width * 0.075,
+            height: height * 0.105,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderTopWidth: 1,
+            borderTopColor: 'rgba(224,190,255,0.55)',
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(224,190,255,0.3)',
+          }}
+        >
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.65}
+            style={{ color: ink, fontSize: Math.max(8, width * 0.075), fontWeight: '900', letterSpacing: 0.7, textAlign: 'center', textShadowColor: '#7B2DCC', textShadowRadius: 5 }}
+          >
+            {shell ? '' : name}
+          </Text>
+          <Text numberOfLines={1} style={{ color: '#D4B0FA', fontSize: Math.max(5, width * 0.043), fontWeight: '800', letterSpacing: 0.9, marginTop: 1 }}>
+            {shell ? '' : player.club.toUpperCase()}
+          </Text>
+        </View>
+
+        <View style={{ position: 'absolute', top: height * 0.72, left: width * 0.055, right: width * 0.055, flexDirection: 'row', justifyContent: 'space-between', gap: 1 }}>
+          {stats.map(([label, value], index) => (
+            <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(192,139,255,0.25)' }}>
+              <Text style={{ color: '#CC9BFF', fontSize: Math.max(5, width * 0.041), fontWeight: '900', letterSpacing: 0.1 }}>{label}</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.083), lineHeight: Math.max(10, width * 0.087), fontWeight: '900', textShadowColor: '#8E42D2', textShadowRadius: 4 }}>{shell ? '' : value ?? '—'}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={{ position: 'absolute', bottom: height * 0.033, left: width * 0.07, right: width * 0.07, alignItems: 'center' }}>
+          <Text numberOfLines={1} style={{ color: '#D8BDFF', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.1 }}>
+            {shell ? '' : meta}
+          </Text>
+        </View>
       </LinearGradient>
     </View>
   );
