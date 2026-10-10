@@ -75,23 +75,6 @@ const OTW_REMOTE_ART: Record<string, string> = {
 const DESTINED_RATIO = 1152 / 864;
 const TOTW_RATIO = 1152 / 864;
 
-/** Standard Future Stars Team 1 card renders hosted by FUT.GG; unmapped cards use our fallback layout. */
-const FUTURE_STARS_REMOTE_ART: Record<string, string> = {
-  'fs-vicky-lopez': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50603094.webp',
-  'fs-rio-ngumoha': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50412024.webp',
-  'fs-myles-lewis-skelly': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50610421.webp',
-  'fs-mika-godts': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50590026.webp',
-  'fs-jacobo-ramon': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50402614.webp',
-  'fs-gilberto-mora': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50411047.webp',
-  'fs-yoan-bonny': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50591213.webp',
-  'fs-tom-bischof': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50595413.webp',
-  'fs-lewis-hall': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50597775.webp',
-  'fs-lily-yohannes': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50609599.webp',
-  'fs-laura-blindkilde-brown': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50596965.webp',
-  'fs-robin-risser': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50603566.webp',
-  'fs-josh-king': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50402434.webp',
-  'fs-jon-martin': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50608873.webp',
-};
 
 const TOTW_ART: Record<string, number> = {
   raphinha: require('@/assets/images/cards/raphinha-totw-built.png'),
@@ -359,7 +342,6 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
   const height = Math.round(width * 1.48);
   const media = playerMedia(player.baseId ?? player.id);
   const portraitUri = !shell ? media.photo : undefined;
-  const cardRenderUri = !shell && !portraitUri ? FUTURE_STARS_REMOTE_ART[player.id] : undefined;
   const face = player.face;
   const stats = player.position === 'GK'
     ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
@@ -431,21 +413,7 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
               accessibilityIgnoresInvertColors
               style={{ width: '100%', height: '100%' }}
             />
-          ) : cardRenderUri ? (
-            <Image
-              source={{ uri: cardRenderUri }}
-              resizeMode="cover"
-              accessibilityIgnoresInvertColors
-              style={{
-                position: 'absolute',
-                width: width * 1.52,
-                height: width * 1.52,
-                left: -width * 0.31,
-                top: -height * 0.11,
-              }}
-            />
-          ) : (
-            <Svg width="100%" height="100%" viewBox="0 0 200 240">
+          ) : (            <Svg width="100%" height="100%" viewBox="0 0 200 240">
               <Circle cx="100" cy="72" r="37" fill="#9E6BD3" opacity="0.85" />
               <Path d="M34 229 Q37 139 100 132 Q163 139 166 229 Z" fill="#7941A8" opacity="0.9" />
               <Path d="M63 54 Q70 20 100 24 Q132 21 138 55" stroke="#E7D4FF" strokeWidth="4" fill="none" opacity="0.55" />
