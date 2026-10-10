@@ -9,40 +9,34 @@ ON ALL TABLES IN SCHEMA public FROM anon;
 REVOKE TRUNCATE, REFERENCES, TRIGGER
 ON ALL TABLES IN SCHEMA public FROM authenticated;
 
+REVOKE ALL PRIVILEGES
+ON ALL SEQUENCES IN SCHEMA public FROM anon;
+
+-- All current public tables and both functions inspected for search_path are owned by postgres.
 -- Keep future public tables from granting anonymous writes or special table privileges.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
 REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM anon;
 
-ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin IN SCHEMA public
-REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM anon;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon;
 
 -- Future tables must not grant TRUNCATE / REFERENCES / TRIGGER to signed-in API users.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
 REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM authenticated;
 
-ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin IN SCHEMA public
-REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM authenticated;
-
--- Future functions should not inherit PostgreSQL's default EXECUTE grant to PUBLIC.
--- Revoke explicit anonymous EXECUTE grants as well. Authenticated and service_role
--- retain their existing default grants; new client RPCs should still validate auth
--- and authorization in their function body.
+-- Future functions created by postgres should not inherit PostgreSQL's default
+-- EXECUTE grant to PUBLIC. Also remove the schema-specific explicit anon grant.
+-- Authenticated and service_role retain their existing default grants.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres
 REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
 
-ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin
-REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
-
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE EXECUTE ON FUNCTIONS FROM anon;
-
-ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin IN SCHEMA public
 REVOKE EXECUTE ON FUNCTIONS FROM anon;
 
 -- Remove mutable search_path warnings from two existing functions.
 -- comment_is_blocked only uses PostgreSQL built-ins and constants.
 ALTER FUNCTION public.comment_is_blocked(text) SET search_path = pg_catalog;
 
--- protect_profile only calls auth.uid() with an explicit schema qualifier and uses
--- PostgreSQL built-ins; put pg_catalog first and public second for safety.
+-- protect_profile calls auth.uid() with an explicit schema qualifier and uses PostgreSQL
+-- built-ins; pg_catalog first and public second gives a fixed, predictable path.
 ALTER FUNCTION public.protect_profile() SET search_path = pg_catalog, public;
