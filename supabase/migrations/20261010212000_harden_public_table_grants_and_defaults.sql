@@ -15,20 +15,20 @@ ON ALL SEQUENCES IN SCHEMA public FROM anon;
 -- grant no table/sequence/function privileges to API roles implicitly.
 -- Future migrations must GRANT only the exact access their new objects need.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE ALL PRIVILEGES ON TABLES FROM anon;
+REVOKE ALL PRIVILEGES ON TABLES FROM anon, authenticated, service_role;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE ALL PRIVILEGES ON TABLES FROM authenticated;
+REVOKE ALL PRIVILEGES ON TABLES FROM authenticated, service_role;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon, authenticated;
+REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon, authenticated, service_role;
 
 -- PostgreSQL otherwise grants EXECUTE to PUBLIC by default for new functions.
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres
 REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
 
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
-REVOKE EXECUTE ON FUNCTIONS FROM anon, authenticated;
+REVOKE EXECUTE ON FUNCTIONS FROM anon, authenticated, service_role;
 
 -- comment_is_blocked only uses built-ins and constants, so pg_catalog is sufficient.
 ALTER FUNCTION public.comment_is_blocked(text) SET search_path = pg_catalog;
