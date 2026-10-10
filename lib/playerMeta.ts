@@ -2,6 +2,7 @@ import metaFile from '@/assets/data/playerMeta.json';
 import iconCards from '@/assets/data/iconCardMeta.json';
 import heroCards from '@/assets/data/heroCardMeta.json';
 import totwCards from '@/assets/data/totwCardMeta.json';
+import futureStarsFile from '@/assets/data/futureStars.json';
 
 export const META_ATTRS = [
   'acceleration',
@@ -57,6 +58,29 @@ const heroRows = heroCards as Record<string, MetaRow>;
 const totwRows = totwCards as unknown as Record<string, MetaRow>;
 const keys = (metaFile.attrs?.length ? metaFile.attrs : META_ATTRS) as readonly string[];
 
+type FutureStarsMetaRow = {
+  id: string;
+  foot?: 'L' | 'R';
+  skillMoves?: number;
+  weakFoot?: number;
+  attributes?: Partial<Record<MetaAttr, number>>;
+};
+
+const FUTURE_STARS_META = futureStarsFile as FutureStarsMetaRow[];
+const FUTURE_STARS_ROWS: Record<string, MetaRow> = Object.fromEntries(
+  FUTURE_STARS_META
+    .filter((row) => row.foot && row.skillMoves != null && row.weakFoot != null && row.attributes)
+    .map((row) => [
+      row.id,
+      {
+        foot: row.foot!,
+        sm: row.skillMoves!,
+        wf: row.weakFoot!,
+        attrs: keys.map((key) => row.attributes?.[key as MetaAttr] ?? 0),
+      },
+    ]),
+);
+
 /** In-game FC 26 base Icon sheet. Face totals already match ICON_FACE. */
 const CARD_OVERRIDES: Record<string, MetaRow> = {
   'icon-diego-armando-maradona': {
@@ -107,7 +131,7 @@ export function otwCardMeta(id: string): CardMeta | null {
 }
 
 export function playerCardMeta(id: string): CardMeta | null {
-  return toCardMeta(SQUAD_FOUNDATIONS_META[id] ?? heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
+  return toCardMeta(FUTURE_STARS_ROWS[id] ?? SQUAD_FOUNDATIONS_META[id] ?? heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
 }
 
 export function totwCardMeta(id: string): CardMeta | null {
