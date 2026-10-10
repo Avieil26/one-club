@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Circle, Line, Path, Polygon, Rect } from 'react-native-svg';
+import Svg, { Circle, Line, Path, Polygon } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -358,29 +358,48 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         height,
         alignSelf: 'center',
         overflow: 'hidden',
-        borderRadius: width * 0.055,
-        backgroundColor: '#100520',
-        borderColor: '#D4B5FF',
-        borderWidth: 1.4,
-        shadowColor: '#8E35FF',
-        shadowOpacity: 0.65,
-        shadowRadius: width * 0.09,
-        shadowOffset: { width: 0, height: width * 0.035 },
-        elevation: 9,
+        borderRadius: width * 0.065,
+        backgroundColor: '#080315',
+        borderColor: '#F0D8FF',
+        borderWidth: 1.6,
+        shadowColor: '#D51BFF',
+        shadowOpacity: 0.82,
+        shadowRadius: width * 0.14,
+        shadowOffset: { width: 0, height: width * 0.04 },
+        elevation: 12,
       }}
     >
       <LinearGradient
-        colors={['#4B1688', '#271052', '#16072F', '#090719']}
-        locations={[0, 0.3, 0.68, 1]}
-        start={{ x: 0.08, y: 0 }}
+        colors={['#9F32FF', '#6819D6', '#3B0B88', '#1A063C', '#080315']}
+        locations={[0, 0.22, 0.48, 0.76, 1]}
+        start={{ x: 0.03, y: 0 }}
         end={{ x: 0.92, y: 1 }}
         style={{ flex: 1 }}
       >
+        <LinearGradient
+          pointerEvents="none"
+          colors={['rgba(255,255,255,0.25)', 'rgba(255,116,245,0.09)', 'rgba(32,0,75,0.08)', 'rgba(255,34,195,0.16)']}
+          locations={[0, 0.22, 0.58, 1]}
+          start={{ x: 0.05, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={StyleSheet.absoluteFill}
+        />
+        <LinearGradient
+          pointerEvents="none"
+          colors={['rgba(255,91,239,0.46)', 'rgba(184,76,255,0.18)', 'transparent']}
+          locations={[0, 0.45, 1]}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0.12, y: 0.92 }}
+          style={{ position: 'absolute', top: 0, right: 0, width: '88%', height: '67%' }}
+        />
         <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
           <Path d="M120 4 L184 11 Q220 20 226 55 L224 269 Q221 305 120 349 Q19 305 16 269 L14 55 Q20 20 56 11 Z" fill="none" stroke="#F1DEFF" strokeWidth="3.2" opacity="0.95" />
           <Path d="M120 12 L179 19 Q212 27 218 59 L216 263 Q212 294 120 338 Q28 294 24 263 L22 59 Q28 27 61 19 Z" fill="none" stroke="#A85CFF" strokeWidth="2.2" opacity="0.95" />
-          <Path d="M25 71 L78 21 L108 15 L44 112 L43 161 L25 185 Z" fill="#C47BFF" opacity="0.11" />
-          <Path d="M214 62 L176 22 L151 16 L204 115 L205 160 L218 184 Z" fill="#F5D9FF" opacity="0.1" />
+          <Path d="M25 71 L78 21 L108 15 L44 112 L43 161 L25 185 Z" fill="#F2B0FF" opacity="0.23" />
+          <Path d="M214 62 L176 22 L151 16 L204 115 L205 160 L218 184 Z" fill="#FF72E5" opacity="0.20" />
+          <Polygon points="221,22 216,123 185,184 165,171 194,94 174,17" fill="#EC57FF" opacity="0.10" />
+          <Path d="M33 84 L79 36 L102 28 M207 84 L161 36 L138 28" fill="none" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.38" />
+          <Path d="M33 278 L80 310 L120 329 L160 310 L207 278" fill="none" stroke="#FF9BF4" strokeWidth="1" opacity="0.48" />
           <Path d="M20 240 L72 280 L120 303 L168 280 L219 240" fill="none" stroke="#DBB7FF" strokeWidth="1.1" opacity="0.4" />
           <Path d="M33 54 L65 34 L91 31 M207 54 L175 34 L149 31" fill="none" stroke="#F5DFFF" strokeWidth="1.2" opacity="0.7" />
           <Path d="M22 201 L62 230 M218 201 L178 230" fill="none" stroke="#B777FF" strokeWidth="1.5" opacity="0.65" />
@@ -390,7 +409,6 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
           <Polygon points="120,48 124,58 135,59 127,66 129,77 120,71 111,77 113,66 105,59 116,58" fill="#E9D1FF" opacity="0.72" />
           <Line x1="22" y1="313" x2="218" y2="313" stroke="#C77CFF" strokeWidth="1" opacity="0.8" />
           <Path d="M37 322 L48 329 L59 322 M181 322 L192 329 L203 322" fill="none" stroke="#D8B3FF" strokeWidth="1.2" />
-          <Rect x="5" y="5" width="230" height="345" fill="none" stroke="#A04BFF" strokeWidth="0.7" opacity="0.5" />
         </Svg>
 
         <View
@@ -402,8 +420,8 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
             width: width * 0.9,
             height: height * 0.63,
             overflow: 'hidden',
-            borderTopLeftRadius: width * 0.23,
-            borderTopRightRadius: width * 0.23,
+            borderTopLeftRadius: width * 0.25,
+            borderTopRightRadius: width * 0.25,
           }}
         >
           {portraitUri ? (
@@ -421,7 +439,7 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
             </Svg>
           )}
           <LinearGradient
-            colors={['rgba(21,5,43,0.02)', 'rgba(21,5,43,0.02)', 'rgba(21,5,43,0.55)', '#16072F']}
+            colors={['rgba(20,0,39,0.01)', 'rgba(37,0,61,0.02)', 'rgba(36,0,57,0.54)', '#19052F']}
             locations={[0, 0.58, 0.84, 1]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
@@ -430,7 +448,7 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         </View>
 
         <View style={{ position: 'absolute', top: height * 0.055, left: width * 0.095, alignItems: 'flex-start' }}>
-          <Text style={{ color: '#FFFFFF', fontSize: Math.max(18, width * 0.19), lineHeight: Math.max(20, width * 0.195), fontWeight: '900', letterSpacing: -0.8, textShadowColor: '#6B2AB4', textShadowRadius: 8 }}>
+          <Text style={{ color: '#FFFFFF', fontSize: Math.max(18, width * 0.19), lineHeight: Math.max(20, width * 0.195), fontWeight: '900', letterSpacing: -0.8, textShadowColor: '#F030FF', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 10 }}>
             {shell ? '' : player.rating}
           </Text>
           <Text style={{ color: '#E8C9FF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900' }}>
@@ -440,7 +458,7 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
 
         <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.075, alignItems: 'center', gap: 3 }}>
           <Text style={{ color: '#F8EDFF', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>FUTURE</Text>
-          <Text style={{ color: '#C78AFF', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>STARS</Text>
+          <Text style={{ color: '#FF9FEB', fontSize: Math.max(5.5, width * 0.046), fontWeight: '900', letterSpacing: 0.65 }}>STARS</Text>
           {!shell ? <ClubBadge club={player.club} size={Math.max(17, width * 0.17)} /> : null}
           {!shell ? <NationFlag nation={player.nation} size={Math.max(13, width * 0.115)} /> : null}
         </View>
@@ -476,14 +494,14 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
         <View style={{ position: 'absolute', top: height * 0.72, left: width * 0.055, right: width * 0.055, flexDirection: 'row', justifyContent: 'space-between', gap: 1 }}>
           {stats.map(([label, value], index) => (
             <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(192,139,255,0.25)' }}>
-              <Text style={{ color: '#CC9BFF', fontSize: Math.max(5, width * 0.041), fontWeight: '900', letterSpacing: 0.1 }}>{label}</Text>
+              <Text style={{ color: '#E6A4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '900', letterSpacing: 0.1 }}>{label}</Text>
               <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.083), lineHeight: Math.max(10, width * 0.087), fontWeight: '900', textShadowColor: '#8E42D2', textShadowRadius: 4 }}>{shell ? '' : value ?? '—'}</Text>
             </View>
           ))}
         </View>
 
         <View style={{ position: 'absolute', bottom: height * 0.033, left: width * 0.07, right: width * 0.07, alignItems: 'center' }}>
-          <Text numberOfLines={1} style={{ color: '#D8BDFF', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.1 }}>
+          <Text numberOfLines={1} style={{ color: '#F2D4FF', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.1 }}>
             {shell ? '' : meta}
           </Text>
         </View>
