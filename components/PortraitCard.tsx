@@ -569,7 +569,7 @@ function FutureStarsPortraitCard({
       }}
     >
       <Image
-        source={require('@/assets/images/cards/future-stars-purple-gold.webp')}
+        source={require('@/assets/images/cards/future-stars-purple-gold.png')}
         resizeMode="contain"
         accessibilityIgnoresInvertColors
         style={{ position: 'absolute', left: 0, top: 0, width, height }}
