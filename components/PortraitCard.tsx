@@ -525,6 +525,180 @@ function totwAura() {
   };
 }
 
+function FutureStarsPortraitCard({
+  player,
+  width,
+  shell = false,
+  photoOverride,
+  faceOverride,
+}: {
+  player: FcPlayer;
+  width: number;
+  shell?: boolean;
+  photoOverride?: string;
+  faceOverride?: FaceStats;
+}) {
+  const media = playerMedia(player.baseId ?? player.id);
+  const photoUri = photoOverride ?? media.photo ?? '';
+  const face = faceOverride ?? player.face ?? media.face;
+  const height = Math.round(width * 1.5);
+  const [failed, setFailed] = useState(false);
+  const statRows = [
+    { label: 'PAC', value: face?.pac },
+    { label: 'SHO', value: face?.sho },
+    { label: 'PAS', value: face?.pas },
+    { label: 'DRI', value: face?.dri },
+    { label: 'DEF', value: face?.def },
+    { label: 'PHY', value: face?.phy },
+  ];
+
+  return (
+    <View
+      accessibilityLabel={shell ? 'Future Stars card frame' : `Future Stars ${player.en || media.en || player.name}`}
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        direction: 'ltr',
+        overflow: 'visible',
+        shadowColor: '#9D5BFF',
+        shadowOpacity: shell ? 0.18 : 0.36,
+        shadowRadius: Math.max(3, width * 0.055),
+        shadowOffset: { width: 0, height: Math.max(2, width * 0.025) },
+        elevation: shell ? 2 : 6,
+      }}
+    >
+      <Image
+        source={require('@/assets/images/cards/future-stars-purple-gold.webp')}
+        resizeMode="contain"
+        accessibilityIgnoresInvertColors
+        style={{ position: 'absolute', left: 0, top: 0, width, height }}
+      />
+      {!shell && photoUri && !failed ? (
+        <Image
+          source={{ uri: photoUri }}
+          onError={() => setFailed(true)}
+          resizeMode="contain"
+          accessibilityIgnoresInvertColors
+          style={{
+            position: 'absolute',
+            left: width * 0.16,
+            top: height * 0.19,
+            width: width * 0.68,
+            height: height * 0.43,
+          }}
+        />
+      ) : null}
+      {!shell ? (
+        <>
+          <View style={{ position: 'absolute', left: width * 0.18, top: height * 0.135, zIndex: 3 }}>
+            <Text
+              style={{
+                color: '#FFF2C6',
+                fontSize: Math.max(10, width * 0.135),
+                fontWeight: '900',
+                lineHeight: Math.max(10, width * 0.14),
+                textShadowColor: '#13091D',
+                textShadowOffset: { width: 0, height: 1 },
+                textShadowRadius: 3,
+              }}
+            >
+              {player.rating}
+            </Text>
+            <Text style={{ color: '#F7D783', fontSize: Math.max(6, width * 0.052), fontWeight: '900', letterSpacing: 0.2 }}>
+              {player.position}
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.55}
+            style={{
+              position: 'absolute',
+              left: width * 0.13,
+              top: height * 0.687,
+              width: width * 0.74,
+              textAlign: 'center',
+              color: '#FFF4D4',
+              fontSize: Math.max(8, width * 0.075),
+              fontWeight: '900',
+              letterSpacing: 0.15,
+              textShadowColor: 'rgba(0,0,0,0.85)',
+              textShadowOffset: { width: 0, height: 1 },
+              textShadowRadius: 2,
+            }}
+          >
+            {(player.en || media.en || player.name).toUpperCase()}
+          </Text>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.6}
+            style={{
+              position: 'absolute',
+              left: width * 0.16,
+              top: height * 0.75,
+              width: width * 0.68,
+              textAlign: 'center',
+              color: '#DCC9F4',
+              fontSize: Math.max(5.5, width * 0.043),
+              fontWeight: '700',
+              letterSpacing: 0.1,
+            }}
+          >
+            {player.club.toUpperCase()}
+          </Text>
+          <View
+            style={{
+              position: 'absolute',
+              left: width * 0.12,
+              top: height * 0.792,
+              width: width * 0.76,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
+            {statRows.map((stat) => (
+              <View
+                key={stat.label}
+                style={{
+                  width: '33.333%',
+                  height: height * 0.057,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ color: '#D8C3F4', fontSize: Math.max(5, width * 0.032), fontWeight: '800', lineHeight: Math.max(6, width * 0.034) }}>
+                  {stat.label}
+                </Text>
+                <Text style={{ color: '#FFF8E7', fontSize: Math.max(7, width * 0.052), fontWeight: '900', lineHeight: Math.max(8, width * 0.054) }}>
+                  {stat.value ?? '·'}
+                </Text>
+              </View>
+            ))}
+          </View>
+          <Text
+            style={{
+              position: 'absolute',
+              right: width * 0.18,
+              top: height * 0.153,
+              color: '#EED28A',
+              fontSize: Math.max(4.5, width * 0.029),
+              fontWeight: '900',
+              letterSpacing: 0.3,
+            }}
+          >
+            FUTURE STARS
+          </Text>
+        </>
+      ) : null}
+    </View>
+  );
+}
+
+/** Same TOTW card. A short purple rim follows the shield, the way FUTBIN shows the second look. */
+
 export function PortraitCard({
   player,
   width = 168,
@@ -540,7 +714,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -558,6 +732,9 @@ export function PortraitCard({
   const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
   if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  if (shownEdition === 'future-stars') {
+    return <FutureStarsPortraitCard player={player} width={width} shell={shell} photoOverride={photoOverride} faceOverride={faceOverride} />;
+  }
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
     const otwArt = OTW_REMOTE_ART[artId];
@@ -602,9 +779,13 @@ export function PortraitCard({
 }
 
 /** Empty gold, silver, icon, or OTW card, using the same shape as the player cards. */
-export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw'; width: number }) {
+export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'future-stars'; width: number }) {
   if (kind === 'otw') return <OtwShell width={width} />;
   if (kind === 'totw') return <TotwPortraitCard art={require('@/assets/images/cards/totw-shell.png')} width={width} />;
+  if (kind === 'future-stars') {
+    const player: FcPlayer = { id: 'shell-future-stars', name: ' ', en: ' ', rating: 90, position: 'RW', nation: '', league: '', club: '', edition: 'future-stars' };
+    return <FutureStarsPortraitCard player={player} width={width} shell />;
+  }
   if (kind === 'hero') {
     const player: FcPlayer = {
       id: `shell-${kind}`,
@@ -652,7 +833,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;

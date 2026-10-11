@@ -1,4 +1,5 @@
 import { destinedEdition } from '@/lib/destinedEditions';
+import { futureStarsFor } from '@/lib/futureStars';
 import { DB_PLAYERS } from '@/lib/playerDb';
 import { otwFor, totwFor } from '@/lib/specialCards';
 
@@ -16,7 +17,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
@@ -196,6 +197,23 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         face: totw.face,
         ...(totw.positions?.length ? { positions: totw.positions } : {}),
         ...(totw.playstyles?.length ? { playstyles: totw.playstyles } : {}),
+      });
+    }
+    const futureStar = futureStarsFor(player.id);
+    if (futureStar) {
+      cards.push({
+        ...player,
+        id: `${player.id}--future-stars`,
+        edition: 'future-stars',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        rating: futureStar.rating,
+        position: futureStar.position,
+        face: futureStar.face,
+        ...(futureStar.positions?.length ? { positions: futureStar.positions } : {}),
       });
     }
   }
