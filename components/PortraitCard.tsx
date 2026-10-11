@@ -541,7 +541,7 @@ function FutureStarsPortraitCard({
 }) {
   const media = playerMedia(player.baseId ?? player.id);
   const special = futureStarsFor(player.baseId ?? player.id);
-  const photoUri = photoOverride ?? media.photo ?? '';
+  const photoUri = photoOverride ?? special?.photoUrl ?? media.photo ?? '';
   const face = faceOverride ?? special?.face ?? player.face ?? media.face;
   const rating = special?.rating ?? player.rating;
   const position = special?.position ?? player.position;
@@ -622,7 +622,7 @@ function FutureStarsPortraitCard({
             style={{
               position: 'absolute',
               left: width * 0.13,
-              top: height * 0.687,
+              top: height * 0.625,
               width: width * 0.74,
               textAlign: 'center',
               color: '#FFF4D4',
@@ -643,7 +643,7 @@ function FutureStarsPortraitCard({
             style={{
               position: 'absolute',
               left: width * 0.16,
-              top: height * 0.75,
+              top: height * 0.683,
               width: width * 0.68,
               textAlign: 'center',
               color: '#DCC9F4',
@@ -658,7 +658,7 @@ function FutureStarsPortraitCard({
             style={{
               position: 'absolute',
               left: width * 0.22,
-              top: height * 0.78,
+              top: height * 0.720,
               width: width * 0.56,
               flexDirection: 'row',
               flexWrap: 'wrap',
