@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -18,6 +18,7 @@ import { SiteNav } from '@/components/SiteNav';
 import { useColumns } from '@/components/TileGrid';
 import { Button, colors, Muted, Title } from '@/components/ui';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
+import { futureStarsFor } from '@/lib/futureStars';
 import { playerMedia } from '@/lib/playerMedia';
 import { EMPTY_FILTERS, filtersActive, playerMatches, type PlayerFilters } from '@/lib/playerFilter';
 
@@ -128,6 +129,8 @@ export default function MarketScreen() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [page, setPage] = useState(1);
   const router = useRouter();
+  const searchParams = useLocalSearchParams<{ kind?: string }>();
+  const routeKind = Array.isArray(searchParams.kind) ? searchParams.kind[0] : searchParams.kind;
   const listRef = useRef<FlatList>(null);
   const columns = useColumns(5, 2);
   const { width } = useWindowDimensions();
@@ -135,6 +138,14 @@ export default function MarketScreen() {
   const contentWidth = Math.min(width, maxWidth) - 32;
   const gap = 12;
   const cardWidth = Math.floor((contentWidth - gap * (columns - 1)) / columns);
+
+  useEffect(() => {
+    setFilters(routeKind === 'future-stars' ? { ...EMPTY_FILTERS, kind: 'future-stars' } : EMPTY_FILTERS);
+    setQuery('');
+    setDebouncedQuery('');
+    setFilterOpen(false);
+    setPage(1);
+  }, [routeKind]);
 
   useEffect(() => {
     if (query !== debouncedQuery) {
@@ -344,7 +355,11 @@ export default function MarketScreen() {
                 onPress={() => router.push(`/market/${player.id}`)}
                 style={{ width: cardWidth, alignItems: 'center' }}
               >
-                <PortraitCard player={player} width={cardWidth} />
+                <PortraitCard
+                  player={player}
+                  width={cardWidth}
+                  photoOverride={player.edition === 'future-stars' ? futureStarsFor(player.baseId ?? player.id)?.photoUrl : undefined}
+                />
               </Pressable>
             ))}
             {Array.from({ length: columns - row.length }).map((_, index) => (
