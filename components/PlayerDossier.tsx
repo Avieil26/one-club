@@ -118,7 +118,22 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
             <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{playerHeight(player.baseId ?? player.id)!.feet}</Text>
           </View>
         ) : null}
-        {player.playstyles?.length ? (
+        {player.foot || player.heightCm || player.weightKg || player.age || player.accelerate || player.roles?.length ? (
+        <View style={{ gap: 6, alignItems: 'flex-end' }}>
+          <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 6 }}>
+            {player.foot ? <Text style={{ color: '#F4F7F2', backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.09)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, fontSize: compact ? 10 : 11, fontWeight: '800' }}>{player.foot === 'L' ? 'רגל שמאל' : 'רגל ימין'}</Text> : null}
+            {player.accelerate ? <Text style={{ color: '#9FF5DC', backgroundColor: 'rgba(60,220,188,0.08)', borderWidth: 1, borderColor: 'rgba(112,248,218,0.24)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, fontSize: compact ? 10 : 11, fontWeight: '900' }}>AcceleRATE · {player.accelerate}</Text> : null}
+            {player.roles?.map((role) => <Text key={role} style={{ color: '#06231E', backgroundColor: '#9FF5DC', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, fontSize: compact ? 10 : 11, fontWeight: '900' }}>{role}</Text>)}
+          </View>
+          <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 9 }}>
+            {player.positions?.length ? <Text style={{ color: '#A9BAB3', fontSize: compact ? 11 : 12, fontWeight: '800' }}>עמדות · {player.positions.join(' · ')}</Text> : null}
+            {player.heightCm ? <Text style={{ color: '#A9BAB3', fontSize: compact ? 11 : 12, fontWeight: '800' }}>גובה · {player.heightCm} ס״מ</Text> : null}
+            {player.weightKg ? <Text style={{ color: '#A9BAB3', fontSize: compact ? 11 : 12, fontWeight: '800' }}>משקל · {player.weightKg} ק״ג</Text> : null}
+            {player.age ? <Text style={{ color: '#A9BAB3', fontSize: compact ? 11 : 12, fontWeight: '800' }}>גיל · {player.age}</Text> : null}
+          </View>
+        </View>
+      ) : null}
+      {player.playstyles?.length ? (
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end', maxWidth: 420 }}>
             {player.playstyles.map((style) => (
               <Text key={style.name} style={{ color: style.plus ? '#E8C86A' : '#C5D0C8', fontSize: 12, fontWeight: style.plus ? '800' : '600' }}>
@@ -242,8 +257,8 @@ function ago(iso: string) {
   return `לפני ${Math.round(hours / 24)} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' {
-  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw') return player.edition;
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars' {
+  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw' || player.edition === 'squadFoundations' || player.edition === 'futureStars') return player.edition;
   return 'base';
 }
 
@@ -254,9 +269,9 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const app = useApp();
   const personId = player.baseId ?? player.id;
   const media = playerMedia(personId);
-  const baseMeta = playerCardMeta(personId);
+  const baseMeta = playerCardMeta(player.edition === 'futureStars' ? player.id : personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -340,7 +355,11 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const viewingTotw = edition === 'totw' && (totw != null || player.edition === 'totw');
   const viewingOtw = edition === 'otw' && (otw != null || player.edition === 'otw');
   const viewingHero = edition === 'hero';
-  const card: FcPlayer = viewingPromo
+  const viewingFoundations = edition === 'squadFoundations' && player.edition === 'squadFoundations';
+  const viewingFutureStars = edition === 'futureStars' && player.edition === 'futureStars';
+  const card: FcPlayer = viewingFutureStars
+    ? { ...player, edition: 'futureStars' }
+    : viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
     : viewingTotw
       ? {
@@ -366,7 +385,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             face: undefined,
           };
   const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : viewingOtw ? (otwCardMeta(personId) ?? baseMeta) : baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingOtw ? (card.face ?? media.face) : viewingHero ? player.face : media.face;
+  const face = viewingFutureStars ? (card.face ?? media.face) : viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingOtw ? (card.face ?? media.face) : viewingHero ? player.face : viewingFoundations ? (card.face ?? media.face) : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -396,19 +415,19 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingOtw ? 'otw' : viewingHero ? 'hero' : 'base';
-  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingOtw ? `${personId}--otw` : personId;
+  const shown = viewingFutureStars ? 'futureStars' : viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingOtw ? 'otw' : viewingHero ? 'hero' : viewingFoundations ? 'squadFoundations' : 'base';
+  const quoteId = viewingFutureStars ? player.id : viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingOtw ? `${personId}--otw` : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
-  const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
-  const alts: { edition: 'base' | 'destined' | 'totw' | 'otw'; label: string }[] = [];
+  const hasRegular = player.edition !== 'futureStars' && (Boolean(player.baseId) || (player.edition !== 'hero' && player.edition !== 'squadFoundations' && !(player.edition === 'totw' && !player.baseId)));
+  const alts: { edition: 'base' | 'destined' | 'totw' | 'otw' | 'squadFoundations'; label: string }[] = [];
   if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: 'קלף רגיל' });
   if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: 'קלף פרומו' });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
   if (otw && shown !== 'otw') alts.push({ edition: 'otw', label: 'קלף OTW' });
 
-  const foot = meta?.foot;
+  const foot = meta?.foot ?? card.foot;
   const iconPage = !!player.icon;
   const showChem = card.position !== 'GK' && !!meta;
   const chem = showChem ? CHEM_STYLES.find((style) => style.id === chemId) : undefined;
@@ -462,23 +481,30 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} /> : null;
 
-  const skills = meta ? (
+  const detailWeakFoot = meta?.weakFoot ?? card.weakFoot;
+  const detailSkillMoves = meta?.skillMoves ?? card.skillMoves;
+  const skills = detailWeakFoot != null || detailSkillMoves != null ? (
     <View style={{ gap: 12, alignItems: 'flex-end' }}>
-      <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
-        <Stars count={meta.weakFoot} />
-      </View>
-      <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
-          <SkillMark />
-          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+      {detailWeakFoot != null ? (
+        <View style={{ gap: 4, alignItems: 'flex-end' }}>
+          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
+          <Stars count={detailWeakFoot} />
         </View>
-        <Stars count={meta.skillMoves} />
-      </View>
+      ) : null}
+      {detailSkillMoves != null ? (
+        <View style={{ gap: 4, alignItems: 'flex-end' }}>
+          <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
+            <SkillMark />
+            <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+          </View>
+          <Stars count={detailSkillMoves} />
+        </View>
+      ) : null}
     </View>
   ) : (
-    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון רשמי לרגל ולסקיל</Text>
+    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון מאומת לרגל חלשה ולסקיל</Text>
   );
+  const futureStarsStatsUnverified = player.edition === 'futureStars' && Boolean((player as FcPlayer & { attributesStatus?: string }).attributesStatus || !meta);
 
   const accent = iconPage ? '#E8C86A' : '#E3B341';
 
@@ -578,6 +604,14 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           </View>
         </View>
       )}
+
+      {futureStarsStatsUnverified ? (
+        <View style={{ padding: 12, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(198,151,255,0.35)', backgroundColor: 'rgba(72,34,105,0.22)' }}>
+          <Text style={{ color: '#D9C2FF', fontSize: 12, fontWeight: '700', textAlign: 'right' }}>
+            הנתונים המפורטים של הקלף הזה עדיין לא אומתו ממקור מלא; לא נציג ערכים משוערים כאילו הם רשמיים.
+          </Text>
+        </View>
+      ) : null}
 
       {viewingOtw && personId === 'ea-264947-nicole-anyomi' ? (
         <View

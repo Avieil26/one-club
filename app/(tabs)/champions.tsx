@@ -180,7 +180,7 @@ function Panel({ children, style }: { children: ReactNode; style?: object }) {
         colors={['rgba(13,14,20,.76)', 'rgba(7,9,14,.84)']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={StyleSheet.absoluteFillObject}
+        style={StyleSheet.absoluteFill}
       />
       {children}
     </View>
@@ -261,8 +261,8 @@ function MiniPitch({ formation, compact = false }: { formation: string; compact?
           return (
             <View key={slot.id} style={{
               position: 'absolute',
-              left: String(x * 100) + '%',
-              top: String(y * 100) + '%',
+              left: (String(x * 100) + '%') as any,
+              top: (String(y * 100) + '%') as any,
               width: size,
               height: size,
               marginLeft: -size / 2,
@@ -583,7 +583,7 @@ function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; com
     <View style={[styles.tekkzCard, compact && styles.tekkzCardCompact, selected && styles.tekkzCardSelected]}>
       <View style={[styles.tekkzCardImageWrap, compact && styles.tekkzCardCompactImage]}>
         <Image source={{ uri: TEKKZ_IMAGE_URL }} resizeMode="cover" style={styles.tekkzCardImage} />
-        <LinearGradient colors={['transparent', 'rgba(4,7,10,.93)']} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={StyleSheet.absoluteFillObject} />
+        <LinearGradient colors={['transparent', 'rgba(4,7,10,.93)']} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={StyleSheet.absoluteFill} />
         <View style={styles.tekkzCardImageText}>
           <Text style={styles.tekkzCardKicker}>FC27 PRO PLAYER</Text>
           <Text style={styles.tekkzCardName}>TEKKZ</Text>
@@ -1183,7 +1183,9 @@ export default function ChampionsScreen() {
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.pageRoot}>
-        <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage} pointerEvents="none" />
+        <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+          <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage} />
+        </View>
         <View style={styles.backgroundSoftener} pointerEvents="none" />
       <View style={styles.mainLayout}>
         <View style={styles.sidebar}>
@@ -1449,7 +1451,7 @@ const styles = StyleSheet.create({
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
   settingLabel: { color: '#6E7984', fontSize: 10, fontWeight: '800', textAlign: 'right', flex: 1 },
-  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },  tekkzCardCompact: { minHeight: 0 },
+  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },
   cardTopLine: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
   sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },  playerCardBody: { flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch' },
@@ -1682,7 +1684,8 @@ const styles = StyleSheet.create({
   communitySquadTitle: { color: '#E8EDF1', fontSize: 13, fontWeight: '900', textAlign: 'right' },
   communitySquadHint: { color: '#717D88', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
   communitySquadSaved: { color: '#E3C765', fontSize: 8, fontWeight: '900', textAlign: 'right' },
-  formationPicker: { width: 'min(900px, 95%)', maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .70, shadowRadius: 32, shadowOffset: { width: 0, height: 18 }, zIndex: 2147483648, elevation: 2147483648 },
+  communityControllerBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(221,48,65,.20)', backgroundColor: 'rgba(8,12,17,.58)', padding: 12, gap: 7, marginTop: 6 },
+  formationPicker: { width: '95%', maxWidth: 900, maxHeight: '84%', borderRadius: 20, borderWidth: 1, borderColor: '#E04151', backgroundColor: '#090D13', padding: 16, shadowColor: '#000', shadowOpacity: .70, shadowRadius: 32, shadowOffset: { width: 0, height: 18 }, zIndex: 2147483648, elevation: 2147483648 },
   formationPickerMobile: { width: '96%', padding: 13 },
   modalHeaderCopy: { flex: 1, alignItems: 'flex-end' },
   modalBackButton: { minHeight: 35, borderRadius: 11, backgroundColor: '#141A23', borderWidth: 1, borderColor: 'rgba(255,255,255,.10)', paddingHorizontal: 10, flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 5, flexShrink: 0 },
@@ -1698,19 +1701,14 @@ const styles = StyleSheet.create({
   formationOptionActive: { backgroundColor: 'rgba(214,45,62,.20)', borderColor: '#E24A59' },
   formationOptionText: { color: '#F4F6F8', fontSize: 10, fontWeight: '900' },
   formationOptionTextActive: { color: '#FFFFFF' },
-  selectorChipText: { color: '#F0F3F6', fontSize: 9, fontWeight: '900' },
   modalHeader: { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 10 },
   modalKicker: { color: '#D2AA57', fontSize: 8, fontWeight: '900', letterSpacing: 1.3, textAlign: 'right' },
   modalTitle: { color: '#F5F7F9', fontSize: 22, fontWeight: '900', textAlign: 'right', marginTop: 2 },
   modalHint: { color: '#74808B', fontSize: 9, lineHeight: 14, fontWeight: '700', textAlign: 'right', marginTop: 4 },
   formationPickerOptionMobile: { width: '48.2%' },
-  communitySquadBlock: { borderRadius: 14, borderWidth: 1, borderColor: 'rgba(221,48,65,.20)', backgroundColor: 'rgba(8,12,17,.58)', padding: 12, gap: 7, marginTop: 4 },
-  communitySquadTitle: { color: '#E9EDF1', fontSize: 12, fontWeight: '900', textAlign: 'right' },
-  communitySquadHint: { color: '#727E89', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
-  communitySquadSaved: { color: '#E6C969', fontSize: 8, fontWeight: '900', textAlign: 'right' },
 
   squadOverlay: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.92)', padding: 14, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
-  squadBuilderPanel: { width: 'min(1180px, 96%)', maxHeight: '95%', borderRadius: 22, borderWidth: 1, borderColor: '#D83A4B', backgroundColor: '#07100D', padding: 14, zIndex: 2147483648, elevation: 2147483648, shadowColor: '#000', shadowOpacity: .82, shadowRadius: 34, shadowOffset: { width: 0, height: 18 } },
+  squadBuilderPanel: { width: '96%', maxWidth: 1180, maxHeight: '95%', borderRadius: 22, borderWidth: 1, borderColor: '#D83A4B', backgroundColor: '#07100D', padding: 14, zIndex: 2147483648, elevation: 2147483648, shadowColor: '#000', shadowOpacity: .82, shadowRadius: 34, shadowOffset: { width: 0, height: 18 } },
   squadBuilderHeader: { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 10 },
   squadBuilderHeaderCopy: { flex: 1, alignItems: 'flex-end' },
   squadBuilderTitle: { color: '#F5F7FA', fontSize: 24, fontWeight: '900', textAlign: 'right' },

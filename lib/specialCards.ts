@@ -1,5 +1,6 @@
 import heroesFile from '@/assets/data/heroes.json';
 import totwFile from '@/assets/data/totw.json';
+import futureStarsFile from '@/assets/data/futureStars.json';
 
 import type { FcPlayer } from '@/lib/fcPlayers';
 
@@ -36,6 +37,80 @@ type TotwRow = {
 
 const heroes = heroesFile as HeroRow[];
 const totw = totwFile as TotwRow[];
+
+type FutureStarsRow = {
+  id: string;
+  baseId?: string;
+  itemId?: number;
+  en: string;
+  name: string;
+  rating: number;
+  position: string;
+  nation: string;
+  league: string;
+  club: string;
+  face: Face;
+  positions?: string[];
+  foot?: 'L' | 'R';
+  skillMoves?: number;
+  weakFoot?: number;
+  accelerate?: string;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
+  attributes?: Record<string, number>;
+};
+
+const futureStars = futureStarsFile as FutureStarsRow[];
+
+export const FUTURE_STARS_PLAYERS: FcPlayer[] = futureStars.map((row) => ({
+  id: row.id,
+  ...(row.baseId ? { baseId: row.baseId } : {}),
+  en: row.en,
+  name: row.name,
+  rating: row.rating,
+  position: row.position,
+  nation: row.nation,
+  league: row.league,
+  club: row.club,
+  edition: 'futureStars',
+  face: row.face,
+  ...(row.positions?.length ? { positions: row.positions } : {}),
+  ...(row.foot ? { foot: row.foot } : {}),
+  ...(row.skillMoves != null ? { skillMoves: row.skillMoves } : {}),
+  ...(row.weakFoot != null ? { weakFoot: row.weakFoot } : {}),
+  ...(row.accelerate ? { accelerate: row.accelerate } : {}),
+  ...(row.heightCm ? { heightCm: row.heightCm } : {}),
+  ...(row.weightKg ? { weightKg: row.weightKg } : {}),
+  ...(row.age ? { age: row.age } : {}),
+}));
+
+export const SQUAD_FOUNDATIONS_PLAYERS: FcPlayer[] = [{
+  id: 'patati--foundations',
+  name: 'Patati',
+  en: 'Weslley Patati',
+  rating: 84,
+  position: 'RW',
+  nation: 'ברזיל',
+  league: 'Eredivisie',
+  club: 'AZ',
+  edition: 'squadFoundations',
+  face: { ovr: 84, pac: 90, sho: 82, pas: 77, dri: 84, def: 40, phy: 75 },
+  positions: ['RW', 'RM'],
+  playstyles: [
+    { name: 'Incisive Pass', plus: false },
+    { name: 'Inventive', plus: false },
+    { name: 'Technical', plus: false },
+  ],
+  foot: 'L',
+  weakFoot: 3,
+  skillMoves: 4,
+  accelerate: 'Explosive',
+  heightCm: 173,
+  weightKg: 59,
+  age: 23,
+  roles: ['RM++'],
+}];
 
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
   id: hero.id,

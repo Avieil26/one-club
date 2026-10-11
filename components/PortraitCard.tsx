@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { Image, Platform, Text, View } from 'react-native';
+import { useId, useState } from 'react';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Svg, { Circle, ClipPath, Defs, Ellipse, G, Line, LinearGradient as SvgLinearGradient, Path, Polygon, RadialGradient as SvgRadialGradient, Stop } from 'react-native-svg';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
@@ -73,6 +74,7 @@ const OTW_REMOTE_ART: Record<string, string> = {
 
 const DESTINED_RATIO = 1152 / 864;
 const TOTW_RATIO = 1152 / 864;
+
 
 const TOTW_ART: Record<string, number> = {
   raphinha: require('@/assets/images/cards/raphinha-totw-built.png'),
@@ -229,7 +231,7 @@ function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: n
           <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
           <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
         </View>
-        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', zIndex: 6 }}>
+        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', direction: 'ltr', zIndex: 6 }}>
           {stats.map(([label, value]) => (
             <View key={label} style={{ flex: 1, alignItems: 'center' }}>
               <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, contentWidth * 0.034), fontWeight: '800' }}>{label}</Text>
@@ -336,6 +338,171 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
   );
 }
 
+function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcPlayer; width: number; shell?: boolean }) {
+  const height = Math.round(width * 1.48);
+  const uid = useId().replace(/:/g, '');
+  const sid = (part: string) => 'fs-' + uid + '-' + part;
+  const media = playerMedia(player.baseId ?? player.id);
+  const portraitUri = !shell ? media.photo : undefined;
+  const face = player.face;
+  const stats = player.position === 'GK'
+    ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
+    : ([['PAC', face?.pac], ['SHO', face?.sho], ['PAS', face?.pas], ['DRI', face?.dri], ['DEF', face?.def], ['PHY', face?.phy]] as const);
+  const name = surname(player.en || player.name || '').toUpperCase();
+  const shield = 'M120 5 C106 12 96 27 79 25 C63 22 53 29 42 37 C28 46 23 64 20 87 L15 132 L21 145 L18 175 L21 251 C26 286 53 316 120 350 C187 316 214 286 219 251 L222 175 L219 145 L225 132 L220 87 C217 64 212 46 198 37 C187 29 177 22 161 25 C144 27 134 12 120 5 Z';
+  const inset = 'M120 15 C107 21 98 34 81 32 C65 29 57 36 49 43 C38 51 34 68 31 89 L26 132 L31 145 L29 175 L31 248 C36 277 60 304 120 335 C180 304 204 277 209 248 L211 175 L209 145 L214 132 L209 89 C206 68 202 51 191 43 C183 36 175 29 159 32 C142 34 133 21 120 15 Z';
+  const sparkles = [[35,69,1.3],[54,89,0.9],[74,53,1.1],[91,39,0.8],[150,38,0.9],[178,51,1.2],[202,72,1.4],[211,105,0.9],[27,119,1.1],[36,180,1.3],[49,207,0.9],[196,205,1.2],[211,229,0.9],[184,264,1.1],[157,286,0.8],[73,283,1.1],[44,248,1],[62,224,0.8],[188,96,0.8],[33,154,0.9],[80,73,0.8],[205,147,0.8],[174,221,0.8],[94,301,0.8],[144,278,0.8],[28,218,0.8],[214,185,0.8],[52,106,0.8],[174,67,0.8],[197,246,0.9]] as const;
+
+  return (
+    <View style={{ width, height, alignSelf: 'center', overflow: 'visible', backgroundColor: 'transparent' }}>
+      <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
+        <Defs>
+          <SvgLinearGradient id={sid('base')} x1="0%" y1="0%" x2="92%" y2="100%">
+            <Stop offset="0%" stopColor="#682AA4" />
+            <Stop offset="20%" stopColor="#4D2188" />
+            <Stop offset="44%" stopColor="#2F166A" />
+            <Stop offset="72%" stopColor="#171039" />
+            <Stop offset="100%" stopColor="#08081F" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id={sid('metal')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#F4DFFF" />
+            <Stop offset="16%" stopColor="#9B7CF2" />
+            <Stop offset="30%" stopColor="#FFF0B7" />
+            <Stop offset="45%" stopColor="#8D69D8" />
+            <Stop offset="61%" stopColor="#F7D98B" />
+            <Stop offset="78%" stopColor="#A6BEFF" />
+            <Stop offset="100%" stopColor="#F4D9FF" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id={sid('gold')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#A56D22" />
+            <Stop offset="21%" stopColor="#FFF2B7" />
+            <Stop offset="40%" stopColor="#C38E3A" />
+            <Stop offset="58%" stopColor="#FFF8D3" />
+            <Stop offset="78%" stopColor="#A66A1E" />
+            <Stop offset="100%" stopColor="#F4D88C" />
+          </SvgLinearGradient>
+          <SvgLinearGradient id={sid('gloss')} x1="0%" y1="0%" x2="100%" y2="100%">
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
+            <Stop offset="25%" stopColor="#C1A7FF" stopOpacity="0.1" />
+            <Stop offset="61%" stopColor="#6B35D7" stopOpacity="0.02" />
+            <Stop offset="100%" stopColor="#F6B3FF" stopOpacity="0.15" />
+          </SvgLinearGradient>
+          <SvgRadialGradient id={sid('glow')} cx="50%" cy="42%" r="65%">
+            <Stop offset="0%" stopColor="#9D5BFF" stopOpacity="0.48" />
+            <Stop offset="63%" stopColor="#6938D2" stopOpacity="0.13" />
+            <Stop offset="100%" stopColor="#10092E" stopOpacity="0" />
+          </SvgRadialGradient>
+          <SvgLinearGradient id={sid('fade')} x1="0%" y1="0%" x2="0%" y2="100%">
+            <Stop offset="0%" stopColor="#201044" stopOpacity="0.02" />
+            <Stop offset="42%" stopColor="#170A37" stopOpacity="0.36" />
+            <Stop offset="100%" stopColor="#08071D" stopOpacity="0.99" />
+          </SvgLinearGradient>
+          <ClipPath id={sid('clip')}><Path d={shield} /></ClipPath>
+        </Defs>
+
+        <Path d={shield} fill="#080515" stroke="#6143A8" strokeWidth="9" />
+        <Path d={shield} fill={'url(#' + sid('base') + ')'} />
+        <G clipPath={'url(#' + sid('clip') + ')'}>
+          <Path d="M-10 35 C34 6 69 18 92 49 C121 87 151 90 184 48 L250 4 L250 120 C208 153 180 165 138 149 C94 133 58 91 -10 110 Z" fill="#B26AFF" opacity="0.17" />
+          <Path d="M-10 198 C37 157 68 184 94 218 C123 254 172 251 250 184 L250 285 C180 336 115 354 49 311 L-10 269 Z" fill="#A445FF" opacity="0.13" />
+          <Path d="M18 56 L59 30 L82 41 L40 105 L22 143 Z M222 56 L181 30 L158 41 L200 105 L218 143 Z" fill="#D2C5FF" opacity="0.12" />
+          <Path d="M27 54 L61 32 L83 36 M213 54 L179 32 L157 36" fill="none" stroke="#F9E9FF" strokeWidth="1.2" opacity="0.64" />
+
+          <Ellipse cx="120" cy="173" rx="82" ry="54" fill={'url(#' + sid('glow') + ')'} />
+          <Ellipse cx="120" cy="173" rx="78" ry="44" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="2.7" opacity="0.98" />
+          <Ellipse cx="120" cy="173" rx="53" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.1" opacity="0.96" />
+          <Ellipse cx="120" cy="173" rx="29" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.5" opacity="0.99" />
+          <Ellipse cx="120" cy="173" rx="15" ry="48" transform="rotate(31 120 173)" fill="none" stroke="#FCECB7" strokeWidth="1" opacity="0.82" />
+          <Path d="M45 160 C80 181 164 182 196 158 M47 179 C86 200 157 201 194 179" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.2" opacity="0.97" />
+          <Path d="M61 131 C88 155 152 187 185 183 M58 194 C90 172 147 145 184 153" fill="none" stroke="#FFF0BC" strokeWidth="1.1" opacity="0.72" />
+          {sparkles.map(([cx, cy, r], index) => <Circle key={index} cx={cx} cy={cy} r={r} fill={index % 3 === 0 ? '#FFF0B5' : '#E0D9FF'} opacity={index % 2 ? 0.46 : 0.8} />)}
+          <Path d="M-5 0 L245 0 L245 355 L-5 355 Z" fill={'url(#' + sid('gloss') + ')'} />
+          <Polygon points="120,42 124,51 134,52 126,59 128,68 120,63 112,68 114,59 106,52 116,51" fill="#FFF0B5" stroke="#B17C32" strokeWidth="1" />
+          <Path d="M18 281 C54 300 89 320 120 334 C151 320 186 300 222 281" fill="none" stroke="#9A7AE5" strokeWidth="1.1" opacity="0.68" />
+          <Path d="M33 290 L48 300 L63 291 M177 291 L192 300 L207 290" fill="none" stroke="#F1D8A0" strokeWidth="1.2" opacity="0.92" />
+          <Path d="M15 136 L28 145 L20 157 L28 171 L16 181 M225 136 L212 145 L220 157 L212 171 L224 181" fill="none" stroke="#F6E7FF" strokeWidth="2.3" opacity="0.92" />
+        </G>
+        <Path d={shield} fill="none" stroke="#9C7DEB" strokeWidth="7" opacity="0.66" />
+        <Path d={shield} fill="none" stroke={'url(#' + sid('metal') + ')'} strokeWidth="3.3" opacity="0.99" />
+        <Path d={inset} fill="none" stroke="#E0C6FF" strokeWidth="1" opacity="0.72" />
+        <Path d="M120 12 C111 14 107 25 102 28 C91 34 82 23 74 21 C62 18 55 29 45 37 L36 43 C25 50 23 70 22 87 L18 130" fill="none" stroke="#FCF0FF" strokeWidth="1.1" opacity="0.72" />
+        <Polygon points="13,157 27,148 41,157 27,174" fill="#28145C" stroke="#E7D8FF" strokeWidth="1.4" />
+        <Polygon points="19,157 27,152 35,157 27,167" fill="none" stroke="#D6C3FF" strokeWidth="1" />
+        <Path d="M27 155 L29 159 L33 159 L30 162 L31 166 L27 164 L23 166 L24 162 L21 159 L25 159 Z" fill="#FFF0B5" />
+      </Svg>
+
+      {portraitUri ? (
+        <Image
+          source={{ uri: portraitUri }}
+          resizeMode="contain"
+          accessibilityIgnoresInvertColors
+          style={{ position: 'absolute', left: width * 0.07, top: height * 0.115, width: width * 0.86, height: height * 0.59 }}
+        />
+      ) : (
+        <Svg width={width * 0.72} height={height * 0.49} viewBox="0 0 200 240" style={{ position: 'absolute', top: height * 0.16, left: width * 0.14 }}>
+          <Circle cx="100" cy="72" r="37" fill="#B49AFF" opacity="0.9" />
+          <Path d="M26 235 Q34 137 100 132 Q166 137 174 235 Z" fill="#7551B0" opacity="0.95" />
+          <Path d="M63 53 Q69 20 100 24 Q132 20 138 55" stroke="#F3DCFF" strokeWidth="4" fill="none" opacity="0.75" />
+        </Svg>
+      )}
+
+      <Svg pointerEvents="none" width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
+        <Defs>
+          <SvgLinearGradient id={sid('photoFade')} x1="0%" y1="0%" x2="0%" y2="100%">
+            <Stop offset="0%" stopColor="#14082F" stopOpacity="0" />
+            <Stop offset="25%" stopColor="#1B0A42" stopOpacity="0.08" />
+            <Stop offset="63%" stopColor="#160833" stopOpacity="0.67" />
+            <Stop offset="100%" stopColor="#09071F" stopOpacity="0.99" />
+          </SvgLinearGradient>
+        </Defs>
+        <Path d="M20 215 C53 224 84 222 120 218 C156 222 187 224 220 215 L219 251 C214 283 187 313 120 349 C53 313 26 283 21 251 Z" fill={'url(#' + sid('photoFade') + ')'} />
+      </Svg>
+
+      <View style={{ position: 'absolute', top: height * 0.05, left: width * 0.105, zIndex: 5, alignItems: 'flex-start' }}>
+        <Text style={{ color: '#FFFFFF', fontSize: Math.max(19, width * 0.2), lineHeight: Math.max(21, width * 0.205), fontWeight: '900', letterSpacing: -0.9, textShadowColor: '#16082D', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}>
+          {shell ? '' : player.rating}
+        </Text>
+        <Text style={{ color: '#F6E8FF', fontSize: Math.max(8, width * 0.07), lineHeight: Math.max(10, width * 0.075), fontWeight: '900', letterSpacing: 0.4, textShadowColor: '#180A40', textShadowRadius: 3 }}>
+          {shell ? '' : player.position}
+        </Text>
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.1, zIndex: 5, alignItems: 'center', gap: 1 }}>
+        <Text style={{ color: '#F8ECFF', fontSize: Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.25 }}>FUTURE</Text>
+        <Text style={{ color: '#D7C0FF', fontSize: Math.max(5.5, width * 0.043), fontWeight: '900', letterSpacing: 1.25 }}>STARS</Text>
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.675, left: width * 0.09, right: width * 0.09, zIndex: 5, alignItems: 'center' }}>
+        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.65} style={{ color: '#FFFFFF', fontSize: Math.max(10, width * 0.11), fontWeight: '900', letterSpacing: 0.15, textAlign: 'center', textShadowColor: '#10051E', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}>
+          {shell ? '' : name}
+        </Text>
+        <LinearGradient
+          colors={['transparent', '#F3D58C', '#FFF4C1', '#F3D58C', 'transparent']}
+          locations={[0, 0.24, 0.5, 0.76, 1]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{ width: '56%', height: 1.2, marginTop: 3 }}
+        />
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.75, left: 0, right: 0, zIndex: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: width * 0.075 }}>
+        {!shell ? <ClubBadge club={player.club} size={Math.max(12, width * 0.087)} /> : null}
+        {!shell ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.08)} /> : null}
+      </View>
+
+      <View style={{ position: 'absolute', top: height * 0.81, left: width * 0.095, right: width * 0.095, zIndex: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
+        {stats.map(([label, value], index) => (
+          <View key={label} style={{ flex: 1, alignItems: 'center', borderLeftWidth: index ? 0.6 : 0, borderColor: 'rgba(238,216,255,0.23)' }}>
+            <Text style={{ color: '#F3D98E', fontSize: Math.max(5, width * 0.039), fontWeight: '900', letterSpacing: -0.15 }}>{label}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: Math.max(8, width * 0.066), lineHeight: Math.max(10, width * 0.071), fontWeight: '900', textShadowColor: '#1D0A42', textShadowRadius: 3 }}>
+              {shell ? '' : value ?? '—'}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
 function OtwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
   const height = Math.round(width * DESTINED_RATIO);
   const data = otwFor(player.baseId ?? player.id);
@@ -515,6 +682,145 @@ function surname(en: string) {
 }
 
 /** Same TOTW card. A short purple rim follows the shield, the way FUTBIN shows the second look. */
+function SquadFoundationsPortraitCard({ player, width, compact = false }: { player: FcPlayer; width: number; compact?: boolean }) {
+  const media = playerMedia(player.id);
+  const face = player.face ?? media.face;
+  const height = Math.round(width * (compact ? 1.53 : 1.61));
+  const photoHeight = Math.round(height * (compact ? 0.49 : 0.51));
+  const statRows = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: width * 0.11,
+        borderWidth: compact ? 1.1 : 1.7,
+        borderColor: '#CFFFF3',
+        backgroundColor: '#071B18',
+        shadowColor: '#49DDBE',
+        shadowOpacity: compact ? 0.22 : 0.32,
+        shadowRadius: compact ? 5 : 12,
+        shadowOffset: { width: 0, height: compact ? 2 : 7 },
+        elevation: compact ? 4 : 8,
+      }}
+    >
+      <LinearGradient
+        colors={['#0B5449', '#0E7665', '#0A302B', '#041513']}
+        locations={[0, 0.32, 0.69, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+      <LinearGradient
+        colors={['rgba(243,255,252,0.18)', 'transparent', 'rgba(67,250,211,0.11)']}
+        start={{ x: 0.1, y: 0 }}
+        end={{ x: 0.95, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+      <View style={{ position: 'absolute', left: -width * 0.18, top: height * 0.10, width: width * 1.05, height: width * 0.045, backgroundColor: 'rgba(222,255,247,0.12)', transform: [{ rotate: '-23deg' }] }} />
+      <View style={{ position: 'absolute', right: -width * 0.22, top: height * 0.30, width: width * 1.12, height: width * 0.03, backgroundColor: 'rgba(71,255,216,0.11)', transform: [{ rotate: '-23deg' }] }} />
+      <View style={{ position: 'absolute', top: -width * 0.10, right: -width * 0.13, width: width * 0.70, height: width * 0.70, borderRadius: width, borderWidth: 1, borderColor: 'rgba(216,255,247,0.16)' }} />
+
+      <View style={{ position: 'absolute', top: compact ? width * 0.035 : width * 0.045, left: compact ? width * 0.055 : width * 0.065, right: compact ? width * 0.055 : width * 0.065, flexDirection: 'row', direction: 'ltr', alignItems: 'flex-start', justifyContent: 'space-between', zIndex: 6 }}>
+        <View>
+          <Text style={{ color: '#F5FFFC', fontSize: compact ? width * 0.16 : width * 0.18, lineHeight: compact ? width * 0.16 : width * 0.18, fontWeight: '900', letterSpacing: -0.7 }}>{player.rating}</Text>
+          <Text style={{ color: '#A9F9E7', fontSize: Math.max(6, width * 0.055), lineHeight: Math.max(7, width * 0.065), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+        </View>
+        <View style={{ alignItems: 'flex-end' }}>
+          <Text style={{ color: '#E7FFFA', fontSize: Math.max(5.5, width * 0.044), fontWeight: '900', letterSpacing: 1.5 }}>SQUAD FOUNDATIONS</Text>
+          <Text style={{ color: 'rgba(235,255,251,0.56)', fontSize: Math.max(4.5, width * 0.033), fontWeight: '800', letterSpacing: 0.7 }}>84 OVR · PLAYER ITEM</Text>
+        </View>
+      </View>
+
+      <View style={{ height: photoHeight, marginTop: compact ? width * 0.005 : width * 0.012, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden' }}>
+        {media.photo ? (
+          <Image
+            source={{ uri: media.photo }}
+            resizeMode="contain"
+            accessibilityIgnoresInvertColors
+            style={{
+              width: width * (compact ? 0.94 : 0.96),
+              height: photoHeight * 1.10,
+              marginBottom: -height * 0.008,
+              ...(Platform.OS === 'web' ? ({ objectFit: 'contain', objectPosition: 'center 13%' } as object) : {}),
+            }}
+          />
+        ) : null}
+        <LinearGradient
+          colors={['transparent', 'rgba(3,19,16,0.90)']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: photoHeight * 0.28 }}
+        />
+      </View>
+
+      <View
+        style={{
+          marginHorizontal: compact ? width * 0.055 : width * 0.05,
+          marginTop: -width * 0.004,
+          borderRadius: width * 0.045,
+          overflow: 'hidden',
+          zIndex: 7,
+          borderWidth: 1,
+          borderColor: 'rgba(251,255,253,0.72)',
+        }}
+      >
+        <LinearGradient
+          colors={['#F7FFFC', '#BEEFE0']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{ paddingHorizontal: compact ? width * 0.035 : width * 0.04, paddingVertical: compact ? width * 0.024 : width * 0.032 }}
+        >
+          <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 7 }}>
+            <View style={{ flex: 1, minWidth: 0, alignItems: 'flex-end' }}>
+              <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7} style={{ color: '#061715', fontSize: compact ? Math.max(8.2, width * 0.093) : Math.max(13, width * 0.108), lineHeight: compact ? Math.max(9, width * 0.105) : Math.max(15, width * 0.12), fontWeight: '900', letterSpacing: 0.55 }}>PATATI</Text>
+              <Text numberOfLines={1} style={{ color: '#315950', fontSize: compact ? Math.max(4.5, width * 0.038) : Math.max(6, width * 0.045), fontWeight: '800', marginTop: 2 }}>RW · RM++ · LEFT FOOT</Text>
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'center', gap: 3 }}>
+              <ClubBadge club={player.club} size={compact ? Math.max(16, width * 0.17) : Math.max(23, width * 0.13)} />
+              {!compact ? <NationFlag nation={player.nation} size={Math.max(11, width * 0.075)} /> : null}
+            </View>
+          </View>
+          {!compact ? (
+            <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 5, marginTop: 6 }}>
+              <Text style={{ color: '#24544A', fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>4★ SKILLS</Text>
+              <Text style={{ color: '#24544A', fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>3★ WEAK FOOT</Text>
+              <Text style={{ color: '#0A3F34', backgroundColor: '#8FECD3', borderRadius: 999, paddingHorizontal: 7, paddingVertical: 3, fontSize: Math.max(5.5, width * 0.035), fontWeight: '900' }}>RM++</Text>
+            </View>
+          ) : null}
+        </LinearGradient>
+      </View>
+
+      <View style={{ marginTop: compact ? width * 0.018 : width * 0.022, paddingHorizontal: compact ? width * 0.055 : width * 0.06, gap: compact ? 5 : 6, zIndex: 7 }}>
+        {(compact ? [statRows.slice(0, 3), statRows.slice(3)] : [statRows]).map((row, rowIndex) => (
+          <View key={rowIndex} style={{ flexDirection: 'row', direction: 'ltr', gap: compact ? 3 : 5 }}>
+            {row.map(([label, value]) => (
+              <View key={label} style={{ flex: 1, minWidth: 0, alignItems: 'center', borderRadius: 7, backgroundColor: compact ? 'rgba(2,17,14,0.48)' : 'rgba(3,21,18,0.34)', borderWidth: 1, borderColor: 'rgba(206,255,244,0.13)', paddingVertical: compact ? 3 : 4 }}>
+                <Text style={{ color: '#A7F7E4', fontSize: compact ? Math.max(4.5, width * 0.034) : Math.max(5.5, width * 0.036), fontWeight: '900', letterSpacing: 0.25 }}>{label}</Text>
+                <Text style={{ color: '#FFFFFF', fontSize: compact ? Math.max(7.4, width * 0.058) : Math.max(8.5, width * 0.064), lineHeight: compact ? Math.max(9, width * 0.067) : Math.max(10, width * 0.073), fontWeight: '900' }}>{value ?? '·'}</Text>
+              </View>
+            ))}
+          </View>
+        ))}
+      </View>
+
+      <View style={{ flex: 1 }} />
+      <View style={{ alignItems: 'center', paddingTop: compact ? 4 : 6, paddingBottom: compact ? width * 0.022 : width * 0.029 }}>
+        <Text style={{ color: '#BDF8E9', fontSize: Math.max(4.5, width * 0.034), fontWeight: '900', letterSpacing: 1.1 }}>UNTRADEABLE · SQUAD FOUNDATIONS</Text>
+      </View>
+    </View>
+  );
+}
 function totwAura() {
   if (Platform.OS === 'web') return webRimStyle();
   return {
@@ -540,7 +846,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -558,6 +864,8 @@ export function PortraitCard({
   const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
   if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  if (shownEdition === 'futureStars') return <FutureStarsPortraitCard player={player} width={width} shell={shell} />;
+  if (shownEdition === 'squadFoundations' && !shell) return <SquadFoundationsPortraitCard player={player} width={width} compact={compactStats} />;
   const otw = shownEdition === 'otw' ? otwFor(artId) : null;
   if (shownEdition === 'otw') {
     const otwArt = OTW_REMOTE_ART[artId];
@@ -576,7 +884,7 @@ export function PortraitCard({
     const heroArt = HERO_ART[player.id];
     if (heroArt) return <TotwPortraitCard art={heroArt} width={width} />;
   }
-  if (shownEdition === 'hero' || shownEdition === 'totw') {
+  if (shownEdition === 'hero') {
     return (
       <View style={aura as object}>
         <ShieldPortrait player={player} width={width} edition={shownEdition} shell={shell} pitch={variant === 'pitch'} />
@@ -602,9 +910,13 @@ export function PortraitCard({
 }
 
 /** Empty gold, silver, icon, or OTW card, using the same shape as the player cards. */
-export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw'; width: number }) {
+export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'futureStars'; width: number }) {
   if (kind === 'otw') return <OtwShell width={width} />;
   if (kind === 'totw') return <TotwPortraitCard art={require('@/assets/images/cards/totw-shell.png')} width={width} />;
+  if (kind === 'futureStars') {
+    const player: FcPlayer = { id: 'shell-futureStars', name: ' ', en: ' ', rating: 88, position: 'CM', nation: '', league: '', club: '', edition: 'futureStars' };
+    return <PortraitCard player={player} width={width} shell />;
+  }
   if (kind === 'hero') {
     const player: FcPlayer = {
       id: `shell-${kind}`,
@@ -652,7 +964,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'squadFoundations' | 'futureStars';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
