@@ -339,7 +339,7 @@ function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?:
 }
 
 function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcPlayer; width: number; shell?: boolean }) {
-  const height = Math.round(width * 1.48);
+  const height = Math.round(width * 1.5);
   const uid = useId().replace(/:/g, '');
   const sid = (part: string) => 'fs-' + uid + '-' + part;
   const media = playerMedia(player.baseId ?? player.id);
@@ -349,94 +349,23 @@ function FutureStarsPortraitCard({ player, width, shell = false }: { player: FcP
     ? ([['DIV', face?.pac], ['HAN', face?.sho], ['KIC', face?.pas], ['REF', face?.dri], ['SPD', face?.def], ['POS', face?.phy]] as const)
     : ([['PAC', face?.pac], ['SHO', face?.sho], ['PAS', face?.pas], ['DRI', face?.dri], ['DEF', face?.def], ['PHY', face?.phy]] as const);
   const name = surname(player.en || player.name || '').toUpperCase();
-  const shield = 'M120 5 C106 12 96 27 79 25 C63 22 53 29 42 37 C28 46 23 64 20 87 L15 132 L21 145 L18 175 L21 251 C26 286 53 316 120 350 C187 316 214 286 219 251 L222 175 L219 145 L225 132 L220 87 C217 64 212 46 198 37 C187 29 177 22 161 25 C144 27 134 12 120 5 Z';
-  const inset = 'M120 15 C107 21 98 34 81 32 C65 29 57 36 49 43 C38 51 34 68 31 89 L26 132 L31 145 L29 175 L31 248 C36 277 60 304 120 335 C180 304 204 277 209 248 L211 175 L209 145 L214 132 L209 89 C206 68 202 51 191 43 C183 36 175 29 159 32 C142 34 133 21 120 15 Z';
-  const sparkles = [[35,69,1.3],[54,89,0.9],[74,53,1.1],[91,39,0.8],[150,38,0.9],[178,51,1.2],[202,72,1.4],[211,105,0.9],[27,119,1.1],[36,180,1.3],[49,207,0.9],[196,205,1.2],[211,229,0.9],[184,264,1.1],[157,286,0.8],[73,283,1.1],[44,248,1],[62,224,0.8],[188,96,0.8],[33,154,0.9],[80,73,0.8],[205,147,0.8],[174,221,0.8],[94,301,0.8],[144,278,0.8],[28,218,0.8],[214,185,0.8],[52,106,0.8],[174,67,0.8],[197,246,0.9]] as const;
+
 
   return (
     <View style={{ width, height, alignSelf: 'center', overflow: 'visible', backgroundColor: 'transparent' }}>
-      <Svg width={width} height={height} viewBox="0 0 240 355" style={StyleSheet.absoluteFill}>
-        <Defs>
-          <SvgLinearGradient id={sid('base')} x1="0%" y1="0%" x2="92%" y2="100%">
-            <Stop offset="0%" stopColor="#682AA4" />
-            <Stop offset="20%" stopColor="#4D2188" />
-            <Stop offset="44%" stopColor="#2F166A" />
-            <Stop offset="72%" stopColor="#171039" />
-            <Stop offset="100%" stopColor="#08081F" />
-          </SvgLinearGradient>
-          <SvgLinearGradient id={sid('metal')} x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#F4DFFF" />
-            <Stop offset="16%" stopColor="#9B7CF2" />
-            <Stop offset="30%" stopColor="#FFF0B7" />
-            <Stop offset="45%" stopColor="#8D69D8" />
-            <Stop offset="61%" stopColor="#F7D98B" />
-            <Stop offset="78%" stopColor="#A6BEFF" />
-            <Stop offset="100%" stopColor="#F4D9FF" />
-          </SvgLinearGradient>
-          <SvgLinearGradient id={sid('gold')} x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#A56D22" />
-            <Stop offset="21%" stopColor="#FFF2B7" />
-            <Stop offset="40%" stopColor="#C38E3A" />
-            <Stop offset="58%" stopColor="#FFF8D3" />
-            <Stop offset="78%" stopColor="#A66A1E" />
-            <Stop offset="100%" stopColor="#F4D88C" />
-          </SvgLinearGradient>
-          <SvgLinearGradient id={sid('gloss')} x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
-            <Stop offset="25%" stopColor="#C1A7FF" stopOpacity="0.1" />
-            <Stop offset="61%" stopColor="#6B35D7" stopOpacity="0.02" />
-            <Stop offset="100%" stopColor="#F6B3FF" stopOpacity="0.15" />
-          </SvgLinearGradient>
-          <SvgRadialGradient id={sid('glow')} cx="50%" cy="42%" r="65%">
-            <Stop offset="0%" stopColor="#9D5BFF" stopOpacity="0.48" />
-            <Stop offset="63%" stopColor="#6938D2" stopOpacity="0.13" />
-            <Stop offset="100%" stopColor="#10092E" stopOpacity="0" />
-          </SvgRadialGradient>
-          <SvgLinearGradient id={sid('fade')} x1="0%" y1="0%" x2="0%" y2="100%">
-            <Stop offset="0%" stopColor="#201044" stopOpacity="0.02" />
-            <Stop offset="42%" stopColor="#170A37" stopOpacity="0.36" />
-            <Stop offset="100%" stopColor="#08071D" stopOpacity="0.99" />
-          </SvgLinearGradient>
-          <ClipPath id={sid('clip')}><Path d={shield} /></ClipPath>
-        </Defs>
-
-        <Path d={shield} fill="#080515" stroke="#6143A8" strokeWidth="9" />
-        <Path d={shield} fill={'url(#' + sid('base') + ')'} />
-        <G clipPath={'url(#' + sid('clip') + ')'}>
-          <Path d="M-10 35 C34 6 69 18 92 49 C121 87 151 90 184 48 L250 4 L250 120 C208 153 180 165 138 149 C94 133 58 91 -10 110 Z" fill="#B26AFF" opacity="0.17" />
-          <Path d="M-10 198 C37 157 68 184 94 218 C123 254 172 251 250 184 L250 285 C180 336 115 354 49 311 L-10 269 Z" fill="#A445FF" opacity="0.13" />
-          <Path d="M18 56 L59 30 L82 41 L40 105 L22 143 Z M222 56 L181 30 L158 41 L200 105 L218 143 Z" fill="#D2C5FF" opacity="0.12" />
-          <Path d="M27 54 L61 32 L83 36 M213 54 L179 32 L157 36" fill="none" stroke="#F9E9FF" strokeWidth="1.2" opacity="0.64" />
-
-          <Ellipse cx="120" cy="173" rx="82" ry="54" fill={'url(#' + sid('glow') + ')'} />
-          <Ellipse cx="120" cy="173" rx="78" ry="44" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="2.7" opacity="0.98" />
-          <Ellipse cx="120" cy="173" rx="53" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.1" opacity="0.96" />
-          <Ellipse cx="120" cy="173" rx="29" ry="47" transform="rotate(31 120 173)" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.5" opacity="0.99" />
-          <Ellipse cx="120" cy="173" rx="15" ry="48" transform="rotate(31 120 173)" fill="none" stroke="#FCECB7" strokeWidth="1" opacity="0.82" />
-          <Path d="M45 160 C80 181 164 182 196 158 M47 179 C86 200 157 201 194 179" fill="none" stroke={'url(#' + sid('gold') + ')'} strokeWidth="3.2" opacity="0.97" />
-          <Path d="M61 131 C88 155 152 187 185 183 M58 194 C90 172 147 145 184 153" fill="none" stroke="#FFF0BC" strokeWidth="1.1" opacity="0.72" />
-          {sparkles.map(([cx, cy, r], index) => <Circle key={index} cx={cx} cy={cy} r={r} fill={index % 3 === 0 ? '#FFF0B5' : '#E0D9FF'} opacity={index % 2 ? 0.46 : 0.8} />)}
-          <Path d="M-5 0 L245 0 L245 355 L-5 355 Z" fill={'url(#' + sid('gloss') + ')'} />
-          <Polygon points="120,42 124,51 134,52 126,59 128,68 120,63 112,68 114,59 106,52 116,51" fill="#FFF0B5" stroke="#B17C32" strokeWidth="1" />
-          <Path d="M18 281 C54 300 89 320 120 334 C151 320 186 300 222 281" fill="none" stroke="#9A7AE5" strokeWidth="1.1" opacity="0.68" />
-          <Path d="M33 290 L48 300 L63 291 M177 291 L192 300 L207 290" fill="none" stroke="#F1D8A0" strokeWidth="1.2" opacity="0.92" />
-          <Path d="M15 136 L28 145 L20 157 L28 171 L16 181 M225 136 L212 145 L220 157 L212 171 L224 181" fill="none" stroke="#F6E7FF" strokeWidth="2.3" opacity="0.92" />
-        </G>
-        <Path d={shield} fill="none" stroke="#9C7DEB" strokeWidth="7" opacity="0.66" />
-        <Path d={shield} fill="none" stroke={'url(#' + sid('metal') + ')'} strokeWidth="3.3" opacity="0.99" />
-        <Path d={inset} fill="none" stroke="#E0C6FF" strokeWidth="1" opacity="0.72" />
-        <Path d="M120 12 C111 14 107 25 102 28 C91 34 82 23 74 21 C62 18 55 29 45 37 L36 43 C25 50 23 70 22 87 L18 130" fill="none" stroke="#FCF0FF" strokeWidth="1.1" opacity="0.72" />
-        <Polygon points="13,157 27,148 41,157 27,174" fill="#28145C" stroke="#E7D8FF" strokeWidth="1.4" />
-        <Polygon points="19,157 27,152 35,157 27,167" fill="none" stroke="#D6C3FF" strokeWidth="1" />
-        <Path d="M27 155 L29 159 L33 159 L30 162 L31 166 L27 164 L23 166 L24 162 L21 159 L25 159 Z" fill="#FFF0B5" />
-      </Svg>
+      <Image
+        source={require('@/assets/images/cards/future-stars-purple-gold.png')}
+        resizeMode="stretch"
+        accessibilityIgnoresInvertColors
+        style={StyleSheet.absoluteFill}
+      />
 
       {portraitUri ? (
         <Image
           source={{ uri: portraitUri }}
           resizeMode="contain"
           accessibilityIgnoresInvertColors
-          style={{ position: 'absolute', left: width * 0.07, top: height * 0.115, width: width * 0.86, height: height * 0.59 }}
+          style={{ position: 'absolute', left: width * 0.09, top: height * 0.12, width: width * 0.82, height: height * 0.52 }}
         />
       ) : (
         <Svg width={width * 0.72} height={height * 0.49} viewBox="0 0 200 240" style={{ position: 'absolute', top: height * 0.16, left: width * 0.14 }}>
