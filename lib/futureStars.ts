@@ -22,6 +22,7 @@ export type FutureStarData = {
   nation: string;
   league: string;
   club: string;
+  photoUrl: string;
   face: FutureStarFace;
   positions?: string[];
   foot: 'L' | 'R';
