@@ -588,10 +588,10 @@ function FutureStarsPortraitCard({
           accessibilityIgnoresInvertColors
           style={{
             position: 'absolute',
-            left: width * 0.16,
-            top: height * 0.19,
-            width: width * 0.68,
-            height: height * 0.43,
+            left: width * 0.12,
+            top: height * 0.17,
+            width: width * 0.76,
+            height: height * 0.45,
           }}
         />
       ) : null}
