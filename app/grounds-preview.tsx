@@ -31,18 +31,26 @@ function levelColor(level:number){if(level>=50)return '#F0C979';if(level>=20)ret
 function StadiumBackdrop() {
   return <Svg width="100%" height="100%" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" style={StyleSheet.absoluteFill}>
     <Defs>
-      <SvgGradient id="grounds-sky" x1="0" y1="0" x2="0.9" y2="1"><Stop offset="0" stopColor="#172923"/><Stop offset="0.42" stopColor="#0C1717"/><Stop offset="1" stopColor="#040908"/></SvgGradient>
-      <SvgGradient id="grounds-pitch" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#173A2E" stopOpacity="0.12"/><Stop offset="0.45" stopColor="#14392A" stopOpacity="0.62"/><Stop offset="1" stopColor="#07130F" stopOpacity="0.96"/></SvgGradient>
+      <SvgGradient id="grounds-sky" x1="0" y1="0" x2="0.9" y2="1"><Stop offset="0" stopColor="#28324B"/><Stop offset="0.42" stopColor="#111C2C"/><Stop offset="1" stopColor="#050A12"/></SvgGradient>
+      <SvgGradient id="grounds-pitch" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#1A3A46" stopOpacity="0.16"/><Stop offset="0.45" stopColor="#122833" stopOpacity="0.78"/><Stop offset="1" stopColor="#060D15" stopOpacity="0.98"/></SvgGradient>
       <SvgGradient id="grounds-beam-l" x1="0" y1="0" x2="1" y2="1"><Stop offset="0" stopColor="#DBF6C4" stopOpacity="0.26"/><Stop offset="1" stopColor="#DBF6C4" stopOpacity="0"/></SvgGradient>
       <SvgGradient id="grounds-beam-r" x1="1" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#96D6C1" stopOpacity="0.2"/><Stop offset="1" stopColor="#96D6C1" stopOpacity="0"/></SvgGradient>
       <SvgGradient id="grounds-vignette" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#020504" stopOpacity="0.08"/><Stop offset="0.62" stopColor="#020504" stopOpacity="0.12"/><Stop offset="1" stopColor="#020504" stopOpacity="0.84"/></SvgGradient>
     </Defs>
     <Rect width="1440" height="760" fill="url(#grounds-sky)"/>
     <Path d="M0 180 L350 160 L585 205 L0 360Z" fill="url(#grounds-beam-l)"/><Path d="M1440 160 L1110 160 L840 222 L1440 370Z" fill="url(#grounds-beam-r)"/>
-    <Path d="M0 210 Q260 115 510 198 T960 188 T1440 206 L1440 360 L0 360Z" fill="#091310" opacity="0.7"/><Path d="M0 278 L1440 278 L1440 390 L0 390Z" fill="#13231D" opacity="0.72"/>
-    {Array.from({length:15},(_,i)=><Path key={i} d={'M'+(i*105-90)+' 266 l42 -75 l42 75'} stroke="#72897A" strokeWidth="1" opacity={0.09+(i%3)*0.02} fill="none"/>)}
-    <Path d="M0 420 L1440 420 L1440 760 L0 760Z" fill="url(#grounds-pitch)"/><Path d="M-80 760 L520 410 L920 410 L1520 760" fill="none" stroke="#85BE9D" strokeWidth="1.5" opacity="0.22"/>
-    <Path d="M185 760 L600 410 M395 760 L675 410 M1045 760 L765 410 M1255 760 L840 410" fill="none" stroke="#85BE9D" strokeWidth="1" opacity="0.13"/><Path d="M0 610 L1440 610 M0 674 L1440 674 M720 430 L720 760" stroke="#85BE9D" strokeWidth="1.4" opacity="0.12"/>
+    <Path d="M0 355 V235 H70 V184 H125 V215 H170 V151 H220 V231 H274 V193 H328 V252 H385 V171 H442 V226 H495 V250 H560 V203 H620 V355 Z" fill="#101824"/>
+    <Path d="M730 355 V266 H785 V223 H840 V165 H892 V219 H950 V145 H1003 V199 H1052 V168 H1110 V238 H1170 V190 H1217 V222 H1271 V139 H1330 V205 H1380 V174 H1440 V355 Z" fill="#0D1622"/>
+    <Path d="M0 310 H1440 V389 H0 Z" fill="#111D28" opacity="0.66"/>
+    {Array.from({length:52},(_,i)=><Rect key={'citywin-'+i} x={22+(i*73)%1390} y={192+(i*31)%105} width={4+(i%3)} height={8+(i%2)*3} rx="1" fill={i%5===0?'#53E6E0':'#9EC5D9'} opacity={i%5===0?0.48:0.18}/>)}
+    <Path d="M310 336 L310 104 L303 104 L317 104 M308 125 L337 135" stroke="#7DA9C4" strokeWidth="2" fill="none" opacity="0.7"/>
+    <Path d="M1040 335 L1040 86 L1033 86 L1047 86 M1038 111 L1073 124" stroke="#7DA9C4" strokeWidth="2" fill="none" opacity="0.7"/>
+    <Path d="M285 135 L180 352 L430 352Z" fill="url(#grounds-beam-l)" opacity="0.35"/><Path d="M1015 116 L905 352 L1165 352Z" fill="url(#grounds-beam-r)" opacity="0.3"/>
+    <Path d="M0 366 Q180 342 355 367 T720 364 T1080 365 T1440 359 L1440 420 L0 420Z" fill="#08111A" opacity="0.92"/>
+    {Array.from({length:74},(_,i)=><Circle key={'crowd-head-'+i} cx={9+i*19.5} cy={366+(i%4)*4} r={2+(i%3)*0.45} fill={i%4===0?'#54DFD9':'#7C96A7'} opacity={0.22+(i%3)*0.06}/>)}
+    {Array.from({length:20},(_,i)=><Path key={'crowd-body-'+i} d={'M'+(20+i*72)+' 394 l-6 -18 l12 0 l-4 18'} fill={i%3===0?'#0B1118':'#131F2B'} opacity="0.95"/>)}
+    <Path d="M0 420 L1440 420 L1440 760 L0 760Z" fill="url(#grounds-pitch)"/><Path d="M-80 760 L520 410 L920 410 L1520 760" fill="none" stroke="#66C8D5" strokeWidth="1.5" opacity="0.26"/>
+    <Path d="M185 760 L600 410 M395 760 L675 410 M1045 760 L765 410 M1255 760 L840 410" fill="none" stroke="#66C8D5" strokeWidth="1" opacity="0.16"/><Path d="M0 610 L1440 610 M0 674 L1440 674 M720 430 L720 760" stroke="#66C8D5" strokeWidth="1.4" opacity="0.13"/>
     <Ellipse cx="720" cy="578" rx="210" ry="84" stroke="#93C4A4" strokeWidth="1.2" fill="none" opacity="0.16"/><Path d="M570 760 L630 630 L810 630 L870 760" fill="none" stroke="#93C4A4" strokeWidth="1.2" opacity="0.15"/>
     {Array.from({length:65},(_,i)=><Circle key={i} cx={(i*197)%1440} cy={240+((i*97)%360)} r={i%5===0?1.6:0.65} fill="#D1E5D3" opacity={i%5===0?0.18:0.09}/>)}
     <Rect width="1440" height="760" fill="url(#grounds-vignette)"/>
