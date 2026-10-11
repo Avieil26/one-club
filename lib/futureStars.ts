@@ -29,13 +29,13 @@ export type FutureStarData = {
   skillMoves: number;
   weakFoot: number;
   accelerate: string;
-  heightCm: number;
-  weightKg: number;
-  age: number;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
   attributes: Record<string, number>;
 };
 
-const futureStarsRows = futureStarsFile as FutureStarData[];
+const futureStarsRows = futureStarsFile as unknown as FutureStarData[];
 const FUTURE_STARS: Record<string, FutureStarData> = Object.fromEntries(
   futureStarsRows.map((row) => [row.baseId, row]),
 );
