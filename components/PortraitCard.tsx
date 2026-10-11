@@ -753,7 +753,7 @@ export function PortraitCard({
     const heroArt = HERO_ART[player.id];
     if (heroArt) return <TotwPortraitCard art={heroArt} width={width} />;
   }
-  if (shownEdition === 'hero' || shownEdition === 'totw') {
+  if (shownEdition === 'hero') {
     return (
       <View style={aura as object}>
         <ShieldPortrait player={player} width={width} edition={shownEdition} shell={shell} pitch={variant === 'pitch'} />

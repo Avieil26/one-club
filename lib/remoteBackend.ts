@@ -231,7 +231,7 @@ function mapSubmission(row: SubmissionRow): CareerSubmission {
     note: row.note,
     imageUris: row.image_uris ?? [],
     status: row.status,
-    parentId: row.parent_id ?? null,
+
     createdAt: row.created_at,
   };
 }
