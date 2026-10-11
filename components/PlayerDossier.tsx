@@ -574,10 +574,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 18, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 10 }}>
               {likes}
-              <PortraitCard player={card} width={shown === 'totw' ? 250 : 210} edition={shown} glow={shown === 'totw' && shine} />
+              <PortraitCard player={card} width={shown === 'totw' ? 250 : 210} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
-                  <PortraitCard player={card} width={78} edition={alt.edition} />
+                  <PortraitCard player={card} width={78} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
@@ -610,10 +610,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 10, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 8, flexShrink: 0 }}>
               {likes}
-              <PortraitCard player={card} width={shown === 'totw' ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} />
+              <PortraitCard player={card} width={shown === 'totw' ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
-                  <PortraitCard player={card} width={62} edition={alt.edition} />
+                  <PortraitCard player={card} width={62} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
