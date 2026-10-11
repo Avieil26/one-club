@@ -1,11 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Modal, Platform, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
 
 import { PortraitCard } from '@/components/PortraitCard';
 import { hasAcceptedTerms } from '@/lib/legal';
 import { getSupabase } from '@/lib/supabase';
-import { FUTURE_STARS_PLAYERS } from '@/lib/futureStars';
+import { FUTURE_STARS_PLAYERS, futureStarsFor } from '@/lib/futureStars';
 import { useApp } from '@/lib/store';
 
 const CAMPAIGN_ID = 'future-stars-launch-2026-10-v1';
@@ -65,6 +66,7 @@ async function saveCampaignSeen(userId: string): Promise<void> {
 
 export function FutureStarsAnnouncement() {
   const app = useApp();
+  const router = useRouter();
   const userId = app.user?.id;
   const { width, height: windowHeight } = useWindowDimensions();
   const [visible, setVisible] = useState(false);
@@ -109,6 +111,11 @@ export function FutureStarsAnnouncement() {
   const dismiss = () => {
     setVisible(false);
     if (userId) void saveCampaignSeen(userId);
+  };
+
+  const goToFutureStars = () => {
+    dismiss();
+    router.push({ pathname: '/market', params: { kind: 'future-stars' } });
   };
 
   if (!visible || !app.user) return null;
@@ -202,7 +209,7 @@ export function FutureStarsAnnouncement() {
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start', gap: 8, maxWidth: modalWidth - 20 }}>
               {FUTURE_STARS_PLAYERS.map((player) => (
                 <View key={player.id} style={{ width: cardWidth, alignItems: 'center', overflow: 'visible' }}>
-                  <PortraitCard player={player} width={cardWidth} edition="future-stars" />
+                  <PortraitCard player={player} width={cardWidth} edition="future-stars" photoOverride={futureStarsFor(player.baseId ?? player.id)?.photoUrl} />
                 </View>
               ))}
             </View>
@@ -211,7 +218,7 @@ export function FutureStarsAnnouncement() {
           <View style={{ paddingHorizontal: 15, paddingTop: 10, paddingBottom: 13, borderTopWidth: 1, borderTopColor: 'rgba(174, 111, 255, 0.22)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
             <Pressable
               accessibilityRole="button"
-              onPress={dismiss}
+              onPress={goToFutureStars}
               style={{ minHeight: 43, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: '#B786F5', borderWidth: 1, borderColor: '#D9B6FF', paddingHorizontal: 16 }}
             >
               <Text style={{ color: '#170C25', fontSize: 14, fontWeight: '900' }}>יאללה, בואו לראות את הכוכבים ✦</Text>
