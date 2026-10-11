@@ -7,13 +7,15 @@
 - Only add the new route and this note in branch `preview/grounds-2-premium-20261011` until the design is approved.
 
 ## Visual asset stage
-- The route currently uses original inline SVG art for the night pitch and generic player-portrait illustrations. This makes the layout self-contained and avoids presenting real footballers as fictional community members.
-- Replace the SVG stadium with generated original artwork once available, preferably stored as `assets/images/grounds-v2-night-pitch.png`; keep dark negative space in the center/lower third so UI text remains legible.
-- Generate several original generic Virtual Pro portrait cut-outs/portrait crops for sample cards. Do not use EA/FIFA marks, a cloned EA screen, or actual player portraits for fictional handles.
-- Design direction: premium sports-game art; forest green / charcoal / mist / restrained lime; sharp typography and subtle movement. Avoid the current generic dark-gradient look.
+- The route currently uses original inline SVG art for an urban night football ground, floodlights, city silhouettes, crowd detail, and generic illustrated Virtual Pro portraits. No external/EA logos are used.
+- The selected direction stays aligned with the approved visual concept: cinematic night football environment, dark forest green / charcoal, restrained lime and mint accents, crisp card typography and subtle motion. Do not switch to another palette or new design direction without approval.
+- The real existing `SiteNav` component is reused, including the current ONE CLUB brand asset and the top tabs. Do not recreate/replace the logo in the actual app route.
+- The page copy and layout are Hebrew and RTL; established gameplay terms such as OVR, LEVEL, Archetype, PlayStyles and Build remain as labels where useful.
+- Each sample card presents OVR (overall rating) independently from LEVEL (Archetype progression level). Example cards include levels 1, 5, 10, 20 and 50. Their numbers/colors are illustrative design samples, not EA's official tier styling.
+- Do not use EA/FIFA marks, a cloned EA screen, or actual player portraits for fictional handles.
 
 ## FC 27 terminology / data integrity
-- EA's FC 27 Clubs / The Grounds uses Archetypes, Archetype XP (AXP), Attributes, PlayStyles, and Clubs divisions. Display "Archetype Level" only as a profile-provided value.
+- FC 27 Clubs / The Grounds uses Archetypes and progression via Archetype XP (AXP). Keep OVR (overall rating) distinct from Archetype LEVEL; only present values supplied by the player or verified from a user-provided screenshot.
 - Do not invent overall ratings, official level tiers, verified status, club stats, or EA account sync. The profile can distinguish self-reported details from a screenshot that was actually reviewed.
 - Platform availability in current EA FC 27 The Grounds: PlayStation 5, Xbox Series X|S, PC, Nintendo Switch 2; preserve platform-specific filtering where relevant.
 - Reference: https://help.ea.com/en/articles/ea-sports-fc/archetypes/
