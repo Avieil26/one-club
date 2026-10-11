@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Animated, Modal, Platform, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import Svg, { Circle, Defs, Ellipse, LinearGradient as SvgGradient, Path, Rect, Stop } from 'react-native-svg';
 import { SiteNav } from '@/components/SiteNav';
@@ -57,7 +57,7 @@ function PlayerPortrait({variant=0,height=232}:{variant?:number;height?:number})
     {skin:'#A96D50',hair:'#211B19',shirt:'#C4ED73',accent:'#556938'},
     {skin:'#E3B995',hair:'#5B4639',shirt:'#BBD9E8',accent:'#3B5E74'},
   ];
-  const look=looks[((variant%looks.length)+looks.length)%looks.length], id='g-face-'+variant;
+  const uid=useId().replace(/[^a-zA-Z0-9_-]/g,''), look=looks[((variant%looks.length)+looks.length)%looks.length], id='g-face-'+uid;
   return <Svg width="100%" height={height} viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice">
     <Defs>
       <SvgGradient id={id+'-bg'} x1="0" y1="0" x2="1" y2="1"><Stop offset="0" stopColor={look.accent}/><Stop offset="0.52" stopColor="#13211C"/><Stop offset="1" stopColor="#090F0D"/></SvgGradient>
@@ -126,7 +126,7 @@ export default function GroundsPreviewScreen() {
         <View style={s.hero}><StadiumBackdrop/><LinearGradient colors={['rgba(5,12,9,0.18)','rgba(5,12,9,0.07)','#050907']} locations={[0,0.55,1]} style={StyleSheet.absoluteFill}/>
           <Animated.View style={[s.heroContent,{opacity:intro,transform:[{translateY:intro.interpolate({inputRange:[0,1],outputRange:[24,0]})}]}]}>
             <View style={s.heroTop}><Eyebrow>FC 27 · CLUBS NETWORK</Eyebrow><View style={s.previewBadge}><Text style={s.previewBadgeText}>DESIGN PREVIEW</Text></View></View>
-            <View style={s.heroCopy}><Text style={s.heroOverline}>YOUR NEXT TEAM STARTS HERE</Text><Text style={s.heroTitle}>THE <Text style={{color:LIME}}>GROUNDS</Text></Text><Text style={s.heroHebrew}>המגרש שלך. האנשים שלך.</Text><Text style={s.heroLead}>מוצאים שחקנים שמתאימים לסגנון שלך, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.</Text>
+            <View style={s.heroCopy}><Text style={s.heroOverline}>YOUR NEXT TEAM STARTS HERE</Text><Text style={[s.heroTitle,compact&&{fontSize:46,lineHeight:52,letterSpacing:-0.5}]}>THE <Text style={{color:LIME}}>GROUNDS</Text></Text><Text style={s.heroHebrew}>המגרש שלך. האנשים שלך.</Text><Text style={s.heroLead}>מוצאים שחקנים שמתאימים לסגנון שלך, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.</Text>
               <View style={[s.heroActions,compact&&{flexDirection:'column',alignItems:'stretch'}]}><Action label="מצא את הקבוצה שלי" icon="search" onPress={()=>scroll.current?.scrollTo({y:610,animated:true})}/><Action label="איך זה עובד" icon="play-circle-outline" secondary onPress={()=>setInfoOpen(true)}/></View>
             </View>
             <View style={[s.featureRow,compact&&{flexWrap:'wrap'}]}>
