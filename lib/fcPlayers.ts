@@ -1,5 +1,5 @@
 import { destinedEdition } from '@/lib/destinedEditions';
-import { futureStarsFor } from '@/lib/futureStars';
+import { FUTURE_STARS_PLAYERS, futureStarsFor } from '@/lib/futureStars';
 import { DB_PLAYERS } from '@/lib/playerDb';
 import { otwFor, totwFor } from '@/lib/specialCards';
 
@@ -28,6 +28,15 @@ export type FcPlayer = {
   regularPosition?: string;
   regularClub?: string;
   regularLeague?: string;
+  itemId?: number;
+  foot?: 'L' | 'R';
+  weakFoot?: number;
+  skillMoves?: number;
+  accelerate?: string;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
+  roles?: string[];
 };
 
 export const N = {
@@ -210,9 +219,22 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         regularPosition: player.position,
         regularClub: player.club,
         regularLeague: player.league,
+        name: futureStar.name,
+        en: futureStar.en,
         rating: futureStar.rating,
         position: futureStar.position,
+        nation: futureStar.nation,
+        league: futureStar.league,
+        club: futureStar.club,
+        itemId: futureStar.itemId,
         face: futureStar.face,
+        foot: futureStar.foot,
+        skillMoves: futureStar.skillMoves,
+        weakFoot: futureStar.weakFoot,
+        accelerate: futureStar.accelerate,
+        heightCm: futureStar.heightCm,
+        weightKg: futureStar.weightKg,
+        age: futureStar.age,
         ...(futureStar.positions?.length ? { positions: futureStar.positions } : {}),
       });
     }
@@ -221,4 +243,15 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
 }
 
 /** Every card in the database, including promo versions beside their regular card. */
-export const PLAYERS: FcPlayer[] = withPromoCards(DB_PLAYERS);
+const playersWithPromoCards = withPromoCards(DB_PLAYERS);
+const includedFutureStars = new Set(
+  playersWithPromoCards
+    .filter((player) => player.edition === 'future-stars')
+    .map((player) => player.baseId ?? player.id),
+);
+
+/** Include Future Stars even if a regular base card is missing from the roster. */
+export const PLAYERS: FcPlayer[] = [
+  ...playersWithPromoCards,
+  ...FUTURE_STARS_PLAYERS.filter((player) => !includedFutureStars.has(player.baseId ?? player.id)),
+];

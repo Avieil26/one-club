@@ -3,6 +3,7 @@ import { Image, Platform, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { ClubBadge } from '@/components/ClubBadge';
+import { futureStarsFor } from '@/lib/futureStars';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
 import { NationFlag } from '@/components/NationFlag';
 import { ShieldPortrait } from '@/components/ShieldPortrait';
@@ -539,8 +540,13 @@ function FutureStarsPortraitCard({
   faceOverride?: FaceStats;
 }) {
   const media = playerMedia(player.baseId ?? player.id);
+  const special = futureStarsFor(player.baseId ?? player.id);
   const photoUri = photoOverride ?? media.photo ?? '';
-  const face = faceOverride ?? player.face ?? media.face;
+  const face = faceOverride ?? special?.face ?? player.face ?? media.face;
+  const rating = special?.rating ?? player.rating;
+  const position = special?.position ?? player.position;
+  const displayName = special?.en || player.en || media.en || player.name;
+  const displayClub = special?.club ?? player.club;
   const height = Math.round(width * 1.5);
   const [failed, setFailed] = useState(false);
   const statRows = [
@@ -561,11 +567,11 @@ function FutureStarsPortraitCard({
         alignSelf: 'center',
         direction: 'ltr',
         overflow: 'visible',
-        shadowColor: '#9D5BFF',
-        shadowOpacity: shell ? 0.18 : 0.36,
-        shadowRadius: Math.max(3, width * 0.055),
-        shadowOffset: { width: 0, height: Math.max(2, width * 0.025) },
-        elevation: shell ? 2 : 6,
+        shadowColor: Platform.OS === 'web' ? 'transparent' : '#9D5BFF',
+        shadowOpacity: Platform.OS === 'web' ? 0 : shell ? 0.18 : 0.36,
+        shadowRadius: Platform.OS === 'web' ? 0 : Math.max(3, width * 0.055),
+        shadowOffset: { width: 0, height: Platform.OS === 'web' ? 0 : Math.max(2, width * 0.025) },
+        elevation: Platform.OS === 'web' ? 0 : shell ? 2 : 6,
       }}
     >
       <Image
@@ -603,10 +609,10 @@ function FutureStarsPortraitCard({
                 textShadowRadius: 3,
               }}
             >
-              {player.rating}
+              {rating}
             </Text>
             <Text style={{ color: '#F7D783', fontSize: Math.max(6, width * 0.052), fontWeight: '900', letterSpacing: 0.2 }}>
-              {player.position}
+              {position}
             </Text>
           </View>
           <Text
@@ -628,7 +634,7 @@ function FutureStarsPortraitCard({
               textShadowRadius: 2,
             }}
           >
-            {(player.en || media.en || player.name).toUpperCase()}
+            {displayName.toUpperCase()}
           </Text>
           <Text
             numberOfLines={1}
@@ -646,14 +652,14 @@ function FutureStarsPortraitCard({
               letterSpacing: 0.1,
             }}
           >
-            {player.club.toUpperCase()}
+            {displayClub.toUpperCase()}
           </Text>
           <View
             style={{
               position: 'absolute',
-              left: width * 0.12,
-              top: height * 0.792,
-              width: width * 0.76,
+              left: width * 0.22,
+              top: height * 0.78,
+              width: width * 0.56,
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'center',
@@ -664,15 +670,16 @@ function FutureStarsPortraitCard({
                 key={stat.label}
                 style={{
                   width: '33.333%',
-                  height: height * 0.057,
+                  height: height * 0.06,
+                  minWidth: 0,
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <Text style={{ color: '#D8C3F4', fontSize: Math.max(5, width * 0.032), fontWeight: '800', lineHeight: Math.max(6, width * 0.034) }}>
+                <Text style={{ color: '#D8C3F4', fontSize: Math.max(4.5, width * 0.028), fontWeight: '800', lineHeight: Math.max(5, width * 0.03) }}>
                   {stat.label}
                 </Text>
-                <Text style={{ color: '#FFF8E7', fontSize: Math.max(7, width * 0.052), fontWeight: '900', lineHeight: Math.max(8, width * 0.054) }}>
+                <Text style={{ color: '#FFF8E7', fontSize: Math.max(6.5, width * 0.046), fontWeight: '900', lineHeight: Math.max(7, width * 0.049) }}>
                   {stat.value ?? '·'}
                 </Text>
               </View>

@@ -2,6 +2,7 @@ import metaFile from '@/assets/data/playerMeta.json';
 import iconCards from '@/assets/data/iconCardMeta.json';
 import heroCards from '@/assets/data/heroCardMeta.json';
 import totwCards from '@/assets/data/totwCardMeta.json';
+import { futureStarsFor } from '@/lib/futureStars';
 
 export const META_ATTRS = [
   'acceleration',
@@ -96,6 +97,17 @@ export function playerCardMeta(id: string): CardMeta | null {
 
 export function totwCardMeta(id: string): CardMeta | null {
   return toCardMeta(totwRows[id]);
+}
+
+export function futureStarsCardMeta(id: string): CardMeta | null {
+  const row = futureStarsFor(id);
+  if (!row) return null;
+  return toCardMeta({
+    foot: row.foot,
+    sm: row.skillMoves,
+    wf: row.weakFoot,
+    attrs: keys.map((key) => row.attributes[key] ?? 0),
+  });
 }
 
 export type StatRow = { key: MetaAttr; label: string };

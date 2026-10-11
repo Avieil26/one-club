@@ -50,6 +50,7 @@ for (const hero of heroes) put(hero.id, hero.eaId);
 
 const destined = JSON.parse(fs.readFileSync(new URL('../assets/data/destinedEditions.json', import.meta.url), 'utf8'));
 const totw = JSON.parse(fs.readFileSync(new URL('../assets/data/totw.json', import.meta.url), 'utf8'));
+const futureStars = JSON.parse(fs.readFileSync(new URL('../assets/data/futureStars.json', import.meta.url), 'utf8'));
 
 async function search(name) {
   const url = `https://www.fut.gg/api/fut/players/v2/search/?name=${encodeURIComponent(name)}&game=27`;
@@ -101,6 +102,15 @@ async function worker() {
   }
 }
 await Promise.all([worker(), worker(), worker(), worker()]);
+
+// Keep each Future Stars edition mapped to its own FUT.GG market item.
+for (const card of futureStars) {
+  if (!card.baseId || !card.itemId) continue;
+  const key = `${card.baseId}--future-stars`;
+  eaIds[key] = card.itemId;
+  const row = byEa.get(card.itemId);
+  if (row) prices[key] = row;
+}
 
 const ordered = Object.fromEntries(Object.entries(prices).sort(([a], [b]) => a.localeCompare(b)));
 const orderedIds = Object.fromEntries(Object.entries(eaIds).sort(([a], [b]) => a.localeCompare(b)));
