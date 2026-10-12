@@ -4,9 +4,9 @@ export const TRUSTED_APPROVALS = 5;
 
 export const PLATFORMS: { id: PlatformId; label: string }[] = [
   { id: 'ps5', label: 'פלייסטיישן 5' },
-  { id: 'xbox', label: 'אקסבוקס' },
-  { id: 'pc', label: 'מחשב' },
-  { id: 'switch2', label: 'סוויץ׳ 2' },
+  { id: 'xbox', label: 'Xbox Series X|S' },
+  { id: 'pc', label: 'מחשב (PC)' },
+  { id: 'switch2', label: 'נינטנדו סוויץ׳ 2' },
 ];
 
 export const FORMATIONS = ['4-3-3', '4-2-3-1', '4-4-2', '4-2-2-2', '4-1-2-1-2', '3-5-2', '5-3-2'];
