@@ -43,10 +43,6 @@ export default function NewGroundsScreen() {
   }
 
   async function save() {
-    if (!avatarUri) {
-      Alert.alert('רגע', 'חייבים לבחור תמונה ולמרכז את הפנים בעיגול לפני הפרסום.');
-      return;
-    }
     try {
       await app.createGrounds({
         intent,
@@ -59,9 +55,9 @@ export default function NewGroundsScreen() {
         region,
         eaId,
         gamertag,
-        avatarUri,
-        // Same cropped face is the card image — not the raw full screenshot
-        levelImageUri: avatarUri,
+        avatarUri: avatarUri ?? app.user?.avatarUrl ?? null,
+        // A profile picture is not proof of the Clubs level; level verification stays pending.
+        levelImageUri: null,
       });
       Alert.alert('פורסם', 'המודעה עלתה לגראונדס.');
       router.replace('/grounds');
@@ -138,7 +134,7 @@ export default function NewGroundsScreen() {
       <ChoiceGroup label="אזור" options={REGIONS.map((item) => ({ id: item, label: item }))} value={region} onChange={setRegion} />
       <Field label="Skill Rating, לא חובה" value={skillRating} onChangeText={setSkillRating} keyboardType="number-pad" />
 
-      <Muted>תמונת פרופיל — העלו צילום ומרכזו את הפנים בעיגול</Muted>
+      <Muted>תמונת פרופיל היא רשות: אפשר להעלות תמונת שחקן או צילום דמות מהמשחק. פרסום בלי תמונה אפשרי.</Muted>
       <Button label={avatarUri ? 'החלפת תמונה' : 'העלאת תמונה + חיתוך'} variant="ghost" onPress={choosePhoto} />
       {avatarUri ? (
         <Pressable onPress={() => rawUri && setCropOpen(true)} style={{ alignSelf: 'center', marginVertical: 8 }}>
