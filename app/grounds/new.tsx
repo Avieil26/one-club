@@ -7,23 +7,52 @@ import { PlatformPicker } from '@/components/PlatformPicker';
 import { Button, ChoiceGroup, Field, Muted, Screen, Title, colors } from '@/components/ui';
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
-import { ARCHETYPES, DIVISIONS, POSITIONS, REGIONS, playerLevelTone } from '@/lib/labels';
+import { ARCHETYPES, DIVISIONS, playerLevelTone } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 import type { DivisionId, GroundsIntent, PlatformId } from '@/lib/types';
 
 const LEVELS = Array.from({ length: 50 }, (_, i) => i + 1);
+const GROUND_POSITIONS = [
+  { id: 'שוער', label: 'שוער' },
+  { id: 'מגן שמאלי', label: 'מגן שמאלי' },
+  { id: 'בלם', label: 'בלם' },
+  { id: 'מגן ימני', label: 'מגן ימני' },
+  { id: 'קשר אחורי', label: 'קשר אחורי' },
+  { id: 'קשר מרכזי', label: 'קשר מרכזי' },
+  { id: 'קשר שמאלי', label: 'קשר שמאלי' },
+  { id: 'קשר ימני', label: 'קשר ימני' },
+  { id: 'קשר התקפי', label: 'קשר התקפי' },
+  { id: 'כנף שמאלי', label: 'כנף שמאלי' },
+  { id: 'כנף ימני', label: 'כנף ימני' },
+  { id: 'חלוץ', label: 'חלוץ' },
+  { id: 'כל עמדה', label: 'כל עמדה' },
+];
+const GROUND_REGIONS = [
+  { id: '', label: 'לא לציין אזור' },
+  { id: 'צפון', label: 'ישראל · צפון' },
+  { id: 'שרון', label: 'ישראל · השרון' },
+  { id: 'מרכז', label: 'ישראל · מרכז' },
+  { id: 'ירושלים', label: 'ישראל · ירושלים' },
+  { id: 'דרום', label: 'ישראל · דרום' },
+  { id: 'אירופה', label: 'אירופה' },
+  { id: 'צפון אמריקה', label: 'צפון אמריקה' },
+  { id: 'דרום אמריקה', label: 'דרום אמריקה' },
+  { id: 'אסיה–פסיפיק', label: 'אסיה–פסיפיק' },
+  { id: 'המזרח התיכון', label: 'המזרח התיכון' },
+  { id: 'אונליין בלבד', label: 'אונליין בלבד' },
+];
 
 export default function NewGroundsScreen() {
   const app = useApp();
   const router = useRouter();
   const [intent, setIntent] = useState<GroundsIntent>('need_player');
   const [platform, setPlatform] = useState<PlatformId>('ps5');
-  const [position, setPosition] = useState(POSITIONS[0]);
+  const [position, setPosition] = useState(GROUND_POSITIONS[0].id);
   const [division, setDivision] = useState<DivisionId>('7');
   const [playerLevel, setPlayerLevel] = useState(15);
   const [skillRating, setSkillRating] = useState('');
   const [archetype, setArchetype] = useState(ARCHETYPES[0]);
-  const [region, setRegion] = useState(REGIONS[5]);
+  const [region, setRegion] = useState('');
   const [eaId, setEaId] = useState('');
   const [gamertag, setGamertag] = useState('');
   const [rawUri, setRawUri] = useState<string | null>(null);
@@ -90,7 +119,7 @@ export default function NewGroundsScreen() {
       />
       <Field label="EA ID" value={eaId} onChangeText={setEaId} placeholder="מזהה EA שלכם" />
 
-      <ChoiceGroup label="עמדה" options={POSITIONS.map((item) => ({ id: item, label: item }))} value={position} onChange={setPosition} />
+      <ChoiceGroup label="עמדה" options={GROUND_POSITIONS} value={position} onChange={setPosition} />
       <ChoiceGroup label="דיוויז׳ן ב-Pro Clubs" options={DIVISIONS} value={division} onChange={setDivision} />
 
       <Text style={{ color: colors.muted, textAlign: 'right', fontWeight: '700', marginBottom: 6 }}>רמת ארכיטיפ (1–50)</Text>
@@ -131,7 +160,7 @@ export default function NewGroundsScreen() {
         value={archetype}
         onChange={setArchetype}
       />
-      <ChoiceGroup label="אזור" options={REGIONS.map((item) => ({ id: item, label: item }))} value={region} onChange={setRegion} />
+      <ChoiceGroup label="אזור (לא חובה)" options={GROUND_REGIONS} value={region} onChange={setRegion} />
       <Field label="Skill Rating, לא חובה" value={skillRating} onChangeText={setSkillRating} keyboardType="number-pad" />
 
       <Muted>תמונת פרופיל היא רשות: אפשר להעלות תמונת שחקן או צילום דמות מהמשחק. פרסום בלי תמונה אפשרי.</Muted>
