@@ -56,7 +56,7 @@ export default function GroundsPreviewScreen() {
   useEffect(()=>{Animated.timing(intro,{toValue:1,duration:760,useNativeDriver:true}).start();},[intro]);
   const players=useMemo<CommunityPlayer[]>(()=>app.grounds.map((post,index)=>{
     const profile=app.profiles.find(item=>item.id===post.userId);
-    return {id:post.id,userId:post.userId,handle:post.gamertag||post.eaId||profile?.displayName||'שחקן קהילה',display:profile?.displayName||post.gamertag||post.eaId||'שחקן קהילה',position:post.position,secondary:'',level:post.playerLevel,ovr:post.skillRating,archetype:post.archetype,platform:post.platform,division:post.division==='elite'?'ליגת על':'ליגה '+post.division,region:post.region,languages:[],tags:post.levelVerified?['רמה מאומתת']:[],availability:'',intent:post.intent,portrait:index%6,avatarUri:post.avatarUri,eaId:post.eaId,gamertag:post.gamertag,levelVerified:post.levelVerified};
+    return {id:post.id,userId:post.userId,handle:post.gamertag||post.eaId||profile?.displayName||'שחקן קהילה',display:profile?.displayName||post.gamertag||post.eaId||'שחקן קהילה',position:post.position,secondary:'',level:post.playerLevel,ovr:post.skillRating,archetype:post.archetype,platform:post.platform,division:post.division==='elite'?'ליגת על':'ליגה '+post.division,region:post.region,languages:[],tags:post.levelVerified?['רמה מאומתת']:[],availability:'',intent:post.intent,portrait:index%6,avatarUri:post.avatarUri??profile?.avatarUrl??null,eaId:post.eaId,gamertag:post.gamertag,levelVerified:post.levelVerified};
   }),[app.grounds,app.profiles]);
   const recruiting=useMemo(()=>players.filter(p=>p.intent==='need_player'),[players]);
   const filtered=useMemo(()=>players.filter(p=>{
