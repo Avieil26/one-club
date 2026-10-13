@@ -260,8 +260,8 @@ export default function GroundsV22Screen() {
             <LinearGradient colors={['rgba(2,8,15,0.00)', 'rgba(2,10,18,0.06)', 'rgba(2,8,15,0.24)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
             <View style={s.heroContent}>
               <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>קהילת שחקנים אמיתית</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
-              <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-end', gap: 14 }]}>
-                <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-end' }]}>
+              <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-start', gap: 14 }]}>
+                <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-start', direction: 'rtl' }]}>
                   <Eyebrow>FC 27 · קהילת מועדונים</Eyebrow>
                   
                   <Text style={[s.heroHeadline, compact && { fontSize: 28, lineHeight: 36 }]}>המגרש שלך. האנשים שלך.</Text>
@@ -283,13 +283,13 @@ export default function GroundsV22Screen() {
           </View>
 
           <View style={s.content}>
-            <View style={[s.sectionHeader, compact && { alignItems: 'stretch', flexDirection: 'column' }]}>
+            <View style={[s.sectionHeader, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}>
               <View style={s.sectionCopy}><Eyebrow>רשת השחקנים</Eyebrow><Text style={s.sectionTitle}>מצא את האנשים שלך.</Text><Text style={s.sectionLead}>פרופילים שנשלחו על ידי שחקנים, התאמה לפי המשחק שאתם אוהבים ודרך פשוטה להתחיל לדבר.</Text></View>
               <Pressable onPress={() => navigate('/grounds/new')} style={s.outlineButton}><Ionicons name="add" size={18} color={C.cyan} /><Text style={s.outlineButtonText}>פרסם את פרופיל השחקן שלך</Text></Pressable>
             </View>
 
             <View style={s.filtersPanel} onLayout={(event) => { filtersOffset.current = event.nativeEvent.layout.y; }}>
-              <View style={[s.filterHeading, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
+              <View style={[s.filterHeading, compact && { flexDirection: 'column', alignItems: 'flex-start' }]}>
                 <View style={s.resultCounter}><View style={s.greenDot} /><Text style={s.resultCounterText}>שחקנים מהקהילה</Text><Text style={s.resultCount}>{visiblePosts.length} פרופילים</Text></View>
                 <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder="חיפוש שם, EA ID, אזור או סגנון..." placeholderTextColor="#7F93A0" style={s.searchInput} returnKeyType="search" accessibilityLabel="חיפוש פרופילים" />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
               </View>
@@ -299,7 +299,7 @@ export default function GroundsV22Screen() {
             </View>
 
             <View style={s.playersSection}>
-              <View style={[s.playersHeading, compact && { alignItems: 'flex-end', flexDirection: 'column' }]}><View><Text style={s.playersTitle}>שחקנים מומלצים</Text><Text style={s.playersSubtitle}>מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>פרופילים מהמערכת</Text></View></View>
+              <View style={[s.playersHeading, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}><View style={s.playersHeadingCopy}><Text style={s.playersTitle}>שחקנים מומלצים</Text><Text style={s.playersSubtitle}>מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>פרופילים מהמערכת</Text></View></View>
               {app.mode !== 'remote' ? (
                 <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="cloud-offline-outline" size={28} color={C.cyan} /></View><Text style={s.emptyStateTitle}>הדגמות לא מוצגות כפרופילים אמיתיים</Text><Text style={s.emptyStateCopy}>כשהחיבור למסד הנתונים פעיל, יוצגו כאן רק מודעות שנשמרו במערכת.</Text><ActionButton label="פרסם את הפרופיל שלך" icon="person-add-outline" onPress={() => navigate('/grounds/new')} /></View>
               ) : visiblePosts.length === 0 ? (
@@ -383,7 +383,7 @@ const s = StyleSheet.create({
   greenDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.green, shadowColor: C.green, shadowOpacity: 0.6, shadowRadius: 5 },
   heroBadgeText: { color: C.green, fontSize: 10, fontWeight: '800' }, heroKicker: { color: C.muted, fontSize: 10, fontWeight: '900', letterSpacing: 2 },
   heroMain: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 28, direction: 'rtl' },
-  heroCopy: { flex: 1, maxWidth: 920, gap: 13, alignItems: 'flex-end' },
+  heroCopy: { flex: 1, maxWidth: 920, gap: 13, alignItems: 'flex-start', direction: 'rtl' },
   eyebrow: { flexDirection: 'row', alignItems: 'center', gap: 7 }, eyebrowDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: C.cyan },
   eyebrowText: { color: C.cyan, fontSize: 10, fontWeight: '900', letterSpacing: 1.3 },
   heroHeadline: { color: C.ink, fontSize: 30, lineHeight: 38, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
@@ -405,25 +405,25 @@ const s = StyleSheet.create({
   heroFoot: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12, backgroundColor: 'rgba(2,8,15,0.72)', paddingVertical: 9, borderTopWidth: 1, borderTopColor: 'rgba(75,211,222,0.22)' },
   heroFootText: { color: C.muted, fontSize: 9, fontWeight: '800', letterSpacing: 0.5 }, heroFootRule: { height: 12, width: 1, backgroundColor: C.line },
   content: { paddingHorizontal: 18, paddingTop: 34 },
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', gap: 18, marginBottom: 19 },
-  sectionCopy: { flex: 1, gap: 8, alignItems: 'flex-end', direction: 'rtl' },
-  sectionTitle: { color: C.ink, fontSize: 28, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
-  sectionLead: { color: C.muted, fontSize: 12, lineHeight: 19, textAlign: 'right', writingDirection: 'rtl', maxWidth: 740 },
+  sectionHeader: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'flex-end', gap: 18, marginBottom: 19, direction: 'rtl' },
+  sectionCopy: { flex: 1, gap: 8, alignItems: 'flex-start', direction: 'rtl' },
+  sectionTitle: { width: '100%', color: C.ink, fontSize: 28, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
+  sectionLead: { width: '100%', color: C.muted, fontSize: 12, lineHeight: 19, textAlign: 'right', writingDirection: 'rtl', maxWidth: 740, alignSelf: 'stretch' },
   outlineButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, borderWidth: 1, borderColor: 'rgba(57,219,232,0.48)', backgroundColor: 'rgba(4,23,33,0.84)', borderRadius: 6, paddingHorizontal: 13, paddingVertical: 11 },
   outlineButtonText: { color: C.ink, fontSize: 11, fontWeight: '800' },
   filtersPanel: { borderWidth: 1, borderColor: 'rgba(75,211,222,0.32)', borderRadius: 9, backgroundColor: C.panel, padding: 15, gap: 15, marginBottom: 23 },
-  filterHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, direction: 'rtl' },
+  filterHeading: { flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 12, direction: 'rtl' },
   resultCounter: { flexDirection: 'row', alignItems: 'center', gap: 8 }, resultCounterText: { color: C.ink, fontSize: 12, fontWeight: '900' },
   resultCount: { color: C.cyan, fontSize: 10, fontWeight: '800', paddingHorizontal: 7, paddingVertical: 3, borderRadius: 4, backgroundColor: 'rgba(57,219,232,0.10)' },
   searchBox: { flexDirection: 'row', alignItems: 'center', gap: 9, width: '100%', maxWidth: 430, borderWidth: 1, borderColor: 'rgba(113,195,213,0.38)', borderRadius: 6, backgroundColor: 'rgba(1,9,16,0.94)', paddingHorizontal: 11, paddingVertical: 2, minHeight: 39 },
   searchInput: { flex: 1, color: C.ink, fontSize: 12, textAlign: 'right', writingDirection: 'rtl', paddingVertical: 8 },
-  filterGroup: { gap: 8, alignItems: 'flex-end', direction: 'rtl' }, filterLabel: { color: C.muted, fontSize: 10, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
+  filterGroup: { gap: 8, alignItems: 'flex-start', direction: 'rtl' }, filterLabel: { color: C.muted, fontSize: 10, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 }, horizontalChips: { flexDirection: 'row', gap: 6, paddingVertical: 2 },
   chip: { borderWidth: 1, borderColor: 'rgba(104,160,182,0.32)', backgroundColor: 'rgba(6,18,28,0.88)', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 7, alignItems: 'center', justifyContent: 'center' },
   chipActive: { borderColor: C.cyan, backgroundColor: 'rgba(17,66,76,0.75)' }, chipText: { color: '#C0D1DB', fontSize: 10, fontWeight: '700' }, chipTextActive: { color: C.cyan, fontWeight: '900' },
   playersSection: { gap: 14 },
-  playersHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12, direction: 'rtl' },
-  playersTitle: { color: C.ink, fontSize: 20, fontWeight: '900', textAlign: 'right' }, playersSubtitle: { color: C.muted, fontSize: 11, marginTop: 5, textAlign: 'right' },
+  playersHeading: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', gap: 12, direction: 'rtl' },
+  playersHeadingCopy: { flex: 1, alignItems: 'flex-start', direction: 'rtl' }, playersTitle: { width: '100%', color: C.ink, fontSize: 20, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }, playersSubtitle: { width: '100%', color: C.muted, fontSize: 11, marginTop: 5, textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
   sortPill: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: 'rgba(132,242,154,0.26)', backgroundColor: 'rgba(8,38,30,0.6)', borderRadius: 5, paddingHorizontal: 9, paddingVertical: 6 },
   sortPillText: { color: C.green, fontSize: 9, fontWeight: '900' },
   playerGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 13, direction: 'rtl' }, playerGridItem: { width: '48.8%', minWidth: 0, maxWidth: '100%' },
@@ -454,10 +454,10 @@ const s = StyleSheet.create({
   emptyStateTitle: { color: C.ink, fontSize: 16, fontWeight: '900', textAlign: 'center' }, emptyStateCopy: { color: C.muted, fontSize: 12, lineHeight: 19, textAlign: 'center', maxWidth: 520 },
   bottomGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 13, marginTop: 30, alignItems: 'stretch' },
   infoPanel: { flex: 1, minWidth: 250, borderWidth: 1, borderColor: 'rgba(70,165,203,0.4)', borderRadius: 9, padding: 13, backgroundColor: 'rgba(3,12,20,0.985)', gap: 12 },
-  panelTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 9, borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.2)' },
+  panelTitleRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 8, paddingBottom: 9, borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.2)', direction: 'rtl' },
   panelIcon: { width: 32, height: 32, borderRadius: 6, borderWidth: 1, borderColor: C.line, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(11,48,62,0.48)' },
   panelTitle: { flex: 1, color: C.ink, fontSize: 13, fontWeight: '900', textAlign: 'right' },
-  recruitRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 7, direction: 'rtl', borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.12)' },
+  recruitRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 8, paddingVertical: 7, direction: 'rtl', borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.12)' },
   recruitCrest: { width: 37, height: 40, borderRadius: 5, borderWidth: 1, borderColor: 'rgba(237,198,110,0.5)', backgroundColor: 'rgba(78,58,18,0.28)', alignItems: 'center', justifyContent: 'center' },
   recruitCopy: { flex: 1, gap: 4 }, recruitName: { color: C.ink, fontSize: 11, fontWeight: '900', textAlign: 'right' }, recruitSub: { color: C.muted, fontSize: 9, textAlign: 'right' },
   panelEmpty: { color: C.muted, fontSize: 11, lineHeight: 18, textAlign: 'right' },
