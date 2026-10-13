@@ -163,10 +163,10 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
   );
 }
 
-function InfoPanel({ title, icon, children }: { title: string; icon: keyof typeof Ionicons.glyphMap; children: ReactNode }) {
+function InfoPanel({ title, icon, children, onTitlePress }: { title: string; icon: keyof typeof Ionicons.glyphMap; children: ReactNode; onTitlePress?: () => void }) {
   return (
     <View style={s.infoPanel}>
-      <View style={s.panelTitleRow}><View style={s.panelIcon}><Ionicons name={icon} size={19} color={C.cyan} /></View><Text style={s.panelTitle}>{title}</Text></View>
+      <Pressable onPress={onTitlePress} disabled={!onTitlePress} accessibilityRole={onTitlePress ? "button" : undefined} style={s.panelTitleRow}><View style={s.panelIcon}><Ionicons name={icon} size={19} color={C.cyan} /></View><Text style={s.panelTitle}>{title}</Text>{onTitlePress ? <Ionicons name="chevron-back" size={15} color={C.cyan} /> : null}</Pressable>
       {children}
     </View>
   );
@@ -312,7 +312,7 @@ export default function GroundsV22Screen() {
             </View>
 
             <View style={[s.bottomGrid, compact && { flexDirection: 'column' }]}>
-              <InfoPanel title="גיוס פעיל" icon="people-outline">
+              <InfoPanel title="גיוס פעיל" icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
                   return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || 'שחקן מהקהילה'}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position)} · {divisionLabel(post.division)} · {platformLabel(post.platform)}</Text><Text style={s.recruitSub}>{post.region || 'אזור לא צוין'}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
