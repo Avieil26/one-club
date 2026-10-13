@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   Modal,
+  Platform,
   Pressable,
   ScrollView,
   StatusBar,
@@ -173,7 +174,7 @@ function InfoPanel({ title, icon, children }: { title: string; icon: keyof typeo
 export default function GroundsV22Screen() {
   const app = useApp();
   const router = useRouter();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [intent, setIntent] = useState<'all' | GroundsIntent>('all');
   const [platform, setPlatform] = useState<PlatformId | 'all'>('all');
   const [position, setPosition] = useState('all');
@@ -222,29 +223,30 @@ export default function GroundsV22Screen() {
   const selectedName = selected ? selectedProfile?.displayName || selected.gamertag || selected.eaId || 'שחקן קהילה' : '';
 
   return (
-    <View style={s.page}>
+    <ImageBackground source={require('@/assets/images/scene-grounds.png')} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
+      <LinearGradient colors={['rgba(2,8,15,0.18)', 'rgba(2,8,15,0.52)', 'rgba(2,8,15,0.90)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
       <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false, title: 'THE GROUNDS — ONE CLUB' }} />
       <NavBar onNavigate={navigate} loggedIn={Boolean(app.user)} />
       {notice ? <Pressable onPress={() => setNotice('')} style={s.noticeBar}><Ionicons name="information-circle-outline" size={18} color={C.cyan} /><Text style={s.noticeText}>{notice}</Text><Ionicons name="close" size={16} color={C.muted} /></Pressable> : null}
 
-      <ScrollView style={s.scroll} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView style={[s.scroll, Platform.OS === 'web' ? { minHeight: 0 } : undefined]} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={Platform.OS === 'web'} scrollEnabled={true}>
         <View style={s.shell}>
-          <ImageBackground source={require('@/assets/images/scene-grounds.png')} resizeMode="cover" style={[s.heroBackground, compact && s.heroBackgroundCompact]} imageStyle={s.heroImage}>
-            <LinearGradient colors={['rgba(2,8,15,0.84)', 'rgba(2,10,18,0.78)', 'rgba(2,8,15,0.97)']} style={FILL} />
+          <View style={[s.heroBackground, compact && s.heroBackgroundCompact]}>
+            <LinearGradient colors={['rgba(2,8,15,0.10)', 'rgba(2,10,18,0.24)', 'rgba(2,8,15,0.72)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
             <View style={s.heroContent}>
               <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>קהילת שחקנים אמיתית</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
-              <View style={[s.heroMain, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
-                <View style={s.heroCopy}>
-                  <Eyebrow>THE GROUNDS · קהילת מועדונים</Eyebrow>
-                  <Text style={[s.heroHeadline, compact && { fontSize: 34, lineHeight: 42 }]}>המגרש שלך.{"\n"}האנשים שלך.</Text>
+              <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-end', gap: 14 }]}>
+                <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-end' }]}>
+                  <Eyebrow>FC 27 · קהילת מועדונים</Eyebrow>
+                  <Text style={[s.wordmark, compact && { fontSize: 42, lineHeight: 48, letterSpacing: -1.2 }]}>THE <Text style={{ color: C.cyan }}>GROUNDS</Text></Text>
+                  <Text style={[s.heroHeadline, compact && { fontSize: 28, lineHeight: 36 }]}>המגרש שלך. האנשים שלך.</Text>
                   <Text style={s.heroLead}>מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.</Text>
                   <View style={[s.heroButtons, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
                     <ActionButton label="חפש שחקנים" icon="search-outline" onPress={() => setNotice('סננו לפי עמדה, פלטפורמה או שם באזור השחקנים למטה.')} />
-                    <ActionButton label="פרסם פרופיל" icon="person-add-outline" quiet onPress={() => navigate('/grounds/new')} />
+                    <ActionButton label="פרסם פרופיל" icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
                   </View>
                 </View>
-                <View style={s.heroWordmark}><Text style={s.wordmarkOverline}>FIND YOUR TEAM</Text><Text style={[s.wordmark, compact && { fontSize: 44 }]}>THE <Text style={{ color: C.cyan }}>GROUNDS</Text></Text><View style={s.wordmarkRule} /><Text style={s.wordmarkCaption}>שחקנים. קבוצות. הקהילה.</Text></View>
               </View>
               <View style={[s.quickActions, compact && { flexDirection: 'column' }]}>
                 <Pressable onPress={() => { setIntent('all'); setNotice('מוצגים פרופילים אמיתיים לפי המסננים שבחרתם.'); }} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>חפש שחקנים</Text><Text style={s.quickSub}>סנן לפי עמדה ופלטפורמה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
@@ -254,7 +256,7 @@ export default function GroundsV22Screen() {
               </View>
             </View>
             <View style={s.heroFoot}><Text style={s.heroFootText}>נבנה לקהילה</Text><View style={s.heroFootRule} /><Text style={s.heroFootText}>לא שירות רשמי של EA</Text></View>
-          </ImageBackground>
+          </View>
 
           <View style={s.content}>
             <View style={[s.sectionHeader, compact && { alignItems: 'stretch', flexDirection: 'column' }]}>
@@ -325,13 +327,14 @@ export default function GroundsV22Screen() {
           </View>
         </View>
       </Modal>
-    </View>
+    </ImageBackground>
   );
 }
 
 const s = StyleSheet.create({
   page: { flex: 1, minHeight: '100%', backgroundColor: C.deep },
-  scroll: { flex: 1 }, scrollContent: { flexGrow: 1, paddingBottom: 40 },
+  pageBackgroundImage: { opacity: 0.92 },
+  scroll: { flex: 1 }, scrollContent: { flexGrow: 1, paddingBottom: 48 },
   navWrap: { zIndex: 20, backgroundColor: 'rgba(2,8,15,0.98)', borderBottomWidth: 1, borderBottomColor: C.line, paddingHorizontal: 18, paddingVertical: 10 },
   navInner: { width: '100%', maxWidth: 1536, alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 14 },
   brand: { flexDirection: 'row', alignItems: 'center', gap: 8, flexShrink: 0 },
@@ -347,20 +350,19 @@ const s = StyleSheet.create({
   accountText: { color: C.ink, fontSize: 12, fontWeight: '800' },
   noticeBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9, paddingHorizontal: 14, paddingVertical: 9, backgroundColor: 'rgba(4,23,34,0.96)', borderBottomWidth: 1, borderBottomColor: C.line },
   noticeText: { color: C.ink, fontSize: 12, textAlign: 'center', flexShrink: 1 },
-  shell: { width: '100%', maxWidth: 1536, alignSelf: 'center', paddingHorizontal: 12 },
-  heroBackground: { minHeight: 480, borderRadius: 14, overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(57,219,232,0.30)', marginTop: 12, backgroundColor: '#030C15' },
-  heroBackgroundCompact: { minHeight: 620 },
-  heroImage: { opacity: 0.66 },
+  shell: { width: '100%', maxWidth: 1536, alignSelf: 'center', paddingHorizontal: 0 },
+  heroBackground: { minHeight: 500, borderRadius: 0, overflow: 'hidden', borderWidth: 0, marginTop: 0, backgroundColor: 'rgba(3,12,21,0.06)' },
+  heroBackgroundCompact: { minHeight: 600 },
   heroContent: { paddingHorizontal: 30, paddingTop: 25, paddingBottom: 28, gap: 22 },
   heroMetaRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
   heroBadge: { flexDirection: 'row', alignItems: 'center', gap: 8, borderRadius: 5, borderWidth: 1, borderColor: 'rgba(132,242,154,0.34)', backgroundColor: 'rgba(2,21,23,0.83)', paddingHorizontal: 10, paddingVertical: 6 },
   greenDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.green, shadowColor: C.green, shadowOpacity: 0.6, shadowRadius: 5 },
   heroBadgeText: { color: C.green, fontSize: 10, fontWeight: '800' }, heroKicker: { color: C.muted, fontSize: 10, fontWeight: '900', letterSpacing: 2 },
   heroMain: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 28, direction: 'rtl' },
-  heroCopy: { flex: 1, maxWidth: 570, gap: 13, alignItems: 'flex-start' },
+  heroCopy: { flex: 1, maxWidth: 920, gap: 13, alignItems: 'flex-end' },
   eyebrow: { flexDirection: 'row', alignItems: 'center', gap: 7 }, eyebrowDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: C.cyan },
   eyebrowText: { color: C.cyan, fontSize: 10, fontWeight: '900', letterSpacing: 1.3 },
-  heroHeadline: { color: C.ink, fontSize: 46, lineHeight: 56, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
+  heroHeadline: { color: C.ink, fontSize: 30, lineHeight: 38, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
   heroLead: { maxWidth: 550, color: '#D4E0E8', fontSize: 14, lineHeight: 23, fontWeight: '500', textAlign: 'right', writingDirection: 'rtl' },
   heroButtons: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 5, flexWrap: 'wrap' },
   button: { minHeight: 43, borderRadius: 7, borderWidth: 1, borderColor: C.cyan, paddingHorizontal: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: C.cyan },
@@ -368,7 +370,7 @@ const s = StyleSheet.create({
   buttonText: { color: '#041017', fontSize: 12, fontWeight: '900', textAlign: 'center' },
   heroWordmark: { flex: 1, alignItems: 'flex-end', justifyContent: 'center', gap: 8, minWidth: 230 },
   wordmarkOverline: { color: C.green, fontSize: 11, fontWeight: '900', letterSpacing: 3 },
-  wordmark: { color: C.ink, fontSize: 54, lineHeight: 62, fontWeight: '900', letterSpacing: -2, textAlign: 'right' },
+  wordmark: { color: C.ink, fontSize: 78, lineHeight: 84, fontWeight: '900', letterSpacing: -2.6, textAlign: 'right', writingDirection: 'ltr', textShadowColor: 'rgba(0,0,0,0.50)', textShadowOffset: { width: 0, height: 5 }, textShadowRadius: 22 },
   wordmarkRule: { height: 2, width: 155, backgroundColor: C.cyan, shadowColor: C.cyan, shadowOpacity: 0.8, shadowRadius: 9 },
   wordmarkCaption: { color: C.muted, fontSize: 12, fontWeight: '700' },
   quickActions: { flexDirection: 'row', gap: 10, flexWrap: 'wrap' },
