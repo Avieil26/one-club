@@ -734,9 +734,10 @@ export function createRemoteBackend(): Backend {
       if (!Number.isInteger(level) || level < 1 || level > 50) {
         throw new Error('רמת השחקן צריכה להיות בין 1 ל-50');
       }
-      const avatarSource = input.avatarUri || input.levelImageUri;
-      if (!avatarSource) throw new Error('חייבים תמונת פרופיל חתוכה');
-      const images = await uploadProofs(userData.user.id, [avatarSource], 'avatar');
+      const levelProofSource = input.levelImageUri;
+      const images = levelProofSource
+        ? await uploadProofs(userData.user.id, [levelProofSource], 'level')
+        : [];
       // Encode new fields into existing RPC columns until schema migration is applied:
       // skill = playerLevel, hours = gamertag, contact_value = eaId
       await call('create_grounds_post', {
