@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   Image,
   ImageBackground,
@@ -73,7 +73,7 @@ function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; 
       <View style={s.navInner}>
         <Pressable onPress={() => onNavigate('/')} style={s.brand}>
           <Image source={require('@/assets/images/brand-1club.png')} style={s.brandImage} />
-          <View><Text style={s.brandName}>1 CLUB</Text><Text style={s.brandSub}>COMMUNITY</Text></View>
+          <View><Text style={s.brandName}>ONE CLUB</Text></View>
         </Pressable>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.navLinks}>
           {NAV.map((item) => (
@@ -182,6 +182,9 @@ export default function GroundsV22Screen() {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<GroundsPost | null>(null);
   const [notice, setNotice] = useState('');
+  const scrollRef = useRef<ScrollView>(null);
+  const searchInputRef = useRef<TextInput>(null);
+  const filtersOffset = useRef(0);
   const compact = width < 760;
 
   // Local backend includes seeded demonstration entries. Do not display those as real community members.
@@ -203,6 +206,26 @@ export default function GroundsV22Screen() {
   const isFollowing = (userId: string) => app.follows.some((follow) => follow.followerId === app.user?.id && follow.followingId === userId);
 
   function navigate(href: string) { router.push(href as never); }
+  function scrollToFilters() {
+    setNotice('');
+    requestAnimationFrame(() => scrollRef.current?.scrollTo({ y: Math.max(filtersOffset.current - 18, 0), animated: true }));
+  }
+  function searchPlayers() {
+    setIntent('all');
+    setNotice('');
+    scrollToFilters();
+    setTimeout(() => searchInputRef.current?.focus(), 350);
+  }
+  function findTeam() {
+    setIntent('looking_for_club');
+    setNotice('');
+    scrollToFilters();
+  }
+  function showRecruiting() {
+    setIntent('need_player');
+    setNotice('');
+    scrollToFilters();
+  }
   async function toggleFollow(post: GroundsPost) {
     if (!app.user) { navigate('/register'); return; }
     if (post.userId === app.user.id) { setNotice('זה הפרופיל שלך — אי אפשר לעקוב אחרי עצמך.'); return; }
@@ -225,35 +248,35 @@ export default function GroundsV22Screen() {
 
   return (
     <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
-      <LinearGradient colors={['rgba(2,8,15,0.18)', 'rgba(2,8,15,0.52)', 'rgba(2,8,15,0.90)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
+      <LinearGradient colors={['rgba(2,8,15,0.02)', 'rgba(2,8,15,0.10)', 'rgba(2,8,15,0.26)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
       <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false, title: 'THE GROUNDS — ONE CLUB' }} />
       <NavBar onNavigate={navigate} loggedIn={Boolean(app.user)} />
       {notice ? <Pressable onPress={() => setNotice('')} style={s.noticeBar}><Ionicons name="information-circle-outline" size={18} color={C.cyan} /><Text style={s.noticeText}>{notice}</Text><Ionicons name="close" size={16} color={C.muted} /></Pressable> : null}
 
-      <ScrollView style={[s.scroll, Platform.OS === 'web' ? { minHeight: 0 } : undefined]} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={Platform.OS === 'web'} scrollEnabled={true}>
+      <ScrollView ref={scrollRef} style={[s.scroll, Platform.OS === 'web' ? { minHeight: 0 } : undefined]} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={Platform.OS === 'web'} scrollEnabled={true}>
         <View style={s.shell}>
           <View style={[s.heroBackground, compact && s.heroBackgroundCompact]}>
-            <LinearGradient colors={['rgba(2,8,15,0.10)', 'rgba(2,10,18,0.24)', 'rgba(2,8,15,0.72)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
+            <LinearGradient colors={['rgba(2,8,15,0.00)', 'rgba(2,10,18,0.06)', 'rgba(2,8,15,0.24)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
             <View style={s.heroContent}>
               <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>קהילת שחקנים אמיתית</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
               <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-end', gap: 14 }]}>
                 <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-end' }]}>
                   <Eyebrow>FC 27 · קהילת מועדונים</Eyebrow>
-                  <Text style={[s.wordmark, compact && { fontSize: 42, lineHeight: 48, letterSpacing: -1.2 }]}>THE <Text style={{ color: C.cyan }}>GROUNDS</Text></Text>
+                  
                   <Text style={[s.heroHeadline, compact && { fontSize: 28, lineHeight: 36 }]}>המגרש שלך. האנשים שלך.</Text>
                   <Text style={s.heroLead}>מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.</Text>
                   <View style={[s.heroButtons, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
-                    <ActionButton label="חפש שחקנים" icon="search-outline" onPress={() => setNotice('סננו לפי עמדה, פלטפורמה או שם באזור השחקנים למטה.')} />
+                    <ActionButton label="חפש שחקנים" icon="search-outline" onPress={searchPlayers} />
                     <ActionButton label="פרסם פרופיל" icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
                   </View>
                 </View>
               </View>
               <View style={[s.quickActions, compact && { flexDirection: 'column' }]}>
-                <Pressable onPress={() => { setIntent('all'); setNotice('מוצגים פרופילים אמיתיים לפי המסננים שבחרתם.'); }} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>חפש שחקנים</Text><Text style={s.quickSub}>סנן לפי עמדה ופלטפורמה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={() => { setIntent('need_player'); setNotice('מוצגות מודעות גיוס שפורסמו על ידי הקהילה.'); }} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="people-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>מצא קבוצה</Text><Text style={s.quickSub}>גלה מודעות גיוס שפורסמו</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={searchPlayers} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>חפש שחקנים</Text><Text style={s.quickSub}>סנן לפי עמדה ופלטפורמה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={findTeam} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="people-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>מצא קבוצה</Text><Text style={s.quickSub}>שחקנים שמחפשים מועדון</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
                 <Pressable onPress={() => navigate('/grounds/new')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="person-add-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>פרסם גיוס</Text><Text style={s.quickSub}>הפרטים נשמרים במערכת</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={() => setNotice('אתגרי הקהילה יופיעו כאן כשהם יחוברו לנתונים אמיתיים.')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>אתגרי הקהילה</Text><Text style={s.quickSub}>נתונים אמיתיים בלבד</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={() => navigate('/career?tab=challenges')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>אתגרי הקהילה</Text><Text style={s.quickSub}>לצפייה באתגרי הקריירה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
               </View>
             </View>
             <View style={s.heroFoot}><Text style={s.heroFootText}>נבנה לקהילה</Text><View style={s.heroFootRule} /><Text style={s.heroFootText}>לא שירות רשמי של EA</Text></View>
@@ -265,10 +288,10 @@ export default function GroundsV22Screen() {
               <Pressable onPress={() => navigate('/grounds/new')} style={s.outlineButton}><Ionicons name="add" size={18} color={C.cyan} /><Text style={s.outlineButtonText}>פרסם את פרופיל השחקן שלך</Text></Pressable>
             </View>
 
-            <View style={s.filtersPanel}>
+            <View style={s.filtersPanel} onLayout={(event) => { filtersOffset.current = event.nativeEvent.layout.y; }}>
               <View style={[s.filterHeading, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
                 <View style={s.resultCounter}><View style={s.greenDot} /><Text style={s.resultCounterText}>שחקנים מהקהילה</Text><Text style={s.resultCount}>{visiblePosts.length} פרופילים</Text></View>
-                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput value={search} onChangeText={setSearch} placeholder="חיפוש שם, EA ID, אזור או סגנון..." placeholderTextColor="#7F93A0" style={s.searchInput} returnKeyType="search" accessibilityLabel="חיפוש פרופילים" />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
+                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder="חיפוש שם, EA ID, אזור או סגנון..." placeholderTextColor="#7F93A0" style={s.searchInput} returnKeyType="search" accessibilityLabel="חיפוש פרופילים" />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
               </View>
               <View style={s.filterGroup}><Text style={s.filterLabel}>סוג מודעה</Text><View style={s.chipRow}><Chip label="הכל" active={intent === 'all'} onPress={() => setIntent('all')} /><Chip label="מחפש קבוצה" active={intent === 'looking_for_club'} onPress={() => setIntent('looking_for_club')} /><Chip label="גיוס שחקנים" active={intent === 'need_player'} onPress={() => setIntent('need_player')} /></View></View>
               <View style={s.filterGroup}><Text style={s.filterLabel}>עמדה</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{POSITIONS.map((item) => <Chip key={item.id} label={item.label} active={position === item.id} onPress={() => setPosition(item.id)} />)}</ScrollView></View>
@@ -276,7 +299,7 @@ export default function GroundsV22Screen() {
             </View>
 
             <View style={s.playersSection}>
-              <View style={[s.playersHeading, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}><View><Text style={s.playersTitle}>שחקנים מומלצים</Text><Text style={s.playersSubtitle}>מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>פרופילים מהמערכת</Text></View></View>
+              <View style={[s.playersHeading, compact && { alignItems: 'flex-end', flexDirection: 'column' }]}><View><Text style={s.playersTitle}>שחקנים מומלצים</Text><Text style={s.playersSubtitle}>מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>פרופילים מהמערכת</Text></View></View>
               {app.mode !== 'remote' ? (
                 <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="cloud-offline-outline" size={28} color={C.cyan} /></View><Text style={s.emptyStateTitle}>הדגמות לא מוצגות כפרופילים אמיתיים</Text><Text style={s.emptyStateCopy}>כשהחיבור למסד הנתונים פעיל, יוצגו כאן רק מודעות שנשמרו במערכת.</Text><ActionButton label="פרסם את הפרופיל שלך" icon="person-add-outline" onPress={() => navigate('/grounds/new')} /></View>
               ) : visiblePosts.length === 0 ? (
@@ -294,7 +317,7 @@ export default function GroundsV22Screen() {
                   const owner = profileFor(post);
                   return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || 'שחקן מהקהילה'}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position)} · {divisionLabel(post.division)} · {platformLabel(post.platform)}</Text><Text style={s.recruitSub}>{post.region || 'אזור לא צוין'}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.</Text>}
-                <Pressable onPress={() => setIntent('need_player')} style={s.panelCta}><Text style={s.panelCtaText}>צפה בכל הגיוסים</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
+                <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>צפה בכל הגיוסים</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
               <InfoPanel title="מועדונים מובילים" icon="podium-outline"><View style={s.placeholderBox}><Ionicons name="stats-chart-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>הדירוג עדיין לא זמין</Text><Text style={s.panelEmpty}>לא נציג נקודות או שמות מועדונים מדומים. הדירוג יופעל כשיהיו נתוני מועדונים אמיתיים.</Text></View></InfoPanel>
               <InfoPanel title="האתגרים האחרונים" icon="trophy-outline"><View style={s.placeholderBox}><Ionicons name="flag-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>אתגרי הקהילה בדרך</Text><Text style={s.panelEmpty}>אתגרים ותגמולים יוצגו כאן רק אחרי חיבור למקור נתונים פעיל.</Text></View></InfoPanel>
@@ -333,18 +356,18 @@ export default function GroundsV22Screen() {
 }
 
 const s = StyleSheet.create({
-  page: { flex: 1, minHeight: '100%', backgroundColor: C.deep },
+  page: { flex: 1, minHeight: '100%', backgroundColor: C.deep, direction: 'rtl' },
   pageBackgroundImage: { opacity: 0.92 },
   scroll: { flex: 1 }, scrollContent: { flexGrow: 1, paddingBottom: 48 },
   navWrap: { zIndex: 20, backgroundColor: 'rgba(2,8,15,0.98)', borderBottomWidth: 1, borderBottomColor: C.line, paddingHorizontal: 18, paddingVertical: 10 },
-  navInner: { width: '100%', maxWidth: 1536, alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 14 },
+  navInner: { width: '100%', maxWidth: 1536, alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 14, direction: 'rtl' },
   brand: { flexDirection: 'row', alignItems: 'center', gap: 8, flexShrink: 0 },
   brandImage: { width: 34, height: 34, borderRadius: 8, borderWidth: 1, borderColor: 'rgba(57,219,232,0.45)' },
-  brandName: { color: C.ink, fontSize: 14, fontWeight: '900', letterSpacing: 1 },
+  brandName: { color: C.ink, fontSize: 14, fontWeight: '900', letterSpacing: 1, writingDirection: 'ltr' },
   brandSub: { color: C.cyan, fontSize: 8, fontWeight: '900', letterSpacing: 2 },
-  navLinks: { flexDirection: 'row', alignItems: 'center', gap: 3, flexGrow: 1, flexShrink: 1 },
+  navLinks: { flexDirection: 'row', alignItems: 'center', gap: 3, flexGrow: 1, flexShrink: 1, direction: 'rtl' },
   navLink: { borderRadius: 6, borderWidth: 1, borderColor: 'transparent', paddingHorizontal: 9, paddingVertical: 8 },
-  navLinkActive: { borderColor: 'rgba(57,219,232,0.42)', backgroundColor: 'rgba(12,47,58,0.68)' },
+  navLinkActive: { borderColor: 'rgba(57,219,232,0.42)', backgroundColor: 'transparent' },
   navLinkText: { color: '#D0DEE7', fontSize: 12, fontWeight: '600' },
   navLinkTextActive: { color: C.cyan, fontWeight: '900' },
   accountButton: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: C.line, borderRadius: 7, backgroundColor: 'rgba(5,23,33,0.94)', paddingHorizontal: 11, paddingVertical: 8, flexShrink: 0 },
@@ -383,23 +406,23 @@ const s = StyleSheet.create({
   heroFootText: { color: C.muted, fontSize: 9, fontWeight: '800', letterSpacing: 0.5 }, heroFootRule: { height: 12, width: 1, backgroundColor: C.line },
   content: { paddingHorizontal: 18, paddingTop: 34 },
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', gap: 18, marginBottom: 19 },
-  sectionCopy: { flex: 1, gap: 8, alignItems: 'flex-start' },
+  sectionCopy: { flex: 1, gap: 8, alignItems: 'flex-end', direction: 'rtl' },
   sectionTitle: { color: C.ink, fontSize: 28, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
   sectionLead: { color: C.muted, fontSize: 12, lineHeight: 19, textAlign: 'right', writingDirection: 'rtl', maxWidth: 740 },
   outlineButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, borderWidth: 1, borderColor: 'rgba(57,219,232,0.48)', backgroundColor: 'rgba(4,23,33,0.84)', borderRadius: 6, paddingHorizontal: 13, paddingVertical: 11 },
   outlineButtonText: { color: C.ink, fontSize: 11, fontWeight: '800' },
   filtersPanel: { borderWidth: 1, borderColor: 'rgba(75,211,222,0.32)', borderRadius: 9, backgroundColor: C.panel, padding: 15, gap: 15, marginBottom: 23 },
-  filterHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
+  filterHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, direction: 'rtl' },
   resultCounter: { flexDirection: 'row', alignItems: 'center', gap: 8 }, resultCounterText: { color: C.ink, fontSize: 12, fontWeight: '900' },
   resultCount: { color: C.cyan, fontSize: 10, fontWeight: '800', paddingHorizontal: 7, paddingVertical: 3, borderRadius: 4, backgroundColor: 'rgba(57,219,232,0.10)' },
   searchBox: { flexDirection: 'row', alignItems: 'center', gap: 9, width: '100%', maxWidth: 430, borderWidth: 1, borderColor: 'rgba(113,195,213,0.38)', borderRadius: 6, backgroundColor: 'rgba(1,9,16,0.94)', paddingHorizontal: 11, paddingVertical: 2, minHeight: 39 },
-  searchInput: { flex: 1, color: C.ink, fontSize: 12, textAlign: 'right', paddingVertical: 8 },
-  filterGroup: { gap: 8 }, filterLabel: { color: C.muted, fontSize: 10, fontWeight: '900', textAlign: 'right' },
+  searchInput: { flex: 1, color: C.ink, fontSize: 12, textAlign: 'right', writingDirection: 'rtl', paddingVertical: 8 },
+  filterGroup: { gap: 8, alignItems: 'flex-end', direction: 'rtl' }, filterLabel: { color: C.muted, fontSize: 10, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 }, horizontalChips: { flexDirection: 'row', gap: 6, paddingVertical: 2 },
   chip: { borderWidth: 1, borderColor: 'rgba(104,160,182,0.32)', backgroundColor: 'rgba(6,18,28,0.88)', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 7, alignItems: 'center', justifyContent: 'center' },
   chipActive: { borderColor: C.cyan, backgroundColor: 'rgba(17,66,76,0.75)' }, chipText: { color: '#C0D1DB', fontSize: 10, fontWeight: '700' }, chipTextActive: { color: C.cyan, fontWeight: '900' },
   playersSection: { gap: 14 },
-  playersHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
+  playersHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12, direction: 'rtl' },
   playersTitle: { color: C.ink, fontSize: 20, fontWeight: '900', textAlign: 'right' }, playersSubtitle: { color: C.muted, fontSize: 11, marginTop: 5, textAlign: 'right' },
   sortPill: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: 'rgba(132,242,154,0.26)', backgroundColor: 'rgba(8,38,30,0.6)', borderRadius: 5, paddingHorizontal: 9, paddingVertical: 6 },
   sortPillText: { color: C.green, fontSize: 9, fontWeight: '900' },
@@ -415,9 +438,9 @@ const s = StyleSheet.create({
   levelBadge: { minWidth: 48, paddingHorizontal: 7, paddingVertical: 6, borderWidth: 1, borderRadius: 6, alignItems: 'center' },
   levelNumber: { color: C.ink, fontSize: 20, fontWeight: '900' }, levelLabel: { color: C.muted, fontSize: 8, fontWeight: '900', letterSpacing: 1 },
   playerNameWrap: { flex: 1, alignItems: 'flex-start', gap: 3 }, playerName: { color: C.ink, fontSize: 16, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }, playerHandle: { color: '#B9CEDB', fontSize: 10, fontWeight: '600' },
-  cardBody: { padding: 12, gap: 10, flex: 1 }, cardHeadline: { flexDirection: 'row', alignItems: 'center', gap: 9 },
+  cardBody: { padding: 12, gap: 10, flex: 1 }, cardHeadline: { flexDirection: 'row', alignItems: 'center', gap: 9, direction: 'rtl' },
   platformBadge: { width: 36, height: 36, borderRadius: 6, borderWidth: 1, borderColor: 'rgba(57,219,232,0.36)', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(15,47,59,0.4)' },
-  cardInfoMain: { flex: 1, alignItems: 'flex-start', gap: 4 }, cardPosition: { color: C.ink, fontSize: 12, fontWeight: '900', textAlign: 'right' }, cardMeta: { color: C.muted, fontSize: 10, textAlign: 'right' },
+  cardInfoMain: { flex: 1, alignItems: 'flex-end', gap: 4, direction: 'rtl' }, cardPosition: { color: C.ink, fontSize: 12, fontWeight: '900', textAlign: 'right' }, cardMeta: { color: C.muted, fontSize: 10, textAlign: 'right' },
   cardTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 5 }, smallTag: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: 'rgba(92,165,193,0.27)', borderRadius: 4, backgroundColor: 'rgba(11,28,39,0.7)', paddingHorizontal: 6, paddingVertical: 4 },
   verifiedTag: { borderColor: 'rgba(132,242,154,0.25)', backgroundColor: 'rgba(10,38,28,0.48)' }, smallTagText: { color: '#C8D8E1', fontSize: 9, fontWeight: '700' },
   regionLine: { flexDirection: 'row', alignItems: 'center', gap: 5 }, regionText: { color: C.muted, fontSize: 10, textAlign: 'right' },
@@ -434,7 +457,7 @@ const s = StyleSheet.create({
   panelTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 9, borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.2)' },
   panelIcon: { width: 32, height: 32, borderRadius: 6, borderWidth: 1, borderColor: C.line, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(11,48,62,0.48)' },
   panelTitle: { flex: 1, color: C.ink, fontSize: 13, fontWeight: '900', textAlign: 'right' },
-  recruitRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 7, borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.12)' },
+  recruitRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 7, direction: 'rtl', borderBottomWidth: 1, borderBottomColor: 'rgba(80,165,192,0.12)' },
   recruitCrest: { width: 37, height: 40, borderRadius: 5, borderWidth: 1, borderColor: 'rgba(237,198,110,0.5)', backgroundColor: 'rgba(78,58,18,0.28)', alignItems: 'center', justifyContent: 'center' },
   recruitCopy: { flex: 1, gap: 4 }, recruitName: { color: C.ink, fontSize: 11, fontWeight: '900', textAlign: 'right' }, recruitSub: { color: C.muted, fontSize: 9, textAlign: 'right' },
   panelEmpty: { color: C.muted, fontSize: 11, lineHeight: 18, textAlign: 'right' },
