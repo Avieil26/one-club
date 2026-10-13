@@ -1,10 +1,12 @@
 import { ImageBackground, StyleSheet, View } from 'react-native';
 
+import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
+
 export default function GroundsPreviewBackground() {
   return (
     <View style={styles.screen} accessibilityLabel="THE GROUNDS background preview">
       <ImageBackground
-        source={require('@/assets/images/grounds-preview-background.jpg')}
+        source={{ uri: GROUNDS_PREVIEW_BACKGROUND }}
         resizeMode="cover"
         style={StyleSheet.absoluteFill}
       />
