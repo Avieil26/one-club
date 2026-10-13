@@ -256,8 +256,13 @@ export function createGrounds(db: Database, input: NewGrounds) {
   if (!Number.isInteger(playerLevel) || playerLevel < 1 || playerLevel > 50) {
     throw new Error('רמת השחקן צריכה להיות בין 1 ל-50');
   }
+  const eaId = input.eaId.trim();
+  const gamertag = input.gamertag.trim();
+  if (!eaId && !gamertag) throw new Error('צריך למלא לפחות שם משתמש או EA ID');
+  if (eaId.length > 40) throw new Error('EA ID ארוך מדי');
+  if (gamertag.length > 40) throw new Error('שם משתמש ארוך מדי');
   const avatarUri = input.avatarUri || null;
-  const levelImageUri = input.levelImageUri || avatarUri || null;
+  const levelImageUri = input.levelImageUri || null;
   db.groundsPosts.unshift({
     id: uid('lfg'),
     userId: user.id,
@@ -272,8 +277,8 @@ export function createGrounds(db: Database, input: NewGrounds) {
     hours: '',
     contactType: 'discord',
     contactValue: '',
-    eaId: text(input.eaId, 'EA ID', 40),
-    gamertag: text(input.gamertag, 'שם משתמש', 40),
+    eaId,
+    gamertag,
     avatarUri,
     levelImageUri,
     levelVerified: false,
