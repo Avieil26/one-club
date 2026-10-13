@@ -19,6 +19,7 @@ import {
 import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
+import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
 
 const FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 };
 
@@ -223,7 +224,7 @@ export default function GroundsV22Screen() {
   const selectedName = selected ? selectedProfile?.displayName || selected.gamertag || selected.eaId || 'שחקן קהילה' : '';
 
   return (
-    <ImageBackground source={require('@/assets/images/scene-grounds.png')} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
+    <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
       <LinearGradient colors={['rgba(2,8,15,0.18)', 'rgba(2,8,15,0.52)', 'rgba(2,8,15,0.90)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
       <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false, title: 'THE GROUNDS — ONE CLUB' }} />
