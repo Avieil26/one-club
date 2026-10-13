@@ -43,11 +43,12 @@ export default function NewGroundsScreen() {
   }
 
   async function save() {
-    if (!avatarUri) {
-      Alert.alert('רגע', 'חייבים לבחור תמונה ולמרכז את הפנים בעיגול לפני הפרסום.');
+    if (!gamertag.trim() && !eaId.trim()) {
+      Alert.alert('רגע', 'צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.');
       return;
     }
     try {
+      if (avatarUri) await app.setAvatar(avatarUri);
       await app.createGrounds({
         intent,
         platform,
@@ -59,9 +60,9 @@ export default function NewGroundsScreen() {
         region,
         eaId,
         gamertag,
-        avatarUri,
-        // Same cropped face is the card image — not the raw full screenshot
-        levelImageUri: avatarUri,
+        // Profile avatar is saved separately. It is not used as level-verification proof.
+        avatarUri: null,
+        levelImageUri: null,
       });
       Alert.alert('פורסם', 'המודעה עלתה לגראונדס.');
       router.replace('/grounds');
@@ -136,10 +137,8 @@ export default function NewGroundsScreen() {
         onChange={setArchetype}
       />
       <ChoiceGroup label="אזור" options={REGIONS.map((item) => ({ id: item, label: item }))} value={region} onChange={setRegion} />
-      <Field label="Skill Rating, לא חובה" value={skillRating} onChangeText={setSkillRating} keyboardType="number-pad" />
-
-      <Muted>תמונת פרופיל — העלו צילום ומרכזו את הפנים בעיגול</Muted>
-      <Button label={avatarUri ? 'החלפת תמונה' : 'העלאת תמונה + חיתוך'} variant="ghost" onPress={choosePhoto} />
+            <Muted>תמונת פרופיל (רשות) — תמונה שתעלו תשמש גם בפרופיל המשתמש שלכם</Muted>
+      <Button label={avatarUri ? 'החלפת תמונה' : 'העלאת תמונה (רשות) + חיתוך'} variant="ghost" onPress={choosePhoto} />
       {avatarUri ? (
         <Pressable onPress={() => rawUri && setCropOpen(true)} style={{ alignSelf: 'center', marginVertical: 8 }}>
           <View style={{ width: 112, height: 112, borderRadius: 56, overflow: 'hidden', borderWidth: 3, borderColor: levelTone.bg }}>
