@@ -292,9 +292,10 @@ function mapGrounds(row: GroundsRow): GroundsPost {
     hours: row.hours ?? '',
     contactType: row.contact_type,
     contactValue: row.contact_value,
-    eaId: row.ea_id || row.contact_value || '',
-    gamertag: row.gamertag || row.hours || '',
-    avatarUri: row.avatar_uri || row.level_image_uri,
+    eaId: row.ea_id || (row.contact_value === 'in-app' ? '' : row.contact_value) || '',
+    gamertag: row.gamertag || (row.hours === '—' ? '' : row.hours) || '',
+    // Verification images are private proof material, not profile photos.
+    avatarUri: row.avatar_uri || null,
     levelImageUri: row.level_image_uri,
     levelVerified: row.level_verified,
     levelStatus: row.level_status,
@@ -675,9 +676,15 @@ export function createRemoteBackend(): Backend {
       if (!Number.isInteger(level) || level < 1 || level > 50) {
         throw new Error('רמת השחקן צריכה להיות בין 1 ל-50');
       }
-      const avatarSource = input.avatarUri || input.levelImageUri;
-      if (!avatarSource) throw new Error('חייבים תמונת פרופיל חתוכה');
-      const images = await uploadProofs(userData.user.id, [avatarSource], 'avatar');
+      const eaId = input.eaId.trim();
+      const gamertag = input.gamertag.trim();
+      if (!eaId && !gamertag) throw new Error('צריך למלא לפחות שם משתמש או EA ID');
+      if (eaId.length > 40) throw new Error('EA ID ארוך מדי');
+      if (gamertag.length > 40) throw new Error('שם משתמש ארוך מדי');
+      const levelProofSource = input.levelImageUri;
+      const images = levelProofSource
+        ? await uploadProofs(userData.user.id, [levelProofSource], 'level')
+        : [];
       // Encode new fields into existing RPC columns until schema migration is applied:
       // skill = playerLevel, hours = gamertag, contact_value = eaId
       await call('create_grounds_post', {
@@ -688,9 +695,9 @@ export function createRemoteBackend(): Backend {
         p_skill: level,
         p_archetype: input.archetype,
         p_region: input.region || 'אונליין בלבד',
-        p_hours: input.gamertag.trim() || '—',
+        p_hours: gamertag || '—',
         p_contact_type: 'discord',
-        p_contact_value: input.eaId.trim() || 'in-app',
+        p_contact_value: eaId || 'in-app',
         p_level_image: images[0] ?? null,
       });
       return readSnapshot();
