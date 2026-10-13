@@ -19,6 +19,8 @@ import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/li
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
 
+const FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 };
+
 const C = {
   ink: '#F5F7F6', muted: '#A8B8C5', deep: '#050B12', panel: 'rgba(4,13,22,0.96)',
   line: 'rgba(75,211,222,0.30)', cyan: '#39DBE8', green: '#84F29A', gold: '#EDC66E',
@@ -119,14 +121,14 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
     <View style={s.playerCard}>
       <Pressable onPress={onOpen} style={s.playerArt} accessibilityRole="button" accessibilityLabel={'פתיחת פרופיל ' + name}>
         {avatar ? (
-          <Image source={{ uri: avatar }} style={StyleSheet.absoluteFill} resizeMode="cover" />
+          <Image source={{ uri: avatar }} style={FILL} resizeMode="cover" />
         ) : (
-          <LinearGradient colors={['#103849', '#071522', '#030910']} style={StyleSheet.absoluteFill}>
+          <LinearGradient colors={['#103849', '#071522', '#030910']} style={FILL}>
             <View style={s.emptyAvatarMark}><Ionicons name="person-outline" size={56} color="rgba(57,219,232,0.72)" /></View>
             <View style={s.artGrid} />
           </LinearGradient>
         )}
-        <LinearGradient colors={['rgba(2,9,15,0.03)', 'rgba(2,9,15,0.12)', 'rgba(2,9,15,0.94)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
+        <LinearGradient colors={['rgba(2,9,15,0.03)', 'rgba(2,9,15,0.12)', 'rgba(2,9,15,0.94)']} locations={[0, 0.45, 1]} style={FILL} />
         <View style={s.cardTopLine}>
           <View style={s.livePill}><View style={s.greenDot} /><Text style={s.livePillText}>{intentLabel(post.intent)}</Text></View>
           {ovr !== null ? <View style={[s.ovrBadge, { borderColor: tone.bg }]}><Text style={s.ovrTiny}>OVR</Text><Text style={s.ovrValue}>{ovr}</Text></View> : null}
@@ -229,7 +231,7 @@ export default function GroundsV22Screen() {
       <ScrollView style={s.scroll} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={s.shell}>
           <ImageBackground source={require('@/assets/images/scene-grounds.png')} resizeMode="cover" style={[s.heroBackground, compact && s.heroBackgroundCompact]} imageStyle={s.heroImage}>
-            <LinearGradient colors={['rgba(2,8,15,0.84)', 'rgba(2,10,18,0.78)', 'rgba(2,8,15,0.97)']} style={StyleSheet.absoluteFill} />
+            <LinearGradient colors={['rgba(2,8,15,0.84)', 'rgba(2,10,18,0.78)', 'rgba(2,8,15,0.97)']} style={FILL} />
             <View style={s.heroContent}>
               <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>קהילת שחקנים אמיתית</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
               <View style={[s.heroMain, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
@@ -308,7 +310,7 @@ export default function GroundsV22Screen() {
             <View style={s.modalTopbar}><View><Text style={s.modalKicker}>ONE CLUB / THE GROUNDS</Text><Text style={s.modalTitle}>פרופיל שחקן</Text></View><Pressable onPress={() => setSelected(null)} style={s.closeButton} accessibilityLabel="סגירת הפרופיל"><Ionicons name="close" size={21} color={C.ink} /></Pressable></View>
             {selected ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.modalContent}>
               <View style={[s.modalHero, compact && { flexDirection: 'column' }]}>
-                <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={StyleSheet.absoluteFill} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}<View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View></View>
+                <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}<View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View></View>
                 <View style={s.modalIntro}><Eyebrow>{intentLabel(selected.intent)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || 'שם משתמש לא נמסר'}</Text><Text style={s.modalDescription}>{selected.archetype} · {positionLabel(selected.position)}</Text><Text style={s.modalDescription}>{platformLabel(selected.platform)} · {divisionLabel(selected.division)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
