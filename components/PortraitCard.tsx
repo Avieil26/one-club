@@ -82,6 +82,8 @@ const TOTW_ART: Record<string, number> = {
   'ea-267974-mexx-meerdink': require('@/assets/images/cards/ea-267974-mexx-meerdink-totw.png'),
   'ea-272137-sara-ortega': require('@/assets/images/cards/ea-272137-sara-ortega-totw.png'),
   'ea-276695-shea-charles': require('@/assets/images/cards/ea-276695-shea-charles-totw.png'),
+  // BEGIN GENERATED TOTW 5 ART
+  // END GENERATED TOTW 5 ART
 };
 
 const TOTW_RIM = `<filter id="totw-rim" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
