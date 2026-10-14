@@ -152,7 +152,7 @@ export const officialChallenges: SbcChallenge[] = [
   // Current live FC 27 SBCs verified against FUTBIN on 14 Oct 2026.
   {
     id: 'sbc-fs-xavi-espart',
-    title: 'Future Stars · Xavi Espart',
+    title: 'Future Stars · צ׳אבי אספארט',
     kind: 'streamlined',
     requirements: 'פרס שחקן Future Stars: Xavi Espart 85 LB. יעד ניקוד הפריט: 34,000.',
     endsAt: XAVI_ESPART_ENDS,
@@ -166,7 +166,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-potm-ferran',
-    title: 'Ligue 1 POTM · Ferran Torres',
+    title: 'Ligue 1 POTM · פראן טורס',
     kind: 'streamlined',
     requirements: 'פרס POTM: Ferran Torres 85 ST. יעד ניקוד הפריט: 123,000.',
     endsAt: FERRAN_ENDS,
@@ -194,7 +194,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-fs-super-lig-pick',
-    title: 'Future Stars · Super Lig Player Pick',
+    title: 'בחירת Future Stars · סופר ליג',
     kind: 'streamlined',
     requirements: 'בחירת Future Stars אחת מתוך 4 שחקנים מה-Super Lig. יעד ניקוד הפריט: 11,000.',
     endsAt: SUPER_LIG_PICK_ENDS,
@@ -207,7 +207,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-hero-matchday-pick',
-    title: 'Base Hero · Matchday Player Pick',
+    title: 'בחירת Base Hero · יום משחק',
     kind: 'streamlined',
     requirements: 'בחירת Hero אחד מתוך Rafael Márquez, Sonia Bompastor, Davor Šuker ו-Pablo Aimar. יעד ניקוד הפריט: 115,000.',
     endsAt: HERO_MATCHDAY_PICK_ENDS,
@@ -220,7 +220,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-fs-challenge-1',
-    title: 'Future Stars · אתגר 1',
+    title: 'אתגר Future Stars · 1',
     kind: 'classic',
     requirements: '11 שחקנים; לפחות 3 מאותה ליגה, לפחות 4 לאומים, עד 4 מועדונים, שחקני ארד ומעלה וכימיה 14. הפרס: חבילת זהב לא סחירה.',
     endsAt: FS_CHALLENGE_ENDS,
@@ -234,7 +234,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-fs-carlos-espi',
-    title: 'Future Stars · Carlos Espí',
+    title: 'Future Stars · קרלוס אספי',
     kind: 'streamlined',
     requirements: 'פרס שחקן Future Stars: Carlos Espí 85 ST. יעד ניקוד הפריט: 41,000.',
     endsAt: CARLOS_ESPI_ENDS,
@@ -248,7 +248,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-foundations-patati',
-    title: 'Squad Foundations · Patati',
+    title: 'Squad Foundations · פאטאטי',
     kind: 'streamlined',
     requirements: 'פרס שחקן Squad Foundations: Weslley Pinto Batista (Patati) 84 RW. יעד ניקוד הפריט: 11,800.',
     endsAt: PATATI_ENDS,
@@ -262,7 +262,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-hero-max86-upgrade',
-    title: 'Max 86 Base Hero Upgrade',
+    title: 'שדרוג Base Hero עד 86',
     kind: 'streamlined',
     requirements: 'חבילת Hero בסיסי לא סחירה עם דירוג מקסימלי 86. יעד ניקוד הפריט: 85,000.',
     endsAt: MAX86_HERO_ENDS,
@@ -275,7 +275,7 @@ export const officialChallenges: SbcChallenge[] = [
   },
   {
     id: 'sbc-potm-pina',
-    title: 'Liga F POTM · Claudia Pina',
+    title: 'Liga F POTM · קלאודיה פינה',
     kind: 'streamlined',
     requirements: 'פרס POTM: Claudia Pina 89 LW. נתוני קלף: 91 PAC, 89 SHO, 85 PAS, 89 DRI, 45 DEF, 74 PHY. יעד ניקוד הפריט: 1,125,000.',
     endsAt: PINA_ENDS,
@@ -337,7 +337,7 @@ export const officialChallenges: SbcChallenge[] = [
     endsAt: MARQUEE_MATCHUPS_ENDS,
     createdBy: 'admin',
     targetScore: null,
-    rules: { chemistry: 26, clubsAtLeast: { clubs: ['Liverpool', 'Manchester City'], count: 2 }, leagueAtLeast: [{ league: L.prem, count: 3 }], minClubs: 3, sameNationAtLeast: 4, minRating: 75 },
+    rules: { chemistry: 26, clubsAtLeast: { clubs: ['Liverpool', 'Manchester City'], count: 2 }, leagueAtLeast: [{ league: L.prem, count: 3 }], minClubs: 3,  minRating: 75 },
     reward: 'חבילת אלקטרום גדולה · סחירה',
     clubs: ['Liverpool', 'Manchester City'],
     previewFormation: '433',
