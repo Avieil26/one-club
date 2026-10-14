@@ -148,7 +148,7 @@ async function fetchFullCard(spec, rosterByEaId) {
   const html = await page.text();
   // FUT.GG marks the current week's item with its release timestamp. Reject an older TOTW
   // for the same player even if its rating happens to match this week's item.
-  if (!/Oct(?:ober)?\\s+14,\\s+2026/i.test(html)) {
+  if (!/Oct(?:ober)?\s+14,\s+2026/i.test(html)) {
     throw new Error(`Selected card for ${spec.query} is not verified as added on 14 Oct 2026 (current TOTW 5). No data will be written.`);
   }
   const attrs = parseAttrs(html);
