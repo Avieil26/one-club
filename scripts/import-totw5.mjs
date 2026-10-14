@@ -146,6 +146,11 @@ async function fetchFullCard(spec, rosterByEaId) {
   });
   if (!page.ok) throw new Error(`Could not load the full TOTW card page for ${spec.query}: HTTP ${page.status}`);
   const html = await page.text();
+  // FUT.GG marks the current week's item with its release timestamp. Reject an older TOTW
+  // for the same player even if its rating happens to match this week's item.
+  if (!/Oct(?:ober)?\\s+14,\\s+2026/i.test(html)) {
+    throw new Error(`Selected card for ${spec.query} is not verified as added on 14 Oct 2026 (current TOTW 5). No data will be written.`);
+  }
   const attrs = parseAttrs(html);
   if (!attrs) throw new Error(`Full detailed attributes were not available for ${spec.query}; refusing to fall back to the regular card stats.`);
 
