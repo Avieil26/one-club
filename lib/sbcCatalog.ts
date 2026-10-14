@@ -33,7 +33,6 @@ const HERO_MATCHDAY_PICK_ENDS = '2026-10-18T17:00:00.000Z';
 const FERRAN_ENDS = '2026-11-10T17:00:00.000Z';
 const PINA_ENDS = '2026-11-03T17:00:00.000Z';
 const FRATTESI_ENDS = '2026-10-06T17:00:00.000Z';
-const UPGRADE_80X5_ENDS = '2026-10-16T17:00:00.000Z';
 const EFL_FUTURE_STARS_ENDS = '2026-10-17T17:00:00.000Z';
 
 export const NATION_DRILL_SQUAD: Record<string, string> = {
@@ -350,7 +349,7 @@ export const officialChallenges: SbcChallenge[] = [
     title: 'שדרוג · 5×80+',
     kind: 'classic',
     requirements: 'הפרס הוא חבילת 5 שחקני זהב בדירוג 80 ומעלה, לא סחירה. FUT.GG מסמן את האתגר כמתחדש כל 48 שעות; דרישות ההגשה המדויקות לא הופיעו בפירוט FUTBIN הזמין, ולכן לא הומצאו כאן תנאי סגל.',
-    endsAt: UPGRADE_80X5_ENDS,
+    endsAt: null,
     createdBy: 'admin',
     targetScore: null,
     rules: null,
