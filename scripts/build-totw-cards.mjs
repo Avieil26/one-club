@@ -227,6 +227,7 @@ for (const spec of jobs) {
   const hit = pick(rows, spec);
   if (!hit) {
     console.log('MISSING', spec.id);
+    if (extra) throw new Error(`TOTW asset not found for ${spec.q} (${spec.rating}); aborting the batch to avoid an incomplete squad.`);
     continue;
   }
   console.log(spec.id, hit.overall, hit.position, hit.cardName, hit.eaId);
