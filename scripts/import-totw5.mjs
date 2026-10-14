@@ -111,6 +111,13 @@ function faceOf(hit) {
   return result;
 }
 
+async function restoreArt(backups) {
+  for (const [file, original] of backups) {
+    if (original != null) await writeFile(file, original);
+    else await unlink(file).catch(() => undefined);
+  }
+}
+
 function parseAttrs(html) {
   const start = html.indexOf('attributeAcceleration:');
   if (start < 0) return null;
@@ -224,6 +231,17 @@ async function main() {
   if (!portraitSource.includes(TOTW_ART_START) || !portraitSource.includes(TOTW_ART_END)) {
     throw new Error('TOTW 5 art markers are missing from PortraitCard.tsx. No files were changed.');
   }
+  const persistedPaths = [
+    'assets/data/totw.json',
+    'assets/data/totwCardMeta.json',
+    'assets/data/marketPrices.json',
+    'assets/data/priceEaIds.json',
+    'assets/data/totwShine.json',
+    portraitPath,
+  ];
+  const originalPersisted = new Map();
+  for (const file of persistedPaths) originalPersisted.set(file, await readFile(file));
+
 
   const rosterByEaId = new Map(players.filter((player) => player.eaId != null).map((player) => [Number(player.eaId), player]));
   const found = new Array(TOTW5.length);
@@ -261,18 +279,37 @@ async function main() {
     face: [row.row.face.pac, row.row.face.sho, row.row.face.pas, row.row.face.dri, row.row.face.def, row.row.face.phy],
   }));
   const specsPath = 'assets/data/totw5-specs.json';
+  const cardDir = 'assets/images/cards';
+  const cardOutputs = found.map((row) => path.join(cardDir, `${row.id}-totw.png`));
+  const originalArt = new Map();
+  for (const output of cardOutputs) {
+    try {
+      originalArt.set(output, await readFile(output));
+    } catch (error) {
+      if (error && typeof error === 'object' && error.code === 'ENOENT') originalArt.set(output, null);
+      else throw error;
+    }
+  }
+
   await writeFile(specsPath, JSON.stringify(specs));
   const build = spawnSync(process.execPath, ['scripts/build-totw-cards.mjs', 'extra', 'totw5-specs.json'], {
     stdio: 'inherit',
     windowsHide: true,
   });
-  if (build.error) throw build.error;
-  if (build.status !== 0) throw new Error('TOTW 5 card-art build failed. The live catalogue and PortraitCard mapping have not been updated.');
-  const cardDir = 'assets/images/cards';
-  for (const row of found) {
-    const output = path.join(cardDir, `${row.id}-totw.png`);
+  if (build.error || build.status !== 0) {
+    await restoreArt(originalArt);
+    await unlink(specsPath).catch(() => undefined);
+    if (build.error) throw build.error;
+    throw new Error('TOTW 5 card-art build failed; existing TOTW images have been restored. The catalogue was not changed.');
+  }
+  for (let index = 0; index < cardOutputs.length; index++) {
+    const output = cardOutputs[index];
     const info = await stat(output).catch(() => null);
-    if (!info?.size) throw new Error(`Missing generated art for ${row.query}: ${output}. Catalogue files have not been updated.`);
+    if (!info?.size) {
+      await restoreArt(originalArt);
+      await unlink(specsPath).catch(() => undefined);
+      throw new Error(`Missing generated art for ${found[index].query}; existing TOTW images have been restored and the catalogue was not changed.`);
+    }
   }
 
   let livePrices = new Map();
@@ -301,12 +338,28 @@ async function main() {
   );
   if (nextPortrait === portraitSource) throw new Error('Could not replace the generated-art map. No JSON catalogue files were written.');
 
-  await writeFile('assets/data/totw.json', JSON.stringify(mergedTotw));
-  await writeFile('assets/data/totwCardMeta.json', JSON.stringify(meta));
-  await writeFile('assets/data/marketPrices.json', JSON.stringify(priceTable));
-  await writeFile('assets/data/priceEaIds.json', JSON.stringify(priceEaIds));
-  await writeFile('assets/data/totwShine.json', JSON.stringify(shine));
-  await writeFile(portraitPath, nextPortrait);
+  const nextPersisted = new Map([
+    ['assets/data/totw.json', JSON.stringify(mergedTotw)],
+    ['assets/data/totwCardMeta.json', JSON.stringify(meta)],
+    ['assets/data/marketPrices.json', JSON.stringify(priceTable)],
+    ['assets/data/priceEaIds.json', JSON.stringify(priceEaIds)],
+    ['assets/data/totwShine.json', JSON.stringify(shine)],
+    [portraitPath, nextPortrait],
+  ]);
+  const attemptedWrites = [];
+  try {
+    for (const [file, content] of nextPersisted) {
+      attemptedWrites.push(file);
+      await writeFile(file, content);
+    }
+  } catch (error) {
+    for (const file of attemptedWrites.reverse()) {
+      await writeFile(file, originalPersisted.get(file)).catch(() => undefined);
+    }
+    await restoreArt(originalArt);
+    await unlink(specsPath).catch(() => undefined);
+    throw new Error(`TOTW 5 catalogue update failed; previous catalogue and card art were restored. ${error instanceof Error ? error.message : String(error)}`);
+  }
   await unlink(specsPath).catch(() => undefined);
 
   console.log('\nDONE: TOTW 5 imported without replacing the regular player rows.');
