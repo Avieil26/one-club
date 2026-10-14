@@ -32,11 +32,6 @@ type TotwRow = {
   face: Face;
   positions?: string[];
   playstyles?: { name: string; plus: boolean }[];
-  name?: string;
-  en?: string;
-  nation?: string;
-  league?: string;
-  club?: string;
 };
 
 const heroes = heroesFile as HeroRow[];
@@ -68,6 +63,11 @@ export function totwFor(baseId: string): {
   face: Face;
   positions?: string[];
   playstyles?: { name: string; plus: boolean }[];
+  name?: string;
+  en?: string;
+  nation?: string;
+  league?: string;
+  club?: string;
 } | null {
   const row = totwByBase.get(baseId);
   if (!row) return null;
