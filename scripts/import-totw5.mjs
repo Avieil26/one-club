@@ -328,6 +328,7 @@ async function main() {
     priceEaIds[key] = row.cardEaId;
     const quote = livePrices.get(row.cardEaId);
     if (quote && (quote[0] > 0 || quote[1] > 0)) priceTable[key] = quote;
+    else delete priceTable[key]; // never leave a previous-week price attached to the new TOTW item
     shine[row.id] = row.rating >= 88 ? 'pristine' : 'holographic';
   }
   const artLines = found.map((row) => `  '${row.id}': require('@/assets/images/cards/${row.id}-totw.png'),`).join('\n');
@@ -336,7 +337,11 @@ async function main() {
     /  \/\/ BEGIN GENERATED TOTW 5 ART[\s\S]*?  \/\/ END GENERATED TOTW 5 ART/,
     artBlock,
   );
-  if (nextPortrait === portraitSource) throw new Error('Could not replace the generated-art map. No JSON catalogue files were written.');
+  if (nextPortrait === portraitSource) {
+    await restoreArt(originalArt);
+    await unlink(specsPath).catch(() => undefined);
+    throw new Error('Could not replace the generated-art map; previous TOTW images were restored and no catalogue JSON files were written.');
+  }
 
   const nextPersisted = new Map([
     ['assets/data/totw.json', JSON.stringify(mergedTotw)],
