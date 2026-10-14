@@ -63,6 +63,11 @@ export function totwFor(baseId: string): {
   face: Face;
   positions?: string[];
   playstyles?: { name: string; plus: boolean }[];
+  name?: string;
+  en?: string;
+  nation?: string;
+  league?: string;
+  club?: string;
 } | null {
   const row = totwByBase.get(baseId);
   if (!row) return null;
@@ -71,7 +76,12 @@ export function totwFor(baseId: string): {
     position: row.position,
     face: row.face,
     ...(row.positions?.length ? { positions: row.positions } : {}),
-    ...(row.playstyles?.length ? { playstyles: row.playstyles } : {}),
+    ...(row.playstyles ? { playstyles: row.playstyles } : {}),
+    ...(row.name ? { name: row.name } : {}),
+    ...(row.en ? { en: row.en } : {}),
+    ...(row.nation ? { nation: row.nation } : {}),
+    ...(row.league ? { league: row.league } : {}),
+    ...(row.club ? { club: row.club } : {}),
   };
 }
 
