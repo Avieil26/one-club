@@ -171,11 +171,16 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         regularPosition: player.position,
         regularClub: player.club,
         regularLeague: player.league,
+        name: totw.name ?? player.name,
+        en: totw.en ?? player.en,
+        nation: totw.nation ?? player.nation,
+        league: totw.league ?? player.league,
+        club: totw.club ?? player.club,
         rating: totw.rating,
         position: totw.position,
         face: totw.face,
         ...(totw.positions?.length ? { positions: totw.positions } : {}),
-        ...(totw.playstyles?.length ? { playstyles: totw.playstyles } : {}),
+        ...(totw.playstyles ? { playstyles: totw.playstyles } : {}),
       });
     }
   }
