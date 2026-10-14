@@ -493,6 +493,13 @@ function buildChecks(
       ok: highest >= rules.sameNationAtLeast,
     });
   }
+  if (rules.maxSameNation) {
+    const highest = Math.max(0, ...countBy(players, (player) => player.nation).values());
+    checks.push({
+      label: `עד ${rules.maxSameNation} מאותה מדינה (${highest})`,
+      ok: highest <= rules.maxSameNation,
+    });
+  }
   for (const rule of rules.nationAtLeast ?? []) {
     const count = players.filter((player) => player.nation === rule.nation).length;
     checks.push({ label: `לפחות ${rule.count} מ${rule.nation} (${count})`, ok: count >= rule.count });
