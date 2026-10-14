@@ -23,16 +23,18 @@ const MALEN_ENDS = '2026-10-29T13:00:00.000Z';
 /** FUTBIN live refresh checked 14 Oct 2026; short countdowns translated to UTC expiry dates. */
 const FS_CHALLENGE_ENDS = '2026-10-14T17:00:00.000Z';
 const MAX86_HERO_ENDS = '2026-10-14T17:00:00.000Z';
-const MARQUEE_MATCHUPS_ENDS = '2026-10-15T18:00:00.000Z';
-const PATATI_ENDS = '2026-10-16T17:00:00.000Z';
+const MARQUEE_MATCHUPS_ENDS = '2026-10-15T17:00:00.000Z';
+const PATATI_ENDS = '2026-10-15T17:00:00.000Z';
 const CARLOS_ESPI_ENDS = '2026-10-16T17:00:00.000Z';
 const XAVI_ESPART_ENDS = '2026-10-20T17:00:00.000Z';
 const UPGRADE_79X3_ENDS = '2026-10-19T17:00:00.000Z';
 const SUPER_LIG_PICK_ENDS = '2026-10-19T17:00:00.000Z';
 const HERO_MATCHDAY_PICK_ENDS = '2026-10-18T17:00:00.000Z';
-const FERRAN_ENDS = '2026-11-04T17:00:00.000Z';
-const PINA_ENDS = '2026-10-28T17:00:00.000Z';
+const FERRAN_ENDS = '2026-11-10T17:00:00.000Z';
+const PINA_ENDS = '2026-11-03T17:00:00.000Z';
 const FRATTESI_ENDS = '2026-10-06T17:00:00.000Z';
+const UPGRADE_80X5_ENDS = '2026-10-16T17:00:00.000Z';
+const EFL_FUTURE_STARS_ENDS = '2026-10-17T17:00:00.000Z';
 
 export const NATION_DRILL_SQUAD: Record<string, string> = {
   gk: 'alisson',
@@ -182,11 +184,11 @@ export const officialChallenges: SbcChallenge[] = [
     id: 'sbc-upgrade-79x3',
     title: 'שדרוג · 3×79+',
     kind: 'classic',
-    requirements: 'מגישים 10 שחקני זהב בדיוק. הפרס: חבילת 3 שחקני זהב בדירוג 79+ (לא סחירה). חוזר ללא הגבלה.',
+    requirements: '10 שחקני זהב בדיוק, ללא דרישת כימיה. הפרס: חבילת 3 שחקני זהב בדירוג 79+ (לא סחירה). חוזר ללא הגבלה עד 19 באוקטובר.',
     endsAt: UPGRADE_79X3_ENDS,
     createdBy: 'admin',
     targetScore: null,
-    rules: { chemistry: 0, exactQuality: 'gold' },
+    rules: { chemistry: 0, squadSize: 10, exactQuality: 'gold' },
     reward: 'חבילת 3 שחקני זהב 79+ · לא סחירה',
     clubs: [],
     previewFormation: '433',
@@ -226,7 +228,7 @@ export const officialChallenges: SbcChallenge[] = [
     endsAt: FS_CHALLENGE_ENDS,
     createdBy: 'admin',
     targetScore: null,
-    rules: { chemistry: 14, minSameLeague: 3, minNations: 4, maxClubs: 4, minQuality: 'bronze' },
+    rules: { chemistry: 14, minSameLeague: 3, minNations: 4, maxClubs: 4 },
     reward: 'חבילת זהב · לא סחירה',
     clubs: [],
     previewFormation: '433',
@@ -291,11 +293,11 @@ export const officialChallenges: SbcChallenge[] = [
     id: 'sbc-mm-leipzig-frankfurt',
     title: 'מרקי מאצ׳אפס · RB Leipzig נגד Eintracht Frankfurt',
     kind: 'classic',
-    requirements: '11 שחקנים; לפחות שחקן אחד מ-RB Leipzig או Eintracht Frankfurt, לפחות 4 מועדונים, לפחות שחקן כסף אחד, שחקני ארד ומעלה וכימיה 14. הפרס: חבילת זהב קטנה סחירה.',
+    requirements: '11 שחקנים; לפחות שחקן אחד מ-RB Leipzig או Eintracht Frankfurt, לפחות 4 מועדונים, לפחות שחקן כסף אחד, כרטיסי ארד ומעלה וכימיה 14. הפרס: חבילת זהב קטנה סחירה.',
     endsAt: MARQUEE_MATCHUPS_ENDS,
     createdBy: 'admin',
     targetScore: null,
-    rules: { chemistry: 14, clubsAtLeast: { clubs: ['RB Leipzig', 'Eintracht Frankfurt'], count: 1 }, minClubs: 4, minSilver: 1, minQuality: 'bronze' },
+    rules: { chemistry: 14, clubsAtLeast: { clubs: ['RB Leipzig', 'Eintracht Frankfurt'], count: 1 }, minClubs: 4, minSilver: 1 },
     reward: 'חבילת זהב קטנה · סחירה',
     clubs: ['RB Leipzig', 'Eintracht Frankfurt'],
     previewFormation: '433',
@@ -305,12 +307,12 @@ export const officialChallenges: SbcChallenge[] = [
     id: 'sbc-mm-como-roma',
     title: 'מרקי מאצ׳אפס · Como 1907 נגד AS Roma',
     kind: 'classic',
-    requirements: '11 שחקנים; לפחות שחקן אחד מ-Como 1907 או AS Roma, לפחות 2 מאיטליה, עד 4 ליגות, לפחות שחקן זהב אחד, שחקני כסף ומעלה וכימיה 18. הפרס: חבילת שחקני אלקטרום קטנה סחירה.',
+    requirements: '11 שחקנים; לפחות שחקן אחד מ-Como 1907 או AS Roma, לפחות 2 מאיטליה, עד 4 ליגות, לפחות שחקן זהב אחד, כל הכרטיסים כסף ומעלה וכימיה 18. הפרס: חבילת אלקטרום קטנה סחירה.',
     endsAt: MARQUEE_MATCHUPS_ENDS,
     createdBy: 'admin',
     targetScore: null,
     rules: { chemistry: 18, clubsAtLeast: { clubs: ['Como 1907', 'AS Roma'], count: 1 }, nationAtLeast: [{ nation: N.italy, count: 2 }], maxLeagues: 4, minGold: 1, minQuality: 'silver' },
-    reward: 'חבילת שחקני אלקטרום קטנה · סחירה',
+    reward: 'חבילת אלקטרום קטנה · סחירה',
     clubs: ['Como 1907', 'AS Roma'],
     previewFormation: '433',
     createdAt: '2026-10-09T18:00:00.000Z',
@@ -319,7 +321,7 @@ export const officialChallenges: SbcChallenge[] = [
     id: 'sbc-mm-real-villarreal',
     title: 'מרקי מאצ׳אפס · Real Madrid נגד Villarreal CF',
     kind: 'classic',
-    requirements: '11 שחקנים; לפחות 2 שחקנים מ-Real Madrid או Villarreal CF, לפחות 3 מלה ליגה, עד 4 מאותה ליגה, לפחות שחקן זהב אחד, שחקני כסף ומעלה וכימיה 22. הפרס: חבילת זהב סחירה.',
+    requirements: '11 שחקנים; לפחות 2 שחקנים מ-Real Madrid או Villarreal CF, לפחות 3 מ-LaLiga, עד 4 מאותה ליגה, לפחות שחקן זהב אחד, כל הכרטיסים כסף ומעלה וכימיה 22. הפרס: חבילת זהב סחירה.',
     endsAt: MARQUEE_MATCHUPS_ENDS,
     createdBy: 'admin',
     targetScore: null,
@@ -337,12 +339,39 @@ export const officialChallenges: SbcChallenge[] = [
     endsAt: MARQUEE_MATCHUPS_ENDS,
     createdBy: 'admin',
     targetScore: null,
-    rules: { chemistry: 26, clubsAtLeast: { clubs: ['Liverpool', 'Manchester City'], count: 2 }, leagueAtLeast: [{ league: L.prem, count: 3 }], minClubs: 3,  minRating: 75 },
+    rules: { chemistry: 26, clubsAtLeast: { clubs: ['Liverpool', 'Manchester City'], count: 2 }, leagueAtLeast: [{ league: L.prem, count: 3 }], minClubs: 3, maxSameNation: 4, minRating: 75 },
     reward: 'חבילת אלקטרום גדולה · סחירה',
     clubs: ['Liverpool', 'Manchester City'],
     previewFormation: '433',
     createdAt: '2026-10-09T18:00:00.000Z',
   },
+  {
+    id: 'sbc-upgrade-80x5',
+    title: 'שדרוג · 5×80+',
+    kind: 'classic',
+    requirements: 'הפרס הוא חבילת 5 שחקני זהב בדירוג 80 ומעלה, לא סחירה. FUT.GG מסמן את האתגר כמתחדש כל 48 שעות; דרישות ההגשה המדויקות לא הופיעו בפירוט FUTBIN הזמין, ולכן לא הומצאו כאן תנאי סגל.',
+    endsAt: UPGRADE_80X5_ENDS,
+    createdBy: 'admin',
+    targetScore: null,
+    rules: null,
+    reward: 'חבילת 5 שחקני זהב 80+ · לא סחירה',
+    clubs: [],
+    createdAt: '2026-10-14T12:00:00.000Z',
+  },
+  {
+    id: 'sbc-fs-efl-pick',
+    title: 'בחירת Future Stars · האליפות האנגלית',
+    kind: 'streamlined',
+    requirements: 'בחירת Future Stars אחת מתוך Fer López, Will Lankshear, Othmane Maamma ו-Divine Mukasa. יעד ניקוד הפריט: 17,000.',
+    endsAt: EFL_FUTURE_STARS_ENDS,
+    createdBy: 'admin',
+    targetScore: 17000,
+    rules: null,
+    reward: 'EFL Championship Future Stars Pick · לא סחירה',
+    clubs: [],
+    createdAt: '2026-10-14T12:00:00.000Z',
+  },
+
 
   {
     id: 'sbc-dfg-akliouche',
