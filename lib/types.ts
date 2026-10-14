@@ -143,6 +143,8 @@ export type CardQuality = 'bronze' | 'silver' | 'gold';
 
 export type SquadRules = {
   chemistry: number;
+  /** Expected number of submitted items when the SBC does not use a standard 11-player squad. */
+  squadSize?: number;
   minRating?: number;
   minNations?: number;
   maxSameLeague?: number;
