@@ -178,7 +178,7 @@ export default function SbcScreen() {
       <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: 'flex-start' }}>
         <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: 'right', width: '100%' }}>מחשבון Streamlined</Text>
       </Pressable>
-      <Muted>מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.</Muted>
+      <Muted>SBCs פעילים מתעדכנים לפי תאריך הסיום שלהם. אתגרי קבע נשארים זמינים גם לאחר שהאתגרים הזמניים פגים.</Muted>
       {app.user?.isAdmin ? <Button label="אתגר SBC חדש" variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
       {!challenges.length ? <Muted>אין כרגע SBC פעילים.</Muted> : null}
       {rows.map((row, rowIndex) => (

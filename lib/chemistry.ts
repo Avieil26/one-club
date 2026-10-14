@@ -437,7 +437,8 @@ function buildChecks(
   rating: number | null,
   rules: SquadRules | null,
 ): RuleCheck[] {
-  const checks: RuleCheck[] = [{ label: `11 שחקנים (${players.length})`, ok: players.length === 11 }];
+  const expectedPlayers = rules?.squadSize ?? 11;
+  const checks: RuleCheck[] = [{ label: `${expectedPlayers} שחקנים (${players.length})`, ok: players.length === expectedPlayers }];
   const targetChem = rules?.chemistry ?? 0;
   if (targetChem > 0) checks.push({ label: `כימיה ${targetChem} (עכשיו ${chemistry})`, ok: chemistry >= targetChem });
   if (!rules) return checks;
@@ -493,6 +494,13 @@ function buildChecks(
       ok: highest >= rules.sameNationAtLeast,
     });
   }
+  if (rules.maxSameNation) {
+    const highest = Math.max(0, ...countBy(players, (player) => player.nation).values());
+    checks.push({
+      label: `עד ${rules.maxSameNation} מאותה מדינה (${highest})`,
+      ok: highest <= rules.maxSameNation,
+    });
+  }
   for (const rule of rules.nationAtLeast ?? []) {
     const count = players.filter((player) => player.nation === rule.nation).length;
     checks.push({ label: `לפחות ${rule.count} מ${rule.nation} (${count})`, ok: count >= rule.count });
@@ -535,7 +543,7 @@ function buildChecks(
   if (rules.exactQuality) {
     const label = rules.exactQuality === 'gold' ? 'זהב' : rules.exactQuality === 'silver' ? 'כסף' : 'ארד';
     const count = players.filter((player) => cardQuality(player.rating) === rules.exactQuality).length;
-    checks.push({ label: `כל הכרטיסים ${label} (${count}/11)`, ok: players.length === 11 && count === 11 });
+    checks.push({ label: `כל הכרטיסים ${label} (${count}/${expectedPlayers})`, ok: players.length === expectedPlayers && count === expectedPlayers });
   }
   return checks;
 }
