@@ -89,7 +89,6 @@ async function findTotwCard(spec) {
     const matches = rows.filter((card) => isTotw27(card) && Number(card.overall) === spec.rating);
     const hit = matches.find((card) => cardMatchesName(card, spec));
     if (hit) return hit;
-    if (matches.length === 1) return matches[0];
   }
   return null;
 }
@@ -120,9 +119,9 @@ function parseAttrs(html) {
   for (const match of slice.matchAll(/attribute([A-Za-z]+):(\d+)/g)) {
     if (raw[match[1]] == null) raw[match[1]] = Number(match[2]);
   }
-  const attrs = ATTRS.map((name) => raw[name] ?? 0);
-  if (attrs.length !== 34 || attrs.filter((value) => value > 0).length < 10) return null;
-  return attrs;
+  const present = ATTRS.filter((name) => raw[name] != null).length;
+  if (present !== ATTRS.length) return null;
+  return ATTRS.map((name) => raw[name]);
 }
 
 function parsePlaystyles(html, plusCount) {
@@ -162,13 +161,14 @@ async function fetchFullCard(spec, rosterByEaId) {
     ...(positions.length ? { positions } : {}),
     ...(playstyles.length ? { playstyles } : {}),
   };
+  const foot = hit.foot === 'Left' ? 'L' : hit.foot === 'Right' ? 'R' : null;
   const meta = {
-    foot: hit.foot === 'Left' ? 'L' : 'R',
+    foot,
     sm: Number(hit.skillMoves),
     wf: Number(hit.weakFoot),
     attrs,
   };
-  if (!Number.isInteger(meta.sm) || meta.sm < 1 || meta.sm > 5 || !Number.isInteger(meta.wf) || meta.wf < 1 || meta.wf > 5) {
+  if (!meta.foot || !Number.isInteger(meta.sm) || meta.sm < 1 || meta.sm > 5 || !Number.isInteger(meta.wf) || meta.wf < 1 || meta.wf > 5) {
     throw new Error(`Incomplete foot / skill-move / weak-foot data for ${spec.query}; refusing a partial import.`);
   }
   return {
@@ -250,6 +250,7 @@ async function main() {
     id: row.id,
     q: row.q,
     eaId: row.baseEaId,
+    cardEaId: row.cardEaId,
     rating: row.rating,
     position: row.position,
     face: [row.row.face.pac, row.row.face.sho, row.row.face.pas, row.row.face.dri, row.row.face.def, row.row.face.phy],
