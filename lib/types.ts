@@ -153,6 +153,7 @@ export type SquadRules = {
   maxSameClub?: number;
   minSameLeague?: number;
   sameNationAtLeast?: number;
+  maxSameNation?: number;
   /** At least `count` players whose nation is any of `nations`. */
   nationsAtLeast?: { nations: string[]; count: number };
   nationAtLeast?: { nation: string; count: number }[];
