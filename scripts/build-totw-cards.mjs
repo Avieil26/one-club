@@ -145,6 +145,14 @@ async function search(q) {
 
 function pick(rows, spec) {
   const totw = rows.filter((p) => p.rarityName === 'Team of the week' && String(p.game) === '27');
+  if (extra) {
+    // New weekly items must match exact FUT.GG item ID and rating; never fall back to an older TOTW version.
+    return totw.find((p) =>
+      Number(p.eaId) === Number(spec.cardEaId) &&
+      Number(p.overall) === Number(spec.rating) &&
+      Number(p.basePlayerEaId) === Number(spec.eaId)
+    ) || null;
+  }
   return (
     totw.find((p) => p.overall === spec.rating && (spec.eaId == null || p.basePlayerEaId === spec.eaId)) ||
     totw.find((p) => spec.eaId == null || p.basePlayerEaId === spec.eaId) ||
