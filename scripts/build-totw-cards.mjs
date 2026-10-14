@@ -191,7 +191,8 @@ const { outside, rim, dist } = maskFrom(shellSource);
 let shell;
 if (extra) {
   shell = Buffer.from(shellSource);
-  PLAYERS = JSON.parse(await readFile('assets/data/totw3-specs.json', 'utf8'));
+  const specsFile = process.argv[3] || 'totw3-specs.json';
+  PLAYERS = JSON.parse(await readFile(path.join('assets/data', specsFile), 'utf8'));
   console.log('extra cards', PLAYERS.length);
 } else {
   shell = Buffer.from(preview);
@@ -300,13 +301,15 @@ for (const spec of jobs) {
   console.log('wrote', file);
 }
 
-const raphinhaPath = path.join(outDir, 'raphinha-totw-built.png');
-const raphinha = await sharp(raphinhaPath).ensureAlpha().raw().toBuffer();
-for (let k = 0; k < W * H; k++) {
-  if (dist[k] > 18) continue;
-  const i = k * 4;
-  if (isGold(raphinha[i], raphinha[i + 1], raphinha[i + 2])) continue;
-  raphinha[i + 3] = 0;
+if (!extra) {
+  const raphinhaPath = path.join(outDir, 'raphinha-totw-built.png');
+  const raphinha = await sharp(raphinhaPath).ensureAlpha().raw().toBuffer();
+  for (let k = 0; k < W * H; k++) {
+    if (dist[k] > 18) continue;
+    const i = k * 4;
+    if (isGold(raphinha[i], raphinha[i + 1], raphinha[i + 2])) continue;
+    raphinha[i + 3] = 0;
+  }
+  await sharp(raphinha, { raw: { width: W, height: H, channels: 4 } }).png().toFile(raphinhaPath);
+  console.log('clipped raphinha');
 }
-await sharp(raphinha, { raw: { width: W, height: H, channels: 4 } }).png().toFile(raphinhaPath);
-console.log('clipped raphinha');
