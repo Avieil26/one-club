@@ -7,10 +7,12 @@ import { Button, Muted, Screen, Title } from '@/components/ui';
 import { CareerScoutView } from '@/components/CareerScoutView';
 import { CAREER_SCOUT_PLAYERS } from '@/lib/careerScoutData';
 import { useApp } from '@/lib/store';
+import { useLocale } from '@/lib/i18n';
 
 export default function CareerScreen() {
   const app = useApp();
   const router = useRouter();
+  const { t, isRTL } = useLocale();
   const params = useLocalSearchParams<{ tab?: string }>();
   const [careerTab, setCareerTab] = useState<'scout' | 'challenges'>(
     params.tab === 'challenges' ? 'challenges' : 'scout',
@@ -19,14 +21,14 @@ export default function CareerScreen() {
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="career">
       {/* MODE SWITCHER TABS */}
-      <View style={styles.tabSwitcher}>
+      <View style={[styles.tabSwitcher, { flexDirection: isRTL ? 'row-reverse' : 'row' }]}>
         <Pressable
           accessibilityRole="button"
           onPress={() => setCareerTab('scout')}
           style={[styles.switchBtn, careerTab === 'scout' && styles.switchBtnActive]}
         >
           <Text style={[styles.switchBtnText, careerTab === 'scout' && styles.switchBtnTextActive]}>
-            🌟 סקאוטינג כישרונות ({CAREER_SCOUT_PLAYERS.length})
+            {t('career.scouting')} ({CAREER_SCOUT_PLAYERS.length})
           </Text>
         </Pressable>
 
@@ -41,7 +43,7 @@ export default function CareerScreen() {
               careerTab === 'challenges' && styles.switchBtnTextActive,
             ]}
           >
-            🏆 אתגרי קריירה
+            {t('career.badge')}
           </Text>
         </Pressable>
       </View>
@@ -50,10 +52,10 @@ export default function CareerScreen() {
         <CareerScoutView onSwitchToChallenges={() => setCareerTab('challenges')} />
       ) : (
         <View style={{ gap: 14 }}>
-          <Title>אתגרי קריירה</Title>
-          <Muted>אתגר, צילום, וקרדיט אחרי אישור. אחרי 5 אישורים ההגשה עולה מיד.</Muted>
+          <Title>{t('career.title')}</Title>
+          <Muted>{t('career.description')}</Muted>
           {app.user?.isAdmin ? (
-            <Button label="אתגר חדש" onPress={() => router.push('/career/new')} />
+            <Button label={t('career.newChallenge')} onPress={() => router.push('/career/new')} />
           ) : null}
           <View style={{ gap: 14 }}>
             {app.challenges.map((challenge) => (
