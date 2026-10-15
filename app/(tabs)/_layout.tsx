@@ -3,9 +3,11 @@ import { Platform, Text, View, type ColorValue } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
+  const { t } = useLanguage();
   const native = Platform.OS !== 'web';
 
   return (
@@ -28,15 +30,15 @@ export default function TabLayout() {
         tabBarLabelStyle: { fontSize: 11, fontWeight: '800' },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'בית', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⌂" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="career" options={{ title: 'קריירה', tabBarActiveTintColor: colors.career, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="★" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="ultimate" options={{ title: 'אולטימייט', tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="●" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="index" options={{ title: t('בית', 'Home'), tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⌂" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="career" options={{ title: t('קריירה', 'Career'), tabBarActiveTintColor: colors.career, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="★" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="ultimate" options={{ title: t('אולטימייט', 'Ultimate Team'), tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="●" color={color} focused={focused} /> }} />
       <Tabs.Screen name="champions" options={{ title: 'FUT Champions', tabBarActiveTintColor: '#F04A52', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="🏆" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="grounds" options={{ title: 'גראונדס', tabBarActiveTintColor: colors.green, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="☰" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="grounds" options={{ title: t('גראונדס', 'Grounds'), tabBarActiveTintColor: colors.green, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="☰" color={color} focused={focused} /> }} />
       <Tabs.Screen name="sbc" options={{ title: 'SBC', tabBarActiveTintColor: colors.copper, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▦" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="games" options={{ title: 'משחקונים', tabBarActiveTintColor: '#E23B57', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="✦" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="board" options={{ title: 'לוח', tabBarActiveTintColor: '#F4F6F8', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⬡" color={color} focused={focused} /> }} />
-      <Tabs.Screen name="market" options={{ title: 'שחקנים', tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▨" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="games" options={{ title: t('משחקונים', 'Mini-games'), tabBarActiveTintColor: '#E23B57', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="✦" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="board" options={{ title: t('לוח', 'Community Board'), tabBarActiveTintColor: '#F4F6F8', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⬡" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="market" options={{ title: t('שחקנים', 'Players'), tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▨" color={color} focused={focused} /> }} />
     </Tabs>
   );
 }

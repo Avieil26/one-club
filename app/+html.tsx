@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 export default function Root({ children }: { children: ReactNode }) {
   return (
-    <html lang="he" dir="rtl">
+    <html>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -19,7 +19,7 @@ export default function Root({ children }: { children: ReactNode }) {
 const responsiveBackground = `
 body {
   background-color: #10211A;
-  direction: rtl;
+  direction: inherit;
 }
 *::-webkit-scrollbar {
   width: 10px;

@@ -4,6 +4,7 @@ import { Image, Pressable, ScrollView, Text, TextInput, useWindowDimensions, Vie
 import { NationFlag } from '@/components/NationFlag';
 import { TypeShell } from '@/components/PortraitCard';
 import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 import { PLAYERS } from '@/lib/fcPlayers';
 import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import {
@@ -48,6 +49,8 @@ export function PlayerFilter({
   onChange: (next: PlayerFilters) => void;
   onClose: () => void;
 }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { height: windowHeight } = useWindowDimensions();
   const [panel, setPanel] = useState<Panel>('menu');
   const [leagueQuery, setLeagueQuery] = useState('');
@@ -80,11 +83,11 @@ export function PlayerFilter({
   }
 
   const title =
-    panel === 'menu' ? 'סינון' : panel === 'kind' ? 'סוג קלף' : panel === 'nation' ? 'מדינה' : panel === 'squad' ? 'ליגה וקבוצה' : panel === 'position' ? 'עמדה' : 'דירוג';
+    panel === 'menu' ? t('סינון', 'Filters') : panel === 'kind' ? t('סוג קלף', 'Card type') : panel === 'nation' ? t('מדינה', 'Nation') : panel === 'squad' ? t('ליגה וקבוצה', 'League & club') : panel === 'position' ? t('עמדה', 'Position') : t('דירוג', 'Rating');
 
   return (
     <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel="סגור סינון" onPress={onClose} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.45)' }} />
+      <Pressable accessibilityRole="button" accessibilityLabel={t('סגור סינון', 'Close filters')} onPress={onClose} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.45)' }} />
       <View
         style={{
           width: '100%',
@@ -99,23 +102,23 @@ export function PlayerFilter({
           overflow: 'hidden',
         }}
       >
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: rtl ? 'row' : 'row-reverse', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', justifyContent: 'space-between' }}>
           <Text style={{ color: TEXT, fontSize: 18, fontWeight: '500' }}>{title}</Text>
           <Pressable accessibilityRole="button" onPress={panel === 'menu' ? onClose : () => setPanel('menu')}>
-            <Text style={{ color: QUIET, fontSize: 14, fontWeight: '500' }}>{panel === 'menu' ? 'סגור' : 'חזרה'}</Text>
+            <Text style={{ color: QUIET, fontSize: 14, fontWeight: '500' }}>{panel === 'menu' ? t('סגור', 'Close') : t('חזרה', 'Back')}</Text>
           </Pressable>
         </View>
         <View style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
 
         {panel === 'menu' ? (
           <View>
-            <MenuRow label="סוג קלף" value={filters.kind === 'all' ? '' : kindLabel(filters.kind)} onPress={() => setPanel('kind')} />
-            <MenuRow label="מדינה" value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
-            <MenuRow label="ליגה וקבוצה" value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
-            <MenuRow label="עמדה" value={filters.position ?? ''} onPress={() => setPanel('position')} />
-            <MenuRow label="דירוג" value={ratingLabel(filters, choices.ratingMin, choices.ratingMax)} onPress={() => setPanel('rating')} />
+            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind)} onPress={() => setPanel('kind')} />
+            <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
+            <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
+            <MenuRow label={t('עמדה', 'Position')} value={filters.position ?? ''} onPress={() => setPanel('position')} />
+            <MenuRow label={t('דירוג', 'Rating')} value={ratingLabel(filters, choices.ratingMin, choices.ratingMax)} onPress={() => setPanel('rating')} />
             <Pressable accessibilityRole="button" onPress={() => onChange(EMPTY_FILTERS)} style={{ alignSelf: 'center', marginTop: 14, minHeight: 32, justifyContent: 'center' }}>
-              <Text style={{ color: QUIET, fontWeight: '500' }}>נקה</Text>
+              <Text style={{ color: QUIET, fontWeight: '500' }}>{t('נקה', 'Clear all')}</Text>
             </Pressable>
           </View>
         ) : null}
@@ -159,13 +162,13 @@ export function PlayerFilter({
         {panel === 'squad' ? (
           <View style={{ flex: 1, minHeight: 0, flexDirection: 'row', direction: 'rtl', gap: 12, overflow: 'hidden' }}>
             <View style={{ flex: 1, minWidth: 0, minHeight: 0, gap: 8, overflow: 'hidden' }}>
-              <Text style={{ color: QUIET, fontWeight: '500', textAlign: 'right' }}>ליגה</Text>
+              <Text style={{ color: QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left' }}>{t('ליגה', 'League')}</Text>
               <TextInput
                 value={leagueQuery}
                 onChangeText={setLeagueQuery}
-                placeholder="חיפוש ליגה"
+                placeholder={t('חיפוש ליגה', 'Search leagues')}
                 placeholderTextColor={QUIET}
-                style={{ color: TEXT, borderBottomWidth: 1, borderBottomColor: LINE, paddingVertical: 6, textAlign: 'right', fontWeight: '500' }}
+                style={{ color: TEXT, borderBottomWidth: 1, borderBottomColor: LINE, paddingVertical: 6, textAlign: rtl ? 'right' : 'left', fontWeight: '500' }}
               />
               <ScrollView style={{ flex: 1, minHeight: 0 }}>
                 {leagues.map((league) => (
@@ -178,16 +181,16 @@ export function PlayerFilter({
             </View>
             <View style={{ width: 1, backgroundColor: LINE }} />
             <View style={{ flex: 1, minWidth: 0, minHeight: 0, gap: 8, overflow: 'hidden' }}>
-              <Text style={{ color: QUIET, fontWeight: '500', textAlign: 'right' }}>קבוצה</Text>
+              <Text style={{ color: QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left' }}>{t('קבוצה', 'Club')}</Text>
               <ScrollView style={{ flex: 1, minHeight: 0 }}>
                 {filters.league ? (
                   clubs.map((club) => (
                     <Pressable key={club} accessibilityRole="button" onPress={() => toggleClub(club)} style={{ minHeight: 40, justifyContent: 'center' }}>
-                      <Text style={{ color: filters.club === club ? TEXT : QUIET, fontWeight: '500', textAlign: 'right', textDecorationLine: filters.club === club ? 'underline' : 'none' }}>{club}</Text>
+                      <Text style={{ color: filters.club === club ? TEXT : QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left', textDecorationLine: filters.club === club ? 'underline' : 'none' }}>{club}</Text>
                     </Pressable>
                   ))
                 ) : (
-                  <Text style={{ color: QUIET, fontWeight: '500', textAlign: 'right' }}>בחרו ליגה</Text>
+                  <Text style={{ color: QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left' }}>{t('בחרו ליגה', 'Select a league')}</Text>
                 )}
               </ScrollView>
             </View>
@@ -236,7 +239,7 @@ export function PlayerFilter({
               max={choices.ratingMax}
               onChange={(maxRating) => onChange({ ...filters, maxRating })}
             />
-            <Text style={{ color: QUIET, fontWeight: '500', textAlign: 'right' }}>לחיצה על המספר מבטלת את הקצה</Text>
+            <Text style={{ color: QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left' }}>{t('לחיצה על המספר מבטלת את הקצה', 'Tap the number to clear that limit')}</Text>
           </View>
         ) : null}
         </View>

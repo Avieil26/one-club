@@ -1,18 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 
 export default function ChampionsComingSoon() {
+  const { t } = useLanguage();
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.icon}>🏆</Text>
         <Text style={styles.title}>FUT Champions</Text>
-        <Text style={styles.status}>בקרוב</Text>
+        <Text style={styles.status}>{t('בקרוב', 'Coming soon')}</Text>
         <Text style={styles.message}>
-          מרכז FUT Champions החדש נמצא בהכנה.
+          {t('מרכז FUT Champions החדש נמצא בהכנה.', 'The new FUT Champions hub is in development.')}
           {'\n'}
-          הוא ייפתח באתר לאחר שהגרסה הסופית תהיה מוכנה.
+          {t('הוא ייפתח באתר לאחר שהגרסה הסופית תהיה מוכנה.', 'It will be available here once the final version is ready.')}
         </Text>
       </View>
     </View>

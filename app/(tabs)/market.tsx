@@ -19,6 +19,7 @@ import { useColumns } from '@/components/TileGrid';
 import { Button, colors, Muted, Title } from '@/components/ui';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
+import { useLanguage } from '@/lib/language';
 import { EMPTY_FILTERS, filtersActive, playerMatches, type PlayerFilters } from '@/lib/playerFilter';
 
 const PAGE_SIZE = 36;
@@ -59,6 +60,7 @@ function Pager({
   onNext: () => void;
   onJump: (page: number) => void;
 }) {
+  const { t, language } = useLanguage();
   const windowPages = useMemo(() => {
     if (totalPages <= 1) return [] as number[];
     const pages: number[] = [];
@@ -73,14 +75,14 @@ function Pager({
 
   return (
     <View style={{ gap: 10, marginVertical: 8 }}>
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-        <Button label="הקודם" variant="ghost" disabled={page <= 1} onPress={onPrev} />
+      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+        <Button label={t('הקודם', 'Previous')} variant="ghost" disabled={page <= 1} onPress={onPrev} />
         <Text style={{ color: colors.text, fontWeight: '800', minWidth: 88, textAlign: 'center' }}>
           {page} / {totalPages}
         </Text>
-        <Button label="הבא" variant="ghost" disabled={page >= totalPages} onPress={onNext} />
+        <Button label={t('הבא', 'Next')} variant="ghost" disabled={page >= totalPages} onPress={onNext} />
       </View>
-      <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
+      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
         {windowPages[0] > 1 ? (
           <PageChip label="1" active={false} onPress={() => onJump(1)} />
         ) : null}
@@ -121,6 +123,8 @@ function PageChip({ label, active, onPress }: { label: string; active: boolean; 
 }
 
 export default function MarketScreen() {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -238,15 +242,15 @@ export default function MarketScreen() {
               padding: 14,
             }}
           >
-            <Title>שחקנים</Title>
+            <Title>{t('שחקנים', 'Players')}</Title>
             <Muted>
-              {PLAYERS.length.toLocaleString('he-IL')} קלפים במאגר · {PAGE_SIZE} בעמוד · לחיצה פותחת פרטים מלאים.
+              {PLAYERS.length.toLocaleString(language === 'he' ? 'he-IL' : 'en-US')} {t('קלפים במאגר', 'cards in the database')} · {PAGE_SIZE} {t('בעמוד', 'per page')} · {t('לחיצה פותחת פרטים מלאים.', 'Select a card to view full details.')}
             </Muted>
-            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+            <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center', gap: 10 }}>
               <View
                 style={{
                   flex: 1,
-                  flexDirection: 'row-reverse',
+                  flexDirection: rtl ? 'row-reverse' : 'row',
                   alignItems: 'center',
                   backgroundColor: 'rgba(16, 28, 24, 0.92)',
                   borderRadius: 14,
@@ -258,14 +262,14 @@ export default function MarketScreen() {
                 <TextInput
                   value={query}
                   onChangeText={setQuery}
-                  placeholder="חיפוש לפי שם, עמדה, קבוצה או ליגה..."
+                  placeholder={t('חיפוש לפי שם, עמדה, קבוצה או ליגה...', 'Search by name, position, club or league...')}
                   placeholderTextColor={colors.muted}
                   style={{
                     flex: 1,
                     color: colors.text,
                     paddingVertical: 12,
                     fontSize: 16,
-                    textAlign: 'right',
+                    textAlign: rtl ? 'right' : 'left',
                   }}
                 />
                 {isSearching ? (
@@ -273,7 +277,7 @@ export default function MarketScreen() {
                 ) : query ? (
                   <Pressable
                     accessibilityRole="button"
-                    accessibilityLabel="נקה חיפוש"
+                    accessibilityLabel={t('נקה חיפוש', 'Clear search')}
                     onPress={() => {
                       setQuery('');
                       setDebouncedQuery('');
@@ -304,14 +308,14 @@ export default function MarketScreen() {
                     fontSize: 16,
                   }}
                 >
-                  סינון {filtersActive(filters) ? '●' : ''}
+                  {t('סינון', 'Filters')} {filtersActive(filters) ? '●' : ''}
                 </Text>
               </Pressable>
             </View>
-            <Text style={{ color: colors.muted, textAlign: 'right', fontWeight: '700' }}>
+            <Text style={{ color: colors.muted, textAlign: rtl ? 'right' : 'left', fontWeight: '700' }}>
               {players.length === 0
-                ? 'אין תוצאות'
-                : `מציג ${from}–${to} מתוך ${players.length.toLocaleString('he-IL')}`}
+                ? t('אין תוצאות', 'No results')
+                : `${t('מציג', 'Showing')} ${from}–${to} ${t('מתוך', 'of')} ${players.length.toLocaleString(language === 'he' ? 'he-IL' : 'en-US')}`}
             </Text>
           </View>
         }
@@ -332,11 +336,11 @@ export default function MarketScreen() {
         }
         ListEmptyComponent={
           <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 24, fontWeight: '700' }}>
-            לא נמצאו שחקנים לחיפוש הזה
+            {t('לא נמצאו שחקנים לחיפוש הזה', 'No players match this search')}
           </Text>
         }
         renderItem={({ item: row }) => (
-          <View style={{ flexDirection: 'row-reverse', gap, marginBottom: gap }}>
+          <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', gap, marginBottom: gap }}>
             {row.map((player: FcPlayer) => (
               <Pressable
                 key={player.id}

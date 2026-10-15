@@ -5,6 +5,7 @@ import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-n
 import { Screen } from '@/components/ui';
 import { careerFont } from '@/lib/careerCardTheme';
 import { portraitByEnglish } from '@/lib/clubQuiz';
+import { useLanguage } from '@/lib/language';
 
 const CREAM = '#F6F1E4';
 const GOLD = '#E8C46A';
@@ -17,6 +18,8 @@ function face(position: string): ImageStyle | null {
 
 export default function GamesScreen() {
   const router = useRouter();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const saka = portraitByEnglish('Bukayo Saka');
   const faces = ['Lamine Yamal', 'Erling Haaland', 'Bukayo Saka', 'Pedri']
     .map((name) => portraitByEnglish(name))
@@ -25,17 +28,17 @@ export default function GamesScreen() {
   return (
     <Screen scene="games" maxWidth={460}>
       <View style={styles.stack}>
-      <Text style={styles.eyebrow}>משחקים קצרים</Text>
-      <Text style={styles.title}>משחקונים</Text>
-      <Text style={styles.lead}>ארבעה משחקים על הקלפים שבמאגר.</Text>
+      <Text style={[styles.eyebrow, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('משחקים קצרים', 'QUICK GAMES')}</Text>
+      <Text style={[styles.title, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('משחקונים', 'Mini-games')}</Text>
+      <Text style={[styles.lead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('ארבעה משחקים על הקלפים שבמאגר.', 'Four games built around the cards in the database.')}</Text>
 
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/who')}>
         <LinearGradient colors={['#ff8a1e', '#ff2f78', '#6a22d6']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.who}>
-          <Text style={styles.whoKicker}>סימון</Text>
-          <Text style={styles.whoTitle}>נחש מי</Text>
-          <Text style={styles.whoBody}>משבצות בשחור־לבן. לוחצים רק על מי שמתאים לשאלה.</Text>
+          <Text style={styles.whoKicker}>{t('סימון', 'MARK')}</Text>
+          <Text style={styles.whoTitle}>{t('נחש מי', 'Guess Who')}</Text>
+          <Text style={styles.whoBody}>{t('משבצות בשחור־לבן. לוחצים רק על מי שמתאים לשאלה.', 'A black-and-white grid. Select only players who match the question.')}</Text>
           <View style={styles.playLight}>
-            <Text style={styles.playLightText}>שחק</Text>
+            <Text style={styles.playLightText}>{t('שחק', 'PLAY')}</Text>
           </View>
         </LinearGradient>
       </Pressable>
@@ -48,11 +51,11 @@ export default function GamesScreen() {
           />
           <View style={styles.netVeil} />
           <View style={styles.netCopy}>
-            <Text style={styles.netKicker}>לוח</Text>
-            <Text style={styles.whoTitle}>הרשת</Text>
-            <Text style={styles.whoBody}>שורה וטור. שם אחד לכל משבצת, מהגברים שבמאגר.</Text>
+            <Text style={styles.netKicker}>{t('לוח', 'GRID')}</Text>
+            <Text style={styles.whoTitle}>{t('הרשת', 'The Grid')}</Text>
+            <Text style={styles.whoBody}>{t('שורה וטור. שם אחד לכל משבצת, מהגברים שבמאגר.', 'A row and a column. Name one player for every square.')}</Text>
             <View style={styles.playLight}>
-              <Text style={styles.playLightText}>שחק</Text>
+              <Text style={styles.playLightText}>{t('שחק', 'PLAY')}</Text>
             </View>
           </View>
         </LinearGradient>
@@ -62,13 +65,13 @@ export default function GamesScreen() {
         <LinearGradient colors={['rgba(92,22,40,0.94)', 'rgba(28,8,14,0.92)']} style={styles.club}>
           {saka ? <Image source={{ uri: saka }} style={[styles.heroPhoto, face('center 12%')]} /> : <View style={styles.heroPhoto} />}
           <View style={styles.clubCopy}>
-            <Text style={styles.kicker}>מועדון</Text>
-            <Text style={styles.clubTitle}>איזה מועדון</Text>
-            <Text style={styles.clubBody}>מזהים את השחקן ובוחרים איפה הוא משחק.</Text>
+            <Text style={styles.kicker}>{t('מועדון', 'CLUB')}</Text>
+            <Text style={[styles.clubTitle, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('איזה מועדון', 'Which Club?')}</Text>
+            <Text style={[styles.clubBody, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מזהים את השחקן ובוחרים איפה הוא משחק.', 'Identify the player and choose which club they play for.')}</Text>
             <View style={styles.play}>
               <View style={styles.inset} />
               <View style={styles.pip} />
-              <Text style={styles.playText}>שחק</Text>
+              <Text style={styles.playText}>{t('שחק', 'PLAY')}</Text>
             </View>
           </View>
         </LinearGradient>
@@ -77,9 +80,9 @@ export default function GamesScreen() {
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/draft')}>
         <LinearGradient colors={['rgba(16,48,36,0.94)', 'rgba(8,16,12,0.92)']} style={styles.draft}>
           <View style={styles.draftCopy}>
-            <Text style={styles.goldKicker}>כמו ב־FC 27</Text>
-            <Text style={styles.draftTitle}>דראפט</Text>
-            <Text style={styles.draftBody}>מערך, קפטן, וחמישה קלפים לכל עמדה.</Text>
+            <Text style={styles.goldKicker}>{t('כמו ב־FC 27', 'FC 27 STYLE')}</Text>
+            <Text style={styles.draftTitle}>{t('דראפט', 'Draft')}</Text>
+            <Text style={styles.draftBody}>{t('מערך, קפטן, וחמישה קלפים לכל עמדה.', 'Formation, captain, and five cards for every position.')}</Text>
           </View>
           <View style={styles.mini}>
             {faces.slice(0, 3).map((photo, index) => (

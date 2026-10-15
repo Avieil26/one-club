@@ -14,6 +14,7 @@ import { TermsConsentModal } from '@/components/TermsConsentModal';
 import { colors } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
+import { LanguageProvider, useLanguage } from '@/lib/language';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -58,8 +59,6 @@ export default function RootLayout() {
   useEffect(() => {
     SplashScreen.hideAsync();
     if (Platform.OS === 'web') {
-      document.documentElement.lang = 'he';
-      document.documentElement.dir = 'rtl';
       const styleId = 'fc27-scroll';
       if (!document.getElementById(styleId)) {
         const style = document.createElement('style');
@@ -93,6 +92,7 @@ export default function RootLayout() {
 
   return (
     <AppProvider>
+      <LanguageProvider>
       <ThemeProvider value={theme}>
         <View style={styles.fill}>
           <View style={styles.fill}>
@@ -108,6 +108,7 @@ export default function RootLayout() {
                 }}>
                 <Stack.Screen name="index" options={{ headerShown: false }} />
                 <Stack.Screen name="login" options={{ headerShown: false }} />
+                <Stack.Screen name="language" options={{ headerShown: false }} />
                 <Stack.Screen name="register" options={{ headerShown: false }} />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               </Stack>
@@ -117,24 +118,28 @@ export default function RootLayout() {
           <NoticeHost />
         </View>
       </ThemeProvider>
+      </LanguageProvider>
     </AppProvider>
   );
 }
 
 function Gate({ children }: { children: React.ReactNode }) {
   const { ready, user } = useApp();
+  const { ready: languageReady, hasSelection } = useLanguage();
   const segments = useSegments();
   const router = useRouter();
   const fromLogin = useRef(segments[0] === 'login' || segments[0] === 'register');
   const [arriving, setArriving] = useState(false);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !languageReady) return;
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
+    const onLanguage = segments[0] === 'language';
     const onLegal = segments[0] === 'legal';
-    if (!user && !onAuth && !onLegal) router.replace('/register');
-    if (user && onAuth) router.replace('/(tabs)');
-  }, [ready, user, segments, router]);
+    if (!user && !onAuth && !onLanguage && !onLegal) router.replace(hasSelection ? '/register' : '/language');
+    if (!user && onAuth && !hasSelection) router.replace('/language');
+    if (user && (onAuth || onLanguage)) router.replace('/(tabs)');
+  }, [ready, languageReady, hasSelection, user, segments, router]);
 
   useEffect(() => {
     if (segments[0] === 'login' || segments[0] === 'register') fromLogin.current = true;
@@ -152,7 +157,7 @@ function Gate({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(timer);
   }, [arriving]);
 
-  if (!ready) {
+  if (!ready || !languageReady) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator color={colors.green} />

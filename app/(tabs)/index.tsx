@@ -15,6 +15,7 @@ import { PLAYERS } from '@/lib/fcPlayers';
 import { displayName } from '@/lib/labels';
 import { openChallenges } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 const doors: {
   href: '/career' | '/ultimate' | '/grounds' | '/sbc' | '/market';
@@ -88,6 +89,10 @@ function DoorButton({
   index: number;
   onPress: () => void;
 }) {
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
+  const label = t(door.label, door.href === '/career' ? 'Career' : door.href === '/ultimate' ? 'Ultimate Team' : door.href === '/grounds' ? 'Grounds' : door.href === '/sbc' ? 'SBC' : 'Players');
+  const hint = t(door.hint, door.href === '/career' ? 'Challenges and proof' : door.href === '/ultimate' ? 'Squads and packs' : door.href === '/grounds' ? 'Find a player' : door.href === '/sbc' ? 'Community solutions' : 'Cards and data');
   return (
     <Pressable
       accessibilityRole="button"
@@ -118,7 +123,7 @@ function DoorButton({
           end={{ x: 0.9, y: 0.7 }}
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
         />
-        <View style={{ flexDirection: 'row', direction: 'rtl', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <View
             style={{
               width: 58,
@@ -147,14 +152,14 @@ function DoorButton({
           </Text>
         </View>
         <View style={{ gap: 4 }}>
-          <Text style={{ color: '#F6F8FC', fontSize: 22, fontWeight: '900', textAlign: 'right' }}>{door.label}</Text>
-          <Text style={{ color: 'rgba(220,230,240,0.72)', fontSize: 13, textAlign: 'right', fontWeight: '600' }}>
-            {door.hint}
+          <Text style={{ color: '#F6F8FC', fontSize: 22, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{label}</Text>
+          <Text style={{ color: 'rgba(220,230,240,0.72)', fontSize: 13, textAlign: rtl ? 'right' : 'left', fontWeight: '600' }}>
+            {hint}
           </Text>
           <View
             style={{
               marginTop: 8,
-              alignSelf: 'flex-end',
+              alignSelf: rtl ? 'flex-end' : 'flex-start',
               height: 3,
               width: 42,
               borderRadius: 2,
@@ -171,30 +176,32 @@ function DoorButton({
 export default function HomeScreen() {
   const router = useRouter();
   const { user, challenges, futPosts, grounds, profiles, likes } = useApp();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const open = openChallenges(challenges);
   const columns = useColumns(5, 2);
   const featured = futPosts.find((post) => post.kind === 'squad');
   const featuredLikes = featured ? likes.filter((like) => like.postId === featured.id).length : 0;
   const stats = [
-    { value: Number(PLAYERS.length).toLocaleString('en-US'), label: 'שחקנים' },
-    { value: String(open.length), label: 'אתגרים פתוחים' },
-    { value: String(grounds.length), label: 'מודעות' },
+    { value: Number(PLAYERS.length).toLocaleString('en-US'), label: t('שחקנים', 'Players') },
+    { value: String(open.length), label: t('אתגרים פתוחים', 'Open challenges') },
+    { value: String(grounds.length), label: t('מודעות', 'Listings') },
   ];
 
   return (
     <Screen scene="home">
       <Rise index={0}>
-        <Text style={{ color: '#FD6502', fontSize: 13, fontWeight: '700', textAlign: 'right', letterSpacing: 1 }}>
+        <Text style={{ color: '#FD6502', fontSize: 13, fontWeight: '700', textAlign: rtl ? 'right' : 'left', letterSpacing: 1 }}>
           1 CLUB
         </Text>
-        <Title>{user ? user.displayName : 'המגרש'}</Title>
-        <Muted>הקהילה הישראלית ל-EA FC 27. לא קשורה ל-EA.</Muted>
+        <Title>{user ? user.displayName : t('המגרש', 'The Pitch')}</Title>
+        <Muted>{t('הקהילה הישראלית ל-EA FC 27. לא קשורה ל-EA.', 'The EA FC 27 community. Not affiliated with EA.')}</Muted>
       </Rise>
       <Rise index={1}>
         <FutzBetaDownload />
       </Rise>
       <Rise index={2}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8 }}>
+        <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8 }}>
           {stats.map((item) => (
             <View
               key={item.label}
@@ -244,7 +251,7 @@ export default function HomeScreen() {
           ))}
         </View>
       </Rise>
-      <View style={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', gap: 12 }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', flexWrap: 'wrap', gap: 12 }}>
         {doors.map((door, index) => (
           <View key={door.href} style={{ width: `${100 / columns - 2}%`, flexGrow: 1, minWidth: columns === 5 ? 150 : '46%' }}>
             <Rise index={index + 3}>
@@ -256,11 +263,11 @@ export default function HomeScreen() {
       {featured ? (
         <Rise index={8}>
           <Card onPress={() => router.push(`/ultimate/${featured.id}`)}>
-            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+            <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center', gap: 10 }}>
               <PlatformMark id={featured.platform} size={40} />
               <View style={{ flex: 1 }}>
-                <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '700', textAlign: 'right' }}>קבוצה מהקהילה</Text>
-                <Text style={{ color: colors.text, fontSize: 18, fontWeight: '700', textAlign: 'right' }}>
+                <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>{t('קבוצה מהקהילה', 'Community squad')}</Text>
+                <Text style={{ color: colors.text, fontSize: 18, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>
                   {displayName(profiles, featured.userId)}
                 </Text>
               </View>
@@ -271,7 +278,7 @@ export default function HomeScreen() {
               body={featured.body}
               avatarUrl={profiles.find((profile) => profile.id === featured.userId)?.avatarUrl}
             />
-            <Muted>{featuredLikes ? `${featuredLikes} לייקים` : 'עדיין בלי לייקים'}</Muted>
+            <Muted>{featuredLikes ? t(`${featuredLikes} לייקים`, `${featuredLikes} likes`) : t('עדיין בלי לייקים', 'No likes yet')}</Muted>
           </Card>
         </Rise>
       ) : null}

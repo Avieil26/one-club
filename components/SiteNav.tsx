@@ -5,11 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LevelChip } from '@/components/OwnerLevelPlate';
 import { communityXp, xpProgress } from '@/lib/communityBoard';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 const TEXT = '#F4F7F2';
 const QUIET = 'rgba(244,247,242,0.62)';
 
-/** Order: בית first (right in RTL), שחקנים last (left). Do NOT use row-reverse — html already has dir=rtl. */
+/** Keep direction controlled by the selected language. */
 const LINKS = [
   { href: '/' as const, label: 'בית' },
   { href: '/career' as const, label: 'קריירה' },
@@ -31,6 +32,8 @@ export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
   const app = useApp();
+  const { t, language, chooseLanguage } = useLanguage();
+  const rtl = language === 'he';
   const { user } = app;
   const progress = user ? xpProgress(communityXp(user.id, app)) : null;
   const insets = useSafeAreaInsets();
@@ -41,7 +44,7 @@ export function SiteNav() {
   const logoNode = (
     <Pressable
       onPress={() => router.push('/')}
-      style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}
+      style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}
     >
       <Image
         source={require('@/assets/images/brand-1club.png')}
@@ -85,13 +88,38 @@ export function SiteNav() {
       }}
     >
       <Text style={{ color: '#FFE08A', fontWeight: '700', fontSize: 13 }}>
-        {user ? 'פרופיל' : 'התחברות'}
+        {user ? t('פרופיל', 'Profile') : t('התחברות', 'Sign in')}
+      </Text>
+    </Pressable>
+  );
+
+  const languageNode = (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={language === 'he' ? 'Switch language to English' : 'החלפת שפה לעברית'}
+      onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
+      style={{
+        minHeight: 32,
+        minWidth: 42,
+        paddingHorizontal: 10,
+        paddingVertical: 4,
+        borderRadius: 16,
+        backgroundColor: 'rgba(22, 30, 24, 0.7)',
+        borderWidth: 1,
+        borderColor: 'rgba(227, 179, 65, 0.45)',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Text style={{ color: '#FFE08A', fontWeight: '800', fontSize: 12 }}>
+        {language === 'he' ? 'EN' : 'עב'}
       </Text>
     </Pressable>
   );
 
   const accountNode = (
     <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
+      {languageNode}
       {progress ? <LevelChip progress={progress} /> : null}
       {profileNode}
     </View>
@@ -124,7 +152,7 @@ export function SiteNav() {
               textAlign: 'center',
             }}
           >
-            {item.label}
+            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : 'Players')}
           </Text>
           {!isMobile ? (
             <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />
@@ -151,7 +179,7 @@ export function SiteNav() {
         <View
           style={{
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: rtl ? 'rtl' : 'ltr',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
@@ -165,7 +193,7 @@ export function SiteNav() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: rtl ? 'rtl' : 'ltr',
             alignItems: 'center',
             gap: 4,
             paddingVertical: 2,
@@ -191,13 +219,13 @@ export function SiteNav() {
       <View
         style={{
           flexDirection: 'row',
-          direction: 'rtl',
+          direction: rtl ? 'rtl' : 'ltr',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 12,
         }}
       >
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
+        <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
           {logoNode}
           {renderLinks()}
         </View>

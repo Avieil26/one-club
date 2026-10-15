@@ -27,6 +27,7 @@ import {
   DetailedAttrGroup,
 } from '@/lib/careerAttributes';
 import { statTone } from '@/lib/playerMeta';
+import { useLanguage } from '@/lib/language';
 
 type FilterTab = 'all' | 'israel' | 'attack' | 'midfield' | 'defense';
 
@@ -45,6 +46,8 @@ function formatEurFull(val: number): string {
 }
 
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [subFilter, setSubFilter] = useState<SubFilterTab>('all');
   const [page, setPage] = useState(1);
@@ -83,27 +86,27 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { direction: rtl ? 'rtl' : 'ltr' }]}>
       {/* TOP HEADER */}
       <View style={styles.topRow}>
         {onSwitchToChallenges ? (
           <Pressable accessibilityRole="button" onPress={onSwitchToChallenges} style={styles.backBtn}>
-            <Text style={styles.backBtnText}>‹ אתגרי קריירה</Text>
+            <Text style={styles.backBtnText}>‹ {t('אתגרי קריירה', 'Career challenges')}</Text>
           </Pressable>
         ) : (
           <View />
         )}
         <View style={styles.careerBadge}>
           <View style={styles.greenDot} />
-          <Text style={styles.careerBadgeText}>{CAREER_SCOUT_PLAYERS.length} שחקנים מומלצים</Text>
+          <Text style={styles.careerBadgeText}>{CAREER_SCOUT_PLAYERS.length} {t('שחקנים מומלצים', 'recommended players')}</Text>
         </View>
       </View>
 
       {/* TITLE */}
-      <View style={styles.titleBlock}>
-        <Text style={styles.mainTitle}>סקאוטינג כישרונות FC 27</Text>
+      <View style={[styles.titleBlock, { direction: rtl ? 'rtl' : 'ltr' }]}>
+        <Text style={styles.mainTitle}>{t('סקאוטינג כישרונות FC 27', 'FC 27 Talent Scouting')}</Text>
         <Text style={styles.subTitle}>
-          שחקנים עם פוטנציאל התפתחות אדיר מכל העמדות • כולל שחקנים כחול-לבן 🇮🇱
+          {t('שחקנים עם פוטנציאל התפתחות אדיר מכל העמדות • כולל שחקנים כחול-לבן 🇮🇱', 'High-potential prospects across every position • including Israeli talents 🇮🇱')}
         </Text>
       </View>
 
@@ -120,7 +123,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'all' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'all' && styles.filterPillTextActive]}>
-            הכל ({CAREER_SCOUT_PLAYERS.length})
+            {t('הכל', 'All')} ({CAREER_SCOUT_PLAYERS.length})
           </Text>
         </Pressable>
 
@@ -140,7 +143,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
               activeTab === 'israel' && styles.israelFilterTextActive,
             ]}
           >
-            🇮🇱 כחול-לבן ({CAREER_SCOUT_PLAYERS.filter(p => p.nation === 'ישראל').length})
+            🇮🇱 {t('כחול-לבן', 'Israeli')} ({CAREER_SCOUT_PLAYERS.filter(p => p.nation === 'ישראל').length})
           </Text>
         </Pressable>
 
@@ -150,7 +153,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'attack' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'attack' && styles.filterPillTextActive]}>
-            התקפה (ST/W)
+            {t('התקפה (ST/W)', 'Attack (ST/W)')}
           </Text>
         </Pressable>
 
@@ -160,7 +163,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'midfield' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'midfield' && styles.filterPillTextActive]}>
-            קישור (CAM/CM)
+            {t('קישור (CAM/CM)', 'Midfield (CAM/CM)')}
           </Text>
         </Pressable>
 
@@ -170,7 +173,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'defense' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'defense' && styles.filterPillTextActive]}>
-            הגנה ושוערים
+            {t('הגנה ושוערים', 'Defence & goalkeepers')}
           </Text>
         </Pressable>
       </ScrollView>
@@ -183,7 +186,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'all' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'all' && styles.subFilterBtnTextActive]}>
-            כל הרמות
+            {t('כל הרמות', 'All levels')}
           </Text>
         </Pressable>
 
@@ -193,7 +196,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, styles.subFilterBtn7077, subFilter === '70-77' && styles.subFilterBtn7077Active]}
         >
           <Text style={[styles.subFilterBtnText, styles.subFilterBtn7077Text, subFilter === '70-77' && styles.subFilterBtn7077TextActive]}>
-            ⭐ רייטינג 70–77 ({CAREER_SCOUT_PLAYERS.filter(p => p.rating >= 70 && p.rating <= 77).length})
+            ⭐ {t('רייטינג', 'Rating')} 70–77 ({CAREER_SCOUT_PLAYERS.filter(p => p.rating >= 70 && p.rating <= 77).length})
           </Text>
         </Pressable>
 
@@ -203,7 +206,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'wonderkids' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'wonderkids' && styles.subFilterBtnTextActive]}>
-            💎 וונדרקידס
+            💎 {t('וונדרקידס', 'Wonderkids')}
           </Text>
         </Pressable>
 
@@ -213,19 +216,19 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'bargains' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'bargains' && styles.subFilterBtnTextActive]}>
-            🏷️ מציאות שוק
+            🏷️ {t('מציאות שוק', 'Market bargains')}
           </Text>
         </Pressable>
       </View>
 
       {/* PAGE SUMMARY STRIP */}
       <View style={styles.pageSummaryStrip}>
-        <View style={styles.pageSummaryInfo}>
+        <View style={[styles.pageSummaryInfo, { alignItems: rtl ? 'flex-start' : 'flex-end' }]}>
           <Text style={styles.pageSummaryTotal}>
-            מציג <Text style={styles.pageSummaryNum}>{filteredPlayers.length > 0 ? startIndex + 1 : 0}–{Math.min(startIndex + PAGE_SIZE, filteredPlayers.length)}</Text> מתוך <Text style={styles.pageSummaryNum}>{filteredPlayers.length}</Text> שחקנים
+            {t('מציג', 'Showing')} <Text style={styles.pageSummaryNum}>{filteredPlayers.length > 0 ? startIndex + 1 : 0}–{Math.min(startIndex + PAGE_SIZE, filteredPlayers.length)}</Text> {t('מתוך', 'of')} <Text style={styles.pageSummaryNum}>{filteredPlayers.length}</Text> {t('שחקנים', 'players')}
           </Text>
           <Text style={styles.pageSummaryPage}>
-            עמוד {currentPage} מתוך {totalPages}
+            {t('עמוד', 'Page')} {currentPage} {t('מתוך', 'of')} {totalPages}
           </Text>
         </View>
 
@@ -233,12 +236,12 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           <View style={styles.quickNavArrows}>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="עמוד קודם"
+              accessibilityLabel={t('עמוד קודם', 'Previous page')}
               disabled={currentPage <= 1}
               onPress={() => setPage((p) => Math.max(1, p - 1))}
               style={[styles.quickNavBtn, currentPage <= 1 && styles.quickNavBtnDisabled]}
             >
-              <Text style={[styles.quickNavBtnText, currentPage <= 1 && styles.quickNavBtnTextDisabled]}>‹ הקודם</Text>
+              <Text style={[styles.quickNavBtnText, currentPage <= 1 && styles.quickNavBtnTextDisabled]}>{t('‹ הקודם', '‹ Previous')}</Text>
             </Pressable>
 
             <View style={styles.quickNavPageBadge}>
@@ -247,12 +250,12 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
 
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="עמוד הבא"
+              accessibilityLabel={t('עמוד הבא', 'Next page')}
               disabled={currentPage >= totalPages}
               onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
               style={[styles.quickNavBtn, currentPage >= totalPages && styles.quickNavBtnDisabled]}
             >
-              <Text style={[styles.quickNavBtnText, currentPage >= totalPages && styles.quickNavBtnTextDisabled]}>הבא ›</Text>
+              <Text style={[styles.quickNavBtnText, currentPage >= totalPages && styles.quickNavBtnTextDisabled]}>{t('הבא ›', 'Next ›')}</Text>
             </Pressable>
           </View>
         ) : null}
@@ -321,7 +324,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                         isIsrael && { color: '#38bdf8' },
                       ]}
                     >
-                      +{player.growth} צמיחה
+                      +{player.growth} {t('צמיחה', 'growth')}
                     </Text>
                   </View>
                 </View>
@@ -336,7 +339,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   <NationFlag nation={player.nation} size={14} />
                   <Text style={styles.metaText}>{player.nation}</Text>
                   <Text style={styles.metaDot}>•</Text>
-                  <Text style={styles.metaText}>בן {player.age}</Text>
+                  <Text style={styles.metaText}>{t('גיל', 'Age')} {player.age}</Text>
                 </View>
 
                 {/* RATING & TACTICAL ROLE */}
@@ -358,11 +361,11 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   <View style={styles.valueGroup}>
                     <Text style={styles.euroVal}>{formatEur(player.marketValueEur)}</Text>
                     <Text style={styles.wageVal}>
-                      • שכר: {formatEur(player.weeklyWageEur)}/שבוע
+                      • {t('שכר', 'Wage')}: {formatEur(player.weeklyWageEur)}/week
                     </Text>
                   </View>
                   <View style={styles.reportBtn}>
-                    <Text style={styles.reportBtnText}>דוח מלא ◄</Text>
+                    <Text style={styles.reportBtnText}>{t('דוח מלא ◄', 'Full report ◄')}</Text>
                   </View>
                 </View>
               </View>
@@ -382,12 +385,12 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
               style={[styles.pagerNavBtn, currentPage <= 1 && styles.pagerNavBtnDisabled]}
             >
               <Text style={[styles.pagerNavBtnText, currentPage <= 1 && styles.pagerNavBtnTextDisabled]}>
-                ‹ עמוד קודם
+                ‹ {t('עמוד קודם', 'Previous page')}
               </Text>
             </Pressable>
 
             <Text style={styles.pagerStatusLabel}>
-              עמוד {currentPage} מתוך {totalPages}
+              {t('עמוד', 'Page')} {currentPage} {t('מתוך', 'of')} {totalPages}
             </Text>
 
             <Pressable
@@ -397,7 +400,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
               style={[styles.pagerNavBtn, currentPage >= totalPages && styles.pagerNavBtnDisabled]}
             >
               <Text style={[styles.pagerNavBtnText, currentPage >= totalPages && styles.pagerNavBtnTextDisabled]}>
-                עמוד הבא ›
+                {t('עמוד הבא', 'Next page')} ›
               </Text>
             </Pressable>
           </View>
@@ -428,9 +431,8 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
         <Text style={styles.advisorEmoji}>🇮🇱</Text>
         <View style={{ flex: 1 }}>
           <Text style={styles.advisorText}>
-            <Text style={styles.advisorHighlight}>גאווה ישראלית ב-FC 27: </Text>
-            אוסקר גלוך באייאקס (86 פוטנציאל), ענאן חלאילי בקריסטל פאלאס (85 פוטנציאל), ודניאל פרץ בסאות׳המפטון (83 פוטנציאל) –
-            לצד שחקני מפתח נוספים כמו למקין, קארצב, תורג׳מן, עבדה, קניקובסקי ופיינגולד!
+            <Text style={styles.advisorHighlight}>{t('גאווה ישראלית ב-FC 27: ', 'Israeli pride in FC 27: ')}</Text>
+            {t('אוסקר גלוך באייאקס (86 פוטנציאל), ענאן חלאילי בקריסטל פאלאס (85 פוטנציאל), ודניאל פרץ בסאות׳המפטון (83 פוטנציאל) – לצד שחקני מפתח נוספים כמו למקין, קארצב, תורג׳מן, עבדה, קניקובסקי ופיינגולד!', 'Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.') }
           </Text>
         </View>
       </View>
@@ -460,6 +462,7 @@ function ScoutDossierModal({
   player: CareerScoutPlayer;
   onClose: () => void;
 }) {
+  const { language, t } = useLanguage();
   const { height: windowHeight } = useWindowDimensions();
   const sheetHeight = Math.max(480, Math.round(windowHeight * 0.93));
   const [showPotential, setShowPotential] = useState(false);
@@ -479,11 +482,11 @@ function ScoutDossierModal({
         {/* MODAL HEADER */}
         <View style={styles.modalTopRow}>
           <Pressable accessibilityRole="button" onPress={onClose} style={styles.modalCloseBtn}>
-            <Text style={styles.modalCloseBtnText}>‹ חזרה לשחקנים</Text>
+            <Text style={styles.modalCloseBtnText}>‹ {t('חזרה לשחקנים', 'Back to players')}</Text>
           </Pressable>
           <View style={styles.careerBadge}>
             <View style={styles.greenDot} />
-            <Text style={styles.careerBadgeText}>דוח סקאוטינג FC 27</Text>
+            <Text style={styles.careerBadgeText}>{t('דוח סקאוטינג FC 27', 'FC 27 SCOUTING REPORT')}</Text>
           </View>
         </View>
 
@@ -521,22 +524,22 @@ function ScoutDossierModal({
 
               <View style={styles.chipsWrap}>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>בן {player.age}</Text>
+                  <Text style={styles.infoChipText}>{t('גיל', 'Age')} {player.age}</Text>
                 </View>
                 <View style={styles.infoChip}>
                   <Text style={styles.infoChipText}>{player.position}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>{player.height} ס״מ</Text>
+                  <Text style={styles.infoChipText}>{player.height} {t('ס״מ', 'cm')}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>רגל {player.foot}</Text>
+                  <Text style={styles.infoChipText}>{t('רגל', 'Foot')} {language === 'he' ? player.foot : (player.foot === 'ימין' ? 'Right' : player.foot)}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>★{player.skills} מיומנות</Text>
+                  <Text style={styles.infoChipText}>★{player.skills} {t('מיומנות', 'Skill moves')}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>★{player.weakFoot} חלשה</Text>
+                  <Text style={styles.infoChipText}>★{player.weakFoot} {t('רגל חלשה', 'Weak foot')}</Text>
                 </View>
               </View>
             </View>
@@ -546,7 +549,7 @@ function ScoutDossierModal({
           <View style={[styles.progPanel, showPotential && styles.progPanelPotential]}>
             <View style={styles.progHead}>
               <View>
-                <Text style={styles.progHeadTitle}>התפתחות בקריירה</Text>
+                <Text style={styles.progHeadTitle}>{t('התפתחות בקריירה', 'Career development')}</Text>
                 <View style={styles.progNumbers}>
                   <Text style={styles.numCur}>{player.rating}</Text>
                   <Text style={styles.numArrow}>➔</Text>
@@ -556,10 +559,10 @@ function ScoutDossierModal({
               <View style={{ alignItems: 'flex-start' }}>
                 <View style={[styles.progPill, showPotential && styles.progPillActive]}>
                   <Text style={[styles.progPillText, showPotential && styles.progPillTextActive]}>
-                    {showPotential ? '🚀 במלוא הפוטנציאל' : `+${player.growth} צמיחה בקריירה`}
+                    {showPotential ? t('🚀 במלוא הפוטנציאל', '🚀 Full potential') : `+${player.growth} ${t('צמיחה בקריירה', 'career growth')}`}
                   </Text>
                 </View>
-                <Text style={styles.progRoleSub}>מעמד: {player.squadRole}</Text>
+                <Text style={styles.progRoleSub}>{t('מעמד:', 'Role:')} {player.squadRole}</Text>
               </View>
             </View>
 
@@ -580,34 +583,34 @@ function ScoutDossierModal({
 
             <View style={styles.progFootRow}>
               <Text style={styles.progFootText}>
-                {showPotential ? `רייטינג מוצג: ${player.potential} (שיא)` : `רייטינג נוכחי: ${player.rating}`}
+                {showPotential ? `${t('רייטינג שיא:', 'Peak rating:')} ${player.potential}` : `${t('רייטינג נוכחי:', 'Current rating:')} ${player.rating}`}
               </Text>
-              <Text style={styles.progFootText}>פוטנציאל שיא: {player.potential}</Text>
+              <Text style={styles.progFootText}>{t('פוטנציאל שיא:', 'Peak potential:')} {player.potential}</Text>
             </View>
           </View>
 
           {/* FINANCES 2x2 */}
           <View style={styles.finGrid2x2}>
             <View style={styles.finTile}>
-              <Text style={styles.finLabel}>שווי שוק מוערך</Text>
+              <Text style={styles.finLabel}>{t('שווי שוק מוערך', 'Estimated market value')}</Text>
               <Text style={[styles.finVal, { color: '#38bdf8' }]}>
                 {formatEurFull(player.marketValueEur)}
               </Text>
             </View>
             <View style={styles.finTile}>
-              <Text style={styles.finLabel}>שכר שבועי מבוקש</Text>
+              <Text style={styles.finLabel}>{t('שכר שבועי מבוקש', 'Requested weekly wage')}</Text>
               <Text style={styles.finVal}>
-                {formatEurFull(player.weeklyWageEur)} / שבוע
+                {formatEurFull(player.weeklyWageEur)} / {t('שבוע', 'week')}
               </Text>
             </View>
             <View style={styles.finTile}>
-              <Text style={styles.finLabel}>סעיף שחרור בחוזה</Text>
+              <Text style={styles.finLabel}>{t('סעיף שחרור בחוזה', 'Release clause')}</Text>
               <Text style={[styles.finVal, { color: '#f59e0b' }]}>
                 {formatEurFull(player.releaseClauseEur)}
               </Text>
             </View>
             <View style={styles.finTile}>
-              <Text style={styles.finLabel}>אורך חוזה קיים</Text>
+              <Text style={styles.finLabel}>{t('אורך חוזה קיים', 'Current contract length')}</Text>
               <Text style={styles.finVal}>{player.contractYears}</Text>
             </View>
           </View>
@@ -615,7 +618,7 @@ function ScoutDossierModal({
           {/* TACTICAL ROLES FC 27 */}
           <View style={styles.sectionCard}>
             <View style={styles.secTopLine}>
-              <Text style={styles.secMainLabel}>תפקידים טקטיים (FC 27 Player Roles)</Text>
+              <Text style={styles.secMainLabel}>{t('תפקידים טקטיים (FC 27 Player Roles)', 'Tactical roles (FC 27 Player Roles)')}</Text>
               <Text style={styles.secSystemTag}>{player.roleSystem}</Text>
             </View>
             <View style={styles.rolesRow}>
@@ -635,8 +638,8 @@ function ScoutDossierModal({
           {/* PLAYSTYLES */}
           <View style={styles.sectionCard}>
             <View style={styles.secTopLine}>
-              <Text style={styles.secMainLabel}>סגנונות משחק (PlayStyles)</Text>
-              <Text style={styles.goldPlayStyleHint}>סגנון מוזהב +</Text>
+              <Text style={styles.secMainLabel}>{t('סגנונות משחק (PlayStyles)', 'PlayStyles')}</Text>
+              <Text style={styles.goldPlayStyleHint}>{t('סגנון מוזהב +', 'Gold PlayStyle +')}</Text>
             </View>
             <View style={styles.psWrap}>
               {player.playstyles.map((ps, i) => (
@@ -663,12 +666,12 @@ function ScoutDossierModal({
             <View style={styles.secTopLine}>
               <View style={{ alignItems: 'flex-end', gap: 2 }}>
                 <Text style={styles.secMainLabel}>
-                  {showPotential ? '🚀 נתונים בשיא הפוטנציאל' : '📊 נתוני יכולת מלאים'}
+                  {showPotential ? t('🚀 נתונים בשיא הפוטנציאל', '🚀 Peak-potential stats') : t('📊 נתוני יכולת מלאים', '📊 Full attribute stats')}
                 </Text>
                 <Text style={styles.statsSubtitle}>
                   {showPotential
-                    ? `רייטינג שיא: ${player.potential} (+${player.growth})`
-                    : `רייטינג נוכחי: ${player.rating}`}
+                    ? `${t('רייטינג שיא:', 'Peak rating:')} ${player.potential} (+${player.growth})`
+                    : `${t('רייטינג נוכחי:', 'Current rating:')} ${player.rating}`}
                 </Text>
               </View>
 
@@ -687,7 +690,7 @@ function ScoutDossierModal({
                     showPotential && styles.potentialToggleTextActive,
                   ]}
                 >
-                  {showPotential ? '✔ מלוא הפוטנציאל' : '⚡ ראה מלוא הפוטנציאל'}
+                  {showPotential ? t('✔ מלוא הפוטנציאל', '✔ Full potential') : t('⚡ ראה מלוא הפוטנציאל', '⚡ Show full potential')}
                 </Text>
               </Pressable>
             </View>
@@ -695,32 +698,32 @@ function ScoutDossierModal({
             {/* FACE 6 OVERVIEW */}
             <View style={styles.statMatrix}>
               <StatItem
-                label={attrBundle?.isGk ? 'זינוק (DIV)' : 'מהירות (PAC)'}
+                label={attrBundle?.isGk ? t('זינוק (DIV)', 'Diving (DIV)') : t('מהירות (PAC)', 'Pace (PAC)')}
                 value={currentFace.pac}
                 diff={showPotential ? currentFace.pac - player.attributes.pac : undefined}
               />
               <StatItem
-                label={attrBundle?.isGk ? 'תפיסה (HAN)' : 'סיומת (SHO)'}
+                label={attrBundle?.isGk ? t('תפיסה (HAN)', 'Handling (HAN)') : t('סיומת (SHO)', 'Shooting (SHO)')}
                 value={currentFace.sho}
                 diff={showPotential ? currentFace.sho - player.attributes.sho : undefined}
               />
               <StatItem
-                label={attrBundle?.isGk ? 'בעיטה (KIC)' : 'מסירה (PAS)'}
+                label={attrBundle?.isGk ? t('בעיטה (KIC)', 'Kicking (KIC)') : t('מסירה (PAS)', 'Passing (PAS)')}
                 value={currentFace.pas}
                 diff={showPotential ? currentFace.pas - player.attributes.pas : undefined}
               />
               <StatItem
-                label={attrBundle?.isGk ? 'רפלקסים (REF)' : 'כדרור (DRI)'}
+                label={attrBundle?.isGk ? t('רפלקסים (REF)', 'Reflexes (REF)') : t('כדרור (DRI)', 'Dribbling (DRI)')}
                 value={currentFace.dri}
                 diff={showPotential ? currentFace.dri - player.attributes.dri : undefined}
               />
               <StatItem
-                label={attrBundle?.isGk ? 'מהירות (SPD)' : 'הגנה (DEF)'}
+                label={attrBundle?.isGk ? t('מהירות (SPD)', 'Speed (SPD)') : t('הגנה (DEF)', 'Defending (DEF)')}
                 value={currentFace.def}
                 diff={showPotential ? currentFace.def - player.attributes.def : undefined}
               />
               <StatItem
-                label={attrBundle?.isGk ? 'מיקום (POS)' : 'פיזיות (PHY)'}
+                label={attrBundle?.isGk ? t('מיקום (POS)', 'Positioning (POS)') : t('פיזיות (PHY)', 'Physicality (PHY)')}
                 value={currentFace.phy}
                 diff={showPotential ? currentFace.phy - player.attributes.phy : undefined}
               />
@@ -731,7 +734,7 @@ function ScoutDossierModal({
               <View style={styles.detailedDividerRow}>
                 <View style={styles.detailedDividerLine} />
                 <Text style={styles.detailedDividerLabel}>
-                  פירוט מלא של כל התכונות (In-Game Detailed Stats)
+                  {t('פירוט מלא של כל התכונות (In-Game Detailed Stats)', 'Full attribute breakdown (in-game detailed stats)')}
                 </Text>
                 <View style={styles.detailedDividerLine} />
               </View>
@@ -740,7 +743,7 @@ function ScoutDossierModal({
                 {detailedGroups.map((group) => (
                   <View key={group.label} style={styles.detailedGroupCard}>
                     <View style={styles.detailedGroupHeader}>
-                      <Text style={styles.detailedGroupTitle}>{group.hebrewLabel}</Text>
+                      <Text style={styles.detailedGroupTitle}>{language === 'he' ? group.hebrewLabel : group.label}</Text>
                       <Text style={[styles.detailedGroupTotal, { color: statTone(group.total) }]}>
                         {group.total}
                       </Text>
@@ -764,7 +767,7 @@ function ScoutDossierModal({
                       {group.stats.map((item) => (
                         <View key={item.key} style={styles.subStatRow}>
                           <Text style={styles.subStatLabel} numberOfLines={1}>
-                            {item.hebrewLabel}
+                            {language === 'he' ? item.hebrewLabel : item.label}
                           </Text>
                           <View style={styles.subStatValueWrap}>
                             {item.diff && item.diff > 0 ? (
@@ -794,7 +797,7 @@ function ScoutDossierModal({
             onPress={onClose}
             style={styles.modalBottomCloseBtn}
           >
-            <Text style={styles.modalBottomCloseBtnText}>‹ חזרה לרשימת השחקנים</Text>
+            <Text style={styles.modalBottomCloseBtnText}>‹ {t('חזרה לרשימת השחקנים', 'Back to player list')}</Text>
           </Pressable>
         </ScrollView>
       </View>
