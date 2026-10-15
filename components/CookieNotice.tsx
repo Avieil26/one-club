@@ -4,11 +4,12 @@ import { Platform, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
-import { inlineLatin } from '@/lib/legalBidi';
 import { acceptCookieNotice, hasCookieNotice } from '@/lib/legal';
+import { useLocale } from '@/lib/i18n';
 
 export function CookieNotice() {
   const router = useRouter();
+  const { t, isRTL } = useLocale();
   const insets = useSafeAreaInsets();
   const [open, setOpen] = useState(false);
 
@@ -41,15 +42,13 @@ export function CookieNotice() {
         borderColor: 'rgba(227, 179, 65, 0.55)',
       }}
     >
-      <Text accessibilityRole="header" style={{ color: colors.text, fontWeight: '900', fontSize: 16, textAlign: 'right' }}>
-        {Platform.OS === 'web' ? 'עוגיות ואחסון בדפדפן' : 'אחסון במכשיר'}
+      <Text accessibilityRole="header" style={{ color: colors.text, fontWeight: '900', fontSize: 16, textAlign: isRTL ? 'right' : 'left' }}>
+        {Platform.OS === 'web' ? t('legal.cookieTitleWeb') : t('legal.cookieTitleNative')}
       </Text>
-      <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }}>
-        {inlineLatin(
-          '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום ואין מעקב אנליטי. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
-        )}
+      <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr', alignSelf: 'stretch' }}>
+        {t('legal.cookieText')}
       </Text>
-      <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8, justifyContent: 'flex-start' }}>
+      <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', gap: 8, justifyContent: 'flex-start' }}>
         <Pressable
           accessibilityRole="button"
           onPress={() => {
@@ -57,14 +56,14 @@ export function CookieNotice() {
           }}
           style={{ minHeight: 44, paddingHorizontal: 16, borderRadius: 10, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>הבנתי</Text>
+          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>{t('legal.cookieAccept')}</Text>
         </Pressable>
         <Pressable
           accessibilityRole="link"
           onPress={() => router.push('/legal/cookies')}
           style={{ minHeight: 44, paddingHorizontal: 12, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}>פירוט העוגיות</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}>{t('legal.cookieDetails')}</Text>
         </Pressable>
       </View>
     </View>
