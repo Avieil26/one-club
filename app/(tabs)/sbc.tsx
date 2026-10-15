@@ -13,6 +13,7 @@ import { openSbcChallenges } from '@/lib/selectors';
 import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
+import { useLanguage } from '@/lib/language';
 
 function rowsOf<T>(items: T[], columns: number) {
   const rows: T[][] = [];
@@ -164,6 +165,8 @@ function SbcTile({
 
 export default function SbcScreen() {
   const app = useApp();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const now = useNow();
   const width = useWindowDimensions().width;
@@ -172,19 +175,19 @@ export default function SbcScreen() {
   const rows = rowsOf(challenges, columns);
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="sbc" maxWidth={1080}>
-      <View style={{ width: '100%', direction: 'rtl', alignItems: 'flex-start', paddingTop: 4 }}>
-        <Text style={{ width: '100%', color: '#F7F8FA', fontSize: 38, fontWeight: '900', letterSpacing: 1, textAlign: 'right' }}>SBC</Text>
+      <View style={{ width: '100%', direction: rtl ? 'rtl' : 'ltr', alignItems: rtl ? 'flex-start' : 'flex-end', paddingTop: 4 }}>
+        <Text style={{ width: '100%', color: '#F7F8FA', fontSize: 38, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>SBC</Text>
       </View>
-      <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: 'flex-start' }}>
-        <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: 'right', width: '100%' }}>מחשבון Streamlined</Text>
+      <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: rtl ? 'flex-start' : 'flex-end' }}>
+        <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: rtl ? 'right' : 'left', width: '100%' }}>{t('מחשבון Streamlined', 'Streamlined calculator')}</Text>
       </Pressable>
-      <Muted>מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.</Muted>
-      {app.user?.isAdmin ? <Button label="אתגר SBC חדש" variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
-      {!challenges.length ? <Muted>אין כרגע SBC פעילים.</Muted> : null}
+      <Muted>{t('מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.', 'Marquee matchups through October 1. Completing all four matches earns a Jumbo Gold Pack.')}</Muted>
+      {app.user?.isAdmin ? <Button label={t('אתגר SBC חדש', 'New SBC challenge')} variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
+      {!challenges.length ? <Muted>{t('אין כרגע SBC פעילים.', 'There are no active SBCs right now.')}</Muted> : null}
       {rows.map((row, rowIndex) => (
         <View
           key={row.map((item) => item.id).join('-')}
-          style={{ flexDirection: 'row-reverse', gap: 14, alignItems: 'stretch', paddingHorizontal: width >= 700 ? 8 : 0 }}
+          style={{ flexDirection: rtl ? 'row-reverse' : 'row', gap: 14, alignItems: 'stretch', paddingHorizontal: width >= 700 ? 8 : 0 }}
         >
           {row.map((challenge) => (
             <SbcTile
