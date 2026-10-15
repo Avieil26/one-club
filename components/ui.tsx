@@ -74,6 +74,7 @@ export function Screen({
             { paddingBottom: bottomPad },
             web && (isMobile ? styles.mobileWebContent : styles.webContent),
             web && { paddingBottom: bottomPad },
+            { direction: isRTL ? 'rtl' : 'ltr' },
           ]}
           keyboardShouldPersistTaps="handled"
           refreshControl={
@@ -165,9 +166,10 @@ export function Field({
   secure?: boolean;
   maxLength?: number;
 }) {
+  const { isRTL } = useLocale();
   return (
     <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{label}</Text>
       <TextInput
         value={value}
         onChangeText={(text) => onChangeText(maxLength ? text.slice(0, maxLength) : text)}
@@ -177,7 +179,7 @@ export function Field({
         keyboardType={keyboardType}
         secureTextEntry={secure}
         maxLength={maxLength}
-        style={[styles.input, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
+        style={[styles.input, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
       {maxLength != null ? (
         <Text style={styles.label}>נשארו {Math.max(0, maxLength - value.length)}</Text>
@@ -197,10 +199,11 @@ export function ChoiceGroup<T extends string>({
   value: T;
   onChange: (value: T) => void;
 }) {
+  const { isRTL } = useLocale();
   return (
     <View style={styles.field}>
-      {label ? <Text style={styles.label}>{label}</Text> : null}
-      <View style={styles.wrap}>
+      {label ? <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{label}</Text> : null}
+      <View style={[styles.wrap, { flexDirection: isRTL ? 'row-reverse' : 'row' }]}>
         {options.map((option) => {
           const selected = option.id === value;
           return (
@@ -273,10 +276,11 @@ export function ScorePicker({
   value: number;
   onChange: (value: number) => void;
 }) {
+  const { isRTL } = useLocale();
   return (
     <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.wrap}>
+      <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{label}</Text>
+      <View style={[styles.wrap, { flexDirection: isRTL ? 'row-reverse' : 'row' }]}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((score) => {
           const on = score === value;
           return (
