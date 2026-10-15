@@ -89,6 +89,7 @@ const messages = {
     'legal.accept': 'אישור וכניסה לאפליקציה',
     'legal.decline': 'אינני מסכים/ה (התנתקות ויציאה)',
     'common.loading': 'טוען…',
+    'common.remaining': 'תווים שנותרו:',
   },
   en: {
     'language.label': 'Language',
@@ -133,7 +134,7 @@ const messages = {
     'auth.password': 'Password',
     'auth.passwordPlaceholder': 'At least 6 characters',
     'auth.consentIntro': 'I have read and agree to the ',
-    'auth.consentAnd': ' and the ',
+    'auth.consentAnd': 'and the ',
     'auth.terms': 'Terms of Use',
     'auth.privacy': 'Privacy Policy',
     'auth.underageNotice': 'Users under 18 need consent from a parent or legal guardian.',
@@ -170,6 +171,7 @@ const messages = {
     'legal.accept': 'Accept and enter the app',
     'legal.decline': 'I do not agree (sign out and exit)',
     'common.loading': 'Loading…',
+    'common.remaining': 'Characters remaining:',
   },
 } as const;
 
