@@ -59,8 +59,6 @@ export default function RootLayout() {
   useEffect(() => {
     SplashScreen.hideAsync();
     if (Platform.OS === 'web') {
-      document.documentElement.lang = 'he';
-      document.documentElement.dir = 'rtl';
       const styleId = 'fc27-scroll';
       if (!document.getElementById(styleId)) {
         const style = document.createElement('style');
