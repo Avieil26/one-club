@@ -462,6 +462,7 @@ function ScoutDossierModal({
   player: CareerScoutPlayer;
   onClose: () => void;
 }) {
+  const { language, t } = useLanguage();
   const { height: windowHeight } = useWindowDimensions();
   const sheetHeight = Math.max(480, Math.round(windowHeight * 0.93));
   const [showPotential, setShowPotential] = useState(false);
