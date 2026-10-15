@@ -22,7 +22,7 @@ export default function CareerScreen() {
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="career">
       {/* MODE SWITCHER TABS */}
-      <View style={styles.tabSwitcher}>
+      <View style={[styles.tabSwitcher, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
         <Pressable
           accessibilityRole="button"
           onPress={() => setCareerTab('scout')}
@@ -75,7 +75,7 @@ export default function CareerScreen() {
 
 const styles = StyleSheet.create({
   tabSwitcher: {
-    flexDirection: rtl ? 'row-reverse' : 'row',
+    flexDirection: 'row-reverse',
     backgroundColor: 'rgba(15, 23, 42, 0.75)',
     borderRadius: 14,
     padding: 4,
