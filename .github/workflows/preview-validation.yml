@@ -14,9 +14,6 @@ on:
       - "app.json"
       - "tsconfig.json"
       - ".github/workflows/preview-validation.yml"
-  push:
-    branches:
-      - feature/language-picker-he-en
 
 permissions:
   contents: read

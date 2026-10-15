@@ -532,7 +532,7 @@ function ScoutDossierModal({
                   <Text style={styles.infoChipText}>{player.height} {t('ס״מ', 'cm')}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>{t('רגל', 'Foot')} {player.foot}</Text>
+                  <Text style={styles.infoChipText}>{t('רגל', 'Foot')} {language === 'he' ? player.foot : (player.foot === 'ימין' ? 'Right' : player.foot)}</Text>
                 </View>
                 <View style={styles.infoChip}>
                   <Text style={styles.infoChipText}>★{player.skills} {t('מיומנות', 'Skill moves')}</Text>
@@ -742,7 +742,7 @@ function ScoutDossierModal({
                 {detailedGroups.map((group) => (
                   <View key={group.label} style={styles.detailedGroupCard}>
                     <View style={styles.detailedGroupHeader}>
-                      <Text style={styles.detailedGroupTitle}>{group.hebrewLabel}</Text>
+                      <Text style={styles.detailedGroupTitle}>{language === 'he' ? group.hebrewLabel : group.label}</Text>
                       <Text style={[styles.detailedGroupTotal, { color: statTone(group.total) }]}>
                         {group.total}
                       </Text>
@@ -766,7 +766,7 @@ function ScoutDossierModal({
                       {group.stats.map((item) => (
                         <View key={item.key} style={styles.subStatRow}>
                           <Text style={styles.subStatLabel} numberOfLines={1}>
-                            {item.hebrewLabel}
+                            {language === 'he' ? item.hebrewLabel : item.label}
                           </Text>
                           <View style={styles.subStatValueWrap}>
                             {item.diff && item.diff > 0 ? (
