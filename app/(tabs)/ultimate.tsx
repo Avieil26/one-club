@@ -12,9 +12,12 @@ import { errorMessage } from '@/lib/format';
 import { displayName, futKindLabel, platformLabel, rarityLabel } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 import type { FutKind } from '@/lib/types';
+import { useLanguage } from '@/lib/language';
 
 export default function UltimateScreen() {
   const app = useApp();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const params = useLocalSearchParams<{ tab?: string; posted?: string }>();
   const [kind, setKind] = useState<FutKind>(params.tab === 'pack' ? 'pack' : 'squad');
@@ -28,30 +31,30 @@ export default function UltimateScreen() {
     try {
       await app.toggleFutLike(postId);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
     }
   }
 
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="ultimate">
-      <Title>אולטימייט</Title>
-      <Muted>דירוג קבוצות בשלושה צירים, בלי דיסלייק. חבילות הן שיתוף.</Muted>
+      <Title>{t('אולטימייט', 'Ultimate Team')}</Title>
+      <Muted>{t('דירוג קבוצות בשלושה צירים, בלי דיסלייק. חבילות הן שיתוף.', 'Rate squads across three categories. Packs are for sharing.')}</Muted>
       {params.posted === '1' ? (
         <Card>
-          <Text style={{ color: '#D9FFE9', fontWeight: '900', fontSize: 18, textAlign: 'right' }}>הפוסט פורסם</Text>
-          <Muted>{kind === 'pack' ? 'החבילה מופיעה ברשימה הזו.' : 'הקבוצה מופיעה ברשימה הזו.'}</Muted>
+          <Text style={{ color: '#D9FFE9', fontWeight: '900', fontSize: 18, textAlign: rtl ? 'right' : 'left' }}>{t('הפוסט פורסם', 'Post published')}</Text>
+          <Muted>{kind === 'pack' ? t('החבילה מופיעה ברשימה הזו.', 'The pack appears in this list.') : t('הקבוצה מופיעה ברשימה הזו.', 'The squad appears in this list.')}</Muted>
         </Card>
       ) : null}
-      <Button label={kind === 'squad' ? 'העלאת קבוצה' : 'יצא לי בחבילה'} onPress={() => router.push(`/ultimate/new?kind=${kind}`)} />
+      <Button label={kind === 'squad' ? t('העלאת קבוצה', 'Share a squad') : t('יצא לי בחבילה', 'Share a pack pull')} onPress={() => router.push(`/ultimate/new?kind=${kind}`)} />
       <ChoiceGroup
         options={[
-          { id: 'squad', label: 'קבוצות' },
-          { id: 'pack', label: 'חבילות' },
+          { id: 'squad', label: t('קבוצות', 'Squads') },
+          { id: 'pack', label: t('חבילות', 'Packs') },
         ]}
         value={kind}
         onChange={setKind}
       />
-      {posts.length === 0 ? <Muted>עדיין אין פוסטים כאן.</Muted> : null}
+      {posts.length === 0 ? <Muted>{t('עדיין אין פוסטים כאן.', 'No posts here yet.')}</Muted> : null}
       <TileGrid
         items={posts}
         wide={3}
@@ -62,10 +65,10 @@ export default function UltimateScreen() {
           return (
             <Card>
               <Pressable accessibilityRole="button" onPress={() => router.push(`/ultimate/${post.id}`)} style={{ gap: 10 }}>
-                <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+                <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center', gap: 10 }}>
                   <PlatformMark id={post.platform} size={42} />
                   <View style={{ flex: 1, gap: 2 }}>
-                    <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: 'right' }}>
+                    <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>
                       {displayName(app.profiles, post.userId)}
                     </Text>
                     <Muted>
