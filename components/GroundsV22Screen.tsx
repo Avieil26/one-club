@@ -73,6 +73,7 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
 }
 
 function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; loggedIn: boolean }) {
+  const { t, language } = useLanguage();
   return (
     <View style={s.navWrap}>
       <View style={[s.navInner, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
@@ -180,6 +181,8 @@ function InfoPanel({ title, icon, children, onTitlePress }: { title: string; ico
 
 export default function GroundsV22Screen() {
   const app = useApp();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const { width, height } = useWindowDimensions();
   const [intent, setIntent] = useState<'all' | GroundsIntent>('all');
@@ -267,8 +270,8 @@ export default function GroundsV22Screen() {
             <View style={s.heroContent}>
               <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>{t('קהילת שחקנים אמיתית', 'A real player community')}</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
               <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-start', gap: 14 }]}>
-                <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-start', direction: 'rtl' }]}>
-                  <Eyebrow>FC 27 · קהילת מועדונים</Eyebrow>
+                <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-start', direction: rtl ? 'rtl' : 'ltr' }]}>
+                  <Eyebrow>{t('FC 27 · קהילת מועדונים', 'FC 27 · Club community')}</Eyebrow>
 
                   <Text style={[s.heroHeadline, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, compact && { fontSize: 28, lineHeight: 36 }]}>{t('המגרש שלך. האנשים שלך.', 'Your pitch. Your people.')}</Text>
                   <Text style={[s.heroLead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.', 'Find players who match your style, build a stronger squad, and play with the right people.')}</Text>
