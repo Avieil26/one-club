@@ -5,6 +5,7 @@ import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-n
 import { Screen } from '@/components/ui';
 import { careerFont } from '@/lib/careerCardTheme';
 import { portraitByEnglish } from '@/lib/clubQuiz';
+import { useLocale } from '@/lib/i18n';
 
 const CREAM = '#F6F1E4';
 const GOLD = '#E8C46A';
@@ -17,6 +18,7 @@ function face(position: string): ImageStyle | null {
 
 export default function GamesScreen() {
   const router = useRouter();
+  const { t, isRTL } = useLocale();
   const saka = portraitByEnglish('Bukayo Saka');
   const faces = ['Lamine Yamal', 'Erling Haaland', 'Bukayo Saka', 'Pedri']
     .map((name) => portraitByEnglish(name))
@@ -25,17 +27,17 @@ export default function GamesScreen() {
   return (
     <Screen scene="games" maxWidth={460}>
       <View style={styles.stack}>
-      <Text style={styles.eyebrow}>משחקים קצרים</Text>
-      <Text style={styles.title}>משחקונים</Text>
-      <Text style={styles.lead}>ארבעה משחקים על הקלפים שבמאגר.</Text>
+      <Text style={[styles.eyebrow, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.eyebrow')}</Text>
+      <Text style={[styles.title, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.title')}</Text>
+      <Text style={[styles.lead, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.lead')}</Text>
 
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/who')}>
-        <LinearGradient colors={['#ff8a1e', '#ff2f78', '#6a22d6']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.who}>
-          <Text style={styles.whoKicker}>סימון</Text>
-          <Text style={styles.whoTitle}>נחש מי</Text>
-          <Text style={styles.whoBody}>משבצות בשחור־לבן. לוחצים רק על מי שמתאים לשאלה.</Text>
+        <LinearGradient colors={['#ff8a1e', '#ff2f78', '#6a22d6']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.who, { alignItems: isRTL ? 'flex-end' : 'flex-start' }]}>
+          <Text style={[styles.whoKicker, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.mark')}</Text>
+          <Text style={[styles.whoTitle, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.guessWho')}</Text>
+          <Text style={[styles.whoBody, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.guessWhoBody')}</Text>
           <View style={styles.playLight}>
-            <Text style={styles.playLightText}>שחק</Text>
+            <Text style={styles.playLightText}>{t('games.play')}</Text>
           </View>
         </LinearGradient>
       </Pressable>
@@ -47,10 +49,10 @@ export default function GamesScreen() {
             style={styles.netShot}
           />
           <View style={styles.netVeil} />
-          <View style={styles.netCopy}>
-            <Text style={styles.netKicker}>לוח</Text>
-            <Text style={styles.whoTitle}>הרשת</Text>
-            <Text style={styles.whoBody}>שורה וטור. שם אחד לכל משבצת, מהגברים שבמאגר.</Text>
+          <View style={[styles.netCopy, { alignItems: isRTL ? 'flex-end' : 'flex-start' }]}>
+            <Text style={[styles.netKicker, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.networkKicker')}</Text>
+            <Text style={[styles.whoTitle, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.network')}</Text>
+            <Text style={[styles.whoBody, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.networkBody')}</Text>
             <View style={styles.playLight}>
               <Text style={styles.playLightText}>שחק</Text>
             </View>
@@ -59,27 +61,27 @@ export default function GamesScreen() {
       </Pressable>
 
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/club')}>
-        <LinearGradient colors={['rgba(92,22,40,0.94)', 'rgba(28,8,14,0.92)']} style={styles.club}>
+        <LinearGradient colors={['rgba(92,22,40,0.94)', 'rgba(28,8,14,0.92)']} style={[styles.club, { flexDirection: isRTL ? 'row' : 'row-reverse' }]}>
           {saka ? <Image source={{ uri: saka }} style={[styles.heroPhoto, face('center 12%')]} /> : <View style={styles.heroPhoto} />}
-          <View style={styles.clubCopy}>
-            <Text style={styles.kicker}>מועדון</Text>
-            <Text style={styles.clubTitle}>איזה מועדון</Text>
-            <Text style={styles.clubBody}>מזהים את השחקן ובוחרים איפה הוא משחק.</Text>
+          <View style={[styles.clubCopy, { alignItems: isRTL ? 'flex-end' : 'flex-start' }]}>
+            <Text style={[styles.kicker, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.clubKicker')}</Text>
+            <Text style={[styles.clubTitle, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.club')}</Text>
+            <Text style={[styles.clubBody, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.clubBody')}</Text>
             <View style={styles.play}>
               <View style={styles.inset} />
               <View style={styles.pip} />
-              <Text style={styles.playText}>שחק</Text>
+              <Text style={styles.playText}>{t('games.play')}</Text>
             </View>
           </View>
         </LinearGradient>
       </Pressable>
 
       <Pressable accessibilityRole="button" onPress={() => router.push('/games/draft')}>
-        <LinearGradient colors={['rgba(16,48,36,0.94)', 'rgba(8,16,12,0.92)']} style={styles.draft}>
-          <View style={styles.draftCopy}>
-            <Text style={styles.goldKicker}>כמו ב־FC 27</Text>
-            <Text style={styles.draftTitle}>דראפט</Text>
-            <Text style={styles.draftBody}>מערך, קפטן, וחמישה קלפים לכל עמדה.</Text>
+        <LinearGradient colors={['rgba(16,48,36,0.94)', 'rgba(8,16,12,0.92)']} style={[styles.draft, { flexDirection: isRTL ? 'row' : 'row-reverse' }]}>
+          <View style={[styles.draftCopy, { alignItems: isRTL ? 'flex-end' : 'flex-start' }]}>
+            <Text style={[styles.goldKicker, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.fcKicker')}</Text>
+            <Text style={[styles.draftTitle, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.draft')}</Text>
+            <Text style={[styles.draftBody, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('games.draftBody')}</Text>
           </View>
           <View style={styles.mini}>
             {faces.slice(0, 3).map((photo, index) => (
