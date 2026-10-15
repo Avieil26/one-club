@@ -129,7 +129,7 @@ export function AccountForm() {
                     router.push('/legal/terms');
                   }}
                 >
-                  תנאי השימוש
+                  {t('auth.terms')}
                 </Text>
                 {' '}{t('auth.consentAnd')}
                 <Text
@@ -140,7 +140,7 @@ export function AccountForm() {
                     router.push('/legal/privacy');
                   }}
                 >
-                  מדיניות הפרטיות
+                  {t('auth.privacy')}
                 </Text>
                 .
               </Text>
