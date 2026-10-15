@@ -20,6 +20,7 @@ import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/li
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
 import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
+import { useLanguage } from '@/lib/language';
 
 const FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 };
 
@@ -58,19 +59,23 @@ function matchesPosition(value: string, selected: string) {
   };
   return (aliases[selected] || [selected]).some((item) => current === item || current.includes(item));
 }
-function positionLabel(value: string) {
+function positionLabel(value: string, language: 'he' | 'en' = 'he') {
   const labels: Record<string, string> = {
     GK: 'שוער', ST: 'חלוץ', CF: 'חלוץ', LW: 'כנף שמאל', RW: 'כנף ימין',
     CAM: 'קשר התקפי', CM: 'קשר מרכזי', CDM: 'קשר אחורי', LM: 'קשר שמאלי',
     RM: 'קשר ימני', LB: 'מגן שמאלי', RB: 'מגן ימני', CB: 'בלם',
   };
+  if (language === 'en') {
+    const en: Record<string, string> = { GK: 'Goalkeeper', ST: 'Striker', CF: 'Striker', LW: 'Left winger', RW: 'Right winger', CAM: 'Attacking midfielder', CM: 'Central midfielder', CDM: 'Defensive midfielder', LM: 'Left midfielder', RM: 'Right midfielder', LB: 'Left back', RB: 'Right back', CB: 'Centre back', 'שוער': 'Goalkeeper', 'חלוץ': 'Striker', 'כנף': 'Winger', 'קשר התקפי': 'Attacking midfielder', 'קשר מרכזי': 'Central midfielder', 'קשר אחורי': 'Defensive midfielder', 'בלם': 'Centre back', 'מגן': 'Full back' };
+    return en[value] || value || 'Any position';
+  }
   return labels[value] || value || 'כל עמדה';
 }
 
 function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; loggedIn: boolean }) {
   return (
     <View style={s.navWrap}>
-      <View style={s.navInner}>
+      <View style={[s.navInner, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
         <Pressable onPress={() => onNavigate('/')} style={s.brand}>
           <Image source={require('@/assets/images/brand-1club.png')} style={s.brandImage} />
           <View><Text style={s.brandName}>ONE CLUB</Text></View>
@@ -78,13 +83,13 @@ function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.navLinks}>
           {NAV.map((item) => (
             <Pressable key={item.href} onPress={() => onNavigate(item.href)} style={[s.navLink, item.href === '/grounds' && s.navLinkActive]}>
-              <Text style={[s.navLinkText, item.href === '/grounds' && s.navLinkTextActive]}>{item.label}</Text>
+              <Text style={[s.navLinkText, item.href === '/grounds' && s.navLinkTextActive]}>{t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : 'Players')}</Text>
             </Pressable>
           ))}
         </ScrollView>
         <Pressable onPress={() => onNavigate(loggedIn ? '/profile' : '/register')} style={s.accountButton}>
           <Ionicons name={loggedIn ? 'person-circle-outline' : 'log-in-outline'} size={17} color={C.cyan} />
-          <Text style={s.accountText}>{loggedIn ? 'הפרופיל שלי' : 'התחברות'}</Text>
+          <Text style={s.accountText}>{loggedIn ? t('הפרופיל שלי', 'My profile') : t('התחברות', 'Sign in')}</Text>
         </Pressable>
       </View>
     </View>
@@ -115,13 +120,14 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
   post: GroundsPost; profile?: Profile; following: boolean;
   onOpen: () => void; onFollow: () => void; onMessage: () => void;
 }) {
+  const { t, language } = useLanguage();
   const tone = playerLevelTone(post.playerLevel);
   const avatar = post.avatarUri || profile?.avatarUrl || null;
-  const name = profile?.displayName || post.gamertag || post.eaId || 'שחקן קהילה';
+  const name = profile?.displayName || post.gamertag || post.eaId || t('שחקן קהילה', 'Community player');
   const ovr = post.skillRating != null && post.skillRating >= 51 && post.skillRating <= 99 ? post.skillRating : null;
   return (
     <View style={s.playerCard}>
-      <Pressable onPress={onOpen} style={s.playerArt} accessibilityRole="button" accessibilityLabel={'פתיחת פרופיל ' + name}>
+      <Pressable onPress={onOpen} style={s.playerArt} accessibilityRole="button" accessibilityLabel={t('פתיחת פרופיל ', 'Open profile ') + name}>
         {avatar ? (
           <Image source={{ uri: avatar }} style={FILL} resizeMode="cover" />
         ) : (
@@ -145,18 +151,18 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
       <View style={s.cardBody}>
         <View style={s.cardHeadline}>
           <View style={s.platformBadge}><Ionicons name={post.platform === 'pc' ? 'desktop-outline' : 'game-controller-outline'} size={19} color={C.cyan} /></View>
-          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{positionLabel(post.position)}</Text><Text style={s.cardMeta} numberOfLines={1}>{post.archetype}</Text></View>
+          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{positionLabel(post.position, language)}</Text><Text style={s.cardMeta} numberOfLines={1}>{post.archetype}</Text></View>
         </View>
         <View style={s.cardTags}>
           <View style={s.smallTag}><Text style={s.smallTagText}>{divisionLabel(post.division)}</Text></View>
           <View style={s.smallTag}><Text style={s.smallTagText}>{platformLabel(post.platform)}</Text></View>
-          {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>רמה מאומתת</Text></View> : null}
+          {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>{t('רמה מאומתת', 'Verified level')}</Text></View> : null}
         </View>
-        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region || 'אזור לא צוין'}</Text></View>
+        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region || t('אזור לא צוין', 'Region not specified')}</Text></View>
         <View style={s.cardActions}>
-          <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>פנייה לשחקן</Text></Pressable>
-          <Pressable onPress={onFollow} accessibilityLabel={following ? 'הפסק מעקב' : 'עקוב'} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
-          <Pressable onPress={onOpen} accessibilityLabel="פרופיל מלא" style={s.openButton}><Ionicons name="open-outline" size={17} color={C.ink} /></Pressable>
+          <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>{t('פנייה לשחקן', 'Message player')}</Text></Pressable>
+          <Pressable onPress={onFollow} accessibilityLabel={following ? t('הפסק מעקב', 'Unfollow') : t('עקוב', 'Follow')} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
+          <Pressable onPress={onOpen} accessibilityLabel={t('פרופיל מלא', 'Full profile')} style={s.openButton}><Ionicons name="open-outline" size={17} color={C.ink} /></Pressable>
         </View>
       </View>
     </View>
@@ -228,18 +234,18 @@ export default function GroundsV22Screen() {
   }
   async function toggleFollow(post: GroundsPost) {
     if (!app.user) { navigate('/register'); return; }
-    if (post.userId === app.user.id) { setNotice('זה הפרופיל שלך — אי אפשר לעקוב אחרי עצמך.'); return; }
+    if (post.userId === app.user.id) { setNotice(t('זה הפרופיל שלך — אי אפשר לעקוב אחרי עצמך.', 'This is your profile — you cannot follow yourself.')); return; }
     const wasFollowing = isFollowing(post.userId);
     try {
       await app.toggleFollow(post.userId);
-      setNotice(wasFollowing ? 'המעקב הוסר.' : 'נוסף לרשימת המעקב.');
+      setNotice(wasFollowing ? t('המעקב הוסר.', 'Unfollowed.') : t('נוסף לרשימת המעקב.', 'Added to your following list.'));
     } catch {
-      setNotice('לא הצלחנו לעדכן את המעקב. בדקו שאתם מחוברים ונסו שוב.');
+      setNotice(t('לא הצלחנו לעדכן את המעקב. בדקו שאתם מחוברים ונסו שוב.', 'Could not update your follow list. Sign in and try again.'));
     }
   }
   function startMessage(post: GroundsPost) {
     if (!app.user) { navigate('/register'); return; }
-    if (post.userId === app.user.id) { setNotice('זו המודעה שלך.'); return; }
+    if (post.userId === app.user.id) { setNotice(t('זו המודעה שלך.', 'This is your own listing.')); return; }
     navigate('/grounds/chat/' + post.userId);
   }
   const selectedProfile = selected ? profileFor(selected) : undefined;
@@ -247,7 +253,7 @@ export default function GroundsV22Screen() {
   const selectedName = selected ? selectedProfile?.displayName || selected.gamertag || selected.eaId || 'שחקן קהילה' : '';
 
   return (
-    <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
+    <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, { direction: rtl ? 'rtl' : 'ltr' }, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
       <LinearGradient colors={['rgba(2,8,15,0.02)', 'rgba(2,8,15,0.10)', 'rgba(2,8,15,0.26)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
       <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false, title: 'THE GROUNDS — ONE CLUB' }} />
@@ -259,51 +265,51 @@ export default function GroundsV22Screen() {
           <View style={[s.heroBackground, compact && s.heroBackgroundCompact]}>
             <LinearGradient colors={['rgba(2,8,15,0.00)', 'rgba(2,10,18,0.06)', 'rgba(2,8,15,0.24)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
             <View style={s.heroContent}>
-              <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>קהילת שחקנים אמיתית</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
+              <View style={s.heroMetaRow}><View style={s.heroBadge}><View style={s.greenDot} /><Text style={s.heroBadgeText}>{t('קהילת שחקנים אמיתית', 'A real player community')}</Text></View><Text style={s.heroKicker}>FC 27 · ONE CLUB</Text></View>
               <View style={[s.heroMain, { flexDirection: 'column', alignItems: 'flex-start', gap: 14 }]}>
                 <View style={[s.heroCopy, { width: '100%', maxWidth: 920, alignItems: 'flex-start', direction: 'rtl' }]}>
                   <Eyebrow>FC 27 · קהילת מועדונים</Eyebrow>
 
-                  <Text style={[s.heroHeadline, compact && { fontSize: 28, lineHeight: 36 }]}>המגרש שלך. האנשים שלך.</Text>
-                  <Text style={s.heroLead}>מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.</Text>
+                  <Text style={[s.heroHeadline, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, compact && { fontSize: 28, lineHeight: 36 }]}>{t('המגרש שלך. האנשים שלך.', 'Your pitch. Your people.')}</Text>
+                  <Text style={[s.heroLead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.', 'Find players who match your style, build a stronger squad, and play with the right people.')}</Text>
                   <View style={[s.heroButtons, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
-                    <ActionButton label="חפש שחקנים" icon="search-outline" onPress={searchPlayers} />
-                    <ActionButton label="פרסם פרופיל" icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
+                    <ActionButton label={t('חפש שחקנים', 'Find players')} icon="search-outline" onPress={searchPlayers} />
+                    <ActionButton label={t('פרסם פרופיל', 'Create profile')} icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
                   </View>
                 </View>
               </View>
               <View style={[s.quickActions, compact && { flexDirection: 'column' }]}>
-                <Pressable onPress={searchPlayers} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>חפש שחקנים</Text><Text style={s.quickSub}>סנן לפי עמדה ופלטפורמה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={findTeam} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="people-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>מצא קבוצה</Text><Text style={s.quickSub}>שחקנים שמחפשים מועדון</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={() => navigate('/grounds/new')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="person-add-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>פרסם גיוס</Text><Text style={s.quickSub}>הפרטים נשמרים במערכת</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={() => navigate('/career?tab=challenges')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={s.quickTitle}>אתגרי הקהילה</Text><Text style={s.quickSub}>לצפייה באתגרי הקריירה</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={searchPlayers} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('חפש שחקנים', 'Find players')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('סנן לפי עמדה ופלטפורמה', 'Filter by position and platform')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={findTeam} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="people-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('מצא קבוצה', 'Find a team')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('שחקנים שמחפשים מועדון', 'Players looking for a club')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={() => navigate('/grounds/new')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="person-add-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('פרסם גיוס', 'Post recruitment')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('הפרטים נשמרים במערכת', 'Your details are saved to the platform')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={() => navigate('/career?tab=challenges')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('אתגרי הקהילה', 'Community challenges')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('לצפייה באתגרי הקריירה', 'Browse Career challenges')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
               </View>
             </View>
-            <View style={s.heroFoot}><Text style={s.heroFootText}>נבנה לקהילה</Text><View style={s.heroFootRule} /><Text style={s.heroFootText}>לא שירות רשמי של EA</Text></View>
+            <View style={s.heroFoot}><Text style={s.heroFootText}>{t('נבנה לקהילה', 'Built for the community')}</Text><View style={s.heroFootRule} /><Text style={s.heroFootText}>{t('לא שירות רשמי של EA', 'Not an official EA service')}</Text></View>
           </View>
 
           <View style={s.content}>
             <View style={[s.sectionHeader, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}>
-              <View style={s.sectionCopy}><Eyebrow>רשת השחקנים</Eyebrow><Text style={s.sectionTitle}>מצא את האנשים שלך.</Text><Text style={s.sectionLead}>פרופילים שנשלחו על ידי שחקנים, התאמה לפי המשחק שאתם אוהבים ודרך פשוטה להתחיל לדבר.</Text></View>
-              <Pressable onPress={() => navigate('/grounds/new')} style={s.outlineButton}><Ionicons name="add" size={18} color={C.cyan} /><Text style={s.outlineButtonText}>פרסם את פרופיל השחקן שלך</Text></Pressable>
+              <View style={[s.sectionCopy, { direction: rtl ? 'rtl' : 'ltr' }]}><Eyebrow>{t('רשת השחקנים', 'Player network')}</Eyebrow><Text style={[s.sectionTitle, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מצא את האנשים שלך.', 'Find your people.')}</Text><Text style={[s.sectionLead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('פרופילים שנשלחו על ידי שחקנים, התאמה לפי המשחק שאתם אוהבים ודרך פשוטה להתחיל לדבר.', 'Player-submitted profiles, matching by the game you love, and an easy way to start talking.')}</Text></View>
+              <Pressable onPress={() => navigate('/grounds/new')} style={s.outlineButton}><Ionicons name="add" size={18} color={C.cyan} /><Text style={s.outlineButtonText}>{t('פרסם את פרופיל השחקן שלך', 'Publish your player profile')}</Text></Pressable>
             </View>
 
             <View style={s.filtersPanel} onLayout={(event) => { filtersOffset.current = event.nativeEvent.layout.y; }}>
               <View style={[s.filterHeading, compact && { flexDirection: 'column', alignItems: 'flex-start' }]}>
-                <View style={s.resultCounter}><View style={s.greenDot} /><Text style={s.resultCounterText}>שחקנים מהקהילה</Text><Text style={s.resultCount}>{visiblePosts.length} פרופילים</Text></View>
-                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder="חיפוש שם, EA ID, אזור או סגנון..." placeholderTextColor="#7F93A0" style={s.searchInput} returnKeyType="search" accessibilityLabel="חיפוש פרופילים" />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
+                <View style={s.resultCounter}><View style={s.greenDot} /><Text style={s.resultCounterText}>{t('שחקנים מהקהילה', 'Community players')}</Text><Text style={s.resultCount}>{visiblePosts.length} {t('פרופילים', 'profiles')}</Text></View>
+                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder={t('חיפוש שם, EA ID, אזור או סגנון...', 'Search name, EA ID, region or play style...')} placeholderTextColor="#7F93A0" style={s.searchInput} returnKeyType="search" accessibilityLabel={t('חיפוש פרופילים', 'Search profiles')} />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
               </View>
-              <View style={s.filterGroup}><Text style={s.filterLabel}>סוג מודעה</Text><View style={s.chipRow}><Chip label="הכל" active={intent === 'all'} onPress={() => setIntent('all')} /><Chip label="מחפש קבוצה" active={intent === 'looking_for_club'} onPress={() => setIntent('looking_for_club')} /><Chip label="גיוס שחקנים" active={intent === 'need_player'} onPress={() => setIntent('need_player')} /></View></View>
-              <View style={s.filterGroup}><Text style={s.filterLabel}>עמדה</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{POSITIONS.map((item) => <Chip key={item.id} label={item.label} active={position === item.id} onPress={() => setPosition(item.id)} />)}</ScrollView></View>
-              <View style={s.filterGroup}><Text style={s.filterLabel}>פלטפורמה</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{PLATFORMS.map((item) => <Chip key={item.id} label={item.label} active={platform === item.id} onPress={() => setPlatform(item.id)} />)}</ScrollView></View>
+              <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('סוג מודעה', 'Listing type')}</Text><View style={s.chipRow}><Chip label={t('הכל', 'All')} active={intent === 'all'} onPress={() => setIntent('all')} /><Chip label={t('מחפש קבוצה', 'Looking for a club')} active={intent === 'looking_for_club'} onPress={() => setIntent('looking_for_club')} /><Chip label={t('גיוס שחקנים', 'Recruiting players')} active={intent === 'need_player'} onPress={() => setIntent('need_player')} /></View></View>
+              <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('עמדה', 'Position')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{POSITIONS.map((item) => <Chip key={item.id} label={item.label} active={position === item.id} onPress={() => setPosition(item.id)} />)}</ScrollView></View>
+              <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('פלטפורמה', 'Platform')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{PLATFORMS.map((item) => <Chip key={item.id} label={item.label} active={platform === item.id} onPress={() => setPlatform(item.id)} />)}</ScrollView></View>
             </View>
 
             <View style={s.playersSection}>
-              <View style={[s.playersHeading, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}><View style={s.playersHeadingCopy}><Text style={s.playersTitle}>שחקנים מומלצים</Text><Text style={s.playersSubtitle}>מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>פרופילים מהמערכת</Text></View></View>
+              <View style={[s.playersHeading, compact && { alignItems: 'flex-start', flexDirection: 'column' }]}><View style={s.playersHeadingCopy}><Text style={[s.playersTitle, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('שחקנים מומלצים', 'Featured players')}</Text><Text style={[s.playersSubtitle, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מודעות אמיתיות בלבד · נתונים שלא נמסרו לא יוצגו', 'Real listings only · missing details are not displayed')}</Text></View><View style={s.sortPill}><Ionicons name="shield-checkmark-outline" size={14} color={C.green} /><Text style={s.sortPillText}>{t('פרופילים מהמערכת', 'Verified platform profiles')}</Text></View></View>
               {app.mode !== 'remote' ? (
-                <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="cloud-offline-outline" size={28} color={C.cyan} /></View><Text style={s.emptyStateTitle}>הדגמות לא מוצגות כפרופילים אמיתיים</Text><Text style={s.emptyStateCopy}>כשהחיבור למסד הנתונים פעיל, יוצגו כאן רק מודעות שנשמרו במערכת.</Text><ActionButton label="פרסם את הפרופיל שלך" icon="person-add-outline" onPress={() => navigate('/grounds/new')} /></View>
+                <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="cloud-offline-outline" size={28} color={C.cyan} /></View><Text style={s.emptyStateTitle}>{t('הדגמות לא מוצגות כפרופילים אמיתיים', 'Demo data is not shown as real profiles')}</Text><Text style={s.emptyStateCopy}>{t('כשהחיבור למסד הנתונים פעיל, יוצגו כאן רק מודעות שנשמרו במערכת.', 'When the database connection is active, only saved community listings will appear here.')}</Text><ActionButton label={t('פרסם את הפרופיל שלך', 'Publish your profile')} icon="person-add-outline" onPress={() => navigate('/grounds/new')} /></View>
               ) : visiblePosts.length === 0 ? (
-                <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="people-outline" size={30} color={C.cyan} /></View><Text style={s.emptyStateTitle}>{posts.length ? 'לא נמצאו שחקנים לפי הסינון' : 'עדיין אין פרופילים שפורסמו'}</Text><Text style={s.emptyStateCopy}>{posts.length ? 'שנו את החיפוש או את המסננים כדי לראות מודעות נוספות.' : 'היו הראשונים לפרסם את פרטי השחקן שלכם ולהופיע כאן בקהילה.'}</Text>{posts.length ? <ActionButton label="איפוס סינון" icon="refresh-outline" onPress={() => { setIntent('all'); setPlatform('all'); setPosition('all'); setSearch(''); }} /> : <ActionButton label="פרסם את הפרופיל שלך" icon="person-add-outline" onPress={() => navigate('/grounds/new')} />}</View>
+                <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="people-outline" size={30} color={C.cyan} /></View><Text style={s.emptyStateTitle}>{posts.length ? t('לא נמצאו שחקנים לפי הסינון', 'No players match these filters') : t('עדיין אין פרופילים שפורסמו', 'No profiles have been published yet')}</Text><Text style={s.emptyStateCopy}>{posts.length ? t('שנו את החיפוש או את המסננים כדי לראות מודעות נוספות.', 'Change your search or filters to see more listings.') : t('היו הראשונים לפרסם את פרטי השחקן שלכם ולהופיע כאן בקהילה.', 'Be the first to publish your player details and appear in the community.')}</Text>{posts.length ? <ActionButton label={t('איפוס סינון', 'Reset filters')} icon="refresh-outline" onPress={() => { setIntent('all'); setPlatform('all'); setPosition('all'); setSearch(''); }} /> : <ActionButton label="פרסם את הפרופיל שלך" icon="person-add-outline" onPress={() => navigate('/grounds/new')} />}</View>
               ) : (
                 <View style={[s.playerGrid, compact && { flexDirection: 'column' }]}>
                   {visiblePosts.map((post) => <View key={post.id} style={[s.playerGridItem, compact && { width: '100%' }, width >= 1100 && { width: '31.7%' }, width >= 1500 && { width: '23.8%' }]}><PlayerCard post={post} profile={profileFor(post)} following={isFollowing(post.userId)} onOpen={() => setSelected(post)} onFollow={() => void toggleFollow(post)} onMessage={() => startMessage(post)} /></View>)}
@@ -312,20 +318,20 @@ export default function GroundsV22Screen() {
             </View>
 
             <View style={[s.bottomGrid, compact && { flexDirection: 'column' }]}>
-              <InfoPanel title="גיוס פעיל" icon="people-outline" onTitlePress={showRecruiting}>
+              <InfoPanel title={t('גיוס פעיל', 'Active recruitment')} icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
                   return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || 'שחקן מהקהילה'}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position)} · {divisionLabel(post.division)} · {platformLabel(post.platform)}</Text><Text style={s.recruitSub}>{post.region || 'אזור לא צוין'}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.</Text>}
                 <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>צפה בכל הגיוסים</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
-              <InfoPanel title="מועדונים מובילים" icon="podium-outline"><View style={s.placeholderBox}><Ionicons name="stats-chart-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>הדירוג עדיין לא זמין</Text><Text style={s.panelEmpty}>לא נציג נקודות או שמות מועדונים מדומים. הדירוג יופעל כשיהיו נתוני מועדונים אמיתיים.</Text></View></InfoPanel>
-              <InfoPanel title="האתגרים האחרונים" icon="trophy-outline"><View style={s.placeholderBox}><Ionicons name="flag-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>אתגרי הקהילה בדרך</Text><Text style={s.panelEmpty}>אתגרים ותגמולים יוצגו כאן רק אחרי חיבור למקור נתונים פעיל.</Text></View></InfoPanel>
-              <InfoPanel title="הפרופיל שלי" icon="person-circle-outline">
+              <InfoPanel title={t('מועדונים מובילים', 'Top clubs')} icon="podium-outline"><View style={s.placeholderBox}><Ionicons name="stats-chart-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>הדירוג עדיין לא זמין</Text><Text style={s.panelEmpty}>לא נציג נקודות או שמות מועדונים מדומים. הדירוג יופעל כשיהיו נתוני מועדונים אמיתיים.</Text></View></InfoPanel>
+              <InfoPanel title={t('האתגרים האחרונים', 'Latest challenges')} icon="trophy-outline"><View style={s.placeholderBox}><Ionicons name="flag-outline" size={25} color={C.muted} /><Text style={s.placeholderTitle}>אתגרי הקהילה בדרך</Text><Text style={s.panelEmpty}>אתגרים ותגמולים יוצגו כאן רק אחרי חיבור למקור נתונים פעיל.</Text></View></InfoPanel>
+              <InfoPanel title={t('הפרופיל שלי', 'My profile')} icon="person-circle-outline">
                 {app.user ? <><Text style={s.myProfileName}>{app.user.displayName}</Text><View style={s.myStatsRow}><View style={s.myStat}><Text style={s.myStatValue}>{posts.filter((post) => post.userId === app.user?.id).length}</Text><Text style={s.myStatLabel}>מודעות שלי</Text></View><View style={s.myStat}><Text style={s.myStatValue}>{app.user.approvedCount}</Text><Text style={s.myStatLabel}>פרסומים מאושרים</Text></View><View style={s.myStat}><Text style={s.myStatValue}>{app.user.reputation}</Text><Text style={s.myStatLabel}>מוניטין</Text></View></View><Pressable onPress={() => navigate('/profile')} style={s.panelCta}><Text style={s.panelCtaText}>ניהול הפרופיל</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable></> : <><Text style={s.panelEmpty}>התחברו כדי לפרסם מודעה, לעקוב אחרי שחקנים ולשלוח הודעות מתוך האפליקציה.</Text><Pressable onPress={() => navigate('/register')} style={s.panelCta}><Text style={s.panelCtaText}>התחברות / הרשמה</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable></>}
               </InfoPanel>
             </View>
-            <View style={s.footerNote}><View style={s.greenDot} /><Text style={s.footerNoteText}>THE GROUNDS · קהילה עצמאית לשחקני FC 27</Text></View>
+            <View style={s.footerNote}><View style={s.greenDot} /><Text style={s.footerNoteText}>{t('THE GROUNDS · קהילה עצמאית לשחקני FC 27', 'THE GROUNDS · Independent FC 27 community')}</Text></View>
           </View>
         </View>
       </ScrollView>
@@ -333,20 +339,20 @@ export default function GroundsV22Screen() {
       <Modal visible={Boolean(selected)} animationType="fade" transparent onRequestClose={() => setSelected(null)}>
         <View style={s.modalBackdrop}>
           <View style={[s.profileModal, compact && { width: '100%', maxHeight: '94%' }]}>
-            <View style={s.modalTopbar}><View><Text style={s.modalKicker}>ONE CLUB / THE GROUNDS</Text><Text style={s.modalTitle}>פרופיל שחקן</Text></View><Pressable onPress={() => setSelected(null)} style={s.closeButton} accessibilityLabel="סגירת הפרופיל"><Ionicons name="close" size={21} color={C.ink} /></Pressable></View>
+            <View style={s.modalTopbar}><View><Text style={s.modalKicker}>ONE CLUB / THE GROUNDS</Text><Text style={s.modalTitle}>{t('פרופיל שחקן', 'Player profile')}</Text></View><Pressable onPress={() => setSelected(null)} style={s.closeButton} accessibilityLabel={t('סגירת הפרופיל', 'Close profile')}><Ionicons name="close" size={21} color={C.ink} /></Pressable></View>
             {selected ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.modalContent}>
               <View style={[s.modalHero, compact && { flexDirection: 'column' }]}>
                 <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}<View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View></View>
-                <View style={s.modalIntro}><Eyebrow>{intentLabel(selected.intent)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || 'שם משתמש לא נמסר'}</Text><Text style={s.modalDescription}>{selected.archetype} · {positionLabel(selected.position)}</Text><Text style={s.modalDescription}>{platformLabel(selected.platform)} · {divisionLabel(selected.division)}</Text></View>
+                <View style={s.modalIntro}><Eyebrow>{intentLabel(selected.intent)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || 'שם משתמש לא נמסר'}</Text><Text style={s.modalDescription}>{selected.archetype} · {positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{platformLabel(selected.platform)} · {divisionLabel(selected.division)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
-                <View style={s.detailTile}><Text style={s.detailLabel}>אזור</Text><Text style={s.detailValue}>{selected.region || 'לא נמסר'}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region || t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || 'לא נמסר'}</Text></View>
-                <View style={s.detailTile}><Text style={s.detailLabel}>רמת ארכיטיפ</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
-                <View style={s.detailTile}><Text style={s.detailLabel}>אימות רמה</Text><Text style={s.detailValue}>{selected.levelVerified ? 'מאומתת' : 'דיווח עצמי'}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>
               </View>
-              <View style={s.modalActions}><ActionButton label="שליחת הודעה" icon="chatbubble-ellipses-outline" onPress={() => { const post = selected; setSelected(null); startMessage(post); }} /><ActionButton label={isFollowing(selected.userId) ? 'הפסק מעקב' : 'עקוב אחרי השחקן'} icon="heart-outline" quiet onPress={() => void toggleFollow(selected)} /></View>
-              {!app.user ? <Text style={s.modalAuthNote}>לשליחת הודעה או למעקב צריך להתחבר למערכת.</Text> : null}
+              <View style={s.modalActions}><ActionButton label={t('שליחת הודעה', 'Send message')} icon="chatbubble-ellipses-outline" onPress={() => { const post = selected; setSelected(null); startMessage(post); }} /><ActionButton label={isFollowing(selected.userId) ? t('הפסק מעקב', 'Unfollow') : t('עקוב אחרי השחקן', 'Follow player')} icon="heart-outline" quiet onPress={() => void toggleFollow(selected)} /></View>
+              {!app.user ? <Text style={s.modalAuthNote}>{t('לשליחת הודעה או למעקב צריך להתחבר למערכת.', 'Sign in to message or follow players.')}</Text> : null}
             </ScrollView> : null}
           </View>
         </View>
