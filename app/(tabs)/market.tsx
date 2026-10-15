@@ -20,6 +20,7 @@ import { Button, colors, Muted, Title } from '@/components/ui';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
 import { EMPTY_FILTERS, filtersActive, playerMatches, type PlayerFilters } from '@/lib/playerFilter';
+import { useLocale } from '@/lib/i18n';
 
 const PAGE_SIZE = 36;
 
@@ -59,6 +60,7 @@ function Pager({
   onNext: () => void;
   onJump: (page: number) => void;
 }) {
+  const { t, isRTL } = useLocale();
   const windowPages = useMemo(() => {
     if (totalPages <= 1) return [] as number[];
     const pages: number[] = [];
@@ -73,14 +75,14 @@ function Pager({
 
   return (
     <View style={{ gap: 10, marginVertical: 8 }}>
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-        <Button label="הקודם" variant="ghost" disabled={page <= 1} onPress={onPrev} />
+      <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+        <Button label={t('common.previous')} variant="ghost" disabled={page <= 1} onPress={onPrev} />
         <Text style={{ color: colors.text, fontWeight: '800', minWidth: 88, textAlign: 'center' }}>
           {page} / {totalPages}
         </Text>
-        <Button label="הבא" variant="ghost" disabled={page >= totalPages} onPress={onNext} />
+        <Button label={t('common.next')} variant="ghost" disabled={page >= totalPages} onPress={onNext} />
       </View>
-      <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
+      <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
         {windowPages[0] > 1 ? (
           <PageChip label="1" active={false} onPress={() => onJump(1)} />
         ) : null}
@@ -128,6 +130,7 @@ export default function MarketScreen() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [page, setPage] = useState(1);
   const router = useRouter();
+  const { t, isRTL, locale } = useLocale();
   const listRef = useRef<FlatList>(null);
   const columns = useColumns(5, 2);
   const { width } = useWindowDimensions();
@@ -238,15 +241,15 @@ export default function MarketScreen() {
               padding: 14,
             }}
           >
-            <Title>שחקנים</Title>
+            <Title>{t('market.title')}</Title>
             <Muted>
-              {PLAYERS.length.toLocaleString('he-IL')} קלפים במאגר · {PAGE_SIZE} בעמוד · לחיצה פותחת פרטים מלאים.
+              {PLAYERS.length.toLocaleString(locale === 'en' ? 'en-US' : 'he-IL')} {t('market.cardsInDatabase')} · {PAGE_SIZE} {t('market.perPage')} · {t('market.cardHelp')}
             </Muted>
-            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+            <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'center', gap: 10 }}>
               <View
                 style={{
                   flex: 1,
-                  flexDirection: 'row-reverse',
+                  flexDirection: isRTL ? 'row-reverse' : 'row',
                   alignItems: 'center',
                   backgroundColor: 'rgba(16, 28, 24, 0.92)',
                   borderRadius: 14,
@@ -258,14 +261,15 @@ export default function MarketScreen() {
                 <TextInput
                   value={query}
                   onChangeText={setQuery}
-                  placeholder="חיפוש לפי שם, עמדה, קבוצה או ליגה..."
+                  placeholder={t('market.searchPlaceholder')}
                   placeholderTextColor={colors.muted}
                   style={{
                     flex: 1,
                     color: colors.text,
                     paddingVertical: 12,
                     fontSize: 16,
-                    textAlign: 'right',
+                    textAlign: isRTL ? 'right' : 'left',
+                    writingDirection: isRTL ? 'rtl' : 'ltr',
                   }}
                 />
                 {isSearching ? (
@@ -273,7 +277,7 @@ export default function MarketScreen() {
                 ) : query ? (
                   <Pressable
                     accessibilityRole="button"
-                    accessibilityLabel="נקה חיפוש"
+                    accessibilityLabel={t('market.clearSearch')}
                     onPress={() => {
                       setQuery('');
                       setDebouncedQuery('');
@@ -304,14 +308,14 @@ export default function MarketScreen() {
                     fontSize: 16,
                   }}
                 >
-                  סינון {filtersActive(filters) ? '●' : ''}
+                  {t('market.filter')} {filtersActive(filters) ? '●' : ''}
                 </Text>
               </Pressable>
             </View>
-            <Text style={{ color: colors.muted, textAlign: 'right', fontWeight: '700' }}>
+            <Text style={{ color: colors.muted, textAlign: isRTL ? 'right' : 'left', fontWeight: '700' }}>
               {players.length === 0
-                ? 'אין תוצאות'
-                : `מציג ${from}–${to} מתוך ${players.length.toLocaleString('he-IL')}`}
+                ? t('market.noResults')
+                : `${t('market.showing')} ${from.toLocaleString(locale === 'en' ? 'en-US' : 'he-IL')}–${to.toLocaleString(locale === 'en' ? 'en-US' : 'he-IL')} ${t('market.of')} ${players.length.toLocaleString(locale === 'en' ? 'en-US' : 'he-IL')}`}
             </Text>
           </View>
         }
@@ -332,11 +336,11 @@ export default function MarketScreen() {
         }
         ListEmptyComponent={
           <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 24, fontWeight: '700' }}>
-            לא נמצאו שחקנים לחיפוש הזה
+            {t('market.noPlayersFound')}
           </Text>
         }
         renderItem={({ item: row }) => (
-          <View style={{ flexDirection: 'row-reverse', gap, marginBottom: gap }}>
+          <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', gap, marginBottom: gap }}>
             {row.map((player: FcPlayer) => (
               <Pressable
                 key={player.id}
