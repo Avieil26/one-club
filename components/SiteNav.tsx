@@ -5,11 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LevelChip } from '@/components/OwnerLevelPlate';
 import { communityXp, xpProgress } from '@/lib/communityBoard';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 const TEXT = '#F4F7F2';
 const QUIET = 'rgba(244,247,242,0.62)';
 
-/** Order: בית first (right in RTL), שחקנים last (left). Do NOT use row-reverse — html already has dir=rtl. */
+/** Keep direction controlled by the selected language. */
 const LINKS = [
   { href: '/' as const, label: 'בית' },
   { href: '/career' as const, label: 'קריירה' },
@@ -31,6 +32,8 @@ export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
   const app = useApp();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { user } = app;
   const progress = user ? xpProgress(communityXp(user.id, app)) : null;
   const insets = useSafeAreaInsets();
@@ -41,7 +44,7 @@ export function SiteNav() {
   const logoNode = (
     <Pressable
       onPress={() => router.push('/')}
-      style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}
+      style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}
     >
       <Image
         source={require('@/assets/images/brand-1club.png')}
@@ -85,7 +88,7 @@ export function SiteNav() {
       }}
     >
       <Text style={{ color: '#FFE08A', fontWeight: '700', fontSize: 13 }}>
-        {user ? 'פרופיל' : 'התחברות'}
+        {user ? t('פרופיל', 'Profile') : t('התחברות', 'Sign in')}
       </Text>
     </Pressable>
   );
@@ -124,7 +127,7 @@ export function SiteNav() {
               textAlign: 'center',
             }}
           >
-            {item.label}
+            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : 'Players')}
           </Text>
           {!isMobile ? (
             <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />
@@ -151,7 +154,7 @@ export function SiteNav() {
         <View
           style={{
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: rtl ? 'rtl' : 'ltr',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
