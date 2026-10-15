@@ -166,7 +166,7 @@ export function Field({
   secure?: boolean;
   maxLength?: number;
 }) {
-  const { isRTL } = useLocale();
+  const { isRTL, t } = useLocale();
   return (
     <View style={styles.field}>
       <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{label}</Text>
@@ -182,7 +182,7 @@ export function Field({
         style={[styles.input, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
       {maxLength != null ? (
-        <Text style={styles.label}>נשארו {Math.max(0, maxLength - value.length)}</Text>
+        <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('common.remaining')} {Math.max(0, maxLength - value.length)}</Text>
       ) : null}
     </View>
   );
