@@ -12,10 +12,12 @@ import { errorMessage } from '@/lib/format';
 import { displayName, futKindLabel, platformLabel, rarityLabel } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 import type { FutKind } from '@/lib/types';
+import { useLocale } from '@/lib/i18n';
 
 export default function UltimateScreen() {
   const app = useApp();
   const router = useRouter();
+  const { t, isRTL } = useLocale();
   const params = useLocalSearchParams<{ tab?: string; posted?: string }>();
   const [kind, setKind] = useState<FutKind>(params.tab === 'pack' ? 'pack' : 'squad');
   const posts = app.futPosts.filter((post) => post.kind === kind);
@@ -28,30 +30,30 @@ export default function UltimateScreen() {
     try {
       await app.toggleFutLike(postId);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('common.errorTitle'), errorMessage(error));
     }
   }
 
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="ultimate">
-      <Title>אולטימייט</Title>
-      <Muted>דירוג קבוצות בשלושה צירים, בלי דיסלייק. חבילות הן שיתוף.</Muted>
+      <Title>{t('ultimate.title')}</Title>
+      <Muted>{t('ultimate.description')}</Muted>
       {params.posted === '1' ? (
         <Card>
-          <Text style={{ color: '#D9FFE9', fontWeight: '900', fontSize: 18, textAlign: 'right' }}>הפוסט פורסם</Text>
-          <Muted>{kind === 'pack' ? 'החבילה מופיעה ברשימה הזו.' : 'הקבוצה מופיעה ברשימה הזו.'}</Muted>
+          <Text style={{ color: '#D9FFE9', fontWeight: '900', fontSize: 18, textAlign: isRTL ? 'right' : 'left' }}>{t('ultimate.postPublished')}</Text>
+          <Muted>{kind === 'pack' ? t('ultimate.packShown') : t('ultimate.squadShown')}</Muted>
         </Card>
       ) : null}
-      <Button label={kind === 'squad' ? 'העלאת קבוצה' : 'יצא לי בחבילה'} onPress={() => router.push(`/ultimate/new?kind=${kind}`)} />
+      <Button label={kind === 'squad' ? t('ultimate.uploadSquad') : t('ultimate.packOpened')} onPress={() => router.push(`/ultimate/new?kind=${kind}`)} />
       <ChoiceGroup
         options={[
-          { id: 'squad', label: 'קבוצות' },
-          { id: 'pack', label: 'חבילות' },
+          { id: 'squad', label: t('ultimate.squads') },
+          { id: 'pack', label: t('ultimate.packs') },
         ]}
         value={kind}
         onChange={setKind}
       />
-      {posts.length === 0 ? <Muted>עדיין אין פוסטים כאן.</Muted> : null}
+      {posts.length === 0 ? <Muted>{t('ultimate.noPosts')}</Muted> : null}
       <TileGrid
         items={posts}
         wide={3}
