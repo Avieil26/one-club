@@ -6,9 +6,12 @@ import { Button, colors, Field, Muted } from '@/components/ui';
 import { errorMessage } from '@/lib/format';
 import { recordAcceptedTerms } from '@/lib/legal';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 export function AccountForm() {
   const app = useApp();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,7 +24,7 @@ export function AccountForm() {
     try {
       await work();
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'Please try again'), errorMessage(error));
     }
   }
 
@@ -29,8 +32,8 @@ export function AccountForm() {
     if (registering && !termsAccepted) {
       setTermsError(true);
       Alert.alert(
-        'אישור תנאים נדרש',
-        'כדי להירשם לאפליקציה, חובה לקרוא ולסמן אישור לתנאי השימוש ולמדיניות הפרטיות.',
+        t('אישור תנאים נדרש', 'Terms acceptance required'),
+        t('כדי להירשם לאפליקציה, חובה לקרוא ולסמן אישור לתנאי השימוש ולמדיניות הפרטיות.', 'Please read and accept the Terms of Use and Privacy Policy to create an account.'),
       );
       return false;
     }
@@ -68,11 +71,11 @@ export function AccountForm() {
 
   return (
     <View style={{ gap: 14, width: '100%', maxWidth: 480 }}>
-      <Text style={{ color: colors.text, fontSize: 36, fontWeight: '800', textAlign: 'right' }}>{registering ? 'הרשמה' : 'כניסה'}</Text>
-      <Muted>{registering ? 'שם, אימייל וסיסמה. אחרי זה נכנסים לדף הבית.' : 'אימייל וסיסמה של החשבון שנרשמתם איתו.'}</Muted>
-      {registering ? <Field label="שם בקהילה" value={name} onChangeText={setName} placeholder="איך לקרוא לך" /> : null}
-      <Field label="אימייל" value={email} onChangeText={setEmail} placeholder="name@email.com" keyboardType="email-address" />
-      <Field label="סיסמה" value={password} onChangeText={setPassword} placeholder="לפחות 6 תווים" secure />
+      <Text style={{ color: colors.text, fontSize: 36, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{registering ? t('הרשמה', 'Create account') : t('כניסה', 'Sign in')}</Text>
+      <Muted>{registering ? t('שם, אימייל וסיסמה. אחרי זה נכנסים לדף הבית.', 'Your name, email and password — then you are ready to join.') : t('אימייל וסיסמה של החשבון שנרשמתם איתו.', 'Enter the email and password for your account.')}</Muted>
+      {registering ? <Field label={t("שם בקהילה", "Community name")} value={name} onChangeText={setName} placeholder={t("איך לקרוא לך", "How should we call you?")} /> : null}
+      <Field label={t("אימייל", "Email")} value={email} onChangeText={setEmail} placeholder="name@email.com" keyboardType="email-address" />
+      <Field label={t("סיסמה", "Password")} value={password} onChangeText={setPassword} placeholder={t("לפחות 6 תווים", "At least 6 characters")} secure />
 
       {/* CHECKBOX FOR TERMS & PRIVACY (SIGNUP ONLY) */}
       {registering ? (
@@ -80,7 +83,7 @@ export function AccountForm() {
           <Pressable
             accessibilityRole="checkbox"
             accessibilityState={{ checked: termsAccepted }}
-            accessibilityLabel="אני מאשר את תנאי השימוש ומדיניות הפרטיות"
+            accessibilityLabel={t("אני מאשר את תנאי השימוש ומדיניות הפרטיות", "I accept the Terms of Use and Privacy Policy")}
             onPress={() => {
               setTermsAccepted((prev) => !prev);
               if (termsError) setTermsError(false);
@@ -91,7 +94,7 @@ export function AccountForm() {
               borderWidth: 1.5,
               borderRadius: 12,
               padding: 12,
-              flexDirection: 'row-reverse',
+              flexDirection: rtl ? 'row-reverse' : 'row',
               alignItems: 'flex-start',
               gap: 12,
             }}
@@ -118,7 +121,7 @@ export function AccountForm() {
             {/* Label and Links */}
             <View style={{ flex: 1, gap: 4 }}>
               <Text style={{ color: colors.text, fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
-                קראתי ואני מסכים/ה ל
+                {t("קראתי ואני מסכים/ה ל", "I have read and agree to the ")}
                 <Text
                   accessibilityRole="link"
                   style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}
@@ -127,9 +130,9 @@ export function AccountForm() {
                     router.push('/legal/terms');
                   }}
                 >
-                  תנאי השימוש
+                  {t("תנאי השימוש", "Terms of Use")}
                 </Text>
-                {' '}ול
+                {' '}{t('ול', 'and the ')}
                 <Text
                   accessibilityRole="link"
                   style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}
@@ -138,12 +141,12 @@ export function AccountForm() {
                     router.push('/legal/privacy');
                   }}
                 >
-                  מדיניות הפרטיות
+                  {t("מדיניות הפרטיות", "Privacy Policy")}
                 </Text>
                 .
               </Text>
               <Text style={{ color: colors.muted, fontSize: 11.5, textAlign: 'right', lineHeight: 17 }}>
-                השימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.
+                {t("השימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.", "Users under 18 need consent from a parent or legal guardian.")}
               </Text>
             </View>
           </Pressable>
@@ -157,18 +160,19 @@ export function AccountForm() {
       ) : null}
 
       <Button
-        label={registering ? 'הרשמה וכניסה' : 'כניסה'}
+        label={registering ? t('הרשמה וכניסה', 'Create account') : t('כניסה', 'Sign in')}
         disabled={app.busy}
         onPress={handleEmailAuth}
       />
       <Button
-        label={registering ? 'הרשמה עם Google' : 'כניסה עם Google'}
+        label={registering ? t('הרשמה עם Google', 'Sign up with Google') : t('כניסה עם Google', 'Sign in with Google')}
         variant="gold"
         disabled={app.busy}
         onPress={handleGoogleAuth}
       />
 
-      <Button label={registering ? 'יש לי כבר חשבון' : 'להרשמה'} variant="link" onPress={toggleMode} />
+      <Button label={registering ? t('יש לי כבר חשבון', 'I already have an account') : t('להרשמה', 'Create an account')} variant="link" onPress={toggleMode} />
+      <Button label={t('שינוי שפה', 'Change language')} variant="link" onPress={() => router.push('/language')} />
     </View>
   );
 }
