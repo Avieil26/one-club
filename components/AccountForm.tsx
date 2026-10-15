@@ -152,8 +152,8 @@ export function AccountForm() {
           </Pressable>
 
           {termsError ? (
-            <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '700', textAlign: 'right', paddingHorizontal: 4 }}>
-              ⚠️ חובה לסמן שקראת והסכמת לתנאי השימוש ומדיניות הפרטיות כדי להירשם.
+            <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '700', textAlign: rtl ? 'right' : 'left', paddingHorizontal: 4 }}>
+              ⚠️ {t("חובה לסמן שקראת והסכמת לתנאי השימוש ומדיניות הפרטיות כדי להירשם.", "You must accept the Terms of Use and Privacy Policy to register.")}
             </Text>
           ) : null}
         </View>
