@@ -74,6 +74,7 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
 
 function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; loggedIn: boolean }) {
   const { t, language } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <View style={s.navWrap}>
       <View style={[s.navInner, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
@@ -181,6 +182,8 @@ function InfoPanel({ title, icon, children, onTitlePress }: { title: string; ico
 
 export default function GroundsV22Screen() {
   const app = useApp();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { t, language } = useLanguage();
   const rtl = language === 'he';
   const router = useRouter();
