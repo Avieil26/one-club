@@ -1,0 +1,43 @@
+name: Preview candidate validation
+
+on:
+  pull_request:
+    branches:
+      - codex/grounds-prod-release
+    paths:
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "assets/data/totw.json"
+      - "package.json"
+      - "package-lock.json"
+      - "app.json"
+      - "tsconfig.json"
+      - ".github/workflows/preview-validation.yml"
+  push:
+    branches:
+      - feature/language-picker-he-en
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Export web build
+        run: npx expo export -p web
