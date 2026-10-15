@@ -186,7 +186,7 @@ export function SiteNav() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: isRTL ? 'rtl' : 'ltr',
             alignItems: 'center',
             gap: 4,
             paddingVertical: 2,
@@ -212,13 +212,13 @@ export function SiteNav() {
       <View
         style={{
           flexDirection: 'row',
-          direction: 'rtl',
+          direction: isRTL ? 'rtl' : 'ltr',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 12,
         }}
       >
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
+        <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', alignItems: 'center', flexWrap: 'wrap', gap: 8, flexShrink: 1 }}>
           {logoNode}
           {renderLinks()}
         </View>
