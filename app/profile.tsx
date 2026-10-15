@@ -12,9 +12,12 @@ import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
 import { badgesFor, pendingCount } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 export default function ProfileScreen() {
   const app = useApp();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const badges = app.user ? badgesFor(app.user, app.grounds) : [];
   const userId = app.user?.id;
@@ -28,14 +31,14 @@ export default function ProfileScreen() {
     try {
       await work();
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
     }
   }
 
   async function changePhoto() {
     try {
       const [uri] = await pickImages(1, {
-        permission: 'צריך אישור לגלריה כדי לבחור תמונת פרופיל.',
+        permission: t('צריך אישור לגלריה כדי לבחור תמונת פרופיל.', 'Gallery permission is required to choose a profile photo.'),
       });
       if (!uri) return;
       setRawUri(uri);
@@ -56,20 +59,20 @@ export default function ProfileScreen() {
 
   return (
     <Screen scene="home">
-      <Stack.Screen options={{ title: 'פרופיל' }} />
+      <Stack.Screen options={{ title: t('פרופיל', 'Profile') }} />
       {app.user ? (
         <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 14 }}>
           <LevelChip progress={progress} />
           <View style={{ flex: 1, gap: 8 }}>
             <Title>{app.user.displayName}</Title>
-            <Button label="החלפת תמונת פרופיל" onPress={changePhoto} disabled={app.busy} />
+            <Button label={t('החלפת תמונת פרופיל', 'Change profile photo')} onPress={changePhoto} disabled={app.busy} />
           </View>
           <ProfileFace name={app.user.displayName} uri={app.user.avatarUrl} size={76} />
         </View>
       ) : (
-        <Title>פרופיל</Title>
+        <Title>{t('פרופיל', 'Profile')}</Title>
       )}
-      <Muted>{app.mode === 'local' ? 'מצב הדגמה על המכשיר' : 'מחוברים לשרת'}</Muted>
+      <Muted>{app.mode === 'local' ? t('מצב הדגמה על המכשיר', 'On-device demo mode') : t('מחוברים לשרת', 'Connected to server')}</Muted>
       {app.user ? (
         <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8 }}>
           <View
@@ -85,7 +88,7 @@ export default function ProfileScreen() {
             }}
           >
             <Text style={{ color: '#F7F4EA', fontSize: 22, fontWeight: '900' }}>{followers}</Text>
-            <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '700' }}>עוקבים</Text>
+            <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '700' }}>{t('עוקבים', 'Followers')}</Text>
           </View>
           <View
             style={{
@@ -100,23 +103,23 @@ export default function ProfileScreen() {
             }}
           >
             <Text style={{ color: '#F7F4EA', fontSize: 22, fontWeight: '900' }}>{following}</Text>
-            <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '700' }}>עוקב</Text>
+            <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '700' }}>{t('עוקב', 'Following')}</Text>
           </View>
         </View>
       ) : null}
       <Text style={{ color: colors.gold, fontSize: 32, fontWeight: '700', textAlign: 'right' }}>{app.user?.reputation ?? 0}</Text>
-      <Muted>נקודות מוניטין. זה לא מטבע ולא פרס שאפשר למשוך.</Muted>
-      <Muted>הגשות שאושרו: {app.user?.approvedCount ?? 0}</Muted>
+      <Muted>{t('נקודות מוניטין. זה לא מטבע ולא פרס שאפשר למשוך.', 'Reputation points. They are not currency and cannot be withdrawn.')}</Muted>
+      <Muted>{t('הגשות שאושרו:', 'Approved submissions:')} {app.user?.approvedCount ?? 0}</Muted>
       {app.user ? (
         <>
           <Button
-            label={app.user.squad ? 'עריכת הקבוצה' : 'בניית הקבוצה'}
+            label={app.user.squad ? t('עריכת הקבוצה', 'Edit squad') : t('בניית הקבוצה', 'Build squad')}
             onPress={() => router.push('/squad')}
           />
           {app.user.squad ? (
             <ProfileSquadBoard squad={app.user.squad} />
           ) : (
-            <Muted>בנו סגל משחקנים ומחליפים. מי שנכנס לפרופיל יראה את הקבוצה על המגרש.</Muted>
+            <Muted>{t('בנו סגל משחקנים ומחליפים. מי שנכנס לפרופיל יראה את הקבוצה על המגרש.', 'Build a squad with starters and substitutes. Visitors to your profile will see it on the pitch.')}</Muted>
           )}
         </>
       ) : null}
@@ -127,13 +130,13 @@ export default function ProfileScreen() {
           ))}
         </>
       ) : (
-        <Muted>תגים מגיעים מאישורי קריירה וממודעות בגראונדס.</Muted>
+        <Muted>{t('תגים מגיעים מאישורי קריירה וממודעות בגראונדס.', 'Badges are earned through Career approvals and Grounds listings.')}</Muted>
       )}
       {app.user?.isAdmin ? (
-        <Button label={`תור אישור · ${pendingCount(app)}`} onPress={() => router.push('/admin/queue')} />
+        <Button label={`${t('תור אישור', 'Approval queue')} · ${pendingCount(app)}`} onPress={() => router.push('/admin/queue')} />
       ) : null}
-      {app.mode === 'local' ? <Button label="איפוס נתוני הדגמה" variant="ghost" onPress={() => run(app.resetDemo)} /> : null}
-      <Button label="יציאה" variant="danger" onPress={() => run(app.signOut)} />
+      {app.mode === 'local' ? <Button label={t('איפוס נתוני הדגמה', 'Reset demo data')} variant="ghost" onPress={() => run(app.resetDemo)} /> : null}
+      <Button label={t('יציאה', 'Sign out')} variant="danger" onPress={() => run(app.signOut)} />
       {rawUri ? (
         <AvatarCropModal uri={rawUri} visible={cropOpen} onCancel={() => setCropOpen(false)} onConfirm={saveCropped} />
       ) : null}
