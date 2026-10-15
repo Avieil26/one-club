@@ -73,7 +73,7 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
 }
 
 function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; loggedIn: boolean }) {
-  const { t, language } = useLanguage();
+  const { t, language, chooseLanguage } = useLanguage();
   return (
     <View style={s.navWrap}>
       <View style={[s.navInner, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
@@ -88,6 +88,14 @@ function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; 
             </Pressable>
           ))}
         </ScrollView>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={language === 'he' ? 'Switch language to English' : 'Switch language to Hebrew'}
+          onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
+          style={[s.accountButton, { marginRight: 6 }]}
+        >
+          <Text style={s.accountText}>{language === 'he' ? 'EN' : 'עב'}</Text>
+        </Pressable>
         <Pressable onPress={() => onNavigate(loggedIn ? '/profile' : '/register')} style={s.accountButton}>
           <Ionicons name={loggedIn ? 'person-circle-outline' : 'log-in-outline'} size={17} color={C.cyan} />
           <Text style={s.accountText}>{loggedIn ? t('הפרופיל שלי', 'My profile') : t('התחברות', 'Sign in')}</Text>
