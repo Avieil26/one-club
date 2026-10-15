@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 export default function Root({ children }: { children: ReactNode }) {
   return (
-    <html lang="he">
+    <html>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
