@@ -17,6 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SceneAtmosphere, type SceneId } from '@/components/MarketAtmosphere';
 import { SiteNav } from '@/components/SiteNav';
+import { useLocale } from '@/lib/i18n';
 
 export const colors = {
   bg: '#0A100E',
@@ -54,6 +55,7 @@ export function Screen({
   showNav?: boolean;
 }) {
   const web = Platform.OS === 'web';
+  const { isRTL } = useLocale();
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const insets = useSafeAreaInsets();
@@ -83,7 +85,7 @@ export function Screen({
           <View
             style={[
               web ? { width: '100%', maxWidth, alignSelf: 'center', gap: 14 } : { width: '100%', gap: 14 },
-              { direction: 'rtl', alignItems: 'stretch' },
+              { direction: isRTL ? 'rtl' : 'ltr', alignItems: 'stretch' },
             ]}
           >
             {children}
@@ -95,16 +97,18 @@ export function Screen({
 }
 
 export function Title({ children }: { children: ReactNode }) {
+  const { isRTL } = useLocale();
   return (
-    <Text style={[styles.h1, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+    <Text style={[styles.h1, { width: '100%', textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
     </Text>
   );
 }
 
 export function Muted({ children }: { children: ReactNode }) {
+  const { isRTL } = useLocale();
   return (
-    <Text style={[styles.muted, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+    <Text style={[styles.muted, { width: '100%', textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
     </Text>
   );
