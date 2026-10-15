@@ -5,21 +5,21 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LevelChip } from '@/components/OwnerLevelPlate';
 import { communityXp, xpProgress } from '@/lib/communityBoard';
 import { useApp } from '@/lib/store';
+import { useLocale, type TranslationKey } from '@/lib/i18n';
 
 const TEXT = '#F4F7F2';
 const QUIET = 'rgba(244,247,242,0.62)';
 
-/** Order: בית first (right in RTL), שחקנים last (left). Do NOT use row-reverse — html already has dir=rtl. */
-const LINKS = [
-  { href: '/' as const, label: 'בית' },
-  { href: '/career' as const, label: 'קריירה' },
-  { href: '/ultimate' as const, label: 'אולטימייט' },
-  { href: '/champions' as const, label: 'FUT Champions' },
-  { href: '/grounds' as const, label: 'גראונדס' },
-  { href: '/sbc' as const, label: 'SBC' },
-  { href: '/games' as const, label: 'משחקונים' },
-  { href: '/board' as const, label: 'לוח' },
-  { href: '/market' as const, label: 'שחקנים' },
+const LINKS: { href: '/' | '/career' | '/ultimate' | '/champions' | '/grounds' | '/sbc' | '/games' | '/board' | '/market'; labelKey: TranslationKey }[] = [
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/career', labelKey: 'nav.career' },
+  { href: '/ultimate', labelKey: 'nav.ultimate' },
+  { href: '/champions', labelKey: 'nav.champions' },
+  { href: '/grounds', labelKey: 'nav.grounds' },
+  { href: '/sbc', labelKey: 'nav.sbc' },
+  { href: '/games', labelKey: 'nav.games' },
+  { href: '/board', labelKey: 'nav.board' },
+  { href: '/market', labelKey: 'nav.players' },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -32,6 +32,7 @@ export function SiteNav() {
   const router = useRouter();
   const app = useApp();
   const { user } = app;
+  const { locale, isRTL, setLocale, t } = useLocale();
   const progress = user ? xpProgress(communityXp(user.id, app)) : null;
   const insets = useSafeAreaInsets();
   const mobile = Platform.OS !== 'web';
@@ -41,7 +42,7 @@ export function SiteNav() {
   const logoNode = (
     <Pressable
       onPress={() => router.push('/')}
-      style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}
+      style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}
     >
       <Image
         source={require('@/assets/images/brand-1club.png')}
@@ -85,13 +86,33 @@ export function SiteNav() {
       }}
     >
       <Text style={{ color: '#FFE08A', fontWeight: '700', fontSize: 13 }}>
-        {user ? 'פרופיל' : 'התחברות'}
+        {user ? t('nav.profile') : t('nav.login')}
       </Text>
     </Pressable>
   );
 
   const accountNode = (
     <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('language.label')}
+        onPress={() => { void setLocale(locale === 'he' ? 'en' : 'he'); }}
+        style={{
+          minHeight: 32,
+          minWidth: 40,
+          paddingHorizontal: 9,
+          borderRadius: 16,
+          borderWidth: 1,
+          borderColor: 'rgba(227, 179, 65, 0.48)',
+          backgroundColor: 'rgba(227, 179, 65, 0.12)',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Text style={{ color: '#FFE08A', fontWeight: '900', fontSize: 12 }}>
+          {locale === 'he' ? 'EN' : 'עב'}
+        </Text>
+      </Pressable>
       {progress ? <LevelChip progress={progress} /> : null}
       {profileNode}
     </View>
@@ -124,7 +145,7 @@ export function SiteNav() {
               textAlign: 'center',
             }}
           >
-            {item.label}
+            {t(item.labelKey)}
           </Text>
           {!isMobile ? (
             <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />
@@ -151,7 +172,7 @@ export function SiteNav() {
         <View
           style={{
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: isRTL ? 'rtl' : 'ltr',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
