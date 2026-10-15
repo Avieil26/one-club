@@ -55,7 +55,7 @@ export default function GamesScreen() {
             <Text style={styles.whoTitle}>{t('הרשת', 'The Grid')}</Text>
             <Text style={styles.whoBody}>{t('שורה וטור. שם אחד לכל משבצת, מהגברים שבמאגר.', 'A row and a column. Name one player for every square.')}</Text>
             <View style={styles.playLight}>
-              <Text style={styles.playLightText}>שחק</Text>
+              <Text style={styles.playLightText}>{t('שחק', 'PLAY')}</Text>
             </View>
           </View>
         </LinearGradient>

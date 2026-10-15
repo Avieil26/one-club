@@ -16,7 +16,8 @@ import { useLanguage } from '@/lib/language';
 
 export default function ProfileScreen() {
   const app = useApp();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const badges = app.user ? badgesFor(app.user, app.grounds) : [];
   const userId = app.user?.id;
@@ -43,7 +44,7 @@ export default function ProfileScreen() {
       setRawUri(uri);
       setCropOpen(true);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
     }
   }
 
@@ -52,7 +53,7 @@ export default function ProfileScreen() {
     try {
       await app.setAvatar(cropped);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
     }
   }
 
@@ -73,7 +74,7 @@ export default function ProfileScreen() {
       )}
       <Muted>{app.mode === 'local' ? t('מצב הדגמה על המכשיר', 'On-device demo mode') : t('מחוברים לשרת', 'Connected to server')}</Muted>
       {app.user ? (
-        <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8 }}>
+        <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8 }}>
           <View
             style={{
               flex: 1,
