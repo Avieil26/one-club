@@ -186,6 +186,8 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const setLocale = useCallback(async (next: Locale) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Keep the in-memory choice for this session if persistence is unavailable.
     } finally {
       setLocaleState(next);
     }
