@@ -27,6 +27,7 @@ import {
   DetailedAttrGroup,
 } from '@/lib/careerAttributes';
 import { statTone } from '@/lib/playerMeta';
+import { useLanguage } from '@/lib/language';
 
 type FilterTab = 'all' | 'israel' | 'attack' | 'midfield' | 'defense';
 
@@ -45,6 +46,8 @@ function formatEurFull(val: number): string {
 }
 
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [subFilter, setSubFilter] = useState<SubFilterTab>('all');
   const [page, setPage] = useState(1);
@@ -83,27 +86,27 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { direction: rtl ? 'rtl' : 'ltr' }]}>
       {/* TOP HEADER */}
       <View style={styles.topRow}>
         {onSwitchToChallenges ? (
           <Pressable accessibilityRole="button" onPress={onSwitchToChallenges} style={styles.backBtn}>
-            <Text style={styles.backBtnText}>‹ אתגרי קריירה</Text>
+            <Text style={styles.backBtnText}>‹ {t('אתגרי קריירה', 'Career challenges')}</Text>
           </Pressable>
         ) : (
           <View />
         )}
         <View style={styles.careerBadge}>
           <View style={styles.greenDot} />
-          <Text style={styles.careerBadgeText}>{CAREER_SCOUT_PLAYERS.length} שחקנים מומלצים</Text>
+          <Text style={styles.careerBadgeText}>{CAREER_SCOUT_PLAYERS.length} {t('שחקנים מומלצים', 'recommended players')}</Text>
         </View>
       </View>
 
       {/* TITLE */}
-      <View style={styles.titleBlock}>
-        <Text style={styles.mainTitle}>סקאוטינג כישרונות FC 27</Text>
+      <View style={[styles.titleBlock, { direction: rtl ? 'rtl' : 'ltr' }]}>
+        <Text style={styles.mainTitle}>{t('סקאוטינג כישרונות FC 27', 'FC 27 Talent Scouting')}</Text>
         <Text style={styles.subTitle}>
-          שחקנים עם פוטנציאל התפתחות אדיר מכל העמדות • כולל שחקנים כחול-לבן 🇮🇱
+          {t('שחקנים עם פוטנציאל התפתחות אדיר מכל העמדות • כולל שחקנים כחול-לבן 🇮🇱', 'High-potential prospects across every position • including Israeli talents 🇮🇱')}
         </Text>
       </View>
 
@@ -120,7 +123,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'all' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'all' && styles.filterPillTextActive]}>
-            הכל ({CAREER_SCOUT_PLAYERS.length})
+            {t('הכל', 'All')} ({CAREER_SCOUT_PLAYERS.length})
           </Text>
         </Pressable>
 
@@ -140,7 +143,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
               activeTab === 'israel' && styles.israelFilterTextActive,
             ]}
           >
-            🇮🇱 כחול-לבן ({CAREER_SCOUT_PLAYERS.filter(p => p.nation === 'ישראל').length})
+            🇮🇱 {t('כחול-לבן', 'Israeli')} ({CAREER_SCOUT_PLAYERS.filter(p => p.nation === 'ישראל').length})
           </Text>
         </Pressable>
 
@@ -150,7 +153,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'attack' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'attack' && styles.filterPillTextActive]}>
-            התקפה (ST/W)
+            {t('התקפה (ST/W)', 'Attack (ST/W)')}
           </Text>
         </Pressable>
 
@@ -160,7 +163,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'midfield' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'midfield' && styles.filterPillTextActive]}>
-            קישור (CAM/CM)
+            {t('קישור (CAM/CM)', 'Midfield (CAM/CM)')}
           </Text>
         </Pressable>
 
@@ -170,7 +173,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.filterPill, activeTab === 'defense' && styles.filterPillActive]}
         >
           <Text style={[styles.filterPillText, activeTab === 'defense' && styles.filterPillTextActive]}>
-            הגנה ושוערים
+            {t('הגנה ושוערים', 'Defence & goalkeepers')}
           </Text>
         </Pressable>
       </ScrollView>
@@ -183,7 +186,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'all' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'all' && styles.subFilterBtnTextActive]}>
-            כל הרמות
+            {t('כל הרמות', 'All levels')}
           </Text>
         </Pressable>
 
@@ -193,7 +196,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, styles.subFilterBtn7077, subFilter === '70-77' && styles.subFilterBtn7077Active]}
         >
           <Text style={[styles.subFilterBtnText, styles.subFilterBtn7077Text, subFilter === '70-77' && styles.subFilterBtn7077TextActive]}>
-            ⭐ רייטינג 70–77 ({CAREER_SCOUT_PLAYERS.filter(p => p.rating >= 70 && p.rating <= 77).length})
+            ⭐ {t('רייטינג', 'Rating')} 70–77 ({CAREER_SCOUT_PLAYERS.filter(p => p.rating >= 70 && p.rating <= 77).length})
           </Text>
         </Pressable>
 
@@ -203,7 +206,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'wonderkids' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'wonderkids' && styles.subFilterBtnTextActive]}>
-            💎 וונדרקידס
+            💎 {t('וונדרקידס', 'Wonderkids')}
           </Text>
         </Pressable>
 
@@ -213,19 +216,19 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           style={[styles.subFilterBtn, subFilter === 'bargains' && styles.subFilterBtnActive]}
         >
           <Text style={[styles.subFilterBtnText, subFilter === 'bargains' && styles.subFilterBtnTextActive]}>
-            🏷️ מציאות שוק
+            🏷️ {t('מציאות שוק', 'Market bargains')}
           </Text>
         </Pressable>
       </View>
 
       {/* PAGE SUMMARY STRIP */}
       <View style={styles.pageSummaryStrip}>
-        <View style={styles.pageSummaryInfo}>
+        <View style={[styles.pageSummaryInfo, { alignItems: rtl ? 'flex-start' : 'flex-end' }]}>
           <Text style={styles.pageSummaryTotal}>
-            מציג <Text style={styles.pageSummaryNum}>{filteredPlayers.length > 0 ? startIndex + 1 : 0}–{Math.min(startIndex + PAGE_SIZE, filteredPlayers.length)}</Text> מתוך <Text style={styles.pageSummaryNum}>{filteredPlayers.length}</Text> שחקנים
+            {t('מציג', 'Showing')} <Text style={styles.pageSummaryNum}>{filteredPlayers.length > 0 ? startIndex + 1 : 0}–{Math.min(startIndex + PAGE_SIZE, filteredPlayers.length)}</Text> {t('מתוך', 'of')} <Text style={styles.pageSummaryNum}>{filteredPlayers.length}</Text> {t('שחקנים', 'players')}
           </Text>
           <Text style={styles.pageSummaryPage}>
-            עמוד {currentPage} מתוך {totalPages}
+            {t('עמוד', 'Page')} {currentPage} {t('מתוך', 'of')} {totalPages}
           </Text>
         </View>
 
@@ -233,12 +236,12 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
           <View style={styles.quickNavArrows}>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="עמוד קודם"
+              accessibilityLabel={t('עמוד קודם', 'Previous page')}
               disabled={currentPage <= 1}
               onPress={() => setPage((p) => Math.max(1, p - 1))}
               style={[styles.quickNavBtn, currentPage <= 1 && styles.quickNavBtnDisabled]}
             >
-              <Text style={[styles.quickNavBtnText, currentPage <= 1 && styles.quickNavBtnTextDisabled]}>‹ הקודם</Text>
+              <Text style={[styles.quickNavBtnText, currentPage <= 1 && styles.quickNavBtnTextDisabled]}>{t('‹ הקודם', '‹ Previous')}</Text>
             </Pressable>
 
             <View style={styles.quickNavPageBadge}>
@@ -247,12 +250,12 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
 
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="עמוד הבא"
+              accessibilityLabel={t('עמוד הבא', 'Next page')}
               disabled={currentPage >= totalPages}
               onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
               style={[styles.quickNavBtn, currentPage >= totalPages && styles.quickNavBtnDisabled]}
             >
-              <Text style={[styles.quickNavBtnText, currentPage >= totalPages && styles.quickNavBtnTextDisabled]}>הבא ›</Text>
+              <Text style={[styles.quickNavBtnText, currentPage >= totalPages && styles.quickNavBtnTextDisabled]}>{t('הבא ›', 'Next ›')}</Text>
             </Pressable>
           </View>
         ) : null}
@@ -321,7 +324,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                         isIsrael && { color: '#38bdf8' },
                       ]}
                     >
-                      +{player.growth} צמיחה
+                      +{player.growth} {t('צמיחה', 'growth')}
                     </Text>
                   </View>
                 </View>
@@ -358,11 +361,11 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   <View style={styles.valueGroup}>
                     <Text style={styles.euroVal}>{formatEur(player.marketValueEur)}</Text>
                     <Text style={styles.wageVal}>
-                      • שכר: {formatEur(player.weeklyWageEur)}/שבוע
+                      • {t('שכר', 'Wage')}: {formatEur(player.weeklyWageEur)}/week
                     </Text>
                   </View>
                   <View style={styles.reportBtn}>
-                    <Text style={styles.reportBtnText}>דוח מלא ◄</Text>
+                    <Text style={styles.reportBtnText}>{t('דוח מלא ◄', 'Full report ◄')}</Text>
                   </View>
                 </View>
               </View>
@@ -428,9 +431,8 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
         <Text style={styles.advisorEmoji}>🇮🇱</Text>
         <View style={{ flex: 1 }}>
           <Text style={styles.advisorText}>
-            <Text style={styles.advisorHighlight}>גאווה ישראלית ב-FC 27: </Text>
-            אוסקר גלוך באייאקס (86 פוטנציאל), ענאן חלאילי בקריסטל פאלאס (85 פוטנציאל), ודניאל פרץ בסאות׳המפטון (83 פוטנציאל) –
-            לצד שחקני מפתח נוספים כמו למקין, קארצב, תורג׳מן, עבדה, קניקובסקי ופיינגולד!
+            <Text style={styles.advisorHighlight}>{t('גאווה ישראלית ב-FC 27: ', 'Israeli pride in FC 27: ')}</Text>
+            {t('אוסקר גלוך באייאקס (86 פוטנציאל), ענאן חלאילי בקריסטל פאלאס (85 פוטנציאל), ודניאל פרץ בסאות׳המפטון (83 פוטנציאל) – לצד שחקני מפתח נוספים כמו למקין, קארצב, תורג׳מן, עבדה, קניקובסקי ופיינגולד!', 'Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.') }
           </Text>
         </View>
       </View>
