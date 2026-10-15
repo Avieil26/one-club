@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -14,6 +14,7 @@ import { TermsConsentModal } from '@/components/TermsConsentModal';
 import { colors } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
+import { LocaleProvider } from '@/lib/i18n';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -57,14 +58,12 @@ export default function RootLayout() {
 
   useEffect(() => {
     SplashScreen.hideAsync();
-    if (Platform.OS === 'web') {
-      document.documentElement.lang = 'he';
-      document.documentElement.dir = 'rtl';
-      const styleId = 'fc27-scroll';
-      if (!document.getElementById(styleId)) {
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
+    if (Platform.OS !== 'web') return;
+    const styleId = 'fc27-scroll';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = `
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-track { background: #14120e; }
 *::-webkit-scrollbar-thumb { background: #8a7340; border-radius: 8px; border: 2px solid #14120e; }
@@ -80,20 +79,14 @@ export default function RootLayout() {
 *::-webkit-scrollbar-button:vertical:end:increment {
   display: none; width: 0; height: 0; background: transparent;
 }`;
-        document.head.appendChild(style);
-      }
-      return;
-    }
-    if (!I18nManager.isRTL) {
-      I18nManager.allowRTL(true);
-      I18nManager.forceRTL(true);
-      if (__DEV__) DevSettings.reload();
+      document.head.appendChild(style);
     }
   }, []);
 
   return (
-    <AppProvider>
-      <ThemeProvider value={theme}>
+    <LocaleProvider>
+      <AppProvider>
+        <ThemeProvider value={theme}>
         <View style={styles.fill}>
           <View style={styles.fill}>
             <StatusBar style="light" />
@@ -116,8 +109,9 @@ export default function RootLayout() {
           </View>
           <NoticeHost />
         </View>
-      </ThemeProvider>
-    </AppProvider>
+        </ThemeProvider>
+      </AppProvider>
+    </LocaleProvider>
   );
 }
 
