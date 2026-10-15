@@ -15,11 +15,12 @@ import { PLAYERS } from '@/lib/fcPlayers';
 import { displayName } from '@/lib/labels';
 import { openChallenges } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
+import { useLocale, type TranslationKey } from '@/lib/i18n';
 
 const doors: {
   href: '/career' | '/ultimate' | '/grounds' | '/sbc' | '/market';
-  label: string;
-  hint: string;
+  labelKey: TranslationKey;
+  hintKey: TranslationKey;
   accent: string;
   gradient: [string, string, string];
   logo?: ImageSourcePropType;
@@ -27,40 +28,40 @@ const doors: {
 }[] = [
   {
     href: '/career',
-    label: 'קריירה',
-    hint: 'אתגרים והוכחות',
+    labelKey: 'home.career.title',
+    hintKey: 'home.career.hint',
     accent: '#8EC5FF',
     gradient: ['#081018', '#122638', '#1E4A6A'],
     logo: require('@/assets/images/door-career.png'),
   },
   {
     href: '/ultimate',
-    label: 'אולטימייט',
-    hint: 'קבוצות וחבילות',
+    labelKey: 'home.ultimate.title',
+    hintKey: 'home.ultimate.hint',
     accent: '#E3B341',
     gradient: ['#0A0804', '#1C160A', '#3A2E12'],
     logo: require('@/assets/images/door-ultimate.png'),
   },
   {
     href: '/grounds',
-    label: 'הגראונדס',
-    hint: 'מחפשים שחקן',
+    labelKey: 'home.grounds.title',
+    hintKey: 'home.grounds.hint',
     accent: '#7ED0C8',
     gradient: ['#070C12', '#12202A', '#1C3A48'],
     logo: require('@/assets/images/door-grounds.png'),
   },
   {
     href: '/sbc',
-    label: 'SBC',
-    hint: 'פתרונות קהילה',
+    labelKey: 'home.sbc.title',
+    hintKey: 'home.sbc.hint',
     accent: '#E0915C',
     gradient: ['#0A0C12', '#161A24', '#242C3A'],
     logo: require('@/assets/images/door-sbc.png'),
   },
   {
     href: '/market',
-    label: 'מרקט',
-    hint: 'קלפים ונתונים',
+    labelKey: 'home.market.title',
+    hintKey: 'home.market.hint',
     accent: '#F0D060',
     gradient: ['#080A10', '#121820', '#1C2838'],
     logo: require('@/assets/images/door-market.png'),
@@ -88,6 +89,7 @@ function DoorButton({
   index: number;
   onPress: () => void;
 }) {
+  const { t, isRTL } = useLocale();
   return (
     <Pressable
       accessibilityRole="button"
@@ -118,7 +120,7 @@ function DoorButton({
           end={{ x: 0.9, y: 0.7 }}
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
         />
-        <View style={{ flexDirection: 'row', direction: 'rtl', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <View
             style={{
               width: 58,
@@ -147,14 +149,14 @@ function DoorButton({
           </Text>
         </View>
         <View style={{ gap: 4 }}>
-          <Text style={{ color: '#F6F8FC', fontSize: 22, fontWeight: '900', textAlign: 'right' }}>{door.label}</Text>
-          <Text style={{ color: 'rgba(220,230,240,0.72)', fontSize: 13, textAlign: 'right', fontWeight: '600' }}>
-            {door.hint}
+          <Text style={{ color: '#F6F8FC', fontSize: 22, fontWeight: '900', textAlign: isRTL ? 'right' : 'left' }}>{t(door.labelKey)}</Text>
+          <Text style={{ color: 'rgba(220,230,240,0.72)', fontSize: 13, textAlign: isRTL ? 'right' : 'left', fontWeight: '600' }}>
+            {t(door.hintKey)}
           </Text>
           <View
             style={{
               marginTop: 8,
-              alignSelf: 'flex-end',
+              alignSelf: isRTL ? 'flex-end' : 'flex-start',
               height: 3,
               width: 42,
               borderRadius: 2,
@@ -171,30 +173,32 @@ function DoorButton({
 export default function HomeScreen() {
   const router = useRouter();
   const { user, challenges, futPosts, grounds, profiles, likes } = useApp();
+  const { t, isRTL, locale } = useLocale();
   const open = openChallenges(challenges);
   const columns = useColumns(5, 2);
   const featured = futPosts.find((post) => post.kind === 'squad');
   const featuredLikes = featured ? likes.filter((like) => like.postId === featured.id).length : 0;
   const stats = [
-    { value: Number(PLAYERS.length).toLocaleString('en-US'), label: 'שחקנים' },
-    { value: String(open.length), label: 'אתגרים פתוחים' },
-    { value: String(grounds.length), label: 'מודעות' },
+    { value: Number(PLAYERS.length).toLocaleString(locale === 'en' ? 'en-US' : 'he-IL'), label: t('home.players') },
+    { value: String(open.length), label: t('home.openChallenges') },
+    { value: String(grounds.length), label: t('home.posts') },
   ];
 
   return (
     <Screen scene="home">
       <Rise index={0}>
-        <Text style={{ color: '#FD6502', fontSize: 13, fontWeight: '700', textAlign: 'right', letterSpacing: 1 }}>
+        <Text style={{ color: '#FD6502', fontSize: 13, fontWeight: '700', textAlign: isRTL ? 'right' : 'left', letterSpacing: 1 }}>
           1 CLUB
         </Text>
-        <Title>{user ? user.displayName : 'המגרש'}</Title>
-        <Muted>הקהילה הישראלית ל-EA FC 27. לא קשורה ל-EA.</Muted>
+        <Title>{user ? user.displayName : t('home.arena')}</Title>
+        <Muted>{t('home.tagline')}</Muted>
+        {locale === 'en' ? <Muted>{t('home.languageBeta')}</Muted> : null}
       </Rise>
       <Rise index={1}>
         <FutzBetaDownload />
       </Rise>
       <Rise index={2}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8 }}>
+        <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', gap: 8 }}>
           {stats.map((item) => (
             <View
               key={item.label}
@@ -244,7 +248,7 @@ export default function HomeScreen() {
           ))}
         </View>
       </Rise>
-      <View style={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', gap: 12 }}>
+      <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', flexWrap: 'wrap', gap: 12 }}>
         {doors.map((door, index) => (
           <View key={door.href} style={{ width: `${100 / columns - 2}%`, flexGrow: 1, minWidth: columns === 5 ? 150 : '46%' }}>
             <Rise index={index + 3}>
