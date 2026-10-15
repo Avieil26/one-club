@@ -6,10 +6,12 @@ import { Button, colors, Field, Muted } from '@/components/ui';
 import { errorMessage } from '@/lib/format';
 import { recordAcceptedTerms } from '@/lib/legal';
 import { useApp } from '@/lib/store';
+import { useLocale } from '@/lib/i18n';
 
 export function AccountForm() {
   const app = useApp();
   const router = useRouter();
+  const { t, isRTL } = useLocale();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ export function AccountForm() {
     try {
       await work();
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('common.errorTitle'), errorMessage(error));
     }
   }
 
@@ -29,8 +31,8 @@ export function AccountForm() {
     if (registering && !termsAccepted) {
       setTermsError(true);
       Alert.alert(
-        'אישור תנאים נדרש',
-        'כדי להירשם לאפליקציה, חובה לקרוא ולסמן אישור לתנאי השימוש ולמדיניות הפרטיות.',
+        t('auth.requiredTermsTitle'),
+        t('auth.requiredTermsMessage'),
       );
       return false;
     }
@@ -68,11 +70,11 @@ export function AccountForm() {
 
   return (
     <View style={{ gap: 14, width: '100%', maxWidth: 480 }}>
-      <Text style={{ color: colors.text, fontSize: 36, fontWeight: '800', textAlign: 'right' }}>{registering ? 'הרשמה' : 'כניסה'}</Text>
-      <Muted>{registering ? 'שם, אימייל וסיסמה. אחרי זה נכנסים לדף הבית.' : 'אימייל וסיסמה של החשבון שנרשמתם איתו.'}</Muted>
-      {registering ? <Field label="שם בקהילה" value={name} onChangeText={setName} placeholder="איך לקרוא לך" /> : null}
-      <Field label="אימייל" value={email} onChangeText={setEmail} placeholder="name@email.com" keyboardType="email-address" />
-      <Field label="סיסמה" value={password} onChangeText={setPassword} placeholder="לפחות 6 תווים" secure />
+      <Text style={{ color: colors.text, fontSize: 36, fontWeight: '800', textAlign: isRTL ? 'right' : 'left' }}>{registering ? t('auth.registerTitle') : t('auth.signInTitle')}</Text>
+      <Muted>{registering ? t('auth.signUpBlurb') : t('auth.signInBlurb')}</Muted>
+      {registering ? <Field label={t('auth.communityName')} value={name} onChangeText={setName} placeholder={t('auth.namePlaceholder')} /> : null}
+      <Field label={t('auth.email')} value={email} onChangeText={setEmail} placeholder="name@email.com" keyboardType="email-address" />
+      <Field label={t('auth.password')} value={password} onChangeText={setPassword} placeholder={t('auth.passwordPlaceholder')} secure />
 
       {/* CHECKBOX FOR TERMS & PRIVACY (SIGNUP ONLY) */}
       {registering ? (
@@ -80,7 +82,7 @@ export function AccountForm() {
           <Pressable
             accessibilityRole="checkbox"
             accessibilityState={{ checked: termsAccepted }}
-            accessibilityLabel="אני מאשר את תנאי השימוש ומדיניות הפרטיות"
+            accessibilityLabel={`${t('auth.consentIntro')}${t('auth.terms')} ${t('auth.consentAnd')} ${t('auth.privacy')}`}
             onPress={() => {
               setTermsAccepted((prev) => !prev);
               if (termsError) setTermsError(false);
@@ -91,7 +93,7 @@ export function AccountForm() {
               borderWidth: 1.5,
               borderRadius: 12,
               padding: 12,
-              flexDirection: 'row-reverse',
+              flexDirection: isRTL ? 'row-reverse' : 'row',
               alignItems: 'flex-start',
               gap: 12,
             }}
@@ -117,8 +119,8 @@ export function AccountForm() {
 
             {/* Label and Links */}
             <View style={{ flex: 1, gap: 4 }}>
-              <Text style={{ color: colors.text, fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
-                קראתי ואני מסכים/ה ל
+              <Text style={{ color: colors.text, fontSize: 14, lineHeight: 22, textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }}>
+                {t('auth.consentIntro')}
                 <Text
                   accessibilityRole="link"
                   style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}
@@ -129,7 +131,7 @@ export function AccountForm() {
                 >
                   תנאי השימוש
                 </Text>
-                {' '}ול
+                {' '}{t('auth.consentAnd')}
                 <Text
                   accessibilityRole="link"
                   style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}
@@ -142,33 +144,33 @@ export function AccountForm() {
                 </Text>
                 .
               </Text>
-              <Text style={{ color: colors.muted, fontSize: 11.5, textAlign: 'right', lineHeight: 17 }}>
-                השימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.
+              <Text style={{ color: colors.muted, fontSize: 11.5, textAlign: isRTL ? 'right' : 'left', lineHeight: 17 }}>
+                {t('auth.underageNotice')}
               </Text>
             </View>
           </Pressable>
 
           {termsError ? (
-            <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '700', textAlign: 'right', paddingHorizontal: 4 }}>
-              ⚠️ חובה לסמן שקראת והסכמת לתנאי השימוש ומדיניות הפרטיות כדי להירשם.
+            <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '700', textAlign: isRTL ? 'right' : 'left', paddingHorizontal: 4 }}>
+              ⚠️ {t('auth.consentError')}
             </Text>
           ) : null}
         </View>
       ) : null}
 
       <Button
-        label={registering ? 'הרשמה וכניסה' : 'כניסה'}
+        label={registering ? t('auth.signUpButton') : t('auth.signInButton')}
         disabled={app.busy}
         onPress={handleEmailAuth}
       />
       <Button
-        label={registering ? 'הרשמה עם Google' : 'כניסה עם Google'}
+        label={registering ? t('auth.signUpGoogle') : t('auth.signInGoogle')}
         variant="gold"
         disabled={app.busy}
         onPress={handleGoogleAuth}
       />
 
-      <Button label={registering ? 'יש לי כבר חשבון' : 'להרשמה'} variant="link" onPress={toggleMode} />
+      <Button label={registering ? t('auth.haveAccount') : t('auth.needAccount')} variant="link" onPress={toggleMode} />
     </View>
   );
 }
