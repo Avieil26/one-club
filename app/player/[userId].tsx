@@ -12,7 +12,7 @@ import { useApp } from '@/lib/store';
 
 export default function PlayerProfileScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const id = String(userId || '');
@@ -28,7 +28,7 @@ export default function PlayerProfileScreen() {
   const progress = xpProgress(communityXp(id, app));
 
   return (
-    <Screen scene="grounds" style={{ direction: language === 'he' ? 'rtl' : 'ltr' }}>
+    <Screen scene="grounds">
       <Stack.Screen options={{ title: name }} />
       {!profile ? (
         <Muted>{t('הפרופיל לא נמצא', 'Profile not found')}</Muted>
