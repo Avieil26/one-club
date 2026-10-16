@@ -1,5 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
