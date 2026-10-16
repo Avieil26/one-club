@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useLanguage } from '@/lib/language';
 import { Animated, Easing, Image, PanResponder, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack } from 'expo-router';
@@ -160,6 +161,7 @@ function FormationShape({ formation, height }: { formation: DraftFormation; heig
 }
 
 export default function DraftScreen() {
+  const { t, language } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 768;
   const pitchH = wide ? 920 : 560;
@@ -324,20 +326,20 @@ export default function DraftScreen() {
   const asking = formation?.slots.find((slot) => slot.id === active);
   const title =
     phase === 'formation'
-      ? 'בחרו מערך'
+      ? t('בחרו מערך', 'Choose a formation')
       : phase === 'captain'
-        ? 'בחרו כוכב'
+        ? t('בחרו כוכב', 'Choose a star')
         : phase === 'manager'
-          ? 'בחרו מאמן'
+          ? t('בחרו מאמן', 'Choose a manager')
           : phase === 'done'
-            ? 'הסגל נסגר'
+            ? t('הסגל נסגר', 'Squad locked')
             : phase === 'subs'
               ? reserveSlot !== null
-                ? 'מחוץ לסגל'
-                : 'בחרו מחליף'
+                ? t('מחוץ לסגל', 'Out of squad')
+                : t('בחרו מחליף', 'Choose a substitute')
               : asking
-                ? `בחרו ${asking.position}`
-                : 'לחצו על עמדה';
+                ? (language === 'he' ? `בחרו ${asking.position}` : `Choose ${asking.position}`)
+                : t('לחצו על עמדה', 'Tap a position');
 
   return (
     <Screen scene="draft" maxWidth={wide ? 1180 : 520}>
@@ -345,7 +347,7 @@ export default function DraftScreen() {
       {phase === 'formation' ? (
         <>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.lead}>המערך נשאר לכל הדרך. אחר כך כוכב, ואז לוחצים על עמדה.</Text>
+          <Text style={styles.lead}>{t('המערך נשאר לכל הדרך. אחר כך כוכב, ואז לוחצים על עמדה.', 'Your formation stays for the whole draft. Pick a star next, then tap a position.')}</Text>
         </>
       ) : null}
 
@@ -428,10 +430,10 @@ export default function DraftScreen() {
             </View>
           ) : null}
           <View pointerEvents="none" style={styles.hud}>
-            <Text style={styles.hudLabel}>רייטינג</Text>
+            <Text style={styles.hudLabel}>{t('רייטינג', 'Rating')}</Text>
             <Text style={styles.hudValue}>{rating ?? '—'}</Text>
             <Stars value={rating == null ? 0 : squadStars(rating)} />
-            <Text style={styles.hudLabel}>כימיה</Text>
+            <Text style={styles.hudLabel}>{t('כימיה', 'Chemistry')}</Text>
             <Text style={styles.hudChem}>
               {chemistry}
               <Text style={styles.hudOf}>/33</Text>
@@ -442,7 +444,7 @@ export default function DraftScreen() {
 
       {formation && phase !== 'formation' ? (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.benchStrip}>
-          <Text style={styles.benchLabel}>מחליפים</Text>
+          <Text style={styles.benchLabel}>{t('מחליפים', 'Substitutes')}</Text>
           {Array.from({ length: SUB_COUNT }, (_, index) => {
             const player = subs[index];
             const slotW = wide ? 62 : 52;
@@ -459,7 +461,7 @@ export default function DraftScreen() {
             );
           })}
           <View style={styles.benchDivider} />
-          <Text style={styles.benchLabel}>מחוץ לסגל</Text>
+          <Text style={styles.benchLabel}>{t('מחוץ לסגל', 'Reserves')}</Text>
           {Array.from({ length: RESERVE_COUNT }, (_, index) => {
             const player = reserves[index];
             const slotW = wide ? 62 : 52;
@@ -488,7 +490,7 @@ export default function DraftScreen() {
                   <Image source={{ uri: item.photo }} resizeMode="cover" style={{ width: wide ? 168 : 148, height: wide ? 168 : 136 }} />
                   <Text style={styles.managerName}>{item.name}</Text>
                   <Text style={styles.managerMeta}>{item.league}</Text>
-                  <Text style={styles.managerChem}>כימיה {chemistryFor(item)}</Text>
+                  <Text style={styles.managerChem}>{t('כימיה', 'Chemistry')} {chemistryFor(item)}</Text>
                 </LinearGradient>
               </Pressable>
             </Rise>
@@ -499,7 +501,7 @@ export default function DraftScreen() {
       {phase === 'done' ? (
         <Pressable accessibilityRole="button" onPress={again} style={styles.again}>
           <View style={styles.inset} />
-          <Text style={styles.againText}>דראפט חדש</Text>
+          <Text style={styles.againText}>{t('דראפט חדש', 'New draft')}</Text>
         </Pressable>
       ) : null}
     </Screen>
