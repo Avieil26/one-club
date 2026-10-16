@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { careerFont } from '@/lib/careerCardTheme';
+import { useLanguage } from '@/lib/language';
 
 export function Hearts({ lives }: { lives: number }) {
   return (
@@ -23,10 +24,16 @@ export function Hearts({ lives }: { lives: number }) {
 }
 
 export function RoundNote({ text, good }: { text: string; good?: boolean }) {
+  const { t, language } = useLanguage();
+  const localizedText = language === 'he' ? text : ({
+    'נכון': 'Correct',
+    'השחקן כבר על הלוח': 'That player is already on the grid',
+    'טעית. נגמרו הטעויות': 'Incorrect. No mistakes left',
+  } as Record<string, string>)[text] ?? text;
   return (
     <View style={[styles.note, good ? styles.noteGood : styles.noteBad]}>
       <View style={[styles.noteStripe, good ? styles.noteStripeGood : null]} />
-      <Text style={styles.noteText}>{text}</Text>
+      <Text style={[styles.noteText, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{localizedText}</Text>
     </View>
   );
 }
@@ -40,17 +47,18 @@ export function GameEnd({
   onAgain: () => void;
   onBack: () => void;
 }) {
+  const { t, language } = useLanguage();
   return (
     <View style={styles.end}>
       <Text style={styles.endTitle}>{title}</Text>
       <Pressable accessibilityRole="button" onPress={onAgain} style={styles.againPress}>
         <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.again}>
           <View style={styles.againShine} />
-          <Text style={styles.againText}>עוד משחק</Text>
+          <Text style={[styles.againText, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{t('עוד משחק', 'Play again')}</Text>
         </LinearGradient>
       </Pressable>
       <Pressable accessibilityRole="button" onPress={onBack} style={styles.back}>
-        <Text style={styles.backText}>חזור למשחקונים</Text>
+        <Text style={[styles.backText, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{t('חזור למשחקונים', 'Back to mini-games')}</Text>
       </Pressable>
     </View>
   );
@@ -95,8 +103,8 @@ const styles = {
     color: '#fffaf6',
     fontSize: 15,
     fontWeight: '800' as const,
-    textAlign: 'right' as const,
-    writingDirection: 'rtl' as const,
+    textAlign: 'left' as const,
+    writingDirection: 'ltr' as const,
   },
   end: {
     gap: 10,
