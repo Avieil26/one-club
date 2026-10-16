@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '@/lib/language';
 import { Alert, Image, Pressable, Text, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
@@ -16,6 +17,8 @@ const LEVELS = Array.from({ length: 50 }, (_, i) => i + 1);
 export default function NewGroundsScreen() {
   const app = useApp();
   const router = useRouter();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const [intent, setIntent] = useState<GroundsIntent>('need_player');
   const [platform, setPlatform] = useState<PlatformId>('ps5');
   const [position, setPosition] = useState(POSITIONS[0]);
@@ -38,13 +41,13 @@ export default function NewGroundsScreen() {
       setRawUri(picked[0]);
       setCropOpen(true);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'Notice'), errorMessage(error));
     }
   }
 
   async function save() {
     if (!gamertag.trim() && !eaId.trim()) {
-      Alert.alert('רגע', 'צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.');
+      Alert.alert(t('רגע', 'Notice'), t('צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.', 'Enter at least a gamertag or EA ID before publishing.'));
       return;
     }
     try {
@@ -64,41 +67,41 @@ export default function NewGroundsScreen() {
         avatarUri: null,
         levelImageUri: null,
       });
-      Alert.alert('פורסם', 'המודעה עלתה לגראונדס.');
+      Alert.alert(t('פורסם', 'Published'), t('המודעה עלתה לגראונדס.', 'Your post is now live on The Grounds.'));
       router.replace('/grounds');
     } catch (error) {
-      Alert.alert('הפרסום נכשל', errorMessage(error));
+      Alert.alert(t('הפרסום נכשל', 'Publishing failed'), errorMessage(error));
     }
   }
 
   return (
     <Screen scene="grounds">
-      <Stack.Screen options={{ title: 'מודעה' }} />
-      <Title>פרטי שחקן בגראונדס</Title>
-      <Muted>בלי וואטסאפ — אחרי הפרסום אפשר לשלוח הודעה ולעקוב מתוך האפליקציה.</Muted>
+      <Stack.Screen options={{ title: t('מודעה', 'Post') }} />
+      <Title>{t('פרטי שחקן בגראונדס', 'Player details for The Grounds')}</Title>
+      <Muted>{t('בלי וואטסאפ — אחרי הפרסום אפשר לשלוח הודעה ולעקוב מתוך האפליקציה.', 'No WhatsApp needed — after publishing, you can message and follow players inside the app.')}</Muted>
 
       <ChoiceGroup
         options={[
-          { id: 'need_player', label: 'חסר שחקן' },
-          { id: 'looking_for_club', label: 'מחפש קבוצה' },
+          { id: 'need_player', label: t('חסר שחקן', 'Looking for a player') },
+          { id: 'looking_for_club', label: t('מחפש קבוצה', 'Looking for a club') },
         ]}
         value={intent}
         onChange={setIntent}
       />
-      <PlatformPicker value={platform} onChange={setPlatform} />
+      <PlatformPicker value={platform} onChange={setPlatform} label={t('פלטפורמה', 'Platform')} />
 
       <Field
-        label={platform === 'pc' ? 'שם משתמש במחשב' : 'שם משתמש בקונסולה'}
+        label={platform === 'pc' ? t('שם משתמש במחשב', 'PC username') : t('שם משתמש בקונסולה', 'Console gamertag')}
         value={gamertag}
         onChangeText={setGamertag}
-        placeholder="כמו שמופיע ב־EA / בקונסולה"
+        placeholder={t('כמו שמופיע ב־EA / בקונסולה', 'As shown in EA or on your console')}
       />
-      <Field label="EA ID" value={eaId} onChangeText={setEaId} placeholder="מזהה EA שלכם" />
+      <Field label="EA ID" value={eaId} onChangeText={setEaId} placeholder={t('מזהה EA שלכם', 'Your EA ID')} />
 
-      <ChoiceGroup label="עמדה" options={POSITIONS.map((item) => ({ id: item, label: item }))} value={position} onChange={setPosition} />
-      <ChoiceGroup label="דיוויז׳ן ב-Pro Clubs" options={DIVISIONS} value={division} onChange={setDivision} />
+      <ChoiceGroup label={t('עמדה', 'Position')} options={POSITIONS.map((item) => ({ id: item, label: t(item, ({ 'שוער':'Goalkeeper', 'בלם':'Centre back', 'מגן':'Full back', 'קשר הגנתי':'Defensive midfielder', 'קשר':'Midfielder', 'קשר התקפי':'Attacking midfielder', 'כנף':'Winger', 'חלוץ':'Striker', 'כל עמדה':'Any position' } as Record<string,string>)[item] ?? item) }))} value={position} onChange={setPosition} />
+      <ChoiceGroup label={t('דיוויז׳ן ב-Pro Clubs', 'Pro Clubs division')} options={DIVISIONS.map((item) => ({ ...item, label: t(item.label, item.id === 'elite' ? 'Elite' : `Division ${item.id}`) }))} value={division} onChange={setDivision} />
 
-      <Text style={{ color: colors.muted, textAlign: 'right', fontWeight: '700', marginBottom: 6 }}>רמת ארכיטיפ (1–50)</Text>
+      <Text style={{ color: colors.muted, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', fontWeight: '700', marginBottom: 6 }}>{t('רמת ארכיטיפ (1–50)', 'Archetype level (1–50)')}</Text>
       <View
         style={{
           alignSelf: 'flex-end',
@@ -109,7 +112,7 @@ export default function NewGroundsScreen() {
           marginBottom: 8,
         }}
       >
-        <Text style={{ color: levelTone.text, fontWeight: '900' }}>{levelTone.label}</Text>
+        <Text style={{ color: levelTone.text, fontWeight: '900' }}>{language === 'en' ? `Level ${playerLevel}` : levelTone.label}</Text>
       </View>
       <ChoiceGroup
         options={LEVELS.filter((n) => n % 5 === 0 || n === 1 || n === 50).map((n) => ({
@@ -120,7 +123,7 @@ export default function NewGroundsScreen() {
         onChange={(id) => setPlayerLevel(Number(id))}
       />
       <Field
-        label="רמה מדויקת (1–50)"
+        label={t('רמה מדויקת (1–50)', 'Exact level (1–50)')}
         value={String(playerLevel)}
         onChangeText={(v) => {
           const n = Number(v.replace(/\D/g, ''));
@@ -131,24 +134,24 @@ export default function NewGroundsScreen() {
       />
 
       <ChoiceGroup
-        label="ארכיטיפ"
-        options={ARCHETYPES.map((item) => ({ id: item, label: item }))}
+        label={t("ארכיטיפ", "Archetype")}
+        options={ARCHETYPES.map((item) => ({ id: item, label: language === "en" ? item.split(" · ")[0] : item }))}
         value={archetype}
         onChange={setArchetype}
       />
-      <ChoiceGroup label="אזור" options={REGIONS.map((item) => ({ id: item, label: item }))} value={region} onChange={setRegion} />
-      <Muted>תמונת פרופיל (רשות) — תמונה שתעלו תשמש גם בפרופיל המשתמש שלכם</Muted>
-      <Button label={avatarUri ? 'החלפת תמונה' : 'העלאת תמונה (רשות) + חיתוך'} variant="ghost" onPress={choosePhoto} />
+      <ChoiceGroup label={t('אזור', 'Region')} options={REGIONS.map((item) => ({ id: item, label: t(item, ({ 'צפון':'North', 'שרון':'Sharon', 'מרכז':'Central', 'ירושלים':'Jerusalem', 'דרום':'South', 'אונליין בלבד':'Online only' } as Record<string,string>)[item] ?? item) }))} value={region} onChange={setRegion} />
+      <Muted>{t('תמונת פרופיל (רשות) — תמונה שתעלו תשמש גם בפרופיל המשתמש שלכם', 'Profile photo (optional) — the image will also be used on your user profile.')}</Muted>
+      <Button label={avatarUri ? t('החלפת תמונה', 'Change photo') : t('העלאת תמונה (רשות) + חיתוך', 'Upload photo (optional) and crop')} variant="ghost" onPress={choosePhoto} />
       {avatarUri ? (
         <Pressable onPress={() => rawUri && setCropOpen(true)} style={{ alignSelf: 'center', marginVertical: 8 }}>
           <View style={{ width: 112, height: 112, borderRadius: 56, overflow: 'hidden', borderWidth: 3, borderColor: levelTone.bg }}>
             <Image source={{ uri: avatarUri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
           </View>
-          <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 6, fontWeight: '600' }}>לחצו לעריכת החיתוך</Text>
+          <Text style={{ color: colors.muted, textAlign: 'center', writingDirection: rtl ? 'rtl' : 'ltr', marginTop: 6, fontWeight: '600' }}>{t('לחצו לעריכת החיתוך', 'Tap to adjust the crop')}</Text>
         </Pressable>
       ) : null}
 
-      <Button label="פרסום מודעה" onPress={save} />
+      <Button label={t('פרסום מודעה', 'Publish post')} onPress={save} />
 
       {rawUri ? (
         <AvatarCropModal

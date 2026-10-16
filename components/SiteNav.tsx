@@ -21,6 +21,7 @@ const LINKS = [
   { href: '/games' as const, label: 'משחקונים' },
   { href: '/board' as const, label: 'לוח' },
   { href: '/market' as const, label: 'שחקנים' },
+  { href: '/settings' as const, label: 'הגדרות' },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -152,7 +153,7 @@ export function SiteNav() {
               textAlign: 'center',
             }}
           >
-            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : 'Players')}
+            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : item.href === '/settings' ? 'Settings' : 'Players')}
           </Text>
           {!isMobile ? (
             <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />
