@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, TextInput, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
@@ -21,6 +22,7 @@ function cellKey(nation: string, club: string) {
 
 export default function GridGameScreen() {
   const router = useRouter();
+  const { t, language } = useLanguage();
   const [puzzle, setPuzzle] = useState<GridPuzzle>(() => makeGrid());
   const [filled, setFilled] = useState<Record<string, GamePlayer>>({});
   const [active, setActive] = useState<string | null>(null);
@@ -39,7 +41,7 @@ export default function GridGameScreen() {
     if (!active || done) return;
     const [nation, club] = active.split('::');
     if (Object.values(filled).some((item) => item.id === player.id)) {
-      setNote('השחקן כבר על הלוח');
+      setNote(t('השחקן כבר על הלוח', 'That player is already on the grid'));
       return;
     }
     if (player.club === club && player.nation === nation) {
@@ -79,11 +81,11 @@ export default function GridGameScreen() {
         <View style={styles.veil} />
         <View style={styles.pad}>
           <View style={styles.top}>
-            <Text style={styles.pill}>{`מולאו ${placed}`}</Text>
+            <Text style={styles.pill}>{language === 'he' ? `מולאו ${placed}` : `${placed} filled`}</Text>
             <Hearts lives={lives} />
           </View>
-          <Text style={styles.title}>הרשת</Text>
-          <Text style={styles.lead}>שם אחד בכל משבצת: שחקן שיושב גם על השורה וגם על הטור.</Text>
+          <Text style={styles.title}>{t('הרשת', 'The Grid')}</Text>
+          <Text style={styles.lead}>{t('שם אחד בכל משבצת: שחקן שיושב גם על השורה וגם על הטור.', 'One name per cell: a player who matches both the row and the column.')}</Text>
           {note && !done ? <RoundNote text={note} /> : null}
 
           <View style={styles.board}>
@@ -130,7 +132,7 @@ export default function GridGameScreen() {
 
           {done ? (
             <GameEnd
-              title={won ? 'השלמת את הרשת' : 'המשחק נגמר'}
+              title={won ? t('השלמת את הרשת', 'Grid completed') : t('המשחק נגמר', 'Game over')}
               onAgain={again}
               onBack={() => router.push('/games')}
             />
@@ -139,7 +141,7 @@ export default function GridGameScreen() {
               <TextInput
                 value={query}
                 onChangeText={setQuery}
-                placeholder="חפשו שחקן למשבצת"
+                placeholder={t('חפשו שחקן למשבצת', 'Search for a player to fill this cell')}
                 placeholderTextColor="rgba(26,20,12,0.45)"
                 style={styles.field}
                 autoCorrect={false}
@@ -151,7 +153,7 @@ export default function GridGameScreen() {
               ))}
             </View>
           ) : (
-            <Text style={styles.hint}>לחצו על משבצת פנויה</Text>
+            <Text style={styles.hint}>{t('לחצו על משבצת פנויה', 'Tap an empty cell')}</Text>
           )}
         </View>
       </View>
