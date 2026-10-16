@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 import { Stack } from 'expo-router';
 
@@ -17,6 +18,8 @@ function face(position: string): ImageStyle | null {
 }
 
 export default function ClubGameScreen() {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const [used, setUsed] = useState<string[]>([]);
   const [question, setQuestion] = useState<ClubQuestion | null>(() => nextClubQuestion([]));
   const [lives, setLives] = useState(3);
@@ -72,16 +75,16 @@ export default function ClubGameScreen() {
         </View>
         <View style={styles.pad}>
           <View style={styles.top}>
-            <Text style={styles.pill}>+{POINTS} לניחוש</Text>
+            <Text style={styles.pill}>+{POINTS} {t('לניחוש', 'per guess')}</Text>
             <View style={styles.lives}>
               {[0, 1, 2].map((index) => (
                 <View key={index} style={[styles.life, index >= lives && styles.lifeOff]} />
               ))}
             </View>
           </View>
-          <Text style={styles.title}>איזה מועדון?</Text>
+          <Text style={[styles.title, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('איזה מועדון?', 'Which Club?')}</Text>
           <Text style={styles.lead}>
-            {over ? `הסיבוב נגמר. ניקוד ${score}.` : 'השם מוסתר. שלוש טעויות סוגרות את הסיבוב.'}
+            {over ? (language === 'he' ? `הסיבוב נגמר. ניקוד ${score}.` : `Round over. Score: ${score}.`) : t('השם מוסתר. שלוש טעויות סוגרות את הסיבוב.', 'The player name is hidden. Three mistakes end the round.')}
           </Text>
 
           {question && !over ? (
@@ -112,10 +115,10 @@ export default function ClubGameScreen() {
             <Pressable accessibilityRole="button" onPress={again} style={styles.again}>
               <View style={styles.inset} />
               <View style={styles.pip} />
-              <Text style={styles.againText}>עוד סיבוב</Text>
+              <Text style={[styles.againText, { writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('עוד סיבוב', 'Play again')}</Text>
             </Pressable>
           ) : (
-            <Text style={styles.score}>ניקוד {score}</Text>
+            <Text style={[styles.score, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('ניקוד', 'Score')} {score}</Text>
           )}
         </View>
       </View>
@@ -176,7 +179,7 @@ const styles = {
     fontSize: 30,
     fontWeight: '800' as const,
     textAlign: 'right' as const,
-    writingDirection: 'rtl' as const,
+    writingDirection: 'ltr' as const,
   },
   lead: {
     fontFamily: careerFont,
