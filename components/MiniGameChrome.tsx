@@ -24,7 +24,7 @@ export function Hearts({ lives }: { lives: number }) {
 }
 
 export function RoundNote({ text, good }: { text: string; good?: boolean }) {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const localizedText = language === 'he' ? text : ({
     'נכון': 'Correct',
     'השחקן כבר על הלוח': 'That player is already on the grid',
@@ -50,7 +50,7 @@ export function GameEnd({
   const { t, language } = useLanguage();
   return (
     <View style={styles.end}>
-      <Text style={styles.endTitle}>{title}</Text>
+      <Text style={[styles.endTitle, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{title}</Text>
       <Pressable accessibilityRole="button" onPress={onAgain} style={styles.againPress}>
         <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.again}>
           <View style={styles.againShine} />
