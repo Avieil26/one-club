@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, useWindowDimensions, View, type TextProps, type TextInputProps } from 'react-native';
+import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
@@ -14,6 +15,120 @@ import { useApp } from '@/lib/store';
 import type { PlatformId, ProfileSquad } from '@/lib/types';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { FORMATIONS, formationById } from '@/lib/chemistry';
+
+
+const ENGLISH_COPY: Record<string, string> = {
+  " הפסדים · ": " losses · ",
+  "ניצחונות": "wins",
+  "תמונות נבחרו": "images selected",
+  "הגדרות נבחרו": "settings selected",
+  "בחירת מחליף": "Choose a substitute",
+  "בחר מערך": "Choose formation",
+  "בחר מערך לפני שליחת הטקטיקה.": "Choose a formation before submitting the tactic.",
+  "בחר מערך קודם": "Choose a formation first",
+  "בחר קודם את המערך של הטקטיקה.": "Choose the tactic formation first.",
+  "בניית הקבוצה לפוסט": "Build the team for your post",
+  "הוסף לפחות שחקן אחד לפני השמירה.": "Add at least one player before saving.",
+  "הטקטיקה נשמרה בעמוד שלך כ־Pending ותופיע בקהילה רק לאחר אישור.": "Your tactic was saved to your page as Pending and will appear in the community after approval.",
+  "המאזן שלי": "My record",
+  "הסבר קצר על הטקטיקה": "Brief tactic explanation",
+  "העלאה נכשלה": "Upload failed",
+  "העלאת תמונה": "Upload image",
+  "העלה צילום של הטקטיקה / הקבוצה": "Upload a screenshot of the tactic / team",
+  "העמדה נבחרה. חפש שחקן והוסף אותו.": "Position selected. Search for a player and add them.",
+  "העמוד שלי": "My Champions",
+  "הפרופיל של TEKKZ": "TEKKZ profile",
+  "הפרס של הריצה": "Run reward",
+  "הפרסים לפי מספר הניצחונות": "Rewards by wins",
+  "הקבוצה ריקה": "Team is empty",
+  "השחקן שלי": "My player",
+  "השמירה נכשלה": "Save failed",
+  "חזרה": "Back",
+  "חזרה להעלאת טקטיקה": "Back to tactic upload",
+  "חזרה לשחקני הקהילה": "Back to community players",
+  "חסר תוכן": "Missing content",
+  "חפש לפי שם שחקן או מועדון": "Search by player or club",
+  "טקטיקות והגדרות שלט שאושרו. התוכן שאתה מעלה נשאר בעמוד שלך עד אישור.": "Approved tactics and controller settings. Your uploads stay on your page until approved.",
+  "כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״.": "This section contains TEKKZ data only. Your record, CQP and progress are in My Champions.",
+  "כדי להעלות תוכן צריך להתחבר.": "Sign in to upload content.",
+  "כותרת": "Title",
+  "כל טקטיקה והגדרות שלט שלך מופיעים כאן מיד כ־Pending, ולאחר אישור כ־Approved.": "Your tactics and controller settings appear here as Pending and become Approved after review.",
+  "כל משתמש מקבל run משלו. הנתונים נשמרים לחשבון ולא נשארים רנדומליים בין כניסות.": "Each user has their own run. Data is saved to the account and persists between visits.",
+  "לא הוגדרו הגדרות": "No settings configured",
+  "לא הצלחנו לבחור תמונה.": "Could not select an image.",
+  "לא הצלחנו לשמור את נתוני ה־Champions שלך.": "Could not save your Champions data.",
+  "לא מדורג": "Unranked",
+  "ללא מערך": "No formation",
+  "מאושר": "Approved",
+  "מה שהעליתי": "My submissions",
+  "מלא כותרת והסבר קצר.": "Enter a title and a short explanation.",
+  "ממתין לאישור": "Pending approval",
+  "נדחה": "Rejected",
+  "נסה שוב.": "Try again.",
+  "נשלח לבדיקה": "Submitted for review",
+  "נתון חי של החשבון": "Live account data",
+  "נתונים לא תקינים": "Invalid data",
+  "סגור": "Close",
+  "עדכן נתונים": "Update data",
+  "עריכת הקבוצה לפוסט": "Edit the team for the post",
+  "פרסים": "Rewards",
+  "צריך להתחבר": "Sign in required",
+  "שומר…": "Saving…",
+  "שחקן לעמדה": "Player for position",
+  "שחקן נבחר. אפשר להעביר, לפנות או להעביר לספסל.": "Player selected. Move them, remove them, or send them to the bench.",
+  "שחקני הקהילה": "Community players",
+  "שלח לבדיקה": "Submit for review",
+  "שמור את ה־Champions שלי": "Save my Champions",
+  "שמור קבוצה": "Save team",
+  "TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר.": "TEKKZ is shown by default until community content is approved.",
+  "WINS + LOSSES חייבים להיות עד 15.": "WINS + LOSSES must not exceed 15.",
+  "אין עדיין מחליפים.": "No substitutes yet.",
+  "הקבוצה שלי": "My team",
+  "יצא לי": "I packed",
+  "ניצחון": "Win",
+  "הפסד": "Loss",
+  "ריצה": "Run",
+  "ניקוד": "Score",
+  "חיפוש": "Search",
+  "בחר שחקן": "Choose player",
+  "שמור": "Save",
+  "ביטול": "Cancel",
+  "הוסף": "Add",
+  "הסר": "Remove",
+  "מחיר": "Price",
+  "קבוצה": "Team",
+  "פרטים": "Details",
+  "התקדמות": "Progress"
+};
+
+function localizeCopy(value: string | undefined, language: 'he' | 'en') {
+  if (value === undefined || language !== 'en') return value;
+  const trimmed = value.trim();
+  const exact = ENGLISH_COPY[trimmed];
+  if (exact) return value.replace(trimmed, exact);
+  let output = value;
+  for (const [he, en] of Object.entries(ENGLISH_COPY)) {
+    if (he.length > 2 && output.includes(he)) output = output.replaceAll(he, en);
+  }
+  return output;
+}
+
+function Text(props: TextProps) {
+  const { language } = useLanguage();
+  const children = Array.isArray(props.children)
+    ? props.children.map((child) => typeof child === 'string' ? localizeCopy(child, language) : child)
+    : typeof props.children === 'string' ? localizeCopy(props.children, language) : props.children;
+  return <NativeText {...props}>{children}</NativeText>;
+}
+
+function TextInput(props: TextInputProps) {
+  const { language } = useLanguage();
+  return <NativeTextInput
+    {...props}
+    placeholder={localizeCopy(props.placeholder, language)}
+    accessibilityLabel={localizeCopy(props.accessibilityLabel, language)}
+  />;
+}
 
 type IconName = keyof typeof Ionicons.glyphMap;
 type SectionId = 'center' | 'community' | 'rewards' | 'tekkz';
@@ -343,6 +458,7 @@ function CommunitySquadBuilder({
   onClose: () => void;
   onSave: (squad: ProfileSquad) => void;
 }) {
+  const { t } = useLanguage();
   const base = FORMATIONS.find((item) => item.label === formationLabel) ?? FORMATIONS[0];
   const [formationId, setFormationId] = useState(base.id);
   const [slots, setSlots] = useState<Record<string, string>>(initial?.slots ?? {});
@@ -562,7 +678,7 @@ function CommunitySquadBuilder({
 
           <Pressable style={styles.builderSave} onPress={() => {
             if (!Object.keys(slots).length) {
-              Alert.alert('הקבוצה ריקה', 'הוסף לפחות שחקן אחד לפני השמירה.');
+              Alert.alert(t('הקבוצה ריקה', 'Team is empty'), t('הוסף לפחות שחקן אחד לפני השמירה.', 'Add at least one player before saving.'));
               return;
             }
             onSave({ formation: formationId, slots, bench });
@@ -696,6 +812,7 @@ function EmptyCommunity() {
 
 export default function ChampionsScreen() {
   const app = useApp();
+  const { t, language } = useLanguage();
   const { width, height } = useWindowDimensions();
   const mobile = width < 900;
 
@@ -789,7 +906,7 @@ export default function ChampionsScreen() {
     const cqp = Math.max(0, Number(draftCqp) || 0);
 
     if (matchesPlayed > 15 || wins + losses > 15) {
-      Alert.alert('נתונים לא תקינים', 'WINS + LOSSES חייבים להיות עד 15.');
+      Alert.alert(t('נתונים לא תקינים', 'Invalid data'), t('WINS + LOSSES חייבים להיות עד 15.', 'WINS + LOSSES must not exceed 15.'));
       return;
     }
 
@@ -809,7 +926,7 @@ export default function ChampionsScreen() {
     setSaving(false);
 
     if (error) {
-      Alert.alert('השמירה נכשלה', 'לא הצלחנו לשמור את נתוני ה־Champions שלך.');
+      Alert.alert(t('השמירה נכשלה', 'Save failed'), t('לא הצלחנו לשמור את נתוני ה־Champions שלך.', 'Could not save your Champions data.'));
       return;
     }
 
@@ -818,12 +935,12 @@ export default function ChampionsScreen() {
   }
 
   async function pickComposerImages() {
-    try { setComposerImages(await pickImages(3)); } catch (error) { Alert.alert('העלאת תמונה', error instanceof Error ? error.message : 'לא הצלחנו לבחור תמונה.'); }
+    try { setComposerImages(await pickImages(3)); } catch (error) { Alert.alert(t('העלאת תמונה', 'Upload image'), error instanceof Error ? error.message : t('לא הצלחנו לבחור תמונה.', 'Could not select an image.')); }
   }
 
   function openSquadBuilder() {
     if (!composerFormation) {
-      Alert.alert('בחר מערך קודם', 'בחר קודם את המערך של הטקטיקה.');
+      Alert.alert(t('בחר מערך קודם', 'Choose a formation first'), t('בחר קודם את המערך של הטקטיקה.', 'Choose the tactic formation first.'));
       return;
     }
     setSquadBuilderOpen(true);
@@ -837,11 +954,11 @@ export default function ChampionsScreen() {
 
   async function publish() {
     if (!app.user?.id) {
-      Alert.alert('צריך להתחבר', 'כדי להעלות תוכן צריך להתחבר.');
+      Alert.alert(t('צריך להתחבר', 'Sign in required'), t('כדי להעלות תוכן צריך להתחבר.', 'Sign in to upload content.'));
       return;
     }
     if (!composerFormation || title.trim().length < 2 || body.trim().length < 2) {
-      Alert.alert('חסר תוכן', composerFormation ? 'מלא כותרת והסבר קצר.' : 'בחר מערך לפני שליחת הטקטיקה.');
+      Alert.alert(t('חסר תוכן', 'Missing content'), composerFormation ? t('מלא כותרת והסבר קצר.', 'Enter a title and a short explanation.') : t('בחר מערך לפני שליחת הטקטיקה.', 'Choose a formation before submitting the tactic.'));
       return;
     }
 
@@ -884,9 +1001,9 @@ export default function ChampionsScreen() {
       setSquadBuilderOpen(false);
       setShowComposer(false);
       await loadLiveData();
-      Alert.alert('נשלח לבדיקה', 'הטקטיקה נשמרה בעמוד שלך כ־Pending ותופיע בקהילה רק לאחר אישור.');
+      Alert.alert(t('נשלח לבדיקה', 'Submitted for review'), t('הטקטיקה נשמרה בעמוד שלך כ־Pending ותופיע בקהילה רק לאחר אישור.', 'Your tactic was saved to your page as Pending and will appear in the community after approval.'));
     } catch (error) {
-      Alert.alert('העלאה נכשלה', error instanceof Error ? error.message : 'נסה שוב.');
+      Alert.alert(t('העלאה נכשלה', 'Upload failed'), error instanceof Error ? error.message : t('נסה שוב.', 'Try again.'));
     } finally {
       setSaving(false);
     }
