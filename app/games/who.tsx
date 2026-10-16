@@ -16,6 +16,7 @@ function face(colored: boolean): ImageStyle {
 
 export default function WhoGameScreen() {
   const router = useRouter();
+  const { t, language } = useLanguage();
   const [correctCount, setCorrectCount] = useState(0);
   const [usedPrompts, setUsedPrompts] = useState<string[]>([]);
   const [round, setRound] = useState<MarkRound>(() => makeMarkRound(0, []));
@@ -48,7 +49,7 @@ export default function WhoGameScreen() {
         return;
       }
       setGood(true);
-      setNote('נכון');
+      setNote(t('נכון', 'Correct'));
       const nextCorrectCount = correctCount + 1;
       const nextUsedPrompts = [...usedPrompts, round.prompt];
       setCorrectCount(nextCorrectCount);
@@ -96,11 +97,11 @@ export default function WhoGameScreen() {
         <View style={styles.glow} />
         <View style={styles.pad}>
           <View style={styles.top}>
-            <Text style={styles.pill}>{over ? 'נגמר' : `נשארו ${remain}`}</Text>
+            <Text style={styles.pill}>{over ? t('נגמר', 'Finished') : language === 'he' ? `נשארו ${remain}` : `${remain} left`}</Text>
             <Hearts lives={lives} />
           </View>
-          <Text style={styles.title}>נחש מי</Text>
-          <Text style={styles.lead}>כולם בשחור־לבן. לחצו רק על מי שמתאים. צבע נשאר על נכון.</Text>
+          <Text style={styles.title}>{t('נחש מי', 'Guess Who')}</Text>
+          <Text style={styles.lead}>{t('כולם בשחור־לבן. לחצו רק על מי שמתאים. צבע נשאר על נכון.', 'Everyone is in black and white. Tap only the player who matches. Correct answers stay in color.')}</Text>
 
           <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.ask}>
             <View style={styles.askEdge} />
@@ -134,7 +135,7 @@ export default function WhoGameScreen() {
           </View>
 
           {over ? (
-            <GameEnd title="המשחק נגמר" onAgain={again} onBack={() => router.push('/games')} />
+            <GameEnd title={t('המשחק נגמר', 'Game over')} onAgain={again} onBack={() => router.push('/games')} />
           ) : null}
         </View>
       </LinearGradient>
