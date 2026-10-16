@@ -1,4 +1,5 @@
 import { Text, View } from 'react-native';
+import { useLanguage } from '@/lib/language';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { LevelChip } from '@/components/OwnerLevelPlate';
@@ -11,6 +12,7 @@ import { useApp } from '@/lib/store';
 
 export default function PlayerProfileScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
+  const { t, language } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const id = String(userId || '');
@@ -26,18 +28,18 @@ export default function PlayerProfileScreen() {
   const progress = xpProgress(communityXp(id, app));
 
   return (
-    <Screen scene="grounds">
+    <Screen scene="grounds" style={{ direction: language === 'he' ? 'rtl' : 'ltr' }}>
       <Stack.Screen options={{ title: name }} />
       {!profile ? (
-        <Muted>הפרופיל לא נמצא</Muted>
+        <Muted>{t('הפרופיל לא נמצא', 'Profile not found')}</Muted>
       ) : (
         <View style={{ gap: 14 }}>
           <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 14 }}>
             {mine ? <LevelChip progress={progress} /> : null}
             <View style={{ flex: 1, gap: 4 }}>
               <Title>{name}</Title>
-              <Muted>{profile.reputation} מוניטין · {profile.approvedCount} אישורים</Muted>
-              <Muted>{followers} עוקבים · {following} עוקב</Muted>
+              <Muted>{profile.reputation} {t('מוניטין', 'reputation')} · {profile.approvedCount} {t('אישורים', 'approvals')}</Muted>
+              <Muted>{followers} {t('עוקבים', 'followers')} · {following} {t('עוקב', 'following')}</Muted>
             </View>
             <ProfileFace name={name} uri={profile.avatarUrl} size={76} />
           </View>
@@ -63,18 +65,18 @@ export default function PlayerProfileScreen() {
               {post.eaId ? <Text style={{ color: colors.muted, textAlign: 'right' }}>EA ID: {post.eaId}</Text> : null}
             </View>
           ) : (
-            <Muted>עדיין אין מודעה בגראונדס.</Muted>
+            <Muted>{t('עדיין אין מודעה בגראונדס.', 'No Grounds post yet.')}</Muted>
           )}
 
           {profile.squad ? (
             <ProfileSquadBoard squad={profile.squad} />
           ) : (
-            <Muted>{mine ? 'בנו את הסגל מהפרופיל — שחקנים על המגרש, ומחליפים אם בא לכם.' : 'השחקן עדיין לא בנה סגל.'}</Muted>
+            <Muted>{mine ? t('בנו את הסגל מהפרופיל — שחקנים על המגרש, ומחליפים אם בא לכם.', 'Build your squad from your profile — players on the pitch, with optional substitutes.') : t('השחקן עדיין לא בנה סגל.', 'This player has not built a squad yet.')}</Muted>
           )}
 
-          {mine ? <Button label={profile.squad ? 'עריכת הקבוצה' : 'בניית הקבוצה'} onPress={() => router.push('/squad')} /> : null}
+          {mine ? <Button label={profile.squad ? t('עריכת הקבוצה', 'Edit squad') : t('בניית הקבוצה', 'Build squad')} onPress={() => router.push('/squad')} /> : null}
           {!mine && app.user ? (
-            <Button label="הודעה" onPress={() => router.push(`/grounds/chat/${id}`)} />
+            <Button label={t('הודעה', 'Message')} onPress={() => router.push(`/grounds/chat/${id}`)} />
           ) : null}
         </View>
       )}
