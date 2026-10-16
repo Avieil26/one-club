@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/format';
 import { modeLabel } from '@/lib/labels';
 import { isOpen } from '@/lib/selectors';
 import type { CareerChallenge } from '@/lib/types';
+import { useLanguage } from '@/lib/language';
 
 const ink = '#F7F4EA';
 
@@ -15,7 +16,8 @@ function webPhotoStyle(position: string): ImageStyle | null {
   return { objectFit: 'cover', objectPosition: position } as ImageStyle;
 }
 
-export function challengeStatusLine(challenge: Pick<CareerChallenge, 'endsAt'>): string {
+export function challengeStatusLine(challenge: Pick<CareerChallenge, 'endsAt'>, language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') return isOpen(challenge) ? `Open until ${formatDate(challenge.endsAt)}` : 'Challenge closed';
   return isOpen(challenge) ? `פתוח עד ${formatDate(challenge.endsAt)}` : 'האתגר נסגר';
 }
 
@@ -86,6 +88,7 @@ export function CareerChallengeCard({
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 520;
 
+  const { language, t } = useLanguage();
   return (
     <Pressable
       accessibilityRole="button"
@@ -99,11 +102,11 @@ export function CareerChallengeCard({
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode)}</Text>
-            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge)}</Text>
+            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
           <Text style={[styles.title, narrow && styles.titleNarrow]}>{challenge.title}</Text>
           <Text style={styles.rules}>{challenge.rules}</Text>
-          <CareerCreamButton theme={theme} label="לכרטיס האתגר" />
+          <CareerCreamButton theme={theme} label={t('לכרטיס האתגר', 'View challenge')} />
         </View>
         {narrow ? null : <CareerPhoto theme={theme} />}
       </View>
