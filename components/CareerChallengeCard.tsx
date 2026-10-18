@@ -131,7 +131,7 @@ export function CareerDetailBlock({
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode)}</Text>
-            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge)}</Text>
+            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
           <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{challenge.title}</Text>
         </View>
