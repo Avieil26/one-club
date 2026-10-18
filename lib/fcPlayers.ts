@@ -1,6 +1,7 @@
 import { destinedEdition } from '@/lib/destinedEditions';
+import { futureStarsFor } from '@/lib/futureStars';
 import { DB_PLAYERS } from '@/lib/playerDb';
-import { starPerformerFor, totwFor } from '@/lib/specialCards';
+import { otwFor, starPerformerFor, totwFor } from '@/lib/specialCards';
 
 export type PlayStyle = { name: string; plus: boolean };
 
@@ -16,7 +17,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw' | 'star-performer';
+  edition?: 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
@@ -27,6 +28,14 @@ export type FcPlayer = {
   regularPosition?: string;
   regularClub?: string;
   regularLeague?: string;
+  itemId?: number;
+  foot?: 'L' | 'R';
+  weakFoot?: number;
+  skillMoves?: number;
+  accelerate?: string;
+  heightCm?: number;
+  weightKg?: number;
+  age?: number;
 };
 
 export const N = {
@@ -160,6 +169,25 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         league: promo.league || player.league,
       });
     }
+    const otw = otwFor(player.id);
+    if (otw) {
+      cards.push({
+        ...player,
+        id: `${player.id}--otw`,
+        edition: 'otw',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        rating: otw.rating,
+        position: otw.position,
+        face: otw.face,
+        ...(otw.positions?.length ? { positions: otw.positions } : {}),
+        ...(otw.playstyles?.length ? { playstyles: otw.playstyles } : {}),
+      });
+    }
+
     const totw = totwFor(player.id);
     if (totw) {
       cards.push({
@@ -181,6 +209,37 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         face: totw.face,
         ...(totw.positions?.length ? { positions: totw.positions } : {}),
         ...(totw.playstyles ? { playstyles: totw.playstyles } : {}),
+      });
+    }
+
+    const futureStar = futureStarsFor(player.id);
+    if (futureStar) {
+      cards.push({
+        ...player,
+        id: `${player.id}--future-stars`,
+        edition: 'future-stars',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        name: futureStar.name,
+        en: futureStar.en,
+        rating: futureStar.rating,
+        position: futureStar.position,
+        nation: futureStar.nation,
+        league: futureStar.league,
+        club: futureStar.club,
+        itemId: futureStar.itemId,
+        face: futureStar.face,
+        foot: futureStar.foot,
+        skillMoves: futureStar.skillMoves,
+        weakFoot: futureStar.weakFoot,
+        accelerate: futureStar.accelerate,
+        heightCm: futureStar.heightCm,
+        weightKg: futureStar.weightKg,
+        age: futureStar.age,
+        ...(futureStar.positions?.length ? { positions: futureStar.positions } : {}),
       });
     }
 
