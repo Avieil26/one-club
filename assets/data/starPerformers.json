@@ -86,7 +86,10 @@
     "pricePc": 0,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "No active listings shown on the current console promo market page."
+    "priceNote": "No active listings shown on the current console promo market page.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/lamine-yamal/120352",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true
   },
   {
     "baseId": "doue",
@@ -177,7 +180,10 @@
     "pricePc": 0,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Current PS/Xbox list quote; no PC quote verified in the current snapshot."
+    "priceNote": "Current PS/Xbox list quote; no PC quote verified in the current snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/desire-doue/120354",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true
   },
   {
     "baseId": "barcola",
@@ -260,7 +266,16 @@
     "pricePc": 876000,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot."
+    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/bradley-barcola/120368",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": false,
+    "missingDetailedStats": [
+      "jumping",
+      "stamina",
+      "strength",
+      "aggression"
+    ]
   },
   {
     "baseId": "ea-269230-noah-sadiki",
@@ -338,7 +353,10 @@
     "pricePc": 155000,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot."
+    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/noah-sadiki/120362",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true
   },
   {
     "baseId": "ea-242879-maarten-vandevoordt",
@@ -416,7 +434,17 @@
     "pricePc": 35500,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot."
+    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/maarten-vandevoordt/120361",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": false,
+    "missingDetailedStats": [
+      "jumping",
+      "stamina",
+      "strength",
+      "aggression",
+      "verify current FC 27 goalkeeper-specific detail keys"
+    ]
   },
   {
     "baseId": "ea-278326-alphadjo-cisse",
@@ -493,6 +521,9 @@
     "pricePc": 83000,
     "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot."
+    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/alphadjo-cisse/120360",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true
   }
 ]
