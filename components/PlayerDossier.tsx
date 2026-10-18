@@ -600,6 +600,11 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{player.name}</Text>
               {quote ? <MarketQuote compact console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} compact />
+              {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
+                <Text style={{ color: '#FFC477', fontSize: 11, textAlign: 'right' }}>
+                  {t('חלק מתכונות המשנה של הקלף עדיין לא אומתו מול מקור FC 27.', 'Some detailed attributes for this Star Performer have not yet been verified against an FC 27 source.')}
+                </Text>
+              ) : null}
             </View>
           </View>
           <View
