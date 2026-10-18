@@ -254,7 +254,6 @@ function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'sta
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
   const { t, language } = useLanguage();
-  const rtl = language === 'he';
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -595,7 +594,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Base card') : t('קלף עם זוהר', 'Card with glow')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={62} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
