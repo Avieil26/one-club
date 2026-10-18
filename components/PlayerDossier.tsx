@@ -166,7 +166,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
   );
 }
 
-function BootPair({ foot, wide, narrow }: { foot: 'L' | 'R'; wide: boolean; narrow?: boolean }) {
+function BootPair({ foot, wide, narrow, language = 'he' }: { foot: 'L' | 'R'; wide: boolean; narrow?: boolean; language?: 'he' | 'en' }) {
   return (
     <View style={{ width: narrow ? 210 : wide ? 300 : 240, maxWidth: '100%' }}>
       <Image
@@ -175,8 +175,8 @@ function BootPair({ foot, wide, narrow }: { foot: 'L' | 'R'; wide: boolean; narr
         style={{ width: '100%', height: wide ? 120 : 100, transform: foot === 'L' ? [{ scaleX: -1 }] : undefined }}
       />
       <View style={{ flexDirection: 'row', direction: 'ltr', justifyContent: 'space-between', paddingHorizontal: 18 }}>
-        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>שמאל</Text>
-        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>ימין</Text>
+        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{language === 'he' ? 'שמאל' : 'Left'}</Text>
+        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{language === 'he' ? 'ימין' : 'Right'}</Text>
       </View>
     </View>
   );
@@ -237,12 +237,13 @@ function Group({
   );
 }
 
-function ago(iso: string) {
+function ago(iso: string, language: 'he' | 'en' = 'he') {
   const minutes = Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
-  if (minutes < 60) return `לפני ${minutes} דק׳`;
+  if (minutes < 60) return language === 'en' ? `${minutes}m ago` : `לפני ${minutes} דק׳`;
   const hours = Math.round(minutes / 60);
-  if (hours < 48) return `לפני ${hours} שע׳`;
-  return `לפני ${Math.round(hours / 24)} ימים`;
+  if (hours < 48) return language === 'en' ? `${hours}h ago` : `לפני ${hours} שע׳`;
+  const days = Math.round(hours / 24);
+  return language === 'en' ? `${days}d ago` : `לפני ${days} ימים`;
 }
 
 function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' {
@@ -253,6 +254,7 @@ function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'sta
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
   const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -290,7 +292,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   function requireUser() {
     if (!app.user) {
-      Alert.alert('רגע', 'צריך להתחבר כדי להצביע או לכתוב');
+      Alert.alert(t('רגע', 'Sign in required'), t('צריך להתחבר כדי להצביע או לכתוב', 'Sign in to vote or comment.'));
       return false;
     }
     return true;
@@ -303,7 +305,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       await voteOnPlayer(personId, app.user.id, vote);
       await refresh();
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'ההצבעה נכשלה');
+      Alert.alert(t('רגע', 'Something went wrong'), error instanceof Error ? error.message : t('ההצבעה נכשלה', 'Voting failed.'));
     } finally {
       setBusy(false);
     }
@@ -316,9 +318,9 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       const result = await addPlayerComment(personId, app.user.id, app.user.displayName, draft);
       setDraft('');
       await refresh();
-      if (result === 'held') Alert.alert('נשמר לבדיקה', 'התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.');
+      if (result === 'held') Alert.alert(t('נשמר לבדיקה', 'Held for review'), t('התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.', 'Your comment was not published because it did not meet the community respect guidelines.'));
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'התגובה נכשלה');
+      Alert.alert(t('רגע', 'Something went wrong'), error instanceof Error ? error.message : t('התגובה נכשלה', 'Comment failed to send.'));
     } finally {
       setBusy(false);
     }
@@ -438,8 +440,8 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
   const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
   const alts: { edition: 'base' | 'destined' | 'totw' | 'star-performer'; label: string }[] = [];
-  if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: 'קלף רגיל' });
-  if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: 'קלף פרומו' });
+  if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: t('קלף רגיל', 'Base card') });
+  if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: t('קלף פרומו', 'Promo card') });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
   if ((starPerformer || (player.edition === 'star-performer' && player.baseId)) && shown !== 'star-performer') alts.push({ edition: 'star-performer', label: 'Star Performer' });
 
@@ -495,24 +497,24 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
     </View>
   );
 
-  const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} /> : null;
+  const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} language={language} /> : null;
 
   const skills = meta ? (
     <View style={{ gap: 12, alignItems: 'flex-end' }}>
       <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
+        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>{t('רגל חלשה', 'Weak foot')}</Text>
         <Stars count={meta.weakFoot} />
       </View>
       <View style={{ gap: 4, alignItems: 'flex-end' }}>
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
           <SkillMark />
-          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>{t('סקיל', 'Skill moves')}</Text>
         </View>
         <Stars count={meta.skillMoves} />
       </View>
     </View>
   ) : (
-    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון רשמי לרגל ולסקיל</Text>
+    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>{t('אין נתון רשמי לרגל ולסקיל', 'Official weak-foot and skill-move data is unavailable.')}</Text>
   );
 
   const accent = iconPage ? '#E8C86A' : '#E3B341';
@@ -552,7 +554,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Base card') : t('קלף עם זוהר', 'Card with glow')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={78} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
@@ -629,10 +631,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.03)', padding: 12, borderRadius: 14, borderWidth: 1, borderColor: showPotential ? '#38bdf8' : 'rgba(255,255,255,0.08)' }}>
           <View style={{ alignItems: 'flex-end', gap: 2 }}>
             <Text style={{ color: showPotential ? '#38bdf8' : '#F7F4EA', fontSize: 14, fontWeight: '800' }}>
-              {showPotential ? '🚀 תחזית נתונים במלוא הפוטנציאל' : '📊 נתונים נוכחיים'}
+              {showPotential ? t('🚀 תחזית נתונים במלוא הפוטנציאל', '🚀 Full-potential projection') : t('📊 נתונים נוכחיים', '📊 Current stats')}
             </Text>
             <Text style={{ color: '#9AA8A0', fontSize: 11 }}>
-              {showPotential ? `דירוג שיא משוער: 89 (+${growth})` : 'הצג כיצד כל הנתונים יראו בשיא ההתפתחות'}
+              {showPotential ? t(`דירוג שיא משוער: 89 (+${growth})`, `Estimated peak rating: 89 (+${growth})`) : t('הצג כיצד כל הנתונים יראו בשיא ההתפתחות', 'Preview the player at peak development')}
             </Text>
           </View>
           <Pressable
@@ -647,7 +649,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             }}
           >
             <Text style={{ color: showPotential ? '#ffffff' : '#38bdf8', fontSize: 12, fontWeight: '800' }}>
-              {showPotential ? '✔ מלוא הפוטנציאל פעיל' : '⚡ ראה מלוא הפוטנציאל'}
+              {showPotential ? t('✔ מלוא הפוטנציאל פעיל', '✔ Full potential active') : t('⚡ ראה מלוא הפוטנציאל', '⚡ Show full potential')}
             </Text>
           </Pressable>
         </View>
@@ -726,12 +728,12 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         }}
       >
         <View style={{ flexDirection: wide ? 'row' : 'column', direction: 'ltr', gap: 10, alignItems: wide ? 'center' : 'stretch' }}>
-          <Text style={{ color: '#F7F4EA', fontSize: 18, fontWeight: '900', textAlign: 'right', flex: wide ? 1 : undefined }}>תגובות</Text>
+          <Text style={{ color: '#F7F4EA', fontSize: 18, fontWeight: '900', textAlign: 'right', flex: wide ? 1 : undefined }}>{t('תגובות', 'Comments')}</Text>
           <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', width: wide ? 360 : '100%' }}>
             <TextInput
               value={draft}
               onChangeText={setDraft}
-              placeholder="מה דעתך על הקלף"
+              placeholder={t('מה דעתך על הקלף', 'What do you think of this card?')}
               placeholderTextColor="#8E9A90"
               style={{
                 flex: 1,
@@ -756,7 +758,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 paddingVertical: 10,
               }}
             >
-              <Text style={{ color: accent, fontWeight: '800' }}>שליחה</Text>
+              <Text style={{ color: accent, fontWeight: '800' }}>{t('שליחה', 'Send')}</Text>
             </Pressable>
           </View>
         </View>
@@ -771,7 +773,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             }}
           >
             <Text style={{ color: '#F4F7F2', fontWeight: '800', textAlign: 'right' }}>{comment.name}</Text>
-            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: 'right' }}>{ago(comment.createdAt)}</Text>
+            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: 'right' }}>{ago(comment.createdAt, language)}</Text>
             <Text style={{ color: '#E7EEE8', textAlign: 'right', fontSize: 15 }}>{comment.body}</Text>
             <View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end' }}>
               <Pressable onPress={() => void voteRow(comment.id, -1)}>
