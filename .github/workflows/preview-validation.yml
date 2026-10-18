@@ -1,6 +1,9 @@
 name: Preview candidate validation
 
 on:
+  push:
+    branches:
+      - preview/star-performers-20261018
   pull_request:
     branches:
       - codex/grounds-prod-release
