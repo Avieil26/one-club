@@ -19,6 +19,7 @@ import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import { playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 function Stars({ count }: { count: number }) {
   return (
@@ -249,6 +250,7 @@ function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'sta
 
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
+  const { t } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -557,6 +559,11 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{player.name}</Text>
               {quote ? <MarketQuote console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} />
+              {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
+                <Text style={{ color: '#FFC477', fontSize: 11, textAlign: 'right' }}>
+                  {t('חלק מתכונות המשנה של הקלף עדיין לא אומתו מול מקור FC 27.', 'Some detailed attributes for this Star Performer have not yet been verified against an FC 27 source.')}
+                </Text>
+              ) : null}
             </View>
             {iconPage ? null : (
               <View style={{ alignItems: 'flex-end', gap: 16, flexShrink: 1 }}>
