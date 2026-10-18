@@ -130,7 +130,6 @@ export function LegalSection({
   body?: string;
   children?: ReactNode;
 }) {
-  const { language } = useLanguage();
   return (
     <View style={{ gap: 8, marginTop: 6 }}>
       <Bidi text={title} header style={{ color: colors.gold, fontSize: 18, fontWeight: '900' }} />
