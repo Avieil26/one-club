@@ -6,6 +6,8 @@ import { LegalLinks } from '@/components/LegalLinks';
 import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
 import { inlineLatin, latinParts } from '@/lib/legalBidi';
+import { useLanguage } from '@/lib/language';
+import { legalEnglish } from '@/lib/legalTranslations';
 
 export { inlineLatin };
 
@@ -31,8 +33,16 @@ function Bidi({
   style?: TextStyle;
   header?: boolean;
 }) {
-  const parts = latinParts(text);
-
+  const { language } = useLanguage();
+  const localized = language === 'en' ? legalEnglish(text) : text;
+  if (language === 'en') {
+    return (
+      <Text accessibilityRole={header ? 'header' : undefined} style={[ltr, style]}>
+        {localized}
+      </Text>
+    );
+  }
+  const parts = latinParts(localized);
   return (
     <Text accessibilityRole={header ? 'header' : undefined} style={[rtl, style]}>
       {parts.map((part, index) =>
@@ -53,6 +63,8 @@ function Bidi({
  * both Privacy Policy and Terms of Service to prevent copyright issues with EA.
  */
 export function PrimaryLegalNotice() {
+  const { language } = useLanguage();
+  const he = language === 'he';
   return (
     <View
       style={{
@@ -69,8 +81,7 @@ export function PrimaryLegalNotice() {
         shadowRadius: 12,
       }}
     >
-      {/* BADGE */}
-      <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', direction: he ? 'rtl' : 'ltr', alignItems: 'center' }}>
         <View
           style={{
             backgroundColor: 'rgba(227, 179, 65, 0.16)',
@@ -80,40 +91,30 @@ export function PrimaryLegalNotice() {
             paddingHorizontal: 9,
             paddingVertical: 4,
             flexDirection: 'row',
-            direction: 'rtl',
+            direction: he ? 'rtl' : 'ltr',
             alignItems: 'center',
             gap: 6,
           }}
         >
           <Text style={{ fontSize: 13 }}>⚖️</Text>
-          <Bidi text="הבהרה משפטית רשמית • LEGAL DISCLAIMER" style={{ color: colors.gold, fontSize: 11.5, fontWeight: '900', width: undefined }} />
+          <Bidi text={he ? 'הבהרה משפטית רשמית • LEGAL DISCLAIMER' : 'Official Legal Notice • LEGAL DISCLAIMER'} style={{ color: colors.gold, fontSize: 11.5, fontWeight: '900', width: undefined }} />
         </View>
       </View>
-
       <Bidi
-        text='אתר זה הינו אתר מעריצים עצמאי ואינו קשור, ממומן, מאושר או נתמך על ידי Electronic Arts Inc. או שותפיה. כל שמות המשחקים, הלוגואים, המותגים ותמונות השחקנים המוצגים באתר הם קניינם הרוחני של בעליהם החוקיים ומשמשים כאן תחת הגדרת "שימוש הוגן" למטרות מידע וקהילה בלבד.'
+        text={he
+          ? 'אתר זה הינו אתר מעריצים עצמאי ואינו קשור, ממומן, מאושר או נתמך על ידי Electronic Arts Inc. או שותפיה. כל שמות המשחקים, הלוגואים, המותגים ותמונות השחקנים המוצגים באתר הם קניינם הרוחני של בעליהם החוקיים ומשמשים כאן תחת הגדרת "שימוש הוגן" למטרות מידע וקהילה בלבד.'
+          : 'This website and application are an independent fan site. They are not affiliated with, endorsed, sponsored, or specifically approved by Electronic Arts Inc. or its affiliates. All game titles, logos, brands, and player images remain the intellectual property of their respective owners and are used for informational and community purposes under applicable fair-use principles.'}
         style={{ color: '#FFFFFF', fontSize: 15, fontWeight: '700', lineHeight: 25 }}
       />
-
-      {/* DIVIDER */}
-      <View style={{ height: 1, backgroundColor: 'rgba(227, 179, 65, 0.25)', marginVertical: 2 }} />
-
-      {/* ENGLISH DISCLAIMER */}
-      <View nativeID="legal-en" style={{ gap: 4, direction: 'ltr', width: '100%' }}>
-        <Text style={{ color: colors.gold, fontSize: 11, fontWeight: '800', letterSpacing: 0.5, ...ltr }}>
-          NON-AFFILIATION & FAIR USE NOTICE (ENGLISH)
-        </Text>
-        <Text style={{ color: '#D1D5DB', fontSize: 13, fontWeight: '500', lineHeight: 21, ...ltr }}>
-          This website and application is an independent fan site and is not affiliated with, endorsed, sponsored, or specifically approved by Electronic Arts Inc. or its affiliates. All game titles, logos, brands, and player images displayed on this site are the intellectual property of their respective owners and are used here under 'fair use' for informational, educational, and community purposes only.
-        </Text>
-      </View>
     </View>
   );
 }
 
 export function LegalBulletItem({ text }: { text: string }) {
+  const { language } = useLanguage();
+  const he = language === 'he';
   return (
-    <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'flex-start', gap: 8, width: '100%' }}>
+    <View style={{ flexDirection: 'row', direction: he ? 'rtl' : 'ltr', alignItems: 'flex-start', gap: 8, width: '100%' }}>
       <Text style={{ color: colors.gold, fontSize: 15, lineHeight: 25, fontWeight: '800' }}>•</Text>
       <Bidi text={text} style={{ flex: 1, color: colors.text, fontSize: 15, lineHeight: 25, width: undefined }} />
     </View>
@@ -129,6 +130,7 @@ export function LegalSection({
   body?: string;
   children?: ReactNode;
 }) {
+  const { language } = useLanguage();
   return (
     <View style={{ gap: 8, marginTop: 6 }}>
       <Bidi text={title} header style={{ color: colors.gold, fontSize: 18, fontWeight: '900' }} />
@@ -147,21 +149,28 @@ export function LegalScreen({
   updated: string;
   children: ReactNode;
 }) {
+  const { language } = useLanguage();
+  const he = language === 'he';
+
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return;
-    if (document.getElementById('fc27-legal-rtl')) return;
-    const style = document.createElement('style');
-    style.id = 'fc27-legal-rtl';
+    let style = document.getElementById('fc27-legal-rtl') as HTMLStyleElement | null;
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'fc27-legal-rtl';
+      document.head.appendChild(style);
+    }
     style.textContent = `
-      #legal-doc { direction: rtl; text-align: right; }
+      #legal-doc { direction: ${he ? 'rtl' : 'ltr'}; text-align: ${he ? 'right' : 'left'}; }
       #legal-en, #legal-en * { direction: ltr; text-align: left; }
     `;
-    document.head.appendChild(style);
-  }, []);
+    document.documentElement.lang = language;
+    document.documentElement.dir = he ? 'rtl' : 'ltr';
+  }, [he, language]);
 
   return (
-    <View nativeID="legal-doc" style={{ flex: 1, backgroundColor: '#050A08', direction: 'rtl' }}>
-      <Stack.Screen options={{ headerShown: false, title }} />
+    <View nativeID="legal-doc" style={{ flex: 1, backgroundColor: '#050A08', direction: he ? 'rtl' : 'ltr' }}>
+      <Stack.Screen options={{ headerShown: false, title: he ? title : legalEnglish(title) }} />
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 16,
@@ -170,7 +179,7 @@ export function LegalScreen({
           maxWidth: 840,
           alignSelf: 'center',
           alignItems: 'stretch',
-          direction: 'rtl',
+          direction: he ? 'rtl' : 'ltr',
           gap: 16,
         }}
       >
