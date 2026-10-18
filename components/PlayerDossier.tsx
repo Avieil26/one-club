@@ -9,7 +9,7 @@ import { NationFlag } from '@/components/NationFlag';
 import { PortraitCard } from '@/components/PortraitCard';
 import { destinedCardMeta, destinedEdition } from '@/lib/destinedEditions';
 import { marketQuote, useMarketPrices } from '@/lib/marketPrices';
-import { totwFor } from '@/lib/specialCards';
+import { starPerformerFor, totwFor } from '@/lib/specialCards';
 import { colors } from '@/components/ui';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
@@ -242,8 +242,8 @@ function ago(iso: string) {
   return `לפני ${Math.round(hours / 24)} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' {
-  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw') return player.edition;
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' {
+  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'star-performer') return player.edition;
   return 'base';
 }
 
@@ -256,7 +256,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const media = playerMedia(personId);
   const baseMeta = playerCardMeta(personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'star-performer'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -335,8 +335,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   const promo = destinedEdition(personId);
   const totw = totwFor(personId);
+  const starPerformer = starPerformerFor(personId);
   const viewingPromo = edition === 'destined' && promo != null;
   const viewingTotw = edition === 'totw' && (totw != null || player.edition === 'totw');
+  const viewingStarPerformer = edition === 'star-performer' && (starPerformer != null || player.edition === 'star-performer');
   const viewingHero = edition === 'hero';
   const card: FcPlayer = viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
@@ -350,19 +352,52 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           ...(totw?.positions?.length ? { positions: totw.positions } : {}),
           ...(totw?.playstyles?.length ? { playstyles: totw.playstyles } : {}),
         }
-      : viewingHero
-        ? { ...player, edition: 'hero' }
-        : {
+      : viewingStarPerformer
+        ? {
             ...player,
-            rating: player.pairRating ?? player.rating,
-            position: player.regularPosition ?? player.position,
-            club: player.regularClub ?? player.club,
-            league: player.regularLeague ?? player.league,
-            edition: undefined,
-            face: undefined,
-          };
-  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingHero ? player.face : media.face;
+            name: starPerformer?.name ?? player.name,
+            en: starPerformer?.en ?? player.en,
+            rating: starPerformer?.rating ?? player.rating,
+            position: starPerformer?.position ?? player.position,
+            nation: starPerformer?.nation ?? player.nation,
+            club: starPerformer?.club ?? player.club,
+            league: starPerformer?.league ?? player.league,
+            face: starPerformer?.face ?? player.face,
+            edition: 'star-performer',
+            ...(starPerformer?.positions?.length ? { positions: starPerformer.positions } : {}),
+            ...(starPerformer?.playstyles ? { playstyles: starPerformer.playstyles } : {}),
+          }
+        : viewingHero
+          ? { ...player, edition: 'hero' }
+          : {
+              ...player,
+              rating: player.pairRating ?? player.rating,
+              position: player.regularPosition ?? player.position,
+              club: player.regularClub ?? player.club,
+              league: player.regularLeague ?? player.league,
+              edition: undefined,
+              face: undefined,
+            };
+  const starMeta = viewingStarPerformer && starPerformer ? {
+    foot: starPerformer.foot,
+    skillMoves: starPerformer.sm,
+    weakFoot: starPerformer.wf,
+    stats: Object.fromEntries(
+      Object.entries(starPerformer.detailedStats).map(([key, value]) => {
+        const normalized = ({
+          attackingPosition: 'positioning',
+          diving: 'gkDiving',
+          handling: 'gkHandling',
+          kicking: 'gkKicking',
+          reflexes: 'gkReflexes',
+          goalkeeperPositioning: 'gkPositioning',
+        } as Record<string, MetaAttr>)[key] ?? (key as MetaAttr);
+        return [normalized, value];
+      }),
+    ) as Partial<Record<MetaAttr, number>>,
+  } : null;
+  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : starMeta ?? baseMeta;
+  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -392,16 +427,17 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingHero ? 'hero' : 'base';
-  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : personId;
+  const shown: 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingStarPerformer ? 'star-performer' : viewingHero ? 'hero' : 'base';
+  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingStarPerformer ? `${personId}--star-performer` : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
   const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
-  const alts: { edition: 'base' | 'destined' | 'totw'; label: string }[] = [];
+  const alts: { edition: 'base' | 'destined' | 'totw' | 'star-performer'; label: string }[] = [];
   if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: 'קלף רגיל' });
   if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: 'קלף פרומו' });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
+  if ((starPerformer || (player.edition === 'star-performer' && player.baseId)) && shown !== 'star-performer') alts.push({ edition: 'star-performer', label: 'Star Performer' });
 
   const foot = meta?.foot;
   const iconPage = !!player.icon;
