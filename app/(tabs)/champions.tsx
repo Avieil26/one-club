@@ -1300,7 +1300,9 @@ export default function ChampionsScreen() {
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
       <View style={styles.pageRoot}>
-        <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage as any} pointerEvents="none" />
+        <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+          <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage as any} />
+        </View>
         <View style={styles.backgroundSoftener} pointerEvents="none" />
       <View style={styles.mainLayout}>
         <View style={styles.sidebar}>
@@ -1565,7 +1567,7 @@ const styles = StyleSheet.create({
   panelLegacy: { position: 'relative', overflow: 'hidden', backgroundColor: '#0A0F15', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   settingRow: { minHeight: 35, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,.05)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: 'ltr', gap: 9 },
   settingLabel: { color: '#6E7984', fontSize: 10, fontWeight: '800', textAlign: 'right', flex: 1 },
-  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },  tekkzCardCompact: { minHeight: 0 },
+  settingValue: { color: '#DCE2E7', fontSize: 11, fontWeight: '900', textAlign: 'right' },
   cardTopLine: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' },
   sourceBadge: { flexDirection: 'row-reverse', alignItems: 'center', gap: 5, borderWidth: 1, borderColor: 'rgba(104,224,155,.20)', backgroundColor: 'rgba(104,224,155,.05)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
   sourceBadgeText: { color: '#79D59F', fontSize: 8, fontWeight: '900' },  playerCardBody: { flexDirection: 'row-reverse', gap: 12, alignItems: 'stretch' },
