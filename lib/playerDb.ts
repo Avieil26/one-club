@@ -1,6 +1,6 @@
 import rosterJson from '@/assets/data/players.json';
 import { ICON_PLAYERS } from '@/lib/iconPlayers';
-import { HERO_PLAYERS, SOLO_TOTW } from '@/lib/specialCards';
+import { HERO_PLAYERS, SOLO_STAR_PERFORMERS, SOLO_TOTW } from '@/lib/specialCards';
 import type { FcPlayer, PlayStyle } from '@/lib/fcPlayers';
 
 export type RosterFace = {
@@ -53,6 +53,8 @@ function toFcPlayer(entry: RosterEntry): FcPlayer {
 
 const regularPlayers: FcPlayer[] = roster.map(toFcPlayer);
 const iconIds = new Set(ICON_PLAYERS.map((player) => player.id));
+const regularIds = new Set(regularPlayers.map((player) => player.id));
+const unpairedStarPerformers = SOLO_STAR_PERFORMERS.filter((player) => !regularIds.has(player.baseId ?? ''));
 
 /** Full market roster: EA gold/high-silver import + icons (icons win on id clash). */
 export const DB_PLAYERS: FcPlayer[] = [
@@ -60,6 +62,7 @@ export const DB_PLAYERS: FcPlayer[] = [
   ...ICON_PLAYERS,
   ...HERO_PLAYERS,
   ...SOLO_TOTW,
+  ...unpairedStarPerformers,
 ].sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name, 'he'));
 
 const mediaById = new Map<string, { en: string; photo?: string; face?: RosterFace }>();
