@@ -66,7 +66,7 @@ export type StarPerformerRow = {
   missingDetailedStats?: string[];
 };
 
-const starPerformers = starPerformersFile as StarPerformerRow[];
+const starPerformers = starPerformersFile as unknown as StarPerformerRow[];
 const starPerformerByBase = new Map(starPerformers.map((row) => [row.baseId, row]));
 
 export function starPerformerFor(baseId: string): StarPerformerRow | null {
