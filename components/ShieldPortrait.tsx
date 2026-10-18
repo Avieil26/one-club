@@ -68,7 +68,7 @@ export function ShieldPortrait({
   const quiet = hero ? 'rgba(244,230,200,0.78)' : isStarPerformer ? 'rgba(255,226,186,0.86)' : 'rgba(232,197,106,0.78)';
   const height = Math.round(width * (pitch ? 1.42 : 348 / 240));
   const gid = `sh${player.id.replace(/[^a-zA-Z0-9]/g, '')}${edition}`;
-  const photo = !shell && media.photo ? media.photo : '';
+  const photo = !shell ? (starPerformer?.portraitUrl || media.photo || '') : '';
   const showClub = !shell && player.club !== 'Heroes' && player.club !== 'TOTW';
   const rows = position === 'GK' ? GK_ROWS : ROWS;
   const deep = hero ? '#14081C' : isStarPerformer ? '#481306' : '#070604';
