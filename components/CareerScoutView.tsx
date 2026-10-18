@@ -45,6 +45,124 @@ function formatEurFull(val: number): string {
   return '€' + val.toLocaleString('en-US');
 }
 
+const CLUB_NAMES_EN: Record<string, string> = {
+  'אאוגסבורג': 'FC Augsburg', 'אברטון': 'Everton', 'אייאקס': 'Ajax',
+  'אינטר': 'Inter Milan', 'אינטר מיאמי': 'Inter Miami', 'אלצ׳ה': 'Elche CF',
+  'אלקמאר': 'AZ Alkmaar', 'אספניול': 'Espanyol', 'ארסנל': 'Arsenal',
+  'באהיה': 'Bahia', 'באייר לברקוזן': 'Bayer Leverkusen', 'בוטאפוגו': 'Botafogo',
+  'בולוניה': 'Bologna', 'בורוסיה דורטמונד': 'Borussia Dortmund',
+  'בורוסיה מנשנגלדבאך': 'Borussia Mönchengladbach', 'בנפיקה': 'Benfica',
+  'ברייטון': 'Brighton & Hove Albion', 'ברמינגהאם סיטי': 'Birmingham City',
+  'ברסט': 'Stade Brestois 29', 'ברצלונה': 'Barcelona', 'בשיקטאש': 'Beşiktaş',
+  'גלאטסראיי': 'Galatasaray', 'גנואה': 'Genoa', 'גנט': 'Gent', 'ג׳ירונה': 'Girona',
+  'דרבי קאונטי': 'Derby County', 'הנובר 96': 'Hannover 96',
+  'וולבס': 'Wolverhampton Wanderers', 'וולפסבורג': 'VfL Wolfsburg',
+  'ורדר ברמן': 'Werder Bremen', 'חוארס': 'FC Juárez', 'חטאפה': 'Getafe CF',
+  'טוונטה': 'FC Twente', 'טוטנהאם': 'Tottenham Hotspur', 'טולוז': 'Toulouse FC',
+  'טורינו': 'Torino', 'יאנג בויז': 'BSC Young Boys', 'לאנס': 'RC Lens',
+  'לבנטה': 'Levante UD', 'לוריאן': 'FC Lorient', 'ליברפול': 'Liverpool',
+  'לידס יונייטד': 'Leeds United', 'ליון': 'Olympique Lyonnais', 'ליל': 'Lille OSC',
+  'מונצה': 'AC Monza', 'מונקו': 'AS Monaco', 'מיורקה': 'RCD Mallorca',
+  'מיינץ 05': 'Mainz 05', 'מילאן': 'AC Milan', 'מכבי חיפה': 'Maccabi Haifa',
+  'מנצ׳סטר יונייטד': 'Manchester United', 'מנצ׳סטר סיטי': 'Manchester City',
+  'נוטינגהאם פורסט': 'Nottingham Forest', 'ניו אינגלנד': 'New England Revolution',
+  'ניוקאסל': 'Newcastle United', 'סאות׳המפטון': 'Southampton',
+  'סלביה פראג': 'Slavia Prague', 'סנדרלנד': 'Sunderland AFC',
+  'ספורטינג': 'Sporting CP', 'פ.ס.וו': 'PSV Eindhoven', 'פ.צ. קופנהגן': 'FC Copenhagen',
+  'פולהאם': 'Fulham', 'פיורנטינה': 'Fiorentina', 'פילדלפיה יוניון': 'Philadelphia Union',
+  'פנאתינייקוס': 'Panathinaikos', 'פנרבחצ׳ה': 'Fenerbahçe',
+  'פריז סן ז׳רמן': 'Paris Saint-Germain', 'פרייבורג': 'SC Freiburg',
+  'פרנצווארוש': 'Ferencvárosi TC', 'צ׳לסי': 'Chelsea', 'קובנטרי סיטי': 'Coventry City',
+  'קומו': 'Como 1907', 'קלאב ברוז׳': 'Club Brugge', 'קריסטל פאלאס': 'Crystal Palace',
+  'ר.ב. לייפציג': 'RB Leipzig', 'ראסינג קלוב': 'Racing Club', 'רומא': 'AS Roma',
+  'ריאל מדריד': 'Real Madrid', 'שארלוט': 'Charlotte FC', 'שארלוט FC': 'Charlotte FC',
+  'שטוטגרט': 'VfB Stuttgart', 'שנג׳ן פנג סיטי': 'Shenzhen Peng City',
+};
+const NATION_NAMES_EN: Record<string, string> = {
+  'אוסטריה': 'Austria', 'אוסטרליה': 'Australia', 'איטליה': 'Italy',
+  'אירלנד': 'Ireland', 'אנגליה': 'England', 'ארגנטינה': 'Argentina',
+  'בורקינה פאסו': 'Burkina Faso', 'בלגיה': 'Belgium', 'ברזיל': 'Brazil',
+  'גאורגיה': 'Georgia', 'גאנה': 'Ghana', 'גרמניה': 'Germany', 'דנמרק': 'Denmark',
+  'הולנד': 'Netherlands', 'ונצואלה': 'Venezuela', 'חוף השנהב': 'Ivory Coast',
+  'טורקיה': 'Türkiye', 'ישראל': 'Israel', 'מרוקו': 'Morocco', 'נורווגיה': 'Norway',
+  'סנגל': 'Senegal', 'ספרד': 'Spain', 'סקוטלנד': 'Scotland', 'פורטוגל': 'Portugal',
+  'צרפת': 'France', 'צ׳כיה': 'Czechia', 'קולומביה': 'Colombia', 'קונגו': 'Congo',
+  'קנדה': 'Canada', 'שוודיה': 'Sweden', 'שווייץ': 'Switzerland',
+};
+const POSITION_NAMES_EN: Record<string, string> = {
+  ST: 'Striker', CF: 'Centre-forward', RW: 'Right winger', LW: 'Left winger',
+  RM: 'Right midfielder', LM: 'Left midfielder', CAM: 'Attacking midfielder',
+  CM: 'Central midfielder', CDM: 'Defensive midfielder', CB: 'Centre-back',
+  RCB: 'Right centre-back', LCB: 'Left centre-back', RB: 'Right-back',
+  LB: 'Left-back', RWB: 'Right wing-back', LWB: 'Left wing-back', GK: 'Goalkeeper',
+};
+const SIMPLE_ROLES_EN: Record<string, string> = {
+  'עושה משחק מרכזי': 'Central Playmaker', 'בלם בונה': 'Ball-Playing Defender',
+  'בלם כיסוי': 'Cover Defender', 'בלם פיזי': 'Physical Centre-Back',
+  'בלם מסורתי': 'Traditional Centre-Back', 'בלם ימני': 'Right Centre-Back',
+  'בלם שמאל': 'Left Centre-Back', 'בלם שלישי': 'Third Centre-Back',
+  'קשר אחורי': 'Holding Midfielder', 'קשר אחורי הורס': 'Ball-Winning Midfielder',
+  'קשר אחורי מחלץ': 'Ball-Winning Midfielder', 'קשר מרכזי': 'Central Midfielder',
+  'קשר התקפי': 'Attacking Midfielder', 'קשר חודר': 'Shadow Striker',
+  'קשר כנף ימין': 'Right Winger', 'קשר רחבה לרחבה': 'Box-to-Box Midfielder',
+  'חלוץ רחבה': 'Poacher', 'חלוץ מטרה': 'Target Forward', 'חלוץ לחץ': 'Pressing Forward',
+  'חלוץ שני': 'Second Striker', 'חלוץ חופשי': 'Free-Roaming Forward',
+  'חלוץ פיזי': 'Physical Striker', 'חלוץ חודר': 'Advanced Forward',
+  'שחקן אגף חופשי': 'Free Winger', 'שחקן אגף ימין': 'Right Winger',
+  'שחקן אגף טהור': 'Traditional Winger', 'שחקן כנף ימין': 'Right Winger',
+  'שחקן כנף שמאל': 'Left Winger', 'שחקן כנף פיזי': 'Power Winger',
+  'שחקן כנף חודר': 'Inside Forward', 'עוצר בעיטות מסורתי': 'Traditional Goalkeeper',
+  'שוער משוחרר': 'Sweeper Keeper', 'שוער קלאסי': 'Goalkeeper',
+  'שליטה ברחבה': 'Cross Claimer', 'מגן הגנתי': 'Defensive Fullback',
+  'מגן שמאלי הגנתי': 'Defensive Left-Back', 'מגן ימני גיבוי': 'Backup Right-Back',
+  'מגן תוקף': 'Attacking Fullback',
+};
+function displayClub(club: string, language: 'he' | 'en'): string {
+  return language === 'en' ? (CLUB_NAMES_EN[club] ?? club) : club;
+}
+function displayNation(nation: string, language: 'he' | 'en'): string {
+  return language === 'en' ? (NATION_NAMES_EN[nation] ?? nation) : nation;
+}
+function displayRole(role: string, position: string, language: 'he' | 'en'): string {
+  if (language === 'he') return role;
+  const match = role.match(/\(([^)]+)\)/);
+  if (match) {
+    const suffix = role.slice((match.index ?? 0) + match[0].length).match(/^\s*(\+{1,2})/)?.[1];
+    return [match[1], suffix].filter(Boolean).join(' ');
+  }
+  return SIMPLE_ROLES_EN[role] ?? POSITION_NAMES_EN[position] ?? 'Player role';
+}
+function displayPlayStyle(name: string, language: 'he' | 'en'): string {
+  if (language === 'he') return name;
+  return name.match(/\(([^)]+)\)/)?.[1] ?? name;
+}
+function displayScoutRole(player: CareerScoutPlayer, language: 'he' | 'en'): string {
+  if (language === 'he') return player.squadRole;
+  const position = POSITION_NAMES_EN[player.position] ?? 'Football';
+  if (player.category === 'israel') return 'Israeli ' + position.toLowerCase() + ' prospect';
+  if (player.category === 'wonderkids') return 'Wonderkid ' + position.toLowerCase();
+  if (player.category === 'bargains') return 'Value ' + position.toLowerCase();
+  return 'Career ' + position.toLowerCase() + ' prospect';
+}
+function displayTacticalStyle(player: CareerScoutPlayer, language: 'he' | 'en'): string {
+  if (language === 'he') return player.roleSystem;
+  const position = player.position;
+  if (position === 'ST' || position === 'CF') return 'Finishing, movement and runs in behind';
+  if (['RW', 'LW', 'RM', 'LM'].includes(position)) return 'Pace, 1v1 dribbling and cut-inside runs';
+  if (position === 'CAM') return 'Chance creation, close control and through balls';
+  if (position === 'CM') return 'Midfield control, passing and late runs';
+  if (position === 'CDM') return 'Ball-winning, interceptions and defensive cover';
+  if (['CB', 'RCB', 'LCB'].includes(position)) return 'Defensive positioning, duels and recovery runs';
+  if (['LB', 'RB', 'LWB', 'RWB'].includes(position)) return 'Wide defending, recovery pace and overlapping runs';
+  if (position === 'GK') return 'Shot-stopping, reactions and distribution';
+  return 'Versatility, movement and team play';
+}
+function displayContractYears(contractYears: string, language: 'he' | 'en'): string {
+  if (language === 'he') return contractYears;
+  const match = contractYears.match(/(\d+)\s*שנים\s*\(עד\s*(\d{4})\)/);
+  return match ? match[1] + ' years (until ' + match[2] + ')' : contractYears;
+}
+
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
   const { language, t } = useLanguage();
   const rtl = language === 'he';
@@ -323,11 +441,11 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                 <View style={styles.metaRow}>
                   <ClubBadge club={player.club} size={18} />
                   <Text style={styles.metaText} numberOfLines={1}>
-                    {player.club}
+                    {displayClub(player.club, language)}
                   </Text>
                   <Text style={styles.metaDot}>•</Text>
                   <NationFlag nation={player.nation} size={14} />
-                  <Text style={styles.metaText}>{player.nation}</Text>
+                  <Text style={styles.metaText}>{displayNation(player.nation, language)}</Text>
                   <Text style={styles.metaDot}>•</Text>
                   <Text style={styles.metaText}>{t('גיל', 'Age')} {player.age}</Text>
                 </View>
@@ -341,7 +459,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   </View>
                   <View style={styles.roleChip}>
                     <Text style={styles.roleChipText} numberOfLines={1}>
-                      {player.primaryRole}
+                      {displayRole(player.primaryRole, player.position, language)}
                     </Text>
                   </View>
                 </View>
@@ -502,14 +620,14 @@ function ScoutDossierModal({
                 {language === 'en' ? player.enName : player.name} {isIsrael ? '🇮🇱' : ''}
               </Text>
               <Text style={styles.heroEnTitle}>
-                {player.enName} • {player.club}
+                {player.enName} • {displayClub(player.club, language)}
               </Text>
               <View style={styles.metaRow}>
                 <ClubBadge club={player.club} size={20} />
-                <Text style={styles.metaText}>{player.club}</Text>
+                <Text style={styles.metaText}>{displayClub(player.club, language)}</Text>
                 <Text style={styles.metaDot}>•</Text>
                 <NationFlag nation={player.nation} size={15} />
-                <Text style={styles.metaText}>{player.nation}</Text>
+                <Text style={styles.metaText}>{displayNation(player.nation, language)}</Text>
               </View>
 
               <View style={styles.chipsWrap}>
@@ -552,7 +670,7 @@ function ScoutDossierModal({
                     {showPotential ? t('🚀 במלוא הפוטנציאל', '🚀 Full potential') : `+${player.growth} ${t('צמיחה בקריירה', 'career growth')}`}
                   </Text>
                 </View>
-                <Text style={styles.progRoleSub}>{t('מעמד:', 'Role:')} {player.squadRole}</Text>
+                <Text style={styles.progRoleSub}>{t('מעמד:', 'Role:')} {displayScoutRole(player, language)}</Text>
               </View>
             </View>
 
@@ -601,7 +719,7 @@ function ScoutDossierModal({
             </View>
             <View style={styles.finTile}>
               <Text style={styles.finLabel}>{t('אורך חוזה קיים', 'Current contract length')}</Text>
-              <Text style={styles.finVal}>{player.contractYears}</Text>
+              <Text style={styles.finVal}>{displayContractYears(player.contractYears, language)}</Text>
             </View>
           </View>
 
@@ -609,17 +727,17 @@ function ScoutDossierModal({
           <View style={styles.sectionCard}>
             <View style={styles.secTopLine}>
               <Text style={styles.secMainLabel}>{t('תפקידים טקטיים (FC 27 Player Roles)', 'Tactical roles (FC 27 Player Roles)')}</Text>
-              <Text style={styles.secSystemTag}>{player.roleSystem}</Text>
+              <Text style={styles.secSystemTag}>{displayTacticalStyle(player, language)}</Text>
             </View>
             <View style={styles.rolesRow}>
               <View style={[styles.roleBlock, styles.starRoleBlock]}>
                 <Text style={styles.starRoleText} numberOfLines={1}>
-                  {player.primaryRole}
+                  {displayRole(player.primaryRole, player.position, language)}
                 </Text>
               </View>
               <View style={styles.roleBlock}>
                 <Text style={styles.normalRoleText} numberOfLines={1}>
-                  {player.secondaryRole}
+                  {displayRole(player.secondaryRole, player.position, language)}
                 </Text>
               </View>
             </View>
@@ -644,7 +762,7 @@ function ScoutDossierModal({
                     ]}
                   >
                     {ps.plus ? '★ ' : ''}
-                    {ps.name}
+                    {displayPlayStyle(ps.name, language)}
                   </Text>
                 </View>
               ))}
