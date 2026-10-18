@@ -20,7 +20,7 @@ async function loadRemotePrices() {
     if (!res.ok) return;
     const next = (await res.json()) as Record<string, [number, number]>;
     if (!next || typeof next !== 'object' || Object.keys(next).length < 1000) return;
-    table = next;
+    table = { ...table, ...next };
     listeners.forEach((listener) => listener());
   } catch {
     /* Keep the saved snapshot when the daily list is unavailable. */
