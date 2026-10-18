@@ -28,6 +28,7 @@ import {
 } from '@/lib/careerAttributes';
 import { statTone } from '@/lib/playerMeta';
 import { useLanguage } from '@/lib/language';
+import { displayClub, displayNation } from '@/lib/footballLocalization';
 
 type FilterTab = 'all' | 'israel' | 'attack' | 'midfield' | 'defense';
 
@@ -45,50 +46,6 @@ function formatEurFull(val: number): string {
   return '€' + val.toLocaleString('en-US');
 }
 
-const CLUB_NAMES_EN: Record<string, string> = {
-  'אאוגסבורג': 'FC Augsburg', 'אברטון': 'Everton', 'אייאקס': 'Ajax',
-  'אינטר': 'Inter Milan', 'אינטר מיאמי': 'Inter Miami', 'אלצ׳ה': 'Elche CF',
-  'אלקמאר': 'AZ Alkmaar', 'אספניול': 'Espanyol', 'ארסנל': 'Arsenal',
-  'באהיה': 'Bahia', 'באייר לברקוזן': 'Bayer Leverkusen', 'בוטאפוגו': 'Botafogo',
-  'בולוניה': 'Bologna', 'בורוסיה דורטמונד': 'Borussia Dortmund',
-  'בורוסיה מנשנגלדבאך': 'Borussia Mönchengladbach', 'בנפיקה': 'Benfica',
-  'ברייטון': 'Brighton & Hove Albion', 'ברמינגהאם סיטי': 'Birmingham City',
-  'ברסט': 'Stade Brestois 29', 'ברצלונה': 'Barcelona', 'בשיקטאש': 'Beşiktaş',
-  'גלאטסראיי': 'Galatasaray', 'גנואה': 'Genoa', 'גנט': 'Gent', 'ג׳ירונה': 'Girona',
-  'דרבי קאונטי': 'Derby County', 'הנובר 96': 'Hannover 96',
-  'וולבס': 'Wolverhampton Wanderers', 'וולפסבורג': 'VfL Wolfsburg',
-  'ורדר ברמן': 'Werder Bremen', 'חוארס': 'FC Juárez', 'חטאפה': 'Getafe CF',
-  'טוונטה': 'FC Twente', 'טוטנהאם': 'Tottenham Hotspur', 'טולוז': 'Toulouse FC',
-  'טורינו': 'Torino', 'יאנג בויז': 'BSC Young Boys', 'לאנס': 'RC Lens',
-  'לבנטה': 'Levante UD', 'לוריאן': 'FC Lorient', 'ליברפול': 'Liverpool',
-  'לידס יונייטד': 'Leeds United', 'ליון': 'Olympique Lyonnais', 'ליל': 'Lille OSC',
-  'מונצה': 'AC Monza', 'מונקו': 'AS Monaco', 'מיורקה': 'RCD Mallorca',
-  'מיינץ 05': 'Mainz 05', 'מילאן': 'AC Milan', 'מכבי חיפה': 'Maccabi Haifa',
-  'מנצ׳סטר יונייטד': 'Manchester United', 'מנצ׳סטר סיטי': 'Manchester City',
-  'נוטינגהאם פורסט': 'Nottingham Forest', 'ניו אינגלנד': 'New England Revolution',
-  'ניוקאסל': 'Newcastle United', 'סאות׳המפטון': 'Southampton',
-  'סלביה פראג': 'Slavia Prague', 'סנדרלנד': 'Sunderland AFC',
-  'ספורטינג': 'Sporting CP', 'פ.ס.וו': 'PSV Eindhoven', 'פ.צ. קופנהגן': 'FC Copenhagen',
-  'פולהאם': 'Fulham', 'פיורנטינה': 'Fiorentina', 'פילדלפיה יוניון': 'Philadelphia Union',
-  'פנאתינייקוס': 'Panathinaikos', 'פנרבחצ׳ה': 'Fenerbahçe',
-  'פריז סן ז׳רמן': 'Paris Saint-Germain', 'פרייבורג': 'SC Freiburg',
-  'פרנצווארוש': 'Ferencvárosi TC', 'צ׳לסי': 'Chelsea', 'קובנטרי סיטי': 'Coventry City',
-  'קומו': 'Como 1907', 'קלאב ברוז׳': 'Club Brugge', 'קריסטל פאלאס': 'Crystal Palace',
-  'ר.ב. לייפציג': 'RB Leipzig', 'ראסינג קלוב': 'Racing Club', 'רומא': 'AS Roma',
-  'ריאל מדריד': 'Real Madrid', 'שארלוט': 'Charlotte FC', 'שארלוט FC': 'Charlotte FC',
-  'שטוטגרט': 'VfB Stuttgart', 'שנג׳ן פנג סיטי': 'Shenzhen Peng City',
-};
-const NATION_NAMES_EN: Record<string, string> = {
-  'אוסטריה': 'Austria', 'אוסטרליה': 'Australia', 'איטליה': 'Italy',
-  'אירלנד': 'Ireland', 'אנגליה': 'England', 'ארגנטינה': 'Argentina',
-  'בורקינה פאסו': 'Burkina Faso', 'בלגיה': 'Belgium', 'ברזיל': 'Brazil',
-  'גאורגיה': 'Georgia', 'גאנה': 'Ghana', 'גרמניה': 'Germany', 'דנמרק': 'Denmark',
-  'הולנד': 'Netherlands', 'ונצואלה': 'Venezuela', 'חוף השנהב': 'Ivory Coast',
-  'טורקיה': 'Türkiye', 'ישראל': 'Israel', 'מרוקו': 'Morocco', 'נורווגיה': 'Norway',
-  'סנגל': 'Senegal', 'ספרד': 'Spain', 'סקוטלנד': 'Scotland', 'פורטוגל': 'Portugal',
-  'צרפת': 'France', 'צ׳כיה': 'Czechia', 'קולומביה': 'Colombia', 'קונגו': 'Congo',
-  'קנדה': 'Canada', 'שוודיה': 'Sweden', 'שווייץ': 'Switzerland',
-};
 const POSITION_NAMES_EN: Record<string, string> = {
   ST: 'Striker', CF: 'Centre-forward', RW: 'Right winger', LW: 'Left winger',
   RM: 'Right midfielder', LM: 'Left midfielder', CAM: 'Attacking midfielder',
@@ -117,12 +74,6 @@ const SIMPLE_ROLES_EN: Record<string, string> = {
   'מגן שמאלי הגנתי': 'Defensive Left-Back', 'מגן ימני גיבוי': 'Backup Right-Back',
   'מגן תוקף': 'Attacking Fullback',
 };
-function displayClub(club: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (CLUB_NAMES_EN[club] ?? club) : club;
-}
-function displayNation(nation: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (NATION_NAMES_EN[nation] ?? nation) : nation;
-}
 function displayRole(role: string, position: string, language: 'he' | 'en'): string {
   if (language === 'he') return role;
   const match = role.match(/\(([^)]+)\)/);
