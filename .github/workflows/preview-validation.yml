@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - preview/star-performers-20261018
+      - preview/fc27-complete-english-starsafe-20261018
   pull_request:
     branches:
       - codex/grounds-prod-release
@@ -12,6 +13,9 @@ on:
       - "components/**"
       - "lib/**"
       - "assets/data/totw.json"
+      - "assets/data/starPerformers.json"
+      - "assets/data/marketPrices.json"
+      - "assets/data/priceEaIds.json"
       - "package.json"
       - "package-lock.json"
       - "app.json"
