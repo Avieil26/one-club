@@ -60,6 +60,10 @@ export type StarPerformerRow = {
   priceSource: string;
   priceChecked: string;
   priceNote?: string;
+  playerSourceUrl?: string;
+  priceSourceUrl?: string;
+  detailedStatsComplete?: boolean;
+  missingDetailedStats?: string[];
 };
 
 const starPerformers = starPerformersFile as StarPerformerRow[];
