@@ -32,6 +32,9 @@ export const CLUB_NAMES_EN: Record<string, string> = {
   'ר.ב. לייפציג': 'RB Leipzig', 'ראסינג קלוב': 'Racing Club', 'רומא': 'AS Roma',
   'ריאל מדריד': 'Real Madrid', 'שארלוט': 'Charlotte FC', 'שארלוט FC': 'Charlotte FC',
   'שטוטגרט': 'VfB Stuttgart', 'שנג׳ן פנג סיטי': 'Shenzhen Peng City',
+  'Sunderland': 'Sunderland AFC',
+  'RB Leipzig': 'RB Leipzig',
+  'מילאנו FC': 'Milano FC',
 };
 
 export const NATION_NAMES_EN: Record<string, string> = {
