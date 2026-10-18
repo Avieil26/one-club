@@ -1281,20 +1281,6 @@ export default function ChampionsScreen() {
 
     composerFormationPickerOpen,  ]);
 
-  if (!canView) {
-    return (
-      <Screen scene="champions" showNav>
-        <Stack.Screen options={{ title: 'FUT Champions' }} />
-        <View style={styles.comingSoon}>
-          <Text style={styles.comingSoonIcon}>🏆</Text>
-          <Text style={styles.comingSoonTitle}>FUT Champions</Text>
-          <Text style={styles.comingSoonStatus}>בקרוב</Text>
-          <Text style={styles.comingSoonText}>מרכז FUT Champions החדש נמצא בהכנה.</Text>
-        </View>
-      </Screen>
-    );
-  }
-
   return (
     <Screen scene="champions" showNav refreshing={saving} onRefresh={loadLiveData} maxWidth={1700}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
@@ -1631,11 +1617,6 @@ const styles = StyleSheet.create({
   controllerName: { color: '#D9DEE4', fontSize: 12, fontWeight: '900', textAlign: 'center' },
   controllerSettings: { flex: 1, minHeight: 330 },
 
-  comingSoon: { flex: 1, minHeight: 700, alignItems: 'center', justifyContent: 'center', gap: 7 },
-  comingSoonIcon: { fontSize: 40 },
-  comingSoonTitle: { color: '#F2F4F7', fontSize: 27, fontWeight: '900' },
-  comingSoonStatus: { color: '#F04A56', fontSize: 18, fontWeight: '900' },
-  comingSoonText: { color: '#85919C', fontSize: 13, fontWeight: '700' },
   panel: { position: 'relative', overflow: 'hidden', backgroundColor: 'rgba(9,13,19,.58)', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', padding: 17, gap: 12 },
   hero: { minHeight: 400, margin: 24, marginBottom: 18, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(237,55,72,.55)', overflow: 'hidden', position: 'relative', shadowColor: '#000', shadowOpacity: .30, shadowRadius: 22, shadowOffset: { width: 0, height: 12 } },  winChip: { width: 48, height: 48, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.08)', backgroundColor: '#0A1017', alignItems: 'center', justifyContent: 'center' },  winChipValue: { color: '#DCE2E7', fontSize: 15, fontWeight: '900' },  winChipLabel: { color: '#67737E', fontSize: 7, fontWeight: '900' },  rewardSummaryGrid: { flexDirection: 'row-reverse', gap: 10, marginTop: 12, flexWrap: 'wrap' },
   selectorTitle: { color: '#F0F3F6', fontSize: 15, fontWeight: '900', textAlign: 'right' },
