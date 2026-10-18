@@ -61,6 +61,7 @@ export type StarPerformerRow = {
   priceChecked: string;
   priceNote?: string;
   playerSourceUrl?: string;
+  portraitUrl?: string;
   priceSourceUrl?: string;
   detailedStatsComplete?: boolean;
   missingDetailedStats?: string[];
@@ -72,6 +73,23 @@ const starPerformerByBase = new Map(starPerformers.map((row) => [row.baseId, row
 export function starPerformerFor(baseId: string): StarPerformerRow | null {
   return starPerformerByBase.get(baseId) ?? null;
 }
+
+/** Standalone promo entries for Star Performers that are not present in the regular roster. */
+export const SOLO_STAR_PERFORMERS: FcPlayer[] = starPerformers.map((row) => ({
+  id: `${row.baseId}--star-performer`,
+  baseId: row.baseId,
+  name: row.name,
+  en: row.en,
+  rating: row.rating,
+  position: row.position,
+  nation: row.nation,
+  league: row.league,
+  club: row.club,
+  edition: 'star-performer',
+  face: row.face,
+  ...(row.positions?.length ? { positions: row.positions } : {}),
+  ...(row.playstyles?.length ? { playstyles: row.playstyles } : {}),
+}));
 
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
   id: hero.id,
