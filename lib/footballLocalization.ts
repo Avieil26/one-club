@@ -42,7 +42,7 @@ export const NATION_NAMES_EN: Record<string, string> = {
   'הולנד': 'Netherlands', 'ונצואלה': 'Venezuela', 'חוף השנהב': 'Ivory Coast',
   'טורקיה': 'Türkiye', 'ישראל': 'Israel', 'מרוקו': 'Morocco', 'נורווגיה': 'Norway',
   'סנגל': 'Senegal', 'ספרד': 'Spain', 'סקוטלנד': 'Scotland', 'פורטוגל': 'Portugal',
-  'צרפת': 'France', 'צ׳כיה': 'Czechia', 'קולומביה': 'Colombia', 'קונגו': 'Congo',
+  'צרפת': 'France', 'צ׳כיה': 'Czechia', 'קולומביה': 'Colombia', 'קונגו': 'Congo', 'הרפובליקה הדמוקרטית של קונגו': 'DR Congo',
   'קנדה': 'Canada', 'שוודיה': 'Sweden', 'שווייץ': 'Switzerland',
 };
 
