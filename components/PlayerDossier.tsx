@@ -20,6 +20,7 @@ import { playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
+import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 
 function Stars({ count }: { count: number }) {
   return (
@@ -104,18 +105,19 @@ const CHEM_GROUPS = [
 ];
 
 function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) {
+  const { language } = useLanguage();
   const text = compact ? 13 : 15;
   if (player.icon) {
     return (
       <View style={{ gap: 8, alignItems: 'flex-end' }}>
-        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>אייקון</Text>
+        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>{language === 'en' ? 'Icon' : 'אייקון'}</Text>
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
           <NationFlag nation={player.nation} size={compact ? 14 : 16} />
-          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{player.nation}</Text>
+          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{displayNation(player.nation, language)}</Text>
         </View>
         {playerHeight(player.baseId ?? player.id) ? (
           <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} ס״מ</Text>
+            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} {language === 'en' ? 'cm' : 'ס״מ'}</Text>
             <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{playerHeight(player.baseId ?? player.id)!.feet}</Text>
           </View>
         ) : null}
@@ -138,15 +140,15 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
     <View style={{ gap: compact ? 6 : 8, alignItems: 'flex-end' }}>
       <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
         <ClubBadge club={player.club} size={compact ? 20 : 26} />
-        <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{player.club}</Text>
+        <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{displayClub(player.club, language)}</Text>
       </View>
       <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
         {logo ? <Image source={logo} resizeMode="contain" style={{ width: compact ? 72 : 84, height: compact ? 32 : 38 }} /> : null}
-        <Text style={{ color: '#E7D7A1', fontWeight: '700', fontSize: compact ? 13 : 14 }}>{player.league}</Text>
+        <Text style={{ color: '#E7D7A1', fontWeight: '700', fontSize: compact ? 13 : 14 }}>{displayLeague(player.league, language)}</Text>
       </View>
       {height ? (
         <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} ס״מ</Text>
+          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} {language === 'en' ? 'cm' : 'ס״מ'}</Text>
           <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{height.feet}</Text>
         </View>
       ) : null}
@@ -250,7 +252,7 @@ function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'sta
 
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -556,7 +558,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 12, alignItems: 'flex-end', direction: 'ltr', overflow: 'hidden' }}>
-              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{player.name}</Text>
+              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
               {quote ? <MarketQuote console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
@@ -597,7 +599,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 8, alignItems: 'stretch', direction: 'rtl' }}>
-              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{player.name}</Text>
+              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
               {quote ? <MarketQuote compact console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} compact />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
