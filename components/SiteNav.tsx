@@ -12,16 +12,16 @@ const QUIET = 'rgba(244,247,242,0.62)';
 
 /** Keep direction controlled by the selected language. */
 const LINKS = [
-  { href: '/' as const, label: 'בית' },
-  { href: '/career' as const, label: 'קריירה' },
-  { href: '/ultimate' as const, label: 'אולטימייט' },
-  { href: '/champions' as const, label: 'FUT Champions' },
-  { href: '/grounds' as const, label: 'גראונדס' },
-  { href: '/sbc' as const, label: 'SBC' },
-  { href: '/games' as const, label: 'משחקונים' },
-  { href: '/board' as const, label: 'לוח' },
-  { href: '/market' as const, label: 'שחקנים' },
-  { href: '/settings' as const, label: 'הגדרות' },
+  { href: '/' as const, label: 'בית', en: 'Home' },
+  { href: '/career' as const, label: 'קריירה', en: 'Career' },
+  { href: '/ultimate' as const, label: 'אולטימייט', en: 'Ultimate Team' },
+  { href: '/champions' as const, label: 'FUT Champions', en: 'FUT Champions' },
+  { href: '/grounds' as const, label: 'גראונדס', en: 'Grounds' },
+  { href: '/sbc' as const, label: 'SBC', en: 'SBC' },
+  { href: '/games' as const, label: 'משחקונים', en: 'Mini-games' },
+  { href: '/board' as const, label: 'לוח', en: 'Community Board' },
+  { href: '/market' as const, label: 'שחקנים', en: 'Players' },
+  { href: '/settings' as const, label: 'הגדרות', en: 'Settings' },
 ];
 
 function isActive(pathname: string, href: string) {
