@@ -1,5 +1,6 @@
 import heroesFile from '@/assets/data/heroes.json';
 import totwFile from '@/assets/data/totw.json';
+import starPerformersFile from '@/assets/data/starPerformers.json';
 
 import type { FcPlayer } from '@/lib/fcPlayers';
 
@@ -36,6 +37,37 @@ type TotwRow = {
 
 const heroes = heroesFile as HeroRow[];
 const totw = totwFile as TotwRow[];
+
+export type StarPerformerRow = {
+  baseId: string;
+  en: string;
+  name: string;
+  rating: number;
+  position: string;
+  nation: string;
+  league: string;
+  club: string;
+  foot: 'L' | 'R';
+  sm: number;
+  wf: number;
+  cardId: number;
+  face: Face;
+  positions?: string[];
+  playstyles?: { name: string; plus: boolean }[];
+  detailedStats: Record<string, number>;
+  priceConsole: number;
+  pricePc: number;
+  priceSource: string;
+  priceChecked: string;
+  priceNote?: string;
+};
+
+const starPerformers = starPerformersFile as StarPerformerRow[];
+const starPerformerByBase = new Map(starPerformers.map((row) => [row.baseId, row]));
+
+export function starPerformerFor(baseId: string): StarPerformerRow | null {
+  return starPerformerByBase.get(baseId) ?? null;
+}
 
 export const HERO_PLAYERS: FcPlayer[] = heroes.map((hero) => ({
   id: hero.id,
