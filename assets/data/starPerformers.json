@@ -289,7 +289,7 @@
       "CM",
       "CAM"
     ],
-    "nation": "Congo DR",
+    "nation": "הרפובליקה הדמוקרטית של קונגו",
     "league": "פרמייר ליג",
     "club": "Sunderland",
     "foot": "R",
@@ -445,7 +445,7 @@
   {
     "baseId": "ea-278326-alphadjo-cisse",
     "en": "Alphadjo Cissè",
-    "name": "Alphadjo Cissè",
+    "name": "אלפאדג׳ו צ׳יסה",
     "rating": 85,
     "position": "CAM",
     "positions": [
@@ -454,7 +454,7 @@
     ],
     "nation": "איטליה",
     "league": "סרייה א׳",
-    "club": "מילאן",
+    "club": "מילאנו FC",
     "foot": "R",
     "sm": 4,
     "wf": 3,
