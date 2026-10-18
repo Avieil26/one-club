@@ -16,13 +16,13 @@ import {
 
 type Panel = 'menu' | 'kind' | 'nation' | 'squad' | 'position' | 'rating';
 
-const KINDS: { id: CardKind; label: string }[] = [
-  { id: 'gold', label: 'גולד' },
-  { id: 'silver', label: 'סילבר' },
-  { id: 'icon', label: 'אייקון' },
-  { id: 'hero', label: 'הירו' },
-  { id: 'totw', label: 'TOTW' },
-  { id: 'promo', label: 'OTW' },
+const KINDS: { id: CardKind; he: string; en: string }[] = [
+  { id: 'gold', he: 'גולד', en: 'Gold' },
+  { id: 'silver', he: 'סילבר', en: 'Silver' },
+  { id: 'icon', he: 'אייקון', en: 'Icon' },
+  { id: 'hero', he: 'הירו', en: 'Hero' },
+  { id: 'totw', he: 'TOTW', en: 'TOTW' },
+  { id: 'promo', he: 'OTW', en: 'OTW' },
 ];
 
 const TEXT = '#F4F7F2';
@@ -30,8 +30,9 @@ const QUIET = 'rgba(214,222,232,0.72)';
 const LINE = 'rgba(170,186,204,0.28)';
 const PRESETS = [70, 75, 80, 85, 90];
 
-function kindLabel(kind: CardKind) {
-  return KINDS.find((option) => option.id === kind)?.label ?? '';
+function kindLabel(kind: CardKind, language: 'he' | 'en') {
+  const item = KINDS.find((option) => option.id === kind);
+  return item ? (language === 'he' ? item.he : item.en) : '';
 }
 
 function ratingLabel(filters: PlayerFilters, low: number, high: number) {
@@ -112,7 +113,7 @@ export function PlayerFilter({
 
         {panel === 'menu' ? (
           <View>
-            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind)} onPress={() => setPanel('kind')} />
+            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, language)} onPress={() => setPanel('kind')} />
             <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
             <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
             <MenuRow label={t('עמדה', 'Position')} value={filters.position ?? ''} onPress={() => setPanel('position')} />
@@ -125,10 +126,10 @@ export function PlayerFilter({
 
         {panel === 'kind' ? (
           <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
-            <TypePick label="סילבר" kind="silver" active={filters.kind === 'silver'} onPress={() => toggleKind('silver')} />
-            <TypePick label="גולד" kind="gold" active={filters.kind === 'gold'} onPress={() => toggleKind('gold')} />
-            <TypePick label="אייקון" kind="icon" active={filters.kind === 'icon'} onPress={() => toggleKind('icon')} />
-            <TypePick label="הירו" kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
+            <TypePick label={t('סילבר', 'Silver')} kind="silver" active={filters.kind === 'silver'} onPress={() => toggleKind('silver')} />
+            <TypePick label={t('גולד', 'Gold')} kind="gold" active={filters.kind === 'gold'} onPress={() => toggleKind('gold')} />
+            <TypePick label={t('אייקון', 'Icon')} kind="icon" active={filters.kind === 'icon'} onPress={() => toggleKind('icon')} />
+            <TypePick label={t('הירו', 'Hero')} kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
             <TypePick label="TOTW" kind="totw" active={filters.kind === 'totw'} onPress={() => toggleKind('totw')} />
             <TypePick label="OTW" kind="otw" active={filters.kind === 'promo'} onPress={() => toggleKind('promo')} />
           </ScrollView>
@@ -224,7 +225,7 @@ export function PlayerFilter({
               ))}
             </View>
             <RatingEnd
-              label="מ־"
+              label={t('מ־', 'Min')}
               value={filters.minRating}
               fallback={choices.ratingMin}
               min={choices.ratingMin}
@@ -232,7 +233,7 @@ export function PlayerFilter({
               onChange={(minRating) => onChange({ ...filters, minRating })}
             />
             <RatingEnd
-              label="עד"
+              label={t('עד', 'Max')}
               value={filters.maxRating}
               fallback={choices.ratingMax}
               min={filters.minRating ?? choices.ratingMin}
