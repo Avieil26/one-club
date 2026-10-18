@@ -195,6 +195,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
 
   const handleTabChange = (tab: FilterTab) => {
     setActiveTab(tab);
+    setSubFilter('all');
     setPage(1);
   };
 
