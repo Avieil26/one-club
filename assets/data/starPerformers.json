@@ -82,11 +82,11 @@
       "strength": 63,
       "aggression": 47
     },
-    "priceConsole": 3300000,
+    "priceConsole": 0,
     "pricePc": 0,
-    "priceSource": "FUT Flipper",
+    "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Approximate market-list price; no current lowest listing shown"
+    "priceNote": "No active listings shown on the current console promo market page."
   },
   {
     "baseId": "doue",
@@ -173,11 +173,11 @@
       "strength": 83,
       "aggression": 62
     },
-    "priceConsole": 1700000,
+    "priceConsole": 2539000,
     "pricePc": 0,
-    "priceSource": "FUT Flipper",
+    "priceSource": "FUT Flipper — live FC 27 market list",
     "priceChecked": "2026-10-18",
-    "priceNote": "Console market-list estimate; PC had no current listing"
+    "priceNote": "Current PS/Xbox list quote; no PC quote verified in the current snapshot."
   },
   {
     "baseId": "barcola",
@@ -256,10 +256,11 @@
       "standingTackle": 41,
       "slidingTackle": 29
     },
-    "priceConsole": 725000,
+    "priceConsole": 1000000,
     "pricePc": 876000,
-    "priceSource": "FUT Flipper",
-    "priceChecked": "2026-10-18"
+    "priceSource": "FUT Flipper — live FC 27 market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot."
   },
   {
     "baseId": "ea-269230-noah-sadiki",
@@ -333,10 +334,11 @@
       "strength": 73,
       "aggression": 81
     },
-    "priceConsole": 172000,
+    "priceConsole": 273000,
     "pricePc": 155000,
-    "priceSource": "FUT Flipper",
-    "priceChecked": "2026-10-18"
+    "priceSource": "FUT Flipper — live FC 27 market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote; PC value retained from the earlier same-day PC snapshot."
   },
   {
     "baseId": "ea-242879-maarten-vandevoordt",
@@ -410,10 +412,11 @@
       "standingTackle": 10,
       "slidingTackle": 18
     },
-    "priceConsole": 40250,
+    "priceConsole": 72500,
     "pricePc": 35500,
-    "priceSource": "FUT Flipper",
-    "priceChecked": "2026-10-18"
+    "priceSource": "FUT Flipper — live FC 27 market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot."
   },
   {
     "baseId": "ea-278326-alphadjo-cisse",
@@ -486,9 +489,10 @@
       "strength": 64,
       "aggression": 62
     },
-    "priceConsole": 104000,
+    "priceConsole": 160000,
     "pricePc": 83000,
-    "priceSource": "FUT Flipper",
-    "priceChecked": "2026-10-18"
+    "priceSource": "FUT Flipper — live FC 27 market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote for the normal (non-Holographic) Star Performer card; PC value retained from earlier same-day snapshot."
   }
 ]
