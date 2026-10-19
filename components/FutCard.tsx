@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -6,6 +7,7 @@ import { PlayerDossier } from '@/components/PlayerDossier';
 import type { FcPlayer } from '@/lib/fcPlayers';
 
 export function FutCard({ player, onClose }: { player: FcPlayer; onClose: () => void }) {
+  const { t } = useLanguage();
   const insets = useSafeAreaInsets();
   return (
     <Modal visible animationType="fade" onRequestClose={onClose}>
@@ -21,7 +23,7 @@ export function FutCard({ player, onClose }: { player: FcPlayer; onClose: () => 
         }}
       >
         <Pressable onPress={onClose} hitSlop={8}>
-          <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: 'right' }}>סגירה</Text>
+          <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: 'right' }}>{t("סגירה", "Close")}</Text>
         </Pressable>
         <PlayerDossier player={player} />
       </ScrollView>

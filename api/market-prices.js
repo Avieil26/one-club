@@ -1,4 +1,5 @@
 import eaByCard from '../assets/data/priceEaIds.json';
+import totw4EaByCard from '../assets/data/totw4PriceEaIds.json';
 
 export const config = { runtime: 'edge' };
 
@@ -41,7 +42,7 @@ export default async function handler() {
     }
 
     const prices = {};
-    for (const [id, eaId] of Object.entries(eaByCard)) {
+    for (const [id, eaId] of Object.entries({ ...eaByCard, ...totw4EaByCard })) {
       const row = byEa.get(eaId);
       if (row) prices[id] = row;
     }

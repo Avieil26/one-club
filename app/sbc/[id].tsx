@@ -1,3 +1,5 @@
+import { sbcText } from '@/lib/sbcLocalization';
+import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
 import { Image, Platform, Text, useWindowDimensions, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
@@ -24,6 +26,7 @@ function useNow(intervalMs = 30_000) {
 }
 
 export default function SbcDetailScreen() {
+  const { t, language } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -43,7 +46,7 @@ export default function SbcDetailScreen() {
   if (!challenge) {
     return (
       <Screen scene="sbc">
-        <Title>האתגר לא נמצא</Title>
+        <Title>{t("האתגר לא נמצא", "Challenge not found")}</Title>
       </Screen>
     );
   }
@@ -51,16 +54,16 @@ export default function SbcDetailScreen() {
   if (!isOpen(challenge, now)) {
     return (
       <Screen scene="sbc">
-        <Title>{challenge.title}</Title>
-        <Muted>הזמן ל-SBC הזה נגמר, והוא הוסר אוטומטית מהרשימה הפעילה.</Muted>
-        <Button label="חזרה לרשימת SBC" onPress={() => router.replace('/sbc')} />
+        <Title>{language === 'en' ? sbcFace(challenge).en : challenge.title}</Title>
+        <Muted>{t("הזמן ל-SBC הזה נגמר, והוא הוסר אוטומטית מהרשימה הפעילה.", "This SBC has expired and was automatically removed from the active list.")}</Muted>
+        <Button label={t("חזרה לרשימת SBC", "Back to SBCs")} onPress={() => router.replace('/sbc')} />
       </Screen>
     );
   }
 
   const challengeId = challenge.id;
-  const challengeTitle = challenge.title;
-  const remaining = formatRemaining(challenge.endsAt, now);
+  const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
+  const remaining = formatRemaining(challenge.endsAt, now, language);
   const solutions = solutionsFor(app.solutions, challengeId);
   const clubs = challenge.clubs ?? [];
   const nations = challenge.nations ?? [];
@@ -80,21 +83,21 @@ export default function SbcDetailScreen() {
         <View style={{ flex: 1 }}>
           <Badge text={face.category} tone={challenge.kind === 'streamlined' ? 'copper' : 'blue'} />
           <Title>{face.en}</Title>
-          {face.he !== face.en ? <Muted>{face.he}</Muted> : null}
+          {language === 'he' && face.he !== face.en ? <Muted>{face.he}</Muted> : null}
         </View>
       </View>
       <Muted>
-        {challenge.reward ? `${challenge.reward} · ` : ''}
-        {challenge.endsAt ? `נשאר: ${remaining}` : remaining}
+        {challenge.reward ? `${sbcText(challenge.reward, language)} · ` : ''}
+        {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
       </Muted>
       {challenge.kind === 'classic' && challenge.previewSquad ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
               {challenge.rules?.chemistry
-                ? `כימיה ${report.chemistry}/33`
-                : 'בלי דרישת כימיה'}
-              {report.rating === null ? '' : ` · דירוג קבוצה ${report.rating}`}
+                ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
+                : t("בלי דרישת כימיה", "No chemistry requirement")}
+              {report.rating === null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
             </Text>
             <SquadPitch formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
           </View>
@@ -110,13 +113,13 @@ export default function SbcDetailScreen() {
         </View>
       ) : (
         <Card>
-          <Muted>{challenge.requirements}</Muted>
-          {challenge.targetScore ? <Muted>יעד ניקוד: {challenge.targetScore}</Muted> : null}
+          <Muted>{sbcText(challenge.requirements, language)}</Muted>
+          {challenge.targetScore ? <Muted>{t("יעד ניקוד:", "Target score:")}{challenge.targetScore}</Muted> : null}
         </Card>
       )}
       {challenge.kind === 'streamlined' ? (
         <Button
-          label="פתיחת המחשבון"
+          label={t("פתיחת המחשבון", "Open calculator")}
           variant="copper"
           onPress={() => router.push(`/sbc/calculator?target=${challenge.targetScore ?? ''}`)}
         />
@@ -124,22 +127,20 @@ export default function SbcDetailScreen() {
 
       {challenge.kind === 'classic' ? (
         <View style={{ gap: 10, marginTop: 4 }}>
-          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13, textAlign: 'right', letterSpacing: 0.4 }}>
-            הצעת פתרון לאתגר
-          </Text>
-          <Muted>בניית סגל פותחת מגרש ריק: לוחצים על עמדה, מחפשים שחקן, ומניחים את הקלף. צילום מעלה תמונה מהמשחק.</Muted>
-          <Button label="בניית סגל באפליקציה" variant="copper" onPress={() => router.push(`/sbc/build/${challengeId}`)} />
-          <Button label="צילום פתרון מהמשחק" variant="gold" onPress={() => router.push(`/sbc/upload/${challengeId}`)} />
+          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13, textAlign: 'right', letterSpacing: 0.4 }}>{t("הצעת פתרון לאתגר", "Submit a challenge solution")}</Text>
+          <Muted>{t("בניית סגל פותחת מגרש ריק: לוחצים על עמדה, מחפשים שחקן, ומניחים את הקלף. צילום מעלה תמונה מהמשחק.", "Build a squad by selecting positions and adding players to an empty pitch, or upload a screenshot from the game.")}</Muted>
+          <Button label={t("בניית סגל באפליקציה", "Build a squad in the app")} variant="copper" onPress={() => router.push(`/sbc/build/${challengeId}`)} />
+          <Button label={t("צילום פתרון מהמשחק", "Upload an in-game solution")} variant="gold" onPress={() => router.push(`/sbc/upload/${challengeId}`)} />
         </View>
       ) : null}
 
       {challenge.kind === 'classic' ? (
         <View style={{ gap: 6, marginTop: 12 }}>
-          <Text style={{ color: colors.text, fontSize: 22, fontWeight: '800', textAlign: 'right' }}>פתרונות הקהילה</Text>
+          <Text style={{ color: colors.text, fontSize: 22, fontWeight: '800', textAlign: 'right' }}>{t("פתרונות הקהילה", "Community solutions")}</Text>
           <Muted>
             {solutions.length
-              ? `${solutions.length} פתרונות. לחצו על כרטיס כדי לפתוח את המגרש, התמונה והתגובות.`
-              : 'עדיין אין פתרונות לאתגר הזה. תהיו הראשונים לפרסם!'}
+              ? t(`${solutions.length} פתרונות. לחצו על כרטיס כדי לפתוח את המגרש, התמונה והתגובות.`, `${solutions.length} solutions. Select a card to view the pitch, images and comments.`)
+              : t("עדיין אין פתרונות לאתגר הזה. תהיו הראשונים לפרסם!", "No solutions yet. Be the first to submit one!")}
           </Muted>
         </View>
       ) : null}
@@ -162,12 +163,11 @@ export default function SbcDetailScreen() {
                 style={{ width: '100%', height: 220, borderRadius: 14, backgroundColor: '#07140F' }}
               />
             ) : (
-              <Muted>{solution.squad ? 'סגל שנבנה באפליקציה' : 'בלי תמונה'}</Muted>
+              <Muted>{solution.squad ? t("סגל שנבנה באפליקציה", "Squad built in the app") : t("בלי תמונה", "No image")}</Muted>
             )}
-            <Text style={{ color: colors.gold, fontWeight: '800', textAlign: 'right' }}>
-              עבד לי {ups} · לא עבד {downs}
+            <Text style={{ color: colors.gold, fontWeight: '800', textAlign: 'right' }}>{t("עבד לי", "Worked for me")}{ups}{t("· לא עבד", "· Did not work")}{downs}
             </Text>
-            <Text style={{ color: colors.link, fontWeight: '700', textAlign: 'right' }}>פתיחת הפתרון המלא</Text>
+            <Text style={{ color: colors.link, fontWeight: '700', textAlign: 'right' }}>{t("פתיחת הפתרון המלא", "View full solution")}</Text>
           </Card>
         );
       })}

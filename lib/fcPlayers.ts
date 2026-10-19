@@ -36,6 +36,7 @@ export type FcPlayer = {
   heightCm?: number;
   weightKg?: number;
   age?: number;
+  roles?: string[];
 };
 
 export const N = {
@@ -167,6 +168,7 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         position: promo.position || player.position,
         club: promo.club || player.club,
         league: promo.league || player.league,
+        face: promo.face,
       });
     }
     const otw = otwFor(player.id);

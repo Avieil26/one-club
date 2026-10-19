@@ -1,0 +1,195 @@
+{
+  "sourceCommit": "3b2416467ed419ae1a875333f2fab4341c1023dd",
+  "cards": [
+    {
+      "id": "putellas--totw",
+      "rating": 92,
+      "position": "CAM"
+    },
+    {
+      "id": "bellingham--totw",
+      "rating": 91,
+      "position": "CAM"
+    },
+    {
+      "id": "ea-241846-ewa-pajor--totw",
+      "rating": 90,
+      "position": "ST"
+    },
+    {
+      "id": "donnarumma--totw",
+      "rating": 90,
+      "position": "GK"
+    },
+    {
+      "id": "debinha--totw",
+      "rating": 88,
+      "position": "CAM"
+    },
+    {
+      "id": "hemp--totw",
+      "rating": 88,
+      "position": "LM"
+    },
+    {
+      "id": "debruyne--totw",
+      "rating": 86,
+      "position": "CM"
+    },
+    {
+      "id": "lewandowski--totw",
+      "rating": 85,
+      "position": "ST"
+    },
+    {
+      "id": "ea-210514-joao-cancelo--totw",
+      "rating": 84,
+      "position": "RB"
+    },
+    {
+      "id": "marmoush--totw",
+      "rating": 84,
+      "position": "ST"
+    },
+    {
+      "id": "ea-260908-milos-kerkez--totw",
+      "rating": 83,
+      "position": "LB"
+    },
+    {
+      "id": "ea-227381-janine-sonis--totw",
+      "rating": 80,
+      "position": "LB"
+    },
+    {
+      "id": "ea-79532-mariam-toloba--totw",
+      "rating": 80,
+      "position": "LM"
+    },
+    {
+      "id": "ea-73014-cornelia-kramer--totw",
+      "rating": 80,
+      "position": "ST"
+    },
+    {
+      "id": "ea-245902-troy-parrott--totw",
+      "rating": 82,
+      "position": "ST"
+    },
+    {
+      "id": "ea-242000-konstantinos-mavropanos--totw",
+      "rating": 80,
+      "position": "CB"
+    },
+    {
+      "id": "ea-221491-nico-elvedi--totw",
+      "rating": 80,
+      "position": "CB"
+    },
+    {
+      "id": "ea-242541-ciaron-brown--totw",
+      "rating": 80,
+      "position": "CB"
+    },
+    {
+      "id": "ea-210602-salem-al-dawsari--totw",
+      "rating": 80,
+      "position": "CDM"
+    },
+    {
+      "id": "ea-269186-orri-oskarsson--totw",
+      "rating": 80,
+      "position": "ST"
+    },
+    {
+      "id": "ea-259114-ole-romeny--totw",
+      "rating": 80,
+      "position": "CAM"
+    },
+    {
+      "id": "ea-73865-cavan-sullivan--totw",
+      "rating": 80,
+      "position": "RM"
+    },
+    {
+      "id": "ea-273563-annabel-schasching--totw",
+      "rating": 80,
+      "position": "CM"
+    },
+    {
+      "id": "upamecano--destined",
+      "rating": 89,
+      "position": "CB"
+    },
+    {
+      "id": "diani--destined",
+      "rating": 88,
+      "position": "RM"
+    },
+    {
+      "id": "caicedo-w--destined",
+      "rating": 87,
+      "position": "LW"
+    },
+    {
+      "id": "mbeumo--destined",
+      "rating": 86,
+      "position": "RM"
+    },
+    {
+      "id": "lookman--destined",
+      "rating": 86,
+      "position": "ST"
+    },
+    {
+      "id": "haaland--destined",
+      "rating": 91,
+      "position": "ST"
+    },
+    {
+      "id": "kiwior--destined",
+      "rating": 86,
+      "position": "CB"
+    },
+    {
+      "id": "ea-275029-ibrahim-maza--destined",
+      "rating": 85,
+      "position": "CAM"
+    },
+    {
+      "id": "gordon--destined",
+      "rating": 86,
+      "position": "LW"
+    },
+    {
+      "id": "ea-277846-nico-paz--destined",
+      "rating": 87,
+      "position": "CAM"
+    },
+    {
+      "id": "ea-223697-robin-gosens--destined",
+      "rating": 85,
+      "position": "LB"
+    },
+    {
+      "id": "ea-270857-mateus-fernandes--destined",
+      "rating": 85,
+      "position": "CAM"
+    },
+    {
+      "id": "cucurella--destined",
+      "rating": 88,
+      "position": "LB"
+    },
+    {
+      "id": "mckennie--destined",
+      "rating": 85,
+      "position": "CM"
+    },
+    {
+      "id": "ea-254121-charlie-cresswell--destined",
+      "rating": 85,
+      "position": "CB"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import { CookieNotice } from '@/components/CookieNotice';
 import { GoogleAuthSheet } from '@/components/GoogleAuthSheet';
 import { NoticeHost } from '@/components/NoticeHost';
 import { TermsConsentModal } from '@/components/TermsConsentModal';
+import { FutureStarsAnnouncement } from '@/components/FutureStarsAnnouncement';
 import { colors } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
@@ -171,6 +172,7 @@ function Gate({ children }: { children: React.ReactNode }) {
       {arriving && user ? <Arrival name={user.displayName} onDone={() => setArriving(false)} /> : null}
       <CookieNotice />
       <TermsConsentModal />
+      <FutureStarsAnnouncement />
     </View>
   );
 }

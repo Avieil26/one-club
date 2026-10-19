@@ -8,17 +8,19 @@ import { MarketQuote } from '@/components/MarketQuote';
 import { NationFlag } from '@/components/NationFlag';
 import { PortraitCard } from '@/components/PortraitCard';
 import { destinedCardMeta, destinedEdition } from '@/lib/destinedEditions';
+import { futureStarsFor } from '@/lib/futureStars';
 import { marketQuote, useMarketPrices } from '@/lib/marketPrices';
-import { starPerformerFor, totwFor } from '@/lib/specialCards';
+import { otwFor, starPerformerFor, totwFor } from '@/lib/specialCards';
 import { colors } from '@/components/ui';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
-import { playerCardMeta, statGroups, statTone, totwCardMeta, type MetaAttr } from '@/lib/playerMeta';
+import { futureStarsCardMeta, otwCardMeta, playerCardMeta, statGroups, statTone, totwCardMeta, type MetaAttr } from '@/lib/playerMeta';
 import { boostedStat, chemFaceDelta, CHEM_STYLES, type ChemBoosts } from '@/lib/chemStyles';
 import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import { playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 
@@ -246,8 +248,8 @@ function ago(iso: string, language: 'he' | 'en' = 'he') {
   return language === 'en' ? `${days}d ago` : `לפני ${days} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' {
-  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'star-performer') return player.edition;
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' {
+  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw' || player.edition === 'future-stars' || player.edition === 'star-performer') return player.edition;
   return 'base';
 }
 
@@ -261,7 +263,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const media = playerMedia(personId);
   const baseMeta = playerCardMeta(personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'star-performer'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -332,22 +334,50 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       await voteOnComment(commentId, app.user.id, vote);
       await refresh();
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'ההצבעה נכשלה');
+      Alert.alert(t('רגע', 'Something went wrong'), error instanceof Error ? error.message : t('ההצבעה נכשלה', 'Voting failed.'));
     } finally {
       setBusy(false);
     }
   }
 
   const promo = destinedEdition(personId);
+  const futureStar = futureStarsFor(personId);
   const totw = totwFor(personId);
   const starPerformer = starPerformerFor(personId);
+  const otw = otwFor(personId);
   const viewingPromo = edition === 'destined' && promo != null;
+  const viewingFutureStars = edition === 'future-stars' && (futureStar != null || player.edition === 'future-stars');
   const viewingTotw = edition === 'totw' && (totw != null || player.edition === 'totw');
   const viewingStarPerformer = edition === 'star-performer' && (starPerformer != null || player.edition === 'star-performer');
+  const viewingOtw = edition === 'otw' && (otw != null || player.edition === 'otw');
   const viewingHero = edition === 'hero';
   const card: FcPlayer = viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
-    : viewingTotw
+    : viewingFutureStars
+      ? {
+          ...player,
+          id: `${personId}--future-stars`,
+          baseId: personId,
+          itemId: futureStar?.itemId ?? player.itemId,
+          name: futureStar?.name ?? player.name,
+          en: futureStar?.en ?? player.en,
+          rating: futureStar?.rating ?? player.rating,
+          position: futureStar?.position ?? player.position,
+          nation: futureStar?.nation ?? player.nation,
+          league: futureStar?.league ?? player.league,
+          club: futureStar?.club ?? player.club,
+          face: futureStar?.face ?? player.face,
+          edition: 'future-stars',
+          ...(futureStar?.positions?.length ? { positions: futureStar.positions } : {}),
+          ...(futureStar?.foot ? { foot: futureStar.foot } : {}),
+          ...(futureStar?.skillMoves != null ? { skillMoves: futureStar.skillMoves } : {}),
+          ...(futureStar?.weakFoot != null ? { weakFoot: futureStar.weakFoot } : {}),
+          ...(futureStar?.accelerate ? { accelerate: futureStar.accelerate } : {}),
+          ...(futureStar?.heightCm ? { heightCm: futureStar.heightCm } : {}),
+          ...(futureStar?.weightKg ? { weightKg: futureStar.weightKg } : {}),
+          ...(futureStar?.age ? { age: futureStar.age } : {}),
+        }
+      : viewingTotw
       ? {
           ...player,
           rating: totw?.rating ?? player.rating,
@@ -372,6 +402,8 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             ...(starPerformer?.positions?.length ? { positions: starPerformer.positions } : {}),
             ...(starPerformer?.playstyles ? { playstyles: starPerformer.playstyles } : {}),
           }
+        : viewingOtw
+        ? { ...player, rating: otw?.rating ?? player.rating, position: otw?.position ?? player.position, face: otw?.face ?? player.face, edition: 'otw', ...(otw?.positions?.length ? { positions: otw.positions } : {}), ...(otw?.playstyles?.length ? { playstyles: otw.playstyles } : {}) }
         : viewingHero
           ? { ...player, edition: 'hero' }
           : {
@@ -401,8 +433,8 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       }),
     ) as Partial<Record<MetaAttr, number>>,
   } : null;
-  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : starMeta ?? baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
+  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : viewingFutureStars ? (futureStarsCardMeta(personId) ?? baseMeta) : viewingOtw ? (otwCardMeta(personId) ?? baseMeta) : starMeta ?? baseMeta;
+  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingFutureStars || viewingOtw ? card.face : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -432,17 +464,37 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown: 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingStarPerformer ? 'star-performer' : viewingHero ? 'hero' : 'base';
-  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingStarPerformer ? `${personId}--star-performer` : personId;
+  const shown = viewingStarPerformer ? 'star-performer' : viewingPromo
+    ? 'destined'
+    : viewingFutureStars
+      ? 'future-stars'
+      : viewingTotw
+        ? 'totw'
+        : viewingOtw
+          ? 'otw'
+          : viewingHero
+            ? 'hero'
+            : 'base';
+  const quoteId = viewingStarPerformer ? `${personId}--star-performer` : viewingPromo
+    ? `${personId}--destined`
+    : viewingFutureStars
+      ? `${personId}--future-stars`
+      : viewingTotw
+        ? (totw ? `${personId}--totw` : player.id)
+        : viewingOtw
+          ? `${personId}--otw`
+          : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
   const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
-  const alts: { edition: 'base' | 'destined' | 'totw' | 'star-performer'; label: string }[] = [];
+  const alts: { edition: 'base' | 'destined' | 'totw' | 'otw' | 'future-stars' | 'star-performer'; label: string }[] = [];
   if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: t('קלף רגיל', 'Base card') });
   if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: t('קלף פרומו', 'Promo card') });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
   if ((starPerformer || (player.edition === 'star-performer' && player.baseId)) && shown !== 'star-performer') alts.push({ edition: 'star-performer', label: 'Star Performer' });
+  if (otw && shown !== 'otw') alts.push({ edition: 'otw', label: 'OTW' });
+  if (futureStar && shown !== 'future-stars') alts.push({ edition: 'future-stars', label: 'Future Stars' });
 
   const foot = meta?.foot;
   const iconPage = !!player.icon;
@@ -546,10 +598,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 18, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 10 }}>
               {likes}
-              <PortraitCard player={card} width={210} edition={shown} glow={shown === 'totw' && shine} />
+              <PortraitCard player={card} width={shown === 'totw' ? 250 : 210} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
-                  <PortraitCard player={card} width={78} edition={alt.edition} />
+                  <PortraitCard player={card} width={78} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
@@ -559,7 +611,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 12, alignItems: 'flex-end', direction: 'ltr', overflow: 'hidden' }}>
-              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
+              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{playerDisplayName(card, language)}</Text>
               {quote ? <MarketQuote console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
@@ -587,10 +639,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 10, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 8, flexShrink: 0 }}>
               {likes}
-              <PortraitCard player={card} width={140} edition={shown} glow={shown === 'totw' && shine} />
+              <PortraitCard player={card} width={shown === 'totw' ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
-                  <PortraitCard player={card} width={62} edition={alt.edition} />
+                  <PortraitCard player={card} width={62} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
@@ -600,7 +652,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 8, alignItems: 'stretch', direction: 'rtl' }}>
-              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
+              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{playerDisplayName(card, language)}</Text>
               {quote ? <MarketQuote compact console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} compact />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
@@ -624,6 +676,35 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           </View>
         </View>
       )}
+
+      {viewingOtw && personId === 'ea-264947-nicole-anyomi' ? (
+        <View
+          style={{
+            padding: 16,
+            borderRadius: 16,
+            borderWidth: 1,
+            borderColor: 'rgba(213,107,255,0.45)',
+            backgroundColor: 'rgba(39,18,55,0.72)',
+            gap: 5,
+          }}
+        >
+          <Text style={{ color: '#E8B9FF', fontSize: 11, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' }}>
+            {t('איך משיגים', 'HOW TO UNLOCK')}
+          </Text>
+          <Text style={{ color: '#FFFFFF', fontSize: 16, fontWeight: '900', textAlign: 'right' }}>
+            Nicole Anyomi · Ones to Watch
+          </Text>
+          <Text style={{ color: '#E7DDEF', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
+            {t('זו לא SBC ולא קלף שנקנה במרקט.', 'This card is a season reward, unavailable through SBCs or the transfer market.')}
+          </Text>
+          <Text style={{ color: '#FFD6FF', fontSize: 14, fontWeight: '900', textAlign: 'right' }}>
+            Premium Season 1 · Level 7 · 7,000 SP
+          </Text>
+          <Text style={{ color: '#B8A5C4', fontSize: 11, textAlign: 'right' }}>
+            {t('צריך גישה ל־Premium Pass כדי לקבל את פרס Level 7.', 'A Premium Pass is required to claim the Level 7 reward.')}
+          </Text>
+        </View>
+      ) : null}
 
       {/* POTENTIAL TOGGLE IN ULTIMATE DOSSIER */}
       {meta && (card.rating < 88) ? (

@@ -1,3 +1,4 @@
+import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, Text, TextInput, useWindowDimensions, View } from 'react-native';
 
@@ -23,6 +24,7 @@ const KINDS: { id: CardKind; he: string; en: string }[] = [
   { id: 'hero', he: 'הירו', en: 'Hero' },
   { id: 'totw', he: 'TOTW', en: 'TOTW' },
   { id: 'promo', he: 'OTW', en: 'OTW' },
+  { id: 'future-stars', he: 'Future Stars', en: 'Future Stars' },
 ];
 
 const TEXT = '#F4F7F2';
@@ -57,7 +59,7 @@ export function PlayerFilter({
   const [leagueQuery, setLeagueQuery] = useState('');
   const choices = useMemo(() => filterChoices(PLAYERS), []);
   const clubs = filters.league ? (choices.clubsByLeague.get(filters.league) ?? []) : [];
-  const leagues = choices.leagues.filter((name) => !leagueQuery.trim() || name.toLowerCase().includes(leagueQuery.trim().toLowerCase()));
+  const leagues = choices.leagues.filter((name) => !leagueQuery.trim() || `${name} ${displayLeague(name, language)}`.toLowerCase().includes(leagueQuery.trim().toLowerCase()));
 
   function toggleKind(kind: CardKind) {
     onChange({ ...filters, kind: filters.kind === kind ? 'all' : kind });
@@ -132,6 +134,7 @@ export function PlayerFilter({
             <TypePick label={t('הירו', 'Hero')} kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
             <TypePick label="TOTW" kind="totw" active={filters.kind === 'totw'} onPress={() => toggleKind('totw')} />
             <TypePick label="OTW" kind="otw" active={filters.kind === 'promo'} onPress={() => toggleKind('promo')} />
+            <TypePick label="Future Stars" kind="future-stars" active={filters.kind === 'future-stars'} onPress={() => toggleKind('future-stars')} />
           </ScrollView>
         ) : null}
 
@@ -154,7 +157,7 @@ export function PlayerFilter({
                 }}
               >
                 <NationFlag nation={nation} size={26} />
-                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{nation}</Text>
+                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{displayNation(nation, language)}</Text>
               </Pressable>
             ))}
           </ScrollView>
@@ -175,7 +178,7 @@ export function PlayerFilter({
                 {leagues.map((league) => (
                   <Pressable key={league} accessibilityRole="button" onPress={() => toggleLeague(league)} style={{ minHeight: 40, flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
                     {LEAGUE_LOGO[league] ? <Image source={LEAGUE_LOGO[league]} style={{ width: 18, height: 18 }} resizeMode="contain" /> : null}
-                    <Text style={{ color: filters.league === league ? TEXT : QUIET, fontWeight: '500', textDecorationLine: filters.league === league ? 'underline' : 'none', flexShrink: 1 }}>{league}</Text>
+                    <Text style={{ color: filters.league === league ? TEXT : QUIET, fontWeight: '500', textDecorationLine: filters.league === league ? 'underline' : 'none', flexShrink: 1 }}>{displayLeague(league, language)}</Text>
                   </Pressable>
                 ))}
               </ScrollView>
@@ -187,7 +190,7 @@ export function PlayerFilter({
                 {filters.league ? (
                   clubs.map((club) => (
                     <Pressable key={club} accessibilityRole="button" onPress={() => toggleClub(club)} style={{ minHeight: 40, justifyContent: 'center' }}>
-                      <Text style={{ color: filters.club === club ? TEXT : QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left', textDecorationLine: filters.club === club ? 'underline' : 'none' }}>{club}</Text>
+                      <Text style={{ color: filters.club === club ? TEXT : QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left', textDecorationLine: filters.club === club ? 'underline' : 'none' }}>{displayClub(club, language)}</Text>
                     </Pressable>
                   ))
                 ) : (
@@ -265,7 +268,7 @@ function TypePick({
   onPress,
 }: {
   label: string;
-  kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw';
+  kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'future-stars';
   active: boolean;
   onPress: () => void;
 }) {

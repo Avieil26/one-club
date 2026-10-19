@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { careerFont } from '@/lib/careerCardTheme';
+import { miniGameMessage } from '@/lib/miniGameLocalization';
 import { useLanguage } from '@/lib/language';
 
 export function Hearts({ lives }: { lives: number }) {
@@ -25,11 +26,7 @@ export function Hearts({ lives }: { lives: number }) {
 
 export function RoundNote({ text, good }: { text: string; good?: boolean }) {
   const { language } = useLanguage();
-  const localizedText = language === 'he' ? text : ({
-    'נכון': 'Correct',
-    'השחקן כבר על הלוח': 'That player is already on the grid',
-    'טעית. נגמרו הטעויות': 'Incorrect. No mistakes left',
-  } as Record<string, string>)[text] ?? text;
+  const localizedText = miniGameMessage(text, language);
   return (
     <View style={[styles.note, good ? styles.noteGood : styles.noteBad]}>
       <View style={[styles.noteStripe, good ? styles.noteStripeGood : null]} />

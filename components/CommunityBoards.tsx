@@ -1,11 +1,13 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import type { ReactNode } from 'react';
-import { Image, Platform, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
+import { Image, Platform, Pressable, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgGradient, Path, Polygon, Stop } from 'react-native-svg';
 
 import { ProfileFace } from '@/components/ProfileFace';
 import { careerFont } from '@/lib/careerCardTheme';
 import type { BoardRow, CommunityBoards as BoardData } from '@/lib/communityBoard';
+import { useLanguage } from '@/lib/language';
 
 const INK = '#241c14';
 
@@ -75,16 +77,22 @@ function Rank({ place }: { place: number }) {
 }
 
 function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
+  const router = useRouter();
   const value = row.value.toLocaleString('en-US');
   return (
-    <View
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={t(`פתיחת הפרופיל של ${row.name}`, `View ${row.name}’s profile`)}
+      onPress={() => router.push(`/player/${row.userId}`)}
       style={{
         minHeight: 58,
         paddingHorizontal: 6,
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255,255,255,0.07)',
         flexDirection: 'row',
-        direction: 'rtl',
+        direction: rtl ? 'rtl' : 'ltr',
         alignItems: 'center',
         gap: 8,
         backgroundColor: row.you ? 'rgba(227,179,65,0.08)' : 'transparent',
@@ -96,24 +104,24 @@ function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark
       <View style={{ width: 46, alignItems: 'center' }}>
         <Text style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 14, fontWeight: '700' }}>–</Text>
       </View>
-      <View style={{ flex: 1, minWidth: 0, flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 10 }}>
+      <View style={{ flex: 1, minWidth: 0, flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}>
         <ProfileFace name={row.name} uri={row.avatarUrl} size={38} />
         <View style={{ flex: 1, minWidth: 0 }}>
-          <Text numberOfLines={1} style={{ color: '#f3f5f7', fontFamily: careerFont, fontSize: 15, fontWeight: '800', textAlign: 'right', writingDirection: 'rtl' }}>
+          <Text numberOfLines={1} style={{ color: '#f3f5f7', fontFamily: careerFont, fontSize: 15, fontWeight: '800', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
             {row.name}
           </Text>
-          <Text numberOfLines={1} style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 11, fontWeight: '600', textAlign: 'right', writingDirection: 'rtl' }}>
-            {row.joined}
+          <Text numberOfLines={1} style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 11, fontWeight: '600', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
+            {joinedLabel(row.joined, language)}
           </Text>
         </View>
       </View>
       <LevelShield level={row.level} id={`${row.userId}-${place}`} />
-      <View style={{ width: 84, flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'flex-end', gap: 4 }}>
+      <View style={{ width: 84, flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', justifyContent: 'flex-end', gap: 4 }}>
         {mark === 'check' ? <CheckMark size={14} /> : null}
         {mark === 'heart' ? <HeartMark size={14} /> : null}
         <Text style={{ color: '#f3f5f7', fontFamily: careerFont, fontSize: 16, fontWeight: '800', writingDirection: 'ltr' }}>{value}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -132,28 +140,39 @@ function Column({
   rows: BoardRow[];
   mark?: 'check' | 'heart';
 }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   return (
     <View style={{ flex: 1, minWidth: 0 }}>
-      <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
         {icon}
         <Text style={{ color, fontFamily: careerFont, fontSize: 26, fontWeight: '800', textAlign: 'center' }}>{title}</Text>
       </View>
-      <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8, paddingHorizontal: 6, paddingBottom: 8 }}>
-        <Text style={[head, { width: 46 }]}>דירוג</Text>
-        <Text style={[head, { width: 46 }]}>מגמה</Text>
-        <Text style={[head, { flex: 1, width: undefined, textAlign: 'right' }]}>משתמש</Text>
-        <Text style={[head, { width: 34 }]}>רמה</Text>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8, paddingHorizontal: 6, paddingBottom: 8 }}>
+        <Text style={[head, { width: 46 }]}>{t('דירוג', 'Rank')}</Text>
+        <Text style={[head, { width: 46 }]}>{t('מגמה', 'Trend')}</Text>
+        <Text style={[head, { flex: 1, width: undefined, textAlign: rtl ? 'right' : 'left' }]}>{t('משתמש', 'User')}</Text>
+        <Text style={[head, { width: 34 }]}>{t('רמה', 'Level')}</Text>
         <Text style={[head, { width: 84, textAlign: 'left' }]}>{valueLabel}</Text>
       </View>
       {rows.length ? (
         rows.map((row, index) => <BoardRowView key={row.userId} row={row} place={index + 1} mark={mark} />)
       ) : (
-        <Text style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 13, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl', paddingVertical: 16 }}>
-          עוד אין כאן אף אחד
+        <Text style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 13, fontWeight: '700', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', paddingVertical: 16 }}>
+          {t('עוד אין כאן אף אחד', 'No one here yet')}
         </Text>
       )}
     </View>
   );
+}
+
+function joinedLabel(value: string, language: 'he' | 'en') {
+  if (language === 'he') return value;
+  if (value === 'בקהילה') return 'Community member';
+  if (value === 'בקהילה החודש') return 'Joined this month';
+  const month = value.match(/^בקהילה מ(.+)$/)?.[1];
+  const months: Record<string, string> = { ינואר: 'January', פברואר: 'February', מרץ: 'March', אפריל: 'April', מאי: 'May', יוני: 'June', יולי: 'July', אוגוסט: 'August', ספטמבר: 'September', אוקטובר: 'October', נובמבר: 'November', דצמבר: 'December' };
+  return month ? `Member since ${months[month] ?? month}` : value;
 }
 
 const head = {
@@ -165,6 +184,8 @@ const head = {
 };
 
 export function CommunityBoards({ boards }: { boards: BoardData }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { width } = useWindowDimensions();
   const sideBySide = width >= 980;
   return (
@@ -184,10 +205,10 @@ export function CommunityBoards({ boards }: { boards: BoardData }) {
           style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
         />
       </View>
-      <View style={{ flexDirection: sideBySide ? 'row' : 'column', direction: 'rtl', gap: sideBySide ? 28 : 36, alignItems: 'stretch' }}>
-        <Column title="הכי הרבה XP" color="#f7f8fa" icon={<HexMark />} valueLabel="XP" rows={boards.xp} />
-        <Column title="פותרים" color="#5ee6a0" icon={<CheckMark />} valueLabel="פתרונות" rows={boards.solvers} mark="check" />
-        <Column title="מפרגנים" color="#ff5d73" icon={<HeartMark />} valueLabel="אישורים" rows={boards.supporters} mark="heart" />
+      <View style={{ flexDirection: sideBySide ? 'row' : 'column', direction: rtl ? 'rtl' : 'ltr', gap: sideBySide ? 28 : 36, alignItems: 'stretch' }}>
+        <Column title={t("הכי הרבה XP", "Top XP")} color="#f7f8fa" icon={<HexMark />} valueLabel="XP" rows={boards.xp} />
+        <Column title={t("פותרים", "Top solvers")} color="#5ee6a0" icon={<CheckMark />} valueLabel={t("פתרונות", "Solutions")} rows={boards.solvers} mark="check" />
+        <Column title={t("מפרגנים", "Most helpful")} color="#ff5d73" icon={<HeartMark />} valueLabel={t("אישורים", "Approvals")} rows={boards.supporters} mark="heart" />
       </View>
     </View>
   );

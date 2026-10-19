@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { Pressable, Text } from 'react-native';
 
 import { colors } from '@/components/ui';
@@ -13,10 +14,11 @@ export function SquadLike({
   disabled?: boolean;
   onPress: () => void;
 }) {
+  const { t } = useLanguage();
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={liked ? 'הסרת לייק' : 'לייק לקבוצה'}
+      accessibilityLabel={liked ? t("הסרת לייק", "Unlike") : t("לייק לקבוצה", "Like squad")}
       disabled={disabled}
       onPress={onPress}
       style={{
@@ -35,7 +37,7 @@ export function SquadLike({
       }}
     >
       <Text style={{ color: liked ? '#F3B4C3' : colors.text, fontSize: 18 }}>{liked ? '♥' : '♡'}</Text>
-      <Text style={{ color: colors.text, fontSize: 16, fontWeight: '600' }}>{count > 0 ? count : 'לייק'}</Text>
+      <Text style={{ color: colors.text, fontSize: 16, fontWeight: '600' }}>{count > 0 ? count : t("לייק", "Like")}</Text>
     </Pressable>
   );
 }

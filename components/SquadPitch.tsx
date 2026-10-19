@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -98,6 +99,7 @@ export function SquadPitch({
   onSlot?: (slotId: string) => void;
   showChemHud?: boolean;
 }) {
+  const { t } = useLanguage();
   const [width, setWidth] = useState(0);
   const [opened, setOpened] = useState<FcPlayer | null>(null);
   const height = 720;
@@ -221,7 +223,7 @@ export function SquadPitch({
               gap: 6,
             }}
           >
-            <Text style={{ color: 'rgba(200, 240, 220, 0.8)', fontSize: 11, fontWeight: '700' }}>כימיה</Text>
+            <Text style={{ color: 'rgba(200, 240, 220, 0.8)', fontSize: 11, fontWeight: '700' }}>{t("כימיה", "Chemistry")}</Text>
             <Text style={{ color: '#3DDC97', fontSize: 14, fontWeight: '900' }}>
               {teamChem}
               <Text style={{ color: 'rgba(200, 240, 220, 0.5)', fontSize: 11, fontWeight: '700' }}>/33</Text>

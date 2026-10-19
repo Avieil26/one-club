@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 import { Stack, useLocalSearchParams } from 'expo-router';
@@ -14,6 +15,7 @@ import { averageRating } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
 export default function FutDetailScreen() {
+  const { t, language } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const post = app.futPosts.find((item) => item.id === id);
@@ -25,7 +27,7 @@ export default function FutDetailScreen() {
   if (!post) {
     return (
       <Screen scene="ultimate">
-        <Title>הפוסט לא נמצא</Title>
+        <Title>{t("הפוסט לא נמצא", "Post not found")}</Title>
       </Screen>
     );
   }
@@ -40,7 +42,7 @@ export default function FutDetailScreen() {
     try {
       await app.rateFut(postId, fit, fun, creativity);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
@@ -48,22 +50,22 @@ export default function FutDetailScreen() {
     try {
       await app.toggleFutLike(postId);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
   return (
     <Screen scene="ultimate">
-      <Stack.Screen options={{ title: post.kind === 'squad' ? 'קבוצה' : 'חבילה' }} />
+      <Stack.Screen options={{ title: post.kind === 'squad' ? t("קבוצה", "Squad") : t("חבילה", "Pack") }} />
       <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 12 }}>
         <PlatformMark id={post.platform} size={52} />
         <View style={{ flex: 1, gap: 4 }}>
           <Title>{displayName(app.profiles, post.userId)}</Title>
           <Muted>
-            {platformLabel(post.platform)}
+            {platformLabel(post.platform, language)}
             {post.kind === 'squad' && post.formation ? ` · ${post.formation}` : ''}
             {post.playerName ? ` · ${post.playerName}` : ''}
-            {post.packRarity ? ` · ${rarityLabel(post.packRarity)}` : ''}
+            {post.packRarity ? ` · ${rarityLabel(post.packRarity, language)}` : ''}
           </Muted>
         </View>
       </View>
@@ -77,19 +79,18 @@ export default function FutDetailScreen() {
         <View style={{ gap: 12 }}>
           <SquadLike count={likes.length} liked={liked} disabled={app.busy} onPress={like} />
           {summary.count ? (
-            <Muted>
-              דירוג {formatScore(summary.overall)} · התאמה {formatScore(summary.fit)} · כיף {formatScore(summary.fun)} · יצירתיות{' '}
+            <Muted>{t("דירוג", "Rating")}{formatScore(summary.overall)}{t("· התאמה", "· Fit")}{formatScore(summary.fit)}{t("· כיף", "· Fun")}{formatScore(summary.fun)}{t("· יצירתיות", "· Creativity")}{' '}
               {formatScore(summary.creativity)}
             </Muted>
           ) : null}
           {own ? (
-            <Muted>אפשר לדרג קבוצות של אחרים.</Muted>
+            <Muted>{t("אפשר לדרג קבוצות של אחרים.", "You can rate other players’ squads.")}</Muted>
           ) : (
             <View style={{ gap: 14 }}>
-              <ScorePicker label="התאמה" value={fit} onChange={setFit} />
-              <ScorePicker label="כיף" value={fun} onChange={setFun} />
-              <ScorePicker label="יצירתיות" value={creativity} onChange={setCreativity} />
-              <Button label="שמירת דירוג" onPress={rate} disabled={app.busy || fit < 1 || fun < 1 || creativity < 1} />
+              <ScorePicker label={t("התאמה", "Fit")} value={fit} onChange={setFit} />
+              <ScorePicker label={t("כיף", "Fun")} value={fun} onChange={setFun} />
+              <ScorePicker label={t("יצירתיות", "Creativity")} value={creativity} onChange={setCreativity} />
+              <Button label={t("שמירת דירוג", "Save rating")} onPress={rate} disabled={app.busy || fit < 1 || fun < 1 || creativity < 1} />
             </View>
           )}
         </View>

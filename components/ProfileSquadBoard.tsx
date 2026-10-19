@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { ScrollView, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -8,6 +9,7 @@ import { formationById, placedFromSquad, playerById } from '@/lib/profileSquad';
 import type { ProfileSquad } from '@/lib/types';
 
 export function ProfileSquadBoard({ squad }: { squad: ProfileSquad }) {
+  const { t } = useLanguage();
   const formation = formationById(squad.formation);
   const bench = squad.bench.map((id) => playerById(id)).filter((player) => player != null);
 
@@ -26,12 +28,12 @@ export function ProfileSquadBoard({ squad }: { squad: ProfileSquad }) {
           alignSelf: 'flex-end',
         }}
       >
-        <Text style={{ color: colors.gold, fontWeight: '800', textAlign: 'right' }}>הסגל · {formation.label}</Text>
+        <Text style={{ color: colors.gold, fontWeight: '800', textAlign: 'right' }}>{t("הסגל · ", "Squad · ")}{formation.label}</Text>
       </LinearGradient>
       <SquadPitch formation={formation} placed={placedFromSquad(squad)} playerChem={{}} />
       {bench.length ? (
         <View style={{ gap: 8 }}>
-          <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>מחליפים</Text>
+          <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>{t("מחליפים", "Substitutes")}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, flexDirection: 'row' }}>
             {bench.map((player) => (
               <PortraitCard key={player.id} player={player} width={78} variant="pitch" />

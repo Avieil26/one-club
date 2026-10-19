@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { displayLeague } from '@/lib/footballLocalization';
+import { draftManagerName } from '@/lib/miniGameLocalization';
 import { useLanguage } from '@/lib/language';
 import { Animated, Easing, Image, PanResponder, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -488,8 +490,8 @@ export default function DraftScreen() {
                 <LinearGradient colors={['#4A3514', '#16110A', '#2A1C0C']} style={styles.managerFill}>
                   <View style={styles.managerShine} />
                   <Image source={{ uri: item.photo }} resizeMode="cover" style={{ width: wide ? 168 : 148, height: wide ? 168 : 136 }} />
-                  <Text style={styles.managerName}>{item.name}</Text>
-                  <Text style={styles.managerMeta}>{item.league}</Text>
+                  <Text style={[styles.managerName, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{draftManagerName(item, language)}</Text>
+                  <Text style={[styles.managerMeta, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{displayLeague(item.league, language)}</Text>
                   <Text style={styles.managerChem}>{t('כימיה', 'Chemistry')} {chemistryFor(item)}</Text>
                 </LinearGradient>
               </Pressable>

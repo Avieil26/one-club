@@ -1,4 +1,5 @@
-﻿import { useState } from 'react';
+﻿import { useLanguage } from '@/lib/language';
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
@@ -8,6 +9,7 @@ import { useApp } from '@/lib/store';
 import type { SbcKind } from '@/lib/types';
 
 export default function NewSbcScreen() {
+  const { t } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const [title, setTitle] = useState('');
@@ -19,7 +21,7 @@ export default function NewSbcScreen() {
   if (!app.user?.isAdmin) {
     return (
       <Screen scene="sbc">
-        <Title>רק מנהל יכול ליצור SBC</Title>
+        <Title>{t("רק מנהל יכול ליצור SBC", "Only an administrator can create an SBC")}</Title>
       </Screen>
     );
   }
@@ -29,29 +31,29 @@ export default function NewSbcScreen() {
       await app.createSbc({ title, kind, requirements, endsAt, targetScore });
       router.back();
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: 'SBC חדש' }} />
-      <Title>אתגר SBC</Title>
-      <Field label="שם" value={title} onChangeText={setTitle} />
+      <Stack.Screen options={{ title: t("SBC חדש", "New SBC") }} />
+      <Title>{t("אתגר SBC", "SBC challenge")}</Title>
+      <Field label={t("שם", "Name")} value={title} onChangeText={setTitle} />
       <ChoiceGroup
         options={[
           { id: 'streamlined', label: 'Streamlined' },
-          { id: 'classic', label: 'קלאסי' },
+          { id: 'classic', label: t("קלאסי", "Classic") },
         ]}
         value={kind}
         onChange={setKind}
       />
-      <Field label="דרישות" value={requirements} onChangeText={setRequirements} multiline />
+      <Field label={t("דרישות", "Requirements")} value={requirements} onChangeText={setRequirements} multiline />
       {kind === 'streamlined' ? (
-        <Field label="יעד ניקוד" value={targetScore} onChangeText={setTargetScore} keyboardType="number-pad" />
+        <Field label={t("יעד ניקוד", "Target score")} value={targetScore} onChangeText={setTargetScore} keyboardType="number-pad" />
       ) : null}
-      <Field label="תאריך סיום" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
-      <Button label="פרסום" onPress={save} disabled={app.busy} />
+      <Field label={t("תאריך סיום", "End date")} value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
+      <Button label={t("פרסום", "Publish")} onPress={save} disabled={app.busy} />
     </Screen>
   );
 }

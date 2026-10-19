@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
@@ -40,12 +41,14 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: boolean; console?: number; pc?: number }) {
+  const { t } = useLanguage();
   useMarketPrices();
   const [mode, setMode] = useState<'console' | 'pc'>('console');
   const [open, setOpen] = useState(false);
   const amount = mode === 'console' ? consolePrice : pc;
+  const hasAmount = typeof amount === 'number';
 
-  const digits = amount ? String(amount).length : 0;
+  const digits = hasAmount ? String(amount).length : 0;
   const calcPriceSize = compact
     ? digits >= 7
       ? 16
@@ -82,7 +85,7 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
       <View style={{ alignItems: 'flex-start', zIndex: 2 }}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={mode === 'console' ? 'קונסולות' : 'מחשב'}
+          accessibilityLabel={mode === 'console' ? t("קונסולות", "Consoles") : t("מחשב", "PC")}
           onPress={() => setOpen((value) => !value)}
           style={{
             flexDirection: 'row',
@@ -135,16 +138,16 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
           minimumFontScale={0.65}
           style={{
             flexShrink: 1,
-            color: amount ? '#F7F7F7' : '#8E96A3',
-            fontSize: amount ? calcPriceSize : 14,
+            color: hasAmount ? '#F7F7F7' : '#8E96A3',
+            fontSize: hasAmount ? calcPriceSize : 14,
             fontWeight: '900',
             letterSpacing: 0.2,
-            writingDirection: amount ? 'ltr' : 'rtl',
+            writingDirection: hasAmount ? 'ltr' : 'rtl',
           }}
         >
-          {amount ? coins(amount) : 'אין מחיר'}
+          {hasAmount ? coins(amount as number) : t("אין מחיר", "No price available")}
         </Text>
-        {amount ? <Coin size={compact ? 18 : 24} /> : null}
+        {hasAmount ? <Coin size={compact ? 18 : 24} /> : null}
       </View>
     </View>
   );

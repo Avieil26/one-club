@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useMemo, useRef, useState } from 'react';
 import {
   Alert,
@@ -31,14 +32,14 @@ function clock(iso: string) {
   return `${hh}:${mm}`;
 }
 
-function dayLabel(iso: string) {
+function dayLabel(iso: string, language: 'he' | 'en') {
   const date = new Date(iso);
   const today = new Date();
-  if (date.toDateString() === today.toDateString()) return 'היום';
+  if (date.toDateString() === today.toDateString()) return language === 'he' ? 'היום' : 'Today';
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
-  if (date.toDateString() === yesterday.toDateString()) return 'אתמול';
-  return date.toLocaleDateString('he-IL', { day: 'numeric', month: 'short' });
+  if (date.toDateString() === yesterday.toDateString()) return language === 'he' ? 'אתמול' : 'Yesterday';
+  return date.toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB', { day: 'numeric', month: 'short' });
 }
 
 function ChatWallpaper() {
@@ -69,6 +70,7 @@ function ChatWallpaper() {
 }
 
 export default function GroundsChatScreen() {
+  const { t, language } = useLanguage();
   const { userId } = useLocalSearchParams<{ userId: string }>();
   const app = useApp();
   const router = useRouter();
@@ -77,17 +79,17 @@ export default function GroundsChatScreen() {
   const [body, setBody] = useState('');
   const peerId = String(userId || '');
   const preview = peerId === 'preview';
-  const peerName = preview ? 'נועם' : displayName(app.profiles, peerId);
+  const peerName = preview ? (language === 'he' ? 'נועם' : 'Noam') : displayName(app.profiles, peerId);
   const peer = app.profiles.find((profile) => profile.id === peerId);
 
   const thread = useMemo(() => {
     if (preview) {
       const day = new Date().toISOString();
       return [
-        { id: 'p1', fromUserId: 'preview-peer', toUserId: 'me', body: 'יש לך חלון הערב לפרנדלי?', createdAt: day },
-        { id: 'p2', fromUserId: 'me', toUserId: 'preview-peer', body: 'כן, אחרי תשע. פלייסטיישן.', createdAt: day },
-        { id: 'p3', fromUserId: 'preview-peer', toUserId: 'me', body: 'סבבה. אני על 4-3-3, רמה 18.', createdAt: day },
-        { id: 'p4', fromUserId: 'me', toUserId: 'preview-peer', body: 'יאללה, תשלח הזמנה.', createdAt: day },
+        { id: 'p1', fromUserId: 'preview-peer', toUserId: 'me', body: t("יש לך חלון הערב לפרנדלי?", "Are you free for a friendly tonight?"), createdAt: day },
+        { id: 'p2', fromUserId: 'me', toUserId: 'preview-peer', body: t("כן, אחרי תשע. פלייסטיישן.", "Yes, after nine. PlayStation."), createdAt: day },
+        { id: 'p3', fromUserId: 'preview-peer', toUserId: 'me', body: t("סבבה. אני על 4-3-3, רמה 18.", "Great. I play 4-3-3, level 18."), createdAt: day },
+        { id: 'p4', fromUserId: 'me', toUserId: 'preview-peer', body: t("יאללה, תשלח הזמנה.", "Send me an invitation."), createdAt: day },
       ] satisfies DirectMessage[];
     }
     if (!app.user) return [];
@@ -99,13 +101,13 @@ export default function GroundsChatScreen() {
       )
       .slice()
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-  }, [app.messages, app.user, peerId, preview]);
+  }, [app.messages, app.user, peerId, preview, t]);
 
   const rows = useMemo(() => {
     const next: Row[] = [];
     let lastDay = '';
     for (const message of thread) {
-      const label = dayLabel(message.createdAt);
+      const label = dayLabel(message.createdAt, language);
       if (label !== lastDay) {
         lastDay = label;
         next.push({ kind: 'day', id: `day-${message.id}`, label });
@@ -113,12 +115,12 @@ export default function GroundsChatScreen() {
       next.push({ kind: 'msg', id: message.id, message });
     }
     return next;
-  }, [thread]);
+  }, [thread, language]);
 
   async function send() {
     if (preview) return;
     if (!app.user) {
-      Alert.alert('רגע', 'צריך להתחבר');
+      Alert.alert(t("רגע", "Something went wrong"), t("צריך להתחבר", "Sign in required"));
       return;
     }
     const text = body.trim();
@@ -127,14 +129,14 @@ export default function GroundsChatScreen() {
       await app.sendMessage(peerId, text);
       setBody('');
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
   if (!peerId) {
     return (
       <View style={{ flex: 1, backgroundColor: '#10161C', padding: 24 }}>
-        <Text style={{ color: colors.muted, textAlign: 'right' }}>שחקן לא נמצא</Text>
+        <Text style={{ color: colors.muted, textAlign: 'right' }}>{t("שחקן לא נמצא", "Player not found")}</Text>
       </View>
     );
   }
@@ -157,12 +159,12 @@ export default function GroundsChatScreen() {
         }}
       >
         <Pressable onPress={() => router.back()} hitSlop={10}>
-          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 16 }}>חזרה</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 16 }}>{t("חזרה", "Back")}</Text>
         </Pressable>
         <Pressable onPress={() => { if (!preview) router.push(`/player/${peerId}`); }} style={{ flex: 1 }}>
           <Text style={{ color: colors.text, fontWeight: '800', fontSize: 18, textAlign: 'right' }}>{peerName}</Text>
           <Text style={{ color: colors.muted, fontSize: 12, textAlign: 'right' }}>
-            {preview ? 'תצוגה לדוגמה' : peer?.squad ? 'יש סגל בפרופיל' : 'לפרופיל'}
+            {preview ? t("תצוגה לדוגמה", "Demo preview") : peer?.squad ? t("יש סגל בפרופיל", "Squad on profile") : t("לפרופיל", "View profile")}
           </Text>
         </Pressable>
         <LinearGradient
@@ -192,8 +194,8 @@ export default function GroundsChatScreen() {
                 colors={['rgba(227,179,65,0.16)', 'rgba(20,28,26,0.8)']}
                 style={{ borderRadius: 18, paddingHorizontal: 16, paddingVertical: 12, borderWidth: 1, borderColor: 'rgba(227,179,65,0.28)' }}
               >
-                <Text style={{ color: colors.text, textAlign: 'center', fontWeight: '700' }}>אין הודעות עדיין</Text>
-                <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 4 }}>שלחו את הראשונה למטה</Text>
+                <Text style={{ color: colors.text, textAlign: 'center', fontWeight: '700' }}>{t("אין הודעות עדיין", "No messages yet")}</Text>
+                <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 4 }}>{t("שלחו את הראשונה למטה", "Send the first message below")}</Text>
               </LinearGradient>
             </View>
           }
@@ -258,7 +260,7 @@ export default function GroundsChatScreen() {
           <TextInput
             value={body}
             onChangeText={setBody}
-            placeholder="הודעה"
+            placeholder={t("הודעה", "Message")}
             placeholderTextColor="rgba(197,213,200,0.55)"
             multiline
             textAlign="right"

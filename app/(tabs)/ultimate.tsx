@@ -31,7 +31,7 @@ export default function UltimateScreen() {
     try {
       await app.toggleFutLike(postId);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
@@ -72,10 +72,10 @@ export default function UltimateScreen() {
                       {displayName(app.profiles, post.userId)}
                     </Text>
                     <Muted>
-                      {platformLabel(post.platform)}
+                      {platformLabel(post.platform, language)}
                       {post.formation ? ` · ${post.formation}` : ''}
                       {post.playerName ? ` · ${post.playerName}` : ''}
-                      {post.packRarity ? ` · ${rarityLabel(post.packRarity)}` : ''}
+                      {post.packRarity ? ` · ${rarityLabel(post.packRarity, language)}` : ''}
                     </Muted>
                   </View>
                 </View>

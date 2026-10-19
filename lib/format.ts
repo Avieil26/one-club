@@ -1,10 +1,22 @@
-export function formatDate(iso: string | null): string {
-  if (!iso) return 'בלי הגבלת זמן';
-  return new Date(iso).toLocaleDateString('he-IL');
+import { errorText } from '@/lib/errorLocalization';
+
+export function formatDate(iso: string | null, language: 'he' | 'en' = 'he'): string {
+  if (!iso) return language === 'en' ? 'No time limit' : 'בלי הגבלת זמן';
+  return new Date(iso).toLocaleDateString(language === 'en' ? 'en-GB' : 'he-IL');
 }
 
 /** Live-friendly remaining time for SBC / challenge expiry. */
-export function formatRemaining(iso: string | null, at = Date.now()): string {
+export function formatRemaining(iso: string | null, at = Date.now(), language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') {
+    if (!iso || Number.isNaN(new Date(iso).getTime())) return 'No time limit';
+    const minutes = Math.floor((new Date(iso).getTime() - at) / 60_000);
+    if (minutes < 0 || new Date(iso).getTime() <= at) return 'Expired';
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    if (days) return `${days}d ${hours % 24}h`;
+    if (hours) return `${hours}h ${minutes % 60}m`;
+    return minutes ? `${minutes}m` : 'Less than a minute';
+  }
   if (!iso) return 'בלי הגבלת זמן';
   const end = new Date(iso).getTime();
   if (Number.isNaN(end)) return 'בלי הגבלת זמן';
@@ -44,6 +56,6 @@ export function nowIso(): string {
   return new Date().toISOString();
 }
 
-export function errorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : 'משהו השתבש. נסו שוב.';
+export function errorMessage(error: unknown, language: 'he' | 'en' = 'he'): string {
+  return errorText(error instanceof Error ? error.message : 'משהו השתבש. נסו שוב.', language);
 }

@@ -247,6 +247,14 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-potm-pina': { en: 'Claudia Pina', category: 'LIGA F POTM', edge: '#C9A227', rank: 0 },
+  'sbc-upgrade-80x5': { en: '5×80+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-upgrade-79x3': { en: '3×79+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-madrid-dreams': { en: 'Yan Diomande', category: 'MADRID DREAMS', edge: '#C9A227', rank: 1 },
+  'sbc-mm-celtic': { en: 'Celtic vs Rangers', category: 'MARQUEE MATCHUPS', edge: '#14B8A6', rank: 0 },
+  'sbc-mm-porto': { en: 'Porto vs Benfica', category: 'MARQUEE MATCHUPS', edge: '#C9A227', rank: 0 },
+  'sbc-mm-psg': { en: 'PSG vs Marseille', category: 'MARQUEE MATCHUPS', edge: '#CF081F', rank: 0 },
+  'sbc-mm-madrid': { en: 'Real Madrid vs Atlético', category: 'MARQUEE MATCHUPS', edge: '#C9A227', rank: 0 },
   'sbc-potm-olise': { en: 'Michael Olise', category: 'BUNDESLIGA POTM', edge: '#C9A227', rank: 0 },
   'sbc-dfg-tarciane': { en: 'Tarciane', category: 'DESTINED FOR GLORY', edge: '#14B8A6', rank: 1 },
   'sbc-dfg-akliouche': { en: 'Maghnes Akliouche', category: 'DESTINED FOR GLORY', edge: '#C9A227', rank: 2 },

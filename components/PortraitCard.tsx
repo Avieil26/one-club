@@ -3,13 +3,14 @@ import { Image, Platform, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { ClubBadge } from '@/components/ClubBadge';
+import { futureStarsFor } from '@/lib/futureStars';
 import { CardMetalSheen, heroChrome, iconChrome, tierChrome, totwChrome, type TierTone } from '@/components/cardChrome';
 import { NationFlag } from '@/components/NationFlag';
 import { ShieldPortrait } from '@/components/ShieldPortrait';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia, type FaceStats } from '@/lib/playerMedia';
 import { HERO_ART } from '@/lib/heroArt';
-import { totwFor } from '@/lib/specialCards';
+import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
 
 export const PORTRAIT_RATIO = 1.6;
@@ -32,6 +33,45 @@ const DESTINED_ART: Record<string, number> = {
   'ea-246688-saud-abdulhamid': require('@/assets/images/cards/abdulhamid-destined.png'),
   'ea-241736-yann-aurel-bisseck': require('@/assets/images/cards/bisseck-destined.png'),
 };
+const DESTINED_REMOTE_ART: Record<string, string> = {
+  'upamecano': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50561206.webp',
+  'diani': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50559009.webp',
+  'caicedo-w': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50604801.webp',
+  'mbeumo': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50574662.webp',
+  'lookman': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50562547.webp',
+  'haaland': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570733.webp',
+  'kiwior': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50597341.webp',
+  'ea-275029-ibrahim-maza': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50606677.webp',
+  'gordon': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50574612.webp',
+  'ea-277846-nico-paz': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50609494.webp',
+  'ea-223697-robin-gosens': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50555345.webp',
+  'ea-270857-mateus-fernandes': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50602505.webp',
+  'cucurella': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570879.webp',
+  'mckennie': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50570392.webp',
+  'ea-254121-charlie-cresswell': 'https://game-assets.fut.gg/2026/player-item-social-small/27-50585769.webp',
+};
+const DESTINED_REMOTE_FALLBACK: Record<string, string> = {
+  'upamecano': 'https://assets.fodder.gg/renders/50561206.webp',
+  'diani': 'https://assets.fodder.gg/renders/50559009.webp',
+  'caicedo-w': 'https://assets.fodder.gg/renders/50604801.webp',
+  'mbeumo': 'https://assets.fodder.gg/renders/50574662.webp',
+  'lookman': 'https://assets.fodder.gg/renders/50562547.webp',
+  'haaland': 'https://assets.fodder.gg/renders/50570733.webp',
+  'kiwior': 'https://assets.fodder.gg/renders/50597341.webp',
+  'ea-275029-ibrahim-maza': 'https://assets.fodder.gg/renders/50606677.webp',
+  'gordon': 'https://assets.fodder.gg/renders/50574612.webp',
+  'ea-277846-nico-paz': 'https://assets.fodder.gg/renders/50609494.webp',
+  'ea-223697-robin-gosens': 'https://assets.fodder.gg/renders/50555345.webp',
+  'ea-270857-mateus-fernandes': 'https://assets.fodder.gg/renders/50602505.webp',
+  'cucurella': 'https://assets.fodder.gg/renders/50570879.webp',
+  'mckennie': 'https://assets.fodder.gg/renders/50570392.webp',
+  'ea-254121-charlie-cresswell': 'https://assets.fodder.gg/renders/50585769.webp',
+};
+
+const OTW_REMOTE_ART: Record<string, string> = {
+  'ea-264947-nicole-anyomi': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50596595.acf6c24bd5d6e98a42d8e80d4757d6a74bf7ce8d8ff9dce9c0e0cb2bd39ca702.webp',
+};
+
 const DESTINED_RATIO = 1152 / 864;
 const TOTW_RATIO = 1152 / 864;
 
@@ -116,14 +156,117 @@ function webRimStyle() {
   return { filter: `url("${base}#totw-rim")` } as object;
 }
 
-function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number; width: number; glow?: boolean; sign?: string }) {
-  const height = Math.round(width * TOTW_RATIO);
+function DynamicTotwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
+  const baseHeight = Math.round(width * TOTW_RATIO);
+  const shellWidth = Math.round(width * 1.38);
+  const shellHeight = Math.round(baseHeight * 1.38);
+  const contentWidth = width;
+  const contentHeight = baseHeight;
+  const overlayOffsetX = Math.round((shellWidth - contentWidth) / 2);
+  const overlayOffsetY = Math.round((shellHeight - contentHeight) / 2);
+  const id = player.baseId ?? player.id;
+  const media = playerMedia(id);
+  const face = player.face ?? media.face;
+  const stats = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const name = surname(media.en || player.name || id);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <View
+      style={{
+        width: shellWidth,
+        height: shellHeight,
+        alignSelf: 'center',
+        overflow: 'hidden',
+        borderRadius: shellWidth * 0.08,
+        backgroundColor: 'transparent',
+      }}
+    >
+      <Image
+        source={require('@/assets/images/cards/totw-shell.png')}
+        resizeMode="stretch"
+        style={{ position: 'absolute', top: 0, left: 0, width: shellWidth, height: shellHeight }}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          left: overlayOffsetX,
+          top: overlayOffsetY,
+          width: contentWidth,
+          height: contentHeight,
+        }}
+      >
+        {!failed && media.photo ? (
+          <Image
+            source={{ uri: media.photo }}
+            resizeMode="contain"
+            onError={() => setFailed(true)}
+            accessibilityIgnoresInvertColors
+            style={{
+              position: 'absolute',
+              left: contentWidth * 0.15,
+              top: contentHeight * 0.075,
+              width: contentWidth * 0.70,
+              height: contentHeight * 0.47,
+            }}
+          />
+        ) : null}
+        <View style={{ position: 'absolute', top: contentHeight * 0.12, left: contentWidth * 0.11, zIndex: 4 }}>
+          <Text style={{ color: '#F8F0FF', fontSize: Math.max(15, contentWidth * 0.19), lineHeight: Math.max(16, contentWidth * 0.19), fontWeight: '900' }}>{player.rating}</Text>
+          <Text style={{ color: '#D8B4FE', fontSize: Math.max(7, contentWidth * 0.062), fontWeight: '900', letterSpacing: 0.8 }}>{player.position}</Text>
+        </View>
+        <View style={{ position: 'absolute', top: contentHeight * 0.095, right: contentWidth * 0.1, zIndex: 4, alignItems: 'center' }}>
+          <Text style={{ color: '#F5D0FE', fontSize: Math.max(7, contentWidth * 0.052), fontWeight: '900', letterSpacing: 1.2 }}>TOTW</Text>
+        </View>
+        <View style={{ position: 'absolute', top: contentHeight * 0.60, left: contentWidth * 0.10, right: contentWidth * 0.10, zIndex: 5, alignItems: 'center' }}>
+          <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(10, contentWidth * 0.095), fontWeight: '900', letterSpacing: 1.05 }}>{name}</Text>
+          <View style={{ width: '72%', height: 1.5, backgroundColor: '#D8B4FE', marginTop: 4, opacity: 0.9 }} />
+          <Text numberOfLines={1} style={{ color: '#D6D0DC', fontSize: Math.max(5.5, contentWidth * 0.043), fontWeight: '700', marginTop: 3 }}>{player.club}</Text>
+        </View>
+        <View style={{ position: 'absolute', left: contentWidth * 0.075, right: contentWidth * 0.075, bottom: contentHeight * 0.105, flexDirection: 'row', zIndex: 6 }}>
+          {stats.map(([label, value]) => (
+            <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={{ color: '#C084FC', fontSize: Math.max(4.5, contentWidth * 0.034), fontWeight: '800' }}>{label}</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: Math.max(7.5, contentWidth * 0.057), fontWeight: '900' }}>{value ?? '·'}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={{ position: 'absolute', bottom: contentHeight * 0.022, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+          <NationFlag nation={player.nation} size={Math.max(11, contentWidth * 0.082)} />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function TotwPortraitCard({
+  art,
+  width,
+  glow = false,
+  sign = '',
+  scale = 1,
+}: {
+  art: number;
+  width: number;
+  glow?: boolean;
+  sign?: string;
+  scale?: number;
+}) {
+  const renderWidth = Math.round(width * scale);
+  const renderHeight = Math.round(renderWidth * TOTW_RATIO);
   const card = (
     <Image
       source={art}
       resizeMode="contain"
       accessibilityIgnoresInvertColors
-      style={{ width, height, alignSelf: 'center' }}
+      style={{ width: renderWidth, height: renderHeight, alignSelf: 'center' }}
     />
   );
   const autograph = glow && sign && /^[A-Z][A-Z .'-]*$/.test(sign) ? `${sign.charAt(0)}${sign.slice(1).toLowerCase()}` : '';
@@ -135,22 +278,22 @@ function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number
       : { shadowColor: '#C084FC', shadowOpacity: 0.85, shadowRadius: 6, shadowOffset: { width: 0, height: 0 } }
     : null;
   return (
-    <View style={{ width, height, overflow: 'visible', alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ width: renderWidth, height: renderHeight, overflow: 'visible', alignItems: 'center', justifyContent: 'center' }}>
       <Image
         source={art}
         resizeMode="contain"
         accessibilityIgnoresInvertColors
-        style={[{ width, height, alignSelf: 'center' }, lit]}
+        style={[{ width: renderWidth, height: renderHeight, alignSelf: 'center' }, lit]}
       />
       {autograph ? (
         <View
           pointerEvents="none"
           style={{
             position: 'absolute',
-            left: width * 0.2,
-            right: width * 0.2,
-            top: height * 0.632,
-            height: height * 0.075,
+            left: renderWidth * 0.2,
+            right: renderWidth * 0.2,
+            top: renderHeight * 0.632,
+            height: renderHeight * 0.075,
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#070604',
@@ -161,8 +304,8 @@ function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number
             style={{
               color: '#F4D78A',
               fontFamily: 'GreatVibes',
-              fontSize: width * script,
-              lineHeight: width * script * 1.15,
+              fontSize: renderWidth * script,
+              lineHeight: renderWidth * script * 1.15,
               textAlign: 'center',
             }}
           >
@@ -170,6 +313,128 @@ function TotwPortraitCard({ art, width, glow = false, sign = '' }: { art: number
           </Text>
         </View>
       ) : null}
+    </View>
+  );
+}
+
+function RemoteCardArt({ uri, fallbackUri, width }: { uri: string; fallbackUri?: string; width: number }) {
+  const [sourceUri, setSourceUri] = useState(uri);
+  const [failed, setFailed] = useState(false);
+  const height = Math.round(width * DESTINED_RATIO);
+  return failed ? (
+    <View style={{ width, height, alignSelf: 'center' }} />
+  ) : (
+    <Image
+      source={{ uri: sourceUri }}
+      onError={() => {
+        if (fallbackUri && sourceUri !== fallbackUri) setSourceUri(fallbackUri);
+        else setFailed(true);
+      }}
+      resizeMode="contain"
+      accessibilityIgnoresInvertColors
+      style={{ width, height }}
+    />
+  );
+}
+
+function OtwPortraitCard({ player, width }: { player: FcPlayer; width: number }) {
+  const height = Math.round(width * DESTINED_RATIO);
+  const data = otwFor(player.baseId ?? player.id);
+  const face = data?.face ?? player.face;
+  const [failed, setFailed] = useState(false);
+  const uri = OTW_REMOTE_ART[player.baseId ?? player.id];
+  const statRows = [
+    ['PAC', face?.pac],
+    ['SHO', face?.sho],
+    ['PAS', face?.pas],
+    ['DRI', face?.dri],
+    ['DEF', face?.def],
+    ['PHY', face?.phy],
+  ] as const;
+  const name = (player.en || player.name || '').trim().split(' ').pop()?.toUpperCase() || player.name.toUpperCase();
+
+  return (
+    <View
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        borderRadius: width * 0.075,
+        overflow: 'hidden',
+        backgroundColor: '#0B0810',
+        borderWidth: 1.5,
+        borderColor: '#D56BFF',
+        shadowColor: '#D946EF',
+        shadowOpacity: 0.42,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 7 },
+        elevation: 8,
+      }}
+    >
+      <LinearGradient
+        colors={['#26133B', '#110C20', '#07070D']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ flex: 1, padding: Math.max(5, width * 0.03) }}
+      >
+        <LinearGradient
+          colors={['rgba(255,255,255,0.16)', 'transparent', 'rgba(217,70,239,0.12)']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        />
+        <View style={{ flex: 1, borderRadius: width * 0.055, overflow: 'hidden', backgroundColor: '#0A0910' }}>
+          <LinearGradient
+            colors={['rgba(217,70,239,0.18)', 'transparent', 'rgba(0,0,0,0.58)']}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, height: height * 0.58, zIndex: 2 }}
+          />
+          <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 5, padding: width * 0.055, gap: 1 }}>
+            <Text style={{ color: '#F7E9FF', fontSize: Math.max(14, width * 0.19), fontWeight: '900', lineHeight: Math.max(15, width * 0.19) }}>
+              {player.rating}
+            </Text>
+            <Text style={{ color: '#E5B5FF', fontSize: Math.max(7, width * 0.065), fontWeight: '900', letterSpacing: 0.8 }}>
+              {player.position}
+            </Text>
+          </View>
+          <View style={{ position: 'absolute', top: height * 0.055, right: width * 0.055, zIndex: 5, paddingHorizontal: width * 0.04, paddingVertical: width * 0.018, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(255,214,255,0.6)', backgroundColor: 'rgba(12,6,19,0.78)' }}>
+            <Text style={{ color: '#FFD6FF', fontSize: Math.max(6, width * 0.05), fontWeight: '900', letterSpacing: 1.1 }}>OTW</Text>
+          </View>
+          {uri && !failed ? (
+            <Image
+              source={{ uri }}
+              onError={() => setFailed(true)}
+              resizeMode="contain"
+              accessibilityIgnoresInvertColors
+              style={{ position: 'absolute', left: width * 0.02, right: width * 0.02, top: height * 0.04, width: width * 0.96, height: height * 0.64 }}
+            />
+          ) : null}
+          <LinearGradient
+            colors={['transparent', 'rgba(7,7,13,0.25)', '#07070D']}
+            locations={[0, 0.35, 1]}
+            style={{ position: 'absolute', left: 0, right: 0, top: height * 0.42, height: height * 0.27, zIndex: 3 }}
+          />
+          <View style={{ position: 'absolute', left: width * 0.08, right: width * 0.08, top: height * 0.61, zIndex: 6 }}>
+            <Text numberOfLines={1} style={{ color: '#FFFFFF', fontSize: Math.max(11, width * 0.1), fontWeight: '900', textAlign: 'center', letterSpacing: 1.1 }}>
+              {name}
+            </Text>
+            <View style={{ height: 1.5, marginTop: 4, backgroundColor: '#D56BFF', opacity: 0.82 }} />
+            <Text style={{ color: '#C9B8D4', fontSize: Math.max(5.5, width * 0.045), fontWeight: '700', textAlign: 'center', marginTop: 3 }}>
+              {player.club}
+            </Text>
+          </View>
+          <View style={{ position: 'absolute', left: width * 0.055, right: width * 0.055, bottom: height * 0.075, flexDirection: 'row', zIndex: 7 }}>
+            {statRows.map(([label, value]) => (
+              <View key={label} style={{ flex: 1, alignItems: 'center' }}>
+                <Text style={{ color: '#C995F6', fontSize: Math.max(5, width * 0.041), fontWeight: '800', letterSpacing: 0.2 }}>{label}</Text>
+                <Text style={{ color: '#FFF8FF', fontSize: Math.max(8, width * 0.062), fontWeight: '900' }}>{value ?? '·'}</Text>
+              </View>
+            ))}
+          </View>
+          <View style={{ position: 'absolute', bottom: width * 0.035, left: 0, right: 0, alignItems: 'center', zIndex: 7 }}>
+            <NationFlag nation={player.nation} size={Math.max(11, width * 0.085)} />
+          </View>
+        </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -261,6 +526,186 @@ function totwAura() {
   };
 }
 
+function FutureStarsPortraitCard({
+  player,
+  width,
+  shell = false,
+  photoOverride,
+  faceOverride,
+}: {
+  player: FcPlayer;
+  width: number;
+  shell?: boolean;
+  photoOverride?: string;
+  faceOverride?: FaceStats;
+}) {
+  const media = playerMedia(player.baseId ?? player.id);
+  const special = futureStarsFor(player.baseId ?? player.id);
+  const photoUri = photoOverride ?? special?.photoUrl ?? media.photo ?? '';
+  const face = faceOverride ?? special?.face ?? player.face ?? media.face;
+  const rating = special?.rating ?? player.rating;
+  const position = special?.position ?? player.position;
+  const displayName = special?.en || player.en || media.en || player.name;
+  const displayClub = special?.club ?? player.club;
+  const height = Math.round(width * 1.5);
+  const [failed, setFailed] = useState(false);
+  const statRows = [
+    { label: 'PAC', value: face?.pac },
+    { label: 'SHO', value: face?.sho },
+    { label: 'PAS', value: face?.pas },
+    { label: 'DRI', value: face?.dri },
+    { label: 'DEF', value: face?.def },
+    { label: 'PHY', value: face?.phy },
+  ];
+
+  return (
+    <View
+      accessibilityLabel={shell ? 'Future Stars card frame' : `Future Stars ${player.en || media.en || player.name}`}
+      style={{
+        width,
+        height,
+        alignSelf: 'center',
+        direction: 'ltr',
+        overflow: 'visible',
+        shadowColor: Platform.OS === 'web' ? 'transparent' : '#9D5BFF',
+        shadowOpacity: Platform.OS === 'web' ? 0 : shell ? 0.18 : 0.36,
+        shadowRadius: Platform.OS === 'web' ? 0 : Math.max(3, width * 0.055),
+        shadowOffset: { width: 0, height: Platform.OS === 'web' ? 0 : Math.max(2, width * 0.025) },
+        elevation: Platform.OS === 'web' ? 0 : shell ? 2 : 6,
+      }}
+    >
+      <Image
+        source={require('@/assets/images/cards/future-stars-purple-gold.png')}
+        resizeMode="contain"
+        accessibilityIgnoresInvertColors
+        style={{ position: 'absolute', left: 0, top: 0, width, height }}
+      />
+      {!shell && photoUri && !failed ? (
+        <Image
+          source={{ uri: photoUri }}
+          onError={() => setFailed(true)}
+          resizeMode="contain"
+          accessibilityIgnoresInvertColors
+          style={{
+            position: 'absolute',
+            left: width * 0.12,
+            top: height * 0.17,
+            width: width * 0.76,
+            height: height * 0.45,
+          }}
+        />
+      ) : null}
+      {!shell ? (
+        <>
+          <View style={{ position: 'absolute', left: width * 0.18, top: height * 0.135, zIndex: 3 }}>
+            <Text
+              style={{
+                color: '#FFF2C6',
+                fontSize: Math.max(10, width * 0.135),
+                fontWeight: '900',
+                lineHeight: Math.max(10, width * 0.14),
+                textShadowColor: '#13091D',
+                textShadowOffset: { width: 0, height: 1 },
+                textShadowRadius: 3,
+              }}
+            >
+              {rating}
+            </Text>
+            <Text style={{ color: '#F7D783', fontSize: Math.max(6, width * 0.052), fontWeight: '900', letterSpacing: 0.2 }}>
+              {position}
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.55}
+            style={{
+              position: 'absolute',
+              left: width * 0.13,
+              top: height * 0.625,
+              width: width * 0.74,
+              textAlign: 'center',
+              color: '#FFF4D4',
+              fontSize: Math.max(8, width * 0.075),
+              fontWeight: '900',
+              letterSpacing: 0.15,
+              textShadowColor: 'rgba(0,0,0,0.85)',
+              textShadowOffset: { width: 0, height: 1 },
+              textShadowRadius: 2,
+            }}
+          >
+            {displayName.toUpperCase()}
+          </Text>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.6}
+            style={{
+              position: 'absolute',
+              left: width * 0.16,
+              top: height * 0.683,
+              width: width * 0.68,
+              textAlign: 'center',
+              color: '#DCC9F4',
+              fontSize: Math.max(5.5, width * 0.043),
+              fontWeight: '700',
+              letterSpacing: 0.1,
+            }}
+          >
+            {displayClub.toUpperCase()}
+          </Text>
+          <View
+            style={{
+              position: 'absolute',
+              left: width * 0.22,
+              top: height * 0.720,
+              width: width * 0.56,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
+            {statRows.map((stat) => (
+              <View
+                key={stat.label}
+                style={{
+                  width: '33.333%',
+                  height: height * 0.06,
+                  minWidth: 0,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ color: '#D8C3F4', fontSize: Math.max(4.5, width * 0.028), fontWeight: '800', lineHeight: Math.max(5, width * 0.03) }}>
+                  {stat.label}
+                </Text>
+                <Text style={{ color: '#FFF8E7', fontSize: Math.max(6.5, width * 0.046), fontWeight: '900', lineHeight: Math.max(7, width * 0.049) }}>
+                  {stat.value ?? '·'}
+                </Text>
+              </View>
+            ))}
+          </View>
+          <Text
+            style={{
+              position: 'absolute',
+              right: width * 0.18,
+              top: height * 0.153,
+              color: '#EED28A',
+              fontSize: Math.max(4.5, width * 0.029),
+              fontWeight: '900',
+              letterSpacing: 0.3,
+            }}
+          >
+            FUTURE STARS
+          </Text>
+        </>
+      ) : null}
+    </View>
+  );
+}
+
+/** Same TOTW card. A short purple rim follows the shield, the way FUTBIN shows the second look. */
+
 export function PortraitCard({
   player,
   width = 168,
@@ -276,7 +721,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'star-performer';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -291,7 +736,16 @@ export function PortraitCard({
   const showDestined = !shell && (edition === 'auto' ? player.edition === 'destined' : edition === 'destined');
   const destined = showDestined ? DESTINED_ART[artId] : undefined;
   if (destined) return <DestinedPortraitCard art={destined} width={width} />;
+  const destinedRemote = showDestined ? DESTINED_REMOTE_ART[artId] : undefined;
+  if (destinedRemote) return <RemoteCardArt uri={destinedRemote} fallbackUri={DESTINED_REMOTE_FALLBACK[artId]} width={width} />;
   const shownEdition = edition === 'auto' ? player.edition : edition;
+  if (shownEdition === 'future-stars') {
+    return <FutureStarsPortraitCard player={player} width={width} shell={shell} photoOverride={photoOverride} faceOverride={faceOverride} />;
+  }
+  if (shownEdition === 'otw') {
+    const otwArt = OTW_REMOTE_ART[artId];
+    if (otwArt) return <OtwPortraitCard player={player} width={width} />;
+  }
   const aura = glow && shownEdition === 'totw' ? totwAura() : undefined;
   if (shownEdition === 'totw') {
     const totwArt = TOTW_ART[artId];
@@ -299,12 +753,13 @@ export function PortraitCard({
       const autograph = glow && totwFinish(artId) === 'pristine' ? surname(player.en || player.name || '') : '';
       return <TotwPortraitCard art={totwArt} width={width} glow={Boolean(aura)} sign={autograph} />;
     }
+    return <DynamicTotwPortraitCard player={player} width={width} />;
   }
   if (shownEdition === 'hero') {
     const heroArt = HERO_ART[player.id];
     if (heroArt) return <TotwPortraitCard art={heroArt} width={width} />;
   }
-  if (shownEdition === 'hero' || shownEdition === 'totw' || shownEdition === 'star-performer') {
+  if (shownEdition === 'hero' || shownEdition === 'star-performer') {
     return (
       <View style={aura as object}>
         <ShieldPortrait player={player} width={width} edition={shownEdition} shell={shell} pitch={variant === 'pitch'} />
@@ -330,9 +785,13 @@ export function PortraitCard({
 }
 
 /** Empty gold, silver, icon, or OTW card, using the same shape as the player cards. */
-export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw'; width: number }) {
+export function TypeShell({ kind, width }: { kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'future-stars'; width: number }) {
   if (kind === 'otw') return <OtwShell width={width} />;
   if (kind === 'totw') return <TotwPortraitCard art={require('@/assets/images/cards/totw-shell.png')} width={width} />;
+  if (kind === 'future-stars') {
+    const player: FcPlayer = { id: 'shell-future-stars', name: ' ', en: ' ', rating: 90, position: 'RW', nation: '', league: '', club: '', edition: 'future-stars' };
+    return <FutureStarsPortraitCard player={player} width={width} shell />;
+  }
   if (kind === 'hero') {
     const player: FcPlayer = {
       id: `shell-${kind}`,
@@ -380,7 +839,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'star-performer';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;
@@ -390,7 +849,11 @@ function StandardPortraitCard({
   const shown = edition === 'auto' ? player.edition : edition;
   const totw = shown === 'totw' ? totwFor(player.baseId ?? player.id) : null;
   const special = shown === 'hero' || shown === 'totw';
-  const stats = faceOverride ?? (shown === 'totw' ? (totw?.face ?? player.face) : shown === 'hero' ? player.face : media.face);
+  const stats = faceOverride ?? (shown === 'totw'
+    ? (totw?.face ?? player.face)
+    : shown === 'base'
+      ? media.face
+      : (player.face ?? media.face));
   const rating = shown === 'totw'
     ? (totw?.face.ovr ?? totw?.rating ?? player.rating)
     : shown === 'hero'

@@ -90,10 +90,13 @@ export type Comment = {
   preset: CommentPreset | null;
   body: string;
   status: CommentStatus;
+  parentId?: string | null;
   createdAt: string;
 };
 
 export type GroundsIntent = 'need_player' | 'looking_for_club';
+export type GroundsPlayStyleTier = 'base' | 'plus';
+export type GroundsPlayStyle = { id: string; tier: GroundsPlayStyleTier };
 export type ContactType = 'whatsapp' | 'discord';
 export type DivisionId = '10' | '9' | '8' | '7' | '6' | '5' | '4' | '3' | '2' | '1' | 'elite';
 
@@ -118,6 +121,7 @@ export type GroundsPost = {
   gamertag: string;
   avatarUri: string | null;
   levelImageUri: string | null;
+  playStyles?: GroundsPlayStyle[];
   levelVerified: boolean;
   levelStatus: ModerationStatus;
   createdAt: string;
@@ -216,6 +220,7 @@ export type Database = {
   futRatings: FutRating[];
   futLikes: FutLike[];
   comments: Comment[];
+  commentLikes?: { commentId: string; userId: string }[];
   groundsPosts: GroundsPost[];
   sbcChallenges: SbcChallenge[];
   sbcSolutions: SbcSolution[];
@@ -234,6 +239,7 @@ export type Snapshot = {
   ratings: FutRating[];
   likes: FutLike[];
   comments: Comment[];
+  commentLikes: { commentId: string; userId: string }[];
   grounds: GroundsPost[];
   sbcChallenges: SbcChallenge[];
   solutions: SbcSolution[];
@@ -287,6 +293,7 @@ export type NewGrounds = {
   gamertag: string;
   avatarUri: string | null;
   levelImageUri: string | null;
+  playStyles: GroundsPlayStyle[];
 };
 
 export type NewSbc = {

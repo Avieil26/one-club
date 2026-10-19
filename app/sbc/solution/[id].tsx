@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useMemo } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
@@ -13,6 +14,7 @@ import { catalogChallenge, placedPreview } from '@/lib/sbcCatalog';
 import { useApp } from '@/lib/store';
 
 export default function SbcSolutionScreen() {
+  const { t } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -31,8 +33,8 @@ export default function SbcSolutionScreen() {
   if (!solution || !challenge) {
     return (
       <Screen scene="sbc">
-        <Title>הפתרון לא נמצא</Title>
-        <Button label="חזרה ל-SBC" onPress={() => router.replace('/sbc')} />
+        <Title>{t("הפתרון לא נמצא", "Solution not found")}</Title>
+        <Button label={t("חזרה ל-SBC", "Back to SBC")} onPress={() => router.replace('/sbc')} />
       </Screen>
     );
   }
@@ -49,33 +51,33 @@ export default function SbcSolutionScreen() {
     try {
       await app.voteSolution(solutionId, choice);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: 'פתרון SBC' }} />
-      <Button label="חזרה לאתגר" variant="ghost" onPress={() => router.replace(`/sbc/${challenge.id}`)} />
+      <Stack.Screen options={{ title: t("פתרון SBC", "SBC solution") }} />
+      <Button label={t("חזרה לאתגר", "Back to challenge")} variant="ghost" onPress={() => router.replace(`/sbc/${challenge.id}`)} />
       <Title>{displayName(app.profiles, solution.userId)}</Title>
       <Muted>{solution.explanation}</Muted>
       {solution.squad ? (
         <View style={{ gap: 10 }}>
           <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
-            {report ? `כימיה ${report.chemistry}/33` : 'הסגל שנבנה'}
-            {report?.rating == null ? '' : ` · דירוג קבוצה ${report.rating}`}
+            {report ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`) : t("הסגל שנבנה", "Submitted squad")}
+            {report?.rating == null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
           </Text>
           <SquadPitch formation={formation} placed={placed} playerChem={report?.playerChem ?? {}} showChemHud={false} />
         </View>
       ) : null}
       <SolutionGallery uris={solution.imageUris} />
       <Card>
-        <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>האם הפתרון עבד?</Text>
-        <Muted>לייק ודיסלייק עוזרים לאחרים לדעת אם שווה לנסות את הסגל הזה.</Muted>
+        <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>{t("האם הפתרון עבד?", "Did this solution work?")}</Text>
+        <Muted>{t("לייק ודיסלייק עוזרים לאחרים לדעת אם שווה לנסות את הסגל הזה.", "Likes and dislikes help others decide whether to try this squad.")}</Muted>
         <View style={{ flexDirection: 'row-reverse', gap: 10 }}>
           <View style={{ flex: 1 }}>
             <Button
-              label={votedUp ? `סימנתם שעבד · ${ups}` : `עבד לי · ${ups}`}
+              label={votedUp ? t(`סימנתם שעבד · ${ups}`, `Marked as working · ${ups}`) : t(`עבד לי · ${ups}`, `Worked for me · ${ups}`)}
               variant={votedUp ? 'copper' : 'ghost'}
               onPress={() => vote('up')}
               disabled={app.busy || mine || !app.user}
@@ -83,15 +85,15 @@ export default function SbcSolutionScreen() {
           </View>
           <View style={{ flex: 1 }}>
             <Button
-              label={`לא עבד · ${downs}`}
+              label={t(`לא עבד · ${downs}`, `Did not work · ${downs}`)}
               variant={votedDown ? 'danger' : 'ghost'}
               onPress={() => vote('down')}
               disabled={app.busy || mine || !app.user}
             />
           </View>
         </View>
-        {mine ? <Muted>אי אפשר לדרג פתרון של עצמך.</Muted> : null}
-        {!app.user ? <Muted>צריך להתחבר כדי לסמן אם הפתרון עבד.</Muted> : null}
+        {mine ? <Muted>{t("אי אפשר לדרג פתרון של עצמך.", "You cannot rate your own solution.")}</Muted> : null}
+        {!app.user ? <Muted>{t("צריך להתחבר כדי לסמן אם הפתרון עבד.", "Sign in to rate this solution.")}</Muted> : null}
       </Card>
       <Comments targetType="sbc_solution" targetId={solution.id} />
     </Screen>

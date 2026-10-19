@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Image, Platform, Pressable, StyleSheet, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
 
 import { careerCream, careerFont, careerThemeFor, type CareerCardTheme } from '@/lib/careerCardTheme';
+import { careerText } from '@/lib/careerLocalization';
 import { formatDate } from '@/lib/format';
 import { modeLabel } from '@/lib/labels';
 import { isOpen } from '@/lib/selectors';
@@ -17,7 +18,7 @@ function webPhotoStyle(position: string): ImageStyle | null {
 }
 
 export function challengeStatusLine(challenge: Pick<CareerChallenge, 'endsAt'>, language: 'he' | 'en' = 'he'): string {
-  if (language === 'en') return isOpen(challenge) ? `Open until ${formatDate(challenge.endsAt)}` : 'Challenge closed';
+  if (language === 'en') return isOpen(challenge) ? (challenge.endsAt ? `Open until ${formatDate(challenge.endsAt, language)}` : 'No time limit') : 'Challenge closed';
   return isOpen(challenge) ? `פתוח עד ${formatDate(challenge.endsAt)}` : 'האתגר נסגר';
 }
 
@@ -56,6 +57,7 @@ export function CareerCreamButton({
 }
 
 function CareerPhoto({ theme, large, banner }: { theme: CareerCardTheme; large?: boolean; banner?: boolean }) {
+  const { language } = useLanguage();
   return (
     <View style={[styles.panel, large && !banner && styles.panelLarge, banner && styles.panelBanner]}>
       {theme.photo ? (
@@ -73,7 +75,7 @@ function CareerPhoto({ theme, large, banner }: { theme: CareerCardTheme; large?:
         />
       )}
       <LinearGradient colors={['rgba(0,0,0,0.05)', 'rgba(0,0,0,0.62)']} style={styles.scrim} />
-      <Text style={styles.panelLabel}>{theme.panelLabel}</Text>
+      <Text style={styles.panelLabel}>{careerText(theme.panelLabel, language)}</Text>
     </View>
   );
 }
@@ -92,7 +94,7 @@ export function CareerChallengeCard({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={challenge.title}
+      accessibilityLabel={careerText(challenge.title, language)}
       onPress={onPress}
       style={[styles.card, { backgroundColor: theme.background }]}
     >
@@ -101,11 +103,11 @@ export function CareerChallengeCard({
         {narrow ? <CareerPhoto theme={theme} banner /> : null}
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
-            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode)}</Text>
+            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
-          <Text style={[styles.title, narrow && styles.titleNarrow]}>{challenge.title}</Text>
-          <Text style={styles.rules}>{challenge.rules}</Text>
+          <Text style={[styles.title, narrow && styles.titleNarrow]}>{careerText(challenge.title, language)}</Text>
+          <Text style={styles.rules}>{careerText(challenge.rules, language)}</Text>
           <CareerCreamButton theme={theme} label={t('לכרטיס האתגר', 'View challenge')} />
         </View>
         {narrow ? null : <CareerPhoto theme={theme} />}
@@ -131,10 +133,10 @@ export function CareerDetailBlock({
         {narrow ? <CareerPhoto theme={theme} banner /> : null}
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
-            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode)}</Text>
+            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
-          <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{challenge.title}</Text>
+          <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{careerText(challenge.title, language)}</Text>
         </View>
         {narrow ? null : <CareerPhoto theme={theme} large />}
       </View>

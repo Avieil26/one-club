@@ -1,7 +1,9 @@
+import { playerDisplayName } from '@/lib/playerDisplayName';
+import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Stack, useRouter } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { PortraitCard } from '@/components/PortraitCard';
 import { SquadPitch } from '@/components/SquadPitch';
@@ -16,8 +18,10 @@ import type { ProfileSquad } from '@/lib/types';
 const BENCH_MAX = 7;
 
 export default function SquadBuilderScreen() {
+  const { t, language } = useLanguage();
   const app = useApp();
   const router = useRouter();
+  const params = useLocalSearchParams<{ returnTo?: string }>();
   const saved = app.user?.squad ?? null;
   const [formationId, setFormationId] = useState<FormationId>(
     saved?.formation && isFormationId(saved.formation) ? saved.formation : '433',
@@ -94,7 +98,7 @@ export default function SquadBuilderScreen() {
     const playerId = slots[slotId];
     if (!playerId) return;
     if (bench.length >= BENCH_MAX) {
-      Alert.alert('רגע', 'הספסל מלא');
+      Alert.alert(t("רגע", "Something went wrong"), t("הספסל מלא", "The bench is full"));
       return;
     }
     setSlots((current) => {
@@ -109,7 +113,7 @@ export default function SquadBuilderScreen() {
   function pick(player: FcPlayer) {
     if (addingBench) {
       if (bench.length >= BENCH_MAX) {
-        Alert.alert('רגע', 'אפשר עד 7 מחליפים');
+        Alert.alert(t("רגע", "Something went wrong"), t("אפשר עד 7 מחליפים", "You can add up to 7 substitutes"));
         return;
       }
       setBench((current) => [...current, player.id]);
@@ -131,28 +135,28 @@ export default function SquadBuilderScreen() {
 
   async function save() {
     if (!app.user) {
-      Alert.alert('רגע', 'צריך להתחבר');
+      Alert.alert(t("רגע", "Something went wrong"), t("צריך להתחבר", "Sign in required"));
       return;
     }
     const squad: ProfileSquad = { formation: formationId, slots, bench };
     if (!normalizeSquad(squad)) {
-      Alert.alert('רגע', 'שימו לפחות שחקן אחד בסגל');
+      Alert.alert(t("רגע", "Something went wrong"), t("שימו לפחות שחקן אחד בסגל", "Add at least one player to your squad"));
       return;
     }
     try {
       await app.saveSquad(squad);
-      Alert.alert('הסגל נשמר', 'הקבוצה מופיעה בפרופיל.');
-      router.replace('/profile');
+      Alert.alert(t("הסגל נשמר", "Squad saved"), t("הקבוצה מופיעה בפרופיל.", "Your squad is displayed on your profile."));
+      router.replace(params.returnTo === 'champions' ? '/champions' : '/profile');
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
   return (
     <Screen scene="ultimate">
-      <Stack.Screen options={{ title: 'בניית הקבוצה' }} />
-      <Title>בניית הקבוצה</Title>
-      <Muted>לחצו על עמדה וחפשו שחקן. שחקן שכבר על המגרש זז בלחיצה עליו ואז על העמדה שרוצים.</Muted>
+      <Stack.Screen options={{ title: t("בניית הקבוצה", "Build your squad") }} />
+      <Title>{t("בניית הקבוצה", "Build your squad")}</Title>
+      <Muted>{t("לחצו על עמדה וחפשו שחקן. שחקן שכבר על המגרש זז בלחיצה עליו ואז על העמדה שרוצים.", "Select a position and search for a player. To move a player, select their card, then the destination position.")}</Muted>
 
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
         {FORMATIONS.map((item) => {
@@ -202,22 +206,22 @@ export default function SquadBuilderScreen() {
         <View style={{ gap: 8 }}>
           <Muted>
             {slots[active]
-              ? `נבחר ${playerById(slots[active])?.name ?? 'שחקן'}. לחצו על עמדה אחרת כדי להעביר אותו. אם היא תפוסה, השניים מתחלפים.`
-              : 'נבחרה עמדה ריקה. חפשו שחקן למטה, או לחצו על שחקן שכבר על המגרש.'}
+              ? t(`נבחר ${playerById(slots[active])?.name ?? 'שחקן'}. לחצו על עמדה אחרת כדי להעביר אותו. אם היא תפוסה, השניים מתחלפים.`, `${playerById(slots[active]) ? playerDisplayName(playerById(slots[active])!, 'en') : 'Player'} selected. Select another position to move the player or swap cards.`)
+              : t("נבחרה עמדה ריקה. חפשו שחקן למטה, או לחצו על שחקן שכבר על המגרש.", "Empty position selected. Search below or select a player already on the pitch.")}
           </Muted>
           {slots[active] ? (
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
-              <Button label="העברה לספסל" variant="copper" onPress={() => pitchToBench(active)} />
-              <Button label="פינוי העמדה" variant="ghost" onPress={() => clearSlot(active)} />
+              <Button label={t("העברה לספסל", "Move to bench")} variant="copper" onPress={() => pitchToBench(active)} />
+              <Button label={t("פינוי העמדה", "Clear position")} variant="ghost" onPress={() => clearSlot(active)} />
             </View>
           ) : null}
         </View>
       ) : null}
       {benchHold ? (
         <View style={{ gap: 8 }}>
-          <Muted>{`נבחר ${playerById(benchHold)?.name ?? 'מחליף'} מהספסל. לחצו על עמדה במגרש כדי להכניס אותו.`}</Muted>
+          <Muted>{t(`נבחר ${playerById(benchHold)?.name ?? 'מחליף'} מהספסל. לחצו על עמדה במגרש כדי להכניס אותו.`, `${playerById(benchHold) ? playerDisplayName(playerById(benchHold)!, 'en') : 'Substitute'} selected from the bench. Select a position on the pitch.`)}</Muted>
           <Button
-            label="הוצאה מהסגל"
+            label={t("הוצאה מהסגל", "Remove from squad")}
             variant="ghost"
             onPress={() => {
               setBench((current) => current.filter((id) => id !== benchHold));
@@ -227,8 +231,8 @@ export default function SquadBuilderScreen() {
         </View>
       ) : null}
 
-      <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>מחליפים · {bench.length}/{BENCH_MAX}</Text>
-      {bench.length ? <Muted>לחיצה על מחליף בוחרת אותו. אחר כך לחצו על עמדה במגרש.</Muted> : null}
+      <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>{t("מחליפים ·", "Substitutes ·")}{bench.length}/{BENCH_MAX}</Text>
+      {bench.length ? <Muted>{t("לחיצה על מחליף בוחרת אותו. אחר כך לחצו על עמדה במגרש.", "Select a substitute, then select a position on the pitch.")}</Muted> : null}
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
         {bench.map((id) => {
           const player = playerById(id);
@@ -259,7 +263,7 @@ export default function SquadBuilderScreen() {
         })}
       </View>
       <Button
-        label={addingBench ? 'בחרו מחליף מהחיפוש' : 'הוספת מחליף'}
+        label={addingBench ? t("בחרו מחליף מהחיפוש", "Choose a substitute from search") : t("הוספת מחליף", "Add substitute")}
         variant="copper"
         disabled={bench.length >= BENCH_MAX}
         onPress={() => {
@@ -275,7 +279,7 @@ export default function SquadBuilderScreen() {
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder="שם שחקן, לפחות שתי אותיות"
+            placeholder={t("שם שחקן, לפחות שתי אותיות", "Player name, at least two letters")}
             placeholderTextColor="rgba(197,213,200,0.55)"
             textAlign="right"
             autoFocus
@@ -307,7 +311,7 @@ export default function SquadBuilderScreen() {
               >
                 <Text style={{ color: colors.gold, fontWeight: '900', width: 36, textAlign: 'center' }}>{player.rating}</Text>
                 <View style={{ flex: 1 }}>
-                  <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>{player.name}</Text>
+                  <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>{playerDisplayName(player, language)}</Text>
                   <Text style={{ color: colors.muted, fontSize: 12, textAlign: 'right' }}>
                     {player.position} · {player.club}
                   </Text>
@@ -315,11 +319,11 @@ export default function SquadBuilderScreen() {
               </LinearGradient>
             </Pressable>
           ))}
-          {query.trim().length >= 2 && !results.length ? <Muted>אין שחקן פנוי בשם הזה.</Muted> : null}
+          {query.trim().length >= 2 && !results.length ? <Muted>{t("אין שחקן פנוי בשם הזה.", "No available player matches this name.")}</Muted> : null}
         </View>
       ) : null}
 
-      <Button label={app.busy ? 'שומר...' : 'שמירת הקבוצה'} onPress={save} disabled={app.busy} />
+      <Button label={app.busy ? t("שומר...", "Saving…") : t("שמירת הקבוצה", "Save squad")} onPress={save} disabled={app.busy} />
     </Screen>
   );
 }

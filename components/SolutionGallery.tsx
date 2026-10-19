@@ -1,7 +1,9 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Image, Modal, Pressable, Text, View } from 'react-native';
 
 export function SolutionGallery({ uris }: { uris: string[] }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   if (!uris.length) return null;
   return (
@@ -14,7 +16,7 @@ export function SolutionGallery({ uris }: { uris: string[] }) {
             accessibilityIgnoresInvertColors
             style={{ width: '100%', height: 420, borderRadius: 16, backgroundColor: '#07140F' }}
           />
-          <Text style={{ color: '#E3B341', textAlign: 'center', marginTop: 6, fontWeight: '700' }}>לחצו לתמונה במסך מלא</Text>
+          <Text style={{ color: '#E3B341', textAlign: 'center', marginTop: 6, fontWeight: '700' }}>{t("לחצו לתמונה במסך מלא", "Select an image to view full screen")}</Text>
         </Pressable>
       ))}
       <Modal visible={open !== null} transparent animationType="fade" onRequestClose={() => setOpen(null)}>
@@ -26,7 +28,7 @@ export function SolutionGallery({ uris }: { uris: string[] }) {
           {open ? (
             <Image source={{ uri: open }} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: '100%', height: '84%' }} />
           ) : null}
-          <Text style={{ color: '#F7F8FA', textAlign: 'center', marginTop: 14, fontWeight: '800' }}>סגירה</Text>
+          <Text style={{ color: '#F7F8FA', textAlign: 'center', marginTop: 14, fontWeight: '800' }}>{t("סגירה", "Close")}</Text>
         </Pressable>
       </Modal>
     </View>

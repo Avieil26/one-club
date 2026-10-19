@@ -1,4 +1,5 @@
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
+import { groundsLabel } from '@/lib/groundsLocalization';
 import { useLanguage } from '@/lib/language';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
@@ -12,7 +13,7 @@ import { useApp } from '@/lib/store';
 
 export default function PlayerProfileScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const id = String(userId || '');
@@ -24,8 +25,21 @@ export default function PlayerProfileScreen() {
   const mine = app.user?.id === id;
   const followers = app.follows.filter((item) => item.followingId === id).length;
   const following = app.follows.filter((item) => item.followerId === id).length;
+  const followsThisPlayer = app.follows.some((item) => item.followerId === app.user?.id && item.followingId === id);
   const name = profile?.displayName || displayName(app.profiles, id);
   const progress = xpProgress(communityXp(id, app));
+
+  async function toggleFollow() {
+    if (!app.user) {
+      router.push('/register');
+      return;
+    }
+    try {
+      await app.toggleFollow(id);
+    } catch (error) {
+      Alert.alert(t("רגע", "Something went wrong"), error instanceof Error ? error.message : t("לא הצלחנו לעדכן את המעקב. נסו שוב.", "Could not update your follow status. Try again."));
+    }
+  }
 
   return (
     <Screen scene="grounds">
@@ -56,7 +70,7 @@ export default function PlayerProfileScreen() {
               }}
             >
               <Text style={{ color: colors.text, fontWeight: '700', textAlign: 'right' }}>
-                {divisionLabel(post.division)} · {platformLabel(post.platform)} · {post.position}
+                {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.position, language)}
               </Text>
               <Text style={{ color: colors.muted, textAlign: 'right' }}>
                 {post.archetype}
@@ -75,6 +89,7 @@ export default function PlayerProfileScreen() {
           )}
 
           {mine ? <Button label={profile.squad ? t('עריכת הקבוצה', 'Edit squad') : t('בניית הקבוצה', 'Build squad')} onPress={() => router.push('/squad')} /> : null}
+          {!mine ? <Button label={followsThisPlayer ? t('הפסק מעקב', 'Unfollow') : t('עקוב אחרי השחקן', 'Follow player')} variant={followsThisPlayer ? 'ghost' : 'gold'} onPress={() => void toggleFollow()} /> : null}
           {!mine && app.user ? (
             <Button label={t('הודעה', 'Message')} onPress={() => router.push(`/grounds/chat/${id}`)} />
           ) : null}

@@ -1,8 +1,10 @@
+import { useLanguage } from '@/lib/language';
 import { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 
 export function ProfileFace({ name, uri, size = 44 }: { name: string; uri?: string | null; size?: number }) {
-  const letter = name.trim().charAt(0) || 'ש';
+  const { language } = useLanguage();
+  const letter = name.trim().charAt(0) || (language === 'en' ? 'P' : 'ש');
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     setFailed(false);
