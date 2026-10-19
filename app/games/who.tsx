@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef, useState } from 'react';
 import { playerDisplayName } from '@/lib/playerDisplayName';
+import { miniGamePrompt } from '@/lib/miniGameLocalization';
 import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
@@ -51,7 +52,7 @@ export default function WhoGameScreen() {
         return;
       }
       setGood(true);
-      setNote(t('נכון', 'Correct'));
+      setNote('נכון');
       const nextCorrectCount = correctCount + 1;
       const nextUsedPrompts = [...usedPrompts, round.prompt];
       setCorrectCount(nextCorrectCount);
@@ -107,7 +108,7 @@ export default function WhoGameScreen() {
 
           <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.ask}>
             <View style={styles.askEdge} />
-            <Text style={styles.askText}>{round.prompt}</Text>
+            <Text style={[styles.askText, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{miniGamePrompt(round.prompt, language)}</Text>
           </LinearGradient>
 
           {note && !over ? <RoundNote text={note} good={good} /> : null}

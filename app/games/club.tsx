@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { displayClub } from '@/lib/footballLocalization';
 import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 import { Stack } from 'expo-router';
@@ -103,7 +104,7 @@ export default function ClubGameScreen() {
                     onPress={() => choose(club)}
                     style={[styles.opt, correct && styles.optRight, wrong && styles.optWrong]}
                   >
-                    <Text style={styles.optText}>{club}</Text>
+                    <Text style={styles.optText}>{displayClub(club, language)}</Text>
                     <ClubBadge club={club} size={28} />
                   </Pressable>
                 );
