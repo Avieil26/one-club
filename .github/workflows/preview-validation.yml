@@ -6,6 +6,7 @@ on:
       - preview/star-performers-20261018
       - preview/fc27-complete-english-starsafe-20261018
       - preview/fc27-20118-english-starsafe-fix-20261019
+      - preview/fc27-20118-orphan-promo-cards-fix-20261019
   pull_request:
     branches:
       - codex/grounds-prod-release
