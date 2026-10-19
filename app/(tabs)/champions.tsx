@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, useWindowDimensions, View, type TextProps, type TextInputProps } from 'react-native';
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
 import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -119,6 +119,17 @@ function Text(props: TextProps) {
     ? props.children.map((child) => typeof child === 'string' ? localizeCopy(child, language) : child)
     : typeof props.children === 'string' ? localizeCopy(props.children, language) : props.children;
   return <NativeText {...props}>{children}</NativeText>;
+}
+
+
+function Pressable(props: PressableProps) {
+  const { language } = useLanguage();
+  return (
+    <NativePressable
+      {...props}
+      accessibilityLabel={localizeCopy(props.accessibilityLabel, language)}
+    />
+  );
 }
 
 function TextInput(props: TextInputProps) {
