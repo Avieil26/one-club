@@ -69,7 +69,7 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
     const en: Record<string, string> = { GK: 'Goalkeeper', ST: 'Striker', CF: 'Striker', LW: 'Left winger', RW: 'Right winger', CAM: 'Attacking midfielder', CM: 'Central midfielder', CDM: 'Defensive midfielder', LM: 'Left midfielder', RM: 'Right midfielder', LB: 'Left back', RB: 'Right back', CB: 'Centre back', 'שוער': 'Goalkeeper', 'חלוץ': 'Striker', 'כנף': 'Winger', 'קשר התקפי': 'Attacking midfielder', 'קשר מרכזי': 'Central midfielder', 'קשר אחורי': 'Defensive midfielder', 'בלם': 'Centre back', 'מגן': 'Full back' };
     return en[value] || value || 'Any position';
   }
-  return labels[value] || value || (language === 'en' ? 'Any position' : 'כל עמדה');
+  return labels[value] || value || 'כל עמדה';
 }
 function displayPlatform(id: PlatformId, language: 'he' | 'en') {
   if (language === 'he') return platformLabel(id);
