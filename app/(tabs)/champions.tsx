@@ -98,7 +98,11 @@ const ENGLISH_COPY: Record<string, string> = {
   "מחיר": "Price",
   "קבוצה": "Team",
   "פרטים": "Details",
-  "התקדמות": "Progress"
+  "התקדמות": "Progress",
+  " ניצחונות": " wins",
+  "${composerImages.length} תמונות נבחרו": "${composerImages.length} images selected",
+  "${Object.keys(controllerSettings).length} הגדרות נבחרו": "${Object.keys(controllerSettings).length} settings selected",
+  "בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות.": "Choose a number of wins. This is a display-only preview and does not change your personal run. Coins, CQP, Tokens, and the rewards available to you will be shown."
 };
 
 function localizeCopy(value: string | undefined, language: 'he' | 'en') {
