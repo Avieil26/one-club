@@ -6,10 +6,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/components/ui';
 import { inlineLatin } from '@/lib/legalBidi';
 import { acceptCookieNotice, hasCookieNotice } from '@/lib/legal';
+import { useLanguage } from '@/lib/language';
 
 export function CookieNotice() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { language, t } = useLanguage();
+  const rtl = language === 'he';
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -42,14 +45,14 @@ export function CookieNotice() {
       }}
     >
       <Text accessibilityRole="header" style={{ color: colors.text, fontWeight: '900', fontSize: 16, textAlign: 'right' }}>
-        {Platform.OS === 'web' ? 'עוגיות ואחסון בדפדפן' : 'אחסון במכשיר'}
+        {t(Platform.OS === 'web' ? 'עוגיות ואחסון בדפדפן' : 'אחסון במכשיר', Platform.OS === 'web' ? 'Cookies and browser storage' : 'Device storage')}
       </Text>
-      <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }}>
-        {inlineLatin(
+      <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }}>
+        {rtl ? inlineLatin(
           '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום ואין מעקב אנליטי. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
-        )}
+        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies or analytics tracking. You can keep browsing without clicking this notice, and sign-in will continue to work.'}
       </Text>
-      <View style={{ flexDirection: 'row', direction: 'rtl', gap: 8, justifyContent: 'flex-start' }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8, justifyContent: rtl ? 'flex-start' : 'flex-start' }}>
         <Pressable
           accessibilityRole="button"
           onPress={() => {
@@ -57,14 +60,14 @@ export function CookieNotice() {
           }}
           style={{ minHeight: 44, paddingHorizontal: 16, borderRadius: 10, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>הבנתי</Text>
+          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>{t('הבנתי', 'Got it')}</Text>
         </Pressable>
         <Pressable
           accessibilityRole="link"
           onPress={() => router.push('/legal/cookies')}
           style={{ minHeight: 44, paddingHorizontal: 12, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}>פירוט העוגיות</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800', textDecorationLine: 'underline' }}>{t('פירוט העוגיות', 'Cookie details')}</Text>
         </Pressable>
       </View>
     </View>
