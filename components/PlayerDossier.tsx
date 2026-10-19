@@ -562,7 +562,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Regular card') : t('קלף עם זוהר', 'Glowing card')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={78} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
@@ -603,7 +603,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Regular card') : t('קלף עם זוהר', 'Glowing card')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={62} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
