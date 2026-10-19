@@ -17,6 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SceneAtmosphere, type SceneId } from '@/components/MarketAtmosphere';
 import { SiteNav } from '@/components/SiteNav';
+import { useLanguage } from '@/lib/language';
 
 export const colors = {
   bg: '#0A100E',
@@ -53,6 +54,8 @@ export function Screen({
   scene?: SceneId;
   showNav?: boolean;
 }) {
+  const { language } = useLanguage();
+  const rtl = language === 'he';
   const web = Platform.OS === 'web';
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
@@ -69,7 +72,7 @@ export function Screen({
           style={{ backgroundColor: 'transparent' }}
           contentContainerStyle={[
             styles.content,
-            { paddingBottom: bottomPad },
+            { paddingBottom: bottomPad, direction: rtl ? 'rtl' : 'ltr' },
             web && (isMobile ? styles.mobileWebContent : styles.webContent),
             web && { paddingBottom: bottomPad },
           ]}
@@ -83,7 +86,7 @@ export function Screen({
           <View
             style={[
               web ? { width: '100%', maxWidth, alignSelf: 'center', gap: 14 } : { width: '100%', gap: 14 },
-              { direction: 'rtl', alignItems: 'stretch' },
+              { direction: rtl ? 'rtl' : 'ltr', alignItems: 'stretch' },
             ]}
           >
             {children}
@@ -95,16 +98,20 @@ export function Screen({
 }
 
 export function Title({ children }: { children: ReactNode }) {
+  const { language } = useLanguage();
+  const rtl = language === 'he';
   return (
-    <Text style={[styles.h1, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+    <Text style={[styles.h1, { width: '100%', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
     </Text>
   );
 }
 
 export function Muted({ children }: { children: ReactNode }) {
+  const { language } = useLanguage();
+  const rtl = language === 'he';
   return (
-    <Text style={[styles.muted, { width: '100%', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }]}>
+    <Text style={[styles.muted, { width: '100%', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
     </Text>
   );
@@ -161,9 +168,12 @@ export function Field({
   secure?: boolean;
   maxLength?: number;
 }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
+  const remaining = maxLength != null ? Math.max(0, maxLength - value.length) : 0;
   return (
     <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{label}</Text>
       <TextInput
         value={value}
         onChangeText={(text) => onChangeText(maxLength ? text.slice(0, maxLength) : text)}
@@ -173,10 +183,10 @@ export function Field({
         keyboardType={keyboardType}
         secureTextEntry={secure}
         maxLength={maxLength}
-        style={[styles.input, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
+        style={[styles.input, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
       {maxLength != null ? (
-        <Text style={styles.label}>נשארו {Math.max(0, maxLength - value.length)}</Text>
+        <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t(`נשארו ${remaining}`, `${remaining} left`)}</Text>
       ) : null}
     </View>
   );
