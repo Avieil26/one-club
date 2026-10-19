@@ -16,6 +16,12 @@ on:
       - "assets/data/totw.json"
       - "assets/data/starPerformers.json"
       - "assets/data/futureStars.json"
+      - "assets/data/players.json"
+      - "assets/data/heroes.json"
+      - "assets/data/destinedEditions.json"
+      - "lib/iconPlayers.ts"
+      - "lib/fcPlayers.ts"
+      - "lib/specialCards.ts"
       - "assets/data/marketPrices.json"
       - "assets/data/priceEaIds.json"
       - "package.json"
@@ -48,3 +54,5 @@ jobs:
         run: npm run lint
       - name: Export web build
         run: npx expo export -p web
+      - name: Verify exact catalogue count and special-card rows
+        run: node scripts/verify-preview-catalogue.mjs
