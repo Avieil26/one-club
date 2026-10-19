@@ -4,7 +4,6 @@ import { Platform, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
-import { inlineLatin } from '@/lib/legalBidi';
 import { acceptCookieNotice, hasCookieNotice } from '@/lib/legal';
 import { useLanguage } from '@/lib/language';
 
