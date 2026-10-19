@@ -99,6 +99,7 @@ function SbcTile({
   now: number;
   onPress: () => void;
 }) {
+  const { language } = useLanguage();
   const theme = sbcTileTheme(challenge);
   const face = sbcFace(challenge);
   const nations = challenge.nations ?? [];
@@ -134,9 +135,7 @@ function SbcTile({
           <Text numberOfLines={1} style={{ color: '#F7F8FA', fontSize: 20, fontWeight: '800' }}>
             {face.en}
           </Text>
-          <Text numberOfLines={1} style={{ color: 'rgba(255,255,255,0.62)', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
-            {face.he}
-          </Text>
+          {language === 'he' ? <Text numberOfLines={1} style={{ color: 'rgba(255,255,255,0.62)', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>{face.he}</Text> : null}
           {remaining ? <Text style={{ color: '#E7C56A', fontSize: 12, fontWeight: '800', marginTop: 4 }}>{remaining}</Text> : null}
         </View>
         <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
