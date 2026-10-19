@@ -72,6 +72,29 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
   return labels[value] || value || 'כל עמדה';
 }
 
+
+function divisionLabelFor(value: Parameters<typeof divisionLabel>[0], language: 'he' | 'en') {
+  if (language === 'he') return divisionLabel(value);
+  return value === 'elite' ? 'Elite Division' : `Division ${value}`;
+}
+function platformLabelFor(value: PlatformId, language: 'he' | 'en') {
+  if (language === 'he') return platformLabel(value);
+  return ({ ps5: 'PlayStation 5', xbox: 'Xbox', pc: 'PC', switch2: 'Switch 2' } as Record<PlatformId, string>)[value] ?? value;
+}
+function intentLabelFor(value: GroundsIntent, language: 'he' | 'en') {
+  if (language === 'he') return intentLabel(value);
+  return value === 'need_player' ? 'Recruiting players' : 'Looking for a club';
+}
+function archetypeLabelFor(value: string, language: 'he' | 'en') {
+  return language === 'en' ? value.split(' · ')[0] : value;
+}
+function regionLabelFor(value: string | null | undefined, language: 'he' | 'en', t: (he: string, en: string) => string) {
+  if (!value) return t('אזור לא צוין', 'Region not specified');
+  if (language === 'he') return value;
+  const map: Record<string, string> = { 'צפון': 'North', 'שרון': 'Sharon', 'מרכז': 'Central', 'ירושלים': 'Jerusalem', 'דרום': 'South', 'אונליין בלבד': 'Online only' };
+  return map[value] ?? value;
+}
+
 function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; loggedIn: boolean }) {
   const { t, language, chooseLanguage } = useLanguage();
   return (
@@ -94,7 +117,7 @@ function NavBar({ onNavigate, loggedIn }: { onNavigate: (href: string) => void; 
           onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
           style={[s.accountButton, { marginRight: 6 }]}
         >
-          <Text style={s.accountText}>{language === 'he' ? 'EN' : 'עב'}</Text>
+          <Text style={s.accountText}>{language === 'he' ? 'EN' : 'HE'}</Text>
         </Pressable>
         <Pressable onPress={() => onNavigate(loggedIn ? '/profile' : '/register')} style={s.accountButton}>
           <Ionicons name={loggedIn ? 'person-circle-outline' : 'log-in-outline'} size={17} color={C.cyan} />
@@ -261,7 +284,7 @@ export default function GroundsV22Screen() {
   }
   const selectedProfile = selected ? profileFor(selected) : undefined;
   const selectedAvatar = selected ? selected.avatarUri || selectedProfile?.avatarUrl || null : null;
-  const selectedName = selected ? selectedProfile?.displayName || selected.gamertag || selected.eaId || 'שחקן קהילה' : '';
+  const selectedName = selected ? selectedProfile?.displayName || selected.gamertag || selected.eaId || t('שחקן קהילה', 'Community player') : '';
 
   return (
     <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" imageStyle={s.pageBackgroundImage} style={[s.page, { direction: rtl ? 'rtl' : 'ltr' }, Platform.OS === 'web' ? { height, minHeight: height } : undefined]}>
@@ -332,7 +355,7 @@ export default function GroundsV22Screen() {
               <InfoPanel title={t('גיוס פעיל', 'Active recruitment')} icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
-                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || 'שחקן מהקהילה'}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position)} · {divisionLabel(post.division)} · {platformLabel(post.platform)}</Text><Text style={s.recruitSub}>{post.region || 'אזור לא צוין'}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
+                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {divisionLabelFor(post.division, language)} · {platformLabelFor(post.platform, language)}</Text><Text style={s.recruitSub}>{regionLabelFor(post.region, language, t)}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>{t('אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.', 'There are no active recruitment listings yet. You can post one.')}</Text>}
                 <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>{t('צפה בכל הגיוסים', 'View all recruitment')}</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
@@ -354,11 +377,11 @@ export default function GroundsV22Screen() {
             {selected ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.modalContent}>
               <View style={[s.modalHero, compact && { flexDirection: 'column' }]}>
                 <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}<View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View></View>
-                <View style={[s.modalIntro, { alignItems: rtl ? 'flex-start' : 'flex-start' }]}><Eyebrow>{intentLabel(selected.intent)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || 'שם משתמש לא נמסר'}</Text><Text style={s.modalDescription}>{selected.archetype} · {positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{platformLabel(selected.platform)} · {divisionLabel(selected.division)}</Text></View>
+                <View style={[s.modalIntro, { alignItems: rtl ? 'flex-start' : 'flex-start' }]}><Eyebrow>{intentLabelFor(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{archetypeLabelFor(selected.archetype, language)} · {positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{platformLabelFor(selected.platform, language)} · {divisionLabelFor(selected.division, language)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
-                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region || t('לא נמסר', 'Not provided')}</Text></View>
-                <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || 'לא נמסר'}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{regionLabelFor(selected.region, language, t)}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>
               </View>
