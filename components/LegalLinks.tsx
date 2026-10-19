@@ -1,7 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 
-import { inlineLatin } from '@/lib/legalBidi';
 import { colors } from '@/components/ui';
 import { LEGAL_LINKS } from '@/lib/legal';
 import { useLanguage } from '@/lib/language';
