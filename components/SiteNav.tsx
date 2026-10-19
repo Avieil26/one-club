@@ -97,7 +97,7 @@ export function SiteNav() {
   const languageNode = (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={language === 'he' ? 'Switch language to English' : 'החלפת שפה לעברית'}
+      accessibilityLabel={language === 'he' ? 'החלפת שפה לאנגלית' : 'Switch language to Hebrew'}
       onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
       style={{
         minHeight: 32,
