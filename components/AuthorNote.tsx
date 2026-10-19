@@ -2,8 +2,11 @@ import { Text, View } from 'react-native';
 
 import { ProfileFace } from '@/components/ProfileFace';
 import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 
 export function AuthorNote({ name, body, avatarUrl }: { name: string; body: string; avatarUrl?: string | null }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const words = body.trim();
   if (!words) return null;
   return (
@@ -19,10 +22,10 @@ export function AuthorNote({ name, body, avatarUrl }: { name: string; body: stri
         borderColor: 'rgba(186, 206, 230, 0.28)',
       }}
     >
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+      <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}>
         <ProfileFace name={name} uri={avatarUrl} size={40} />
-        <Text style={{ color: '#F4F7F2', fontSize: 15, fontWeight: '600', textAlign: 'right', writingDirection: 'rtl' }}>
-          {name} כתב
+        <Text style={{ color: '#F4F7F2', fontSize: 15, fontWeight: '600', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
+          {name} {t('כתב', 'wrote')}
         </Text>
       </View>
       <Text
@@ -31,8 +34,8 @@ export function AuthorNote({ name, body, avatarUrl }: { name: string; body: stri
           fontSize: 18,
           lineHeight: 28,
           fontWeight: '500',
-          textAlign: 'right',
-          writingDirection: 'rtl',
+          textAlign: rtl ? 'right' : 'left',
+          writingDirection: rtl ? 'rtl' : 'ltr',
         }}
       >
         {words}
