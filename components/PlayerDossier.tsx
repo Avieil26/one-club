@@ -20,6 +20,7 @@ import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import { playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 
@@ -333,7 +334,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       await voteOnComment(commentId, app.user.id, vote);
       await refresh();
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'ההצבעה נכשלה');
+      Alert.alert(t('רגע', 'Something went wrong'), error instanceof Error ? error.message : t('ההצבעה נכשלה', 'Voting failed.'));
     } finally {
       setBusy(false);
     }
@@ -610,7 +611,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 12, alignItems: 'flex-end', direction: 'ltr', overflow: 'hidden' }}>
-              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
+              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{playerDisplayName(card, language)}</Text>
               {quote ? <MarketQuote console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
@@ -651,7 +652,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 8, alignItems: 'stretch', direction: 'rtl' }}>
-              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{language === 'en' ? (card.en ?? player.en ?? player.name) : player.name}</Text>
+              <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{playerDisplayName(card, language)}</Text>
               {quote ? <MarketQuote compact console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} compact />
               {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
@@ -688,19 +689,19 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           }}
         >
           <Text style={{ color: '#E8B9FF', fontSize: 11, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' }}>
-            HOW TO UNLOCK
+            {t('איך משיגים', 'HOW TO UNLOCK')}
           </Text>
           <Text style={{ color: '#FFFFFF', fontSize: 16, fontWeight: '900', textAlign: 'right' }}>
             Nicole Anyomi · Ones to Watch
           </Text>
           <Text style={{ color: '#E7DDEF', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
-            זו לא SBC ולא קלף שנקנה במרקט.
+            {t('זו לא SBC ולא קלף שנקנה במרקט.', 'This card is a season reward, unavailable through SBCs or the transfer market.')}
           </Text>
           <Text style={{ color: '#FFD6FF', fontSize: 14, fontWeight: '900', textAlign: 'right' }}>
             Premium Season 1 · Level 7 · 7,000 SP
           </Text>
           <Text style={{ color: '#B8A5C4', fontSize: 11, textAlign: 'right' }}>
-            צריך גישה ל־Premium Pass כדי לקבל את פרס Level 7.
+            {t('צריך גישה ל־Premium Pass כדי לקבל את פרס Level 7.', 'A Premium Pass is required to claim the Level 7 reward.')}
           </Text>
         </View>
       ) : null}

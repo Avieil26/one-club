@@ -1,4 +1,5 @@
-﻿import { useMemo, useState } from 'react';
+import { useLanguage } from '@/lib/language';
+import { useMemo, useState } from 'react';
 import { Text } from 'react-native';
 import { Stack, useLocalSearchParams } from 'expo-router';
 
@@ -8,6 +9,7 @@ import { DEFAULT_ITEM_SCORES, buildStrategies } from '@/lib/sbcCalculator';
 const OVRS = Object.keys(DEFAULT_ITEM_SCORES).map(Number);
 
 export default function CalculatorScreen() {
+  const { t } = useLanguage();
   const params = useLocalSearchParams<{ target?: string }>();
   const [target, setTarget] = useState(params.target ?? '20000');
   const [minOvr, setMinOvr] = useState(75);
@@ -26,14 +28,12 @@ export default function CalculatorScreen() {
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: 'מחשבון' }} />
-      <Title>מחשבון Streamlined</Title>
-      <Muted>
-        כל כרטיס נותן ניקוד לפי הדירוג. אפשר כפילויות, ואפשר להגיש חלק ולחזור אחר כך. המספרים הם טבלת ההשקה שפורסמה (75 = 90, 83 = 410, 88 = 8,300) ואפשר לערוך אותם, כי EA אמרו שהטבלה יכולה להשתנות. אין מחירי מטבעות.
-      </Muted>
-      <Field label="יעד ניקוד" value={target} onChangeText={setTarget} keyboardType="number-pad" />
+      <Stack.Screen options={{ title: t("מחשבון", "Calculator") }} />
+      <Title>{t("מחשבון Streamlined", "Streamlined calculator")}</Title>
+      <Muted>{t("כל כרטיס נותן ניקוד לפי הדירוג. אפשר כפילויות, ואפשר להגיש חלק ולחזור אחר כך. המספרים הם טבלת ההשקה שפורסמה (75 = 90, 83 = 410, 88 = 8,300) ואפשר לערוך אותם, כי EA אמרו שהטבלה יכולה להשתנות. אין מחירי מטבעות.", "Each card awards points based on its rating. Duplicates and partial submissions are allowed. The published launch values (75 = 90, 83 = 410, 88 = 8,300) can be edited because EA may change them. Coin prices are not included.")}</Muted>
+      <Field label={t("יעד ניקוד", "Target score")} value={target} onChangeText={setTarget} keyboardType="number-pad" />
       <ChoiceGroup
-        label="דירוג מינימום"
+        label={t("דירוג מינימום", "Minimum rating")}
         options={OVRS.map((ovr) => ({ id: String(ovr), label: String(ovr) }))}
         value={String(minOvr)}
         onChange={(value) => setMinOvr(Number(value))}
@@ -41,7 +41,7 @@ export default function CalculatorScreen() {
       {OVRS.map((ovr) => (
         <Field
           key={ovr}
-          label={`ניקוד לכרטיס ${ovr}`}
+          label={t(`ניקוד לכרטיס ${ovr}`, `Points for a ${ovr}-rated card`)}
           value={scores[ovr] ?? ''}
           keyboardType="number-pad"
           onChangeText={(value) => setScores((current) => ({ ...current, [ovr]: value }))}
@@ -52,11 +52,11 @@ export default function CalculatorScreen() {
           <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: 'right' }}>{strategy.title}</Text>
           {strategy.lines.map((line) => (
             <Muted key={`${strategy.id}-${line.ovr}`}>
-              {line.count} כרטיסי דירוג {line.ovr} · {line.scoreEach} נקודות כל אחד · סה״כ {line.total}
+              {line.count}{t("כרטיסי דירוג", "Rated cards")}{line.ovr} · {line.scoreEach}{t("נקודות כל אחד · סה״כ", "points each · Total")}{line.total}
             </Muted>
           ))}
           <Muted>
-            {strategy.cardCount} כרטיסים מגיעים ל-{strategy.totalScore}, מעל יעד {target || '0'}
+            {strategy.cardCount}{t("כרטיסים מגיעים ל-", "cards reach")}{strategy.totalScore}{t(", מעל יעד", ", above target")}{target || '0'}
           </Muted>
         </Card>
       ))}

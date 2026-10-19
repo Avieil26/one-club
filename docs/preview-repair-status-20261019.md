@@ -21,7 +21,7 @@ The actual app export now has **20,118 cards with 20,118 unique IDs**:
 | Ones to Watch | 1 |
 | Total | 20,118 |
 
-Regular cards are preserved. Metadata, edition prices and item IDs are merged alongside the restored rows. A fixture pins the 38 recovered identities, ratings and positions. Both validation scripts run before Vercel/CI exports.
+Regular cards are preserved. Metadata, edition prices and item IDs are merged alongside the restored rows. A fixture pins the 38 recovered identities, ratings and positions. Catalogue, preservation and localization checks run before Vercel/CI exports.
 
 ## Preserved features
 
@@ -41,6 +41,16 @@ Regular cards are preserved. Metadata, edition prices and item IDs are merged al
 - Full ESLint run reports existing/restored source debt (85 errors, 53 warnings at the initial integrated check), mainly React compiler hook/ref rules. This is not a clean lint result. New Grounds form/PlayStyles code compiled successfully; unrelated hook rewrites were not included in this recovery.
 - Browser visual QA could not complete: no local browser binary was available, its download failed, and the cloud browser could not reach the workspace's local server. No visual pass or live backend test is claimed.
 
-## Remaining design review
+## Star Performers and language follow-up
 
-Star Performer data and item-specific portraits are retained with the orange-shield renderer from `preview/star-performers-20261018`. The later reference screenshot from the earlier conversation is absent from both uploaded archives. Matching to that exact screenshot remains unverified, so this PR stays a draft pending design review and Preview smoke testing.
+The user supplied the approved orange crystal reference after inspecting the first Preview at `https://fc27-israel-6vxtyn33a-avielindapurkar717-9878s-projects.vercel.app`. The shared Star Performer background now uses a faceted orange/gold surface, a thin angular illuminated frame and the small crown/star at the top. The player-free SVG review is in `preview/star-performers-frame.svg`.
+
+All six Star Performer cards use this background. Player data, item-specific portraits, rating, position, name, flag, badge and stat layout remain unchanged. The foreground JSX/styles after the SVG were compared byte-for-byte against the previous commit; catalogue and promo data files are unchanged by this follow-up. Hero and TOTW keep their previous paths.
+
+English presentation now covers player and icon names (including names supplied by media metadata), player page navigation, market filter nations/leagues/clubs, built-in Career challenge titles/rules/proof, status and image labels, create/submit screens, SBC copy, comments, squad building and related dialogs. Known local validation messages also have English translations. Both language options remain available, original Hebrew and stored identifiers remain intact, and community-authored text is preserved.
+
+The Israeli scouting filter was removed without removing the Israeli players from the full list.
+
+`verify:localization` checks all 20,118 player names and football identities, all built-in Career challenges, all 36 catalogued SBCs, language options and literal UI copy (including resolution through the legal/Grounds translation boundaries). It passes alongside typecheck, catalogue and preservation guards and the web export. Full ESLint still reports the pre-existing 85 React compiler/hooks errors; comparison against the integration baseline found no additional errors by file/rule. The new background, translation helpers and localization guard pass focused lint.
+
+The first Preview was deployed successfully through the user's Windows CLI. This follow-up must be fetched into that same isolated worktree and deployed to Preview for full browser review. The connected Vercel tool returned 403 for the intended team/project, so no live visual review or new deployment is claimed here. The PR remains a draft for Preview review.

@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -65,6 +66,7 @@ async function saveCampaignSeen(userId: string): Promise<void> {
 }
 
 export function FutureStarsAnnouncement() {
+  const { t } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const userId = app.user?.id;
@@ -171,12 +173,12 @@ export function FutureStarsAnnouncement() {
               </View>
               <View style={{ gap: 2 }}>
                 <Text style={{ color: '#D9B6FF', fontSize: 10, fontWeight: '900', letterSpacing: 1.1, textAlign: 'right' }}>FC27 ISRAEL · UPDATE</Text>
-                <Text style={{ color: '#FFF4D7', fontSize: 15, fontWeight: '900', textAlign: 'right' }}>עדכון חדש באתר</Text>
+                <Text style={{ color: '#FFF4D7', fontSize: 15, fontWeight: '900', textAlign: 'right' }}>{t("עדכון חדש באתר", "New update")}</Text>
               </View>
             </View>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="סגירת הודעת העדכון"
+              accessibilityLabel={t("סגירת הודעת העדכון", "Close update announcement")}
               onPress={dismiss}
               hitSlop={10}
               style={{ width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.07)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.13)', marginLeft: 10 }}
@@ -186,14 +188,10 @@ export function FutureStarsAnnouncement() {
           </View>
 
           <View style={{ paddingHorizontal: 16, paddingTop: 15, paddingBottom: 12, gap: 8 }}>
-            <Text style={{ color: '#F8E7FF', fontSize: width < 440 ? 23 : 28, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>
-              כוכבי העתיד הגיעו! ✨
-            </Text>
-            <Text style={{ color: '#D8D4E3', fontSize: 13, lineHeight: 21, textAlign: 'right', writingDirection: 'rtl' }}>
-              הכירו את הדור הבא של הכדורגל: כל 15 קלפי Future Stars החדשים מחכים לכם עם דירוגים, נתונים וסטטיסטיקות — וגם חיבור למחירי השוק.
-            </Text>
+            <Text style={{ color: '#F8E7FF', fontSize: width < 440 ? 23 : 28, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>{t("כוכבי העתיד הגיעו! ✨", "Future Stars have arrived! ✨")}</Text>
+            <Text style={{ color: '#D8D4E3', fontSize: 13, lineHeight: 21, textAlign: 'right', writingDirection: 'rtl' }}>{t("הכירו את הדור הבא של הכדורגל: כל 15 קלפי Future Stars החדשים מחכים לכם עם דירוגים, נתונים וסטטיסטיקות — וגם חיבור למחירי השוק.", "Meet the next generation of football: all 15 new Future Stars cards are here with ratings, attributes, statistics and market prices.")}</Text>
             <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 7, marginTop: 1 }}>
-              {['15 קלפים מיוחדים', 'נתוני שחקנים מלאים', 'מחירי שוק'].map((label) => (
+              {[t("15 קלפים מיוחדים", "15 special cards"), t("נתוני שחקנים מלאים", "Full player attributes"), t("מחירי שוק", "Market prices")].map((label) => (
                 <View key={label} style={{ borderRadius: 999, borderWidth: 1, borderColor: 'rgba(196, 151, 255, 0.32)', backgroundColor: 'rgba(133, 79, 204, 0.12)', paddingHorizontal: 10, paddingVertical: 6 }}>
                   <Text style={{ color: '#E8D6FF', fontSize: 10, fontWeight: '800' }}>{label}</Text>
                 </View>
@@ -221,11 +219,9 @@ export function FutureStarsAnnouncement() {
               onPress={goToFutureStars}
               style={{ minHeight: 43, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: '#B786F5', borderWidth: 1, borderColor: '#D9B6FF', paddingHorizontal: 16 }}
             >
-              <Text style={{ color: '#170C25', fontSize: 14, fontWeight: '900' }}>יאללה, בואו לראות את הכוכבים ✦</Text>
+              <Text style={{ color: '#170C25', fontSize: 14, fontWeight: '900' }}>{t("יאללה, בואו לראות את הכוכבים ✦", "Explore Future Stars ✦")}</Text>
             </Pressable>
-            <Text style={{ marginTop: 7, color: '#7C788B', fontSize: 10, textAlign: 'center' }}>
-              ההודעה תופיע פעם אחת בלבד בתקופת ההשקה
-            </Text>
+            <Text style={{ marginTop: 7, color: '#7C788B', fontSize: 10, textAlign: 'center' }}>{t("ההודעה תופיע פעם אחת בלבד בתקופת ההשקה", "This announcement appears once during the launch period")}</Text>
           </View>
         </View>
       </View>

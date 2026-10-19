@@ -1,8 +1,9 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Image, Pressable, Text, View, type ImageSourcePropType } from 'react-native';
 
 import { colors } from '@/components/ui';
-import { PLATFORMS } from '@/lib/labels';
+import { platformLabel, PLATFORMS } from '@/lib/labels';
 import type { PlatformId } from '@/lib/types';
 
 const ICONS: Record<PlatformId, ImageSourcePropType> = {
@@ -13,10 +14,11 @@ const ICONS: Record<PlatformId, ImageSourcePropType> = {
 };
 
 export function PlatformMark({ id, size = 36 }: { id: PlatformId; size?: number }) {
+  const { language } = useLanguage();
   return (
     <Image
       source={ICONS[id]}
-      accessibilityLabel={PLATFORMS.find((item) => item.id === id)?.label ?? id}
+      accessibilityLabel={platformLabel(id, language)}
       style={{ width: size, height: size * 0.78 }}
       resizeMode="contain"
     />
@@ -26,17 +28,18 @@ export function PlatformMark({ id, size = 36 }: { id: PlatformId; size?: number 
 export function PlatformPicker({
   value,
   onChange,
-  label = 'פלטפורמה',
+  label,
 }: {
   value: PlatformId;
   onChange: (value: PlatformId) => void;
   label?: string;
 }) {
+  const { t, language } = useLanguage();
   const [hovered, setHovered] = useState<PlatformId | null>(null);
 
   return (
     <View style={{ gap: 8 }}>
-      <Text style={{ color: colors.muted, fontSize: 13, textAlign: 'right', writingDirection: 'rtl' }}>{label}</Text>
+      <Text style={{ color: colors.muted, fontSize: 13, textAlign: 'right', writingDirection: 'rtl' }}>{label ?? t('פלטפורמה', 'Platform')}</Text>
       <View
         style={{
           flexDirection: 'row-reverse',
@@ -54,7 +57,7 @@ export function PlatformPicker({
             <Pressable
               key={platform.id}
               accessibilityRole="button"
-              accessibilityLabel={platform.label}
+              accessibilityLabel={platformLabel(platform.id, language)}
               accessibilityState={{ selected }}
               onPress={() => onChange(platform.id)}
               onHoverIn={() => setHovered(platform.id)}

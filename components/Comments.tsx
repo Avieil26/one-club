@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 
@@ -11,6 +12,7 @@ import type { CommentTarget } from '@/lib/types';
 const LIMIT = 120;
 
 export function Comments({ targetType, targetId }: { targetType: CommentTarget; targetId: string }) {
+  const { t, language } = useLanguage();
   const app = useApp();
   const [body, setBody] = useState('');
   const [replyTo, setReplyTo] = useState<string | null>(null);
@@ -22,18 +24,18 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
       const held = await app.addComment({ targetType, targetId, preset: null, body, parentId: replyTo });
       setBody('');
       setReplyTo(null);
-      if (held) Alert.alert('נשמר לבדיקה', 'התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.');
+      if (held) Alert.alert(t("נשמר לבדיקה", "Held for review"), t("התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.", "Your comment was held for review under the community respect guidelines."));
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
   async function report(commentId: string) {
     try {
       await app.reportComment(commentId);
-      Alert.alert('תודה', 'התגובה ירדה מהפיד ומחכה לבדיקה.');
+      Alert.alert(t("תודה", "Thank you"), t("התגובה ירדה מהפיד ומחכה לבדיקה.", "The comment has been removed from the feed and is awaiting review."));
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
@@ -41,7 +43,7 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
     try {
       await app.toggleCommentLike(commentId);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
@@ -67,21 +69,21 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
             <ProfileFace name={name} uri={avatarUrl} />
             <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
               <Text style={{ color: '#F4F7F2', fontSize: 14, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{name}</Text>
-              {comment.preset ? <Text style={{ color: '#D5E2F2', fontSize: 11, textAlign: 'right' }}>{presetLabel(comment.preset)}</Text> : null}
+              {comment.preset ? <Text style={{ color: '#D5E2F2', fontSize: 11, textAlign: 'right' }}>{presetLabel(comment.preset, language)}</Text> : null}
             </View>
           </View>
           {comment.body ? <Text style={{ color: colors.text, fontSize: 16, lineHeight: 24, fontWeight: '500', textAlign: 'right', writingDirection: 'rtl' }}>{comment.body}</Text> : null}
-          {comment.status === 'hidden_pending' ? <Badge text="ממתין לבדיקה" tone="amber" /> : null}
+          {comment.status === 'hidden_pending' ? <Badge text={t("ממתין לבדיקה", "Pending review")} tone="amber" /> : null}
           <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 14 }}>
             <Pressable onPress={() => like(comment.id)} disabled={app.busy} style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 5 }}>
               <Text style={{ color: liked ? '#FF5D73' : '#AEB7C2', fontSize: 17 }}>{liked ? '♥' : '♡'}</Text>
-              <Text style={{ color: '#AEB7C2', fontSize: 12, fontWeight: '700' }}>{likes.length || 'לייק'}</Text>
+              <Text style={{ color: '#AEB7C2', fontSize: 12, fontWeight: '700' }}>{likes.length || t("לייק", "Like")}</Text>
             </Pressable>
             <Pressable onPress={() => { setReplyTo(comment.id); setBody(''); }} disabled={app.busy}>
-              <Text style={{ color: '#D5E2F2', fontSize: 12, fontWeight: '800' }}>השב</Text>
+              <Text style={{ color: '#D5E2F2', fontSize: 12, fontWeight: '800' }}>{t("השב", "Reply")}</Text>
             </Pressable>
             {comment.status === 'visible' && comment.userId !== app.user?.id ? (
-              <Pressable onPress={() => report(comment.id)}><Text style={{ color: '#7F8995', fontSize: 12 }}>דיווח</Text></Pressable>
+              <Pressable onPress={() => report(comment.id)}><Text style={{ color: '#7F8995', fontSize: 12 }}>{t("דיווח", "Report")}</Text></Pressable>
             ) : null}
           </View>
         </View>
@@ -94,19 +96,18 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
 
   return (
     <View style={{ gap: 12, paddingTop: 8 }}>
-      <Text style={{ color: colors.text, fontSize: 20, fontWeight: '800', textAlign: 'right' }}>
-        תגובות{items.length ? ' (' + items.length + ')' : ''}
+      <Text style={{ color: colors.text, fontSize: 20, fontWeight: '800', textAlign: 'right' }}>{t("תגובות", "Comments")}{items.length ? ' (' + items.length + ')' : ''}
       </Text>
-      {roots.length === 0 ? <Muted>עדיין אין תגובות.</Muted> : null}
+      {roots.length === 0 ? <Muted>{t("עדיין אין תגובות.", "No comments yet.")}</Muted> : null}
       {roots.map((comment) => <CommentCard key={comment.id} comment={comment} />)}
       {replyTo ? (
         <View style={{ flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'rgba(227,179,65,.08)', borderRadius: 10, padding: 9 }}>
-          <Text style={{ color: '#E3B341', fontSize: 12, fontWeight: '800' }}>משיב ל־{replyName}</Text>
-          <Pressable onPress={() => setReplyTo(null)}><Text style={{ color: '#D5E2F2', fontSize: 12 }}>ביטול</Text></Pressable>
+          <Text style={{ color: '#E3B341', fontSize: 12, fontWeight: '800' }}>{t("משיב ל־", "Replying to")}{replyName}</Text>
+          <Pressable onPress={() => setReplyTo(null)}><Text style={{ color: '#D5E2F2', fontSize: 12 }}>{t("ביטול", "Cancel")}</Text></Pressable>
         </View>
       ) : null}
-      <Field label={replyTo ? 'תגובה לתגובה' : 'תגובה'} value={body} onChangeText={setBody} maxLength={LIMIT} multiline placeholder={replyTo ? 'כתוב תשובה...' : 'כתוב תגובה...'} />
-      <Button label={replyTo ? 'שליחת תשובה' : 'פרסום תגובה'} onPress={send} disabled={app.busy || !body.trim()} />
+      <Field label={replyTo ? t("תגובה לתגובה", "Reply") : t("תגובה", "Comment")} value={body} onChangeText={setBody} maxLength={LIMIT} multiline placeholder={replyTo ? t("כתוב תשובה...", "Write a reply…") : t("כתוב תגובה...", "Write a comment…")} />
+      <Button label={replyTo ? t("שליחת תשובה", "Send reply") : t("פרסום תגובה", "Post comment")} onPress={send} disabled={app.busy || !body.trim()} />
     </View>
   );
 }

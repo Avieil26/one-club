@@ -30,7 +30,7 @@ import { statTone } from '@/lib/playerMeta';
 import { useLanguage } from '@/lib/language';
 import { displayClub, displayNation } from '@/lib/footballLocalization';
 
-type FilterTab = 'all' | 'israel' | 'attack' | 'midfield' | 'defense';
+type FilterTab = 'all' | 'attack' | 'midfield' | 'defense';
 
 type SubFilterTab = 'all' | 'wonderkids' | 'bargains' | '70-77';
 
@@ -126,7 +126,6 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
 
   const filteredPlayers = CAREER_SCOUT_PLAYERS.filter((p) => {
     // Primary position / nation filter
-    if (activeTab === 'israel' && p.category !== 'israel') return false;
     if (activeTab === 'attack' && !['ST', 'RW', 'LW', 'RM', 'LM'].includes(p.position)) return false;
     if (activeTab === 'midfield' && !['CAM', 'CM', 'CDM'].includes(p.position)) return false;
     if (activeTab === 'defense' && !['CB', 'LB', 'RB', 'GK'].includes(p.position)) return false;
@@ -194,16 +193,6 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
         >
           <Text style={[styles.filterPillText, activeTab === 'all' && styles.filterPillTextActive]}>
             {t('הכל', 'All')} ({CAREER_SCOUT_PLAYERS.length})
-          </Text>
-        </Pressable>
-
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => handleTabChange('israel')}
-          style={[styles.filterPill, styles.israelFilterPill, activeTab === 'israel' && styles.israelFilterPillActive]}
-        >
-          <Text style={[styles.filterPillText, styles.israelFilterText, activeTab === 'israel' && styles.israelFilterTextActive]}>
-            🇮🇱 {t('כחול-לבן', 'Israeli')} ({CAREER_SCOUT_PLAYERS.filter(p => p.category === 'israel').length})
           </Text>
         </Pressable>
 
@@ -986,21 +975,6 @@ const styles = StyleSheet.create({
   },
   filterPillTextActive: {
     color: '#022010',
-    fontWeight: '900',
-  },
-  israelFilterPill: {
-    backgroundColor: 'rgba(56, 189, 248, 0.16)',
-    borderColor: 'rgba(56, 189, 248, 0.4)',
-  },
-  israelFilterPillActive: {
-    backgroundColor: '#38bdf8',
-    borderColor: '#7dd3fc',
-  },
-  israelFilterText: {
-    color: '#7dd3fc',
-  },
-  israelFilterTextActive: {
-    color: '#031726',
     fontWeight: '900',
   },
   subFilterBar: {

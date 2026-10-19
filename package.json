@@ -50,8 +50,9 @@
     "verify:players": "node scripts/verify-sample.mjs",
     "lint": "expo lint",
     "verify:catalogue": "node scripts/verify-preview-catalogue.mjs",
-    "build:web": "npm run verify:catalogue && npm run verify:preservation && expo export -p web",
-    "verify:preservation": "node scripts/verify-preview-preservation.mjs"
+    "build:web": "npm run verify:catalogue && npm run verify:preservation && npm run verify:localization && expo export -p web",
+    "verify:preservation": "node scripts/verify-preview-preservation.mjs",
+    "verify:localization": "node scripts/verify-preview-localization.mjs"
   },
   "private": true
 }

@@ -5,6 +5,8 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { CareerCreamButton, CareerStripes } from '@/components/CareerChallengeCard';
 import { ImageRow, Muted, Screen, Title } from '@/components/ui';
 import { careerCream, careerFont, careerThemeFor } from '@/lib/careerCardTheme';
+import { useLanguage } from '@/lib/language';
+import { careerChallengeCopy } from '@/lib/careerLocalization';
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
 import { useApp } from '@/lib/store';
@@ -12,19 +14,21 @@ import { useApp } from '@/lib/store';
 export default function SubmitChallengeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
+  const { language, t } = useLanguage();
   const router = useRouter();
   const challenge = app.challenges.find((item) => item.id === id);
   const [playerOrClubName, setPlayerOrClubName] = useState('');
   const [note, setNote] = useState('');
   const [imageUris, setImageUris] = useState<string[]>([]);
-  const challengeTitle = challenge?.title ?? 'האתגר';
+  const copy = challenge ? careerChallengeCopy(challenge, language) : null;
+  const challengeTitle = copy?.title ?? t('האתגר', 'the challenge');
 
   async function choose() {
     try {
       const picked = await pickImages(3);
       if (picked.length) setImageUris(picked);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
@@ -32,24 +36,24 @@ export default function SubmitChallengeScreen() {
     if (!id) return;
     try {
       if (!imageUris.length) {
-        Alert.alert('רגע', 'צריך לפחות צילום מסך אחד שמתאים לאתגר הקריירה הזה');
+        Alert.alert(t('רגע', 'Something went wrong'), t('צריך לפחות צילום מסך אחד שמתאים לאתגר הקריירה הזה', 'Upload at least one screenshot that meets this challenge’s requirements.'));
         return;
       }
       await app.submitCareer({ challengeId: id, playerOrClubName, note, imageUris });
       Alert.alert(
-        'נשלח לאישור',
-        `ההגשה ל«${challengeTitle}» נשלחה לבדיקה. היא תופיע רק אחרי אישור מנהל.`,
+        t('נשלח לאישור', 'Submitted for approval'),
+        t(`ההגשה ל«${challengeTitle}» נשלחה לבדיקה. היא תופיע רק אחרי אישור מנהל.`, `Your submission for “${challengeTitle}” is awaiting review. It will appear after administrator approval.`),
       );
       router.replace(`/career/${id}`);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
   if (!challenge) {
     return (
       <Screen scene="career">
-        <Title>האתגר לא נמצא</Title>
+        <Title>{t('האתגר לא נמצא', 'Challenge not found')}</Title>
       </Screen>
     );
   }
@@ -58,17 +62,17 @@ export default function SubmitChallengeScreen() {
 
   return (
     <Screen scene="career">
-      <Stack.Screen options={{ title: 'הגשה' }} />
+      <Stack.Screen options={{ title: t('הגשה', 'Submit proof') }} />
       <View style={[styles.sheet, { backgroundColor: theme.background }]}>
         <CareerStripes theme={theme} />
-        <Text style={[styles.kicker, { color: theme.accent }]}>{challenge.title}</Text>
-        <Title>הגשה ל«{challenge.title}»</Title>
-        <Muted>ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.</Muted>
+        <Text style={[styles.kicker, { color: theme.accent }]}>{challengeTitle}</Text>
+        <Title>{t(`הגשה ל«${challengeTitle}»`, `Submit proof for “${challengeTitle}”`)}</Title>
+        <Muted>{t('ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.', 'Your submission is reviewed by an administrator before it appears in the feed.')}</Muted>
         {challenge.proofRequirements ? (
-          <Muted>מה חייב להופיע בצילום: {challenge.proofRequirements}</Muted>
+          <Muted>{t('מה חייב להופיע בצילום: ', 'Required proof: ')}{copy?.proofRequirements}</Muted>
         ) : null}
         <View style={styles.field}>
-          <Text style={styles.label}>שם השחקן או המועדון</Text>
+          <Text style={styles.label}>{t('שם השחקן או המועדון', 'Player or club name')}</Text>
           <TextInput
             value={playerOrClubName}
             onChangeText={setPlayerOrClubName}
@@ -77,7 +81,7 @@ export default function SubmitChallengeScreen() {
           />
         </View>
         <View style={styles.field}>
-          <Text style={styles.label}>מה עשיתם</Text>
+          <Text style={styles.label}>{t('מה עשיתם', 'What did you achieve?')}</Text>
           <TextInput
             value={note}
             onChangeText={setNote}
@@ -88,14 +92,14 @@ export default function SubmitChallengeScreen() {
         </View>
         <Pressable accessibilityRole="button" onPress={choose}>
           <View style={[styles.drop, { borderRightColor: theme.inset, borderColor: theme.accent }]}>
-            <Text style={styles.dropTitle}>צילום מסך להוכחה</Text>
-            <Muted>חובה להגשה ל«{challenge.title}». עד 3 תמונות.</Muted>
+            <Text style={styles.dropTitle}>{t('צילום מסך להוכחה', 'Proof screenshots')}</Text>
+            <Muted>{t(`חובה להגשה ל«${challengeTitle}». עד 3 תמונות.`, `Required for “${challengeTitle}”. Up to 3 images.`)}</Muted>
             {imageUris.length ? <ImageRow uris={imageUris} /> : null}
           </View>
         </Pressable>
         <CareerCreamButton
           theme={theme}
-          label="שליחת ההגשה לאתגר הזה"
+          label={t('שליחת ההגשה לאתגר הזה', 'Submit proof for this challenge')}
           onPress={app.busy ? undefined : save}
         />
       </View>

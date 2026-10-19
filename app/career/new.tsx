@@ -1,14 +1,16 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 
 import { Button, ChoiceGroup, Field, Screen, Title } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 import { errorMessage } from '@/lib/format';
 import { useApp } from '@/lib/store';
 import type { CareerMode } from '@/lib/types';
 
 export default function NewChallengeScreen() {
   const app = useApp();
+  const { t } = useLanguage();
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [mode, setMode] = useState<CareerMode>('manager');
@@ -20,7 +22,7 @@ export default function NewChallengeScreen() {
   if (!app.user?.isAdmin) {
     return (
       <Screen scene="career">
-        <Title>רק מנהל יכול ליצור אתגר</Title>
+        <Title>{t('רק מנהל יכול ליצור אתגר', 'Only an administrator can create a challenge')}</Title>
       </Screen>
     );
   }
@@ -30,29 +32,29 @@ export default function NewChallengeScreen() {
       await app.createChallenge({ title, mode, rules, proofRequirements, shareCode, endsAt });
       router.back();
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
   return (
     <Screen scene="career">
-      <Stack.Screen options={{ title: 'אתגר חדש' }} />
-      <Title>אתגר חדש</Title>
-      <Field label="כותרת" value={title} onChangeText={setTitle} />
+      <Stack.Screen options={{ title: t('אתגר חדש', 'New challenge') }} />
+      <Title>{t('אתגר חדש', 'New challenge')}</Title>
+      <Field label={t('כותרת', 'Title')} value={title} onChangeText={setTitle} />
       <ChoiceGroup
-        label="סוג"
+        label={t('סוג', 'Mode')}
         options={[
-          { id: 'manager', label: 'קריירת מאמן' },
-          { id: 'player', label: 'קריירת שחקן' },
+          { id: 'manager', label: t('קריירת מאמן', 'Manager career') },
+          { id: 'player', label: t('קריירת שחקן', 'Player career') },
         ]}
         value={mode}
         onChange={setMode}
       />
-      <Field label="חוקים" value={rules} onChangeText={setRules} multiline />
-      <Field label="מה חייב להופיע בצילום" value={proofRequirements} onChangeText={setProofRequirements} multiline />
-      <Field label="קוד שיתוף מהמשחק, אם יש" value={shareCode} onChangeText={setShareCode} />
-      <Field label="תאריך סיום" value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
-      <Button label="פרסום האתגר" onPress={save} disabled={app.busy} />
+      <Field label={t('חוקים', 'Rules')} value={rules} onChangeText={setRules} multiline />
+      <Field label={t('מה חייב להופיע בצילום', 'Required proof')} value={proofRequirements} onChangeText={setProofRequirements} multiline />
+      <Field label={t('קוד שיתוף מהמשחק, אם יש', 'In-game share code, if available')} value={shareCode} onChangeText={setShareCode} />
+      <Field label={t('תאריך סיום', 'End date')} value={endsAt} onChangeText={setEndsAt} placeholder="2026-10-20" />
+      <Button label={t('פרסום האתגר', 'Publish challenge')} onPress={save} disabled={app.busy} />
     </Screen>
   );
 }

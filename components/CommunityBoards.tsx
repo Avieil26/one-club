@@ -77,14 +77,14 @@ function Rank({ place }: { place: number }) {
 }
 
 function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const rtl = language === 'he';
   const router = useRouter();
   const value = row.value.toLocaleString('en-US');
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`פתיחת הפרופיל של ${row.name}`}
+      accessibilityLabel={t(`פתיחת הפרופיל של ${row.name}`, `View ${row.name}’s profile`)}
       onPress={() => router.push(`/player/${row.userId}`)}
       style={{
         minHeight: 58,

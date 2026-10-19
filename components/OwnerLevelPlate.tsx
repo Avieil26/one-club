@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -52,6 +53,7 @@ function XpFigure({ value }: { value: string }) {
 
 /** Visual left of the profile. Tap opens a small window on this screen. */
 export function LevelChip({ progress }: { progress: XpProgress }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const tone = playerLevelTone(progress.level);
   const xp = progress.xp.toLocaleString('en-US');
@@ -62,7 +64,7 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
       <Pressable
         onPress={() => setOpen(true)}
         accessibilityRole="button"
-        accessibilityLabel={`רמה ${progress.level}`}
+        accessibilityLabel={t(`רמה ${progress.level}`, `Level ${progress.level}`)}
         hitSlop={8}
       >
         <LevelMark progress={progress} />
@@ -81,17 +83,15 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
                 />
                 <View style={{ padding: 18, gap: 14, direction: 'rtl' }}>
                   <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Text style={{ color: '#F7F4EA', fontFamily: careerFont, fontSize: 18, fontWeight: '900', writingDirection: 'rtl' }}>הרמה שלך</Text>
-                    <Pressable onPress={() => setOpen(false)} hitSlop={10} accessibilityRole="button" accessibilityLabel="סגירה">
+                    <Text style={{ color: '#F7F4EA', fontFamily: careerFont, fontSize: 18, fontWeight: '900', writingDirection: 'rtl' }}>{t("הרמה שלך", "Your level")}</Text>
+                    <Pressable onPress={() => setOpen(false)} hitSlop={10} accessibilityRole="button" accessibilityLabel={t("סגירה", "Close")}>
                       <Text style={{ color: 'rgba(247,244,234,0.7)', fontSize: 18, fontWeight: '800' }}>✕</Text>
                     </Pressable>
                   </View>
                   <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 14 }}>
                     <LevelMark progress={progress} />
                     <View style={{ flex: 1, gap: 4 }}>
-                      <Text style={{ color: 'rgba(247,244,234,0.7)', fontFamily: careerFont, fontSize: 13, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                        יש לך
-                      </Text>
+                      <Text style={{ color: 'rgba(247,244,234,0.7)', fontFamily: careerFont, fontSize: 13, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("יש לך", "You have")}</Text>
                       <Text style={{ color: tone.gradient[0], fontFamily: careerFont, fontSize: 28, fontWeight: '900', textAlign: 'right' }}>
                         <XpFigure value={`${xp} XP`} />
                       </Text>
@@ -99,44 +99,26 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
                   </View>
                   <Text style={{ color: '#F7F4EA', fontFamily: careerFont, fontSize: 16, lineHeight: 24, fontWeight: '800', textAlign: 'right', writingDirection: 'rtl' }}>
                     {progress.maxed ? (
-                      'רמה 50. אין לאן לעלות.'
+                      t("רמה 50. אין לאן לעלות.", "Level 50. You have reached the maximum level.")
                     ) : (
-                      <>
-                        צריך עוד <XpFigure value={`${left} XP`} /> לעלות לרמה <XpFigure value={next} />
+                      <>{t("צריך עוד ", "You need ")}<XpFigure value={`${left} XP`} />{t(" לעלות לרמה ", " to reach level ")}<XpFigure value={next} />
                       </>
                     )}
                   </Text>
                   <View style={{ gap: 7, paddingTop: 2 }}>
-                    <Text style={{ color: tone.gradient[0], fontFamily: careerFont, fontSize: 15, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>
-                      איך מרוויחים XP?
+                    <Text style={{ color: tone.gradient[0], fontFamily: careerFont, fontSize: 15, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>{t("איך מרוויחים XP?", "How do you earn XP?")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• אתגר Career שאושר:", "• Approved Career challenge:")}<XpFigure value="25 XP" />
                     </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • אתגר Career שאושר: <XpFigure value="25 XP" />
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• פתרון SBC שקיבל 3 סימוני «עבד לי»:", "• SBC solution marked “Worked for me” 3 times:")}<XpFigure value="15 XP" />
                     </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • פתרון SBC שקיבל 3 סימוני «עבד לי»: <XpFigure value="15 XP" />
+                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• Squad שקיבל 3 דירוגים:", "• Squad with 3 ratings:")}<XpFigure value="10 XP" />
                     </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.78)', fontFamily: careerFont, fontSize: 13, lineHeight: 21, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • Squad שקיבל 3 דירוגים: <XpFigure value="10 XP" />
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • העלאת Pack מאושרת: <XpFigure value="5 XP" /> · עד 5 פעולות בשבוע
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • אימות רמה ב־Grounds: <XpFigure value="5 XP" /> · עד 5 בשבוע
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • דירוג Squad של שחקן אחר: <XpFigure value="2 XP" /> · עד 5 בשבוע
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • סימון פתרון SBC כ«עבד לי»: <XpFigure value="2 XP" /> לכל פתרון
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      • תגובה שעוברת לאישור ופרסום: <XpFigure value="1 XP" /> · עד 5 בשבוע
-                    </Text>
-                    <Text style={{ color: 'rgba(247,244,234,0.55)', fontFamily: careerFont, fontSize: 12, lineHeight: 19, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>
-                      משחקונים לא נותנים XP — הם רק לכיף.
-                    </Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• העלאת Pack מאושרת:", "• Approved pack upload:")}<XpFigure value="5 XP" />{t("· עד 5 פעולות בשבוע", "· Up to 5 actions per week")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• אימות רמה ב־Grounds:", "• Grounds level verification:")}<XpFigure value="5 XP" />{t("· עד 5 בשבוע", "· Up to 5 per week")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• דירוג Squad של שחקן אחר:", "• Rating another player’s squad:")}<XpFigure value="2 XP" />{t("· עד 5 בשבוע", "· Up to 5 per week")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• סימון פתרון SBC כ«עבד לי»:", "• Marking an SBC solution “Worked for me”:")}<XpFigure value="2 XP" />{t("לכל פתרון", "per solution")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.72)', fontFamily: careerFont, fontSize: 12, lineHeight: 20, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("• תגובה שעוברת לאישור ופרסום:", "• Approved and published comment:")}<XpFigure value="1 XP" />{t("· עד 5 בשבוע", "· Up to 5 per week")}</Text>
+                    <Text style={{ color: 'rgba(247,244,234,0.55)', fontFamily: careerFont, fontSize: 12, lineHeight: 19, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' }}>{t("משחקונים לא נותנים XP — הם רק לכיף.", "Mini-games do not award XP — play them for fun.")}</Text>
                   </View>
                 </View>
               </LinearGradient>

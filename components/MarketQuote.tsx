@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
@@ -40,6 +41,7 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: boolean; console?: number; pc?: number }) {
+  const { t } = useLanguage();
   useMarketPrices();
   const [mode, setMode] = useState<'console' | 'pc'>('console');
   const [open, setOpen] = useState(false);
@@ -83,7 +85,7 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
       <View style={{ alignItems: 'flex-start', zIndex: 2 }}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={mode === 'console' ? 'קונסולות' : 'מחשב'}
+          accessibilityLabel={mode === 'console' ? t("קונסולות", "Consoles") : t("מחשב", "PC")}
           onPress={() => setOpen((value) => !value)}
           style={{
             flexDirection: 'row',
@@ -143,7 +145,7 @@ export function MarketQuote({ compact, console: consolePrice, pc }: { compact?: 
             writingDirection: hasAmount ? 'ltr' : 'rtl',
           }}
         >
-          {hasAmount ? coins(amount as number) : 'אין מחיר'}
+          {hasAmount ? coins(amount as number) : t("אין מחיר", "No price available")}
         </Text>
         {hasAmount ? <Coin size={compact ? 18 : 24} /> : null}
       </View>

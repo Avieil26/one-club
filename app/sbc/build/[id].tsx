@@ -1,3 +1,5 @@
+import { playerDisplayName } from '@/lib/playerDisplayName';
+import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
@@ -27,6 +29,7 @@ function blankSquad(formationId: FormationId): Record<string, FcPlayer | null> {
 }
 
 export default function SquadBuildScreen() {
+  const { t, language } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -86,8 +89,8 @@ export default function SquadBuildScreen() {
   if (!challenge || challenge.kind !== 'classic') {
     return (
       <Screen scene="sbc">
-        <Title>אין כאן בניית סגל</Title>
-        <Muted>המסך הזה מיועד ל-SBC עם כימיה. ל-Streamlined יש מחשבון ניקוד.</Muted>
+        <Title>{t("אין כאן בניית סגל", "Squad building is unavailable here")}</Title>
+        <Muted>{t("המסך הזה מיועד ל-SBC עם כימיה. ל-Streamlined יש מחשבון ניקוד.", "This screen is for SBCs with chemistry. Use the points calculator for Streamlined challenges.")}</Muted>
       </Screen>
     );
   }
@@ -107,11 +110,11 @@ export default function SquadBuildScreen() {
     if (!challenge) return;
     if (!report.ready) {
       const failed = report.checks.filter((check) => !check.ok).map((check) => check.label);
-      Alert.alert('הסגל עדיין לא עומד בדרישות', failed.join('\n'));
+      Alert.alert(t("הסגל עדיין לא עומד בדרישות", "The squad does not meet the requirements yet"), failed.join('\n'));
       return;
     }
     if (!explanation.trim()) {
-      Alert.alert('רגע', 'כתבו משפט קצר איך סגרתם את האתגר');
+      Alert.alert(t("רגע", "Something went wrong"), t("כתבו משפט קצר איך סגרתם את האתגר", "Add a short explanation of how you completed the challenge"));
       return;
     }
     const squad: Record<string, string> = {};
@@ -130,20 +133,20 @@ export default function SquadBuildScreen() {
         squad,
         formation: formationId,
       });
-      Alert.alert('פורסם', `הסגל עלה כפתרון ל«${challenge.title}».`);
+      Alert.alert(t("פורסם", "Published"), t(`הסגל עלה כפתרון ל«${challenge.title}».`, `Your squad was published as a solution for “${challenge.title}”.`));
       router.replace(`/sbc/${challenge.id}`);
     } catch (error) {
-      Alert.alert('רגע', errorMessage(error));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
     }
   }
 
   return (
     <Screen scene="sbc">
-      <Stack.Screen options={{ title: 'בניית סגל' }} />
+      <Stack.Screen options={{ title: t("בניית סגל", "Build squad") }} />
       <Title>{challenge.title}</Title>
-      <Muted>מגרש ריק. לחצו על עמדה, חפשו את שם השחקן באנגלית, והניחו את הקלף.</Muted>
+      <Muted>{t("מגרש ריק. לחצו על עמדה, חפשו את שם השחקן באנגלית, והניחו את הקלף.", "Start with an empty pitch. Select a position, search for a player in English and add their card.")}</Muted>
       <ChoiceGroup
-        label="מערך"
+        label={t("מערך", "Formation")}
         options={FORMATIONS.map((item) => ({ id: item.id, label: item.label }))}
         value={formationId}
         onChange={(next) => {
@@ -165,12 +168,10 @@ export default function SquadBuildScreen() {
         }}
       >
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: 'right' }}>
-            כימיה {report.chemistry}/33
+          <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: 'right' }}>{t("כימיה", "Chemistry")}{report.chemistry}/33
           </Text>
-          <Text style={{ color: colors.muted, fontWeight: '700', textAlign: 'right' }}>
-            מדינות {report.nations}
-            {report.rating === null ? '' : ` · דירוג ${report.rating}`}
+          <Text style={{ color: colors.muted, fontWeight: '700', textAlign: 'right' }}>{t("מדינות", "Nations")}{report.nations}
+            {report.rating === null ? '' : t(` · דירוג ${report.rating}`, ` · Rating ${report.rating}`)}
           </Text>
         </View>
         {report.checks.map((check) => (
@@ -188,28 +189,28 @@ export default function SquadBuildScreen() {
         onSlot={setActive}
       />
       <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
-        {active ? `עמדה נבחרת: ${slotPosition(formation, active)}` : 'לחצו על עמדה במגרש'}
+        {active ? t(`עמדה נבחרת: ${slotPosition(formation, active)}`, `Selected position: ${slotPosition(formation, active)}`) : t("לחצו על עמדה במגרש", "Select a position on the pitch")}
       </Text>
-      <Button label="פינוי העמדה" variant="ghost" onPress={clearSlot} />
-      <Field label="חיפוש שחקן" value={query} onChangeText={setQuery} placeholder="למשל Haaland" />
+      <Button label={t("פינוי העמדה", "Clear position")} variant="ghost" onPress={clearSlot} />
+      <Field label={t("חיפוש שחקן", "Search players")} value={query} onChangeText={setQuery} placeholder={t("למשל Haaland", "For example, Haaland")} />
       <Muted>
         {query.trim()
-          ? `${results.total.toLocaleString('he-IL')} שחקנים נמצאו במאגר`
-          : 'הקלפים של העמדה. חיפוש מוצא כל שחקן במאגר, בעברית או באנגלית.'}
+          ? t(`${results.total.toLocaleString('he-IL')} שחקנים נמצאו במאגר`, `${results.total.toLocaleString('en-US')} players found`)
+          : t("הקלפים של העמדה. חיפוש מוצא כל שחקן במאגר, בעברית או באנגלית.", "Players for this position. Search the full database in Hebrew or English.")}
       </Muted>
       <View style={{ gap: 8 }}>
         {results.shown.map((player) => (
           <Pressable
             key={player.id}
             accessibilityRole="button"
-            accessibilityLabel={player.name}
+            accessibilityLabel={playerDisplayName(player, language)}
             onPress={() => choose(player)}
             style={{ flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 4 }}
           >
             <PortraitCard player={player} width={92} />
             <View style={{ flex: 1, alignItems: 'flex-end', gap: 4 }}>
               <Text style={{ color: colors.text, fontWeight: '800', fontSize: 17, textAlign: 'right' }}>
-                {player.name}
+                {playerDisplayName(player, language)}
               </Text>
               <Text style={{ color: colors.muted, fontWeight: '700', textAlign: 'right' }}>
                 {player.rating} · {player.position}
@@ -222,23 +223,21 @@ export default function SquadBuildScreen() {
         ))}
       </View>
       {results.total > results.shown.length ? (
-        <Muted>ממשיכים להקליד כדי לראות את השאר. כולם נמצאים בחיפוש.</Muted>
+        <Muted>{t("ממשיכים להקליד כדי לראות את השאר. כולם נמצאים בחיפוש.", "Keep typing to narrow the results. All players are searchable.")}</Muted>
       ) : null}
       <Field
-        label="איך סגרתם את האתגר"
+        label={t("איך סגרתם את האתגר", "How did you complete the challenge?")}
         value={explanation}
         onChangeText={setExplanation}
         multiline
-        placeholder="למשל: כסף מליגת העל הבלגית, עם בלגים לכימיה"
+        placeholder={t("למשל: כסף מליגת העל הבלגית, עם בלגים לכימיה", "For example: silver cards from the Belgian league, with Belgian players for chemistry")}
       />
       <Button
-        label="שליחת הסגל כפתרון"
+        label={t("שליחת הסגל כפתרון", "Submit squad as a solution")}
         onPress={publish}
         disabled={app.busy || !report.ready}
       />
-      <Muted>
-        כימיה מודרנית כמו ב-EA FC: שלושה יהלומים לכל שחקן לפי מועדון / מדינה / ליגה בסגל. עמדה לא נכונה = 0. סך הכל עד 33.
-      </Muted>
+      <Muted>{t("כימיה מודרנית כמו ב-EA FC: שלושה יהלומים לכל שחקן לפי מועדון / מדינה / ליגה בסגל. עמדה לא נכונה = 0. סך הכל עד 33.", "EA FC chemistry: up to three diamonds per player based on club, nation and league links. An incorrect position gives 0. Maximum total: 33.")}</Muted>
     </Screen>
   );
 }

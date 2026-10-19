@@ -6,11 +6,13 @@ import { IconMuseumBackdrop, MaradonaBackdrop } from '@/components/IconMuseumSce
 import { PlayerDossier } from '@/components/PlayerDossier';
 import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 import { PLAYERS } from '@/lib/fcPlayers';
 
 export default function PlayerPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const { t } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const player = PLAYERS.find((item) => item.id === id);
@@ -80,7 +82,7 @@ export default function PlayerPage() {
             }}
           >
             <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13 }}>
-              ‹ חזרה לרשימת השחקנים
+              {t('‹ חזרה לרשימת השחקנים', '‹ Back to players')}
             </Text>
           </Pressable>
         </View>
@@ -95,7 +97,7 @@ export default function PlayerPage() {
         ) : player ? (
           <PlayerDossier player={player} />
         ) : (
-          <Text style={{ color: colors.text, textAlign: 'right' }}>השחקן לא נמצא</Text>
+          <Text style={{ color: colors.text, textAlign: 'right' }}>{t('השחקן לא נמצא', 'Player not found')}</Text>
         )}
 
         {/* BOTTOM RETURN BUTTON */}
@@ -122,7 +124,7 @@ export default function PlayerPage() {
               }}
             >
               <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 14 }}>
-                ‹ חזרה לכל השחקנים
+                {t('‹ חזרה לכל השחקנים', '‹ Back to all players')}
               </Text>
             </Pressable>
           </View>

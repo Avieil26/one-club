@@ -58,7 +58,8 @@ export const ARCHETYPES = [
   'Sweeper Keeper · שוער-ליברו',
 ];
 
-export function platformLabel(id: PlatformId): string {
+export function platformLabel(id: PlatformId, language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') return ({ ps5: 'PlayStation 5', xbox: 'Xbox', pc: 'PC', switch2: 'Switch 2' } as const)[id] ?? id;
   return PLATFORMS.find((item) => item.id === id)?.label ?? id;
 }
 
@@ -66,15 +67,18 @@ export function divisionLabel(id: DivisionId): string {
   return DIVISIONS.find((item) => item.id === id)?.label ?? id;
 }
 
-export function presetLabel(id: CommentPreset): string {
+export function presetLabel(id: CommentPreset, language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') return ({ respect: 'Respect', nice: 'Nice', smart: 'Smart', funny: 'Funny' } as const)[id] ?? id;
   return PRESETS.find((item) => item.id === id)?.label ?? id;
 }
 
-export function rarityLabel(id: PackRarity): string {
+export function rarityLabel(id: PackRarity, language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') return ({ regular: 'Regular', special: 'Special', holographic: 'Holographic' } as const)[id] ?? id;
   return RARITIES.find((item) => item.id === id)?.label ?? id;
 }
 
-export function modeLabel(mode: CareerMode): string {
+export function modeLabel(mode: CareerMode, language: 'he' | 'en' = 'he'): string {
+  if (language === 'en') return mode === 'manager' ? 'Manager career' : 'Player career';
   return mode === 'manager' ? 'קריירת מאמן' : 'קריירת שחקן';
 }
 

@@ -1,4 +1,5 @@
 import { Alert, Text, View } from 'react-native';
+import { groundsLabel } from '@/lib/groundsLocalization';
 import { useLanguage } from '@/lib/language';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
@@ -12,7 +13,7 @@ import { useApp } from '@/lib/store';
 
 export default function PlayerProfileScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const id = String(userId || '');
@@ -36,7 +37,7 @@ export default function PlayerProfileScreen() {
     try {
       await app.toggleFollow(id);
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'לא הצלחנו לעדכן את המעקב. נסו שוב.');
+      Alert.alert(t("רגע", "Something went wrong"), error instanceof Error ? error.message : t("לא הצלחנו לעדכן את המעקב. נסו שוב.", "Could not update your follow status. Try again."));
     }
   }
 
@@ -69,7 +70,7 @@ export default function PlayerProfileScreen() {
               }}
             >
               <Text style={{ color: colors.text, fontWeight: '700', textAlign: 'right' }}>
-                {divisionLabel(post.division)} · {platformLabel(post.platform)} · {post.position}
+                {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.position, language)}
               </Text>
               <Text style={{ color: colors.muted, textAlign: 'right' }}>
                 {post.archetype}

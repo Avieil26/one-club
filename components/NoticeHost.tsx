@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -5,6 +6,7 @@ import { colors } from '@/components/ui';
 import { dismissNotice, subscribeNotice, type Notice } from '@/lib/notice';
 
 export function NoticeHost() {
+  const { t } = useLanguage();
   const [notice, setNotice] = useState<Notice | null>(null);
 
   useEffect(() => subscribeNotice(setNotice), []);
@@ -31,7 +33,7 @@ export function NoticeHost() {
                 style={[styles.action, quiet ? styles.quiet : styles.primary]}
               >
                 <Text style={[styles.actionText, quiet ? styles.quietText : styles.primaryText]}>
-                  {button.text || 'הבנתי'}
+                  {(!button.text || button.text === 'הבנתי') ? t('הבנתי', 'Got it') : button.text}
                 </Text>
               </Pressable>
             );

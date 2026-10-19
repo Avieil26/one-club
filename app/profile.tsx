@@ -31,7 +31,7 @@ export default function ProfileScreen() {
     try {
       await work();
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
@@ -44,7 +44,7 @@ export default function ProfileScreen() {
       setRawUri(uri);
       setCropOpen(true);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 
@@ -53,7 +53,7 @@ export default function ProfileScreen() {
     try {
       await app.setAvatar(cropped);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), errorMessage(error));
+      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
     }
   }
 

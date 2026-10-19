@@ -1,5 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef, useState } from 'react';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
@@ -121,13 +122,13 @@ export default function WhoGameScreen() {
                     <Pressable
                       key={player.id}
                       accessibilityRole="button"
-                      accessibilityLabel={player.name}
+                      accessibilityLabel={playerDisplayName(player, language)}
                       onPress={() => tap(player.id)}
                       style={[styles.cell, state === 'miss' && styles.cellMiss, colored && styles.cellHit]}
                     >
                       <Image source={{ uri: player.photo }} style={[styles.photo, face(colored)]} />
                       {!colored && Platform.OS !== 'web' ? <View style={styles.grayWash} /> : null}
-                      <Text style={styles.name} numberOfLines={1}>{player.name}</Text>
+                      <Text style={styles.name} numberOfLines={1}>{playerDisplayName(player, language)}</Text>
                     </Pressable>
                   );
                 })}

@@ -1,9 +1,11 @@
+import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Image, Modal, Pressable, Text, useWindowDimensions, View } from 'react-native';
 
 import { colors } from '@/components/ui';
 
 export function SquadPhoto({ uris, tall = false, expandable = true }: { uris: string[]; tall?: boolean; expandable?: boolean }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const { width, height } = useWindowDimensions();
   const shots = uris.filter((uri) => uri && uri !== 'placeholder');
@@ -14,7 +16,7 @@ export function SquadPhoto({ uris, tall = false, expandable = true }: { uris: st
     <View style={{ gap: 8 }}>
       <Pressable
         accessibilityRole={expandable ? 'button' : undefined}
-        accessibilityLabel={expandable ? 'פתיחת התמונה המלאה' : undefined}
+        accessibilityLabel={expandable ? t("פתיחת התמונה המלאה", "View full image") : undefined}
         disabled={!expandable}
         onPress={() => setOpen(shots[0])}
       >
@@ -46,14 +48,14 @@ export function SquadPhoto({ uris, tall = false, expandable = true }: { uris: st
       <Modal visible={open != null} transparent animationType="fade" onRequestClose={() => setOpen(null)}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="סגירת התמונה"
+          accessibilityLabel={t("סגירת התמונה", "Close image")}
           onPress={() => setOpen(null)}
           style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.94)', alignItems: 'center', justifyContent: 'center', padding: 16 }}
         >
           {open ? (
             <Image source={{ uri: open }} resizeMode="contain" style={{ width: width - 24, height: height * 0.86 }} />
           ) : null}
-          <Text style={{ color: colors.text, marginTop: 12, fontSize: 15 }}>סגירה</Text>
+          <Text style={{ color: colors.text, marginTop: 12, fontSize: 15 }}>{t("סגירה", "Close")}</Text>
         </Pressable>
       </Modal>
     </View>

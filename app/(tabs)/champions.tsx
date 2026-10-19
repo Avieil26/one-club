@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Alert, Image, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -444,6 +445,7 @@ function FormationPickerModal({
   onClose: () => void;
   onSelect: (formation: string) => void;
 }) {
+  const { t } = useLanguage();
   const { width } = useWindowDimensions();
   const mobile = width < 720;
   if (!visible) return null;
@@ -451,16 +453,16 @@ function FormationPickerModal({
     <View style={styles.modalBackdrop}>
         <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
           <View style={styles.modalHeader}>
-            <Pressable onPress={onClose} style={styles.modalBackButton} accessibilityRole="button" accessibilityLabel="חזרה">
+            <Pressable onPress={onClose} style={styles.modalBackButton} accessibilityRole="button" accessibilityLabel={t("חזרה", "Back")}>
               <Ionicons name="arrow-back" size={16} color="#fff" />
-              <Text style={styles.modalBackButtonText}>חזרה</Text>
+              <Text style={styles.modalBackButtonText}>{t("חזרה", "Back")}</Text>
             </Pressable>
             <View style={styles.modalHeaderCopy}>
               <Text style={styles.modalKicker}>FC27 FORMATIONS</Text>
-              <Text style={styles.modalTitle}>בחר מערך</Text>
-              <Text style={styles.modalHint}>כל המערכים במקום אחד. בחר מערך והחלון ייסגר.</Text>
+              <Text style={styles.modalTitle}>{t("בחר מערך", "Choose formation")}</Text>
+              <Text style={styles.modalHint}>{t("כל המערכים במקום אחד. בחר מערך והחלון ייסגר.", "All formations in one place. Select a formation to close this window.")}</Text>
             </View>
-            <Pressable onPress={onClose} style={styles.modalClose} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
+            <Pressable onPress={onClose} style={styles.modalClose} accessibilityRole="button" accessibilityLabel={t("סגור", "Close")}><Text style={styles.modalCloseX}>×</Text></Pressable>
           </View>
           <ScrollView style={styles.formationGridScroll} contentContainerStyle={styles.formationGrid}>
             {FORMATIONS.map((item) => (
@@ -490,7 +492,7 @@ function CommunitySquadBuilder({
   onClose: () => void;
   onSave: (squad: ProfileSquad) => void;
 }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const base = FORMATIONS.find((item) => item.label === formationLabel) ?? FORMATIONS[0];
   const [formationId, setFormationId] = useState(base.id);
   const [slots, setSlots] = useState<Record<string, string>>(initial?.slots ?? {});
@@ -606,16 +608,16 @@ function CommunitySquadBuilder({
     <View style={styles.squadOverlay}>
       <View style={styles.squadBuilderPanel}>
         <View style={styles.squadBuilderHeader}>
-          <Pressable style={styles.modalBackButton} onPress={onClose} accessibilityRole="button" accessibilityLabel="חזרה להעלאת טקטיקה">
+          <Pressable style={styles.modalBackButton} onPress={onClose} accessibilityRole="button" accessibilityLabel={t("חזרה להעלאת טקטיקה", "Back to tactic upload")}>
             <Ionicons name="arrow-back" size={16} color="#fff" />
-            <Text style={styles.modalBackButtonText}>חזרה</Text>
+            <Text style={styles.modalBackButtonText}>{t("חזרה", "Back")}</Text>
           </Pressable>
           <View style={styles.squadBuilderHeaderCopy}>
             <Text style={styles.modalKicker}>COMMUNITY SQUAD BUILDER</Text>
-            <Text style={styles.squadBuilderTitle}>בנה את הקבוצה לפוסט</Text>
-            <Text style={styles.squadBuilderHint}>הקבוצה הזו שייכת לפוסט בלבד. היא לא נוגעת בקבוצה האישית שלך.</Text>
+            <Text style={styles.squadBuilderTitle}>{t("בנה את הקבוצה לפוסט", "Build the squad for this post")}</Text>
+            <Text style={styles.squadBuilderHint}>{t("הקבוצה הזו שייכת לפוסט בלבד. היא לא נוגעת בקבוצה האישית שלך.", "This squad belongs to this post and does not change your personal squad.")}</Text>
           </View>
-          <Pressable style={styles.modalClose} onPress={onClose} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
+          <Pressable style={styles.modalClose} onPress={onClose} accessibilityRole="button" accessibilityLabel={t("סגור", "Close")}><Text style={styles.modalCloseX}>×</Text></Pressable>
         </View>
 
         <ScrollView style={styles.squadBuilderScroll} contentContainerStyle={styles.squadBuilderContent}>
@@ -659,18 +661,18 @@ function CommunitySquadBuilder({
               <Text style={styles.builderSelectionText}>{slots[active] ? 'שחקן נבחר. אפשר להעביר, לפנות או להעביר לספסל.' : 'העמדה נבחרה. חפש שחקן והוסף אותו.'}</Text>
               {slots[active] ? (
                 <View style={styles.builderActions}>
-                  <Pressable style={styles.builderGhost} onPress={() => pitchToBench(active)}><Text style={styles.builderGhostText}>העבר לספסל</Text></Pressable>
-                  <Pressable style={styles.builderGhost} onPress={() => clearSlot(active)}><Text style={styles.builderGhostText}>פנה עמדה</Text></Pressable>
+                  <Pressable style={styles.builderGhost} onPress={() => pitchToBench(active)}><Text style={styles.builderGhostText}>{t("העבר לספסל", "Move to bench")}</Text></Pressable>
+                  <Pressable style={styles.builderGhost} onPress={() => clearSlot(active)}><Text style={styles.builderGhostText}>{t("פנה עמדה", "Clear position")}</Text></Pressable>
                 </View>
               ) : null}
             </View>
           ) : null}
 
           <View style={styles.builderBenchHeader}>
-            <Text style={styles.builderBenchTitle}>מחליפים · {bench.length}/7</Text>
+            <Text style={styles.builderBenchTitle}>{t("מחליפים · ", "Substitutes · ")}{bench.length}/7</Text>
             <Pressable style={styles.builderAddBench} disabled={bench.length >= 7} onPress={() => { setAddingBench(true); setActive(null); setBenchHold(null); setQuery(''); }}>
               <Ionicons name="add" size={15} color="#fff" />
-              <Text style={styles.builderAddBenchText}>הוסף מחליף</Text>
+              <Text style={styles.builderAddBenchText}>{t("הוסף מחליף", "Add substitute")}</Text>
             </Pressable>
           </View>
 
@@ -689,18 +691,18 @@ function CommunitySquadBuilder({
                 </Pressable>
               );
             })}
-            {!bench.length ? <Text style={styles.builderNoBench}>אין עדיין מחליפים.</Text> : null}
+            {!bench.length ? <Text style={styles.builderNoBench}>{t("אין עדיין מחליפים.", "No substitutes yet.")}</Text> : null}
           </ScrollView>
 
           {(active || addingBench) ? (
             <View style={styles.builderSearchPanel}>
               <Text style={styles.builderSearchLabel}>{addingBench ? 'בחירת מחליף' : 'שחקן לעמדה'}</Text>
-              <TextInput value={query} onChangeText={setQuery} autoFocus placeholder="חפש לפי שם שחקן או מועדון" placeholderTextColor="#6D7883" style={styles.builderSearchInput} />
+              <TextInput value={query} onChangeText={setQuery} autoFocus placeholder={t("חפש לפי שם שחקן או מועדון", "Search by player name or club")} placeholderTextColor="#6D7883" style={styles.builderSearchInput} />
               {results.map((player) => (
                 <Pressable key={player.id} onPress={() => pickPlayer(player)} style={styles.builderSearchResult}>
                   <Text style={styles.builderSearchRating}>{player.rating}</Text>
                   <View style={{ flex: 1 }}>
-                    <Text style={styles.builderSearchName}>{player.name}</Text>
+                    <Text style={styles.builderSearchName}>{playerDisplayName(player, language)}</Text>
                     <Text style={styles.builderSearchMeta}>{player.position} · {player.club}</Text>
                   </View>
                 </Pressable>
@@ -716,7 +718,7 @@ function CommunitySquadBuilder({
             onSave({ formation: formationId, slots, bench });
           }}>
             <Ionicons name="checkmark-circle-outline" size={18} color="#fff" />
-            <Text style={styles.builderSaveText}>שמור בתוך הטקטיקה</Text>
+            <Text style={styles.builderSaveText}>{t("שמור בתוך הטקטיקה", "Save squad")}</Text>
           </Pressable>
         </ScrollView>
       </View>
@@ -725,6 +727,7 @@ function CommunitySquadBuilder({
 }
 
 function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; compact?: boolean }) {
+  const { t } = useLanguage();
   const { width } = useWindowDimensions();
   const compact = compactProp ?? width < 1050;
   return (
@@ -745,7 +748,7 @@ function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; com
           </View>
           <Text style={styles.proBadgeText}>DH TEKKZ · FC27</Text>
         </View>
-        <Text style={styles.tekkzCardTitle}>ה־Champions setup של TEKKZ</Text>
+        <Text style={styles.tekkzCardTitle}>{t("ה־Champions setup של TEKKZ", "TEKKZ’s Champions setup")}</Text>
         <Text style={styles.tekkzCardSub}>4-4-1-1 (2) · Short Passing · High · Line Height 65</Text>
         <View style={styles.tekkzFactRow}>
           <View style={styles.tekkzFact}><Text style={styles.tekkzFactValue}>4-4-1-1 (2)</Text><Text style={styles.tekkzFactLabel}>FORMATION</Text></View>
@@ -755,9 +758,9 @@ function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; com
         <View style={styles.tekkzChallenge}>
           <View style={styles.tekkzChallengeIcon}><Ionicons name="flame" size={18} color="#F3CF62" /></View>
           <View style={styles.tekkzChallengeCopy}>
-            <Text style={styles.tekkzChallengeKicker}>הישג אחרון</Text>
-            <Text style={styles.tekkzChallengeTitle}>15-0 · קבוצת ברונזה</Text>
-            <Text style={styles.tekkzChallengeText}>מאזן מושלם של 15 ניצחונות מתוך 15 משחקים עם קבוצת ברונזה.</Text>
+            <Text style={styles.tekkzChallengeKicker}>{t("הישג אחרון", "Latest achievement")}</Text>
+            <Text style={styles.tekkzChallengeTitle}>{t("15-0 · קבוצת ברונזה", "15–0 · Bronze squad")}</Text>
+            <Text style={styles.tekkzChallengeText}>{t("מאזן מושלם של 15 ניצחונות מתוך 15 משחקים עם קבוצת ברונזה.", "A perfect record of 15 wins in 15 matches with a bronze squad.")}</Text>
           </View>
         </View>
                 <View style={styles.tekkzMiniMeta}>
@@ -829,14 +832,15 @@ function RewardStoreCard({ item }: { item: TokenReward }) {
 }
 
 function EmptyCommunity() {
+  const { t } = useLanguage();
   return (
     <Panel style={styles.emptyPanel}>
       <View style={styles.emptyIcon}>
         <Ionicons name="people-outline" size={25} color="#68737D" />
       </View>
-      <Text style={styles.emptyTitle}>שחקני הקהילה</Text>
-      <Text style={styles.emptyText}>כרגע אין שחקני קהילה או טקטיקות שהועלו ואושרו.</Text>
-      <Text style={styles.emptyHint}>כששחקן יעלה תוכן ויאושר, הוא יופיע כאן.</Text>
+      <Text style={styles.emptyTitle}>{t("שחקני הקהילה", "Community players")}</Text>
+      <Text style={styles.emptyText}>{t("כרגע אין שחקני קהילה או טקטיקות שהועלו ואושרו.", "No community players or tactics have been approved yet.")}</Text>
+      <Text style={styles.emptyHint}>{t("כששחקן יעלה תוכן ויאושר, הוא יופיע כאן.", "Approved community uploads will appear here.")}</Text>
     </Panel>
   );
 }
@@ -844,7 +848,7 @@ function EmptyCommunity() {
 
 export default function ChampionsScreen() {
   const app = useApp();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { width, height } = useWindowDimensions();
   const mobile = width < 900;
 
@@ -1053,8 +1057,8 @@ export default function ChampionsScreen() {
     if (section === 'tekkz') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title="הפרופיל של TEKKZ"
-            subtitle="כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״." />
+          <SectionHeading icon="star-outline" eyebrow="TEKKZ PRO" title={t("הפרופיל של TEKKZ", "TEKKZ’s profile")}
+            subtitle={t("כאן נמצאים רק הנתונים של TEKKZ. המאזן, ה־CQP וה־Progress שלך נמצאים ב״העמוד שלי״.", "This section shows TEKKZ’s stats. Your record, CQP and progress appear in My Page.")} />
           <TekkzCard selected />
           <Panel style={styles.tekkzDetailsPanel}>
             <View style={[styles.tekkzDetailsGrid, mobile && styles.columnOnMobile]}>
@@ -1077,8 +1081,8 @@ export default function ChampionsScreen() {
     if (section === 'rewards') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title="הפרסים לפי מספר הניצחונות"
-            subtitle="בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות." />
+          <SectionHeading icon="gift-outline" eyebrow="CHAMPIONS REWARDS" title={t("הפרסים לפי מספר הניצחונות", "Rewards by wins")}
+            subtitle={t("בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות.", "Select a win total to preview Coins, CQP, Tokens and available offers. This does not change your personal run.")} />
           <View style={styles.rewardLogoStrip}>
             <View style={styles.rewardLogoText}>
               <Text style={styles.rewardLogoEyebrow}>EA SPORTS FC 27</Text>
@@ -1121,8 +1125,8 @@ export default function ChampionsScreen() {
               <View style={styles.storeHeaderCopy}>
                 <Text style={[styles.storeKicker, { color: '#FF4E5C' }]}>CHAMPIONS TOKENS</Text>
                 <Text style={styles.storeKicker}>CHAMPIONS TOKEN STORE</Text>
-                <Text style={styles.storeTitleBig}>מה אפשר לקנות עם {selectedReward.tokens} Tokens</Text>
-                <Text style={styles.storeSub}>3 כרטיסים בשורה במחשב, עם Pack Art אמיתי. מוצגים רק פריטים עד כמות ה־Tokens שבחרת.</Text>
+                <Text style={styles.storeTitleBig}>{t("מה אפשר לקנות עם", "What you can buy with")}{selectedReward.tokens} Tokens</Text>
+                <Text style={styles.storeSub}>{t("3 כרטיסים בשורה במחשב, עם Pack Art אמיתי. מוצגים רק פריטים עד כמות ה־Tokens שבחרת.", "Three cards per row on desktop, with pack artwork. Only offers within your selected token budget are shown.")}</Text>
               </View>
               <View style={styles.bigTokenBalance}>
                 <TokenIcon size={46} />
@@ -1137,7 +1141,7 @@ export default function ChampionsScreen() {
             ) : (
               <View style={styles.storeEmptyBox}>
                 <TokenIcon size={36} />
-                <Text style={styles.storeEmpty}>אין מספיק Champions Tokens להצעה הראשונה בחנות.</Text>
+                <Text style={styles.storeEmpty}>{t("אין מספיק Champions Tokens להצעה הראשונה בחנות.", "Not enough Champions Tokens for the first shop offer.")}</Text>
               </View>
             )}
           </Panel>
@@ -1148,13 +1152,13 @@ export default function ChampionsScreen() {
     if (section === 'community') {
       return (
         <View style={styles.contentStack}>
-          <SectionHeading icon="people-outline" eyebrow="COMMUNITY HUB" title="שחקני הקהילה"
-            subtitle="טקטיקות והגדרות שלט שאושרו. התוכן שאתה מעלה נשאר בעמוד שלך עד אישור." />
+          <SectionHeading icon="people-outline" eyebrow="COMMUNITY HUB" title={t("שחקני הקהילה", "Community players")}
+            subtitle={t("טקטיקות והגדרות שלט שאושרו. התוכן שאתה מעלה נשאר בעמוד שלך עד אישור.", "Approved tactics and controller settings. Your uploads stay on your page while awaiting approval.")} />
           <View style={styles.communityHeader}>
-            <Text style={styles.communityCount}>{String(community.length)} פריטים מאושרים</Text>
+            <Text style={styles.communityCount}>{String(community.length)}{t("פריטים מאושרים", "approved items")}</Text>
             {app.user ? (
               <Pressable style={styles.publishButton} onPress={() => { setComposerFormation(''); setCommunitySquad(null); setControllerSettings({}); setShowControllerSettings(false); setShowComposer(true); }}>
-                <Text style={styles.publishButtonText}>העלה טקטיקה</Text>
+                <Text style={styles.publishButtonText}>{t("העלה טקטיקה", "Upload tactic")}</Text>
               </Pressable>
             ) : null}
           </View>
@@ -1164,7 +1168,7 @@ export default function ChampionsScreen() {
             return (
               <Panel key={item.id}>
                 <Text style={styles.communityItemTitle}>{item.title}</Text>
-                <Text style={styles.communityItemMeta}>{item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
+                <Text style={styles.communityItemMeta}>{item.formation || t("ללא מערך", "No formation")} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
                 <Text style={styles.communityItemBody}>{item.body}</Text>
                 {hasControllerSettings ? (
                   <View style={styles.communityControllerGrid}>
@@ -1176,8 +1180,8 @@ export default function ChampionsScreen() {
                 ) : null}
                 {item.settings?.squad ? (
                   <View style={styles.communitySharedSquad}>
-                    <Text style={styles.communitySharedSquadTitle}>הסגל ששויך לטקטיקה</Text>
-                    <Text style={styles.communitySharedSquadText}>{item.settings.squad.formation} · {Object.keys(item.settings.squad.slots ?? {}).length} בהרכב · {(item.settings.squad.bench ?? []).length} מחליפים</Text>
+                    <Text style={styles.communitySharedSquadTitle}>{t("הסגל ששויך לטקטיקה", "Squad attached to this tactic")}</Text>
+                    <Text style={styles.communitySharedSquadText}>{item.settings.squad.formation} · {Object.keys(item.settings.squad.slots ?? {}).length}{t(" בהרכב · ", " in starting XI · ")}{(item.settings.squad.bench ?? []).length}{t("מחליפים", "Substitutes")}</Text>
                   </View>
                 ) : null}
                 {item.image_uris?.length ? <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.communityImages}>{item.image_uris.map((uri) => <Image key={uri} source={{ uri }} style={styles.communityImage as any} resizeMode="cover" />)}</ScrollView> : null}
@@ -1193,8 +1197,8 @@ export default function ChampionsScreen() {
         <SectionHeading
           icon="trophy-outline"
           eyebrow="MY CHAMPIONS"
-          title="העמוד שלי"
-          subtitle="כל משתמש מקבל run משלו. הנתונים נשמרים לחשבון ולא נשארים רנדומליים בין כניסות."
+          title={t("העמוד שלי", "My Page")}
+          subtitle={t("כל משתמש מקבל run משלו. הנתונים נשמרים לחשבון ולא נשארים רנדומליים בין כניסות.", "Each account has its own run. Your progress is saved between visits.")}
         />
 
         <Panel>
@@ -1202,12 +1206,12 @@ export default function ChampionsScreen() {
             <View>
               <Text style={styles.personalTitle}>{app.user?.displayName || 'השחקן שלי'}</Text>
               <Text style={styles.personalSub}>
-                {run.matchesPlayed} / 15 משחקים · Form {form >= 0 ? '+' : ''}{form} · CQP {formatCoins(run.cqp)}
+                {run.matchesPlayed}{t("/ 15 משחקים · Form", "/ 15 matches · Form")}{form >= 0 ? '+' : ''}{form} · CQP {formatCoins(run.cqp)}
               </Text>
             </View>
             <Pressable style={styles.editButton} onPress={() => setEditingRun((value) => !value)}>
               <Ionicons name="create-outline" size={15} color="#fff" />
-              <Text style={styles.editButtonText}>{editingRun ? 'סגור' : 'עדכן נתונים'}</Text>
+              <Text style={styles.editButtonText}>{editingRun ? t("סגור", "Close") : 'עדכן נתונים'}</Text>
             </Pressable>
           </View>
 
@@ -1218,21 +1222,21 @@ export default function ChampionsScreen() {
               <View style={styles.inputBlock}><Text style={styles.inputLabel}>MATCHES</Text><TextInput value={draftMatches} onChangeText={setDraftMatches} keyboardType="numeric" style={styles.numberInput} /></View>
               <View style={styles.inputBlock}><Text style={styles.inputLabel}>CQP</Text><TextInput value={draftCqp} onChangeText={setDraftCqp} keyboardType="numeric" style={styles.numberInput} /></View>
               <Pressable style={styles.saveRunButton} onPress={() => void saveRun()} disabled={saving}>
-                <Text style={styles.saveRunButtonText}>{saving ? 'שומר…' : 'שמור את ה־Champions שלי'}</Text>
+                <Text style={styles.saveRunButtonText}>{saving ? t("שומר…", "Saving…") : 'שמור את ה־Champions שלי'}</Text>
               </Pressable>
             </View>
           ) : null}
 
           <View style={styles.liveStats}>
             <MetricCard label="FINAL STATUS" value={run.matchesPlayed >= 15 ? 'READY' : 'LIVE'} tone="green" note={run.matchesPlayed >= 15 ? 'Finals complete' : 'Live run'} />
-            <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note="נתון חי של החשבון" />
-            <MetricCard label="המאזן שלי" value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
+            <MetricCard label="CQP PROGRESS" value={formatCoins(run.cqp)} tone="gold" note={t("נתון חי של החשבון", "Live account data")} />
+            <MetricCard label={t("המאזן שלי", "My record")} value={String(run.losses) + ' - ' + String(run.wins)} tone="red" note={String(run.losses) + ' הפסדים · ' + String(run.wins) + ' ניצחונות'} />
           </View>
         </Panel>
 
         <View style={styles.myContentPanel}>
           <Panel>
-            <SectionHeading icon="albums-outline" eyebrow="MY CHAMPIONS CONTENT" title="מה שהעליתי" subtitle="כל טקטיקה והגדרות שלט שלך מופיעים כאן מיד כ־Pending, ולאחר אישור כ־Approved." />
+            <SectionHeading icon="albums-outline" eyebrow="MY CHAMPIONS CONTENT" title={t("מה שהעליתי", "My uploads")} subtitle={t("כל טקטיקה והגדרות שלט שלך מופיעים כאן מיד כ־Pending, ולאחר אישור כ־Approved.", "Your tactics and controller settings appear here as Pending, then Approved after review.")} />
             {myContent.length ? myContent.map((item) => {
               const controllerSettings = item.settings?.controllerSettings ?? {};
               const hasControllerSettings = Object.keys(controllerSettings).length > 0;
@@ -1244,7 +1248,7 @@ export default function ChampionsScreen() {
                       <Text style={styles.statusBadgeText}>{item.status === 'approved' ? 'מאושר' : item.status === 'rejected' ? 'נדחה' : 'ממתין לאישור'}</Text>
                     </View>
                   </View>
-                  <Text style={styles.myUploadedMeta}>{item.formation || 'ללא מערך'} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
+                  <Text style={styles.myUploadedMeta}>{item.formation || t("ללא מערך", "No formation")} · {item.platform === 'xbox' ? 'Xbox' : item.platform === 'ps5' ? 'PlayStation 5' : item.platform}</Text>
                   <Text style={styles.myUploadedBody}>{item.body}</Text>
                   {hasControllerSettings ? (
                     <View style={styles.communityControllerGrid}>
@@ -1254,23 +1258,23 @@ export default function ChampionsScreen() {
                       })}
                     </View>
                   ) : null}
-                  {item.settings?.squad ? <Text style={styles.myUploadedSquad}>הסגל ששויך לפוסט: {item.settings.squad.formation} · {Object.keys(item.settings.squad.slots ?? {}).length} בהרכב · {(item.settings.squad.bench ?? []).length} מחליפים</Text> : null}
+                  {item.settings?.squad ? <Text style={styles.myUploadedSquad}>{t("הסגל ששויך לפוסט:", "Squad attached to this post:")}{item.settings.squad.formation} · {Object.keys(item.settings.squad.slots ?? {}).length}{t(" בהרכב · ", " in starting XI · ")}{(item.settings.squad.bench ?? []).length}{t("מחליפים", "Substitutes")}</Text> : null}
                   {item.image_uris?.length ? <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.communityImages}>{item.image_uris.map((uri) => <Image key={uri} source={{ uri }} style={styles.communityImage as any} resizeMode="cover" />)}</ScrollView> : null}
                 </View>
               );
             }) : (
-              <View style={styles.myEmptyContent}><Ionicons name="albums-outline" size={28} color="#68737D" /><Text style={styles.myEmptyContentTitle}>עדיין לא העלית תוכן</Text><Text style={styles.myEmptyContentText}>כאן תופיע הטקטיקה שהעלית, הסגל ששייכת אליה והגדרות השלט שלך.</Text></View>
+              <View style={styles.myEmptyContent}><Ionicons name="albums-outline" size={28} color="#68737D" /><Text style={styles.myEmptyContentTitle}>{t("עדיין לא העלית תוכן", "No uploads yet")}</Text><Text style={styles.myEmptyContentText}>{t("כאן תופיע הטקטיקה שהעלית, הסגל ששייכת אליה והגדרות השלט שלך.", "Your uploaded tactics, attached squads and controller settings will appear here.")}</Text></View>
             )}
           </Panel>
         </View>
 
         <View style={[styles.twoCol, mobile && styles.oneCol]}>
           <Panel style={styles.snapshotPanel}>
-            <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle="TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר." />
+            <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle={t("TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר.", "TEKKZ is shown by default until community content is approved.")} />
             <TekkzCard compact />
           </Panel>
           <Panel style={styles.snapshotPanel}>
-            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title="הפרס של הריצה" subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
+            <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title={t("הפרס של הריצה", "Run reward")} subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
           
             <View style={styles.rewardMiniGrid}>
               <View style={styles.rewardMini}><Text style={styles.rewardMiniValue}>{formatCoins(personalReward.coins)}</Text><Text style={styles.rewardMiniLabel}>COINS</Text></View>
@@ -1282,6 +1286,7 @@ export default function ChampionsScreen() {
       </View>
     );
   }, [
+    t,
     app.user?.displayName,
     app.user?.id,
     community,
@@ -1362,47 +1367,45 @@ export default function ChampionsScreen() {
 
             <View style={styles.composerHeader}>
               <View style={styles.composerHeaderActions}>
-                <Pressable style={styles.modalBackButton} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel="חזרה לשחקני הקהילה">
+                <Pressable style={styles.modalBackButton} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel={t("חזרה לשחקני הקהילה", "Back to community players")}>
                   <Ionicons name="arrow-back" size={16} color="#fff" />
-                  <Text style={styles.modalBackButtonText}>חזרה</Text>
+                  <Text style={styles.modalBackButtonText}>{t("חזרה", "Back")}</Text>
                 </Pressable>
               </View>
-              <Text style={styles.composerTitle}>העלה טקטיקה לקהילה</Text>
-              <Pressable style={styles.modalClose} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel="סגור"><Text style={styles.modalCloseX}>×</Text></Pressable>
+              <Text style={styles.composerTitle}>{t("העלה טקטיקה לקהילה", "Upload a community tactic")}</Text>
+              <Pressable style={styles.modalClose} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel={t("סגור", "Close")}><Text style={styles.modalCloseX}>×</Text></Pressable>
             </View>
             <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} showsVerticalScrollIndicator persistentScrollbar={false}>
-            <TextInput value={title} onChangeText={setTitle} placeholder="כותרת" placeholderTextColor="#6f7984" style={styles.textInput} />
+            <TextInput value={title} onChangeText={setTitle} placeholder={t("כותרת", "Title")} placeholderTextColor="#6f7984" style={styles.textInput} />
             <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
               <View style={styles.formationSelectCopy}>
                 <Text style={styles.formationSelectLabel}>FORMATION</Text>
-                <Text style={styles.formationSelectValue}>{composerFormation || 'בחר מערך'}</Text>
+                <Text style={styles.formationSelectValue}>{composerFormation || t("בחר מערך", "Choose formation")}</Text>
               </View>
               <Ionicons name="chevron-down" size={18} color="#F4CF64" />
             </Pressable>
-            <TextInput value={body} onChangeText={setBody} placeholder="הסבר קצר על הטקטיקה" placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
+            <TextInput value={body} onChangeText={setBody} placeholder={t("הסבר קצר על הטקטיקה", "Brief tactic description")} placeholderTextColor="#6f7984" multiline style={[styles.textInput, styles.textArea]} />
 
             <View style={styles.communitySquadBlock}>
-              <Text style={styles.communitySquadTitle}>הקבוצה של הפוסט</Text>
-              <Text style={styles.communitySquadHint}>בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.</Text>
+              <Text style={styles.communitySquadTitle}>{t("הקבוצה של הפוסט", "Post squad")}</Text>
+              <Text style={styles.communitySquadHint}>{t("בנה קבוצה אמיתית מהשחקנים של האתר: 11 בהרכב ועד 7 מחליפים. לא צילום מסך.", "Build a squad from the site’s players: a starting XI and up to 7 substitutes.")}</Text>
               <Pressable style={[styles.uploadButton, !composerFormation && styles.uploadButtonDisabled]} onPress={() => openSquadBuilder()}>
                 <Ionicons name="football-outline" size={17} color="#fff" />
                 <Text style={styles.uploadButtonText}>{communitySquad ? 'עריכת הקבוצה לפוסט' : 'בניית הקבוצה לפוסט'}</Text>
               </Pressable>
               {communitySquad ? (
                 <Text style={styles.communitySquadSaved}>
-                  {communitySquad.formation} · {Object.keys(communitySquad.slots).length} בהרכב · {communitySquad.bench.length} מחליפים
-                </Text>
+                  {communitySquad.formation} · {Object.keys(communitySquad.slots).length}{t(" בהרכב · ", " in starting XI · ")}{communitySquad.bench.length}{t("מחליפים", "Substitutes")}</Text>
               ) : (
-                <Text style={styles.communitySquadSaved}>בחר מערך ואז בנה את הסגל לפוסט.</Text>
+                <Text style={styles.communitySquadSaved}>{t("בחר מערך ואז בנה את הסגל לפוסט.", "Choose a formation, then build the squad for this post.")}</Text>
               )}
             </View>
 
             <View style={styles.communityControllerBlock}>
               <Pressable style={styles.controllerSettingsToggle} onPress={() => setShowControllerSettings((value) => !value)}>
                 <View style={styles.controllerSettingsToggleCopy}>
-                  <Text style={styles.controllerSettingsToggleTitle}>הגדרות שלט לפוסט</Text>
-                  <Text style={styles.controllerSettingsToggleSub}>
-                    אופציונלי · {Object.keys(controllerSettings).length ? `${Object.keys(controllerSettings).length} הגדרות נבחרו` : 'לא הוגדרו הגדרות'}
+                  <Text style={styles.controllerSettingsToggleTitle}>{t("הגדרות שלט לפוסט", "Controller settings for this post")}</Text>
+                  <Text style={styles.controllerSettingsToggleSub}>{t("אופציונלי ·", "Optional ·")}{Object.keys(controllerSettings).length ? `${Object.keys(controllerSettings).length} הגדרות נבחרו` : 'לא הוגדרו הגדרות'}
                   </Text>
                 </View>
                 <Ionicons name={showControllerSettings ? 'chevron-up' : 'chevron-down'} size={18} color="#F4CF64" />
@@ -1442,7 +1445,7 @@ export default function ChampionsScreen() {
               <PlatformPill value="ps5" selected={platform === 'ps5'} onPress={() => setPlatform('ps5')} />
             </View>
             <Pressable style={styles.publishConfirm} onPress={() => void publish()} disabled={saving}>
-              <Text style={styles.publishConfirmText}>{saving ? 'שומר…' : 'שלח לבדיקה'}</Text>
+              <Text style={styles.publishConfirmText}>{saving ? t("שומר…", "Saving…") : 'שלח לבדיקה'}</Text>
             </Pressable>
           </ScrollView>
 </Panel>

@@ -1,3 +1,5 @@
+import { groundsLabel } from '@/lib/groundsLocalization';
+import { useLanguage } from '@/lib/language';
 import { type ReactNode } from 'react';
 import { Image, ImageBackground, Pressable, Text, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -134,6 +136,7 @@ function RankMonument({ level }: { level: number }) {
 }
 
 export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, onFollow, onOpenProfile, onNeedAuth }: Props) {
+  const { t, language } = useLanguage();
   const tone = playerLevelTone(post.playerLevel);
   const name = displayName(profiles, post.userId);
   const followers = follows.filter((f) => f.followingId === post.userId).length;
@@ -205,12 +208,12 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'flex-end' }}>
               {isMe && post.levelVerified ? (
                 <View style={{ backgroundColor: '#1A5C3E', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 }}>
-                  <Text style={{ color: '#E8FFF4', fontWeight: '800', fontSize: 11 }}>רמה מאומתת</Text>
+                  <Text style={{ color: '#E8FFF4', fontWeight: '800', fontSize: 11 }}>{t("רמה מאומתת", "Verified level")}</Text>
                 </View>
               ) : null}
               {isMe ? (
                 <View style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 }}>
-                  <Text style={{ color: 'rgba(247,244,234,0.8)', fontWeight: '800', fontSize: 11 }}>המודעה שלך</Text>
+                  <Text style={{ color: 'rgba(247,244,234,0.8)', fontWeight: '800', fontSize: 11 }}>{t("המודעה שלך", "Your listing")}</Text>
                 </View>
               ) : null}
             </View>
@@ -218,16 +221,16 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
               {intentLabel(post.intent)} · {post.position}
             </Text>
             <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', fontWeight: '600', width: '100%' }}>
-              {divisionLabel(post.division)} · {platformLabel(post.platform)} · {post.archetype}
+              {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.archetype, language)}
             </Text>
             <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', width: '100%' }}>
               EA ID: {post.eaId || '—'} · {post.gamertag || '—'}
             </Text>
             <Pressable onPress={() => onOpenProfile(post.userId)}>
               <Text style={{ color: 'rgba(180,200,220,0.55)', fontSize: 12, textAlign: 'right', width: '100%' }}>
-                {followers} עוקבים · {following} עוקב · {name}
+                {followers}{t(" עוקבים · ", " followers · ")}{following}{t(" עוקב · ", " following · ")}{name}
               </Text>
-              <Text style={{ color: '#E3B341', fontSize: 13, fontWeight: '800', textAlign: 'right', marginTop: 4 }}>לפרופיל המלא</Text>
+              <Text style={{ color: '#E3B341', fontSize: 13, fontWeight: '800', textAlign: 'right', marginTop: 4 }}>{t("לפרופיל המלא", "View full profile")}</Text>
             </Pressable>
           </View>
         </View>
@@ -244,7 +247,7 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
               alignItems: 'center',
             }}
           >
-            <Text style={{ color: '#FFFFFF', fontWeight: '800', fontSize: 15 }}>הודעה</Text>
+            <Text style={{ color: '#FFFFFF', fontWeight: '800', fontSize: 15 }}>{t("הודעה", "Message")}</Text>
           </Pressable>
           <Pressable
             disabled={isMe}
@@ -260,7 +263,7 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
             }}
           >
             <Text style={{ color: '#FFFFFF', fontWeight: '800', fontSize: 15 }}>
-              {iFollow && !isMe ? 'עוקב' : 'עקוב'}
+              {iFollow && !isMe ? t("עוקב", "Following") : t("עקוב", "Follow")}
             </Text>
           </Pressable>
         </View>

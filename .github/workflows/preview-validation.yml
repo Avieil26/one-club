@@ -61,5 +61,7 @@ jobs:
         run: npm run verify:catalogue
       - name: Verify restored cards and Grounds behavior
         run: npm run verify:preservation
+      - name: Verify English copy and preserve Hebrew
+        run: npm run verify:localization
       - name: Export web build
         run: npx expo export -p web

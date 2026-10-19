@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/language';
 import { useEffect, useRef, useState } from 'react';
 import {
   Image,
@@ -32,6 +33,7 @@ function clamp(n: number, min: number, max: number) {
  * What you see inside the circle is exactly what gets saved and shown on the card.
  */
 export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
+  const { t } = useLanguage();
   const [natural, setNatural] = useState<{ w: number; h: number } | null>(null);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const panRef = useRef({ x: 0, y: 0 });
@@ -98,7 +100,7 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
       img.crossOrigin = 'anonymous';
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
-        img.onerror = () => reject(new Error('לא הצלחנו לטעון את התמונה לחיתוך'));
+        img.onerror = () => reject(new Error(t("לא הצלחנו לטעון את התמונה לחיתוך", "Could not load the image for cropping")));
         img.src = uri;
       });
 
@@ -138,7 +140,7 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
       cctx.drawImage(canvas, 0, 0);
       onConfirm(circle.toDataURL('image/png'));
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'החיתוך נכשל';
+      const message = error instanceof Error ? error.message : t("החיתוך נכשל", "Could not crop the image");
       // Still try JPEG square crop without circle mask
       try {
         if (typeof document !== 'undefined' && natural) {
@@ -171,12 +173,8 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onCancel}>
       <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.92)', justifyContent: 'center', padding: 20 }}>
-        <Text style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '800', textAlign: 'center', marginBottom: 8 }}>
-          בחר אזור לפנים
-        </Text>
-        <Text style={{ color: 'rgba(247,244,234,0.75)', textAlign: 'center', marginBottom: 18 }}>
-          גרור שמאלה / ימינה / למעלה / למטה — מה שבתוך העיגול יישמר בכרטיס
-        </Text>
+        <Text style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '800', textAlign: 'center', marginBottom: 8 }}>{t("בחר אזור לפנים", "Choose your face crop")}</Text>
+        <Text style={{ color: 'rgba(247,244,234,0.75)', textAlign: 'center', marginBottom: 18 }}>{t("גרור שמאלה / ימינה / למעלה / למטה — מה שבתוך העיגול יישמר בכרטיס", "Drag in any direction — the area inside the circle will appear on your card")}</Text>
 
         {/* Dimmed full photo behind, sharp circle in front */}
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -206,7 +204,7 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
               />
             ) : (
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ color: '#aaa' }}>טוען…</Text>
+                <Text style={{ color: '#aaa' }}>{t("טוען…", "Loading…")}</Text>
               </View>
             )}
           </View>
@@ -217,13 +215,13 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
             onPress={onCancel}
             style={{ paddingVertical: 12, paddingHorizontal: 22, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,0.25)' }}
           >
-            <Text style={{ color: '#F7F4EA', fontWeight: '700' }}>ביטול</Text>
+            <Text style={{ color: '#F7F4EA', fontWeight: '700' }}>{t("ביטול", "Cancel")}</Text>
           </Pressable>
           <Pressable
             disabled={!natural || busy}
             onPress={() => {
               confirm().catch((error) => {
-                const msg = error instanceof Error ? error.message : 'החיתוך נכשל';
+                const msg = error instanceof Error ? error.message : t("החיתוך נכשל", "Could not crop the image");
                 if (Platform.OS === 'web') window.alert(msg);
               });
             }}
@@ -235,7 +233,7 @@ export function AvatarCropModal({ uri, visible, onCancel, onConfirm }: Props) {
               opacity: !natural || busy ? 0.5 : 1,
             }}
           >
-            <Text style={{ color: colors.greenInk, fontWeight: '800' }}>{busy ? 'שומר…' : 'אישור'}</Text>
+            <Text style={{ color: colors.greenInk, fontWeight: '800' }}>{busy ? t("שומר…", "Saving…") : t("אישור", "Approve")}</Text>
           </Pressable>
         </View>
       </View>

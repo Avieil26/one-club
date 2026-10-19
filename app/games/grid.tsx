@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { Image, Platform, Pressable, Text, TextInput, View, type ImageStyle } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
@@ -118,7 +119,7 @@ export default function GridGameScreen() {
                       {player ? (
                         <>
                           <Image source={{ uri: player.photo }} style={[styles.photo, face()]} />
-                          <Text style={styles.cellName} numberOfLines={1}>{player.name}</Text>
+                          <Text style={styles.cellName} numberOfLines={1}>{playerDisplayName(player, language)}</Text>
                         </>
                       ) : (
                         <Text style={styles.plus}>+</Text>
@@ -148,7 +149,7 @@ export default function GridGameScreen() {
               />
               {results.map((player) => (
                 <Pressable key={player.id} accessibilityRole="button" onPress={() => guess(player)} style={styles.hit}>
-                  <Text style={styles.hitName}>{player.name}</Text>
+                  <Text style={styles.hitName}>{playerDisplayName(player, language)}</Text>
                 </Pressable>
               ))}
             </View>
