@@ -51,7 +51,7 @@ export default function SettingsScreen() {
         </Text>
         <View style={{ gap: 10 }}>
           {option('en', '🇬🇧', 'English', 'Use the site in English, left to right.')}
-          {option('he', '🇮🇱', 'עברית', 'שימוש באתר בעברית, מימין לשמאל.')}
+          {option('he', '🇮🇱', 'עברית', t('שימוש באתר בעברית, מימין לשמאל.', 'Use the site in Hebrew, right to left.'))}
         </View>
       </ScrollView>
     </View>
