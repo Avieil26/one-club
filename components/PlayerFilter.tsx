@@ -5,6 +5,7 @@ import { NationFlag } from '@/components/NationFlag';
 import { TypeShell } from '@/components/PortraitCard';
 import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
+import { playerLabel } from '@/lib/playerLabels';
 import { PLAYERS } from '@/lib/fcPlayers';
 import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import {
@@ -30,8 +31,11 @@ const QUIET = 'rgba(214,222,232,0.72)';
 const LINE = 'rgba(170,186,204,0.28)';
 const PRESETS = [70, 75, 80, 85, 90];
 
-function kindLabel(kind: CardKind) {
-  return KINDS.find((option) => option.id === kind)?.label ?? '';
+function kindLabel(kind: CardKind, language: 'he' | 'en' = 'he') {
+  const hebrew = KINDS.find((option) => option.id === kind)?.label ?? '';
+  if (language === 'he') return hebrew;
+  const english: Partial<Record<CardKind, string>> = { gold: 'Gold', silver: 'Silver', icon: 'Icon', hero: 'Hero', totw: 'Team of the Week', promo: 'Ones to Watch' };
+  return english[kind] ?? hebrew;
 }
 
 function ratingLabel(filters: PlayerFilters, low: number, high: number) {
@@ -112,7 +116,7 @@ export function PlayerFilter({
 
         {panel === 'menu' ? (
           <View>
-            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind)} onPress={() => setPanel('kind')} />
+            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, language)} onPress={() => setPanel('kind')} />
             <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
             <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
             <MenuRow label={t('עמדה', 'Position')} value={filters.position ?? ''} onPress={() => setPanel('position')} />
@@ -124,18 +128,18 @@ export function PlayerFilter({
         ) : null}
 
         {panel === 'kind' ? (
-          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
-            <TypePick label="סילבר" kind="silver" active={filters.kind === 'silver'} onPress={() => toggleKind('silver')} />
-            <TypePick label="גולד" kind="gold" active={filters.kind === 'gold'} onPress={() => toggleKind('gold')} />
-            <TypePick label="אייקון" kind="icon" active={filters.kind === 'icon'} onPress={() => toggleKind('icon')} />
-            <TypePick label="הירו" kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
+          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
+            <TypePick label={t("סילבר", "Silver")} kind="silver" active={filters.kind === 'silver'} onPress={() => toggleKind('silver')} />
+            <TypePick label={t("גולד", "Gold")} kind="gold" active={filters.kind === 'gold'} onPress={() => toggleKind('gold')} />
+            <TypePick label={t("אייקון", "Icon")} kind="icon" active={filters.kind === 'icon'} onPress={() => toggleKind('icon')} />
+            <TypePick label={t("הירו", "Hero")} kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
             <TypePick label="TOTW" kind="totw" active={filters.kind === 'totw'} onPress={() => toggleKind('totw')} />
             <TypePick label="OTW" kind="otw" active={filters.kind === 'promo'} onPress={() => toggleKind('promo')} />
           </ScrollView>
         ) : null}
 
         {panel === 'nation' ? (
-          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', gap: 8 }}>
+          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', flexWrap: 'wrap', gap: 8 }}>
             {choices.nations.map((nation) => (
               <Pressable
                 key={nation}
@@ -153,7 +157,7 @@ export function PlayerFilter({
                 }}
               >
                 <NationFlag nation={nation} size={26} />
-                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{nation}</Text>
+                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{playerLabel(nation, language)}</Text>
               </Pressable>
             ))}
           </ScrollView>
