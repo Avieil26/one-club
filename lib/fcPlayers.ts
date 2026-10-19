@@ -36,6 +36,7 @@ export type FcPlayer = {
   heightCm?: number;
   weightKg?: number;
   age?: number;
+  roles?: string[];
 };
 
 export const N = {

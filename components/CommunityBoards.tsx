@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import type { ReactNode } from 'react';
-import { Image, Platform, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
+import { Image, Platform, Pressable, Text, useWindowDimensions, View, type ImageStyle } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgGradient, Path, Polygon, Stop } from 'react-native-svg';
 
 import { ProfileFace } from '@/components/ProfileFace';
@@ -78,9 +79,13 @@ function Rank({ place }: { place: number }) {
 function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
   const { language } = useLanguage();
   const rtl = language === 'he';
+  const router = useRouter();
   const value = row.value.toLocaleString('en-US');
   return (
-    <View
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`פתיחת הפרופיל של ${row.name}`}
+      onPress={() => router.push(`/player/${row.userId}`)}
       style={{
         minHeight: 58,
         paddingHorizontal: 6,
@@ -116,7 +121,7 @@ function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark
         {mark === 'heart' ? <HeartMark size={14} /> : null}
         <Text style={{ color: '#f3f5f7', fontFamily: careerFont, fontSize: 16, fontWeight: '800', writingDirection: 'ltr' }}>{value}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

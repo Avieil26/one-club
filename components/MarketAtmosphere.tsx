@@ -1,4 +1,4 @@
-import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board' | 'champions';
@@ -33,6 +33,14 @@ const SCENES: Record<
     wash: 'rgba(16,12,6,0.28)',
     vignette: ['rgba(0,0,0,0.48)', 'transparent', 'transparent', 'rgba(0,0,0,0.76)'],
     base: '#05080A',
+  },
+  champions: {
+    // Exact Champions background supplied for this Preview.
+    source: require('@/assets/images/champions-bg.jpg'),
+    tint: ['rgba(10,0,2,0.10)', 'rgba(12,0,2,0.03)', 'rgba(0,0,0,0.28)'],
+    wash: 'transparent',
+    vignette: ['rgba(0,0,0,0.10)', 'transparent', 'transparent', 'rgba(0,0,0,0.42)'],
+    base: '#090102',
   },
   grounds: {
     source: require('@/assets/images/scene-grounds.png'),
@@ -76,13 +84,6 @@ const SCENES: Record<
     vignette: ['#07080c', '#07080c', '#07080c', '#07080c'],
     base: '#07080c',
   },
-  champions: {
-    source: require('@/assets/images/champions-bg.jpg'),
-    tint: ['rgba(2,4,8,0.45)', 'rgba(2,4,8,0.25)', 'rgba(2,4,8,0.65)'],
-    wash: 'rgba(3,5,8,0.18)',
-    vignette: ['rgba(0,0,0,0.38)', 'transparent', 'transparent', 'rgba(0,0,0,0.68)'],
-    base: '#05070A',
-  },
   modal: {
     source: require('@/assets/images/scene-ultimate.png'),
     tint: ['rgba(2,3,6,0.72)', 'rgba(4,5,10,0.55)', 'rgba(2,2,4,0.88)'],
@@ -96,6 +97,7 @@ const SCENES: Record<
 export function SceneAtmosphere({ scene }: { scene: SceneId }) {
   const config = SCENES[scene];
   const { width, height } = useWindowDimensions();
+  const web = Platform.OS === 'web';
 
   return (
     <View

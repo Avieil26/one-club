@@ -2,6 +2,7 @@ import metaFile from '@/assets/data/playerMeta.json';
 import iconCards from '@/assets/data/iconCardMeta.json';
 import heroCards from '@/assets/data/heroCardMeta.json';
 import totwCards from '@/assets/data/totwCardMeta.json';
+import { futureStarsFor } from '@/lib/futureStars';
 
 export const META_ATTRS = [
   'acceleration',
@@ -77,12 +78,36 @@ function toCardMeta(row: MetaRow | undefined): CardMeta | null {
   return { foot: row.foot, skillMoves: row.sm, weakFoot: row.wf, stats };
 }
 
+const OTW_META: Record<string, MetaRow> = {
+  'ea-264947-nicole-anyomi': {
+    foot: 'R',
+    sm: 4,
+    wf: 4,
+    attrs: [90,90,81,85,84,80,75,60,71,72,72,82,64,64,84,84,78,86,84,79,45,85,45,59,64,95,85,88,64],
+  },
+};
+
+export function otwCardMeta(id: string): CardMeta | null {
+  return toCardMeta(OTW_META[id]);
+}
+
 export function playerCardMeta(id: string): CardMeta | null {
   return toCardMeta(heroRows[id] ?? iconRows[id] ?? CARD_OVERRIDES[id] ?? rows[id]);
 }
 
 export function totwCardMeta(id: string): CardMeta | null {
   return toCardMeta(totwRows[id]);
+}
+
+export function futureStarsCardMeta(id: string): CardMeta | null {
+  const row = futureStarsFor(id);
+  if (!row) return null;
+  return toCardMeta({
+    foot: row.foot,
+    sm: row.skillMoves,
+    wf: row.weakFoot,
+    attrs: keys.map((key) => row.attributes[key] ?? 0),
+  });
 }
 
 export type StatRow = { key: MetaAttr; label: string };

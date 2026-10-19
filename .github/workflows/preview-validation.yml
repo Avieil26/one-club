@@ -59,5 +59,7 @@ jobs:
         run: npm run lint
       - name: Verify exact catalogue count and special-card rows
         run: npm run verify:catalogue
+      - name: Verify restored cards and Grounds behavior
+        run: npm run verify:preservation
       - name: Export web build
         run: npx expo export -p web

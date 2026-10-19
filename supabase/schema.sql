@@ -72,8 +72,21 @@ create table if not exists public.comments (
   preset text check (preset in ('respect', 'nice', 'smart', 'funny')),
   body text not null default '',
   status text not null check (status in ('visible', 'hidden_pending')),
+  parent_id uuid references public.comments(id) on delete cascade,
   created_at timestamptz not null default now()
 );
+
+create table if not exists public.comment_likes (
+  comment_id uuid not null references public.comments(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (comment_id, user_id)
+);
+
+alter table public.comment_likes enable row level security;
+drop policy if exists comment_likes_read on public.comment_likes;
+create policy comment_likes_read on public.comment_likes for select to authenticated using (true);
+grant select on public.comment_likes to authenticated;
 
 create table if not exists public.grounds_posts (
   id uuid primary key default gen_random_uuid(),
@@ -83,6 +96,8 @@ create table if not exists public.grounds_posts (
   position text not null,
   division text not null check (division in ('10', '9', '8', '7', '6', '5', '4', '3', '2', '1', 'elite')),
   skill_rating integer,
+  player_level integer,
+  play_styles jsonb not null default '[]'::jsonb,
   archetype text not null,
   region text not null,
   hours text not null,
@@ -462,17 +477,27 @@ create or replace function public.create_grounds_post(
   p_position text,
   p_division text,
   p_skill integer,
+  p_player_level integer,
   p_archetype text,
   p_region text,
   p_hours text,
   p_contact_type text,
   p_contact_value text,
-  p_level_image text
+  p_level_image text,
+  p_play_styles jsonb
 ) returns uuid
 language plpgsql security definer set search_path = public as $$
 declare
   v_user uuid := auth.uid();
   v_id uuid;
+  v_allowed_ids text[] := array[
+    'acrobatic', 'chip-shot', 'dead-ball', 'finesse-shot', 'gamechanger', 'low-driven-shot', 'power-shot', 'precision-header',
+    'incisive-pass', 'inventive', 'long-ball-pass', 'pinged-pass', 'tiki-taka', 'whipped-pass',
+    'first-touch', 'press-proven', 'rapid', 'technical', 'trickster',
+    'aerial-fortress', 'anticipate', 'block', 'intercept', 'jockey', 'slide-tackle',
+    'bruiser', 'enforcer', 'long-throw', 'quick-step', 'relentless',
+    '1v1-close-down', 'cross-claimer', 'deflector', 'far-reach', 'far-throw', 'footwork'
+  ];
 begin
   if v_user is null then raise exception 'צריך להתחבר'; end if;
   if p_intent not in ('need_player', 'looking_for_club') then raise exception 'סוג מודעה לא תקין'; end if;
@@ -480,16 +505,31 @@ begin
   if p_division not in ('10', '9', '8', '7', '6', '5', '4', '3', '2', '1', 'elite') then raise exception 'חלוקה לא תקינה'; end if;
   if p_contact_type not in ('whatsapp', 'discord') then raise exception 'אמצעי קשר לא תקין'; end if;
   if p_skill is not null and (p_skill < 1 or p_skill > 5000) then raise exception 'Skill Rating צריך להיות מספר בין 1 ל-5000'; end if;
+  if p_player_level is null or p_player_level < 1 or p_player_level > 50 then raise exception 'רמת ארכיטיפ צריכה להיות בין 1 ל-50'; end if;
+  if p_play_styles is null or jsonb_typeof(p_play_styles) <> 'array' or jsonb_array_length(p_play_styles) > 36 then raise exception 'רשימת PlayStyles לא תקינה'; end if;
+  if exists (
+    select 1
+    from jsonb_array_elements(p_play_styles) as item(value)
+    where jsonb_typeof(item.value) <> 'object'
+       or coalesce(item.value->>'id', '') <> all(v_allowed_ids)
+       or coalesce(item.value->>'tier', '') not in ('base', 'plus')
+  ) then
+    raise exception 'רשימת PlayStyles לא תקינה';
+  end if;
+  if (select count(*) from jsonb_array_elements(p_play_styles)) <>
+     (select count(distinct item.value->>'id') from jsonb_array_elements(p_play_styles) as item(value)) then
+    raise exception 'PlayStyle כפול ברשימה';
+  end if;
   if char_length(trim(p_position)) < 1 or char_length(trim(p_archetype)) < 1 or char_length(trim(p_region)) < 1
      or char_length(trim(p_hours)) < 1 or char_length(trim(p_contact_value)) < 1 then
     raise exception 'חסרים פרטי חיפוש';
   end if;
   insert into public.grounds_posts (
-    user_id, intent, platform, position, division, skill_rating, archetype, region, hours,
-    contact_type, contact_value, level_image_uri, level_verified, level_status
+    user_id, intent, platform, position, division, skill_rating, player_level, archetype, region, hours,
+    contact_type, contact_value, level_image_uri, play_styles, level_verified, level_status
   ) values (
-    v_user, p_intent, p_platform, trim(p_position), p_division, p_skill, trim(p_archetype), trim(p_region), trim(p_hours),
-    p_contact_type, trim(p_contact_value), nullif(trim(coalesce(p_level_image, '')), ''), false,
+    v_user, p_intent, p_platform, trim(p_position), p_division, p_skill, p_player_level, trim(p_archetype), trim(p_region), trim(p_hours),
+    p_contact_type, trim(p_contact_value), nullif(trim(coalesce(p_level_image, '')), ''), coalesce(p_play_styles, '[]'::jsonb), false,
     case when nullif(trim(coalesce(p_level_image, '')), '') is null then 'rejected' else 'pending' end
   ) returning id into v_id;
   return v_id;
@@ -666,12 +706,29 @@ grant execute on function public.rate_fut(uuid, integer, integer, integer) to au
 grant execute on function public.add_comment(text, uuid, text, text) to authenticated;
 grant execute on function public.report_comment(uuid) to authenticated;
 grant execute on function public.moderate_comment(uuid, text) to authenticated;
-grant execute on function public.create_grounds_post(text, text, text, text, integer, text, text, text, text, text, text) to authenticated;
+revoke all on function public.create_grounds_post(text, text, text, text, integer, integer, text, text, text, text, text, text, jsonb) from public, anon;
+grant execute on function public.create_grounds_post(text, text, text, text, integer, integer, text, text, text, text, text, text, jsonb) to authenticated;
 grant execute on function public.moderate_grounds_level(uuid, boolean) to authenticated;
 grant execute on function public.create_sbc_challenge(text, text, text, timestamptz, integer) to authenticated;
 grant execute on function public.add_sbc_solution(text, text, text[], text, text, text, timestamptz, integer) to authenticated;
 grant execute on function public.mark_sbc_worked(uuid) to authenticated;
 grant execute on function public.vote_sbc_solution(uuid, text) to authenticated;
+
+create table if not exists public.profile_follows (
+  follower_id uuid not null references auth.users(id) on delete cascade,
+  following_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (follower_id, following_id),
+  constraint profile_follows_not_self check (follower_id <> following_id)
+);
+alter table public.profile_follows enable row level security;
+grant select, insert, delete on public.profile_follows to authenticated;
+drop policy if exists profile_follows_read on public.profile_follows;
+create policy profile_follows_read on public.profile_follows for select to authenticated using (true);
+drop policy if exists profile_follows_insert on public.profile_follows;
+create policy profile_follows_insert on public.profile_follows for insert to authenticated with check (auth.uid() = follower_id);
+drop policy if exists profile_follows_delete on public.profile_follows;
+create policy profile_follows_delete on public.profile_follows for delete to authenticated using (auth.uid() = follower_id);
 
 drop policy if exists profiles_read on public.profiles;
 create policy profiles_read on public.profiles for select to authenticated using (true);

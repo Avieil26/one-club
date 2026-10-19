@@ -5,7 +5,7 @@ import { runInThisContext } from 'node:vm';
 import ts from 'typescript';
 
 /** Execute the same data modules Metro uses, without loading React Native. */
-export function loadPlayerCatalogue(root = process.cwd()) {
+function createRepositoryLoader(root) {
   const cache = new Map();
   const requirePackage = createRequire(path.join(root, 'package.json'));
   function load(filename) {
@@ -14,11 +14,16 @@ export function loadPlayerCatalogue(root = process.cwd()) {
     if (cache.has(filename)) return cache.get(filename).exports;
     const module = { exports: {} };
     cache.set(filename, module);
-    const source = fs.readFileSync(filename, 'utf8');
-    if (filename.endsWith('.json')) {
-      module.exports = JSON.parse(source);
+    if (!fs.existsSync(filename)) throw new Error(`Missing module or asset: ${filename}`);
+    if (/\.(png|webp|jpg|jpeg)$/.test(filename)) {
+      module.exports = filename;
       return module.exports;
     }
+    if (filename.endsWith('.json')) {
+      module.exports = JSON.parse(fs.readFileSync(filename, 'utf8'));
+      return module.exports;
+    }
+    const source = fs.readFileSync(filename, 'utf8');
     const { outputText } = ts.transpileModule(source, {
       compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
       fileName: filename,
@@ -32,5 +37,13 @@ export function loadPlayerCatalogue(root = process.cwd()) {
     execute(localRequire, module, module.exports);
     return module.exports;
   }
-  return load(path.join(root, 'lib/fcPlayers.ts')).PLAYERS;
+  return load;
+}
+
+export function loadRepositoryModule(modulePath, root = process.cwd()) {
+  return createRepositoryLoader(root)(path.resolve(root, modulePath));
+}
+
+export function loadPlayerCatalogue(root = process.cwd()) {
+  return loadRepositoryModule('lib/fcPlayers.ts', root).PLAYERS;
 }

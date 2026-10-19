@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import {
   Image,
+  ImageBackground,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -46,6 +47,7 @@ export function Screen({
   maxWidth = 1120,
   scene = 'home',
   showNav = true,
+  backgroundImage,
 }: {
   children: ReactNode;
   refreshing?: boolean;
@@ -53,6 +55,7 @@ export function Screen({
   maxWidth?: number;
   scene?: SceneId;
   showNav?: boolean;
+  backgroundImage?: string;
 }) {
   const { language } = useLanguage();
   const rtl = language === 'he';
@@ -65,7 +68,14 @@ export function Screen({
   return (
     <View style={[styles.screenShell, { backgroundColor: scene === 'sbc' ? '#060A14' : scene === 'board' ? '#07080c' : '#05080A' }]}>
       {/* Full-bleed background behind everything */}
-      <SceneAtmosphere scene={scene} />
+      {backgroundImage ? (
+        <>
+          <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+            <ImageBackground source={{ uri: backgroundImage }} resizeMode="cover" imageStyle={{ opacity: 0.9 }} style={StyleSheet.absoluteFill} />
+          </View>
+          <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(2, 8, 15, 0.22)' }]} />
+        </>
+      ) : <SceneAtmosphere scene={scene} />}
       {showNav ? <SiteNav /> : null}
       <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView

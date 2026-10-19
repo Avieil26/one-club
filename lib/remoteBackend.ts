@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
@@ -5,9 +6,10 @@ import { catalogChallenge, mergeOfficialSbcs, RETIRED_SBC_IDS } from '@/lib/sbcC
 import { decodeSolution, encodeSolution, proofImages, readSquad } from '@/lib/sbcSolution';
 import { mergeFeaturedCareer, seedDatabase } from '@/lib/seed';
 import { normalizeSquad } from '@/lib/profileSquad';
-import { loadSocial, saveSquadLocal, toggleFollowLocal } from '@/lib/socialLocal';
+import { clearLocalFollowsForUser, loadSocial, saveSquadLocal } from '@/lib/socialLocal';
 import { toSnapshot } from '@/lib/snapshot';
 import { getSupabase, uploadAvatar, uploadProofs } from '@/lib/supabase';
+import { sanitizeGroundsPlayStyles } from '@/lib/groundsPlaystyles';
 import type {
   CareerChallenge,
   CareerMode,
@@ -39,6 +41,7 @@ import type {
   SbcKind,
   SbcSolution,
   Snapshot,
+  UserFollow,
 } from '@/lib/types';
 
 type ProfileRow = {
@@ -103,6 +106,7 @@ type CommentRow = {
   body: string;
   status: CommentStatus;
   created_at: string;
+  parent_id?: string | null;
 };
 type GroundsRow = {
   id: string;
@@ -121,6 +125,7 @@ type GroundsRow = {
   ea_id?: string | null;
   gamertag?: string | null;
   avatar_uri?: string | null;
+  play_styles?: unknown;
   level_image_uri: string | null;
   level_verified: boolean;
   level_status: ModerationStatus;
@@ -147,6 +152,7 @@ type SolutionRow = {
   created_at: string;
 };
 type WorkedRow = { solution_id: string; user_id: string };
+type FollowRow = { follower_id: string; following_id: string; created_at: string };
 
 function fail(error: { message: string }): never {
   const hebrew = error.message.match(/[\u0590-\u05FF][^]*$/);
@@ -229,6 +235,7 @@ function mapSubmission(row: SubmissionRow): CareerSubmission {
     note: row.note,
     imageUris: row.image_uris ?? [],
     status: row.status,
+
     createdAt: row.created_at,
   };
 }
@@ -292,11 +299,11 @@ function mapGrounds(row: GroundsRow): GroundsPost {
     hours: row.hours ?? '',
     contactType: row.contact_type,
     contactValue: row.contact_value,
-    eaId: row.ea_id || (row.contact_value === 'in-app' ? '' : row.contact_value) || '',
-    gamertag: row.gamertag || (row.hours === '—' ? '' : row.hours) || '',
-    // Verification images are private proof material, not profile photos.
-    avatarUri: row.avatar_uri || null,
+    eaId: row.ea_id || row.contact_value || '',
+    gamertag: row.gamertag || row.hours || '',
+    avatarUri: row.avatar_uri || row.level_image_uri,
     levelImageUri: row.level_image_uri,
+    playStyles: sanitizeGroundsPlayStyles(row.play_styles),
     levelVerified: row.level_verified,
     levelStatus: row.level_status,
     createdAt: row.created_at,
@@ -365,6 +372,12 @@ async function latestAvatars(userIds: string[]): Promise<Map<string, string>> {
   return found;
 }
 
+async function commentLikes(): Promise<{ commentId: string; userId: string }[]> {
+  const { data, error } = await getSupabase().from('comment_likes').select('comment_id, user_id');
+  if (error) return [];
+  return (data ?? []).map((row) => ({ commentId: row.comment_id as string, userId: row.user_id as string }));
+}
+
 async function squadLikes(): Promise<{ postId: string; userId: string }[]> {
   const supabase = getSupabase();
   const primary = await supabase.from('fut_likes').select('post_id, user_id');
@@ -379,13 +392,46 @@ async function squadLikes(): Promise<{ postId: string; userId: string }[]> {
   }));
 }
 
+const DEMO_PROFILES: Record<string, Profile> = {
+  admin: {
+    id: 'admin',
+    displayName: 'אביאל',
+    isAdmin: true,
+    approvedCount: 6,
+    reputation: 48,
+    createdAt: '2026-09-18T10:00:00.000Z',
+  },
+  maya: {
+    id: 'maya',
+    displayName: 'מאיה',
+    isAdmin: false,
+    approvedCount: 5,
+    reputation: 62,
+    createdAt: '2026-09-18T12:00:00.000Z',
+  },
+  noam: {
+    id: 'noam',
+    displayName: 'נועם',
+    isAdmin: false,
+    approvedCount: 1,
+    reputation: 8,
+    createdAt: '2026-09-19T12:00:00.000Z',
+  },
+};
+
 async function readSnapshot(): Promise<Snapshot> {
   const supabase = getSupabase();
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError) authFail(sessionError);
   const session = sessionData.session;
 
-  if (!session) {
+  let demoId: string | null = null;
+  try {
+    demoId = await AsyncStorage.getItem('fc27_demo_user');
+  } catch {}
+  const demoProfile = demoId ? DEMO_PROFILES[demoId] : null;
+
+  if (!session && !demoProfile) {
     return toSnapshot(
       {
         sessionUserId: null,
@@ -396,6 +442,7 @@ async function readSnapshot(): Promise<Snapshot> {
         futRatings: [],
         futLikes: [],
         comments: [],
+        commentLikes: [],
         groundsPosts: [],
         sbcChallenges: mergeOfficialSbcs([]),
         sbcSolutions: [],
@@ -409,6 +456,7 @@ async function readSnapshot(): Promise<Snapshot> {
 
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
   if (session) {
+    profiles = profiles.map((profile) => profile.id === session.user.id ? { ...profile, email: session.user.email ?? profile.email } : profile);
     if (!profiles.some((profile) => profile.id === session.user.id)) {
       await new Promise((resolve) => setTimeout(resolve, 400));
       profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
@@ -448,8 +496,12 @@ async function readSnapshot(): Promise<Snapshot> {
         };
       });
     }
+  } else if (demoProfile) {
+    if (!profiles.some((profile) => profile.id === demoProfile.id)) {
+      profiles = [...profiles, demoProfile];
+    }
   }
-  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, uploaded, directMessages] =
+  const [challenges, submissions, futPosts, ratings, comments, grounds, sbcChallenges, solutions, worked, failed, likes, commentLikeRows, uploaded, directMessages] =
     await Promise.all([
       rows<ChallengeRow>('career_challenges'),
       rows<SubmissionRow>('career_submissions'),
@@ -462,6 +514,7 @@ async function readSnapshot(): Promise<Snapshot> {
       rows<WorkedRow>('sbc_worked'),
       rowsOptional<WorkedRow>('sbc_failed'),
       squadLikes(),
+      commentLikes(),
       latestAvatars(profiles.map((profile) => profile.id)),
       messageRows(),
     ]);
@@ -477,9 +530,34 @@ async function readSnapshot(): Promise<Snapshot> {
   );
 
   const social = await loadSocial();
+  let follows: UserFollow[] = social.follows;
+  if (session) {
+    const localFollows = social.follows.filter(
+      (follow) => follow.followerId === session.user.id
+        && follow.followingId !== session.user.id
+        && profiles.some((profile) => profile.id === follow.followingId),
+    );
+    if (localFollows.length) {
+      const { error } = await getSupabase().from('profile_follows').upsert(
+        localFollows.map((follow) => ({
+          follower_id: follow.followerId,
+          following_id: follow.followingId,
+          created_at: follow.createdAt,
+        })),
+        { onConflict: 'follower_id,following_id', ignoreDuplicates: true },
+      );
+      if (error) fail(error);
+      await clearLocalFollowsForUser(session.user.id);
+    }
+    follows = (await rows<FollowRow>('profile_follows')).map((follow) => ({
+      followerId: follow.follower_id,
+      followingId: follow.following_id,
+      createdAt: follow.created_at,
+    }));
+  }
   const seed = seedDatabase();
   const db: Database = {
-    sessionUserId: session?.user.id ?? null,
+    sessionUserId: session ? session.user.id : (demoProfile?.id ?? null),
     profiles: profiles.length ? profiles : seed.profiles,
     careerChallenges: mergeFeaturedCareer(
       challenges.length ? challenges.map(mapChallenge) : seed.careerChallenges,
@@ -489,13 +567,14 @@ async function readSnapshot(): Promise<Snapshot> {
     futRatings: ratings.map(mapRating),
     futLikes: likes,
     comments: comments.map(mapComment),
+    commentLikes: commentLikeRows,
     groundsPosts: grounds.map(mapGrounds),
     sbcChallenges: sbcChallenges.length ? mergeOfficialSbcs(sbcChallenges.map(mapSbc)) : seed.sbcChallenges,
     sbcSolutions: solutions
       .map((row) => mapSolution(row, worked, failed, challengeKeyById))
       .filter((solution) => !RETIRED_SBC_IDS.has(solution.challengeId)),
     reports: [],
-    follows: social.follows,
+    follows,
     messages: directMessages,
   };
   const sessionId = db.sessionUserId;
@@ -537,8 +616,11 @@ export function createRemoteBackend(): Backend {
         void supabase.removeChannel(channel);
       };
     },
-    signInDemo() {
-      return Promise.reject(new Error('כניסת הדגמה אינה זמינה בגרסה הציבורית'));
+    async signInDemo(profileId) {
+      const profile = DEMO_PROFILES[profileId];
+      if (!profile) throw new Error('הפרופיל לא נמצא');
+      await AsyncStorage.setItem('fc27_demo_user', profileId);
+      return readSnapshot();
     },
     signInNamed() {
       return Promise.reject(new Error('בשרת נכנסים עם אימייל וסיסמה'));
@@ -578,6 +660,7 @@ export function createRemoteBackend(): Backend {
       return readSnapshot();
     },
     async signOut() {
+      await AsyncStorage.removeItem('fc27_demo_user');
       const { error } = await getSupabase().auth.signOut();
       if (error) fail(error);
       return readSnapshot();
@@ -651,12 +734,17 @@ export function createRemoteBackend(): Backend {
       }
       return readSnapshot();
     },
-    async addComment(input: NewComment) {
+    async toggleCommentLike(commentId) {
+      await call('toggle_comment_like', { p_comment: commentId });
+      return readSnapshot();
+    },
+    async addComment(input: NewComment & { parentId?: string | null }) {
       const { data, error } = await getSupabase().rpc('add_comment', {
         p_target_type: input.targetType,
         p_target: input.targetId,
         p_preset: input.preset,
         p_body: input.body,
+        p_parent: input.parentId ?? null,
       });
       if (error) fail(error);
       return { snap: await readSnapshot(), held: data === 'held' };
@@ -676,29 +764,30 @@ export function createRemoteBackend(): Backend {
       if (!Number.isInteger(level) || level < 1 || level > 50) {
         throw new Error('רמת השחקן צריכה להיות בין 1 ל-50');
       }
-      const eaId = input.eaId.trim();
-      const gamertag = input.gamertag.trim();
-      if (!eaId && !gamertag) throw new Error('צריך למלא לפחות שם משתמש או EA ID');
-      if (eaId.length > 40) throw new Error('EA ID ארוך מדי');
-      if (gamertag.length > 40) throw new Error('שם משתמש ארוך מדי');
+      const skillText = input.skillRating.trim();
+      const skillRating = skillText ? Number(skillText) : null;
+      if (skillRating != null && (!Number.isInteger(skillRating) || skillRating < 1 || skillRating > 5000)) {
+        throw new Error('Skill Rating צריך להיות מספר בין 1 ל-5000');
+      }
       const levelProofSource = input.levelImageUri;
       const images = levelProofSource
         ? await uploadProofs(userData.user.id, [levelProofSource], 'level')
         : [];
-      // Encode new fields into existing RPC columns until schema migration is applied:
-      // skill = playerLevel, hours = gamertag, contact_value = eaId
+      // Gamertag and EA ID temporarily share legacy RPC columns until their schema migration exists.
       await call('create_grounds_post', {
         p_intent: input.intent,
         p_platform: input.platform,
         p_position: input.position,
         p_division: input.division,
-        p_skill: level,
+        p_skill: skillRating,
+        p_player_level: level,
         p_archetype: input.archetype,
         p_region: input.region || 'אונליין בלבד',
-        p_hours: gamertag || '—',
+        p_hours: input.gamertag.trim() || '—',
         p_contact_type: 'discord',
-        p_contact_value: eaId || 'in-app',
+        p_contact_value: input.eaId.trim() || 'in-app',
         p_level_image: images[0] ?? null,
+        p_play_styles: sanitizeGroundsPlayStyles(input.playStyles),
       });
       return readSnapshot();
     },
@@ -709,7 +798,19 @@ export function createRemoteBackend(): Backend {
     async toggleFollow(followingId) {
       const { data: userData, error: userError } = await getSupabase().auth.getUser();
       if (userError || !userData.user) throw new Error('צריך להתחבר');
-      await toggleFollowLocal(userData.user.id, followingId);
+      const followerId = userData.user.id;
+      if (followerId === followingId) throw new Error('אי אפשר לעקוב אחרי עצמך');
+      const existing = await getSupabase()
+        .from('profile_follows')
+        .select('follower_id')
+        .eq('follower_id', followerId)
+        .eq('following_id', followingId)
+        .maybeSingle();
+      if (existing.error) fail(existing.error);
+      const result = existing.data
+        ? await getSupabase().from('profile_follows').delete().eq('follower_id', followerId).eq('following_id', followingId)
+        : await getSupabase().from('profile_follows').insert({ follower_id: followerId, following_id: followingId });
+      if (result.error) fail(result.error);
       return readSnapshot();
     },
     async sendMessage(toUserId, body) {

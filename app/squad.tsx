@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Stack, useRouter } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { PortraitCard } from '@/components/PortraitCard';
 import { SquadPitch } from '@/components/SquadPitch';
@@ -18,6 +18,7 @@ const BENCH_MAX = 7;
 export default function SquadBuilderScreen() {
   const app = useApp();
   const router = useRouter();
+  const params = useLocalSearchParams<{ returnTo?: string }>();
   const saved = app.user?.squad ?? null;
   const [formationId, setFormationId] = useState<FormationId>(
     saved?.formation && isFormationId(saved.formation) ? saved.formation : '433',
@@ -142,7 +143,7 @@ export default function SquadBuilderScreen() {
     try {
       await app.saveSquad(squad);
       Alert.alert('הסגל נשמר', 'הקבוצה מופיעה בפרופיל.');
-      router.replace('/profile');
+      router.replace(params.returnTo === 'champions' ? '/champions' : '/profile');
     } catch (error) {
       Alert.alert('רגע', errorMessage(error));
     }

@@ -1,46 +1,46 @@
-# Preview repair status — 2026-10-19
+# Preview integration — 2026-10-19
 
-Base: `preview/fc27-20118-orphan-promo-cards-fix-20261019` at `5720e31ff0c323e779510499e32c04c8d8d75b7f`.
+The uploaded current source `fc27-current-source-20261019-165707.zip` identifies its Windows base as `3b2416467ed419ae1a875333f2fab4341c1023dd` on `grounds-prod-safe-20261014`, including uncommitted local changes. The original archive is unchanged.
 
-This is an unfinished Preview candidate. Do not merge or release until the catalogue and design blockers below are resolved.
+The integration combines that current source with the latest English/Star Performer fixes on `fix/continue-preview-20261019`. It does not merge into Production or apply SQL to a live database.
 
-## Repairs
+## Catalogue recovery
 
-- Carried forward missing English copy, accessibility labels and full-word translation matching from `preview/final-integration-20261019`, while keeping Champions accessible without its old “coming soon” gate.
-- Restored English roster names and DFG promo face stats.
-- Standard promo card rendering now prefers the promo's stats; an explicitly requested base card still uses base stats.
-- Restored language-aware shared layout, fields, arrival, sign-in, beta download and community board copy. Grounds region labels now translate without changing user-entered content.
-- Catalogue validation executes the actual `PLAYERS` data modules, checks unique IDs, preserves regular rows and verifies special-card identities, ratings and positions.
-- The existing workflow checks the catalogue before export. Vercel's build command now invokes the same guard.
+The incomplete Preview was missing 23 TOTW cards and all 15 DFG Team 2 cards. Their exact identities and data were recovered from the current source, rather than manufacturing rows to meet a count. Existing promo rows shared by both sources have identical data.
 
-## Catalogue blocker
-
-The real exported catalogue contains **20,080 unique cards**, not the requested **20,118**. The old validator also failed at 20,080; orphan recovery adds zero rows because every paired TOTW, Future Star and Star Performer already has a base row.
+The actual app export now has **20,118 cards with 20,118 unique IDs**:
 
 | Edition | Cards |
 | --- | ---: |
 | Base, including icons | 19,887 |
 | Hero | 87 |
-| TOTW | 69 |
-| Destined for Glory | 15 |
+| TOTW | 92 |
+| Destined for Glory | 30 |
 | Future Stars | 15 |
 | Star Performer | 6 |
 | Ones to Watch | 1 |
-| Total | 20,080 |
+| Total | 20,118 |
 
-The missing 38 identities have not been identified from available sources. No rows were fabricated and the target was not lowered. `npm run verify:catalogue` and the guarded build intentionally fail until authoritative missing data is recovered.
+Regular cards are preserved. Metadata, edition prices and item IDs are merged alongside the restored rows. A fixture pins the 38 recovered identities, ratings and positions. Both validation scripts run before Vercel/CI exports.
 
-The previously referenced Production commit `3b2416467ed419ae1a875333f2fab4341c1023dd` could not be retrieved from the Git remote. The current Vercel connection returned 403 for the specified FC27 team, and no authenticated local Vercel CLI was available. The original Windows working tree is not present in this environment. An archive of the verified current working tree or a reachable commit is needed to recover data that only exists there.
+## Preserved features
 
-## Design blocker
-
-The current Star Performer renderer is identical to the renderer on `preview/star-performers-20261018`: orange shield artwork with item-specific portraits. The later screenshot referenced in the conversation was not attached to this session or found among the available Library files, so visual matching against that screenshot remains unverified.
+- Current Grounds creation form, 36 PlayStyle assets and Base/Plus selections, optional archetype, distinct 1–50 archetype level and 1–5,000 Skill Rating.
+- Full-profile navigation, follow behavior, local social changes and backend RPC fields.
+- Existing source schema and migrations are retained as files; none were applied to a remote database.
+- Approved Future Stars frame, OTW renderer, DFG Team 2 art mapping, promo detail switching, edition metadata and SBC Pina.
+- Latest English copy and language-aware layout remain available, including the restored Grounds creation form. Champions stays visible with its supplied background; public demo admin shortcuts remain removed.
+- Precomposed TOTW artwork is not globally scaled, so restoring its renderer does not enlarge every foreground element.
 
 ## Validation
 
-- TypeScript: passed after integrating English fixes.
-- Web export: passed after integrating English fixes; repeated after final region/stat changes.
-- Repository lint: 65 errors and 30 warnings on the starting branch. The three changed files reporting errors retain the same counts as their baseline: Champions 2, Arrival 9, beta download 1. Other edited source/validation modules passed focused lint at the time of checking.
-- Catalogue: intentionally fails, actual 20,080 versus required 20,118; uniqueness, regular-card preservation and all expected promo identities/rating/position checks pass before that failure.
+- Actual catalogue: passed at 20,118 unique IDs, with preserved regular rows and expected promo ratings/positions.
+- Preservation checks: passed for all 38 recovered identities, 36 PlayStyles, valid Grounds submissions, separate Skill Rating/level, and rejection of invalid/anonymous submissions.
+- TypeScript: passed after integration.
+- Guarded web export: passed after integration.
+- Full ESLint run reports existing/restored source debt (85 errors, 53 warnings at the initial integrated check), mainly React compiler hook/ref rules. This is not a clean lint result. New Grounds form/PlayStyles code compiled successfully; unrelated hook rewrites were not included in this recovery.
+- Browser visual QA could not complete: no local browser binary was available, its download failed, and the cloud browser could not reach the workspace's local server. No visual pass or live backend test is claimed.
 
-No Production branch, alias, database or deployed site was changed during this repair.
+## Remaining design review
+
+Star Performer data and item-specific portraits are retained with the orange-shield renderer from `preview/star-performers-20261018`. The later reference screenshot from the earlier conversation is absent from both uploaded archives. Matching to that exact screenshot remains unverified, so this PR stays a draft pending design review and Preview smoke testing.

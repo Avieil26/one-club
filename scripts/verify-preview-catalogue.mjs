@@ -18,7 +18,7 @@ for (const row of readData('players')) {
   assert.ok(!card.edition, `Regular player was replaced by a promo: ${row.id}`);
 }
 for (const [file, edition, expected] of [
-  ['totw', 'totw', 69],
+  ['totw', 'totw', 92],
   ['futureStars', 'future-stars', 15],
   ['starPerformers', 'star-performer', 6],
 ]) {
@@ -33,6 +33,15 @@ for (const [file, edition, expected] of [
     assert.equal(card.position, row.position, `Wrong special-card position: ${id}`);
   }
 }
+const destined = readData('destinedEditions');
+assert.equal(Object.keys(destined).length, 30, 'Expected both DFG teams');
+assert.equal(editionCounts.destined, 30, 'Missing DFG runtime cards');
+for (const [baseId, row] of Object.entries(destined)) {
+  const card = byId.get(`${baseId}--destined`);
+  assert.equal(card?.rating, row.rating, `Wrong DFG rating: ${baseId}`);
+  assert.deepEqual(card.face, row.face, `Wrong DFG face stats: ${baseId}`);
+}
+
 console.log(JSON.stringify({
   expected: 20118,
   calculated: players.length,

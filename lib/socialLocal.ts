@@ -51,6 +51,12 @@ export async function toggleFollowLocal(followerId: string, followingId: string)
   return bundle;
 }
 
+export async function clearLocalFollowsForUser(followerId: string): Promise<void> {
+  const bundle = await loadSocial();
+  bundle.follows = bundle.follows.filter((follow) => follow.followerId !== followerId);
+  await save(bundle);
+}
+
 export async function sendMessageLocal(fromUserId: string, toUserId: string, body: string): Promise<SocialBundle> {
   if (fromUserId === toUserId) throw new Error('אי אפשר לשלוח הודעה לעצמך');
   const text = body.trim();

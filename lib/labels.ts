@@ -25,17 +25,17 @@ export const PRESETS: { id: CommentPreset; label: string }[] = [
 ];
 
 export const DIVISIONS: { id: DivisionId; label: string }[] = [
-  { id: 'elite', label: 'אליט' },
-  { id: '1', label: 'חלוקה 1' },
-  { id: '2', label: 'חלוקה 2' },
-  { id: '3', label: 'חלוקה 3' },
-  { id: '4', label: 'חלוקה 4' },
-  { id: '5', label: 'חלוקה 5' },
-  { id: '6', label: 'חלוקה 6' },
-  { id: '7', label: 'חלוקה 7' },
-  { id: '8', label: 'חלוקה 8' },
-  { id: '9', label: 'חלוקה 9' },
-  { id: '10', label: 'חלוקה 10' },
+  { id: '10', label: 'Division 10' },
+  { id: '9', label: 'Division 9' },
+  { id: '8', label: 'Division 8' },
+  { id: '7', label: 'Division 7' },
+  { id: '6', label: 'Division 6' },
+  { id: '5', label: 'Division 5' },
+  { id: '4', label: 'Division 4' },
+  { id: '3', label: 'Division 3' },
+  { id: '2', label: 'Division 2' },
+  { id: '1', label: 'Division 1' },
+  { id: 'elite', label: 'Elite' },
 ];
 
 export const POSITIONS = ['שוער', 'בלם', 'מגן', 'קשר הגנתי', 'קשר', 'קשר התקפי', 'כנף', 'חלוץ', 'כל עמדה'];

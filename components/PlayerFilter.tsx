@@ -23,6 +23,7 @@ const KINDS: { id: CardKind; he: string; en: string }[] = [
   { id: 'hero', he: 'הירו', en: 'Hero' },
   { id: 'totw', he: 'TOTW', en: 'TOTW' },
   { id: 'promo', he: 'OTW', en: 'OTW' },
+  { id: 'future-stars', he: 'Future Stars', en: 'Future Stars' },
 ];
 
 const TEXT = '#F4F7F2';
@@ -132,6 +133,7 @@ export function PlayerFilter({
             <TypePick label={t('הירו', 'Hero')} kind="hero" active={filters.kind === 'hero'} onPress={() => toggleKind('hero')} />
             <TypePick label="TOTW" kind="totw" active={filters.kind === 'totw'} onPress={() => toggleKind('totw')} />
             <TypePick label="OTW" kind="otw" active={filters.kind === 'promo'} onPress={() => toggleKind('promo')} />
+            <TypePick label="Future Stars" kind="future-stars" active={filters.kind === 'future-stars'} onPress={() => toggleKind('future-stars')} />
           </ScrollView>
         ) : null}
 
@@ -265,7 +267,7 @@ function TypePick({
   onPress,
 }: {
   label: string;
-  kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw';
+  kind: 'gold' | 'silver' | 'icon' | 'otw' | 'hero' | 'totw' | 'future-stars';
   active: boolean;
   onPress: () => void;
 }) {

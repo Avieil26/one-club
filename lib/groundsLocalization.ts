@@ -1,0 +1,81 @@
+const GROUNDS_COPY: Record<string, string> = {
+  "רשות": "Optional",
+  "PlayStyle רגיל": "Base PlayStyle",
+  "רגיל": "Base",
+  "רגע": "Notice",
+  "צריך להתחבר": "Sign in required",
+  "התחברו כדי לשמור את פרופיל השחקן שלכם.": "Sign in to save your player profile.",
+  "חסר פרטי התחברות למשחק": "Missing game account details",
+  "צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.": "Enter at least a gamertag or EA ID before publishing.",
+  "Skill Rating לא תקין": "Invalid Skill Rating",
+  "אפשר להזין מספר בין 1 ל־5,000.": "Enter a number from 1 to 5,000.",
+  "לא צוין עדיין": "Not specified yet",
+  "הפרופיל פורסם": "Profile published",
+  "הפרטים נשמרו בגראונדס.": "Your details have been saved to The Grounds.",
+  "שמירת הפרופיל נכשלה": "Could not save your profile",
+  "יצירת פרופיל · THE GROUNDS": "Create profile · THE GROUNDS",
+  "בונים את הפרופיל שלך": "Build your player profile",
+  "הפרטים והסגנונות שתבחרו יוצגו לשחקנים שמחפשים אתכם בגראונדס.": "Your details and selected PlayStyles will appear to players looking for you on The Grounds.",
+  "סוג פרופיל ופלטפורמה": "Profile type and platform",
+  "בחרו מה אתם מחפשים ואיפה אתם משחקים": "Choose what you are looking for and where you play",
+  "מטרת הפרסום": "Posting goal",
+  "המועדון שלי מחפש שחקנים": "My club is recruiting players",
+  "אני מחפש מועדון": "I am looking for a club",
+  "פלטפורמה": "Platform",
+  "פרטי השחקן": "Player details",
+  "הוסיפו מספיק מידע כדי ששחקנים יוכלו למצוא אתכם": "Add enough detail for players to find you",
+  "שם משתמש במחשב": "PC username",
+  "שם משתמש במשחק": "In-game username",
+  "כמו שמופיע ב־EA או בקונסולה": "As shown in EA or on your console",
+  "מזהה EA שלכם": "Your EA ID",
+  "צריך למלא לפחות שם משתמש אחד או EA ID.": "Enter at least one username or EA ID.",
+  "עמדה מועדפת": "Preferred position",
+  "Division ב־Clubs": "Clubs division",
+  "ארכיטיפ ב־Clubs": "Clubs archetype",
+  "לא בחרתי עדיין": "Not selected yet",
+  "ארכיטיפ הוא סוג הבנייה של ה־Pro, כמו Finisher או Creator. הוא משפיע על ההתפתחות וה־PlayStyles הייחודיים. אין לך את המשחק או שאתה לא בטוח? אפשר להשאיר ריק.": "An archetype is your Pro build, such as Finisher or Creator. It affects progression and unique PlayStyles. If you do not have the game or are unsure, you can leave this blank.",
+  "רמת ארכיטיפ": "Archetype level",
+  "הפחתת רמה": "Decrease level",
+  "רמת ארכיטיפ בין 1 ל-50": "Archetype level from 1 to 50",
+  "העלאת רמה": "Increase level",
+  "לדוגמה: 1,250": "For example: 1,250",
+  "אזור": "Region",
+  "בחרו את הסגנונות שמופיעים אצלכם ב־My Pro. אפשר לסמן רגיל או PlayStyle+ לכל סגנון; סמני השוערות מוצגים בנפרד.": "Select the PlayStyles shown in My Pro. Choose Base or PlayStyle+ for each style; goalkeeping styles are listed separately.",
+  "תמונת פרופיל": "Profile photo",
+  "תמונה ברורה עוזרת לשחקנים לזהות אתכם": "A clear photo helps players recognize you",
+  "אפשר להעלות תמונה, לחתוך אותה, ולשמור אותה כתמונת המשתמש שלכם.": "Upload a photo, crop it, and save it as your profile picture.",
+  "בחירת תמונה אחרת": "Choose another photo",
+  "בחירת תמונה וחיתוך": "Choose and crop a photo",
+  "לחצו על התמונה לעריכת החיתוך": "Select the photo to adjust the crop",
+  "שומר את הפרופיל…": "Saving profile…",
+  "שמירת פרופיל בגראונדס": "Save profile to The Grounds",
+  "התחברות לפרסום פרופיל": "Sign in to publish your profile",
+  "שוער": "Goalkeeper",
+  "בלם": "Centre back",
+  "מגן": "Full back",
+  "קשר הגנתי": "Defensive midfielder",
+  "קשר": "Midfielder",
+  "קשר התקפי": "Attacking midfielder",
+  "כנף": "Winger",
+  "חלוץ": "Striker",
+  "כל עמדה": "Any position",
+  "אליט": "Elite",
+  "צפון": "North",
+  "שרון": "Sharon",
+  "מרכז": "Central",
+  "ירושלים": "Jerusalem",
+  "דרום": "South",
+  "אונליין בלבד": "Online only"
+};
+
+export function groundsLabel(value: string, language: 'he' | 'en'): string {
+  if (language === 'he') return value;
+  const exact = GROUNDS_COPY[value];
+  if (exact) return exact;
+  const level = value.match(/^רמה\s+(\d+)$/);
+  if (level) return `Level ${level[1]}`;
+  const division = value.match(/^חלוקה\s+(\d+)$/);
+  if (division) return `Division ${division[1]}`;
+  if (value.includes(' · ')) return value.split(' · ')[0];
+  return value;
+}

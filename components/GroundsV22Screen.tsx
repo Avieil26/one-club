@@ -17,6 +17,7 @@ import {
   View,
 } from 'react-native';
 import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/lib/labels';
+import { GROUNDS_PLAYSTYLES } from '@/lib/groundsPlaystyles';
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
 import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
@@ -155,15 +156,16 @@ function Chip({ label, active, onPress }: { label: string; active: boolean; onPr
   );
 }
 
-function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
+function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onViewProfile }: {
   post: GroundsPost; profile?: Profile; following: boolean;
-  onOpen: () => void; onFollow: () => void; onMessage: () => void;
+  onOpen: () => void; onFollow: () => void; onMessage: () => void; onViewProfile: () => void;
 }) {
   const { t, language } = useLanguage();
   const tone = playerLevelTone(post.playerLevel);
   const avatar = post.avatarUri || profile?.avatarUrl || null;
   const name = profile?.displayName || post.gamertag || post.eaId || t('שחקן קהילה', 'Community player');
-  const ovr = post.skillRating != null && post.skillRating >= 51 && post.skillRating <= 99 ? post.skillRating : null;
+  const hasArchetype = Boolean(post.archetype && post.archetype !== 'לא צוין עדיין');
+  const skillRating = post.skillRating;
   return (
     <View style={s.playerCard}>
       <Pressable onPress={onOpen} style={s.playerArt} accessibilityRole="button" accessibilityLabel={t('פתיחת פרופיל ', 'Open profile ') + name}>
@@ -178,32 +180,58 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
         <LinearGradient colors={['rgba(2,9,15,0.03)', 'rgba(2,9,15,0.12)', 'rgba(2,9,15,0.94)']} locations={[0, 0.45, 1]} style={FILL} />
         <View style={s.cardTopLine}>
           <View style={s.livePill}><View style={s.greenDot} /><Text style={s.livePillText}>{displayIntent(post.intent, language)}</Text></View>
-          {ovr !== null ? <View style={[s.ovrBadge, { borderColor: tone.bg }]}><Text style={s.ovrTiny}>OVR</Text><Text style={s.ovrValue}>{ovr}</Text></View> : null}
+          {skillRating != null ? <View style={[s.ovrBadge, { borderColor: tone.bg, minWidth: 54 }]}><Text style={s.ovrTiny}>SKILL</Text><Text style={s.ovrValue}>{skillRating.toLocaleString()}</Text></View> : null}
         </View>
         <View style={s.cardPortraitBottom}>
-          <View style={[s.levelBadge, { borderColor: tone.bg, backgroundColor: tone.bg + '20' }]}>
+          {hasArchetype ? <View style={[s.levelBadge, { borderColor: tone.bg, backgroundColor: tone.bg + '20' }]}>
             <Text style={s.levelNumber}>{String(post.playerLevel).padStart(2, '0')}</Text><Text style={s.levelLabel}>LEVEL</Text>
-          </View>
+          </View> : null}
           <View style={s.playerNameWrap}><Text style={s.playerName} numberOfLines={1}>{name}</Text><Text style={s.playerHandle} numberOfLines={1}>{post.gamertag ? '@' + post.gamertag : '1 CLUB · ' + post.id.slice(0, 8).toUpperCase()}</Text></View>
         </View>
       </Pressable>
       <View style={s.cardBody}>
         <View style={s.cardHeadline}>
           <View style={s.platformBadge}><Ionicons name={post.platform === 'pc' ? 'desktop-outline' : 'game-controller-outline'} size={19} color={C.cyan} /></View>
-          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{positionLabel(post.position, language)}</Text><Text style={s.cardMeta} numberOfLines={1}>{displayArchetype(post.archetype, language)}</Text></View>
+          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{positionLabel(post.position, language)}</Text>{hasArchetype ? <Text style={s.cardMeta} numberOfLines={1}>{displayArchetype(post.archetype, language)}</Text> : null}</View>
         </View>
         <View style={s.cardTags}>
           <View style={s.smallTag}><Text style={s.smallTagText}>{displayDivision(post.division, language)}</Text></View>
           <View style={s.smallTag}><Text style={s.smallTagText}>{displayPlatform(post.platform, language)}</Text></View>
           {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>{t('רמה מאומתת', 'Verified level')}</Text></View> : null}
         </View>
+        <PlayStyleIcons selections={post.playStyles} />
         <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, language) : t('אזור לא צוין', 'Region not specified')}</Text></View>
         <View style={s.cardActions}>
           <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>{t('פנייה לשחקן', 'Message player')}</Text></Pressable>
           <Pressable onPress={onFollow} accessibilityLabel={following ? t('הפסק מעקב', 'Unfollow') : t('עקוב', 'Follow')} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
-          <Pressable onPress={onOpen} accessibilityLabel={t('פרופיל מלא', 'Full profile')} style={s.openButton}><Ionicons name="open-outline" size={17} color={C.ink} /></Pressable>
+          <Pressable onPress={onViewProfile} accessibilityRole="button" accessibilityLabel={t('פרופיל מלא', 'Full profile')} style={s.openButton}><Ionicons name="open-outline" size={17} color={C.ink} /></Pressable>
         </View>
       </View>
+    </View>
+  );
+}
+
+function PlayStyleIcons({ selections, labeled = false, limit = 5 }: {
+  selections?: GroundsPost['playStyles']; labeled?: boolean; limit?: number;
+}) {
+  const selected = selections ?? [];
+  if (!selected.length) return null;
+  const visible = selected.slice(0, limit);
+  return (
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 5, direction: 'rtl' }}>
+      {visible.map((selection) => {
+        const playStyle = GROUNDS_PLAYSTYLES.find((item) => item.id === selection.id);
+        if (!playStyle) return null;
+        const plus = selection.tier === 'plus';
+        return (
+          <View key={selection.id} accessibilityLabel={`${playStyle.name}${plus ? '+' : ''}`} style={{ minHeight: labeled ? 34 : 28, flexDirection: 'row', alignItems: 'center', gap: labeled ? 6 : 0, paddingHorizontal: labeled ? 7 : 3, borderWidth: 1, borderColor: plus ? 'rgba(237,198,110,0.58)' : 'rgba(177,199,210,0.35)', borderRadius: 5, backgroundColor: plus ? 'rgba(108,79,28,0.35)' : 'rgba(133,158,174,0.14)' }}>
+            <Image source={playStyle.icon} resizeMode="contain" style={{ width: labeled ? 22 : 23, height: labeled ? 22 : 23, tintColor: C.gold }} />
+            {labeled ? <Text style={{ color: plus ? C.gold : '#F0E7D0', fontSize: 10, fontWeight: '900' }}>{playStyle.name}{plus ? '+' : ''}</Text> : null}
+            {!labeled && plus ? <Text style={{ color: C.gold, fontSize: 8, fontWeight: '900' }}>+</Text> : null}
+          </View>
+        );
+      })}
+      {selected.length > limit ? <Text style={{ color: C.muted, fontSize: 9, fontWeight: '800' }}>+{selected.length - limit}</Text> : null}
     </View>
   );
 }
@@ -323,7 +351,7 @@ export default function GroundsV22Screen() {
                 <Pressable onPress={searchPlayers} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="search-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('חפש שחקנים', 'Find players')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('סנן לפי עמדה ופלטפורמה', 'Filter by position and platform')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
                 <Pressable onPress={findTeam} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="people-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('מצא קבוצה', 'Find a team')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('שחקנים שמחפשים מועדון', 'Players looking for a club')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
                 <Pressable onPress={() => navigate('/grounds/new')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="person-add-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('פרסם גיוס', 'Post recruitment')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('הפרטים נשמרים במערכת', 'Your details are saved to the platform')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
-                <Pressable onPress={() => navigate('/career?tab=challenges')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('אתגרי הקהילה', 'Community challenges')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('לצפייה באתגרי הקריירה', 'Browse Career challenges')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
+                <Pressable onPress={() => navigate('/grounds/challenges')} style={s.quickCard}><View style={s.quickIcon}><Ionicons name="trophy-outline" size={21} color={C.cyan} /></View><View style={s.quickCopy}><Text style={[s.quickTitle, { textAlign: rtl ? 'right' : 'left' }]}>{t('אתגרי הקהילה', 'Community challenges')}</Text><Text style={[s.quickSub, { textAlign: rtl ? 'right' : 'left' }]}>{t('אתגרי הקהילה בקרוב', 'Community challenges coming soon')}</Text></View><Ionicons name="chevron-back" size={16} color={C.muted} /></Pressable>
               </View>
             </View>
             <View style={s.heroFoot}><Text style={s.heroFootText}>{t('נבנה לקהילה', 'Built for the community')}</Text><View style={s.heroFootRule} /><Text style={s.heroFootText}>{t('לא שירות רשמי של EA', 'Not an official EA service')}</Text></View>
@@ -353,7 +381,7 @@ export default function GroundsV22Screen() {
                 <View style={s.emptyState}><View style={s.emptyStateIcon}><Ionicons name="people-outline" size={30} color={C.cyan} /></View><Text style={s.emptyStateTitle}>{posts.length ? t('לא נמצאו שחקנים לפי הסינון', 'No players match these filters') : t('עדיין אין פרופילים שפורסמו', 'No profiles have been published yet')}</Text><Text style={s.emptyStateCopy}>{posts.length ? t('שנו את החיפוש או את המסננים כדי לראות מודעות נוספות.', 'Change your search or filters to see more listings.') : t('היו הראשונים לפרסם את פרטי השחקן שלכם ולהופיע כאן בקהילה.', 'Be the first to publish your player details and appear in the community.')}</Text>{posts.length ? <ActionButton label={t('איפוס סינון', 'Reset filters')} icon="refresh-outline" onPress={() => { setIntent('all'); setPlatform('all'); setPosition('all'); setSearch(''); }} /> : <ActionButton label={t('פרסם את הפרופיל שלך', 'Publish your profile')} icon="person-add-outline" onPress={() => navigate('/grounds/new')} />}</View>
               ) : (
                 <View style={[s.playerGrid, compact && { flexDirection: 'column' }]}>
-                  {visiblePosts.map((post) => <View key={post.id} style={[s.playerGridItem, compact && { width: '100%' }, width >= 1100 && { width: '31.7%' }, width >= 1500 && { width: '23.8%' }]}><PlayerCard post={post} profile={profileFor(post)} following={isFollowing(post.userId)} onOpen={() => setSelected(post)} onFollow={() => void toggleFollow(post)} onMessage={() => startMessage(post)} /></View>)}
+                  {visiblePosts.map((post) => <View key={post.id} style={[s.playerGridItem, compact && { width: '100%' }, width >= 1100 && { width: '31.7%' }, width >= 1500 && { width: '23.8%' }]}><PlayerCard post={post} profile={profileFor(post)} following={isFollowing(post.userId)} onOpen={() => setSelected(post)} onFollow={() => void toggleFollow(post)} onMessage={() => startMessage(post)} onViewProfile={() => navigate('/player/' + post.userId)} /></View>)}
                 </View>
               )}
             </View>
@@ -383,16 +411,18 @@ export default function GroundsV22Screen() {
             <View style={[s.modalTopbar, { direction: rtl ? 'rtl' : 'ltr' }]}><View><Text style={s.modalKicker}>ONE CLUB / THE GROUNDS</Text><Text style={s.modalTitle}>{t('פרופיל שחקן', 'Player profile')}</Text></View><Pressable onPress={() => setSelected(null)} style={s.closeButton} accessibilityLabel={t('סגירת הפרופיל', 'Close profile')}><Ionicons name="close" size={21} color={C.ink} /></Pressable></View>
             {selected ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.modalContent}>
               <View style={[s.modalHero, compact && { flexDirection: 'column' }]}>
-                <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}<View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View></View>
-                <View style={[s.modalIntro, { alignItems: rtl ? 'flex-start' : 'flex-start' }]}><Eyebrow>{displayIntent(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{displayArchetype(selected.archetype, language)} · {positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {displayDivision(selected.division, language)}</Text></View>
+                <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? <View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View> : null}</View>
+                <View style={s.modalIntro}><Eyebrow>{displayIntent(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? `${displayArchetype(selected.archetype, language)} · ` : ''}{positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {displayDivision(selected.division, language)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
-                <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
+                {selected.archetype && selected.archetype !== 'לא צוין עדיין' ? <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View> : null}
+                <View style={s.detailTile}><Text style={s.detailLabel}>Skill Rating</Text><Text style={s.detailValue}>{selected.skillRating != null ? selected.skillRating.toLocaleString() : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>
               </View>
-              <View style={s.modalActions}><ActionButton label={t('שליחת הודעה', 'Send message')} icon="chatbubble-ellipses-outline" onPress={() => { const post = selected; setSelected(null); startMessage(post); }} /><ActionButton label={isFollowing(selected.userId) ? t('הפסק מעקב', 'Unfollow') : t('עקוב אחרי השחקן', 'Follow player')} icon="heart-outline" quiet onPress={() => void toggleFollow(selected)} /></View>
+              <View style={{ gap: 8 }}><Text style={s.detailLabel}>PlayStyles</Text><PlayStyleIcons selections={selected.playStyles} labeled limit={36} /></View>
+              <View style={s.modalActions}><ActionButton label={t('לפרופיל המלא', 'Full profile')} icon="person-circle-outline" onPress={() => { const userId = selected.userId; setSelected(null); navigate('/player/' + userId); }} /><ActionButton label={t('שליחת הודעה', 'Send message')} icon="chatbubble-ellipses-outline" onPress={() => { const post = selected; setSelected(null); startMessage(post); }} /><ActionButton label={isFollowing(selected.userId) ? t('הפסק מעקב', 'Unfollow') : t('עקוב אחרי השחקן', 'Follow player')} icon="heart-outline" quiet onPress={() => void toggleFollow(selected)} /></View>
               {!app.user ? <Text style={s.modalAuthNote}>{t('לשליחת הודעה או למעקב צריך להתחבר למערכת.', 'Sign in to message or follow players.')}</Text> : null}
             </ScrollView> : null}
           </View>
@@ -415,8 +445,8 @@ const s = StyleSheet.create({
   navLinks: { flexDirection: 'row', alignItems: 'center', gap: 3, flexGrow: 1, flexShrink: 1, direction: 'rtl' },
   navLink: { borderRadius: 6, borderWidth: 1, borderColor: 'transparent', paddingHorizontal: 9, paddingVertical: 8 },
   navLinkActive: { borderColor: 'rgba(57,219,232,0.42)', backgroundColor: 'transparent' },
-  navLinkText: { color: '#D0DEE7', fontSize: 12, fontWeight: '600' },
-  navLinkTextActive: { color: C.cyan, fontWeight: '900' },
+  navLinkText: { color: '#E4EBEF', fontSize: 12, fontWeight: '800' },
+  navLinkTextActive: { color: '#FFFFFF', fontWeight: '900' },
   accountButton: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: C.line, borderRadius: 7, backgroundColor: 'rgba(5,23,33,0.94)', paddingHorizontal: 11, paddingVertical: 8, flexShrink: 0 },
   accountText: { color: C.ink, fontSize: 12, fontWeight: '800' },
   noticeBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9, paddingHorizontal: 14, paddingVertical: 9, backgroundColor: 'rgba(4,23,34,0.96)', borderBottomWidth: 1, borderBottomColor: C.line },
@@ -434,7 +464,7 @@ const s = StyleSheet.create({
   eyebrow: { flexDirection: 'row', alignItems: 'center', gap: 7 }, eyebrowDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: C.cyan },
   eyebrowText: { color: C.cyan, fontSize: 10, fontWeight: '900', letterSpacing: 1.3 },
   heroHeadline: { color: C.ink, fontSize: 30, lineHeight: 38, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' },
-  heroLead: { maxWidth: 550, color: '#D4E0E8', fontSize: 14, lineHeight: 23, fontWeight: '500', textAlign: 'right', writingDirection: 'rtl' },
+  heroLead: { maxWidth: 550, color: '#E5EDF1', fontSize: 14, lineHeight: 23, fontWeight: '700', textAlign: 'right', writingDirection: 'rtl' },
   heroButtons: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 5, flexWrap: 'wrap' },
   button: { minHeight: 43, borderRadius: 7, borderWidth: 1, borderColor: C.cyan, paddingHorizontal: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: C.cyan },
   buttonQuiet: { backgroundColor: 'rgba(2,13,23,0.8)', borderColor: 'rgba(113,195,213,0.48)' },
@@ -467,7 +497,7 @@ const s = StyleSheet.create({
   filterGroup: { gap: 8, alignItems: 'flex-start', direction: 'rtl' }, filterLabel: { color: C.muted, fontSize: 10, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 }, horizontalChips: { flexDirection: 'row', gap: 6, paddingVertical: 2 },
   chip: { borderWidth: 1, borderColor: 'rgba(104,160,182,0.32)', backgroundColor: 'rgba(6,18,28,0.88)', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 7, alignItems: 'center', justifyContent: 'center' },
-  chipActive: { borderColor: C.cyan, backgroundColor: 'rgba(17,66,76,0.75)' }, chipText: { color: '#C0D1DB', fontSize: 10, fontWeight: '700' }, chipTextActive: { color: C.cyan, fontWeight: '900' },
+  chipActive: { borderColor: C.cyan, backgroundColor: 'rgba(17,66,76,0.75)' }, chipText: { color: '#E4EBEF', fontSize: 11, fontWeight: '800' }, chipTextActive: { color: '#FFFFFF', fontWeight: '900' },
   playersSection: { gap: 14 },
   playersHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12, direction: 'rtl' },
   playersHeadingCopy: { flex: 1, alignItems: 'flex-start', direction: 'rtl' }, playersTitle: { width: '100%', color: C.ink, fontSize: 20, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' }, playersSubtitle: { width: '100%', color: C.muted, fontSize: 11, marginTop: 5, textAlign: 'right', writingDirection: 'rtl', alignSelf: 'stretch' },
@@ -484,13 +514,13 @@ const s = StyleSheet.create({
   cardPortraitBottom: { position: 'absolute', bottom: 11, left: 11, right: 11, flexDirection: 'row', alignItems: 'flex-end', gap: 9, direction: 'rtl' },
   levelBadge: { minWidth: 48, paddingHorizontal: 7, paddingVertical: 6, borderWidth: 1, borderRadius: 6, alignItems: 'center' },
   levelNumber: { color: C.ink, fontSize: 20, fontWeight: '900' }, levelLabel: { color: C.muted, fontSize: 8, fontWeight: '900', letterSpacing: 1 },
-  playerNameWrap: { flex: 1, alignItems: 'flex-start', gap: 3 }, playerName: { color: C.ink, fontSize: 16, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }, playerHandle: { color: '#B9CEDB', fontSize: 10, fontWeight: '600' },
+  playerNameWrap: { flex: 1, alignItems: 'flex-start', gap: 3 }, playerName: { color: '#FFFFFF', fontSize: 17, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }, playerHandle: { color: '#E1E8EC', fontSize: 10, fontWeight: '800' },
   cardBody: { padding: 12, gap: 10, flex: 1 }, cardHeadline: { flexDirection: 'row', alignItems: 'center', gap: 9, direction: 'rtl' },
   platformBadge: { width: 36, height: 36, borderRadius: 6, borderWidth: 1, borderColor: 'rgba(57,219,232,0.36)', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(15,47,59,0.4)' },
-  cardInfoMain: { flex: 1, alignItems: 'flex-end', gap: 4, direction: 'rtl' }, cardPosition: { color: C.ink, fontSize: 12, fontWeight: '900', textAlign: 'right' }, cardMeta: { color: C.muted, fontSize: 10, textAlign: 'right' },
-  cardTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 5 }, smallTag: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: 'rgba(92,165,193,0.27)', borderRadius: 4, backgroundColor: 'rgba(11,28,39,0.7)', paddingHorizontal: 6, paddingVertical: 4 },
-  verifiedTag: { borderColor: 'rgba(132,242,154,0.25)', backgroundColor: 'rgba(10,38,28,0.48)' }, smallTagText: { color: '#C8D8E1', fontSize: 9, fontWeight: '700' },
-  regionLine: { flexDirection: 'row', alignItems: 'center', gap: 5 }, regionText: { color: C.muted, fontSize: 10, textAlign: 'right' },
+  cardInfoMain: { flex: 1, alignItems: 'flex-end', gap: 4, direction: 'rtl' }, cardPosition: { color: '#FFFFFF', fontSize: 13, fontWeight: '900', textAlign: 'right' }, cardMeta: { color: '#E0E8EC', fontSize: 11, fontWeight: '800', textAlign: 'right' },
+  cardTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 5 }, smallTag: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: 'rgba(151,177,190,0.34)', borderRadius: 4, backgroundColor: 'rgba(5,13,20,0.95)', paddingHorizontal: 7, paddingVertical: 5 },
+  verifiedTag: { borderColor: 'rgba(132,242,154,0.4)', backgroundColor: 'rgba(10,38,28,0.72)' }, smallTagText: { color: '#F0F4F6', fontSize: 10, fontWeight: '800' },
+  regionLine: { flexDirection: 'row', alignItems: 'center', gap: 5 }, regionText: { color: '#E1E8EC', fontSize: 11, fontWeight: '700', textAlign: 'right' },
   cardActions: { marginTop: 'auto', flexDirection: 'row', gap: 6, paddingTop: 3 },
   messageButton: { flex: 1, minHeight: 34, borderRadius: 5, backgroundColor: C.cyan, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingHorizontal: 7 },
   messageButtonText: { color: '#041017', fontSize: 10, fontWeight: '900' },

@@ -20,6 +20,7 @@ export function toSnapshot(db: Database, mode: Snapshot['mode']): Snapshot {
     ratings: db.futRatings,
     likes: db.futLikes ?? [],
     comments: db.comments.filter((item) => item.status === 'visible' || seeAll || item.userId === user?.id),
+    commentLikes: db.commentLikes ?? [],
     grounds: db.groundsPosts,
     sbcChallenges: db.sbcChallenges,
     solutions: db.sbcSolutions.filter((item) => seeAll || item.status === 'approved' || item.userId === user?.id),
