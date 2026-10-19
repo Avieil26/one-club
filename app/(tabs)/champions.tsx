@@ -111,27 +111,26 @@ function localizeCopy(value: string | undefined, language: 'he' | 'en') {
   const exact = ENGLISH_COPY[trimmed];
   if (exact) return value.replace(trimmed, exact);
   let output = value;
+  const isHebrew = (char: string | undefined) => Boolean(char && /[\u0590-\u05FF]/.test(char));
   const entries = Object.entries(ENGLISH_COPY)
     .filter(([he]) => he.length > 2)
     .sort(([a], [b]) => b.length - a.length);
   for (const [he, en] of entries) {
-    const escaped = he.replace(/[.*+?^${}()|[\]\\]/g, '\\function localizeCopy(value: string | undefined, language: 'he' | 'en') {
-  if (value === undefined || language !== 'en') return value;
-  const trimmed = value.trim();
-  const exact = ENGLISH_COPY[trimmed];
-  if (exact) return value.replace(trimmed, exact);
-  let output = value;
-  for (const [he, en] of Object.entries(ENGLISH_COPY)) {
-    if (he.length > 2 && output.includes(he)) output = output.replaceAll(he, en);
-  }
-  return output;
-}
-
-');
-    const leftBoundary = /[\\u0590-\\u05FF]/.test(he[0]) ? '(^|[^\\u0590-\\u05FF])' : '(^|)';
-    const rightBoundary = /[\\u0590-\\u05FF]/.test(he[he.length - 1]) ? '(?![\\u0590-\\u05FF])' : '';
-    const expression = new RegExp(`${leftBoundary}${escaped}${rightBoundary}`, 'g');
-    output = output.replace(expression, (match, prefix = '') => `${prefix}${en}`);
+    let offset = 0;
+    while (offset < output.length) {
+      const index = output.indexOf(he, offset);
+      if (index < 0) break;
+      const before = index > 0 ? output[index - 1] : undefined;
+      const after = output[index + he.length];
+      const leftOkay = !isHebrew(he[0]) || !isHebrew(before);
+      const rightOkay = !isHebrew(he[he.length - 1]) || !isHebrew(after);
+      if (leftOkay && rightOkay) {
+        output = output.slice(0, index) + en + output.slice(index + he.length);
+        offset = index + en.length;
+      } else {
+        offset = index + he.length;
+      }
+    }
   }
   return output;
 }
