@@ -115,8 +115,8 @@ export function TermsConsentModal() {
           <ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>
             {/* Title & Welcome */}
             <View style={{ gap: 4 }}>
-              <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: 'rtl' }}>
-                {inlineLatin('{t('ברוכים הבאים ל-FC27 ישראל!', 'Welcome to FC27 Israel!')}')}
+              <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
+                {inlineLatin(t('ברוכים הבאים ל-FC27 ישראל!', 'Welcome to FC27 Israel!'))}
               </Text>
               <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left' }}>
                 {t(`שלום ${app.user.displayName}, לפני שתוכל/י להשתמש באפליקציה, חובה לקרוא ולאשר את תנאי השימוש ומדיניות הפרטיות המעודכנים.`, `Hi ${app.user.displayName}, please review and accept the updated Terms of Use and Privacy Policy before using the app.`)}
@@ -138,9 +138,7 @@ export function TermsConsentModal() {
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
                 <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
                   <Text style={{ fontWeight: '800', color: colors.gold }}>{t('אתר מעריצים עצמאי: ', 'Independent fan site: ')}</Text>
-                  {inlineLatin(
-                    'The site is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game titles, and player images belong to their respective owners and are used under fair use.',
-                  )}
+                  {inlineLatin(t('האתר אינו קשור, מאושר או נתמך על ידי Electronic Arts Inc. כל המותגים, שמות המשחקים ותמונות השחקנים שייכים לבעליהם ומשמשים בשימוש הוגן (Fair Use) בלבד.', 'The site is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game titles, and player images belong to their respective owners and are used under fair use.'))}
                 </Text>
               </View>
 
@@ -148,7 +146,7 @@ export function TermsConsentModal() {
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
                 <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
                   <Text style={{ fontWeight: '800', color: colors.gold }}>{t('איסור סחר בכסף אמיתי: ', 'Real-money trading is prohibited: ')}</Text>
-                  {inlineLatin('Trading game coins, accounts, or virtual assets for real money is strictly prohibited.')}
+                  {inlineLatin(t('חל איסור מוחלט על מסחר במטבעות משחק (Coins), חשבונות או נכסים וירטואליים תמורת כסף אמיתי.', 'Trading game coins, accounts, or virtual assets for real money is strictly prohibited.'))}
                 </Text>
               </View>
 
@@ -156,7 +154,7 @@ export function TermsConsentModal() {
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
                 <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
                   <Text style={{ fontWeight: '800', color: colors.gold }}>{t('פרטיות ובטיחות: ', 'Privacy and safety: ')}</Text>
-                  Personal information is not sold. Users under 18 need consent from a parent or legal guardian.
+                  {t('מידע אישי אינו נמכר לאיש. שימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.', 'Personal information is not sold. Users under 18 need consent from a parent or legal guardian.')}
                 </Text>
               </View>
             </View>
@@ -183,7 +181,7 @@ export function TermsConsentModal() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>📄 Full Terms of Use</Text>
+                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>{t('📄 תנאי השימוש המלאים', '📄 Full Terms of Use')}</Text>
               </Pressable>
 
               <Pressable
@@ -198,7 +196,7 @@ export function TermsConsentModal() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>🔒 Privacy Policy</Text>
+                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>{t('🔒 מדיניות הפרטיות', '🔒 Privacy Policy')}</Text>
               </Pressable>
             </View>
 
@@ -240,13 +238,13 @@ export function TermsConsentModal() {
               </View>
 
               <Text style={{ flex: 1, color: colors.text, fontSize: 14, fontWeight: '700', lineHeight: 22, textAlign: rtl ? 'right' : 'left' }}>
-                {inlineLatin('I have read, understood, and agree to the 1 CLUB Terms of Use and Privacy Policy.')}
+                {inlineLatin(t('קראתי, הבנתי ואני מסכים/ה במלואם לתנאי השימוש ולמדיניות הפרטיות של 1 CLUB.', 'I have read, understood, and agree to the 1 CLUB Terms of Use and Privacy Policy.'))}
               </Text>
             </Pressable>
 
             {errorPrompt ? (
               <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '800', textAlign: rtl ? 'right' : 'left', paddingHorizontal: 4 }}>
-                ⚠️ Check the box above to accept the terms and enter the app.
+                {t('⚠️ עליך לסמן V בתיבה למעלה כדי לאשר את התנאים ולהיכנס לאפליקציה.', '⚠️ Check the box above to accept the terms and enter the app.')}
               </Text>
             ) : null}
 
@@ -284,7 +282,7 @@ export function TermsConsentModal() {
                 }}
               >
                 <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '600' }}>
-                  I do not agree (sign out and exit)
+                  {t('אינני מסכים/ה (התנתקות ויציאה)', 'I do not agree (sign out and exit)')}
                 </Text>
               </Pressable>
             </View>
