@@ -4,14 +4,20 @@ on:
   push:
     branches:
       - preview/star-performers-20261018
+      - preview/final-integration-20261019
   pull_request:
     branches:
       - codex/grounds-prod-release
+      - preview/english-full-site-fix-20261016
+      - preview/totw5-20261014
     paths:
       - "app/**"
       - "components/**"
       - "lib/**"
       - "assets/data/totw.json"
+      - "assets/data/starPerformers.json"
+      - "assets/data/marketPrices.json"
+      - "assets/data/priceEaIds.json"
       - "package.json"
       - "package-lock.json"
       - "app.json"
