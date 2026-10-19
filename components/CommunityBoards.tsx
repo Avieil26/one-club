@@ -106,7 +106,7 @@ function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark
             {row.name}
           </Text>
           <Text numberOfLines={1} style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 11, fontWeight: '600', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
-            {row.joined}
+            {joinedLabel(row.joined, language)}
           </Text>
         </View>
       </View>
@@ -159,6 +159,15 @@ function Column({
       )}
     </View>
   );
+}
+
+function joinedLabel(value: string, language: 'he' | 'en') {
+  if (language === 'he') return value;
+  if (value === 'בקהילה') return 'Community member';
+  if (value === 'בקהילה החודש') return 'Joined this month';
+  const month = value.match(/^בקהילה מ(.+)$/)?.[1];
+  const months: Record<string, string> = { ינואר: 'January', פברואר: 'February', מרץ: 'March', אפריל: 'April', מאי: 'May', יוני: 'June', יולי: 'July', אוגוסט: 'August', ספטמבר: 'September', אוקטובר: 'October', נובמבר: 'November', דצמבר: 'December' };
+  return month ? `Member since ${months[month] ?? month}` : value;
 }
 
 const head = {
