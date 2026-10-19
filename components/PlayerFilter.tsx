@@ -228,7 +228,7 @@ export function PlayerFilter({
               ))}
             </View>
             <RatingEnd
-              label="מ־"
+              label={t("מ־", "From")}
               value={filters.minRating}
               fallback={choices.ratingMin}
               min={choices.ratingMin}
@@ -236,7 +236,7 @@ export function PlayerFilter({
               onChange={(minRating) => onChange({ ...filters, minRating })}
             />
             <RatingEnd
-              label="עד"
+              label={t("עד", "To")}
               value={filters.maxRating}
               fallback={choices.ratingMax}
               min={filters.minRating ?? choices.ratingMin}
