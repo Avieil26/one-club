@@ -40,6 +40,7 @@ function toFcPlayer(entry: RosterEntry): FcPlayer {
   return {
     id: entry.id,
     name: entry.name,
+    en: entry.en,
     rating: entry.rating,
     position: entry.position,
     nation: entry.nation,
