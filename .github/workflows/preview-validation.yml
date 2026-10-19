@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - codex/grounds-prod-release
+      - preview/validation-base-20118-20261019
     paths:
       - "app/**"
       - "components/**"
