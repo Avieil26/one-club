@@ -3,6 +3,7 @@ name: Preview candidate validation
 on:
   push:
     branches:
+      - fix/continue-preview-20261019
       - preview/star-performers-20261018
       - preview/fc27-complete-english-starsafe-20261018
       - preview/fc27-20118-english-starsafe-fix-20261019
@@ -12,6 +13,8 @@ on:
       - codex/grounds-prod-release
       - preview/validation-base-20118-20261019
     paths:
+      - "scripts/**"
+      - "vercel.json"
       - "app/**"
       - "components/**"
       - "lib/**"
@@ -54,7 +57,7 @@ jobs:
       - name: Lint (existing repository lint debt is reported but does not block build validation)
         continue-on-error: true
         run: npm run lint
+      - name: Verify exact catalogue count and special-card rows
+        run: npm run verify:catalogue
       - name: Export web build
         run: npx expo export -p web
-      - name: Verify exact catalogue count and special-card rows
-        run: node scripts/verify-preview-catalogue.mjs

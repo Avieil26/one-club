@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, useWindowDimensions, View, type TextProps, type TextInputProps } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
 import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,6 +22,8 @@ const ENGLISH_COPY: Record<string, string> = {
   "ניצחונות": "wins",
   "תמונות נבחרו": "images selected",
   "הגדרות נבחרו": "settings selected",
+  " הגדרות נבחרו": " settings selected",
+  " תמונות נבחרו": " images selected",
   "בחירת מחליף": "Choose a substitute",
   "בחר מערך": "Choose formation",
   "בחר מערך לפני שליחת הטקטיקה.": "Choose a formation before submitting the tactic.",
@@ -40,6 +42,7 @@ const ENGLISH_COPY: Record<string, string> = {
   "הפרופיל של TEKKZ": "TEKKZ profile",
   "הפרס של הריצה": "Run reward",
   "הפרסים לפי מספר הניצחונות": "Rewards by wins",
+  "בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות.": "Choose a win total. This is a display-only selection and does not change your personal run. It shows Coins, CQP, Tokens, and available store offers.",
   "הקבוצה ריקה": "Team is empty",
   "השחקן שלי": "My player",
   "השמירה נכשלה": "Save failed",
@@ -107,8 +110,26 @@ function localizeCopy(value: string | undefined, language: 'he' | 'en') {
   const exact = ENGLISH_COPY[trimmed];
   if (exact) return value.replace(trimmed, exact);
   let output = value;
-  for (const [he, en] of Object.entries(ENGLISH_COPY)) {
-    if (he.length > 2 && output.includes(he)) output = output.replaceAll(he, en);
+  const isHebrew = (char: string | undefined) => Boolean(char && /[\u0590-\u05FF]/.test(char));
+  const entries = Object.entries(ENGLISH_COPY)
+    .filter(([he]) => he.length > 2)
+    .sort(([a], [b]) => b.length - a.length);
+  for (const [he, en] of entries) {
+    let offset = 0;
+    while (offset < output.length) {
+      const index = output.indexOf(he, offset);
+      if (index < 0) break;
+      const before = index > 0 ? output[index - 1] : undefined;
+      const after = output[index + he.length];
+      const leftOkay = !isHebrew(he[0]) || !isHebrew(before);
+      const rightOkay = !isHebrew(he[he.length - 1]) || !isHebrew(after);
+      if (leftOkay && rightOkay) {
+        output = output.slice(0, index) + en + output.slice(index + he.length);
+        offset = index + en.length;
+      } else {
+        offset = index + he.length;
+      }
+    }
   }
   return output;
 }
@@ -119,6 +140,17 @@ function Text(props: TextProps) {
     ? props.children.map((child) => typeof child === 'string' ? localizeCopy(child, language) : child)
     : typeof props.children === 'string' ? localizeCopy(props.children, language) : props.children;
   return <NativeText {...props}>{children}</NativeText>;
+}
+
+
+function Pressable(props: PressableProps) {
+  const { language } = useLanguage();
+  return (
+    <NativePressable
+      {...props}
+      accessibilityLabel={localizeCopy(props.accessibilityLabel, language)}
+    />
+  );
 }
 
 function TextInput(props: TextInputProps) {

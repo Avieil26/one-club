@@ -71,6 +71,14 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
   }
   return labels[value] || value || 'כל עמדה';
 }
+function displayRegion(value: string, language: 'he' | 'en') {
+  if (language === 'he') return value;
+  const regions: Record<string, string> = {
+    'צפון': 'North', 'שרון': 'Sharon', 'מרכז': 'Central',
+    'ירושלים': 'Jerusalem', 'דרום': 'South', 'אונליין בלבד': 'Online only',
+  };
+  return regions[value] ?? value;
+}
 function displayPlatform(id: PlatformId, language: 'he' | 'en') {
   if (language === 'he') return platformLabel(id);
   const labels: Record<PlatformId, string> = { ps5: 'PlayStation 5', xbox: 'Xbox', pc: 'PC', switch2: 'Nintendo Switch 2' };
@@ -189,7 +197,7 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage }: {
           <View style={s.smallTag}><Text style={s.smallTagText}>{displayPlatform(post.platform, language)}</Text></View>
           {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>{t('רמה מאומתת', 'Verified level')}</Text></View> : null}
         </View>
-        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region || t('אזור לא צוין', 'Region not specified')}</Text></View>
+        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, language) : t('אזור לא צוין', 'Region not specified')}</Text></View>
         <View style={s.cardActions}>
           <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>{t('פנייה לשחקן', 'Message player')}</Text></Pressable>
           <Pressable onPress={onFollow} accessibilityLabel={following ? t('הפסק מעקב', 'Unfollow') : t('עקוב', 'Follow')} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
@@ -354,7 +362,7 @@ export default function GroundsV22Screen() {
               <InfoPanel title={t('גיוס פעיל', 'Active recruitment')} icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
-                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {displayDivision(post.division, language)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region || t('אזור לא צוין', 'Region not specified')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
+                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {displayDivision(post.division, language)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region ? displayRegion(post.region, language) : t('אזור לא צוין', 'Region not specified')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>{t('אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.', 'There are no active recruitment listings yet. You can post one.')}</Text>}
                 <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>{t('צפה בכל הגיוסים', 'View all recruitment')}</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
@@ -379,7 +387,7 @@ export default function GroundsV22Screen() {
                 <View style={[s.modalIntro, { alignItems: rtl ? 'flex-start' : 'flex-start' }]}><Eyebrow>{displayIntent(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{displayArchetype(selected.archetype, language)} · {positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {displayDivision(selected.division, language)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
-                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region || t('לא נמסר', 'Not provided')}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>

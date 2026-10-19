@@ -48,7 +48,9 @@
     "typecheck": "tsc --noEmit",
     "import:players": "node scripts/import-ea-roster.mjs",
     "verify:players": "node scripts/verify-sample.mjs",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "verify:catalogue": "node scripts/verify-preview-catalogue.mjs",
+    "build:web": "npm run verify:catalogue && expo export -p web"
   },
   "private": true
 }

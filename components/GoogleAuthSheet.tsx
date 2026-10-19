@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { WebView, type WebViewNavigation } from 'react-native-webview';
+import { useLanguage } from '@/lib/language';
 
 type Pending = {
   url: string;
@@ -55,6 +56,7 @@ const CHROME_MOBILE =
   'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36';
 
 export function GoogleAuthSheet() {
+  const { t } = useLanguage();
   const webRef = useRef<WebView>(null);
   const [session, setSession] = useState<Pending | null>(null);
   const [page, setPage] = useState('');
@@ -91,7 +93,7 @@ export function GoogleAuthSheet() {
       return false;
     }
     if (isVercel(url)) {
-      close(new Error('ההתחברות לא הושלמה. נסו שוב.'));
+      close(new Error(t('ההתחברות לא הושלמה. נסו שוב.', 'Sign-in did not finish. Please try again.')));
       return false;
     }
     return true;
@@ -116,7 +118,7 @@ export function GoogleAuthSheet() {
   if (!session) return null;
 
   return (
-    <Modal visible animationType="slide" presentationStyle="fullScreen" onRequestClose={() => close(new Error('התחברות עם גוגל בוטלה'))}>
+    <Modal visible animationType="slide" presentationStyle="fullScreen" onRequestClose={() => close(new Error(t('התחברות עם גוגל בוטלה', 'Google sign-in was cancelled')))}>
       <View style={{ flex: 1, backgroundColor: '#0B1218' }}>
         <View
           style={{
@@ -129,10 +131,10 @@ export function GoogleAuthSheet() {
             backgroundColor: '#0B1218',
           }}
         >
-          <Pressable onPress={() => close(new Error('התחברות עם גוגל בוטלה'))} hitSlop={12}>
+          <Pressable onPress={() => close(new Error(t('התחברות עם גוגל בוטלה', 'Google sign-in was cancelled')))} hitSlop={12}>
             <Text style={{ color: '#F7F4EA', fontSize: 22, fontWeight: '700' }}>×</Text>
           </Pressable>
-          <Text style={{ color: '#F7F4EA', fontSize: 16, fontWeight: '800' }}>התחברות עם Google</Text>
+          <Text style={{ color: '#F7F4EA', fontSize: 16, fontWeight: '800' }}>{t('התחברות עם Google', 'Sign in with Google')}</Text>
           <View style={{ width: 22 }} />
         </View>
         <WebView

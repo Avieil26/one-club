@@ -390,7 +390,11 @@ function StandardPortraitCard({
   const shown = edition === 'auto' ? player.edition : edition;
   const totw = shown === 'totw' ? totwFor(player.baseId ?? player.id) : null;
   const special = shown === 'hero' || shown === 'totw';
-  const stats = faceOverride ?? (shown === 'totw' ? (totw?.face ?? player.face) : shown === 'hero' ? player.face : media.face);
+  const stats = faceOverride ?? (shown === 'totw'
+    ? (totw?.face ?? player.face)
+    : shown === 'base'
+      ? media.face
+      : (player.face ?? media.face));
   const rating = shown === 'totw'
     ? (totw?.face.ovr ?? totw?.rating ?? player.rating)
     : shown === 'hero'
