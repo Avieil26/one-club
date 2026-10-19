@@ -121,6 +121,7 @@ export function CareerDetailBlock({
   challenge: CareerChallenge;
   children: ReactNode;
 }) {
+  const { language } = useLanguage();
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 720;
   return (
