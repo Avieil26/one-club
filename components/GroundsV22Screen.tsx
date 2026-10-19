@@ -387,7 +387,7 @@ export default function GroundsV22Screen() {
               </View>
               <View style={s.detailsGrid}>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region || t('לא נמסר', 'Not provided')}</Text></View>
-                <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || 'לא נמסר'}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>
               </View>
