@@ -6,7 +6,7 @@ import { useLanguage, type AppLanguage } from '@/lib/language';
 
 export default function LanguageScreen() {
   const router = useRouter();
-  const { chooseLanguage } = useLanguage();
+  const { chooseLanguage, language } = useLanguage();
 
   async function select(language: AppLanguage) {
     await chooseLanguage(language);
@@ -18,7 +18,7 @@ export default function LanguageScreen() {
       <View style={{ width: '100%', maxWidth: 520, borderWidth: 1, borderColor: 'rgba(218,176,75,0.42)', borderRadius: 24, padding: 28, backgroundColor: '#101C16', gap: 18 }}>
         <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '900', letterSpacing: 4, textAlign: 'center' }}>ONE CLUB · FC27</Text>
         <Text style={{ color: colors.text, fontSize: 32, fontWeight: '900', textAlign: 'center' }}>Choose your language</Text>
-        <Text style={{ color: colors.muted, fontSize: 15, textAlign: 'center', lineHeight: 23 }}>בחרו שפה כדי להמשיך לאתר</Text>
+        <Text style={{ color: colors.muted, fontSize: 15, textAlign: 'center', lineHeight: 23 }}>{language === 'en' ? 'Choose a language to continue' : 'בחרו שפה כדי להמשיך לאתר'}</Text>
         <Pressable accessibilityRole="button" onPress={() => void select('en')} style={{ borderRadius: 14, borderWidth: 1, borderColor: colors.gold, paddingVertical: 18, paddingHorizontal: 20, backgroundColor: 'rgba(218,176,75,0.10)', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <Text style={{ fontSize: 24 }}>🇬🇧</Text>
           <View style={{ flex: 1, marginLeft: 16, gap: 3 }}>
