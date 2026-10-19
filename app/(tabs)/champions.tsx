@@ -22,6 +22,9 @@ const ENGLISH_COPY: Record<string, string> = {
   "ניצחונות": "wins",
   "תמונות נבחרו": "images selected",
   "הגדרות נבחרו": "settings selected",
+  " הגדרות נבחרו": " settings selected",
+  " תמונות נבחרו": " images selected",
+  " הפסדים · ": " losses · ",
   "בחירת מחליף": "Choose a substitute",
   "בחר מערך": "Choose formation",
   "בחר מערך לפני שליחת הטקטיקה.": "Choose a formation before submitting the tactic.",
@@ -40,6 +43,7 @@ const ENGLISH_COPY: Record<string, string> = {
   "הפרופיל של TEKKZ": "TEKKZ profile",
   "הפרס של הריצה": "Run reward",
   "הפרסים לפי מספר הניצחונות": "Rewards by wins",
+  "בחר מספר ניצחונות. הבחירה היא תצוגה בלבד ולא משנה את ה־run האישי. יוצגו Coins, CQP, Tokens וההצעות שאתה יכול לקנות.": "Choose a win total. This is a display-only selection and does not change your personal run. It shows Coins, CQP, Tokens, and available store offers.",
   "הקבוצה ריקה": "Team is empty",
   "השחקן שלי": "My player",
   "השמירה נכשלה": "Save failed",
@@ -107,8 +111,27 @@ function localizeCopy(value: string | undefined, language: 'he' | 'en') {
   const exact = ENGLISH_COPY[trimmed];
   if (exact) return value.replace(trimmed, exact);
   let output = value;
+  const entries = Object.entries(ENGLISH_COPY)
+    .filter(([he]) => he.length > 2)
+    .sort(([a], [b]) => b.length - a.length);
+  for (const [he, en] of entries) {
+    const escaped = he.replace(/[.*+?^${}()|[\]\\]/g, '\\function localizeCopy(value: string | undefined, language: 'he' | 'en') {
+  if (value === undefined || language !== 'en') return value;
+  const trimmed = value.trim();
+  const exact = ENGLISH_COPY[trimmed];
+  if (exact) return value.replace(trimmed, exact);
+  let output = value;
   for (const [he, en] of Object.entries(ENGLISH_COPY)) {
     if (he.length > 2 && output.includes(he)) output = output.replaceAll(he, en);
+  }
+  return output;
+}
+
+');
+    const leftBoundary = /[\\u0590-\\u05FF]/.test(he[0]) ? '(^|[^\\u0590-\\u05FF])' : '(^|)';
+    const rightBoundary = /[\\u0590-\\u05FF]/.test(he[he.length - 1]) ? '(?![\\u0590-\\u05FF])' : '';
+    const expression = new RegExp(`${leftBoundary}${escaped}${rightBoundary}`, 'g');
+    output = output.replace(expression, (match, prefix = '') => `${prefix}${en}`);
   }
   return output;
 }
