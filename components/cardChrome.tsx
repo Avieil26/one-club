@@ -17,7 +17,7 @@ export type TierTone = CardTone & {
   faceColors: [string, string, string];
   accent: string;
   glow: string;
-  label: 'GOLD' | 'SILVER' | 'BRONZE' | 'ICON' | 'HERO' | 'TOTW';
+  label: 'GOLD' | 'SILVER' | 'BRONZE' | 'ICON' | 'HERO' | 'TOTW' | 'STAR PERFORMER';
 };
 
 export type IconTone = TierTone;
@@ -100,6 +100,22 @@ export function heroChrome(): IconTone {
     label: 'HERO',
     frameColors: ['#E4D4FF', '#A078FF', '#4C2888', '#C9A6FF'],
     faceColors: ['#3A2060', '#1A1030', '#0C0816'],
+  };
+}
+
+/** Star Performers — vivid orange/amber promo chrome inspired by the FC 27 item. */
+export function starPerformerChrome(): IconTone {
+  return {
+    face: '#F77616',
+    deep: '#451305',
+    shine: 'rgba(255, 239, 195, 0.3)',
+    frame: '#FF9A24',
+    ink: '#FFF1D8',
+    accent: '#FFE7B0',
+    glow: 'rgba(255, 103, 18, 0.72)',
+    label: 'STAR PERFORMER',
+    frameColors: ['#FFF2BB', '#FFC13A', '#F46A16', '#7E2107'],
+    faceColors: ['#FF9C20', '#D94B0C', '#391005'],
   };
 }
 

@@ -9,7 +9,7 @@ import { NationFlag } from '@/components/NationFlag';
 import { PortraitCard } from '@/components/PortraitCard';
 import { destinedCardMeta, destinedEdition } from '@/lib/destinedEditions';
 import { marketQuote, useMarketPrices } from '@/lib/marketPrices';
-import { totwFor } from '@/lib/specialCards';
+import { starPerformerFor, totwFor } from '@/lib/specialCards';
 import { colors } from '@/components/ui';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia } from '@/lib/playerMedia';
@@ -19,6 +19,8 @@ import { LEAGUE_LOGO } from '@/lib/leagueLogo';
 import { playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
+import { playerLabel } from '@/lib/playerLabels';
 
 function Stars({ count }: { count: number }) {
   return (
@@ -103,18 +105,20 @@ const CHEM_GROUPS = [
 ];
 
 function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) {
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const text = compact ? 13 : 15;
   if (player.icon) {
     return (
-      <View style={{ gap: 8, alignItems: 'flex-end' }}>
-        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>אייקון</Text>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
+      <View style={{ gap: 8, alignItems: rtl ? 'flex-end' : 'flex-start' }}>
+        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>{t('אייקון', 'Icon')}</Text>
+        <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
           <NationFlag nation={player.nation} size={compact ? 14 : 16} />
-          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{player.nation}</Text>
+          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{playerLabel(player.nation, language)}</Text>
         </View>
         {playerHeight(player.baseId ?? player.id) ? (
           <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} ס״מ</Text>
+            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} {t('ס״מ', 'cm')}</Text>
             <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{playerHeight(player.baseId ?? player.id)!.feet}</Text>
           </View>
         ) : null}
@@ -134,18 +138,18 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
   const logo = LEAGUE_LOGO[player.league];
   const height = playerHeight(player.baseId ?? player.id);
   return (
-    <View style={{ gap: compact ? 6 : 8, alignItems: 'flex-end' }}>
-      <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
+    <View style={{ gap: compact ? 6 : 8, alignItems: rtl ? 'flex-end' : 'flex-start' }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
         <ClubBadge club={player.club} size={compact ? 20 : 26} />
-        <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{player.club}</Text>
+        <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{playerLabel(player.club, language)}</Text>
       </View>
-      <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
         {logo ? <Image source={logo} resizeMode="contain" style={{ width: compact ? 72 : 84, height: compact ? 32 : 38 }} /> : null}
-        <Text style={{ color: '#E7D7A1', fontWeight: '700', fontSize: compact ? 13 : 14 }}>{player.league}</Text>
+        <Text style={{ color: '#E7D7A1', fontWeight: '700', fontSize: compact ? 13 : 14 }}>{playerLabel(player.league, language)}</Text>
       </View>
       {height ? (
         <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} ס״מ</Text>
+          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} {t('ס״מ', 'cm')}</Text>
           <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{height.feet}</Text>
         </View>
       ) : null}
@@ -164,6 +168,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
 }
 
 function BootPair({ foot, wide, narrow }: { foot: 'L' | 'R'; wide: boolean; narrow?: boolean }) {
+  const { t } = useLanguage();
   return (
     <View style={{ width: narrow ? 210 : wide ? 300 : 240, maxWidth: '100%' }}>
       <Image
@@ -172,8 +177,8 @@ function BootPair({ foot, wide, narrow }: { foot: 'L' | 'R'; wide: boolean; narr
         style={{ width: '100%', height: wide ? 120 : 100, transform: foot === 'L' ? [{ scaleX: -1 }] : undefined }}
       />
       <View style={{ flexDirection: 'row', direction: 'ltr', justifyContent: 'space-between', paddingHorizontal: 18 }}>
-        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>שמאל</Text>
-        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>ימין</Text>
+        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{t('שמאל', 'Left')}</Text>
+        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{t('ימין', 'Right')}</Text>
       </View>
     </View>
   );
@@ -234,21 +239,29 @@ function Group({
   );
 }
 
-function ago(iso: string) {
+function ago(iso: string, language: 'he' | 'en' = 'he') {
   const minutes = Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (language === 'en') {
+    if (minutes < 60) return `${minutes} min ago`;
+    const hours = Math.round(minutes / 60);
+    if (hours < 48) return `${hours} hr ago`;
+    return `${Math.round(hours / 24)} days ago`;
+  }
   if (minutes < 60) return `לפני ${minutes} דק׳`;
   const hours = Math.round(minutes / 60);
   if (hours < 48) return `לפני ${hours} שע׳`;
   return `לפני ${Math.round(hours / 24)} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' {
-  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw') return player.edition;
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' {
+  if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'star-performer') return player.edition;
   return 'base';
 }
 
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -256,7 +269,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const media = playerMedia(personId);
   const baseMeta = playerCardMeta(personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'star-performer'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -286,7 +299,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   function requireUser() {
     if (!app.user) {
-      Alert.alert('רגע', 'צריך להתחבר כדי להצביע או לכתוב');
+      Alert.alert(t('רגע', 'Sign in required'), t('צריך להתחבר כדי להצביע או לכתוב', 'Sign in to vote or comment.'));
       return false;
     }
     return true;
@@ -299,7 +312,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       await voteOnPlayer(personId, app.user.id, vote);
       await refresh();
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'ההצבעה נכשלה');
+      Alert.alert(t('רגע', 'Please try again'), error instanceof Error ? error.message : t('ההצבעה נכשלה', 'Voting failed.'));
     } finally {
       setBusy(false);
     }
@@ -312,9 +325,9 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       const result = await addPlayerComment(personId, app.user.id, app.user.displayName, draft);
       setDraft('');
       await refresh();
-      if (result === 'held') Alert.alert('נשמר לבדיקה', 'התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.');
+      if (result === 'held') Alert.alert(t('נשמר לבדיקה', 'Saved for review'), t('התגובה לא פורסמה כי היא לא עומדת בכללי הכבוד.', 'The comment was held because it did not meet the community guidelines.'));
     } catch (error) {
-      Alert.alert('רגע', error instanceof Error ? error.message : 'התגובה נכשלה');
+      Alert.alert(t('רגע', 'Please try again'), error instanceof Error ? error.message : t('התגובה נכשלה', 'Comment failed.'));
     } finally {
       setBusy(false);
     }
@@ -335,8 +348,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
 
   const promo = destinedEdition(personId);
   const totw = totwFor(personId);
+  const starPerformer = starPerformerFor(personId);
   const viewingPromo = edition === 'destined' && promo != null;
   const viewingTotw = edition === 'totw' && (totw != null || player.edition === 'totw');
+  const viewingStarPerformer = edition === 'star-performer' && (starPerformer != null || player.edition === 'star-performer');
   const viewingHero = edition === 'hero';
   const card: FcPlayer = viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
@@ -350,19 +365,52 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           ...(totw?.positions?.length ? { positions: totw.positions } : {}),
           ...(totw?.playstyles?.length ? { playstyles: totw.playstyles } : {}),
         }
-      : viewingHero
-        ? { ...player, edition: 'hero' }
-        : {
+      : viewingStarPerformer
+        ? {
             ...player,
-            rating: player.pairRating ?? player.rating,
-            position: player.regularPosition ?? player.position,
-            club: player.regularClub ?? player.club,
-            league: player.regularLeague ?? player.league,
-            edition: undefined,
-            face: undefined,
-          };
-  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingHero ? player.face : media.face;
+            name: starPerformer?.name ?? player.name,
+            en: starPerformer?.en ?? player.en,
+            rating: starPerformer?.rating ?? player.rating,
+            position: starPerformer?.position ?? player.position,
+            nation: starPerformer?.nation ?? player.nation,
+            club: starPerformer?.club ?? player.club,
+            league: starPerformer?.league ?? player.league,
+            face: starPerformer?.face ?? player.face,
+            edition: 'star-performer',
+            ...(starPerformer?.positions?.length ? { positions: starPerformer.positions } : {}),
+            ...(starPerformer?.playstyles ? { playstyles: starPerformer.playstyles } : {}),
+          }
+        : viewingHero
+          ? { ...player, edition: 'hero' }
+          : {
+              ...player,
+              rating: player.pairRating ?? player.rating,
+              position: player.regularPosition ?? player.position,
+              club: player.regularClub ?? player.club,
+              league: player.regularLeague ?? player.league,
+              edition: undefined,
+              face: undefined,
+            };
+  const starMeta = viewingStarPerformer && starPerformer ? {
+    foot: starPerformer.foot,
+    skillMoves: starPerformer.sm,
+    weakFoot: starPerformer.wf,
+    stats: Object.fromEntries(
+      Object.entries(starPerformer.detailedStats).map(([key, value]) => {
+        const normalized = ({
+          attackingPosition: 'positioning',
+          diving: 'gkDiving',
+          handling: 'gkHandling',
+          kicking: 'gkKicking',
+          reflexes: 'gkReflexes',
+          goalkeeperPositioning: 'gkPositioning',
+        } as Record<string, MetaAttr>)[key] ?? (key as MetaAttr);
+        return [normalized, value];
+      }),
+    ) as Partial<Record<MetaAttr, number>>,
+  } : null;
+  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : starMeta ?? baseMeta;
+  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -392,16 +440,17 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingHero ? 'hero' : 'base';
-  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : personId;
+  const shown: 'base' | 'destined' | 'hero' | 'totw' | 'star-performer' = viewingPromo ? 'destined' : viewingTotw ? 'totw' : viewingStarPerformer ? 'star-performer' : viewingHero ? 'hero' : 'base';
+  const quoteId = viewingPromo ? `${personId}--destined` : viewingTotw ? (totw ? `${personId}--totw` : player.id) : viewingStarPerformer ? `${personId}--star-performer` : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
   const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
   const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
-  const alts: { edition: 'base' | 'destined' | 'totw'; label: string }[] = [];
-  if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: 'קלף רגיל' });
-  if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: 'קלף פרומו' });
+  const alts: { edition: 'base' | 'destined' | 'totw' | 'star-performer'; label: string }[] = [];
+  if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: t('קלף רגיל', 'Regular card') });
+  if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: t('קלף פרומו', 'Promo card') });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
+  if ((starPerformer || (player.edition === 'star-performer' && player.baseId)) && shown !== 'star-performer') alts.push({ edition: 'star-performer', label: 'Star Performer' });
 
   const foot = meta?.foot;
   const iconPage = !!player.icon;
@@ -460,22 +509,23 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const skills = meta ? (
     <View style={{ gap: 12, alignItems: 'flex-end' }}>
       <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>רגל חלשה</Text>
+        <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>{t('רגל חלשה', 'Weak foot')}</Text>
         <Stars count={meta.weakFoot} />
       </View>
       <View style={{ gap: 4, alignItems: 'flex-end' }}>
-        <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 6 }}>
+        <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 6 }}>
           <SkillMark />
-          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>סקיל</Text>
+          <Text style={{ color: iconPage ? '#E8C86A' : '#E7D7A1', fontSize: 12, fontWeight: '700', letterSpacing: 0.8 }}>{t('סקיל', 'Skill moves')}</Text>
         </View>
         <Stars count={meta.skillMoves} />
       </View>
     </View>
   ) : (
-    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: 'right' }}>אין נתון רשמי לרגל ולסקיל</Text>
+    <Text style={{ color: iconPage ? '#C9B48A' : colors.muted, fontSize: 13, textAlign: rtl ? 'right' : 'left' }}>{t('אין נתון רשמי לרגל ולסקיל', 'No official weak-foot or skill-move data')}</Text>
   );
 
   const accent = iconPage ? '#E8C86A' : '#E3B341';
+  const playerDisplayName = language === 'en' ? (card.en ?? media.en ?? card.name) : card.name;
 
   return (
     <View style={{ width: '100%', maxWidth: 1120, alignSelf: 'center', gap: 40 }}>
@@ -512,15 +562,20 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Regular card') : t('קלף עם זוהר', 'Glowing card')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={78} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
             </View>
             <View style={{ flex: 1, minWidth: 0, gap: 12, alignItems: 'flex-end', direction: 'ltr', overflow: 'hidden' }}>
-              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{player.name}</Text>
+              <Text style={{ color: '#F7F4EA', fontSize: 28, fontWeight: '900', textAlign: 'right', alignSelf: 'stretch' }}>{playerDisplayName}</Text>
               {quote ? <MarketQuote console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} />
+              {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
+                <Text style={{ color: '#FFC477', fontSize: 11, textAlign: 'right' }}>
+                  {t('חלק מתכונות המשנה של הקלף עדיין לא אומתו מול מקור FC 27.', 'Some detailed attributes for this Star Performer have not yet been verified against an FC 27 source.')}
+                </Text>
+              ) : null}
             </View>
             {iconPage ? null : (
               <View style={{ alignItems: 'flex-end', gap: 16, flexShrink: 1 }}>
@@ -548,7 +603,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 </Pressable>
               ))}
               {shown === 'totw' && shineQuote ? (
-                <Pressable accessibilityRole="button" accessibilityLabel={shine ? 'קלף רגיל' : 'קלף עם זוהר'} onPress={() => setShine((on) => !on)}>
+                <Pressable accessibilityRole="button" accessibilityLabel={shine ? t('קלף רגיל', 'Regular card') : t('קלף עם זוהר', 'Glowing card')} onPress={() => setShine((on) => !on)}>
                   <PortraitCard player={card} width={62} edition="totw" glow={!shine} />
                 </Pressable>
               ) : null}
@@ -557,6 +612,11 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               <Text numberOfLines={2} style={{ color: '#F7F4EA', fontSize: 20, fontWeight: '900', textAlign: 'right' }}>{player.name}</Text>
               {quote ? <MarketQuote compact console={quote.console} pc={quote.pc} /> : null}
               <Identity player={card} compact />
+              {viewingStarPerformer && starPerformer && starPerformer.detailedStatsComplete === false ? (
+                <Text style={{ color: '#FFC477', fontSize: 11, textAlign: 'right' }}>
+                  {t('חלק מתכונות המשנה של הקלף עדיין לא אומתו מול מקור FC 27.', 'Some detailed attributes for this Star Performer have not yet been verified against an FC 27 source.')}
+                </Text>
+              ) : null}
             </View>
           </View>
           <View
@@ -579,10 +639,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.03)', padding: 12, borderRadius: 14, borderWidth: 1, borderColor: showPotential ? '#38bdf8' : 'rgba(255,255,255,0.08)' }}>
           <View style={{ alignItems: 'flex-end', gap: 2 }}>
             <Text style={{ color: showPotential ? '#38bdf8' : '#F7F4EA', fontSize: 14, fontWeight: '800' }}>
-              {showPotential ? '🚀 תחזית נתונים במלוא הפוטנציאל' : '📊 נתונים נוכחיים'}
+              {showPotential ? t('🚀 תחזית נתונים במלוא הפוטנציאל', '🚀 Full-potential projection') : t('📊 נתונים נוכחיים', '📊 Current stats')}
             </Text>
             <Text style={{ color: '#9AA8A0', fontSize: 11 }}>
-              {showPotential ? `דירוג שיא משוער: 89 (+${growth})` : 'הצג כיצד כל הנתונים יראו בשיא ההתפתחות'}
+              {showPotential ? t(`דירוג שיא משוער: 89 (+${growth})`, `Estimated peak rating: 89 (+${growth})`) : t('הצג כיצד כל הנתונים יראו בשיא ההתפתחות', 'Preview all attributes at peak development')}
             </Text>
           </View>
           <Pressable
@@ -597,7 +657,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             }}
           >
             <Text style={{ color: showPotential ? '#ffffff' : '#38bdf8', fontSize: 12, fontWeight: '800' }}>
-              {showPotential ? '✔ מלוא הפוטנציאל פעיל' : '⚡ ראה מלוא הפוטנציאל'}
+              {showPotential ? t('✔ מלוא הפוטנציאל פעיל', '✔ Peak potential active') : t('⚡ ראה מלוא הפוטנציאל', '⚡ View peak potential')}
             </Text>
           </Pressable>
         </View>
@@ -676,12 +736,12 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         }}
       >
         <View style={{ flexDirection: wide ? 'row' : 'column', direction: 'ltr', gap: 10, alignItems: wide ? 'center' : 'stretch' }}>
-          <Text style={{ color: '#F7F4EA', fontSize: 18, fontWeight: '900', textAlign: 'right', flex: wide ? 1 : undefined }}>תגובות</Text>
+          <Text style={{ color: '#F7F4EA', fontSize: 18, fontWeight: '900', textAlign: 'right', flex: wide ? 1 : undefined }}>{t('תגובות', 'Comments')}</Text>
           <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', width: wide ? 360 : '100%' }}>
             <TextInput
               value={draft}
               onChangeText={setDraft}
-              placeholder="מה דעתך על הקלף"
+              placeholder={t("מה דעתך על הקלף", "What do you think of this card?")}
               placeholderTextColor="#8E9A90"
               style={{
                 flex: 1,
@@ -706,7 +766,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
                 paddingVertical: 10,
               }}
             >
-              <Text style={{ color: accent, fontWeight: '800' }}>שליחה</Text>
+              <Text style={{ color: accent, fontWeight: '800' }}>{t('שליחה', 'Post')}</Text>
             </Pressable>
           </View>
         </View>
@@ -721,7 +781,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             }}
           >
             <Text style={{ color: '#F4F7F2', fontWeight: '800', textAlign: 'right' }}>{comment.name}</Text>
-            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: 'right' }}>{ago(comment.createdAt)}</Text>
+            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: 'right' }}>{ago(comment.createdAt, language)}</Text>
             <Text style={{ color: '#E7EEE8', textAlign: 'right', fontSize: 15 }}>{comment.body}</Text>
             <View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end' }}>
               <Pressable onPress={() => void voteRow(comment.id, -1)}>

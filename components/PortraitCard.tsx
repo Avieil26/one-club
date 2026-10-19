@@ -276,7 +276,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'star-performer';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -304,7 +304,7 @@ export function PortraitCard({
     const heroArt = HERO_ART[player.id];
     if (heroArt) return <TotwPortraitCard art={heroArt} width={width} />;
   }
-  if (shownEdition === 'hero' || shownEdition === 'totw') {
+  if (shownEdition === 'hero' || shownEdition === 'totw' || shownEdition === 'star-performer') {
     return (
       <View style={aura as object}>
         <ShieldPortrait player={player} width={width} edition={shownEdition} shell={shell} pitch={variant === 'pitch'} />
@@ -380,7 +380,7 @@ function StandardPortraitCard({
   width: number;
   variant: 'full' | 'pitch';
   shell?: boolean;
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'star-performer';
   photoOverride?: string;
   faceOverride?: FaceStats;
   heightOverride?: number;

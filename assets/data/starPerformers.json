@@ -1,0 +1,526 @@
+[
+  {
+    "baseId": "yamal",
+    "en": "Lamine Yamal",
+    "name": "לאמין ימאל",
+    "rating": 91,
+    "position": "RW",
+    "positions": [
+      "RW",
+      "RM"
+    ],
+    "nation": "ספרד",
+    "league": "לה ליגה",
+    "club": "ברצלונה",
+    "foot": "L",
+    "sm": 5,
+    "wf": 3,
+    "cardId": 84163723,
+    "face": {
+      "ovr": 91,
+      "pac": 87,
+      "sho": 85,
+      "pas": 89,
+      "dri": 94,
+      "def": 40,
+      "phy": 64
+    },
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "acceleration": 90,
+      "sprintSpeed": 85,
+      "attackingPosition": 89,
+      "finishing": 85,
+      "shotPower": 84,
+      "longShots": 87,
+      "volleys": 77,
+      "penalties": 80,
+      "vision": 91,
+      "crossing": 90,
+      "freeKickAccuracy": 76,
+      "shortPassing": 90,
+      "longPassing": 86,
+      "curve": 91,
+      "agility": 95,
+      "balance": 84,
+      "reactions": 89,
+      "ballControl": 93,
+      "dribbling": 96,
+      "composure": 86,
+      "interceptions": 40,
+      "headingAccuracy": 35,
+      "defensiveAwareness": 32,
+      "standingTackle": 49,
+      "slidingTackle": 38,
+      "jumping": 68,
+      "stamina": 80,
+      "strength": 63,
+      "aggression": 47
+    },
+    "priceConsole": 3300000,
+    "pricePc": 0,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote 3,300,000; no PC listing shown in the current snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/lamine-yamal/120352",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/84163723.png?v=190945"
+  },
+  {
+    "baseId": "doue",
+    "en": "Désiré Doué",
+    "name": "דזירה דואה",
+    "rating": 87,
+    "position": "RW",
+    "positions": [
+      "RW",
+      "RM",
+      "CM",
+      "LM"
+    ],
+    "nation": "צרפת",
+    "league": "ליג 1",
+    "club": "פריז סן ז׳רמן",
+    "foot": "R",
+    "sm": 5,
+    "wf": 4,
+    "cardId": 50603069,
+    "face": {
+      "ovr": 87,
+      "pac": 85,
+      "sho": 83,
+      "pas": 80,
+      "dri": 91,
+      "def": 56,
+      "phy": 81
+    },
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "acceleration": 87,
+      "sprintSpeed": 84,
+      "attackingPosition": 85,
+      "finishing": 81,
+      "shotPower": 88,
+      "longShots": 86,
+      "volleys": 70,
+      "penalties": 79,
+      "vision": 80,
+      "crossing": 76,
+      "freeKickAccuracy": 69,
+      "shortPassing": 84,
+      "longPassing": 76,
+      "curve": 83,
+      "agility": 89,
+      "balance": 87,
+      "reactions": 87,
+      "ballControl": 91,
+      "dribbling": 93,
+      "composure": 90,
+      "interceptions": 60,
+      "headingAccuracy": 47,
+      "defensiveAwareness": 53,
+      "standingTackle": 61,
+      "slidingTackle": 53,
+      "jumping": 77,
+      "stamina": 91,
+      "strength": 83,
+      "aggression": 62
+    },
+    "priceConsole": 1700000,
+    "pricePc": 0,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current PS/Xbox list quote 1,700,000; no PC listing shown in the current snapshot.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/desire-doue/120354",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/50603069.png?v=190945"
+  },
+  {
+    "baseId": "barcola",
+    "en": "Bradley Barcola",
+    "name": "בראדלי ברקולה",
+    "rating": 86,
+    "position": "LW",
+    "positions": [
+      "LW",
+      "RM",
+      "LM",
+      "RW"
+    ],
+    "nation": "צרפת",
+    "league": "פרמייר ליג",
+    "club": "ליברפול",
+    "foot": "R",
+    "sm": 4,
+    "wf": 4,
+    "cardId": 84150732,
+    "face": {
+      "ovr": 86,
+      "pac": 93,
+      "sho": 80,
+      "pas": 79,
+      "dri": 85,
+      "def": 41,
+      "phy": 68
+    },
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "acceleration": 90,
+      "sprintSpeed": 96,
+      "attackingPosition": 88,
+      "finishing": 84,
+      "shotPower": 78,
+      "longShots": 77,
+      "volleys": 75,
+      "penalties": 70,
+      "vision": 80,
+      "crossing": 82,
+      "freeKickAccuracy": 65,
+      "shortPassing": 84,
+      "longPassing": 65,
+      "curve": 81,
+      "agility": 89,
+      "balance": 70,
+      "reactions": 82,
+      "ballControl": 86,
+      "dribbling": 87,
+      "composure": 80,
+      "interceptions": 41,
+      "headingAccuracy": 72,
+      "defensiveAwareness": 36,
+      "standingTackle": 41,
+      "slidingTackle": 29,
+      "jumping": 80,
+      "stamina": 76,
+      "strength": 65,
+      "aggression": 61
+    },
+    "priceConsole": 725000,
+    "pricePc": 876000,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current Star Performer non-Holographic price shown in the current market snapshot; PS/Xbox and PC values are kept separately.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/bradley-barcola/120368",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/84150732.png?v=190945"
+  },
+  {
+    "baseId": "ea-269230-noah-sadiki",
+    "en": "Noah Sadiki",
+    "name": "Noah Sadiki",
+    "rating": 85,
+    "position": "CDM",
+    "positions": [
+      "CDM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "הרפובליקה הדמוקרטית של קונגו",
+    "league": "פרמייר ליג",
+    "club": "Sunderland",
+    "foot": "R",
+    "sm": 3,
+    "wf": 3,
+    "cardId": 50600878,
+    "face": {
+      "ovr": 85,
+      "pac": 84,
+      "sho": 76,
+      "pas": 80,
+      "dri": 85,
+      "def": 80,
+      "phy": 80
+    },
+    "playstyles": [
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "acceleration": 85,
+      "sprintSpeed": 83,
+      "attackingPosition": 83,
+      "finishing": 75,
+      "shotPower": 77,
+      "longShots": 78,
+      "volleys": 72,
+      "penalties": 60,
+      "vision": 80,
+      "crossing": 76,
+      "freeKickAccuracy": 53,
+      "shortPassing": 85,
+      "longPassing": 81,
+      "curve": 78,
+      "agility": 89,
+      "balance": 89,
+      "reactions": 86,
+      "ballControl": 85,
+      "dribbling": 84,
+      "composure": 83,
+      "interceptions": 85,
+      "headingAccuracy": 56,
+      "defensiveAwareness": 80,
+      "standingTackle": 85,
+      "slidingTackle": 83,
+      "jumping": 80,
+      "stamina": 93,
+      "strength": 73,
+      "aggression": 81
+    },
+    "priceConsole": 172000,
+    "pricePc": 155000,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current Star Performer non-Holographic price shown in the current market snapshot; PS/Xbox and PC values are kept separately.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/noah-sadiki/120362",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/50600878.png?v=190945"
+  },
+  {
+    "baseId": "ea-242879-maarten-vandevoordt",
+    "en": "Maarten Vandevoordt",
+    "name": "Maarten Vandevoordt",
+    "rating": 85,
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "nation": "בלגיה",
+    "league": "בונדסליגה",
+    "club": "RB Leipzig",
+    "foot": "R",
+    "sm": 1,
+    "wf": 3,
+    "cardId": 50574527,
+    "face": {
+      "ovr": 85,
+      "pac": 87,
+      "sho": 84,
+      "pas": 89,
+      "dri": 85,
+      "def": 62,
+      "phy": 83
+    },
+    "playstyles": [
+      {
+        "name": "Far Throw",
+        "plus": false
+      },
+      {
+        "name": "Footwork",
+        "plus": false
+      },
+      {
+        "name": "Cross Claimer",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "diving": 87,
+      "handling": 84,
+      "kicking": 89,
+      "reflexes": 85,
+      "speed": 62,
+      "goalkeeperPositioning": 83,
+      "acceleration": 62,
+      "sprintSpeed": 63,
+      "attackingPosition": 5,
+      "finishing": 7,
+      "shotPower": 62,
+      "longShots": 5,
+      "volleys": 5,
+      "penalties": 15,
+      "vision": 64,
+      "crossing": 23,
+      "freeKickAccuracy": 8,
+      "shortPassing": 53,
+      "longPassing": 66,
+      "curve": 15,
+      "agility": 55,
+      "balance": 40,
+      "reactions": 79,
+      "ballControl": 32,
+      "dribbling": 26,
+      "composure": 56,
+      "interceptions": 14,
+      "headingAccuracy": 16,
+      "defensiveAwareness": 11,
+      "standingTackle": 10,
+      "slidingTackle": 18
+    },
+    "priceConsole": 40250,
+    "pricePc": 35500,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current Star Performer non-Holographic price shown in the current market snapshot; PS/Xbox and PC values are kept separately.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/maarten-vandevoordt/120361",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/50574527.png?v=190945"
+  },
+  {
+    "baseId": "ea-278326-alphadjo-cisse",
+    "en": "Alphadjo Cissè",
+    "name": "אלפאדג׳ו צ׳יסה",
+    "rating": 85,
+    "position": "CAM",
+    "positions": [
+      "CAM",
+      "CM"
+    ],
+    "nation": "איטליה",
+    "league": "סרייה א׳",
+    "club": "מילאנו FC",
+    "foot": "R",
+    "sm": 4,
+    "wf": 3,
+    "cardId": 67387190,
+    "face": {
+      "ovr": 85,
+      "pac": 87,
+      "sho": 84,
+      "pas": 82,
+      "dri": 89,
+      "def": 62,
+      "phy": 68
+    },
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "detailedStats": {
+      "acceleration": 87,
+      "sprintSpeed": 87,
+      "attackingPosition": 85,
+      "finishing": 83,
+      "shotPower": 84,
+      "longShots": 88,
+      "volleys": 87,
+      "penalties": 75,
+      "vision": 81,
+      "crossing": 80,
+      "freeKickAccuracy": 82,
+      "shortPassing": 84,
+      "longPassing": 80,
+      "curve": 81,
+      "agility": 92,
+      "balance": 90,
+      "reactions": 80,
+      "ballControl": 87,
+      "dribbling": 92,
+      "composure": 80,
+      "interceptions": 58,
+      "headingAccuracy": 85,
+      "defensiveAwareness": 61,
+      "standingTackle": 61,
+      "slidingTackle": 50,
+      "jumping": 80,
+      "stamina": 80,
+      "strength": 64,
+      "aggression": 62
+    },
+    "priceConsole": 104000,
+    "pricePc": 83000,
+    "priceSource": "FUT Flipper — FC 27 Star Performer market list",
+    "priceChecked": "2026-10-18",
+    "priceNote": "Current Star Performer non-Holographic price shown in the current market snapshot; PS/Xbox and PC values are kept separately.",
+    "playerSourceUrl": "https://www.futwiz.com/fc27/player/alphadjo-cisse/120360",
+    "priceSourceUrl": "https://futflipper.com/promos/star-performer",
+    "detailedStatsComplete": true,
+    "portraitUrl": "https://cdn.futwiz.com/assets/img/fc27/faces/67387190.png?v=190945"
+  }
+]

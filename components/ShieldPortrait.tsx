@@ -5,7 +5,7 @@ import { ClubBadge } from '@/components/ClubBadge';
 import { NationFlag } from '@/components/NationFlag';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { playerMedia, type FaceStats } from '@/lib/playerMedia';
-import { totwFor } from '@/lib/specialCards';
+import { starPerformerFor, totwFor } from '@/lib/specialCards';
 
 /**
  * Preview silhouette: low center peak, wide straight sides, short bottom point.
@@ -48,38 +48,44 @@ export function ShieldPortrait({
 }: {
   player: FcPlayer;
   width: number;
-  edition: 'hero' | 'totw';
+  edition: 'hero' | 'totw' | 'star-performer';
   shell?: boolean;
   pitch?: boolean;
 }) {
   const hero = edition === 'hero';
+  const isStarPerformer = edition === 'star-performer';
   const media = playerMedia(player.baseId ?? player.id);
   const totw = edition === 'totw' ? totwFor(player.baseId ?? player.id) : null;
-  const stats = edition === 'totw' ? (totw?.face ?? player.face) : player.face;
-  const rating = edition === 'totw' ? (totw?.face.ovr ?? totw?.rating ?? player.rating) : (player.face?.ovr ?? player.rating);
-  const position = edition === 'totw' ? (totw?.position ?? player.position) : player.position;
-  const ink = hero ? '#F4E6C8' : '#E8C56A';
-  const quiet = hero ? 'rgba(244,230,200,0.78)' : 'rgba(232,197,106,0.78)';
+  const starPerformer = isStarPerformer ? starPerformerFor(player.baseId ?? player.id) : null;
+  const stats = edition === 'totw' ? (totw?.face ?? player.face) : isStarPerformer ? (starPerformer?.face ?? player.face) : player.face;
+  const rating = edition === 'totw'
+    ? (totw?.face.ovr ?? totw?.rating ?? player.rating)
+    : isStarPerformer
+      ? (starPerformer?.face.ovr ?? starPerformer?.rating ?? player.rating)
+      : (player.face?.ovr ?? player.rating);
+  const position = edition === 'totw' ? (totw?.position ?? player.position) : isStarPerformer ? (starPerformer?.position ?? player.position) : player.position;
+  const ink = hero ? '#F4E6C8' : isStarPerformer ? '#FFF0D4' : '#E8C56A';
+  const quiet = hero ? 'rgba(244,230,200,0.78)' : isStarPerformer ? 'rgba(255,226,186,0.86)' : 'rgba(232,197,106,0.78)';
   const height = Math.round(width * (pitch ? 1.42 : 348 / 240));
   const gid = `sh${player.id.replace(/[^a-zA-Z0-9]/g, '')}${edition}`;
-  const photo = !shell && media.photo ? media.photo : '';
+  const photo = !shell ? (starPerformer?.portraitUrl || media.photo || '') : '';
   const showClub = !shell && player.club !== 'Heroes' && player.club !== 'TOTW';
   const rows = position === 'GK' ? GK_ROWS : ROWS;
-  const deep = hero ? '#14081C' : '#070604';
+  const deep = hero ? '#14081C' : isStarPerformer ? '#481306' : '#070604';
 
   return (
     <View style={{ width, height, alignSelf: 'center', direction: 'ltr' }}>
       <Svg width={width} height={height} viewBox="0 0 240 348">
         <Defs>
           <LinearGradient id={`${gid}-frame`} x1="0" y1="0" x2="1" y2="1">
-            <Stop offset="0" stopColor={hero ? '#F8F0FF' : '#FFF8DC'} />
-            <Stop offset="0.28" stopColor={hero ? '#D4B4FF' : '#F0D56A'} />
-            <Stop offset="0.55" stopColor={hero ? '#7A45C8' : '#C9A227'} />
-            <Stop offset="0.78" stopColor={hero ? '#4A2288' : '#8A6412'} />
-            <Stop offset="1" stopColor={hero ? '#E7D6FF' : '#FFE9A8'} />
+            <Stop offset="0" stopColor={hero ? '#F8F0FF' : isStarPerformer ? '#FFF2C0' : '#FFF8DC'} />
+            <Stop offset="0.28" stopColor={hero ? '#D4B4FF' : isStarPerformer ? '#FFD45B' : '#F0D56A'} />
+            <Stop offset="0.55" stopColor={hero ? '#7A45C8' : isStarPerformer ? '#FF781B' : '#C9A227'} />
+            <Stop offset="0.78" stopColor={hero ? '#4A2288' : isStarPerformer ? '#8C2508' : '#8A6412'} />
+            <Stop offset="1" stopColor={hero ? '#E7D6FF' : isStarPerformer ? '#FFB436' : '#FFE9A8'} />
           </LinearGradient>
           <LinearGradient id={`${gid}-face`} x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor={hero ? '#3C1874' : '#14110C'} />
+            <Stop offset="0" stopColor={hero ? '#3C1874' : isStarPerformer ? '#FF8B1B' : '#14110C'} />
             <Stop offset="1" stopColor={deep} />
           </LinearGradient>
           <LinearGradient id={`${gid}-fade`} x1="0" y1="0" x2="0" y2="1">
@@ -102,6 +108,13 @@ export function ShieldPortrait({
               <Path d="M36 48 L58 100 L42 108 L78 170" stroke="#E7D4FF" strokeWidth="2.4" fill="none" opacity="0.8" />
               <Path d="M190 36 L164 92 L184 100 L140 168 L156 176 L112 230" stroke="#F0E4FF" strokeWidth="2.2" fill="none" opacity="0.7" />
               <Path d="M204 70 L176 130 L192 138 L148 200" stroke="#C9A6FF" strokeWidth="1.8" fill="none" opacity="0.55" />
+            </>
+          ) : isStarPerformer ? (
+            <>
+              <Path d="M24 50 L98 112 L70 146 L140 202" stroke="#FFE59A" strokeWidth="2.2" fill="none" opacity="0.9" />
+              <Path d="M66 28 L138 89 L118 112 L196 180" stroke="#FFC247" strokeWidth="1.8" fill="none" opacity="0.78" />
+              <Path d="M160 24 L208 66 L188 93 L216 118" stroke="#FFF0C4" strokeWidth="1.2" fill="none" opacity="0.65" />
+              <Path d="M16 196 L58 230 L41 253" stroke="#FFB12D" strokeWidth="1.5" fill="none" opacity="0.68" />
             </>
           ) : (
             <>
@@ -126,12 +139,12 @@ export function ShieldPortrait({
           top: height * 0.075,
           right: width * 0.14,
           color: hero ? 'rgba(244,230,200,0.82)' : ink,
-          fontSize: Math.max(8, width * 0.04),
+          fontSize: Math.max(6, width * (isStarPerformer ? 0.028 : 0.04)),
           fontWeight: '800',
           letterSpacing: 1.3,
         }}
       >
-        {shell ? '' : hero ? 'HERO' : 'TOTW'}
+        {shell ? '' : hero ? 'HERO' : isStarPerformer ? 'STAR PERFORMER' : 'TOTW'}
       </Text>
 
       <View style={{ position: 'absolute', top: height * 0.07, left: width * 0.1, width: width * 0.28, alignItems: 'center' }}>

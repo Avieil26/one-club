@@ -1,7 +1,7 @@
 import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board';
+export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board' | 'champions';
 
 const SCENES: Record<
   SceneId,
@@ -75,6 +75,13 @@ const SCENES: Record<
     wash: 'rgba(7,8,12,0.4)',
     vignette: ['#07080c', '#07080c', '#07080c', '#07080c'],
     base: '#07080c',
+  },
+  champions: {
+    source: require('@/assets/images/champions-bg.jpg'),
+    tint: ['rgba(2,4,8,0.45)', 'rgba(2,4,8,0.25)', 'rgba(2,4,8,0.65)'],
+    wash: 'rgba(3,5,8,0.18)',
+    vignette: ['rgba(0,0,0,0.38)', 'transparent', 'transparent', 'rgba(0,0,0,0.68)'],
+    base: '#05070A',
   },
   modal: {
     source: require('@/assets/images/scene-ultimate.png'),

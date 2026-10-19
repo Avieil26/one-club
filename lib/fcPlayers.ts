@@ -1,6 +1,6 @@
 import { destinedEdition } from '@/lib/destinedEditions';
 import { DB_PLAYERS } from '@/lib/playerDb';
-import { totwFor } from '@/lib/specialCards';
+import { starPerformerFor, totwFor } from '@/lib/specialCards';
 
 export type PlayStyle = { name: string; plus: boolean };
 
@@ -16,7 +16,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw';
+  edition?: 'destined' | 'hero' | 'totw' | 'star-performer';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
@@ -181,6 +181,30 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
         face: totw.face,
         ...(totw.positions?.length ? { positions: totw.positions } : {}),
         ...(totw.playstyles ? { playstyles: totw.playstyles } : {}),
+      });
+    }
+
+    const starPerformer = starPerformerFor(player.id);
+    if (starPerformer) {
+      cards.push({
+        ...player,
+        id: `${player.id}--star-performer`,
+        edition: 'star-performer',
+        baseId: player.id,
+        pairRating: player.rating,
+        regularPosition: player.position,
+        regularClub: player.club,
+        regularLeague: player.league,
+        name: starPerformer.name,
+        en: starPerformer.en,
+        nation: starPerformer.nation,
+        league: starPerformer.league,
+        club: starPerformer.club,
+        rating: starPerformer.rating,
+        position: starPerformer.position,
+        face: starPerformer.face,
+        ...(starPerformer.positions?.length ? { positions: starPerformer.positions } : {}),
+        ...(starPerformer.playstyles ? { playstyles: starPerformer.playstyles } : {}),
       });
     }
   }

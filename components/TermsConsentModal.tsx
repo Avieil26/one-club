@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { Modal, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { colors } from '@/components/ui';
-import { inlineLatin } from '@/lib/legalBidi';
 import { hasAcceptedTerms, recordAcceptedTerms } from '@/lib/legal';
 import { useApp } from '@/lib/store';
+import { useLanguage } from '@/lib/language';
 
 export function TermsConsentModal() {
   const app = useApp();
+  const { t, language } = useLanguage();
+  const rtl = language === 'he';
   const router = useRouter();
   const userId = app.user?.id;
   const [visible, setVisible] = useState(false);
@@ -95,15 +97,15 @@ export function TermsConsentModal() {
               borderBottomWidth: 1,
               paddingVertical: 14,
               paddingHorizontal: 18,
-              flexDirection: 'row', direction: 'rtl',
+              flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr',
               alignItems: 'center',
               justifyContent: 'space-between',
             }}
           >
-            <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
+            <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
               <Text style={{ fontSize: 18 }}>⚖️</Text>
               <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 14, letterSpacing: 0.5 }}>
-                אישור תנאים נדרש • LEGAL CONSENT
+                {t('אישור תנאים נדרש • LEGAL CONSENT', 'Terms acceptance required • LEGAL CONSENT')}
               </Text>
             </View>
             <Text style={{ color: colors.muted, fontSize: 12, fontWeight: '700' }}>1 CLUB</Text>
@@ -112,11 +114,11 @@ export function TermsConsentModal() {
           <ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>
             {/* Title & Welcome */}
             <View style={{ gap: 4 }}>
-              <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900', textAlign: 'right', writingDirection: 'rtl' }}>
-                {inlineLatin('ברוכים הבאים ל-FC27 ישראל!')}
+              <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
+                {t('ברוכים הבאים ל-FC27 ישראל!', 'Welcome to FC27!')}
               </Text>
-              <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
-                שלום {app.user.displayName}, לפני שתוכל/י להשתמש באפליקציה, חובה לקרוא ולאשר את תנאי השימוש ומדיניות הפרטיות המעודכנים.
+              <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left' }}>
+                {t(`שלום ${app.user.displayName}, לפני שתוכל/י להשתמש באפליקציה, חובה לקרוא ולאשר את תנאי השימוש ומדיניות הפרטיות המעודכנים.`, `Hello ${app.user.displayName}, please read and accept the current Terms of Use and Privacy Policy before using the app.`)}
               </Text>
             </View>
 
@@ -131,29 +133,27 @@ export function TermsConsentModal() {
                 gap: 10,
               }}
             >
-              <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'flex-start', gap: 8 }}>
+              <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'flex-start', gap: 8 }}>
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
-                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: 'right' }}>
-                  <Text style={{ fontWeight: '800', color: colors.gold }}>אתר מעריצים עצמאי: </Text>
-                  {inlineLatin(
-                    'האתר אינו קשור, מאושר או נתמך על ידי Electronic Arts Inc. כל המותגים, שמות המשחקים ותמונות השחקנים שייכים לבעליהם ומשמשים בשימוש הוגן (Fair Use) בלבד.',
-                  )}
+                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
+                  <Text style={{ fontWeight: '800', color: colors.gold }}>{t('אתר מעריצים עצמאי: ', 'Independent fan site: ')}</Text>
+                  {t('האתר אינו קשור, מאושר או נתמך על ידי Electronic Arts Inc. כל המותגים, שמות המשחקים ותמונות השחקנים שייכים לבעליהם ומשמשים בשימוש הוגן (Fair Use) בלבד.', 'This is an independent fan site and is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game titles, and player images belong to their respective owners and are used under fair use only.')}
                 </Text>
               </View>
 
-              <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'flex-start', gap: 8 }}>
+              <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'flex-start', gap: 8 }}>
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
-                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: 'right' }}>
-                  <Text style={{ fontWeight: '800', color: colors.gold }}>איסור סחר בכסף אמיתי: </Text>
-                  {inlineLatin('חל איסור מוחלט על מסחר במטבעות משחק (Coins), חשבונות או נכסים וירטואליים תמורת כסף אמיתי.')}
+                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
+                  <Text style={{ fontWeight: '800', color: colors.gold }}>{t('איסור סחר בכסף אמיתי: ', 'Real-money trading prohibited: ')}</Text>
+                  {t('חל איסור מוחלט על מסחר במטבעות משחק (Coins), חשבונות או נכסים וירטואליים תמורת כסף אמיתי.', 'Trading game coins, accounts, or virtual assets for real money is strictly prohibited.')}
                 </Text>
               </View>
 
-              <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'flex-start', gap: 8 }}>
+              <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'flex-start', gap: 8 }}>
                 <Text style={{ color: colors.gold, fontSize: 14 }}>•</Text>
-                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: 'right' }}>
-                  <Text style={{ fontWeight: '800', color: colors.gold }}>פרטיות ובטיחות: </Text>
-                  מידע אישי אינו נמכר לאיש. שימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.
+                <Text style={{ flex: 1, color: colors.text, fontSize: 13, lineHeight: 20, textAlign: rtl ? 'right' : 'left' }}>
+                  <Text style={{ fontWeight: '800', color: colors.gold }}>{t('פרטיות ובטיחות: ', 'Privacy and safety: ')}</Text>
+                  {t('מידע אישי אינו נמכר לאיש. שימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.', 'Personal information is not sold. Users under 18 need consent from a parent or legal guardian.')}
                 </Text>
               </View>
             </View>
@@ -161,7 +161,7 @@ export function TermsConsentModal() {
             {/* Direct Links to Documents */}
             <View
               style={{
-                flexDirection: 'row', direction: 'rtl',
+                flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr',
                 gap: 8,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -180,7 +180,7 @@ export function TermsConsentModal() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>📄 תנאי השימוש המלאים</Text>
+                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>📄 {t('תנאי השימוש המלאים', 'Full Terms of Use')}</Text>
               </Pressable>
 
               <Pressable
@@ -195,7 +195,7 @@ export function TermsConsentModal() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>🔒 מדיניות הפרטיות</Text>
+                <Text style={{ color: colors.gold, fontSize: 13, fontWeight: '800' }}>🔒 {t('מדיניות הפרטיות', 'Privacy Policy')}</Text>
               </Pressable>
             </View>
 
@@ -213,7 +213,7 @@ export function TermsConsentModal() {
                 borderWidth: 1.5,
                 borderRadius: 14,
                 padding: 14,
-                flexDirection: 'row', direction: 'rtl',
+                flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr',
                 alignItems: 'center',
                 gap: 12,
               }}
@@ -236,14 +236,14 @@ export function TermsConsentModal() {
                 ) : null}
               </View>
 
-              <Text style={{ flex: 1, color: colors.text, fontSize: 14, fontWeight: '700', lineHeight: 22, textAlign: 'right' }}>
-                {inlineLatin('קראתי, הבנתי ואני מסכים/ה במלואם לתנאי השימוש ולמדיניות הפרטיות של 1 CLUB.')}
+              <Text style={{ flex: 1, color: colors.text, fontSize: 14, fontWeight: '700', lineHeight: 22, textAlign: rtl ? 'right' : 'left' }}>
+                {t('קראתי, הבנתי ואני מסכים/ה במלואם לתנאי השימוש ולמדיניות הפרטיות של 1 CLUB.', 'I have read, understood, and fully agree to the 1 CLUB Terms of Use and Privacy Policy.')}
               </Text>
             </Pressable>
 
             {errorPrompt ? (
-              <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '800', textAlign: 'right', paddingHorizontal: 4 }}>
-                ⚠️ עליך לסמן V בתיבה למעלה כדי לאשר את התנאים ולהיכנס לאפליקציה.
+              <Text style={{ color: colors.danger, fontSize: 12.5, fontWeight: '800', textAlign: rtl ? 'right' : 'left', paddingHorizontal: 4 }}>
+                {t('⚠️ עליך לסמן V בתיבה למעלה כדי לאשר את התנאים ולהיכנס לאפליקציה.', '⚠️ Check the box above to accept the terms and enter the app.')}
               </Text>
             ) : null}
 
@@ -266,7 +266,7 @@ export function TermsConsentModal() {
                 }}
               >
                 <Text style={{ color: checked ? colors.goldInk : 'rgba(255,255,255,0.6)', fontSize: 16, fontWeight: '900' }}>
-                  {saving ? 'מאשר...' : 'אישור וכניסה לאפליקציה'}
+                  {saving ? t('מאשר...', 'Accepting...') : t('אישור וכניסה לאפליקציה', 'Accept and enter the app')}
                 </Text>
               </Pressable>
 
@@ -281,7 +281,7 @@ export function TermsConsentModal() {
                 }}
               >
                 <Text style={{ color: colors.muted, fontSize: 13, fontWeight: '600' }}>
-                  אינני מסכים/ה (התנתקות ויציאה)
+                  {t('אינני מסכים/ה (התנתקות ויציאה)', 'I do not agree (sign out and leave)')}
                 </Text>
               </Pressable>
             </View>
