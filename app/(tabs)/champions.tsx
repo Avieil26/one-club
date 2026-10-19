@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
 import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,7 +24,6 @@ const ENGLISH_COPY: Record<string, string> = {
   "הגדרות נבחרו": "settings selected",
   " הגדרות נבחרו": " settings selected",
   " תמונות נבחרו": " images selected",
-  " הפסדים · ": " losses · ",
   "בחירת מחליף": "Choose a substitute",
   "בחר מערך": "Choose formation",
   "בחר מערך לפני שליחת הטקטיקה.": "Choose a formation before submitting the tactic.",
