@@ -184,7 +184,7 @@ export function LegalScreen({
       >
         <SiteNav />
         <Bidi text={title} header style={{ color: colors.text, fontSize: 34, fontWeight: '900' }} />
-        <Bidi text={`עודכן: ${updated}`} style={{ color: colors.muted, fontWeight: '700' }} />
+        <Bidi text={language === 'en' ? `Updated: ${updated === '1 באוקטובר 2026' ? 'October 1, 2026' : legalEnglish(updated)}` : `עודכן: ${updated}`} style={{ color: colors.muted, fontWeight: '700' }} />
         {children}
         <LegalLinks />
       </ScrollView>
