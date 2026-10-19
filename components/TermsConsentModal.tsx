@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Modal, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { colors } from '@/components/ui';
-import { inlineLatin } from '@/lib/legalBidi';
 import { hasAcceptedTerms, recordAcceptedTerms } from '@/lib/legal';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
