@@ -300,5 +300,13 @@ export function sbcFace(challenge: SbcChallenge) {
 export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   const known = BY_ID[challenge.id];
   if (known) return known;
+  const reward = challenge.reward ?? '';
+  const rating = reward.match(/(?:×|x)\\s*(\\d{2})\\+/i)?.[1] ?? reward.match(/(\\d{2})\\+/)?.[1];
+  if (/pick/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: 'pick', packLabel: rating ? `${rating}+` : 'PICK' };
+  if (/electrum/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: /small/i.test(reward) ? 'electrum-small' : 'electrum', packLabel: '' };
+  if (/mixed/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: 'mixed', packLabel: '' };
+  if (/hero/i.test(reward)) return { ...FALLBACK_STREAM, pack: 'gold', packLabel: 'HERO 87' };
+  if (rating) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: `${rating}+` };
+  if (/gold/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: /jumbo|large/i.test(reward) ? 'gold-jumbo' : /small|mini/i.test(reward) ? 'gold-small' : 'gold', packLabel: '' };
   return challenge.kind === 'streamlined' ? FALLBACK_STREAM : FALLBACK_CLASSIC;
 }

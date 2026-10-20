@@ -17,10 +17,8 @@ export function openSbcChallenges(list: SbcChallenge[], at = Date.now()): SbcCha
   return list
     .filter((challenge) => isOpen(challenge, at))
     .sort((a, b) => {
-      const aEnd = a.endsAt ?? '9999';
-      const bEnd = b.endsAt ?? '9999';
-      if (aEnd !== bEnd) return aEnd.localeCompare(bEnd);
-      return b.createdAt.localeCompare(a.createdAt);
+      const created = b.createdAt.localeCompare(a.createdAt);
+      return created || a.id.localeCompare(b.id);
     });
 }
 

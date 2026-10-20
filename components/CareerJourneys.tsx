@@ -1,25 +1,25 @@
 import { useCallback, useState } from 'react';
 import { Share, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-import { Button, Card, Field, Muted, Screen, Title } from '@/components/ui';
-import { activityStyles, Choices, CommunityError, CommunitySignIn, Panel, useActivityQuery } from '@/components/CommunityActivityUI';
+import { Button, Field, Muted, Screen, Title } from '@/components/ui';
+import { ActivityHero, ActivitySurface as Card, activityStyles, Choices, CommunityError, CommunitySignIn, Panel, useActivityQuery } from '@/components/CommunityActivityUI';
 import { communityAction, loadActivity, loadCommunityNames, loadJourneys, loadJourneyUpdates, type CareerJourney } from '@/lib/communityActivities';
 import { communityActivityUrl } from '@/lib/communitySharing';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 
-export function CareerJourneysList() {
+export function CareerJourneysList({ embedded = false }: { embedded?: boolean } = {}) {
  const { user } = useApp(); const { language, t } = useLanguage(); const router = useRouter();
  const uid = user?.id;
  const [scope, setScope] = useState('active'); const [spoken, setSpoken] = useState<string>(language);
  const loader = useCallback(() => loadJourneys(scope as 'active' | 'mine', uid!, spoken), [scope, uid, spoken]); const query = useActivityQuery(loader, Boolean(user));
  const journeys = (query.data ?? []).filter((j) => scope === 'mine' ? j.career_journey_members.some((m) => m.user_id === user?.id) : j.status === 'active' && (!spoken || j.language === spoken));
- return <Screen scene="career" maxWidth={840} refreshing={query.loading} onRefresh={query.refresh}>
-  <Stack.Screen options={{ title: t('מסעות קריירה', 'Career journeys') }} />
-  <Panel eyebrow="CAREER / THE LONG GAME" title={t('העונה שלך. הסיפור של כולנו.', 'Your season. Our shared story.')}>
-   <Muted>{t('בוחרים מועדון, מסכימים על חוקים ואבני דרך, ומשתפים את ההתקדמות לאורך העונה. כל אחד משחק בשמירה שלו ב־EA FC.', 'Choose a club, agree on rules and milestones, and share progress throughout the season. Everyone plays their own EA FC save.')}</Muted>
+ const Wrapper = embedded ? View : Screen;
+ return <Wrapper {...(embedded ? { style: { gap: 16 } } : { scene: 'career' as const, maxWidth: 1040, refreshing: query.loading, onRefresh: query.refresh })}>
+  {!embedded ? <Stack.Screen options={{ title: t('מסעות קריירה', 'Career journeys') }} /> : null}
+  <ActivityHero kind="journeys" title={t('אותו אתגר. העונה שלכם.', 'One challenge. Your own season.')} description={t('בחרו מועדון וחוקים, שחקו בשמירה שלכם ושתפו את הדרך עם שחקנים אחרים. המסע נבנה מעדכון לעדכון.', 'Choose a club and rules, play your own save and share the season with other players. Build the story one update at a time.')}>
    {user ? <Button label={t('פתיחת מסע', 'Start a journey')} onPress={() => router.push('/career/journeys/new')} /> : <CommunitySignIn />}
-  </Panel>
+  </ActivityHero>
   {user ? <>
    <Choices label={t('מסעות', 'Journeys')} value={scope} onChange={setScope} options={[{ value: 'active', label: t('מסעות פתוחים', 'Open journeys') }, { value: 'mine', label: t('המסעות שלי', 'My journeys') }]} />
    {scope === 'active' ? <Choices label={t('שפת הקהילה', 'Community language')} value={spoken} onChange={setSpoken} options={[{ value: '', label: t('כל השפות', 'All languages') }, { value: 'he', label: t('עברית', 'Hebrew') }, { value: 'en', label: t('אנגלית', 'English') }]} /> : null}
@@ -32,7 +32,7 @@ export function CareerJourneysList() {
     <Button label={t('כניסה למסע', 'Open journey')} onPress={() => router.push(`/career/journeys/${j.id}`)} variant="ghost" />
    </Card>)}
   </> : null}
- </Screen>;
+ </Wrapper>;
 }
 export function CareerJourneyForm() {
  const { user } = useApp(); const { t, language } = useLanguage(); const router = useRouter();
@@ -48,12 +48,14 @@ export function CareerJourneyForm() {
  }
  return <Screen scene="career" maxWidth={740}>
   <Stack.Screen options={{ title: t('מסע חדש', 'New journey') }} />
-  <Title>{t('מסע חדש', 'New journey')}</Title>
-  {!user ? <CommunitySignIn /> : <Panel title={t('מסכימים על הדרך לפני שמתחילים', 'Set the ground rules before kick-off')}>
+  <ActivityHero kind="journeys" title={t('כאן מתחילה העונה', 'Your season starts here')} description={t('מגדירים מועדון, חוקים ומטרות. כל משתתף יוצא לדרך בשמירה שלו.', 'Set the club, rules and goals. Everyone starts in their own save.')} />
+  {!user ? <CommunitySignIn /> : <><Panel eyebrow="01" title={t('זהות המסע', 'Journey identity')}>
    <Field label={t('שם המסע', 'Journey title')} value={title} onChangeText={setTitle} maxLength={90} placeholder={t('למשל: מחזירים מועדון לליגת האלופות', 'e.g. Back to the Champions League')} />
    <Field label={t('המועדון והקבוצה שלי', 'Suggested club & my club')} value={club} onChangeText={setClub} maxLength={80} placeholder="FC Schalke 04" />
+  </Panel><Panel eyebrow="02" title={t('החוקים והיעדים', 'Rules & objectives')}>
    <Field label={t('חוקים משותפים', 'Shared rules')} value={rules} onChangeText={setRules} maxLength={1000} multiline placeholder={t('תקציב, רכש, אקדמיה ורמת קושי. ציינו אם כולם בוחרים אותו מועדון.', 'Budget, transfers, academy and difficulty. Specify if everyone must use the same club.')} />
    <Field label={t('אבני דרך — אחת בכל שורה, עד 6', 'Milestones — one per line, up to 6')} value={milestones} onChangeText={setMilestones} maxLength={606} multiline placeholder={t('לסיים חלון העברות ראשון\nלעלות ליגה\nלהעפיל לאירופה', 'Finish the first transfer window\nWin promotion\nQualify for Europe')} />
+  </Panel><Panel eyebrow="03" title={t('השמירה שלי', 'My save')}>
    <Field label={t('רמת הקושי שלי', 'My difficulty')} value={difficulty} onChangeText={setDifficulty} maxLength={40} />
    <Field label={t('העונה בשמירה שלי', 'Season in my save')} value={season} onChangeText={setSeason} maxLength={20} />
    <Choices label={t('שפת המסע', 'Journey language')} value={spoken} onChange={setSpoken} options={[{ value: 'he', label: t('עברית', 'Hebrew') }, { value: 'en', label: t('אנגלית', 'English') }]} />
@@ -61,7 +63,7 @@ export function CareerJourneyForm() {
    <CommunityError error={error} />
    <Button disabled={busy || title.trim().length < 3 || club.trim().length < 2 || rules.trim().length < 5 || difficulty.trim().length < 2 || !season.trim()} label={busy ? t('שומר…', 'Saving…') : t('פתיחת המסע', 'Publish journey')} onPress={() => void create()} />
    <Button label={t('חזרה', 'Back')} onPress={() => router.back()} variant="ghost" />
-  </Panel>}
+  </Panel></>}
  </Screen>;
 }
 export function CareerJourneyDetail({ id }: { id: string }) {

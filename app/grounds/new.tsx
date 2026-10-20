@@ -1,3 +1,4 @@
+import { CountryPicker } from '@/components/CountryPicker';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useRouter } from 'expo-router';
@@ -10,7 +11,7 @@ import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
 import { GROUNDS_PLAYSTYLE_CATEGORIES, GROUNDS_PLAYSTYLES, selectionForPlayStyle } from '@/lib/groundsPlaystyles';
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
-import { ARCHETYPES, DIVISIONS, POSITIONS, REGIONS, playerLevelTone } from '@/lib/labels';
+import { ARCHETYPES, DIVISIONS, POSITIONS, playerLevelTone } from '@/lib/labels';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 import { groundsLabel } from '@/lib/groundsLocalization';
@@ -180,7 +181,7 @@ export default function NewGroundsScreen() {
   const [playerLevel, setPlayerLevel] = useState(1);
   const [skillRating, setSkillRating] = useState('');
   const [archetype, setArchetype] = useState('');
-  const [region, setRegion] = useState(REGIONS[5]);
+  const [region, setRegion] = useState('IL');
   const [eaId, setEaId] = useState('');
   const [gamertag, setGamertag] = useState('');
   const [rawUri, setRawUri] = useState<string | null>(null);
@@ -318,7 +319,7 @@ export default function NewGroundsScreen() {
             </View>
           </View> : null}
           <TextField label="Skill Rating" value={skillRating} onChangeText={(value) => setSkillRating(value.replace(/\D/g, ''))} placeholder="לדוגמה: 1,250" keyboardType="number-pad" maxLength={4} optional />
-          <ChoiceChips label="אזור" values={REGIONS.map((item) => ({ id: item, label: item }))} value={region} onChange={setRegion} />
+          <CountryPicker value={region} onChange={setRegion} />
         </Section>
 
         <Section title="PlayStyles" subtitle={language === 'he' ? `36 הסגנונות של FC 27 · ${playStyleCount} נבחרו` : `36 FC 27 PlayStyles · ${playStyleCount} selected`} icon="flash-outline">

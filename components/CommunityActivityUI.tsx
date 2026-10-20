@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
+import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
 import { useRouter } from 'expo-router';
 import { Button, Card, colors, Muted } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
@@ -24,17 +27,39 @@ export function useCommunityNow() {
  return now;
 }
 export function Choices({ label, value, options, onChange }: { label: string; value: string; options: { value: string; label: string }[]; onChange: (value: string) => void }) {
- return <View style={{ gap: 8 }}><Muted>{label}</Muted><View style={activityStyles.wrap}>
-  {options.map((o) => <Pressable key={o.value} accessibilityRole="button" accessibilityState={{ selected: value === o.value }} onPress={() => onChange(o.value)} style={[activityStyles.chip, value === o.value && activityStyles.chipActive]}>
-   <Text style={activityStyles.chipText}>{o.label}</Text></Pressable>)}
+ const { language } = useLanguage(); const rtl = language === 'he';
+ return <View style={{ gap: 9, minWidth: 0 }}><Text style={[activityStyles.label, { textAlign: rtl ? 'right' : 'left' }]}>{label}</Text><View style={[activityStyles.wrap, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
+  {options.map((o) => <Pressable key={o.value} accessibilityRole="button" accessibilityLabel={o.label} accessibilityState={{ selected: value === o.value }} onPress={() => onChange(o.value)} style={[activityStyles.chip, value === o.value && activityStyles.chipActive]}>
+   <Text style={[activityStyles.chipText, value === o.value && { color: '#88F0F0' }]}>{o.label}</Text></Pressable>)}
  </View></View>;
 }
+export function ActivitySurface({ children, onPress }: { children: ReactNode; onPress?: () => void }) {
+ if (onPress) return <Pressable accessibilityRole="button" onPress={onPress} style={activityStyles.surface}>{children}</Pressable>;
+ return <View style={activityStyles.surface}>{children}</View>;
+}
 export function Panel({ eyebrow, title, children }: { eyebrow?: string; title: string; children: ReactNode }) {
- const { language } = useLanguage();
+ const { language } = useLanguage(); const rtl = language === 'he';
  return <View style={activityStyles.panel}>
-  {eyebrow ? <Text style={[activityStyles.eyebrow, { textAlign: language === 'he' ? 'right' : 'left' }]}>{eyebrow}</Text> : null}
-  <Text style={[activityStyles.heading, { textAlign: language === 'he' ? 'right' : 'left' }]}>{title}</Text>{children}
+  <View style={[activityStyles.sectionHead, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
+   {eyebrow ? <Text style={activityStyles.eyebrow}>{eyebrow}</Text> : null}
+   <Text style={[activityStyles.heading, { textAlign: rtl ? 'right' : 'left' }]}>{title}</Text>
+  </View><View style={{ gap: 18 }}>{children}</View>
  </View>;
+}
+export function ActivityHero({ kind, title, description, children }: { kind: 'sessions' | 'journeys'; title: string; description: string; children?: ReactNode }) {
+ const { t, language } = useLanguage(); const rtl = language === 'he'; const career = kind === 'journeys'; const accent = career ? '#E9C36A' : '#44D8E5';
+ return <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" style={activityStyles.hero} imageStyle={{ opacity: 0.55 }}>
+  <LinearGradient colors={['rgba(3,12,20,0.42)', 'rgba(3,12,20,0.98)']} style={activityStyles.heroContent}>
+   <View style={[activityStyles.heroTop, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
+    <View style={[activityStyles.heroIcon, { borderColor: accent }]}><Ionicons name={career ? 'trophy-outline' : 'people-outline'} size={22} color={accent} /></View>
+    <Text style={[activityStyles.eyebrow, { color: accent }]}>{career ? 'CAREER / COMMUNITY' : 'THE GROUNDS / MATCHDAY'}</Text>
+   </View>
+   <Text style={[activityStyles.heroTitle, { textAlign: rtl ? 'right' : 'left' }]}>{title}</Text>
+   <Text style={[activityStyles.heroDescription, { textAlign: rtl ? 'right' : 'left' }]}>{description}</Text>
+   <View style={{ alignSelf: 'stretch', gap: 12 }}>{children}</View>
+   <View style={[activityStyles.heroFooter, { borderTopColor: career ? '#6B5630' : '#24515A' }]}><Text style={[activityStyles.label, { color: accent, textAlign: rtl ? 'right' : 'left' }]}>{career ? t('שמירות אישיות · חוקים משותפים · יומן עונה', 'Individual saves · Shared rules · Season journal') : t('Rush · Clubs · Co-op · חבורה שבועית', 'Rush · Clubs · Co-op · Weekly squads')}</Text></View>
+  </LinearGradient>
+ </ImageBackground>;
 }
 export function CommunitySignIn() {
  const { t } = useLanguage(); const router = useRouter();
@@ -64,12 +89,22 @@ export function CommunityError({ error }: { error: unknown }) {
  </Text>;
 }
 export const activityStyles = StyleSheet.create({
- panel: { backgroundColor: '#101F2A', borderWidth: 1, borderColor: '#2B495A', borderRadius: 20, padding: 20, gap: 14, width: '100%' },
- eyebrow: { color: '#75E6B9', fontSize: 11, fontWeight: '900', letterSpacing: 2 },
- heading: { color: '#F3F7F9', fontSize: 23, fontWeight: '900', flexShrink: 1 },
- wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
- chip: { maxWidth: '100%', borderWidth: 1, borderColor: '#3A5262', backgroundColor: '#101923', paddingHorizontal: 13, paddingVertical: 10, borderRadius: 12 },
- chipActive: { backgroundColor: '#164C43', borderColor: '#75E6B9' },
- chipText: { color: '#F3F7F9', fontSize: 13, fontWeight: '700', flexShrink: 1 },
- progress: { height: 6, backgroundColor: '#243747', borderRadius: 6, overflow: 'hidden' },
+ hero: { width: '100%', overflow: 'hidden', borderWidth: 1, borderColor: '#284450', borderRadius: 8, backgroundColor: '#040D16' },
+ heroContent: { padding: 24, paddingTop: 28, gap: 18 },
+ heroTop: { alignItems: 'center', gap: 12 },
+ heroIcon: { width: 42, height: 42, borderWidth: 1, borderRadius: 7, backgroundColor: 'rgba(3,15,23,0.8)', alignItems: 'center', justifyContent: 'center' },
+ heroTitle: { color: '#FFFFFF', fontSize: 32, lineHeight: 39, fontWeight: '900', flexShrink: 1 },
+ heroDescription: { color: '#CEDAE1', fontSize: 14, lineHeight: 23, maxWidth: 640 },
+ heroFooter: { paddingTop: 15, marginTop: 4, borderTopWidth: 1 },
+ panel: { backgroundColor: 'rgba(3,13,22,0.96)', borderWidth: 1, borderColor: '#253F4C', borderRadius: 7, padding: 18, gap: 20, width: '100%' },
+ surface: { width: '100%', minWidth: 0, backgroundColor: 'rgba(3,13,22,0.96)', borderWidth: 1, borderColor: '#253F4C', borderRadius: 7, padding: 18, gap: 12 },
+ sectionHead: { alignItems: 'center', gap: 12, borderBottomWidth: 1, borderBottomColor: '#203743', paddingBottom: 14 },
+ eyebrow: { color: '#53DCE4', fontSize: 10, fontWeight: '900', letterSpacing: 1.5, flexShrink: 1 },
+ heading: { color: '#F3F7F9', fontSize: 20, lineHeight: 27, fontWeight: '900', flex: 1, minWidth: 0 },
+ label: { color: '#A9BDC9', fontSize: 11, fontWeight: '800', lineHeight: 17 },
+ wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
+ chip: { maxWidth: '100%', minHeight: 44, justifyContent: 'center', borderWidth: 1, borderColor: '#304654', backgroundColor: '#07131F', paddingHorizontal: 12, paddingVertical: 10, borderRadius: 5 },
+ chipActive: { backgroundColor: '#103A45', borderColor: '#44D8E5' },
+ chipText: { color: '#D6E2E9', fontSize: 12, fontWeight: '800', flexShrink: 1 },
+ progress: { height: 6, backgroundColor: '#20323F', borderRadius: 2, overflow: 'hidden' },
 });

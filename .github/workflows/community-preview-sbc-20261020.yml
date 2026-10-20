@@ -9,19 +9,6 @@ concurrency:
   group: community-preview-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
-  reward-sources:
-    runs-on: ubuntu-latest
-    timeout-minutes: 6
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          package-manager-cache: false
-      - run: node scripts/inspect-sbc-rewards-20261020.mjs
   verify:
     if: github.head_ref == 'preview/community-sbc-20261020'
     runs-on: ubuntu-latest
@@ -39,7 +26,16 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - run: node scripts/generate-sbc-ready-squad.mjs
       - run: npm run typecheck
       - run: npm run verify:mobile
       - run: npm run verify:startup
       - run: npm run build:web -- --max-workers 2
+      - name: Lint changed feature files
+        run: npx eslint components/CountryPicker.tsx components/CommunityActivityUI.tsx components/PartnerSessions.tsx components/CareerJourneys.tsx components/SbcRewardVisual.tsx 'app/(tabs)/career.tsx' 'app/(tabs)/sbc.tsx' 'app/sbc/[id].tsx' 'app/grounds/new.tsx' lib/countries.ts lib/sbcPrepared.ts
+      - name: Record repository lint baseline
+        continue-on-error: true
+        run: npm run lint
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/verify-community-ui.mjs

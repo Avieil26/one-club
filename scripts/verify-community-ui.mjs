@@ -22,7 +22,7 @@ try {
  for(const language of ['en','he']) {
   if(language==='he')browser=await playwright.launch(launchOptions);
   console.log('Checking',language);
-  let session={id:sid,host_user_id:other,title:'Rush objectives squad',mode:'Rush',platforms:['PS5','PC'],region:'Europe',language,play_style:'casual',notes:'Complete objectives together',starts_at:new Date(Date.now()+86400000).toISOString(),timezone:'Europe/London',capacity:2,weekly:true,status:'open',parent_id:null,partner_session_members:[{session_id:sid,user_id:other,platform:'PC',status:'joined'}]};
+  let session={id:sid,host_user_id:other,title:'Rush objectives squad',mode:'Rush',platforms:['PS5','PC'],region:'GB',language,play_style:'casual',notes:'Complete objectives together',starts_at:new Date(Date.now()+86400000).toISOString(),timezone:'Europe/London',capacity:2,weekly:true,status:'open',parent_id:null,partner_session_members:[{session_id:sid,user_id:other,platform:'PC',status:'joined'}]};
   let journey={id:jid,owner_user_id:other,title:'Road to Europe',club:'Schalke',rules:'Academy first; follow the shared budget.',milestones:['Finish transfer window','Win promotion'],language,status:'active',created_at:new Date().toISOString(),career_journey_members:[{journey_id:jid,user_id:other,club:'Schalke',difficulty:'World Class',season:'1',active:true}]};
   let updates=[];let createdSession=null;let createdJourney=null;
   const context=await browser.newContext({viewport:{width:390,height:844}});
@@ -63,9 +63,13 @@ try {
   await button(t('Join session','הצטרפות למפגש')).waitFor();
   await page.goto('http://127.0.0.1:8094/grounds/sessions/new');
   await page.getByRole('textbox',{name:t('Session title','שם המפגש'),exact:true}).fill('Friday objectives');
+  await button(t('Choose country','בחירת מדינה')).click();
+  await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).fill('Germany');
+  await button(t('Germany','גרמניה')).click();
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-session-form-${language}.png`)});
   await button(t('Publish session','פרסום המפגש')).click();
   await page.getByText('Friday objectives',{exact:true}).waitFor();
-  assert.equal(createdSession.weekly,true);assert.equal(createdSession.capacity,4);assert(createdSession.starts_at.endsWith('Z'));
+  assert.equal(createdSession.region,'DE');assert.equal(createdSession.weekly,true);assert.equal(createdSession.capacity,4);assert(createdSession.starts_at.endsWith('Z'));
   await page.goto('http://127.0.0.1:8094/career/journeys/'+jid);
   await button(t('Join journey','הצטרפות למסע')).click();
   const notes=page.getByRole('textbox',{name:t('What happened in your save?','מה קרה בשמירה?'),exact:true});
@@ -84,8 +88,22 @@ try {
   await page.getByRole('textbox',{name:t('Suggested club & my club','המועדון והקבוצה שלי'),exact:true}).fill('Schalke');
   await page.getByRole('textbox',{name:t('Shared rules','חוקים משותפים'),exact:true}).fill('Academy first and no free agent signings.');
   await page.getByRole('textbox',{name:t('Milestones — one per line, up to 6','אבני דרך — אחת בכל שורה, עד 6'),exact:true}).fill('First window\nFirst youth debut');
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-journey-form-${language}.png`)});
   await button(t('Publish journey','פתיחת המסע')).click();await page.getByText('Youth academy story',{exact:true}).waitFor();
   assert.deepEqual(createdJourney.milestones,['First window','First youth debut']);
+  await page.goto('http://127.0.0.1:8094/career?tab=journeys');
+  await page.getByRole('tab',{name:t('Shared journeys','מסעות משותפים'),exact:true}).waitFor();
+  await button(t('Start a journey','פתיחת מסע')).waitFor();
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-career-tab-${language}.png`)});
+  await page.goto('http://127.0.0.1:8094/sbc');
+  await page.getByRole('button',{name:'2×83+ Upgrade',exact:true}).waitFor();
+  const sbcTiles=await page.locator('[role="button"]').allTextContents();
+  assert(sbcTiles.findIndex(s=>s.includes('MLS'))<sbcTiles.findIndex(s=>s.includes('Ferran')),'Newest SBCs must precede Ferran');
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-sbc-${language}.png`)});
+  await page.goto('http://127.0.0.1:8094/sbc/sbc-potm-ferran');
+  await page.getByText(t('Ready rating combination','צירוף דירוגים מוכן'),{exact:true}).waitFor();
+  await page.getByRole('img',{name:'Ferran Torres 85 ST'}).waitFor();
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-ferran-${language}.png`)});
   // Invitation links survive the register/login boundary, including a page reload.
   const savedAuth = await page.evaluate(() => localStorage.getItem('sb-hxjgphhcspzjnkkzdmpk-auth-token'));
   await page.evaluate(() => {localStorage.setItem('fc27-browser-signed-out','1');localStorage.removeItem('sb-hxjgphhcspzjnkkzdmpk-auth-token');});
@@ -107,6 +125,10 @@ try {
   await context.close();
  }
  assert.deepEqual(errors,[]);
+ for(const name of ['community-session-form-en','community-journey-form-en','community-career-tab-he','community-sbc-en','community-ferran-en']) {
+  const filename=path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',name+'.png');
+  console.log('UI_SCREENSHOT='+JSON.stringify({name,data:fs.readFileSync(filename).toString('base64')}));
+ }
  fs.writeFileSync(path.join(process.env.FC27_UI_ARTIFACTS || '/tmp','community-ui-results.json'),JSON.stringify({success:true,viewports:[390,1280],languages:['he','en'],calls:calls.map(c=>({language:c.language,action:c.action})),errors},null,2));
  console.log('Browser checks passed in Hebrew & English at 390px: create/join/leave sessions; create/join career journeys; general notes and milestone updates. No page errors or oversized controls. Invitation return through login and OAuth landing and 1280px layout also passed. All API traffic mocked; real permission checks run separately in rollback SQL.');
 } finally {await browser.close();server.close();}

@@ -1,0 +1,352 @@
+{
+  "sbc-fs-mls-pick-20261020": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-64-mls-future-stars-player-pick/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 3,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 84,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-hero-max87-20261019": {
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-69-max-87-base-hero-upgrade/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 26,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 4,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-upgrade-83x2-20261020": {
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-71-2x-83-upgrade/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-fs-diao": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-63-assane-diao/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 9,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 2,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-fs-manzambi": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-60-johan-manzambi/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 12,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 84,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-fs-zicai": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-53-cora-zicai/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 5,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 2,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-fs-espart": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-50-xavi-espart/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 4,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 8,
+        "rating": 85,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 84,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-fs-portugal-pick": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-62-liga-portugal-future-stars-player-pick/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 4,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-raphinha": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-33-laliga-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 282,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 66,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-pina": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-42-liga-f-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 2,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 242,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 58,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-gross": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-34-premier-league-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 4,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 85,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 81,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-ferran": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-58-ligue-1-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 27,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 6,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-olise": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-39-bundesliga-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 151,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 36,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-totw-upgrade": {
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-68-totw-upgrade/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 4,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-upgrade-80x5": {
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-57-5x-80-upgrade/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 85,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 84,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-potm-malen": {
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-32-serie-a-potm-september/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 87,
+        "rarity": "rare"
+      },
+      {
+        "count": 16,
+        "rating": 86,
+        "rarity": "rare"
+      },
+      {
+        "count": 9,
+        "rating": 85,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-intro-espinoza": {
+    "sourceUrl": "https://www.fut.gg/sbc/foundations/27-20-intro-to-player-sbcs/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 1,
+        "rating": 86,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-bronze-silver-reroll": {
+    "sourceUrl": "https://www.fut.gg/sbc/foundations/27-8-bronze-and-silver-re-roll/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 3,
+        "rating": 79,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 49,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-gold-reroll": {
+    "sourceUrl": "https://www.fut.gg/sbc/foundations/27-9-gold-re-roll/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 3,
+        "rating": 83,
+        "rarity": "rare"
+      },
+      {
+        "count": 1,
+        "rating": 49,
+        "rarity": "rare"
+      }
+    ]
+  },
+  "sbc-getting-started": {
+    "sourceUrl": "https://www.fut.gg/sbc/foundations/27-7-getting-started/",
+    "checkedAt": "2026-10-20T18:45:00.000Z",
+    "lines": [
+      {
+        "count": 3,
+        "rating": 64,
+        "rarity": "rare"
+      }
+    ]
+  }
+}

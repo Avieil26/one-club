@@ -1,3 +1,5 @@
+import { SbcRewardVisual } from '@/components/SbcRewardVisual';
+import { preparedRoute } from '@/lib/sbcPrepared';
 import { sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
@@ -64,6 +66,7 @@ export default function SbcDetailScreen() {
   const challengeId = challenge.id;
   const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
   const remaining = formatRemaining(challenge.endsAt, now, language);
+  const ready = preparedRoute(challengeId);
   const solutions = solutionsFor(app.solutions, challengeId);
   const clubs = challenge.clubs ?? [];
   const nations = challenge.nations ?? [];
@@ -74,6 +77,7 @@ export default function SbcDetailScreen() {
     <Screen scene="sbc">
       <Stack.Screen options={{ title: 'SBC' }} />
       <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
+        <SbcRewardVisual challenge={challenge} width={110} />
         {nations.map((nation) => (
           <NationFlag key={nation} nation={nation} size={28} />
         ))}
@@ -96,6 +100,7 @@ export default function SbcDetailScreen() {
       {challenge.kind === 'classic' && challenge.previewSquad ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
+            <Title>{t('סגל מוכן לדוגמה', 'Ready example squad')}</Title>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
               {challenge.rules?.chemistry
                 ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
@@ -108,7 +113,7 @@ export default function SbcDetailScreen() {
             <Card>
               {report.checks.map((check) => (
                 <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
-                  {check.ok ? '✓' : '✗'} {check.label}
+                  {check.ok ? '✓' : '✗'} {language === 'he' ? check.label : t('דרישה', 'Requirement') + ` ${report.checks.indexOf(check) + 1}`}
                 </Text>
               ))}
             </Card>
@@ -120,6 +125,17 @@ export default function SbcDetailScreen() {
           {challenge.targetScore ? <Muted>{t("יעד ניקוד:", "Target score:")}{challenge.targetScore}</Muted> : null}
         </Card>
       )}
+      {ready && challenge.kind === 'streamlined' ? <Card>
+        <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 20, textAlign: language === 'he' ? 'right' : 'left' }}>{t('צירוף דירוגים מוכן', 'Ready rating combination')}</Text>
+        <Muted>{t('קלפים רגילים נדירים לפי הדירוגים הבאים:', 'Use base rare player items with these ratings:')}</Muted>
+        {ready.lines.map((line) => <View key={line.rating} style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', justifyContent: 'space-between', gap: 12, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.line }}>
+          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '900' }}>{line.rating} OVR</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800' }}>{line.count} × {t('קלפים נדירים', 'rare items')}</Text>
+        </View>)}
+        <Muted>{t('הצירוף נבדק במקור. לפני ההגשה ודאו שבמשחק הגעתם ליעד הניקוד. גרסאות מיוחדות ושינויי פריטים עשויים לשנות את הניקוד; זה אינו מחיר שוק מובטח.', 'Source-checked combination. Confirm the in-game score before submitting. Special versions and item changes can affect the score; this is not a guaranteed market price.')}</Muted>
+        <Muted>FUT.GG · {new Date(ready.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted>
+        <Button variant="ghost" label={t('בדיקת הפתרון במקור', 'Check combination at source')} onPress={() => { void Linking.openURL(ready.sourceUrl).catch(() => undefined); }} />
+      </Card> : null}
       {challenge.kind === 'streamlined' ? (
         <Button
           label={t("פתיחת המחשבון", "Open calculator")}
