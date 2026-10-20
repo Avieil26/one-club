@@ -22,7 +22,7 @@ These tables are loaded only on the new screens, outside the application startup
 
 ## SBC catalogue
 
-`assets/data/sbc-audit-20261020.json` records 30 checked entries, including four individual Marquee Matchups segments. There are 15 newly added catalogue entries. Primary requirements/rewards were checked on FUTBIN detail pages; exact UTC deadlines were cross-checked against public FUT.GG page metadata. The audit is a dated snapshot, not an automatic FUTBIN feed. At the audit time, the catalogue has 31 active entries including the non-EA practice challenge. Xavi Espart and 5×80+ expire on October 20 at 17:00 UTC and automatically disappear thereafter.
+`assets/data/sbc-audit-20261020.json` records 32 checked entries, including four individual Marquee Matchups segments. There are 17 newly added catalogue entries. Primary requirements/rewards were checked on FUTBIN detail pages; exact UTC deadlines were cross-checked against public FUT.GG page metadata. The audit is a dated snapshot, not an automatic FUTBIN feed. At the audit time, the catalogue has 31 active entries including the non-EA practice challenge. The evening recheck at 18:25 UTC added MLS Future Stars Player Pick (13,000 points) and 2×83+ Upgrade (5,500 points), both ending October 27 at 18:00:01 UTC according to FUT.GG metadata. Xavi Espart and 5×80+ expired October 20 at 17:00 UTC and are excluded from active listings while their history remains accessible.
 
 The five old unbounded editions (3×79+, Veiga, Nusa, DFG Challenge 1 and the old OTW pick) are archived. Previously recorded timed challenges continue to expire automatically. Historical lookups and solutions are retained. Catalogue overrides win over stale server or native-cache copies. Expired built-ins cannot start a new upload through the app. New 10-player and multi-segment challenges use screenshot solutions instead of incorrectly treating them as a standard eleven-player puzzle.
 
@@ -37,6 +37,8 @@ Additional corrections: Pina's expiry and score; current POTM scores; TOTW 1–5
 - Web and Android JavaScript/Hermes exports passed. No new signed APK was built, and this is not a device validation of the new flows.
 - Full ESLint retains the baseline 85 errors and 48 warnings, with no newly introduced diagnostics. New feature modules and routes pass targeted lint. Existing warnings were not suppressed or broadly refactored.
 - Supabase security advisors show the same pre-existing 18 public definer-function warnings and password-protection notice; none concern the new tables or RPC.
+
+GitHub Actions also checks the exact candidate commit with TypeScript, mobile/startup regressions and the complete web build (catalogue preservation, localization and community/SBC checks). The source-inspection script is a manual read-only audit helper; builds use the checked-in snapshot and do not depend on access to external SBC sites.
 
 ## Preview rollout
 

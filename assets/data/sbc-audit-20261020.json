@@ -1,12 +1,13 @@
 {
-  "checkedAt": "2026-10-20T15:45:00.000Z",
+  "checkedAt": "2026-10-20T18:25:51.360Z",
   "primarySource": "https://www.futbin.com/squad-building-challenges",
   "expirySource": "https://www.fut.gg/sbc/",
   "notes": [
     "FUTBIN requirements and rewards checked on the detail pages. Exact UTC deadlines cross-checked against FUT.GG public page metadata; microseconds dropped.",
     "FUTBIN labels Ferran Torres as Ligue 1 POTM. Use neutral player-based POTM title rather than repeating the contradictory league.",
     "5x80 and TOTW 1-5 are present on FUT.GG but missing from FUTBIN active list; retain with explicit FUT.GG source.",
-    "This is a verified snapshot, not an automatic FUTBIN feed."
+    "This is a verified snapshot, not an automatic FUTBIN feed.",
+    "Evening content check: MLS Future Stars Player Pick and 2x83+ Upgrade added after the 17:00 UTC release. Their requirements were checked on FUTBIN and their exact deadlines on FUT.GG. Xavi Espart and 5x80+ expired at 17:00 UTC; retain history but hide from active listings."
   ],
   "retiredIds": [
     "sbc-upgrade-79x3",
@@ -16,6 +17,38 @@
     "sbc-otw-duo-1"
   ],
   "challenges": [
+    {
+      "id": "sbc-upgrade-83x2-20261020",
+      "title": "2×83+ Upgrade",
+      "kind": "streamlined",
+      "requirements": "Streamlined: מגישים 5,500 נקודות פריט. הפרס: 2 שחקני זהב בדירוג 83 ומעלה, לא ניתנים להעברה.",
+      "requirementsEn": "Streamlined: submit 5,500 item points. Reward: two untradeable gold players rated 83 or higher.",
+      "reward": "2×83+ Gold Players Pack (Untradeable)",
+      "createdBy": "admin",
+      "targetScore": 5500,
+      "rules": null,
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/1000033",
+      "expirySourceUrl": "https://www.fut.gg/sbc/upgrades/27-71-2x-83-upgrade/",
+      "endsAt": "2026-10-27T18:00:01.000Z",
+      "createdAt": "2026-10-20T17:00:13.835Z",
+      "lastCheckedAt": "2026-10-20T18:25:51.360Z"
+    },
+    {
+      "id": "sbc-fs-mls-pick-20261020",
+      "title": "MLS · Future Stars Player Pick",
+      "kind": "streamlined",
+      "requirements": "Streamlined: מגישים 13,000 נקודות פריט. בחירה בין Niko Tsakiris, Tate Johnson, Manu Duah ו־Frankie Westfield.",
+      "requirementsEn": "Streamlined: submit 13,000 item points. Choose between Niko Tsakiris, Tate Johnson, Manu Duah and Frankie Westfield.",
+      "reward": "MLS Future Stars Player Pick",
+      "createdBy": "admin",
+      "targetScore": 13000,
+      "rules": null,
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/1000032",
+      "expirySourceUrl": "https://www.fut.gg/sbc/players/27-64-mls-future-stars-player-pick/",
+      "endsAt": "2026-10-27T18:00:01.000Z",
+      "createdAt": "2026-10-20T17:00:21.721Z",
+      "lastCheckedAt": "2026-10-20T18:25:51.190Z"
+    },
     {
       "id": "sbc-hero-max87-20261019",
       "title": "Max 87 Hero Upgrade",
