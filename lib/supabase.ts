@@ -14,6 +14,10 @@ const SUPABASE_KEY =
   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ||
   'sb_publishable_MAR4aEVulBg1EnssPRZvhw_BzMF295U';
 
+// Explicitly retain Supabase's existing storage key; native startup can read the
+// stored display identity without waiting for a token-refresh network request.
+export const AUTH_STORAGE_KEY = `sb-${new URL(SUPABASE_URL).hostname.split('.')[0]}-auth-token`;
+
 export function isSupabaseConfigured(): boolean {
   return Boolean(SUPABASE_URL && SUPABASE_KEY);
 }
@@ -26,6 +30,8 @@ export function getSupabase(): SupabaseClient {
     client = createClient(SUPABASE_URL, SUPABASE_KEY, {
       auth: {
         storage: AsyncStorage,
+        storageKey: AUTH_STORAGE_KEY,
+        flowType: Platform.OS === 'web' ? 'implicit' : 'pkce',
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: Platform.OS === 'web',

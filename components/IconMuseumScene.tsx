@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Platform, StyleSheet, View } from 'react-native';
 import Svg, { ClipPath, Defs, Image as SvgImage, Polygon } from 'react-native-svg';
 
 import { ICON_MOMENTS, type TrophyKind } from '@/lib/iconMoments';
@@ -67,7 +67,7 @@ export function IconMuseumBackdrop({ playerId }: { playerId: string }) {
   return (
     <View
       pointerEvents="none"
-      style={[StyleSheet.absoluteFill, { backgroundColor: '#070605' }]}
+      style={[StyleSheet.absoluteFill, { backgroundColor: '#070605', overflow: Platform.OS === 'web' ? 'visible' : 'hidden' }]}
       onLayout={(event) => {
         const { width, height } = event.nativeEvent.layout;
         setBox((prev) => (prev.w === width && prev.h === height ? prev : { w: width, h: height }));

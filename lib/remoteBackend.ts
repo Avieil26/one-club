@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
+import { nativeStartupSnapshot, NATIVE_SNAPSHOT_KEY, serializeNativeSnapshot } from '@/lib/nativeStartup';
 
 import { signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
@@ -8,7 +10,7 @@ import { mergeFeaturedCareer, seedDatabase } from '@/lib/seed';
 import { normalizeSquad } from '@/lib/profileSquad';
 import { clearLocalFollowsForUser, loadSocial, saveSquadLocal } from '@/lib/socialLocal';
 import { toSnapshot } from '@/lib/snapshot';
-import { getSupabase, uploadAvatar, uploadProofs } from '@/lib/supabase';
+import { AUTH_STORAGE_KEY, getSupabase, uploadAvatar, uploadProofs } from '@/lib/supabase';
 import { sanitizeGroundsPlayStyles } from '@/lib/groundsPlaystyles';
 import type {
   CareerChallenge,
@@ -357,6 +359,13 @@ const LIKE_PREFIX = 'futlike:';
 async function latestAvatars(userIds: string[]): Promise<Map<string, string>> {
   const found = new Map<string, string>();
   const supabase = getSupabase();
+  if (Platform.OS !== 'web') {
+    const { data, error } = await supabase.rpc('profile_avatar_paths');
+    if (!error) for (const row of data ?? []) {
+      found.set(row.user_id, supabase.storage.from('proofs').getPublicUrl(row.object_name).data.publicUrl);
+    }
+    return found;
+  }
   await Promise.all(
     userIds.map(async (id) => {
       const { data, error } = await supabase.storage.from('proofs').list(`${id}/avatar`, {
@@ -419,7 +428,7 @@ const DEMO_PROFILES: Record<string, Profile> = {
   },
 };
 
-async function readSnapshot(): Promise<Snapshot> {
+async function fetchSnapshot(): Promise<Snapshot> {
   const supabase = getSupabase();
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError) authFail(sessionError);
@@ -587,6 +596,22 @@ async function readSnapshot(): Promise<Snapshot> {
   return toSnapshot(db, 'remote');
 }
 
+async function readNativeStartup(): Promise<Snapshot> {
+  const [session, cache] = await Promise.all([
+    AsyncStorage.getItem(AUTH_STORAGE_KEY), AsyncStorage.getItem(NATIVE_SNAPSHOT_KEY),
+  ]);
+  return nativeStartupSnapshot(session, cache);
+}
+
+async function readSnapshot(): Promise<Snapshot> {
+  const next = await fetchSnapshot();
+  if (Platform.OS !== 'web') {
+    const cached = serializeNativeSnapshot(next);
+    void (cached ? AsyncStorage.setItem(NATIVE_SNAPSHOT_KEY, cached) : AsyncStorage.removeItem(NATIVE_SNAPSHOT_KEY)).catch(() => undefined);
+  }
+  return next;
+}
+
 async function call(fn: string, args: Record<string, unknown>) {
   const { error } = await getSupabase().rpc(fn, args);
   if (error) fail(error);
@@ -600,13 +625,25 @@ function cleanDate(value: string): string | null {
 }
 
 export function createRemoteBackend(): Backend {
+  let refreshing: Promise<Snapshot> | null = null;
+  const reload = () => {
+    if (Platform.OS === 'web') return readSnapshot();
+    if (!refreshing) refreshing = readSnapshot().finally(() => { refreshing = null; });
+    return refreshing;
+  };
   return {
     mode: 'remote',
-    init: readSnapshot,
-    reload: readSnapshot,
+    init: Platform.OS === 'web' ? readSnapshot : readNativeStartup,
+    reload,
     subscribe(onChange) {
       const supabase = getSupabase();
-      const { data } = supabase.auth.onAuthStateChange(() => onChange());
+      const { data } = supabase.auth.onAuthStateChange((event) => {
+        if (Platform.OS === 'web') { onChange(); return; }
+        if (event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') return;
+        refreshing = null;
+        // Auth callbacks must return before any callback calls getSession().
+        setTimeout(onChange, 0);
+      });
       const channel = supabase
         .channel('direct-messages')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'direct_messages' }, () => onChange())
@@ -628,7 +665,7 @@ export function createRemoteBackend(): Backend {
     async signInEmail(email, password) {
       const { error } = await getSupabase().auth.signInWithPassword({ email: email.trim(), password });
       if (error) authFail(error);
-      return readSnapshot();
+      return Platform.OS === 'web' ? readSnapshot() : readNativeStartup();
     },
     async signUpEmail(email, password, name) {
       const displayName = name.trim();
@@ -646,7 +683,7 @@ export function createRemoteBackend(): Backend {
       });
       if (error) authFail(error);
       if (!data.session) throw new Error('נרשמת. אם צריך לאשר אימייל, אשרו אותו ואז התחברו.');
-      return readSnapshot();
+      return Platform.OS === 'web' ? readSnapshot() : readNativeStartup();
     },
     async signInGoogle() {
       try {
@@ -657,9 +694,10 @@ export function createRemoteBackend(): Backend {
         }
         throw error;
       }
-      return readSnapshot();
+      return Platform.OS === 'web' ? readSnapshot() : readNativeStartup();
     },
     async signOut() {
+      if (Platform.OS !== 'web') await AsyncStorage.removeItem(NATIVE_SNAPSHOT_KEY);
       await AsyncStorage.removeItem('fc27_demo_user');
       const { error } = await getSupabase().auth.signOut();
       if (error) fail(error);
@@ -870,7 +908,7 @@ export function createRemoteBackend(): Backend {
     async voteSolution(solutionId, vote) {
       const { error } = await getSupabase().rpc('vote_sbc_solution', { p_id: solutionId, p_vote: vote });
       const missing = error && /does not exist|schema cache|PGRST202|Could not find the function/i.test(error.message ?? '');
-      if (missing) {
+      if (missing && Platform.OS === 'web') {
         if (vote === 'up') {
           await call('mark_sbc_worked', { p_id: solutionId });
           return readSnapshot();

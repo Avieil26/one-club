@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Alert, Image, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
+import { Alert, Image, Platform, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { displayClub } from '@/lib/footballLocalization';
 import { useLanguage } from '@/lib/language';
@@ -325,7 +325,7 @@ function formatCoins(value: number) {
 
 function Panel({ children, style }: { children: ReactNode; style?: object }) {
   return (
-    <View style={[styles.panel, style]}>
+    <View style={[styles.panel, style, Platform.OS !== 'web' && { width: '100%', flexGrow: 0, flexShrink: 0, flexBasis: 'auto', alignSelf: 'stretch' }]}>
       <LinearGradient
         colors={['rgba(13,14,20,.76)', 'rgba(7,9,14,.84)']}
         start={{ x: 0, y: 0 }}
@@ -735,7 +735,7 @@ function CommunitySquadBuilder({
 function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; compact?: boolean }) {
   const { t } = useLanguage();
   const { width } = useWindowDimensions();
-  const compact = compactProp ?? width < 1050;
+  const compact = compactProp ?? (Platform.OS !== 'web' || width < 1050);
   return (
     <View style={[styles.tekkzCard, compact && styles.tekkzCardCompact, selected && styles.tekkzCardSelected]}>
       <View style={[styles.tekkzCardImageWrap, compact && styles.tekkzCardCompactImage]}>
@@ -746,7 +746,7 @@ function TekkzCard({ selected, compact: compactProp }: { selected?: boolean; com
           <Text style={styles.tekkzCardName}>TEKKZ</Text>
         </View>
       </View>
-      <View style={[styles.tekkzCardBody, compact && styles.tekkzCardCompactBody]}>
+      <View style={[styles.tekkzCardBody, compact && styles.tekkzCardCompactBody, compact && Platform.OS !== 'web' && { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }]}>
         <View style={styles.tekkzCardTop}>
           <View style={styles.verifyBadge}>
             <Ionicons name="checkmark-circle" size={14} color="#6ADD9C" />
@@ -813,7 +813,7 @@ function RewardStoreCard({ item }: { item: TokenReward }) {
   const isPack = item.visual != null;
   const kind = isPack ? 'pack' : item.kind ?? (item.title === 'Frontline Flair' ? 'evolution' : 'cosmetic');
   return (
-    <View style={styles.storeCard}>
+    <View style={[styles.storeCard, Platform.OS !== 'web' && { width: '100%', flexGrow: 0, flexBasis: 'auto' }]}>
       <View style={styles.storeVisual}>
         {isPack ? (
           <SbcRewardPack visual={item.visual!} size={106} label={item.packLabel} />
@@ -856,7 +856,8 @@ export default function ChampionsScreen() {
   const app = useApp();
   const { t } = useLanguage();
   const { width, height } = useWindowDimensions();
-  const mobile = width < 900;
+  const native = Platform.OS !== 'web';
+  const mobile = native || width < 900;
 
   const [section, setSection] = useState<SectionId>('center');
   const [platform, setPlatform] = useState<'xbox' | 'ps5'>('xbox');
@@ -1275,11 +1276,11 @@ export default function ChampionsScreen() {
         </View>
 
         <View style={[styles.twoCol, mobile && styles.oneCol]}>
-          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }]}>
+          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }, native && { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }]}>
             <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle={t("TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר.", "TEKKZ is shown by default until community content is approved.")} />
             <TekkzCard compact />
           </Panel>
-          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }]}>
+          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }, native && { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }]}>
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title={t("הפרס של הריצה", "Run reward")} subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
           
             <View style={styles.rewardMiniGrid}>
@@ -1303,6 +1304,7 @@ export default function ChampionsScreen() {
     editingRun,
     form,
     mobile,
+    native,
     personalReward,
     platform,
     run,
@@ -1333,7 +1335,7 @@ export default function ChampionsScreen() {
           <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage as any} />
         </View>
         <View style={styles.backgroundSoftener} pointerEvents="none" />
-      <View style={[styles.mainLayout, mobile && { flexDirection: 'column' }]}>
+      <View style={[styles.mainLayout, mobile && { flexDirection: 'column' }, native && { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }]}>
         {!mobile ? <View style={styles.sidebar}>
           <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
           {NAV.map((item, index) => (
@@ -1345,7 +1347,7 @@ export default function ChampionsScreen() {
           ))}
         </View> : null}
 
-        <View style={[styles.main, mobile && { width: '100%' }]}>
+        <View style={[styles.main, mobile && { width: '100%' }, native && { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }]}>
           <View style={styles.sectionBar}>
             <View style={styles.sectionBarTitleWrap}>
               <Text style={styles.sectionBarEyebrow}>FC27 · FUT CHAMPIONS</Text>

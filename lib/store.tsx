@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Platform } from 'react-native';
 
 import type { Backend } from '@/lib/localBackend';
 import { createLocalBackend } from '@/lib/localBackend';
@@ -20,6 +21,9 @@ type AppValue = Snapshot & {
   ready: boolean;
   startupError: boolean;
   retryStartup: () => void;
+  syncing: boolean;
+  syncError: boolean;
+  refreshCommunity: () => void;
   busy: boolean;
   signInDemo: (profileId: string) => Promise<void>;
   signInNamed: (name: string) => Promise<void>;
@@ -78,23 +82,34 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [busy, setBusy] = useState(false);
   const [startupError, setStartupError] = useState(false);
   const [startupAttempt, setStartupAttempt] = useState(0);
+  const [syncing, setSyncing] = useState(false);
+  const [syncError, setSyncError] = useState(false);
+  const snapshotEpoch = useRef(0);
+  const refreshCommunity = useCallback(() => { setSyncError(false); setStartupAttempt((attempt) => attempt + 1); }, []);
 
   useEffect(() => {
     let alive = true;
     const timeout = setTimeout(() => { if (alive) setStartupError(true); }, 20000);
+    function refresh() {
+      const epoch = ++snapshotEpoch.current;
+      if (Platform.OS !== 'web') setSyncing(true);
+      backend.reload().then((next) => {
+        if (!alive || (Platform.OS !== 'web' && epoch !== snapshotEpoch.current)) return;
+        setSnap(next);
+        setSyncError(false);
+      }).catch(() => { if (alive && Platform.OS !== 'web' && epoch === snapshotEpoch.current) setSyncError(true); })
+        .finally(() => { if (alive && epoch === snapshotEpoch.current) setSyncing(false); });
+    }
     backend.init().then((next) => {
       if (!alive) return;
       setSnap(next);
       setReady(true);
       setStartupError(false);
+      if (Platform.OS !== 'web' && backend.mode === 'remote') refresh();
     }).catch(() => {
       if (alive) setStartupError(true);
     }).finally(() => clearTimeout(timeout));
-    const unsubscribe = backend.subscribe(() => {
-      backend.reload().then((next) => {
-        if (alive) setSnap(next);
-      }).catch(() => { /* Keep the current screen during a transient connection failure. */ });
-    });
+    const unsubscribe = backend.subscribe(refresh);
     return () => {
       alive = false;
       clearTimeout(timeout);
@@ -103,9 +118,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [backend, startupAttempt]);
 
   async function run<T>(work: () => Promise<T>, apply: (result: T) => void): Promise<T> {
+    if (Platform.OS !== 'web') { snapshotEpoch.current += 1; setSyncing(false); }
     setBusy(true);
     try {
       const result = await work();
+      if (Platform.OS !== 'web') { snapshotEpoch.current += 1; setSyncing(false); }
       apply(result);
       return result;
     } finally {
@@ -117,14 +134,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     ...snap,
     ready,
     startupError,
+    syncing,
+    syncError,
+    refreshCommunity,
     retryStartup: () => { setStartupError(false); setStartupAttempt((attempt) => attempt + 1); },
     busy,
     signInDemo: (profileId) => run(() => backend.signInDemo(profileId), setSnap).then(() => undefined),
     signInNamed: (name) => run(() => backend.signInNamed(name), setSnap).then(() => undefined),
-    signInEmail: (email, password) => run(() => backend.signInEmail(email, password), setSnap).then(() => undefined),
+    signInEmail: (email, password) => run(() => backend.signInEmail(email, password), setSnap).then(() => { if (Platform.OS !== 'web') refreshCommunity(); }),
     signUpEmail: (email, password, name) =>
-      run(() => backend.signUpEmail(email, password, name), setSnap).then(() => undefined),
-    signInGoogle: () => run(() => backend.signInGoogle(), setSnap).then(() => undefined),
+      run(() => backend.signUpEmail(email, password, name), setSnap).then(() => { if (Platform.OS !== 'web') refreshCommunity(); }),
+    signInGoogle: () => run(() => backend.signInGoogle(), setSnap).then(() => { if (Platform.OS !== 'web') refreshCommunity(); }),
     signOut: () => run(() => backend.signOut(), setSnap).then(() => undefined),
     resetDemo: () => run(() => backend.resetDemo(), setSnap).then(() => undefined),
     createChallenge: (input) => run(() => backend.createChallenge(input), setSnap).then(() => undefined),

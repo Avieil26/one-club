@@ -202,6 +202,15 @@ export function SiteNav() {
         >
           {renderLinks()}
         </ScrollView> : null}
+        {mobile && (app.syncing || app.syncError) ? <Pressable
+          accessibilityRole="button"
+          disabled={!app.syncError}
+          onPress={app.refreshCommunity}
+          style={{ minHeight: 28, justifyContent: 'center' }}>
+          <Text style={{ color: app.syncError ? '#E3B341' : QUIET, fontSize: 12, textAlign: rtl ? 'right' : 'left' }}>
+            {app.syncError ? t('הרענון נכשל · לחץ לנסות שוב', 'Refresh failed · tap to retry') : t('מרענן נתוני קהילה…', 'Refreshing community data…')}
+          </Text>
+        </Pressable> : null}
       </View>
     );
   }

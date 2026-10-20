@@ -24,7 +24,7 @@
     "apk": {
       "extends": "preview",
       "developmentClient": false,
-      "channel": "android-mobile-20261020",
+      "channel": "android-hotfix-20261020",
       "environment": "production"
     }
   },

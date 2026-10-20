@@ -4,11 +4,9 @@ import { ActivityIndicator, I18nManager, Platform, StyleSheet, View } from 'reac
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Updates from 'expo-updates';
 
 import { Arrival } from '@/components/Arrival';
 import { CookieNotice } from '@/components/CookieNotice';
-import { GoogleAuthSheet } from '@/components/GoogleAuthSheet';
 import { NoticeHost } from '@/components/NoticeHost';
 import { TermsConsentModal } from '@/components/TermsConsentModal';
 import { FutureStarsAnnouncement } from '@/components/FutureStarsAnnouncement';
@@ -46,23 +44,9 @@ export default function RootLayout() {
     GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
   });
 
-  useEffect(() => {
-    if (__DEV__ || Platform.OS === 'web' || !Updates.isEnabled) return;
-    let cancelled = false;
-    void (async () => {
-      try {
-        const check = await Updates.checkForUpdateAsync();
-        if (!check.isAvailable || cancelled) return;
-        await Updates.fetchUpdateAsync();
-        if (!cancelled) await Updates.reloadAsync();
-      } catch {
-        // Keep the installed copy if the update server is unreachable.
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  // expo-updates already downloads compatible updates in the background.
+  // Use them on the next launch, rather than downloading/checking twice and
+  // reloading the whole app while the user is opening it.
 
   useEffect(() => {
     if (fontsLoaded || fontError) void SplashScreen.hideAsync();
@@ -120,7 +104,6 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               </Stack>
             </Gate>
-            {Platform.OS !== 'web' ? <GoogleAuthSheet /> : null}
           </View>
           <NoticeHost />
         </View>
@@ -143,7 +126,8 @@ function Gate({ children }: { children: React.ReactNode }) {
     const onAuth = segments[0] === 'login' || segments[0] === 'register';
     const onLanguage = segments[0] === 'language';
     const onLegal = segments[0] === 'legal';
-    if (!user && !onAuth && !onLanguage && !onLegal) router.replace(hasSelection ? '/register' : '/language');
+    const onNativeCallback = Platform.OS !== 'web' && segments.join('/') === 'auth/callback';
+    if (!user && !onAuth && !onLanguage && !onLegal && !onNativeCallback) router.replace(hasSelection ? '/register' : '/language');
     if (!user && onAuth && !hasSelection) router.replace('/language');
     if (user && (onAuth || onLanguage)) router.replace('/(tabs)');
   }, [ready, languageReady, hasSelection, user, segments, router]);

@@ -66,7 +66,7 @@ export function Screen({
   const bottomPad = Math.max(96, insets.bottom + 72);
 
   return (
-    <View style={[styles.screenShell, { backgroundColor: scene === 'sbc' ? '#060A14' : scene === 'board' ? '#07080c' : '#05080A' }]}>
+    <View style={[styles.screenShell, { backgroundColor: scene === 'sbc' ? '#060A14' : scene === 'board' ? '#07080c' : '#05080A' }, !web && { width: '100%', overflow: 'hidden' }]}>
       {/* Full-bleed background behind everything */}
       {backgroundImage ? (
         <>
@@ -79,10 +79,11 @@ export function Screen({
       {showNav ? <SiteNav /> : null}
       <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView
-          style={{ backgroundColor: 'transparent' }}
+          style={{ backgroundColor: 'transparent', ...(!web ? { width: '100%' } : {}) }}
           contentContainerStyle={[
             styles.content,
             { paddingBottom: bottomPad, paddingTop: !web && !showNav ? insets.top + 16 : 16, direction: rtl ? 'rtl' : 'ltr' },
+            !web && { width: '100%', alignItems: 'stretch' },
             web && (isMobile ? styles.mobileWebContent : styles.webContent),
             web && { paddingBottom: bottomPad },
           ]}

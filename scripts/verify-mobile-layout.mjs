@@ -38,5 +38,6 @@ assert.equal(app.android.package, 'il.fc27.community', 'Keep the existing instal
 assert.equal(app.extra.eas.projectId, '0031c456-43c5-4448-8dc4-da61052b3151');
 assert.equal(app.android.softwareKeyboardLayoutMode, 'resize');
 assert.notEqual(app.version, '1.0.0', 'Isolate this release from older appVersion OTA updates');
+assert.notEqual(app.version, '1.0.1', 'Isolate this hotfix from the previous APK runtime');
 assert.notEqual(profile.channel, eas.build.preview.channel, 'Old Preview updates must not replace this APK');
 console.log(`Mobile checks passed: ${checked} card positions across ${FORMATIONS.length} formations at 9 phone/tablet widths; no overlap/clipping; standalone APK identity, keyboard and OTA isolation.`);
