@@ -64,7 +64,7 @@ const artwork = JSON.parse(fs.readFileSync('assets/data/sbc-reward-art-20261020.
 for (const c of audit.challenges.filter((c) => /sbc-potm-|sbc-fs-(diao|manzambi|zicai)|sbc-intro-espinoza/.test(c.id))) {
  const art = artwork[c.id];
  assert.equal(art?.kind, 'player', c.id + ': missing actual player reward');
- const item = art.sourceUrl.match(/\\/27-(\\d+)\\/$/)[1];
+ const item = art.sourceUrl.split('/').filter(Boolean).at(-1).slice(3);
  assert(art.portrait.includes('/2027/player-item/27-' + item + '.'), c.id + ': wrong edition portrait');
  assert(art.background.includes('/2027/rarities-level-0-large/'), c.id + ': missing actual promo frame');
 }
@@ -76,3 +76,11 @@ for (const [id, route] of Object.entries(prepared)) {
  assert.equal(route.sourceUrl, audit.challenges.find((c) => c.id === id).expirySourceUrl);
 }
 console.log('Newest-first SBC order, matching reward editions, prepared rating routes and bilingual country search passed.');
+
+const { evaluateSquad, formationById } = loadRepositoryModule('lib/chemistry.ts');
+const { placedPreview } = loadRepositoryModule('lib/sbcCatalog.ts');
+const readyClassic = catalogChallenge('sbc-fs-challenge-3');
+const squadReport = evaluateSquad(formationById(readyClassic.previewFormation), placedPreview(readyClassic.previewSquad), readyClassic.rules);
+assert.equal(new Set(Object.values(readyClassic.previewSquad)).size, 11);
+assert(squadReport.ready, 'Ready example squad must meet every published rule');
+assert(squadReport.chemistry >= 18);

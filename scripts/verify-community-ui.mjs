@@ -66,6 +66,7 @@ try {
   await button(t('Choose country','בחירת מדינה')).click();
   await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).fill('Germany');
   await button(t('Germany','גרמניה')).click();
+  await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).waitFor({state:'hidden'});
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-session-form-${language}.png`)});
   await button(t('Publish session','פרסום המפגש')).click();
   await page.getByText('Friday objectives',{exact:true}).waitFor();
@@ -95,6 +96,7 @@ try {
   await button(t('Choose country','בחירת מדינה')).click();
   await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).fill('US');
   await button(t('United States','ארצות הברית')).click();
+  await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).waitFor({state:'hidden'});
   await page.getByText(t('United States','ארצות הברית'),{exact:true}).waitFor();
   assert.equal(await page.getByText(t('Region','אזור'),{exact:true}).count(),0);
   await page.goto('http://127.0.0.1:8094/career?tab=journeys');

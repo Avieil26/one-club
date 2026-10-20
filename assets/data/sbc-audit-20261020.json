@@ -7,7 +7,8 @@
     "FUTBIN labels Ferran Torres as Ligue 1 POTM. Use neutral player-based POTM title rather than repeating the contradictory league.",
     "5x80 and TOTW 1-5 are present on FUT.GG but missing from FUTBIN active list; retain with explicit FUT.GG source.",
     "This is a verified snapshot, not an automatic FUTBIN feed.",
-    "Evening content check: MLS Future Stars Player Pick and 2x83+ Upgrade added after the 17:00 UTC release. Their requirements were checked on FUTBIN and their exact deadlines on FUT.GG. Xavi Espart and 5x80+ expired at 17:00 UTC; retain history but hide from active listings."
+    "Evening content check: MLS Future Stars Player Pick and 2x83+ Upgrade added after the 17:00 UTC release. Their requirements were checked on FUTBIN and their exact deadlines on FUT.GG. Xavi Espart and 5x80+ expired at 17:00 UTC; retain history but hide from active listings.",
+    "Future Stars Challenge 3 includes a locally assembled example squad, verified against all listed rules with 33 chemistry. It is not a live cheapest-price claim."
   ],
   "retiredIds": [
     "sbc-upgrade-79x3",
@@ -311,7 +312,21 @@
       "createdAt": "2026-10-18T17:00:22.717608Z",
       "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/61",
       "expirySourceUrl": "https://www.fut.gg/sbc/challenges/27-61-future-stars-challenge-3/",
-      "lastCheckedAt": "2026-10-20T15:45:00.000Z"
+      "lastCheckedAt": "2026-10-20T15:45:00.000Z",
+      "previewFormation": "433",
+      "previewSquad": {
+        "lw": "ea-266922-ceri-holland",
+        "rw": "ea-273404-seraina-piubel",
+        "lb": "ea-278194-lucia-corrales",
+        "gk": "ea-72795-anna-koivunen",
+        "rb": "ea-265691-charlize-rule",
+        "st": "ea-275399-lorena-azzaro",
+        "lcb": "ea-76693-caitlin-hayes",
+        "rcb": "ea-266949-laia-codina",
+        "lcm": "ea-270892-fuka-nagano",
+        "cm": "ea-276098-giulia-dragoni",
+        "rcm": "ea-261786-justine-vanhaevermaet"
+      }
     },
     {
       "id": "sbc-mm-bayern-leipzig-20261015",

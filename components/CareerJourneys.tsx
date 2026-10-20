@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Share, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-import { Button, Field, Muted, Screen, Title } from '@/components/ui';
-import { ActivityHero, ActivitySurface as Card, activityStyles, Choices, CommunityError, CommunitySignIn, Panel, useActivityQuery } from '@/components/CommunityActivityUI';
+import { Button, Muted, Screen, Title } from '@/components/ui';
+import { ActivityField as Field, ActivityHero, ActivitySurface as Card, activityStyles, Choices, CommunityError, CommunitySignIn, Panel, useActivityQuery } from '@/components/CommunityActivityUI';
 import { communityAction, loadActivity, loadCommunityNames, loadJourneys, loadJourneyUpdates, type CareerJourney } from '@/lib/communityActivities';
 import { communityActivityUrl } from '@/lib/communitySharing';
 import { useApp } from '@/lib/store';

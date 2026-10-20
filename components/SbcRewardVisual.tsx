@@ -34,7 +34,7 @@ export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChal
   <Text style={{ color: '#F5DEA0', fontSize: width * 0.105, fontWeight: '900' }}>COIN BOOST</Text>
  </View>;
  const theme = sbcTileTheme(challenge);
- const stamp = challenge.reward?.match(/(?:×|x)\s*\d{2}\+/i)?.[0] ?? theme.packLabel;
+ const stamp = challenge.reward?.match(/\d+\s*(?:×|x)\s*\d{2}\+/i)?.[0] ?? theme.packLabel;
  return <View style={{ width, height, alignItems: 'center', justifyContent: 'center' }}>
   <SbcRewardPack visual={theme.pack} size={width * 0.82} label={theme.packLabel} />
   {stamp ? <Text style={{ position: 'absolute', bottom: 5, paddingHorizontal: 7, paddingVertical: 3, backgroundColor: '#07101B', borderWidth: 1, borderColor: '#A58A49', color: '#F5DEA0', fontSize: Math.max(9, width * 0.11), fontWeight: '900' }}>{stamp}</Text> : null}
