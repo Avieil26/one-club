@@ -1,3 +1,4 @@
+import { countryName } from '@/lib/countries';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -73,14 +74,7 @@ function positionLabel(value: string, language: 'he' | 'en' = 'he') {
   }
   return labels[value] || value || 'כל עמדה';
 }
-function displayRegion(value: string, language: 'he' | 'en') {
-  if (language === 'he') return value;
-  const regions: Record<string, string> = {
-    'צפון': 'North', 'שרון': 'Sharon', 'מרכז': 'Central',
-    'ירושלים': 'Jerusalem', 'דרום': 'South', 'אונליין בלבד': 'Online only',
-  };
-  return regions[value] ?? value;
-}
+const displayRegion = countryName;
 function displayPlatform(id: PlatformId, language: 'he' | 'en') {
   if (language === 'he') return platformLabel(id);
   const labels: Record<PlatformId, string> = { ps5: 'PlayStation 5', xbox: 'Xbox', pc: 'PC', switch2: 'Nintendo Switch 2' };
@@ -201,7 +195,7 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
           {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>{t('רמה מאומתת', 'Verified level')}</Text></View> : null}
         </View>
         <PlayStyleIcons selections={post.playStyles} />
-        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, language) : t('אזור לא צוין', 'Region not specified')}</Text></View>
+        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, language) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View>
         <View style={s.cardActions}>
           <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>{t('פנייה לשחקן', 'Message player')}</Text></Pressable>
           <Pressable onPress={onFollow} accessibilityLabel={following ? t('הפסק מעקב', 'Unfollow') : t('עקוב', 'Follow')} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
@@ -272,11 +266,11 @@ export default function GroundsV22Screen() {
       if (platform !== 'all' && post.platform !== platform) return false;
       if (!matchesPosition(post.position, position)) return false;
       const profile = app.profiles.find((item) => item.id === post.userId);
-      const haystack = [profile?.displayName, post.gamertag, post.eaId, post.position, post.archetype, post.region, platformLabel(post.platform), divisionLabel(post.division)]
+      const haystack = [profile?.displayName, post.gamertag, post.eaId, post.position, post.archetype, post.region, countryName(post.region, language), countryName(post.region, language === 'he' ? 'en' : 'he'), platformLabel(post.platform), divisionLabel(post.division)]
         .filter(Boolean).join(' ').toLocaleLowerCase();
       return !query || haystack.includes(query);
     });
-  }, [posts, intent, platform, position, search, app.profiles]);
+  }, [posts, intent, platform, position, search, app.profiles, language]);
   const recruiting = useMemo(() => posts.filter((post) => post.intent === 'need_player').slice(0, 3), [posts]);
   const profileFor = (post: GroundsPost) => app.profiles.find((profile) => profile.id === post.userId);
   const isFollowing = (userId: string) => app.follows.some((follow) => follow.followerId === app.user?.id && follow.followingId === userId);
@@ -343,6 +337,7 @@ export default function GroundsV22Screen() {
                   <Text style={[s.heroHeadline, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, compact && { fontSize: 28, lineHeight: 36 }]}>{t('המגרש שלך. האנשים שלך.', 'Your pitch. Your people.')}</Text>
                   <Text style={[s.heroLead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.', 'Find players who match your style, build a stronger squad, and play with the right people.')}</Text>
                   <View style={[s.heroButtons, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
+                    <ActionButton label={t('חבורה קבועה · קביעת מפגש', 'Regular squad · Schedule a session')} icon="calendar-outline" onPress={() => navigate('/grounds/sessions')} />
                     <ActionButton label={t('חפש שחקנים', 'Find players')} icon="search-outline" onPress={searchPlayers} />
                     <ActionButton label={t('פרסם פרופיל', 'Create profile')} icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
                   </View>
@@ -367,7 +362,7 @@ export default function GroundsV22Screen() {
             <View style={s.filtersPanel} onLayout={(event) => { filtersOffset.current = event.nativeEvent.layout.y; }}>
               <View style={[s.filterHeading, compact && { flexDirection: 'column', alignItems: 'flex-start' }]}>
                 <View style={s.resultCounter}><View style={s.greenDot} /><Text style={s.resultCounterText}>{t('שחקנים מהקהילה', 'Community players')}</Text><Text style={s.resultCount}>{visiblePosts.length} {t('פרופילים', 'profiles')}</Text></View>
-                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder={t('חיפוש שם, EA ID, אזור או סגנון...', 'Search name, EA ID, region or play style...')} placeholderTextColor="#7F93A0" style={[s.searchInput, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]} returnKeyType="search" accessibilityLabel={t('חיפוש פרופילים', 'Search profiles')} />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
+                <View style={s.searchBox}><Ionicons name="search-outline" size={18} color={C.muted} /><TextInput ref={searchInputRef} value={search} onChangeText={setSearch} placeholder={t('חיפוש שם, EA ID, מדינה או סגנון...', 'Search name, EA ID, country or play style...')} placeholderTextColor="#7F93A0" style={[s.searchInput, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]} returnKeyType="search" accessibilityLabel={t('חיפוש פרופילים', 'Search profiles')} />{search ? <Pressable onPress={() => setSearch('')}><Ionicons name="close-circle" size={17} color={C.muted} /></Pressable> : null}</View>
               </View>
               <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('סוג מודעה', 'Listing type')}</Text><View style={s.chipRow}><Chip label={t('הכל', 'All')} active={intent === 'all'} onPress={() => setIntent('all')} /><Chip label={t('מחפש קבוצה', 'Looking for a club')} active={intent === 'looking_for_club'} onPress={() => setIntent('looking_for_club')} /><Chip label={t('גיוס שחקנים', 'Recruiting players')} active={intent === 'need_player'} onPress={() => setIntent('need_player')} /></View></View>
               <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('עמדה', 'Position')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{POSITIONS.map((item) => <Chip key={item.id} label={t(item.label, ({ all: 'All positions', 'שוער': 'Goalkeeper', 'חלוץ': 'Striker', 'כנף': 'Winger', 'קשר התקפי': 'Attacking midfielder', 'קשר': 'Central midfielder', 'קשר הגנתי': 'Defensive midfielder', 'בלם': 'Centre back', 'מגן': 'Full back' } as Record<string, string>)[item.id] || item.label)} active={position === item.id} onPress={() => setPosition(item.id)} />)}</ScrollView></View>
@@ -391,7 +386,7 @@ export default function GroundsV22Screen() {
               <InfoPanel title={t('גיוס פעיל', 'Active recruitment')} icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
-                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {displayDivision(post.division, language)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region ? displayRegion(post.region, language) : t('אזור לא צוין', 'Region not specified')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
+                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {displayDivision(post.division, language)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region ? displayRegion(post.region, language) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>{t('אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.', 'There are no active recruitment listings yet. You can post one.')}</Text>}
                 <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>{t('צפה בכל הגיוסים', 'View all recruitment')}</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
@@ -416,7 +411,7 @@ export default function GroundsV22Screen() {
                 <View style={s.modalIntro}><Eyebrow>{displayIntent(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? `${displayArchetype(selected.archetype, language)} · ` : ''}{positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {displayDivision(selected.division, language)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
-                <View style={s.detailTile}><Text style={s.detailLabel}>{t('אזור', 'Region')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('מדינה', 'Country')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
                 {selected.archetype && selected.archetype !== 'לא צוין עדיין' ? <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View> : null}
                 <View style={s.detailTile}><Text style={s.detailLabel}>Skill Rating</Text><Text style={s.detailValue}>{selected.skillRating != null ? selected.skillRating.toLocaleString() : t('לא נמסר', 'Not provided')}</Text></View>

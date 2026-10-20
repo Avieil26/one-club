@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import { loadRepositoryModule } from './load-player-catalogue.mjs';
+const { localSessionTime, localTimeInput, sessionMatches, validCommunityReturn } = loadRepositoryModule('lib/communityActivityLogic.ts');
+const original = process.env.TZ;
+process.env.TZ = 'Europe/London';
+const now = new Date('2026-10-20T10:00:00Z').getTime();
+assert.equal(localSessionTime('2026-10-25 19:00', now), '2026-10-25T19:00:00.000Z');
+assert.equal(localSessionTime('2026-10-24 19:00', now), '2026-10-24T18:00:00.000Z');
+for (const value of ['2026-10-20 10:00', '2026-10-32 19:00', '2026-11-31 18:30', '2026-13-01 17:00', '2026-10-25 25:00', 'tomorrow', '2027-09-01 19:00']) assert.equal(localSessionTime(value, now), null, value);
+assert.equal(localSessionTime('2026-03-29 01:30', new Date('2026-03-28T12:00:00Z').getTime()), null, 'Reject nonexistent local time in DST gap');
+assert.equal(localTimeInput(new Date('2026-10-24T18:00:00Z')), '2026-10-24 19:00');
+const session = { platforms: ['PS5','PC'], mode: 'Rush', language: 'en', region: 'Europe', starts_at: '2026-10-24T18:00:00Z' };
+const filters = { platform: '', mode: '', language: '', region: '', day: '' };
+assert(sessionMatches(session, filters));
+assert(sessionMatches(session, { ...filters, platform: 'PC', language: 'en', day: '2026-10-24' }));
+for (const value of [{ platform: 'PS4' }, { mode: 'Clubs' }, { language: 'he' }, { region: 'Americas' }, { day: '2026-10-25' }]) assert(!sessionMatches(session, { ...filters, ...value }));
+if (original === undefined) delete process.env.TZ; else process.env.TZ = original;
+console.log('Community logic passed: local date validation, DST, matching by platform/mode/language/region/day.');
+
+for (const value of ['/grounds/sessions','/career/journeys/new','/career/journeys/10000000-0000-4000-8000-000000000001']) assert(validCommunityReturn(value));
+for (const value of ['https://example.com','//example.com','/grounds/sessions/../../settings','/career/journeys?redirect=https://example.com','/settings','/career/journeys/not-a-uuid']) assert(!validCommunityReturn(value));

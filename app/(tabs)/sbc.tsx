@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
-import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-
-import { ClubBadge } from '@/components/ClubBadge';
-import { NationFlag } from '@/components/NationFlag';
-import { SbcRewardPack } from '@/components/SbcRewardPack';
-import { PortraitCard } from '@/components/PortraitCard';
-import type { FcPlayer } from '@/lib/fcPlayers';
+import { Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { SbcRewardVisual } from '@/components/SbcRewardVisual';
 import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
-import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
+import { SBC_AUDIT_CHECKED_AT } from '@/lib/sbcLive20261020';
+import { sbcFace } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
 import { useLanguage } from '@/lib/language';
@@ -41,132 +36,21 @@ function compactRemaining(iso: string | null, now: number) {
   return `${Math.max(1, Math.floor(diff / 60_000))}m`;
 }
 
-const PLAYER_REWARD: Record<string, number> = {
-  'sbc-nusa': require('@/assets/images/cards/nusa-destined.png'),
-  'sbc-veiga': require('@/assets/images/cards/veiga-destined.png'),
-};
-
-const SBC_PLAYER_CARDS: Record<string, { player: FcPlayer; photo: string }> = {
-  'sbc-potm-olise': {
-    player: { id: 'sbc-card-olise', name: 'אוליסה', en: 'Michael Olise', rating: 91, position: 'RW', nation: 'צרפת', league: 'Bundesliga', club: 'Bayern',
-      face: { ovr: 91, pac: 84, sho: 83, pas: 90, dri: 92, def: 48, phy: 70 } },
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg/500px-Michael_Olise_France_v_Senegal_16_June_2026-307_%28cropped%29.jpg',
-  },
-  'sbc-potm-raphinha': {
-    player: { id: 'sbc-card-raphinha', name: 'ראפיניה', en: 'Raphinha', rating: 89, position: 'ST', nation: 'ברזיל', league: 'LaLiga', club: 'Barcelona',
-      face: { ovr: 89, pac: 92, sho: 87, pas: 86, dri: 88, def: 55, phy: 77 } },
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg/500px-Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg',
-  },
-  'sbc-potm-pina': {
-    player: { id: 'ea-262531-claudia-pina', name: 'קלאודיה פינה', en: 'Claudia Pina', rating: 89, position: 'LW', nation: 'ספרד', league: 'Liga F Moeve', club: 'ברצלונה',
-      face: { ovr: 89, pac: 91, sho: 89, pas: 84, dri: 88, def: 45, phy: 73 } },
-    photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p262531.png',
-  },
-  'sbc-dfg-tarciane': {
-    player: { id: 'sbc-card-tarciane', name: 'טארסיאני', en: 'Tarciane', rating: 84, position: 'CB', nation: 'ברזיל', league: 'NWSL', club: 'Houston Dash',
-      face: { ovr: 84, pac: 80, sho: 45, pas: 74, dri: 70, def: 84, phy: 87 } },
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dash%20preseason%202025%20-%2013.jpg',
-  },
-  'sbc-dfg-akliouche': {
-    player: { id: 'sbc-card-akliouche', name: 'אקליוש', en: 'Maghnes Akliouche', rating: 85, position: 'CAM', nation: 'צרפת', league: 'Ligue 1', club: 'Monaco',
-      face: { ovr: 85, pac: 84, sho: 83, pas: 86, dri: 89, def: 55, phy: 70 } },
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maghnes%20Akliouche%20France%20v%20Senegal%2016%20June%202026-512.jpg',
-  },
-  'sbc-potm-gross': {
-    player: { id: 'sbc-card-gross', name: 'גרוס', en: 'Pascal Groß', rating: 84, position: 'CDM', nation: 'גרמניה', league: 'Premier League', club: 'Brighton',
-      face: { ovr: 84, pac: 76, sho: 79, pas: 88, dri: 83, def: 77, phy: 79 } },
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pascal%20Gross%20Ecuador%20v%20Germany%2025%20June%202026-065.jpg',
-  },
-  'sbc-potm-malen': {
-    player: { id: 'sbc-card-malen', name: 'מאלן', en: 'Donyell Malen', rating: 85, position: 'ST', nation: 'הולנד', league: 'Serie A', club: 'Roma',
-      face: { ovr: 85, pac: 87, sho: 85, pas: 75, dri: 86, def: 39, phy: 70 } },
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Netherlands%20v%20Tunisia%202026%20World%20Cup%20-%2055374906960.jpg',
-  },
-  'sbc-dfg-frattesi': {
-    player: { id: 'sbc-card-frattesi', name: 'פרטסי', en: 'Davide Frattesi', rating: 84, position: 'CM', nation: 'איטליה', league: 'Serie A', club: 'Inter',
-      face: { ovr: 84, pac: 84, sho: 81, pas: 81, dri: 84, def: 77, phy: 78 } },
-    photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Norway%20Italy%20-%20June%202025%20D%2048.jpg',
-  },
-};
-
-function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
-  if (nation) return <NationFlag nation={nation} size={size} />;
-  if (club) return <ClubBadge club={club} size={size} />;
-  return <View style={{ width: size, height: size }} />;
-}
-
-function SbcTile({
-  challenge,
-  now,
-  onPress,
-}: {
-  challenge: SbcChallenge;
-  now: number;
-  onPress: () => void;
-}) {
-  const { language } = useLanguage();
-  const theme = sbcTileTheme(challenge);
-  const face = sbcFace(challenge);
-  const nations = challenge.nations ?? [];
-  const clubs = challenge.clubs ?? [];
-  const leftNation = nations[0];
-  const rightNation = nations[1];
-  const leftClub = nations.length ? undefined : clubs[0];
-  const rightClub = nations.length ? undefined : clubs[1];
-  const remaining = compactRemaining(challenge.endsAt, now);
-  const legacyPlayerCard = PLAYER_REWARD[challenge.id];
-  const playerCard = SBC_PLAYER_CARDS[challenge.id];
-
-  return (
-    <Pressable
-      accessibilityRole="button"
-      onPress={onPress}
-      style={{
-        flex: 1,
-        minHeight: 118,
-        backgroundColor: 'rgba(8,10,14,0.92)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.16)',
-        overflow: 'visible',
-      }}
-    >
-      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', direction: 'ltr' }}>
-        <View style={{ width: 5, alignSelf: 'stretch', backgroundColor: face.edge }} />
-        <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
-          <SideMark club={leftClub} nation={leftNation} size={36} />
-        </View>
-        <View style={{ flex: 1, gap: 2, paddingVertical: 12, minWidth: 0 }}>
-          <Text style={{ color: '#C9A227', fontSize: 10, fontWeight: '800', letterSpacing: 1.1 }}>{face.category}</Text>
-          <Text numberOfLines={1} style={{ color: '#F7F8FA', fontSize: 20, fontWeight: '800' }}>
-            {face.en}
-          </Text>
-          <Text numberOfLines={1} style={{ color: 'rgba(255,255,255,0.62)', fontSize: 13, fontWeight: '700', textAlign: 'right' }}>
-            {language === 'en' ? face.en : face.he}
-          </Text>
-          {remaining ? <Text style={{ color: '#E7C56A', fontSize: 12, fontWeight: '800', marginTop: 4 }}>{remaining}</Text> : null}
-        </View>
-        <View style={{ width: 58, alignItems: 'center', justifyContent: 'center' }}>
-          <SideMark club={rightClub} nation={rightNation} size={36} />
-        </View>
-        <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
-          {legacyPlayerCard ? (
-            <Image source={legacyPlayerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
-          ) : playerCard ? (
-            <PortraitCard
-              player={playerCard.player}
-              width={70}
-              edition="base"
-              photoOverride={playerCard.photo}
-              faceOverride={playerCard.player.face}
-              compactStats
-            />
-          ) : (
-            <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
-          )}
-        </View>
-      </View>
-    </Pressable>
-  );
+function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: number; onPress: () => void }) {
+ const viewportWidth = useWindowDimensions().width;
+ const { language, t } = useLanguage(); const rtl = language === 'he'; const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now);
+ return <Pressable accessibilityRole="button" accessibilityLabel={face.en} onPress={onPress} style={{ flex: 1, minWidth: 0, backgroundColor: 'rgba(5,12,22,0.96)', borderWidth: 1, borderColor: '#30404D', borderRadius: 7, overflow: 'hidden' }}>
+  <View style={{ height: 3, backgroundColor: face.edge }} />
+  <View style={{ padding: 14, gap: 14, flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center' }}>
+   <SbcRewardVisual challenge={challenge} width={viewportWidth < 760 ? 116 : 132} />
+   <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
+    <Text style={{ color: '#D6B46B', fontSize: 9, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>{face.category}</Text>
+    <Text numberOfLines={3} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'he' ? face.he : face.en}</Text>
+    {remaining ? <Text style={{ color: '#C3CED6', fontSize: 12, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>{t('נותרו ', 'Ends in ')}{remaining}</Text> : null}
+    <Text style={{ color: '#83DCE4', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('דרישות ופתרונות', 'Requirements & solutions')} →</Text>
+   </View>
+  </View>
+ </Pressable>;
 }
 
 export default function SbcScreen() {
@@ -177,7 +61,7 @@ export default function SbcScreen() {
   const now = useNow();
   const width = useWindowDimensions().width;
   const columns = width >= 760 ? 2 : 1;
-  const challenges = openSbcChallenges(app.sbcChallenges, now).sort((a, b) => sbcFace(a).rank - sbcFace(b).rank);
+  const challenges = openSbcChallenges(app.sbcChallenges, now);
   const rows = rowsOf(challenges, columns);
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="sbc" maxWidth={1080}>
@@ -187,7 +71,7 @@ export default function SbcScreen() {
       <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: rtl ? 'flex-start' : 'flex-end' }}>
         <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: rtl ? 'right' : 'left', width: '100%' }}>{t('מחשבון Streamlined', 'Streamlined calculator')}</Text>
       </Pressable>
-      <Muted>{t('מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.', 'Marquee matchups through October 1. Completing all four matches earns a Jumbo Gold Pack.')}</Muted>
+      <Muted>{t('הקטלוג נבדק לאחרונה: ', 'Catalogue last checked: ')}{new Date(SBC_AUDIT_CHECKED_AT).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}{t('. אתגרים שפג תוקפם יורדים אוטומטית מהרשימה.', '. Expired challenges are removed automatically.')}</Muted>
       {app.user?.isAdmin ? <Button label={t('אתגר SBC חדש', 'New SBC challenge')} variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
       {!challenges.length ? <Muted>{t('אין כרגע SBC פעילים.', 'There are no active SBCs right now.')}</Muted> : null}
       {rows.map((row, rowIndex) => (

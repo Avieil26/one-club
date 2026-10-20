@@ -1,8 +1,8 @@
 import { Linking, Platform } from 'react-native';
 
-/** Direct APK from the finished EAS preview build (too large to host on Vercel). */
+/** Direct APK from the tested EAS build 43b39511 (too large to host on Vercel). */
 export const FUTZ_APK_ARTIFACT =
-  'https://expo.dev/artifacts/eas/nrBebdSGZoHQXMXeteAc2GRlgIfYE24TMp-1Ofy7w0s.apk';
+  'https://expo.dev/artifacts/eas/GKRXbbvUxtMzxvmOhXEkWSbwTzCRnHywCPYWoVJkJFI.apk';
 
 export function apkDownloadUrl(): string {
   const fromEnv = process.env.EXPO_PUBLIC_APK_URL?.trim();

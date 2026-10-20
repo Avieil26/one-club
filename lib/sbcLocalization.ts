@@ -1,3 +1,5 @@
+import { LIVE_SBC_TRANSLATIONS } from '@/lib/sbcLive20261020';
+
 const SBC_ENGLISH: Record<string, string> = {
   "5× שחקני זהב 80+": "5× 80+ Gold Players",
   "3× שחקני זהב 79+": "3× 79+ Gold Players",
@@ -64,5 +66,29 @@ const SBC_ENGLISH: Record<string, string> = {
 
 /** Translate built-in copy exactly; preserve community-authored text. */
 export function sbcText(text: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (SBC_ENGLISH[text] ?? text) : text;
+  return language === 'en' ? (LIVE_SBC_TRANSLATIONS[text] ?? SBC_ENGLISH[text] ?? text) : text;
+}
+
+/** Generated rule labels belong to the app; community text is never translated. */
+export function sbcCheckText(label: string, language: 'he' | 'en'): string {
+ if (language === 'he') return label;
+ return label
+  .replace(/11 שחקנים/g, '11 players')
+  .replace(/כימיה/g, 'Chemistry')
+  .replace(/דירוג קבוצה/g, 'Squad rating')
+  .replace(/עכשיו/g, 'current')
+  .replace(/לפחות/g, 'At least')
+  .replace(/עד /g, 'Max. ')
+  .replace(/מדינות/g, 'nations')
+  .replace(/מועדונים/g, 'clubs')
+  .replace(/ליגות/g, 'leagues')
+  .replace(/מאותו מועדון/g, 'from one club')
+  .replace(/מאותה ליגה/g, 'from one league')
+  .replace(/מאותה מדינה/g, 'from one nation')
+  .replace(/כל הכרטיסים מ/g, 'All cards: ')
+  .replace(/כל הכרטיסים /g, 'All cards: ')
+  .replace(/ומעלה/g, 'or higher')
+  .replace(/זהב/g, 'gold')
+  .replace(/כסף/g, 'silver')
+  .replace(/ארד/g, 'bronze');
 }

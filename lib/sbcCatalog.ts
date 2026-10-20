@@ -1,8 +1,9 @@
 import { C, L, N, PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { isOpen } from '@/lib/selectors';
+import { ARCHIVED_SBC_IDS, LIVE_SBC_CHALLENGES } from '@/lib/sbcLive20261020';
 import type { SbcChallenge } from '@/lib/types';
 
-export const RETIRED_SBC_IDS = new Set(['sbc-upgrade', 'sbc-puzzle']);
+export const RETIRED_SBC_IDS = new Set(['sbc-upgrade', 'sbc-puzzle', ...ARCHIVED_SBC_IDS]);
 
 /** Weekly MM set from 17 Sep 2026 — expires 24 Sep 18:00 UTC per EA / FUTBIN. */
 const MM_ENDS = '2026-09-24T18:00:00.000Z';
@@ -136,7 +137,7 @@ const SILVER_UPGRADE_SQUAD: Record<string, string> = {
   rw: 'ea-247668-konan-ndri',
 };
 
-export const officialChallenges: SbcChallenge[] = [
+const legacyChallenges: SbcChallenge[] = [
   {
     id: 'sbc-potm-pina',
     title: 'Liga F POTM · קלאודיה פינה',
@@ -800,6 +801,14 @@ export const officialChallenges: SbcChallenge[] = [
     previewSquad: NATION_DRILL_SQUAD,
     createdAt: '2026-09-23T12:00:00.000Z',
   },
+];
+
+// Official source overrides win over old server/cache data. Keep previous editions
+// in the lookup for historical solutions, but never return retired ones as active.
+const liveById = new Map(LIVE_SBC_CHALLENGES.map((challenge) => [challenge.id, challenge]));
+export const officialChallenges: SbcChallenge[] = [
+  ...legacyChallenges.map((challenge) => ({ ...challenge, ...liveById.get(challenge.id), ...(RETIRED_SBC_IDS.has(challenge.id) ? { archived: true } : {}) })),
+  ...LIVE_SBC_CHALLENGES.filter((challenge) => !legacyChallenges.some((old) => old.id === challenge.id)),
 ];
 
 const byId = new Map(officialChallenges.map((challenge) => [challenge.id, challenge]));

@@ -171,6 +171,15 @@ export type SquadRules = {
 };
 
 export type SbcChallenge = {
+  /** Catalogue archive preserves old solution links without advertising expired editions. */
+  archived?: boolean;
+  sourceUrl?: string;
+  expirySourceUrl?: string;
+  lastCheckedAt?: string;
+  playerCount?: number;
+  isGroup?: boolean;
+  manualValidation?: boolean;
+  groupReward?: string;
   id: string;
   title: string;
   kind: SbcKind;

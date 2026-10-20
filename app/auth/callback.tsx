@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, Text, View } from 'react-native';
-import { Redirect, Stack, useRouter } from 'expo-router';
+import { Redirect, Stack, useRouter, type Href } from 'expo-router';
 import { useLinkingURL } from 'expo-linking';
+import { readCommunityReturn } from '@/lib/communityReturn';
 import { completeNativeAuthReturn } from '@/lib/authGoogle';
 import { isNativeAuthReturn } from '@/lib/nativeAuthReturn';
 import { useApp } from '@/lib/store';
@@ -32,7 +33,13 @@ export default function AuthCallback() {
   }, [url, refresh]);
 
   useEffect(() => {
-    if (completedUser && app.user?.id === completedUser) router.replace('/(tabs)');
+    let active = true;
+    if (completedUser && app.user?.id === completedUser) {
+      void readCommunityReturn().then((destination) => {
+        if (active) router.replace((destination || '/(tabs)') as Href);
+      });
+    }
+    return () => { active = false; };
   }, [completedUser, app.user?.id, router]);
 
   if (Platform.OS === 'web') return <Redirect href="/" />;

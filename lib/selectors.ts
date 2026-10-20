@@ -2,8 +2,8 @@ import type { CareerChallenge, FutPost, FutRating, GroundsPost, Profile, SbcChal
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-export function isOpen(challenge: { endsAt: string | null }, at = Date.now()): boolean {
-  return !challenge.endsAt || new Date(challenge.endsAt).getTime() > at;
+export function isOpen(challenge: { endsAt: string | null; archived?: boolean }, at = Date.now()): boolean {
+  return !challenge.archived && (!challenge.endsAt || new Date(challenge.endsAt).getTime() > at);
 }
 
 export function openChallenges(list: CareerChallenge[], at = Date.now()): CareerChallenge[] {
@@ -17,10 +17,8 @@ export function openSbcChallenges(list: SbcChallenge[], at = Date.now()): SbcCha
   return list
     .filter((challenge) => isOpen(challenge, at))
     .sort((a, b) => {
-      const aEnd = a.endsAt ?? '9999';
-      const bEnd = b.endsAt ?? '9999';
-      if (aEnd !== bEnd) return aEnd.localeCompare(bEnd);
-      return b.createdAt.localeCompare(a.createdAt);
+      const created = b.createdAt.localeCompare(a.createdAt);
+      return created || a.id.localeCompare(b.id);
     });
 }
 

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFonts } from 'expo-font';
 import { ActivityIndicator, I18nManager, Platform, StyleSheet, View } from 'react-native';
-import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
+import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments, usePathname, type Href } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
+
+import { rememberCommunityReturn, readCommunityReturn, clearCommunityReturn } from '@/lib/communityReturn';
+import { validCommunityReturn } from '@/lib/communityActivityLogic';
 
 import { Arrival } from '@/components/Arrival';
 import { CookieNotice } from '@/components/CookieNotice';
@@ -117,6 +120,8 @@ function Gate({ children }: { children: React.ReactNode }) {
   const { ready, user, startupError, retryStartup } = useApp();
   const { ready: languageReady, hasSelection, t } = useLanguage();
   const segments = useSegments();
+  const pathname = usePathname();
+  const returnWrite = useRef<Promise<void>>(Promise.resolve());
   const router = useRouter();
   const fromLogin = useRef(segments[0] === 'login' || segments[0] === 'register');
   const [arriving, setArriving] = useState(false);
@@ -127,10 +132,21 @@ function Gate({ children }: { children: React.ReactNode }) {
     const onLanguage = segments[0] === 'language';
     const onLegal = segments[0] === 'legal';
     const onNativeCallback = Platform.OS !== 'web' && segments.join('/') === 'auth/callback';
-    if (!user && !onAuth && !onLanguage && !onLegal && !onNativeCallback) router.replace(hasSelection ? '/register' : '/language');
+    if (!user && !onAuth && !onLanguage && !onLegal && !onNativeCallback) {
+      if (validCommunityReturn(pathname)) returnWrite.current = rememberCommunityReturn(pathname);
+      router.replace(hasSelection ? '/register' : '/language');
+    }
     if (!user && onAuth && !hasSelection) router.replace('/language');
-    if (user && (onAuth || onLanguage)) router.replace('/(tabs)');
-  }, [ready, languageReady, hasSelection, user, segments, router]);
+    let active = true;
+    if (user && validCommunityReturn(pathname)) void returnWrite.current.then(clearCommunityReturn);
+    if (user && (onAuth || onLanguage || pathname === '/')) {
+      void returnWrite.current.then(readCommunityReturn).then((destination) => {
+        if (active && destination) router.replace(destination as Href);
+        else if (active && (onAuth || onLanguage)) router.replace('/(tabs)');
+      });
+    }
+    return () => { active = false; };
+  }, [ready, languageReady, hasSelection, user, segments, pathname, router]);
 
   useEffect(() => {
     if (segments[0] === 'login' || segments[0] === 'register') fromLogin.current = true;

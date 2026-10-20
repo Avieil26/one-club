@@ -1,11 +1,11 @@
-import { sbcText } from '@/lib/sbcLocalization';
+import { SbcRewardVisual } from '@/components/SbcRewardVisual';
+import { preparedRoute } from '@/lib/sbcPrepared';
+import { sbcCheckText, sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
 import { Image, Platform, Text, useWindowDimensions, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
-import { ClubBadge } from '@/components/ClubBadge';
-import { NationFlag } from '@/components/NationFlag';
 import { SquadPitch } from '@/components/SquadPitch';
 import { Badge, Button, Card, colors, Muted, Screen, Title } from '@/components/ui';
 import { evaluateSquad, formationById } from '@/lib/chemistry';
@@ -64,23 +64,17 @@ export default function SbcDetailScreen() {
   const challengeId = challenge.id;
   const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
   const remaining = formatRemaining(challenge.endsAt, now, language);
+  const ready = preparedRoute(challengeId);
   const solutions = solutionsFor(app.solutions, challengeId);
-  const clubs = challenge.clubs ?? [];
-  const nations = challenge.nations ?? [];
   const face = sbcFace(challenge);
   const split = Platform.OS === 'web' && windowWidth >= 1000;
 
   return (
     <Screen scene="sbc">
       <Stack.Screen options={{ title: 'SBC' }} />
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
-        {nations.map((nation) => (
-          <NationFlag key={nation} nation={nation} size={28} />
-        ))}
-        {clubs.map((club) => (
-          <ClubBadge key={club} size={54} club={club} />
-        ))}
-        <View style={{ flex: 1 }}>
+      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', gap: 18 }}>
+        <SbcRewardVisual challenge={challenge} width={windowWidth < 600 ? 132 : 180} />
+        <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
           <Badge text={face.category} tone={challenge.kind === 'streamlined' ? 'copper' : 'blue'} />
           <Title>{face.en}</Title>
           {language === 'he' && face.he !== face.en ? <Muted>{face.he}</Muted> : null}
@@ -90,9 +84,12 @@ export default function SbcDetailScreen() {
         {challenge.reward ? `${sbcText(challenge.reward, language)} · ` : ''}
         {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
       </Muted>
+      {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
+      {challenge.lastCheckedAt ? <Muted>{t('נבדק לאחרונה: ', 'Last checked: ')}{new Date(challenge.lastCheckedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted> : null}
       {challenge.kind === 'classic' && challenge.previewSquad ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
+            <Title>{t('סגל מוכן לדוגמה', 'Ready example squad')}</Title>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
               {challenge.rules?.chemistry
                 ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
@@ -105,7 +102,7 @@ export default function SbcDetailScreen() {
             <Card>
               {report.checks.map((check) => (
                 <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
-                  {check.ok ? '✓' : '✗'} {check.label}
+                  {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
                 </Text>
               ))}
             </Card>
@@ -117,6 +114,15 @@ export default function SbcDetailScreen() {
           {challenge.targetScore ? <Muted>{t("יעד ניקוד:", "Target score:")}{challenge.targetScore}</Muted> : null}
         </Card>
       )}
+      {ready && challenge.kind === 'streamlined' ? <Card>
+        <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 20, textAlign: language === 'he' ? 'right' : 'left' }}>{t('צירוף דירוגים מוכן', 'Ready rating combination')}</Text>
+        <Muted>{t('קלפים רגילים נדירים לפי הדירוגים הבאים:', 'Use base rare player items with these ratings:')}</Muted>
+        {ready.lines.map((line) => <View key={line.rating} style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', justifyContent: 'space-between', gap: 12, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.line }}>
+          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '900' }}>{line.rating} OVR</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800' }}>{line.count} × {t('קלפים נדירים', 'rare items')}</Text>
+        </View>)}
+        <Muted>{t('לפני ההגשה ודאו במשחק שהגעתם ליעד הניקוד. גרסאות מיוחדות של קלפים עשויות לשנות את הניקוד.', 'Confirm the target score in-game before submitting. Special card versions can affect the score.')}</Muted>
+      </Card> : null}
       {challenge.kind === 'streamlined' ? (
         <Button
           label={t("פתיחת המחשבון", "Open calculator")}
@@ -129,7 +135,7 @@ export default function SbcDetailScreen() {
         <View style={{ gap: 10, marginTop: 4 }}>
           <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13, textAlign: 'right', letterSpacing: 0.4 }}>{t("הצעת פתרון לאתגר", "Submit a challenge solution")}</Text>
           <Muted>{t("בניית סגל פותחת מגרש ריק: לוחצים על עמדה, מחפשים שחקן, ומניחים את הקלף. צילום מעלה תמונה מהמשחק.", "Build a squad by selecting positions and adding players to an empty pitch, or upload a screenshot from the game.")}</Muted>
-          <Button label={t("בניית סגל באפליקציה", "Build a squad in the app")} variant="copper" onPress={() => router.push(`/sbc/build/${challengeId}`)} />
+          {!challenge.manualValidation ? <Button label={t("בניית סגל באפליקציה", "Build a squad in the app")} variant="copper" onPress={() => router.push(`/sbc/build/${challengeId}`)} /> : <Muted>{t('באתגר הזה משתפים צילום מהמשחק עם שם החלק והסבר קצר.', 'For this challenge, share an in-game screenshot with the segment name and a short explanation.')}</Muted>}
           <Button label={t("צילום פתרון מהמשחק", "Upload an in-game solution")} variant="gold" onPress={() => router.push(`/sbc/upload/${challengeId}`)} />
         </View>
       ) : null}

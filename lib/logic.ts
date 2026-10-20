@@ -273,7 +273,7 @@ export function createGrounds(db: Database, input: NewGrounds) {
     playerLevel,
     skillRating,
     archetype: text(input.archetype, 'ארכיטייפ', 40),
-    region: text(input.region, 'אזור', 40),
+    region: text(input.region, 'מדינה', 40),
     hours: '',
     contactType: 'discord',
     contactValue: '',

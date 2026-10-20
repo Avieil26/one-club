@@ -1,3 +1,4 @@
+import { CareerJourneysList } from '@/components/CareerJourneys';
 import React, { useState } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -5,7 +6,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CareerChallengeCard } from '@/components/CareerChallengeCard';
 import { Button, Muted, Screen, Title } from '@/components/ui';
 import { CareerScoutView } from '@/components/CareerScoutView';
-import { CAREER_SCOUT_PLAYERS } from '@/lib/careerScoutData';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 
@@ -15,43 +15,25 @@ export default function CareerScreen() {
   const rtl = language === 'he';
   const router = useRouter();
   const params = useLocalSearchParams<{ tab?: string }>();
-  const [careerTab, setCareerTab] = useState<'scout' | 'challenges'>(
-    params.tab === 'challenges' ? 'challenges' : 'scout',
+  const [careerTab, setCareerTab] = useState<'scout' | 'challenges' | 'journeys'>(
+    params.tab === 'journeys' ? 'journeys' : params.tab === 'challenges' ? 'challenges' : 'scout',
   );
 
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="career">
-      {/* MODE SWITCHER TABS */}
-      <View style={[styles.tabSwitcher, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => setCareerTab('scout')}
-          style={[styles.switchBtn, careerTab === 'scout' && styles.switchBtnActive]}
-        >
-          <Text style={[styles.switchBtnText, careerTab === 'scout' && styles.switchBtnTextActive]}>
-            🌟 {t('סקאוטינג כישרונות', 'Talent scouting')} ({CAREER_SCOUT_PLAYERS.length})
-          </Text>
-        </Pressable>
-
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => setCareerTab('challenges')}
-          style={[styles.switchBtn, careerTab === 'challenges' && styles.switchBtnActive]}
-        >
-          <Text
-            style={[
-              styles.switchBtnText,
-              careerTab === 'challenges' && styles.switchBtnTextActive,
-            ]}
-          >
-            🏆 {t('אתגרי קריירה', 'Career challenges')}
-          </Text>
-        </Pressable>
+      <View accessibilityRole="tablist" style={[styles.tabSwitcher, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
+        {([
+          { id: 'scout', label: t('סקאוטינג', 'Scouting') },
+          { id: 'challenges', label: t('אתגרי קריירה', 'Challenges') },
+          { id: 'journeys', label: t('מסעות משותפים', 'Shared journeys') },
+        ] as const).map((tab) => <Pressable key={tab.id} accessibilityRole="tab" accessibilityState={{ selected: careerTab === tab.id }} onPress={() => { setCareerTab(tab.id); router.setParams({ tab: tab.id }); }} style={[styles.switchBtn, careerTab === tab.id && styles.switchBtnActive]}>
+          <Text style={[styles.switchBtnText, careerTab === tab.id && styles.switchBtnTextActive]}>{tab.label}</Text>
+        </Pressable>)}
       </View>
 
       {careerTab === 'scout' ? (
         <CareerScoutView onSwitchToChallenges={() => setCareerTab('challenges')} />
-      ) : (
+      ) : careerTab === 'journeys' ? <CareerJourneysList embedded /> : (
         <View style={{ gap: 14 }}>
           <Title>{t('אתגרי קריירה', 'Career challenges')}</Title>
           <Muted>{t('אתגר, צילום, וקרדיט אחרי אישור. אחרי 5 אישורים ההגשה עולה מיד.', 'Complete a challenge, upload proof, and earn credit after approval. After 5 approvals, your submission is published immediately.')}</Muted>
@@ -77,7 +59,7 @@ const styles = StyleSheet.create({
   tabSwitcher: {
     flexDirection: 'row-reverse',
     backgroundColor: 'rgba(15, 23, 42, 0.75)',
-    borderRadius: 14,
+    borderRadius: 7,
     padding: 4,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.15)',
@@ -85,8 +67,11 @@ const styles = StyleSheet.create({
   },
   switchBtn: {
     flex: 1,
-    paddingVertical: 9,
-    borderRadius: 11,
+    paddingVertical: 13,
+    paddingHorizontal: 4,
+    minHeight: 48,
+    minWidth: 0,
+    borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -96,7 +81,8 @@ const styles = StyleSheet.create({
     borderColor: '#00ff8c',
   },
   switchBtnText: {
-    fontSize: 13,
+    fontSize: 12,
+    textAlign: 'center',
     fontWeight: '800',
     color: '#94a3b8',
   },

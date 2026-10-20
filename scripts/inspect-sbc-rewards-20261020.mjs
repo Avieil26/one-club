@@ -1,0 +1,7 @@
+const sources=[{"id":"sbc-fs-espart","url":"https://www.fut.gg/players/81863-xavi-espart/27-50413511/"},{"id":"sbc-fs-manzambi","url":"https://www.fut.gg/players/276694-johan-manzambi/27-50608342/"},{"id":"sbc-fs-diao","url":"https://www.fut.gg/players/275324-assane-diao-diaoune/27-50606972/"},{"id":"sbc-fs-zicai","url":"https://www.fut.gg/players/265057-cora-zicai/27-50596705/"},{"id":"sbc-potm-pina","url":"https://www.fut.gg/players/262531-claudia-pina/27-50594179/"},{"id":"sbc-potm-ferran","url":"https://www.fut.gg/players/241461-ferran-torres/27-67350325/"},{"id":"sbc-potm-raphinha","url":"https://www.fut.gg/players/233419-raphinha/27-84119499/"},{"id":"sbc-potm-gross","url":"https://www.fut.gg/players/190765-pascal-gross/27-84076845/"},{"id":"sbc-intro-espinoza","url":"https://www.fut.gg/players/226385-cristian-espinoza/27-50558033/"},{"id":"sbc-potm-olise","url":"https://www.fut.gg/players/247827-michael-olise/27-84133907/"},{"id":"sbc-potm-malen","url":"https://www.fut.gg/players/231447-donyell-malen/27-50563095/"}];
+for(let i=0;i<sources.length;i+=4)await Promise.all(sources.slice(i,i+4).map(async c=>{
+ const html=await (await fetch(c.url,{signal:AbortSignal.timeout(25000)})).text();
+ const plain=html.replace(/<script\b[\s\S]*?<\/script>/g,'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+ const idx=plain.indexOf(' PAC ');
+ console.log('CARD_STATS='+JSON.stringify({id:c.id,card:plain.slice(idx-130,idx+260)}));
+}));

@@ -72,7 +72,7 @@ export default function ProfileScreen() {
       ) : (
         <Title>{t('פרופיל', 'Profile')}</Title>
       )}
-      <Muted>{app.mode === 'local' ? t('מצב הדגמה על המכשיר', 'On-device demo mode') : t('מחוברים לשרת', 'Connected to server')}</Muted>
+      {app.mode === 'local' ? <Muted>{t('הנתונים נשמרים במכשיר הזה בלבד.', 'Data is saved on this device only.')}</Muted> : null}
       {app.user ? (
         <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8 }}>
           <View

@@ -1,0 +1,242 @@
+{
+  "sbc-fs-espart": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/81863-xavi-espart/27-50413511/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/71.1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50413511.7ee28133a6d646c4fcd4bb3086d5be7a5dc2f79e02d4f426a6509181140fe2da.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/45.307275040b6531f26bb980298820e1a50df6eb288379a2efc5e5eb3abdb5f1ea.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/53.adf7c6700978e91b81c4fd4b4a82187dfea2d3074a907efa14caebfaffa461eb.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/241.7884c3386636cb32eaaa8cb83d0995083f1c03dc15e25bd1c31f790ea0d70588.png",
+    "name": "Xavi Espart",
+    "rating": 85,
+    "position": "LB",
+    "stats": [
+      88,
+      64,
+      82,
+      84,
+      82,
+      74
+    ]
+  },
+  "sbc-fs-manzambi": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/276694-johan-manzambi/27-50608342/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/71.1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50608342.4f5bdf848800acf04a6961d284338139fa24d1fd73afa837021579ba41cdc83c.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/47.43b66b0a05952a6d782199d3dd83fad7305a8f94c183e7421c3baac2a4258864.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/13.c4f460c893b66c36c0bcd7b29919107d36f618772343eaedb21f946f16d80c96.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/2.0bf2cc2dd4effd284372989a5c226c74773c10050fcee391a5244c53dd7bc123.png",
+    "name": "Manzambi",
+    "rating": 85,
+    "position": "CM",
+    "stats": [
+      84,
+      84,
+      82,
+      89,
+      78,
+      76
+    ]
+  },
+  "sbc-fs-diao": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/275324-assane-diao-diaoune/27-50606972/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/71.1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50606972.304fee43aaf7aaa80a119ba1fb5fdf8f72a682cafa9c777437107e8714204966.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/136.dbcccf7cc0d334b3b58ea20bf43448e05e565fe48823415de64a32af5781a459.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/31.b1950cc3e90e9a2e75be5bbbf06967a217db45e22180c84bac2e5588ede83541.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/1745.8c971f88a842823449a739210ba569a5e6ca095c65a839a166e3476a9b1c1468.png",
+    "name": "Diao",
+    "rating": 84,
+    "position": "RM",
+    "stats": [
+      92,
+      82,
+      76,
+      85,
+      46,
+      75
+    ]
+  },
+  "sbc-fs-zicai": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/265057-cora-zicai/27-50596705/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/71.1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50596705.cf8accc17e53acefc21d456bcfa1c0b5dfa988615a24bffb241953bfa3142156.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/21.09e6201577ad206ca1927900d61876676ce53a98d69a6e8047ccfeac8c133cdd.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/2215.a8e7c4f76d6be4fa6858792035e7a2e4301d31d1afd0176004b0be27572638e8.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/175.079f6632f4c89cdf432b3b7dc640342506aaea25c5e1e94db2d05b0227c86636.png",
+    "name": "Zicai",
+    "rating": 85,
+    "position": "LW",
+    "stats": [
+      87,
+      83,
+      82,
+      88,
+      58,
+      77
+    ]
+  },
+  "sbc-potm-pina": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/262531-claudia-pina/27-50594179/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/177.88f85522b6723d781dbed81b6d90c7396ed99636860ca2d9f0724de33dd48cb7.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50594179.31827fa0f9007f2c517e4db88fa09025068dfbbdd9a102f68aa2f5f044bb8164.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/45.307275040b6531f26bb980298820e1a50df6eb288379a2efc5e5eb3abdb5f1ea.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/2222.fc11bb6ddeeef9c0ce026fb0ab0b84ea4aa5abee4874b05576899c33fe61d6b1.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/241.7884c3386636cb32eaaa8cb83d0995083f1c03dc15e25bd1c31f790ea0d70588.png",
+    "name": "Claudia Pina",
+    "rating": 89,
+    "position": "LW",
+    "stats": [
+      91,
+      89,
+      85,
+      89,
+      45,
+      74
+    ]
+  },
+  "sbc-potm-ferran": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/241461-ferran-torres/27-67350325/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/79.06c34ce5fa2f351f0b827d57b2116b1abf4af6e042be7965d1ee1a05bf4e597d.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-67350325.f3283a0d041bf690b5e277411062c8d875ef1e5dfe4736a85183965655ec140d.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/45.307275040b6531f26bb980298820e1a50df6eb288379a2efc5e5eb3abdb5f1ea.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/16.16d2e597497f719153fb123b2f425ea2446b7eb52e4cb8d902e341fca08d2e88.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/73.848604e662811fcb98b923c1cef5d3149e95d815ca1bd56b912d801fbeb33f7b.png",
+    "name": "Ferran Torres",
+    "rating": 85,
+    "position": "ST",
+    "stats": [
+      89,
+      85,
+      80,
+      83,
+      42,
+      76
+    ]
+  },
+  "sbc-potm-raphinha": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/233419-raphinha/27-84119499/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/86.40c6f402a13c2c37c892df1095aa680f88cda9d6fb4415aff7ef741cc5ca2c4c.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84119499.b3c11eda3492029701b3fdcd8e4c1be00556f2f0171baf5446be4b6ad36ea765.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/54.d9dc910e9f0757f8cb3980b65ec126b38c7ccd8eacbf33812b324fb0acb499c0.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/53.adf7c6700978e91b81c4fd4b4a82187dfea2d3074a907efa14caebfaffa461eb.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/241.7884c3386636cb32eaaa8cb83d0995083f1c03dc15e25bd1c31f790ea0d70588.png",
+    "name": "Raphinha",
+    "rating": 89,
+    "position": "ST",
+    "stats": [
+      92,
+      87,
+      86,
+      88,
+      55,
+      77
+    ]
+  },
+  "sbc-potm-gross": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/190765-pascal-gross/27-84076845/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/43.5d2dc0a3dbfe139573e85227bdd299727146169f1c4e9417b8ec15192aac0260.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84076845.da2975c64d0d112a7422e7b7c48d22f53e84972e80e68c56edcb81aee88b3711.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/21.09e6201577ad206ca1927900d61876676ce53a98d69a6e8047ccfeac8c133cdd.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/13.c4f460c893b66c36c0bcd7b29919107d36f618772343eaedb21f946f16d80c96.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/1808.3fcff2a5d489cdf45070bbe15839da401d6ee2797e008d5141e9a364b256c43d.png",
+    "name": "Groß",
+    "rating": 84,
+    "position": "CDM",
+    "stats": [
+      76,
+      79,
+      88,
+      83,
+      77,
+      79
+    ]
+  },
+  "sbc-intro-espinoza": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/226385-cristian-espinoza/27-50558033/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/87.ac798fa823433611bba06a89919d6d9d223af203ffad8a34cf2889fa74ebf12e.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50558033.a14c65e2b85c388991c3a98203505a9a650ce363e203f8f5d019b0da66d2e8c8.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/52.411384d76f978ce88ee08880f79fd0b7c92d9f7a35a091c2fe2e58ad066e8a1a.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/39.ea32ac1d4c5aeb379cec48a5132b135cd9c8767b603cd69fe3083092b4ef9eb3.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/114162.10abc10d372053e10629c836fb357e0e00afb4425a9e0e539829dd3ef63534a0.png",
+    "name": "Espinoza",
+    "rating": 82,
+    "position": "RM",
+    "stats": [
+      84,
+      76,
+      80,
+      82,
+      55,
+      71
+    ]
+  },
+  "sbc-potm-olise": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/247827-michael-olise/27-84133907/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/42.72384b5eb7506cd558d7ee4270e17302507e32650b4e4cce80293581272f9425.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84133907.131241b07dcb61a7a7de97716d4f72f8d4d53fbe4bf3cddc6e2243e75aecf6f4.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/18.1913b72e6c1685cc8b67c4126ed88119ac29293b1fc11688ebfb464631a7a654.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/19.2052e58944544251cec9a9c60ef432ace07775c8a00e407b147046d54c930776.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/21.01fbe64716257eb78bc4ff4bbc1969afa82e32bd73a43d7c30abe1ab4fd8d223.png",
+    "name": "Olise",
+    "rating": 91,
+    "position": "RW",
+    "stats": [
+      84,
+      83,
+      90,
+      92,
+      48,
+      70
+    ]
+  },
+  "sbc-potm-malen": {
+    "kind": "player",
+    "sourceUrl": "https://www.fut.gg/players/231447-donyell-malen/27-50563095/",
+    "background": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/114.55c3cba75f9d4fa59932c14f503cc9ad50401cc3551f356dcce12bc5a7fa3899.png",
+    "portrait": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50563095.44ca1ed070c0e7354f77567b7a44112883e94b04750ae8ee56dbe32856260522.webp",
+    "nation": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/34.23bd5b7123ba01a19652dd318088ee023e48622f156dbdabd6d8e1c1805b2f77.png",
+    "league": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/31.b1950cc3e90e9a2e75be5bbbf06967a217db45e22180c84bac2e5588ede83541.png",
+    "club": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/52.7370fe7e3ecd40a6e2a9fe3bdcf665686d07d582cc234ce87ebf1cb706a4897b.png",
+    "name": "Malen",
+    "rating": 85,
+    "position": "ST",
+    "stats": [
+      87,
+      85,
+      75,
+      86,
+      39,
+      70
+    ]
+  },
+  "sbc-fs-mls-pick-20261020": {
+    "kind": "pick",
+    "image": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/64.png",
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-64-mls-future-stars-player-pick/"
+  },
+  "sbc-hero-max87-20261019": {
+    "kind": "pick",
+    "image": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/69.png",
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-69-max-87-base-hero-upgrade/"
+  },
+  "sbc-fs-portugal-pick": {
+    "kind": "pick",
+    "image": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/62.png",
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-62-liga-portugal-future-stars-player-pick/"
+  },
+  "sbc-player-pick-79-20261019": {
+    "kind": "pick",
+    "image": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/66.png",
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-66-1-of-3-79-gold-player-pick/"
+  }
+}

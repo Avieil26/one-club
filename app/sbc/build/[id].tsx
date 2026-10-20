@@ -21,6 +21,7 @@ import { playerMedia } from '@/lib/playerMedia';
 import { catalogChallenge } from '@/lib/sbcCatalog';
 import { useApp } from '@/lib/store';
 import { errorMessage } from '@/lib/format';
+import { isOpen } from '@/lib/selectors';
 
 function blankSquad(formationId: FormationId): Record<string, FcPlayer | null> {
   const placed: Record<string, FcPlayer | null> = {};
@@ -86,11 +87,12 @@ export default function SquadBuildScreen() {
     return { shown: matched.slice(0, limit), total: matched.length };
   }, [active, formation, placed, query, used]);
 
-  if (!challenge || challenge.kind !== 'classic') {
+  if (!challenge || !isOpen(challenge) || challenge.kind !== 'classic' || challenge.manualValidation) {
     return (
       <Screen scene="sbc">
         <Title>{t("אין כאן בניית סגל", "Squad building is unavailable here")}</Title>
-        <Muted>{t("המסך הזה מיועד ל-SBC עם כימיה. ל-Streamlined יש מחשבון ניקוד.", "This screen is for SBCs with chemistry. Use the points calculator for Streamlined challenges.")}</Muted>
+        <Muted>{t('חזרו לעמוד האתגר כדי לראות אם הוא פעיל, לפתוח מחשבון או לשתף צילום מהמשחק.', 'Return to the challenge to check availability, open its calculator or share an in-game screenshot.')}</Muted>
+        <Button label={t('חזרה לאתגר', 'Back to challenge')} onPress={() => router.replace(`/sbc/${id}`)} variant="ghost" />
       </Screen>
     );
   }
