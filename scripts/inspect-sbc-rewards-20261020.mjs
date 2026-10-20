@@ -1,13 +1,10 @@
-import fs from 'node:fs';
-const audit=JSON.parse(fs.readFileSync('assets/data/sbc-audit-20261020.json','utf8'));
-const sources=[...new Map(audit.challenges.map(c=>[c.expirySourceUrl,c])).values()];
+const sources=[{"id":"sbc-fs-diao","url":"https://www.fut.gg/players/275324-assane-diao-diaoune/27-50606972/"},{"id":"sbc-fs-manzambi","url":"https://www.fut.gg/players/276694-johan-manzambi/27-50608342/"},{"id":"sbc-fs-zicai","url":"https://www.fut.gg/players/265057-cora-zicai/27-50596705/"},{"id":"sbc-fs-espart","url":"https://www.fut.gg/players/81863-xavi-espart/27-50413511/"},{"id":"sbc-potm-raphinha","url":"https://www.fut.gg/players/233419-raphinha/27-84119499/"},{"id":"sbc-potm-pina","url":"https://www.fut.gg/players/262531-claudia-pina/27-50594179/"},{"id":"sbc-potm-gross","url":"https://www.fut.gg/players/190765-pascal-gross/27-84076845/"},{"id":"sbc-potm-ferran","url":"https://www.fut.gg/players/241461-ferran-torres/27-67350325/"},{"id":"sbc-potm-olise","url":"https://www.fut.gg/players/247827-michael-olise/27-84133907/"},{"id":"sbc-potm-malen","url":"https://www.fut.gg/players/231447-donyell-malen/27-50563095/"},{"id":"sbc-intro-espinoza","url":"https://www.fut.gg/players/226385-cristian-espinoza/27-50558033/"}];
 for(let i=0;i<sources.length;i+=4)await Promise.all(sources.slice(i,i+4).map(async c=>{
-try{
-const res=await fetch(c.expirySourceUrl,{signal:AbortSignal.timeout(25000)});if(!res.ok)throw Error(String(res.status));
-const html=await res.text();
-const images=[...html.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]).filter(t=>/game-assets.fut.gg/.test(t)).map(t=>({src:t.match(/src="([^"]+)"/)?.[1],alt:t.match(/alt="([^"]*)"/)?.[1]})).filter(i=>/2027\/(?:rarities|player-item|pack|sbc)/.test(i.src||''));
-const links=[...html.matchAll(/href="([^"]*\/players\/[^"]+)"/g)].map(m=>m[1]);
-const plain=html.replace(/<script\b[\s\S]*?<\/script>/g,'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
-console.log('REWARD_FACT='+JSON.stringify({id:c.id,images:[...new Map(images.map(i=>[i.src,i])).values()],players:[...new Set(links)],solve:plain.slice(plain.indexOf('Total cards'),plain.indexOf('Total cards')+1200)}));
-}catch(e){console.log('SOURCE_ERROR='+JSON.stringify({id:c.id,error:String(e)}));}
+ const res=await fetch(c.url,{signal:AbortSignal.timeout(25000)});if(!res.ok)throw Error(String(res.status));const html=await res.text();
+ const images=[...html.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]).filter(t=>/game-assets.fut.gg/.test(t)).map(t=>({src:t.match(/src="([^"]+)"/)?.[1],alt:t.match(/alt="([^"]*)"/)?.[1]}));
+ const plain=html.replace(/<script\b[\s\S]*?<\/script>/g,'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+ console.log('PLAYER_ART='+JSON.stringify({...c,images:[...new Map(images.map(i=>[i.src,i])).values()],card:plain.slice(plain.indexOf(' OVR '),plain.indexOf(' OVR ')+900)}));
 }));
+for (const url of ['https://www.fut.gg/sbc/upgrades/27-71-2x-83-upgrade/','https://www.fut.gg/sbc/challenges/27-61-future-stars-challenge-3/']) {
+ const html=await (await fetch(url)).text();console.log('PACK_ART='+JSON.stringify({url,images:[...html.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]).filter(t=>/game-assets.fut.gg/.test(t))}));
+}
