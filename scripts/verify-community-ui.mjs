@@ -152,6 +152,9 @@ try {
   await page.getByRole('img',{name:'Ferran Torres 85 ST'}).waitFor();
   await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('[data-testid="sbc-reward-sbc-potm-ferran"] img')];return imgs.length>0&&imgs.every(i=>i.complete&&i.naturalWidth>0&&i.src.startsWith(location.origin+'/'));},{},{timeout:25000});
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-ferran-${language}.png`)});
+  const detailCopy=await page.locator('body').innerText();
+  assert(!/FUT\.?GG|FUTBIN|source-checked|בדיקת הפתרון במקור|דרישות ומקור/i.test(detailCopy),'SBC detail exposes internal source labels');
+  assert.equal(await page.locator('a[href*="fut.gg"],a[href*="futbin.com"]').count(),0);
   // Invitation links survive the register/login boundary, including a page reload.
   const savedAuth = await page.evaluate(() => localStorage.getItem('sb-hxjgphhcspzjnkkzdmpk-auth-token'));
   await page.evaluate(() => {localStorage.setItem('fc27-browser-signed-out','1');localStorage.removeItem('sb-hxjgphhcspzjnkkzdmpk-auth-token');});

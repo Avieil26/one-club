@@ -3,7 +3,7 @@ import { preparedRoute } from '@/lib/sbcPrepared';
 import { sbcCheckText, sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
-import { Image, Linking, Platform, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, Text, useWindowDimensions, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { SquadPitch } from '@/components/SquadPitch';
@@ -85,7 +85,6 @@ export default function SbcDetailScreen() {
         {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
-      {challenge.sourceUrl ? <Button label={t('דרישות ומקור ב־FUTBIN / FUT.GG', 'Requirements & source on FUTBIN / FUT.GG')} variant="ghost" onPress={() => { void Linking.openURL(challenge.sourceUrl!).catch(() => undefined); }} /> : null}
       {challenge.lastCheckedAt ? <Muted>{t('נבדק לאחרונה: ', 'Last checked: ')}{new Date(challenge.lastCheckedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted> : null}
       {challenge.kind === 'classic' && challenge.previewSquad ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
@@ -122,9 +121,7 @@ export default function SbcDetailScreen() {
           <Text style={{ color: colors.text, fontSize: 17, fontWeight: '900' }}>{line.rating} OVR</Text>
           <Text style={{ color: colors.gold, fontWeight: '800' }}>{line.count} × {t('קלפים נדירים', 'rare items')}</Text>
         </View>)}
-        <Muted>{t('הצירוף נבדק במקור. לפני ההגשה ודאו שבמשחק הגעתם ליעד הניקוד. גרסאות מיוחדות ושינויי פריטים עשויים לשנות את הניקוד; זה אינו מחיר שוק מובטח.', 'Source-checked combination. Confirm the in-game score before submitting. Special versions and item changes can affect the score; this is not a guaranteed market price.')}</Muted>
-        <Muted>FUT.GG · {new Date(ready.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted>
-        <Button variant="ghost" label={t('בדיקת הפתרון במקור', 'Check combination at source')} onPress={() => { void Linking.openURL(ready.sourceUrl).catch(() => undefined); }} />
+        <Muted>{t('לפני ההגשה ודאו במשחק שהגעתם ליעד הניקוד. גרסאות מיוחדות של קלפים עשויות לשנות את הניקוד.', 'Confirm the target score in-game before submitting. Special card versions can affect the score.')}</Muted>
       </Card> : null}
       {challenge.kind === 'streamlined' ? (
         <Button
