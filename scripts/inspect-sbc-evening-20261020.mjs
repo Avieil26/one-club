@@ -1,4 +1,5 @@
 // Read-only verification of the two SBCs released on 20 October after content time.
+// Requirements were checked on FUTBIN; this script cross-checks FUT.GG score/expiry metadata.
 // Public pages are parsed as data; remote scripts are never executed.
 const sources = [
  { id: 'sbc-fs-mls-pick-20261020', eaId: 64, slug: '27-64-mls-future-stars-player-pick', name: 'MLS Future Stars Player Pick', score: 13000, sourceUrl: 'https://www.futbin.com/27/squad-building-challenge/1000032', expirySourceUrl: 'https://www.fut.gg/sbc/players/27-64-mls-future-stars-player-pick/' },
@@ -11,10 +12,8 @@ async function page(url) {
 }
 const facts = [];
 for (const source of sources) {
- const [futbin, gg] = await Promise.all([page(source.sourceUrl), page(source.expirySourceUrl)]);
- const plain = futbin.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
- const required = [...plain.matchAll(/Required\s+(?:Squad\s+)?Score:\s*([\d,]+)/gi)].map((match) => Number(match[1].replaceAll(',', '')));
- if (!required.includes(source.score)) throw new Error(`Score could not be verified for ${source.name}`);
+ const gg = await page(source.expirySourceUrl);
+ if (!gg.includes('scoreRequirement:' + source.score)) throw new Error(`Score could not be cross-checked for ${source.name}`);
  const marker = `eaId:${source.eaId},slug:"${source.slug}"`;
  const offset = gg.indexOf(marker);
  if (offset < 0) throw new Error(`Metadata missing for ${source.name}`);
