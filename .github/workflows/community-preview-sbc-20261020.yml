@@ -12,6 +12,8 @@ jobs:
   reward-assets:
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -22,3 +24,6 @@ jobs:
           node-version: '24'
           package-manager-cache: false
       - run: node scripts/collect-sbc-art-assets.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FC27_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
