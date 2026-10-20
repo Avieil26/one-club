@@ -26,8 +26,8 @@ for(const [id,art] of Object.entries(artwork)) if(art.kind==='player'){
 const urls=[...sources];
 for(let offset=0;offset<urls.length;offset+=4)await Promise.all(urls.slice(offset,offset+4).map(async(url,j)=>{
  const index=offset+j;const raw=normalize(url);
- let response=await fetch(raw,{headers:{Accept:'image/png,image/webp,image/*'},signal:AbortSignal.timeout(25000)});
- if(!response.ok) response=await fetch(url,{signal:AbortSignal.timeout(25000)});
+ let response=await fetch(url,{headers:{Accept:'image/webp,image/png,image/*'},signal:AbortSignal.timeout(25000)});
+ if(!response.ok) response=await fetch(raw,{signal:AbortSignal.timeout(25000)});
  if(!response.ok)throw Error(response.status+' '+url);
  const bytes=Buffer.from(await response.arrayBuffer());
  const png=bytes.subarray(0,8).toString('hex')==='89504e470d0a1a0a';
@@ -45,7 +45,7 @@ console.log('ASSET_TOTAL='+urls.length);
 
 entries.push({path:'assets/data/sbc-local-art-manifest.json',mode:'100644',type:'blob',content:JSON.stringify({sourceCommit:sourceSha,assets:manifest.sort((a,b)=>a.index-b.index),complete:Object.fromEntries(Object.entries(artwork).filter(([,a])=>a.complete).map(([id,a])=>[id,a.complete]))},null,2)+'\n'});
 const tree=await api('/git/trees','POST',{base_tree:gitCommit.tree.sha,tree:entries});
-const commit=await api('/git/commits','POST',{message:'Bundle exact SBC reward artwork as local app assets',tree:tree.sha,parents:[sourceSha]});
+const commit=await api('/git/commits','POST',{message:'Optimize bundled SBC artwork for display resolution',tree:tree.sha,parents:[sourceSha]});
 const latest=await api('/git/ref/heads/'+branch);if(latest.object.sha!==sourceSha)throw Error('Source branch moved during artwork import');
 await api('/git/refs/heads/'+branch,'PATCH',{sha:commit.sha,force:false});
 console.log('BUNDLED_ASSET_COMMIT='+commit.sha);
