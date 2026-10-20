@@ -187,6 +187,7 @@ export function Field({
     <View style={styles.field}>
       <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{label}</Text>
       <TextInput
+        accessibilityLabel={label}
         value={value}
         onChangeText={(text) => onChangeText(maxLength ? text.slice(0, maxLength) : text)}
         placeholder={placeholder}

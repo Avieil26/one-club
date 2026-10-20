@@ -291,7 +291,7 @@ export function sbcFace(challenge: SbcChallenge) {
   return {
     en: face?.en ?? hebrew,
     he: hebrew,
-    category: face?.category ?? (challenge.kind === 'streamlined' ? 'UPGRADES' : 'SBC'),
+    category: challenge.isGroup ? 'FOUNDATIONS' : face?.category ?? (challenge.id.startsWith('sbc-fs-') ? 'FUTURE STARS' : challenge.id.startsWith('sbc-mm-') ? 'MARQUEE MATCHUPS' : challenge.id.startsWith('sbc-potm-') ? 'POTM' : challenge.kind === 'streamlined' ? 'UPGRADES' : 'SBC'),
     edge: face?.edge ?? '#C9A227',
     rank: face?.rank ?? 4,
   };

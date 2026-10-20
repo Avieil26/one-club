@@ -21,6 +21,7 @@ export default function CareerScreen() {
 
   return (
     <Screen refreshing={app.busy} onRefresh={app.refresh} scene="career">
+      <Button label={t('מסעות קריירה משותפים — הצטרפו לעונה', 'Shared career journeys — join the season')} onPress={() => router.push('/career/journeys')} variant="ghost" />
       {/* MODE SWITCHER TABS */}
       <View style={[styles.tabSwitcher, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
         <Pressable

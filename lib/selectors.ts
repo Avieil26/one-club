@@ -2,8 +2,8 @@ import type { CareerChallenge, FutPost, FutRating, GroundsPost, Profile, SbcChal
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-export function isOpen(challenge: { endsAt: string | null }, at = Date.now()): boolean {
-  return !challenge.endsAt || new Date(challenge.endsAt).getTime() > at;
+export function isOpen(challenge: { endsAt: string | null; archived?: boolean }, at = Date.now()): boolean {
+  return !challenge.archived && (!challenge.endsAt || new Date(challenge.endsAt).getTime() > at);
 }
 
 export function openChallenges(list: CareerChallenge[], at = Date.now()): CareerChallenge[] {

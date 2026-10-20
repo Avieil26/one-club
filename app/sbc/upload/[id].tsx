@@ -9,6 +9,7 @@ import { Badge, Button, Card, colors, Field, ImageRow, Muted, Screen, Title } fr
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
 import { catalogChallenge } from '@/lib/sbcCatalog';
+import { isOpen } from '@/lib/selectors';
 import { sbcFace } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 
@@ -33,7 +34,7 @@ export default function SbcUploadSolutionScreen() {
     Animated.spring(scale, { toValue: 1, friction: 6, useNativeDriver: true }).start();
   }, [imageUris, scale]);
 
-  if (!challenge) {
+  if (!challenge || !isOpen(challenge)) {
     return (
       <Screen scene="sbc">
         <Title>{t("האתגר לא נמצא", "Challenge not found")}</Title>
@@ -58,6 +59,7 @@ export default function SbcUploadSolutionScreen() {
   }
 
   async function save() {
+    if (!challenge || !isOpen(challenge)) { router.replace(`/sbc/${id}`); return; }
     if (!app.user) {
       Alert.alert(t("נדרשת התחברות", "Sign in required"), t("כדי לפרסם פתרון לקהילה צריך להתחבר למשתמש.", "Sign in to share a solution with the community."));
       return;

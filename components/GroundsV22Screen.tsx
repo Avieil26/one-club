@@ -343,6 +343,7 @@ export default function GroundsV22Screen() {
                   <Text style={[s.heroHeadline, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, compact && { fontSize: 28, lineHeight: 36 }]}>{t('המגרש שלך. האנשים שלך.', 'Your pitch. Your people.')}</Text>
                   <Text style={[s.heroLead, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('מוצאים שחקנים שמתאימים לסגנון שלכם, בונים קבוצה טובה יותר ונכנסים למשחק עם האנשים הנכונים.', 'Find players who match your style, build a stronger squad, and play with the right people.')}</Text>
                   <View style={[s.heroButtons, compact && { flexDirection: 'column', alignItems: 'stretch' }]}>
+                    <ActionButton label={t('חבורה קבועה · קביעת מפגש', 'Regular squad · Schedule a session')} icon="calendar-outline" onPress={() => navigate('/grounds/sessions')} />
                     <ActionButton label={t('חפש שחקנים', 'Find players')} icon="search-outline" onPress={searchPlayers} />
                     <ActionButton label={t('פרסם פרופיל', 'Create profile')} icon="person-add-outline" onPress={() => navigate('/grounds/new')} quiet />
                   </View>

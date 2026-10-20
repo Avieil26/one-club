@@ -10,6 +10,7 @@ import { PortraitCard } from '@/components/PortraitCard';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
+import { SBC_AUDIT_CHECKED_AT } from '@/lib/sbcLive20261020';
 import { sbcFace, sbcTileTheme } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
@@ -187,7 +188,7 @@ export default function SbcScreen() {
       <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: rtl ? 'flex-start' : 'flex-end' }}>
         <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: rtl ? 'right' : 'left', width: '100%' }}>{t('מחשבון Streamlined', 'Streamlined calculator')}</Text>
       </Pressable>
-      <Muted>{t('מרקי מאצ׳אפס עד 1 באוקטובר. סיום כל ארבעת המשחקים נותן חבילת זהב גדולה.', 'Marquee matchups through October 1. Completing all four matches earns a Jumbo Gold Pack.')}</Muted>
+      <Muted>{t('הקטלוג נבדק לאחרונה: ', 'Catalogue last checked: ')}{new Date(SBC_AUDIT_CHECKED_AT).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}{t('. אתגרים שפג תוקפם יורדים אוטומטית מהרשימה.', '. Expired challenges are removed automatically.')}</Muted>
       {app.user?.isAdmin ? <Button label={t('אתגר SBC חדש', 'New SBC challenge')} variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
       {!challenges.length ? <Muted>{t('אין כרגע SBC פעילים.', 'There are no active SBCs right now.')}</Muted> : null}
       {rows.map((row, rowIndex) => (

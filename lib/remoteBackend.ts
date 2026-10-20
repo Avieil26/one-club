@@ -5,6 +5,7 @@ import { nativeStartupSnapshot, NATIVE_SNAPSHOT_KEY, serializeNativeSnapshot } f
 import { signInWithGoogleOAuth } from '@/lib/authGoogle';
 import type { Backend } from '@/lib/backend';
 import { catalogChallenge, mergeOfficialSbcs, RETIRED_SBC_IDS } from '@/lib/sbcCatalog';
+import { isOpen } from '@/lib/selectors';
 import { decodeSolution, encodeSolution, proofImages, readSquad } from '@/lib/sbcSolution';
 import { mergeFeaturedCareer, seedDatabase } from '@/lib/seed';
 import { normalizeSquad } from '@/lib/profileSquad';
@@ -882,6 +883,8 @@ export function createRemoteBackend(): Backend {
       return readSnapshot();
     },
     async addSolution(input: NewSolution) {
+      const catalog = catalogChallenge(input.challengeId);
+      if (catalog && !isOpen(catalog)) throw new Error('האתגר כבר הסתיים');
       const { data: userData, error: userError } = await getSupabase().auth.getUser();
       if (userError || !userData.user) throw new Error('צריך להתחבר');
       if (!input.explanation.trim()) throw new Error('חסר הסבר');
@@ -889,7 +892,6 @@ export function createRemoteBackend(): Backend {
       const proofs = proofImages(input.imageUris, squad);
       if (!proofs.length) throw new Error('אפשר לבנות סגל של 11 שחקנים, או להעלות צילום מסך');
       const imageUris = proofs[0] === 'squad' ? proofs : await uploadProofs(userData.user.id, proofs, 'sbc');
-      const catalog = catalogChallenge(input.challengeId);
       await call('add_sbc_solution', {
         p_challenge: input.challengeId,
         p_explanation: encodeSolution(input.explanation, squad),

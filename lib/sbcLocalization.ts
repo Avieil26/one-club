@@ -1,3 +1,5 @@
+import { LIVE_SBC_TRANSLATIONS } from '@/lib/sbcLive20261020';
+
 const SBC_ENGLISH: Record<string, string> = {
   "5× שחקני זהב 80+": "5× 80+ Gold Players",
   "3× שחקני זהב 79+": "3× 79+ Gold Players",
@@ -64,5 +66,5 @@ const SBC_ENGLISH: Record<string, string> = {
 
 /** Translate built-in copy exactly; preserve community-authored text. */
 export function sbcText(text: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (SBC_ENGLISH[text] ?? text) : text;
+  return language === 'en' ? (LIVE_SBC_TRANSLATIONS[text] ?? SBC_ENGLISH[text] ?? text) : text;
 }
