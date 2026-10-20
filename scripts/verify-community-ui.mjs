@@ -137,6 +137,11 @@ try {
   }
   await page.setViewportSize({width:1280,height:1000});
   await page.getByRole('button',{name:'Ferran Torres',exact:true}).scrollIntoViewIfNeeded();
+  await page.locator('[data-testid^="sbc-reward-"] img').evaluateAll(async images => {
+   await Promise.all(images.map(img=>img.decode()));
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  });
+  console.log('REWARD_RENDER='+JSON.stringify(await page.locator('[data-testid^="sbc-reward-"]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.testid,html:n.outerHTML})))));
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`sbc-player-cards-${language}.png`)});
   await page.setViewportSize({width:390,height:844});
   await page.getByRole('button',{name:'MLS Future Stars Player Pick',exact:true}).scrollIntoViewIfNeeded();

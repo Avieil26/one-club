@@ -24,7 +24,7 @@ export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChal
  </View>;
  if (art?.kind === 'pick') return <View testID={testID} accessibilityRole="image" accessibilityLabel={challenge.reward ?? challenge.title} style={{ width, height }}><Image source={bundledImage(art.image)} resizeMode="contain" style={{ width, height }} /></View>;
  if (art?.kind === 'player') {
-  const ink = challenge.id === 'sbc-potm-pina' ? '#382255' : '#FFF8ED';
+  const ink = '#FFF8ED';
   return <View testID={testID} accessibilityRole="image" accessibilityLabel={`${art.name} ${art.rating} ${art.position}`} style={{ width, height, direction: 'ltr' }}>
    <Image testID={`sbc-card-frame-${challenge.id}`} source={bundledImage(art.background)} resizeMode="contain" style={{ position: 'absolute', top: 0, left: 0, width, height }} />
    <Image source={bundledImage(art.portrait)} resizeMode="contain" style={{ position: 'absolute', width: width * 0.79, height: height * 0.61, top: height * 0.10, right: width * 0.025 }} />
