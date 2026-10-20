@@ -20,7 +20,7 @@ const sid='20000000-0000-4000-8000-000000000001',jid='30000000-0000-4000-8000-00
 const errors=[]; const calls=[];
 try {
  for(const language of ['en','he']) {
-  if(language==='he')browser=await playwright.launch(launchOptions);
+  if(language==='he'){await browser.close();browser=await playwright.launch(launchOptions);}
   console.log('Checking',language);
   let session={id:sid,host_user_id:other,title:'Rush objectives squad',mode:'Rush',platforms:['PS5','PC'],region:'GB',language,play_style:'casual',notes:'Complete objectives together',starts_at:new Date(Date.now()+86400000).toISOString(),timezone:'Europe/London',capacity:2,weekly:true,status:'open',parent_id:null,partner_session_members:[{session_id:sid,user_id:other,platform:'PC',status:'joined'}]};
   let journey={id:jid,owner_user_id:other,title:'Road to Europe',club:'Schalke',rules:'Academy first; follow the shared budget.',milestones:['Finish transfer window','Win promotion'],language,status:'active',created_at:new Date().toISOString(),career_journey_members:[{journey_id:jid,user_id:other,club:'Schalke',difficulty:'World Class',season:'1',active:true}]};
@@ -91,18 +91,27 @@ try {
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-journey-form-${language}.png`)});
   await button(t('Publish journey','פתיחת המסע')).click();await page.getByText('Youth academy story',{exact:true}).waitFor();
   assert.deepEqual(createdJourney.milestones,['First window','First youth debut']);
+  await page.goto('http://127.0.0.1:8094/grounds/new');
+  await button(t('Choose country','בחירת מדינה')).click();
+  await page.getByRole('textbox',{name:t('Search countries','חיפוש מדינה'),exact:true}).fill('US');
+  await button(t('United States','ארצות הברית')).click();
+  await page.getByText(t('United States','ארצות הברית'),{exact:true}).waitFor();
+  assert.equal(await page.getByText(t('Region','אזור'),{exact:true}).count(),0);
   await page.goto('http://127.0.0.1:8094/career?tab=journeys');
   await page.getByRole('tab',{name:t('Shared journeys','מסעות משותפים'),exact:true}).waitFor();
   await button(t('Start a journey','פתיחת מסע')).waitFor();
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-career-tab-${language}.png`)});
   await page.goto('http://127.0.0.1:8094/sbc');
   await page.getByRole('button',{name:'2×83+ Upgrade',exact:true}).waitFor();
-  const sbcTiles=await page.locator('[role="button"]').allTextContents();
-  assert(sbcTiles.findIndex(s=>s.includes('MLS'))<sbcTiles.findIndex(s=>s.includes('Ferran')),'Newest SBCs must precede Ferran');
+  await page.getByRole('button',{name:'MLS Future Stars Player Pick',exact:true}).waitFor();
+  const sbcTiles=await page.locator('[role="button"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('aria-label')));
+  const newest=sbcTiles.indexOf('MLS Future Stars Player Pick'), ferran=sbcTiles.indexOf('Ferran Torres');
+  assert(newest>=0 && ferran>=0 && newest<ferran,'Newest SBCs must precede Ferran');
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-sbc-${language}.png`)});
   await page.goto('http://127.0.0.1:8094/sbc/sbc-potm-ferran');
   await page.getByText(t('Ready rating combination','צירוף דירוגים מוכן'),{exact:true}).waitFor();
   await page.getByRole('img',{name:'Ferran Torres 85 ST'}).waitFor();
+  await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('img')].filter(i=>i.src.includes('game-assets.fut.gg'));return imgs.length>=5 && imgs.every(i=>i.complete&&i.naturalWidth>0);},{},{timeout:25000});
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-ferran-${language}.png`)});
   // Invitation links survive the register/login boundary, including a page reload.
   const savedAuth = await page.evaluate(() => localStorage.getItem('sb-hxjgphhcspzjnkkzdmpk-auth-token'));

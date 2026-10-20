@@ -247,6 +247,11 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-fs-mls-pick-20261020': { en: 'MLS Future Stars Player Pick', category: 'FUTURE STARS / MLS', edge: '#AD89F8', rank: 0 },
+  'sbc-fs-portugal-pick': { en: 'Liga Portugal Future Stars Player Pick', category: 'FUTURE STARS / PORTUGAL', edge: '#AD89F8', rank: 0 },
+  'sbc-potm-ferran': { en: 'Ferran Torres', category: 'POTM', edge: '#5793FF', rank: 0 },
+  'sbc-hero-max87-20261019': { en: 'Max 87 Hero Upgrade', category: 'HERO UPGRADE', edge: '#ED9A64', rank: 0 },
+
   'sbc-potm-pina': { en: 'Claudia Pina', category: 'LIGA F POTM', edge: '#C9A227', rank: 0 },
   'sbc-upgrade-80x5': { en: '5×80+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-upgrade-79x3': { en: '3×79+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
@@ -287,7 +292,7 @@ const FACE: Record<string, { en: string; category: string; edge: string; rank: n
 
 export function sbcFace(challenge: SbcChallenge) {
   const face = FACE[challenge.id];
-  const hebrew = challenge.title.includes(' · ') ? challenge.title.split(' · ').slice(1).join(' · ') : challenge.title;
+  const hebrew = /[\u0590-\u05FF]/u.test(challenge.title) && challenge.title.includes(' · ') ? challenge.title.split(' · ').slice(1).join(' · ') : challenge.title;
   return {
     en: face?.en ?? hebrew,
     he: hebrew,
@@ -299,6 +304,9 @@ export function sbcFace(challenge: SbcChallenge) {
 
 export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   const known = BY_ID[challenge.id];
+  if (challenge.id === 'sbc-silver-upgrade' || challenge.id === 'sbc-bronze-silver-reroll') return { ...FALLBACK_CLASSIC, pack: 'rare-75', packLabel: '75+' };
+  if (challenge.id === 'sbc-bronze-upgrade') return { ...FALLBACK_CLASSIC, pack: 'silver-x2', packLabel: '2× SILVER' };
+  if (challenge.id === 'sbc-gold-upgrade' || challenge.id === 'sbc-gold-reroll') return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2×78+' };
   if (known) return known;
   const reward = challenge.reward ?? '';
   const rating = reward.match(/(?:×|x)\\s*(\\d{2})\\+/i)?.[1] ?? reward.match(/(\\d{2})\\+/)?.[1];

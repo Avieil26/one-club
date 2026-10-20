@@ -1,6 +1,6 @@
 import { SbcRewardVisual } from '@/components/SbcRewardVisual';
 import { preparedRoute } from '@/lib/sbcPrepared';
-import { sbcText } from '@/lib/sbcLocalization';
+import { sbcCheckText, sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
 import { Image, Linking, Platform, Text, useWindowDimensions, View } from 'react-native';
@@ -113,7 +113,7 @@ export default function SbcDetailScreen() {
             <Card>
               {report.checks.map((check) => (
                 <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
-                  {check.ok ? '✓' : '✗'} {language === 'he' ? check.label : t('דרישה', 'Requirement') + ` ${report.checks.indexOf(check) + 1}`}
+                  {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
                 </Text>
               ))}
             </Card>

@@ -47,3 +47,32 @@ const custom = { ...catalogChallenge('sbc-fs-challenge-3'), id: 'custom-communit
 assert(mergeOfficialSbcs([custom], Date.parse(audit.checkedAt)).some((c) => c.id === custom.id));
 const active = mergeOfficialSbcs([], Date.parse(audit.checkedAt));
 console.log(`SBC refresh verified: ${audit.challenges.length} source-checked entries, ${audit.retiredIds.length} archived old editions; ${active.length} active entries including practice at audit time. Exact deadlines override stale server/cache data.`);
+
+const { openSbcChallenges } = loadRepositoryModule('lib/selectors.ts');
+const sorted = openSbcChallenges(officialChallenges, eveningAt);
+assert.deepEqual(sorted.slice(0, 2).map((c) => c.id), ['sbc-fs-mls-pick-20261020', 'sbc-upgrade-83x2-20261020']);
+assert(sorted.findIndex((c) => c.id === 'sbc-hero-max87-20261019') < sorted.findIndex((c) => c.id === 'sbc-potm-ferran'));
+const { countryOptions, countryName, COUNTRY_CODES } = loadRepositoryModule('lib/countries.ts');
+assert.equal(COUNTRY_CODES.size, 249);
+assert.equal(countryName('DE', 'he'), 'גרמניה');
+assert.equal(countryName('DE', 'en'), 'Germany');
+assert(countryOptions('גרמניה', 'en').some((c) => c.code === 'DE'));
+assert(countryOptions('Germany', 'he').some((c) => c.code === 'DE'));
+assert.equal(countryName('Europe', 'en'), 'Country not selected', 'Do not infer a country from an old broad region');
+assert.equal(countryName('מרכז', 'en'), 'Israel');
+const artwork = JSON.parse(fs.readFileSync('assets/data/sbc-reward-art-20261020.json', 'utf8'));
+for (const c of audit.challenges.filter((c) => /sbc-potm-|sbc-fs-(diao|manzambi|zicai)|sbc-intro-espinoza/.test(c.id))) {
+ const art = artwork[c.id];
+ assert.equal(art?.kind, 'player', c.id + ': missing actual player reward');
+ const item = art.sourceUrl.match(/\\/27-(\\d+)\\/$/)[1];
+ assert(art.portrait.includes('/2027/player-item/27-' + item + '.'), c.id + ': wrong edition portrait');
+ assert(art.background.includes('/2027/rarities-level-0-large/'), c.id + ': missing actual promo frame');
+}
+const prepared = JSON.parse(fs.readFileSync('assets/data/sbc-prepared-20261020.json', 'utf8'));
+assert(prepared['sbc-upgrade-83x2-20261020'] && prepared['sbc-potm-ferran']);
+for (const [id, route] of Object.entries(prepared)) {
+ assert.equal(catalogChallenge(id).kind, 'streamlined');
+ assert(route.lines.length > 0 && route.lines.every((line) => Number.isInteger(line.count) && line.count > 0 && line.rating >= 45 && line.rating <= 99 && line.rarity === 'rare'));
+ assert.equal(route.sourceUrl, audit.challenges.find((c) => c.id === id).expirySourceUrl);
+}
+console.log('Newest-first SBC order, matching reward editions, prepared rating routes and bilingual country search passed.');

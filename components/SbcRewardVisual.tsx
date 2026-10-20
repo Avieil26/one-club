@@ -29,6 +29,10 @@ export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChal
    </View>
   </View>;
  }
+ if (challenge.id === 'sbc-getting-started') return <View accessibilityRole="image" accessibilityLabel="Coin Boost" style={{ width, height, alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+  <Text style={{ color: '#E9C36A', fontSize: width * 0.45, fontWeight: '900' }}>◉</Text>
+  <Text style={{ color: '#F5DEA0', fontSize: width * 0.105, fontWeight: '900' }}>COIN BOOST</Text>
+ </View>;
  const theme = sbcTileTheme(challenge);
  const stamp = challenge.reward?.match(/(?:×|x)\s*\d{2}\+/i)?.[0] ?? theme.packLabel;
  return <View style={{ width, height, alignItems: 'center', justifyContent: 'center' }}>

@@ -40,6 +40,7 @@ const GROUNDS_COPY: Record<string, string> = {
   "העלאת רמה": "Increase level",
   "לדוגמה: 1,250": "For example: 1,250",
   "אזור": "Region",
+  "מדינה": "Country",
   "בחרו את הסגנונות שמופיעים אצלכם ב־My Pro. אפשר לסמן רגיל או PlayStyle+ לכל סגנון; סמני השוערות מוצגים בנפרד.": "Select the PlayStyles shown in My Pro. Choose Base or PlayStyle+ for each style; goalkeeping styles are listed separately.",
   "תמונת פרופיל": "Profile photo",
   "תמונה ברורה עוזרת לשחקנים לזהות אתכם": "A clear photo helps players recognize you",

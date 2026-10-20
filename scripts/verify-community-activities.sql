@@ -12,12 +12,13 @@ begin
   insert into public.profiles(id,display_name) values(host,'Rollback community host'),(player,'Rollback community player'),(outsider,'Rollback outsider') on conflict do nothing;
   perform set_config('request.jwt.claim.sub',host::text,true);
   set local role authenticated;
-  payload:=jsonb_build_object('title','QA weekly squad','mode','Rush','platforms',array['PS5','PC'],'platform','PS5','region','Europe','language','en','play_style','casual','starts_at',now()+interval '1 day','timezone','Europe/London','capacity',2,'weekly',true);
+  payload:=jsonb_build_object('title','QA weekly squad','mode','Rush','platforms',array['PS5','PC'],'platform','PS5','region','DE','language','en','play_style','casual','starts_at',now()+interval '1 day','timezone','Europe/London','capacity',2,'weekly',true);
   denied:=false; begin
    perform public.community_activity('create_session',payload || jsonb_build_object('capacity',11));
   exception when check_violation then denied:=true; end;
   if not denied then raise exception 'Rush party exceeded four players'; end if;
   sid:=public.community_activity('create_session',payload);
+  if not exists(select 1 from public.partner_sessions where id=sid and region='DE') then raise exception 'Country was not saved'; end if;
   if (select count(*) from public.partner_session_members where session_id=sid and status='joined')<>1 then raise exception 'Host must occupy a spot'; end if;
   denied:=false; begin
    insert into public.partner_session_members(session_id,user_id,platform,status) values(sid,outsider,'PS5','joined');
