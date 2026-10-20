@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, DevSettings, I18nManager, Platform, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, I18nManager, Platform, StyleSheet, View } from 'react-native';
 import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -12,7 +12,7 @@ import { GoogleAuthSheet } from '@/components/GoogleAuthSheet';
 import { NoticeHost } from '@/components/NoticeHost';
 import { TermsConsentModal } from '@/components/TermsConsentModal';
 import { FutureStarsAnnouncement } from '@/components/FutureStarsAnnouncement';
-import { colors } from '@/components/ui';
+import { Button, colors, Muted, Title } from '@/components/ui';
 import '@/lib/installWebAlert';
 import { AppProvider, useApp } from '@/lib/store';
 import { LanguageProvider, useLanguage } from '@/lib/language';
@@ -20,6 +20,13 @@ import { LanguageProvider, useLanguage } from '@/lib/language';
 export { ErrorBoundary } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
+
+// Screen layouts already select direction explicitly. OS-wide RTL would also
+// mirror football pitches and keep English mirrored until a process restart.
+if (Platform.OS !== 'web') {
+  I18nManager.allowRTL(false);
+  I18nManager.forceRTL(false);
+}
 
 const theme = {
   ...DarkTheme,
@@ -34,7 +41,7 @@ const theme = {
 };
 
 export default function RootLayout() {
-  useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     Heebo: require('../assets/fonts/Heebo.ttf'),
     GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
   });
@@ -58,7 +65,10 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    SplashScreen.hideAsync();
+    if (fontsLoaded || fontError) void SplashScreen.hideAsync();
+  }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
     if (Platform.OS === 'web') {
       const styleId = 'fc27-scroll';
       if (!document.getElementById(styleId)) {
@@ -83,11 +93,6 @@ export default function RootLayout() {
         document.head.appendChild(style);
       }
       return;
-    }
-    if (!I18nManager.isRTL) {
-      I18nManager.allowRTL(true);
-      I18nManager.forceRTL(true);
-      if (__DEV__) DevSettings.reload();
     }
   }, []);
 
@@ -126,8 +131,8 @@ export default function RootLayout() {
 }
 
 function Gate({ children }: { children: React.ReactNode }) {
-  const { ready, user } = useApp();
-  const { ready: languageReady, hasSelection } = useLanguage();
+  const { ready, user, startupError, retryStartup } = useApp();
+  const { ready: languageReady, hasSelection, t } = useLanguage();
   const segments = useSegments();
   const router = useRouter();
   const fromLogin = useRef(segments[0] === 'login' || segments[0] === 'register');
@@ -159,6 +164,13 @@ function Gate({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(timer);
   }, [arriving]);
 
+  if (startupError) {
+    return <View style={{ flex: 1, backgroundColor: colors.bg, justifyContent: 'center', padding: 24, gap: 16 }}>
+      <Title>{t('לא הצלחנו להתחבר', 'Could not connect')}</Title>
+      <Muted>{t('בדוק את החיבור לאינטרנט ונסה שוב.', 'Check your internet connection and try again.')}</Muted>
+      <Button label={t('נסה שוב', 'Try again')} onPress={retryStartup} />
+    </View>;
+  }
   if (!ready || !languageReady) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' }}>
@@ -178,5 +190,5 @@ function Gate({ children }: { children: React.ReactNode }) {
 }
 
 const styles = StyleSheet.create({
-  fill: { flex: 1, backgroundColor: colors.bg },
+  fill: { flex: 1, backgroundColor: colors.bg, direction: 'ltr' },
 });

@@ -20,6 +20,12 @@
       "android": {
         "buildType": "app-bundle"
       }
+    },
+    "apk": {
+      "extends": "preview",
+      "developmentClient": false,
+      "channel": "android-mobile-20261020",
+      "environment": "production"
     }
   },
   "submit": {

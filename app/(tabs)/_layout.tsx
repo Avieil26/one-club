@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
+import { MobileTabBar } from '@/components/MobileTabBar';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -12,6 +13,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      tabBar={native ? (props) => <MobileTabBar {...props} /> : undefined}
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,

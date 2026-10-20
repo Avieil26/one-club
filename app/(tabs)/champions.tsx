@@ -1,12 +1,14 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Alert, Image, ScrollView, StyleSheet, Text as NativeText, TextInput as NativeTextInput, Pressable as NativePressable, useWindowDimensions, View, type TextProps, type TextInputProps, type PressableProps } from 'react-native';
 import { playerDisplayName } from '@/lib/playerDisplayName';
+import { displayClub } from '@/lib/footballLocalization';
 import { useLanguage } from '@/lib/language';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 
 import { Screen } from '@/components/ui';
+import { AppModal } from '@/components/AppModal';
 import { SbcRewardPack, type PackVisual } from '@/components/SbcRewardPack';
 import { SquadPitch } from '@/components/SquadPitch';
 import { PortraitCard } from '@/components/PortraitCard';
@@ -450,7 +452,7 @@ function FormationPickerModal({
   const mobile = width < 720;
   if (!visible) return null;
   return (
-    <View style={styles.modalBackdrop}>
+    <AppModal onClose={onClose}>
         <View style={[styles.formationPicker, mobile && styles.formationPickerMobile]}>
           <View style={styles.modalHeader}>
             <Pressable onPress={onClose} style={styles.modalBackButton} accessibilityRole="button" accessibilityLabel={t("חזרה", "Back")}>
@@ -474,7 +476,7 @@ function FormationPickerModal({
             ))}
           </ScrollView>
         </View>
-      </View>
+      </AppModal>
   );
 }
 
@@ -502,6 +504,7 @@ function CommunitySquadBuilder({
   const [addingBench, setAddingBench] = useState(false);
   const [query, setQuery] = useState('');
   const [showFormations, setShowFormations] = useState(false);
+  const builderScrollRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     if (!visible) return;
@@ -605,7 +608,7 @@ function CommunitySquadBuilder({
   if (!visible) return null;
 
   return (
-    <View style={styles.squadOverlay}>
+    <AppModal onClose={onClose}>
       <View style={styles.squadBuilderPanel}>
         <View style={styles.squadBuilderHeader}>
           <Pressable style={styles.modalBackButton} onPress={onClose} accessibilityRole="button" accessibilityLabel={t("חזרה להעלאת טקטיקה", "Back to tactic upload")}>
@@ -620,7 +623,7 @@ function CommunitySquadBuilder({
           <Pressable style={styles.modalClose} onPress={onClose} accessibilityRole="button" accessibilityLabel={t("סגור", "Close")}><Text style={styles.modalCloseX}>×</Text></Pressable>
         </View>
 
-        <ScrollView style={styles.squadBuilderScroll} contentContainerStyle={styles.squadBuilderContent}>
+        <ScrollView ref={builderScrollRef} style={styles.squadBuilderScroll} contentContainerStyle={styles.squadBuilderContent} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
           <Pressable style={styles.builderFormationButton} onPress={() => setShowFormations((value) => !value)}>
             <View style={styles.builderFormationCopy}>
               <Text style={styles.formationSelectLabel}>FORMATION</Text>
@@ -695,7 +698,10 @@ function CommunitySquadBuilder({
           </ScrollView>
 
           {(active || addingBench) ? (
-            <View style={styles.builderSearchPanel}>
+            <View style={styles.builderSearchPanel} onLayout={(event) => {
+              const y = event.nativeEvent.layout.y;
+              requestAnimationFrame(() => builderScrollRef.current?.scrollTo({ y: Math.max(0, y - 12), animated: true }));
+            }}>
               <Text style={styles.builderSearchLabel}>{addingBench ? 'בחירת מחליף' : 'שחקן לעמדה'}</Text>
               <TextInput value={query} onChangeText={setQuery} autoFocus placeholder={t("חפש לפי שם שחקן או מועדון", "Search by player name or club")} placeholderTextColor="#6D7883" style={styles.builderSearchInput} />
               {results.map((player) => (
@@ -703,7 +709,7 @@ function CommunitySquadBuilder({
                   <Text style={styles.builderSearchRating}>{player.rating}</Text>
                   <View style={{ flex: 1 }}>
                     <Text style={styles.builderSearchName}>{playerDisplayName(player, language)}</Text>
-                    <Text style={styles.builderSearchMeta}>{player.position} · {player.club}</Text>
+                    <Text style={styles.builderSearchMeta}>{player.position} · {displayClub(player.club, language)}</Text>
                   </View>
                 </Pressable>
               ))}
@@ -722,7 +728,7 @@ function CommunitySquadBuilder({
           </Pressable>
         </ScrollView>
       </View>
-    </View>
+    </AppModal>
   );
 }
 
@@ -1269,11 +1275,11 @@ export default function ChampionsScreen() {
         </View>
 
         <View style={[styles.twoCol, mobile && styles.oneCol]}>
-          <Panel style={styles.snapshotPanel}>
+          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }]}>
             <SectionHeading icon="star-outline" eyebrow="FEATURED PRO" title="TEKKZ" subtitle={t("TEKKZ הוא ברירת המחדל עד שיש תוכן קהילתי מאושר.", "TEKKZ is shown by default until community content is approved.")} />
             <TekkzCard compact />
           </Panel>
-          <Panel style={styles.snapshotPanel}>
+          <Panel style={[styles.snapshotPanel, mobile && { width: '100%' }]}>
             <SectionHeading icon="gift-outline" eyebrow="REWARD SNAPSHOT" title={t("הפרס של הריצה", "Run reward")} subtitle={String(run.wins) + ' wins · ' + String(personalReward.tokens) + ' Champions Tokens'} />
           
             <View style={styles.rewardMiniGrid}>
@@ -1322,13 +1328,13 @@ export default function ChampionsScreen() {
     <Screen scene="champions" showNav refreshing={saving} onRefresh={loadLiveData} maxWidth={1700}>
       <Stack.Screen options={{ title: 'FUT Champions' }} />
 
-      <View style={styles.pageRoot}>
+      <View style={[styles.pageRoot, mobile && { paddingHorizontal: 0, paddingVertical: 8 }]}>
         <View pointerEvents="none" style={StyleSheet.absoluteFill}>
           <Image source={require('@/assets/images/champions-bg.jpg')} resizeMode="cover" style={styles.backgroundImage as any} />
         </View>
         <View style={styles.backgroundSoftener} pointerEvents="none" />
-      <View style={styles.mainLayout}>
-        <View style={styles.sidebar}>
+      <View style={[styles.mainLayout, mobile && { flexDirection: 'column' }]}>
+        {!mobile ? <View style={styles.sidebar}>
           <Text style={styles.sidebarTitle}>FUT CHAMPIONS</Text>
           {NAV.map((item, index) => (
             <Pressable key={item.id} onPress={() => setSection(item.id)} style={[styles.sidebarItem, section === item.id && styles.sidebarItemActive]}>
@@ -1337,9 +1343,9 @@ export default function ChampionsScreen() {
               <Ionicons name={item.icon} size={18} color={section === item.id ? '#F5F7FA' : '#88939E'} />
             </Pressable>
           ))}
-        </View>
+        </View> : null}
 
-        <View style={styles.main}>
+        <View style={[styles.main, mobile && { width: '100%' }]}>
           <View style={styles.sectionBar}>
             <View style={styles.sectionBarTitleWrap}>
               <Text style={styles.sectionBarEyebrow}>FC27 · FUT CHAMPIONS</Text>
@@ -1355,15 +1361,15 @@ export default function ChampionsScreen() {
             </View>
           </View>
 
-          <View style={styles.contentArea}>{content}</View>
+          <View style={[styles.contentArea, mobile && { paddingHorizontal: 0 }]}>{content}</View>
         </View>
       </View>
 
       </View>
 
       {showComposer ? (
-        <View style={styles.modalBackdrop}>
-          <Panel style={[styles.composer, { height: Math.min(height * 0.9, 760) }]}>
+        <AppModal onClose={() => setShowComposer(false)}>
+          <Panel style={[styles.composer, { height: Math.min(height * 0.9, 760), maxHeight: '100%' }]}>
 
             <View style={styles.composerHeader}>
               <View style={styles.composerHeaderActions}>
@@ -1375,7 +1381,7 @@ export default function ChampionsScreen() {
               <Text style={styles.composerTitle}>{t("העלה טקטיקה לקהילה", "Upload a community tactic")}</Text>
               <Pressable style={styles.modalClose} onPress={() => setShowComposer(false)} accessibilityRole="button" accessibilityLabel={t("סגור", "Close")}><Text style={styles.modalCloseX}>×</Text></Pressable>
             </View>
-            <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} showsVerticalScrollIndicator persistentScrollbar={false}>
+            <ScrollView style={styles.composerScroll} contentContainerStyle={styles.composerScrollContent} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" showsVerticalScrollIndicator persistentScrollbar={false}>
             <TextInput value={title} onChangeText={setTitle} placeholder={t("כותרת", "Title")} placeholderTextColor="#6f7984" style={styles.textInput} />
             <Pressable style={styles.formationSelectCard} onPress={() => setComposerFormationPickerOpen(true)}>
               <View style={styles.formationSelectCopy}>
@@ -1449,7 +1455,7 @@ export default function ChampionsScreen() {
             </Pressable>
           </ScrollView>
 </Panel>
-        </View>
+        </AppModal>
       ) : null}
 
       <FormationPickerModal visible={formationPickerOpen} selected={formation} onClose={() => setFormationPickerOpen(false)} onSelect={setFormation} />
@@ -1497,7 +1503,7 @@ const styles = StyleSheet.create({
   metricBarRed: { backgroundColor: '#E33C4A', width: '30%' },
   metricBarGreen: { backgroundColor: '#62E29B', width: '80%' },
 
-  heroTitleWrap: { flex: 1, alignItems: 'flex-end', justifyContent: 'center', minWidth: 260 },
+  heroTitleWrap: { flex: 1, alignItems: 'flex-end', justifyContent: 'center', minWidth: 0 },
   heroEyebrow: { color: '#E0A5AA', fontSize: 10, fontWeight: '900', letterSpacing: 2.3, textAlign: 'right' },
   heroTitle: { color: '#FFF7EB', fontSize: 62, lineHeight: 62, fontWeight: '900', letterSpacing: 1.2, textAlign: 'right', textShadowColor: 'rgba(255,59,76,.23)', textShadowOffset: { width: 0, height: 4 }, textShadowRadius: 13 },
   heroSubtitle: { color: '#EBC9CC', fontSize: 16, fontWeight: '800', textAlign: 'right' },
@@ -1698,7 +1704,7 @@ const styles = StyleSheet.create({
   liveStats: { flexDirection: 'row-reverse', gap: 10, marginTop: 14 },
   twoCol: { flexDirection: 'row-reverse', gap: 13, width: '100%', minWidth: 0 },
   oneCol: { flexDirection: 'column' },
-  snapshotPanel: { flex: 1, minWidth: 0, width: 0 as any },
+  snapshotPanel: { flexGrow: 1, flexBasis: 0, minWidth: 0, width: '100%' },
   rewardMiniGrid: { flexDirection: 'row-reverse', gap: 9 },
   rewardMini: { flex: 1, minHeight: 78, borderRadius: 13, borderWidth: 1, borderColor: 'rgba(255,255,255,.06)', backgroundColor: '#0B1016', alignItems: 'center', justifyContent: 'center' },
   rewardMiniValue: { color: '#F4CF64', fontSize: 18, fontWeight: '900' },
@@ -1712,7 +1718,6 @@ const styles = StyleSheet.create({
 
   pitchTitle: { color: '#E9EDF1', fontSize: 15, fontWeight: '900', textAlign: 'right' },
   pitchSub: { color: '#F1CB63', fontSize: 11, fontWeight: '900', textAlign: 'right', marginTop: 2 },
-  modalBackdrop: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.88)', padding: 18, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
   composer: { maxWidth: 620, width: '100%', alignSelf: 'center', borderColor: '#D12D39', zIndex: 2147483648, elevation: 2147483648, paddingBottom: 10 },
   composerScroll: { flex: 1, minHeight: 0, marginTop: 10 },
   composerScrollContent: { gap: 9, paddingBottom: 22 },
@@ -1795,8 +1800,8 @@ const styles = StyleSheet.create({
   pitchGoalTop: { position: 'absolute', left: '39%', right: '39%', top: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderBottomWidth: 0 },
   pitchGoalBottom: { position: 'absolute', left: '39%', right: '39%', bottom: '3%', height: '5%', borderWidth: 1, borderColor: 'rgba(255,255,255,.15)', borderTopWidth: 0 },
   tacticsHero: { flexDirection: 'row-reverse', gap: 16, alignItems: 'stretch' },
-  tacticsPitchWrap: { flex: 1.15, minWidth: 340 },
-  tacticsControls: { flex: .85, minWidth: 290, justifyContent: 'center', alignItems: 'flex-end', gap: 7 },
+  tacticsPitchWrap: { flex: 1.15, minWidth: 0 },
+  tacticsControls: { flex: .85, minWidth: 0, justifyContent: 'center', alignItems: 'flex-end', gap: 7 },
   tacticsKicker: { color: '#C89748', fontSize: 8, fontWeight: '900', letterSpacing: 1.4, textAlign: 'right' },
   tacticsBigTitle: { color: '#F5F7F9', fontSize: 31, fontWeight: '900', textAlign: 'right' },
   tacticsBody: { color: '#7A8691', fontSize: 10, lineHeight: 16, fontWeight: '700', textAlign: 'right', maxWidth: 470 },
@@ -1840,8 +1845,7 @@ const styles = StyleSheet.create({
   communitySquadHint: { color: '#727E89', fontSize: 8, lineHeight: 13, fontWeight: '700', textAlign: 'right' },
   communitySquadSaved: { color: '#E6C969', fontSize: 8, fontWeight: '900', textAlign: 'right' },
 
-  squadOverlay: ({ position: 'fixed' as any, left: 0, top: 0, width: '100vw' as any, height: '100vh' as any, zIndex: 2147483647, elevation: 2147483647, backgroundColor: 'rgba(0,0,0,.92)', padding: 14, justifyContent: 'center', alignItems: 'center', direction: 'rtl' } as any),
-  squadBuilderPanel: { width: '96%', maxWidth: 1180, maxHeight: '95%', borderRadius: 22, borderWidth: 1, borderColor: '#D83A4B', backgroundColor: '#07100D', padding: 14, zIndex: 2147483648, elevation: 2147483648, shadowColor: '#000', shadowOpacity: .82, shadowRadius: 34, shadowOffset: { width: 0, height: 18 } },
+  squadBuilderPanel: { width: '96%', maxWidth: 1180, maxHeight: '100%', borderRadius: 22, borderWidth: 1, borderColor: '#D83A4B', backgroundColor: '#07100D', padding: 14, zIndex: 2147483648, elevation: 2147483648, shadowColor: '#000', shadowOpacity: .82, shadowRadius: 34, shadowOffset: { width: 0, height: 18 } },
   squadBuilderHeader: { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 10 },
   squadBuilderHeaderCopy: { flex: 1, alignItems: 'flex-end' },
   squadBuilderTitle: { color: '#F5F7FA', fontSize: 24, fontWeight: '900', textAlign: 'right' },

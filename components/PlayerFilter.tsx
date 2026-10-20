@@ -2,6 +2,7 @@ import { displayClub, displayLeague, displayNation } from '@/lib/footballLocaliz
 import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, Text, TextInput, useWindowDimensions, View } from 'react-native';
 
+import { AppModal } from '@/components/AppModal';
 import { NationFlag } from '@/components/NationFlag';
 import { TypeShell } from '@/components/PortraitCard';
 import { colors } from '@/components/ui';
@@ -89,13 +90,14 @@ export function PlayerFilter({
     panel === 'menu' ? t('סינון', 'Filters') : panel === 'kind' ? t('סוג קלף', 'Card type') : panel === 'nation' ? t('מדינה', 'Nation') : panel === 'squad' ? t('ליגה וקבוצה', 'League & club') : panel === 'position' ? t('עמדה', 'Position') : t('דירוג', 'Rating');
 
   return (
-    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+    <AppModal onClose={onClose}>
       <Pressable accessibilityRole="button" accessibilityLabel={t('סגור סינון', 'Close filters')} onPress={onClose} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.45)' }} />
       <View
         style={{
           width: '100%',
           maxWidth: 560,
-          height: Math.min(windowHeight * 0.72, 560),
+          height: Math.min(windowHeight * 0.8, 600),
+          maxHeight: '100%',
           backgroundColor: '#1A2030',
           borderRadius: 18,
           borderWidth: 1,
@@ -114,7 +116,7 @@ export function PlayerFilter({
         <View style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
 
         {panel === 'menu' ? (
-          <View>
+          <ScrollView keyboardShouldPersistTaps="handled">
             <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, language)} onPress={() => setPanel('kind')} />
             <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
             <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
@@ -123,11 +125,11 @@ export function PlayerFilter({
             <Pressable accessibilityRole="button" onPress={() => onChange(EMPTY_FILTERS)} style={{ alignSelf: 'center', marginTop: 14, minHeight: 32, justifyContent: 'center' }}>
               <Text style={{ color: QUIET, fontWeight: '500' }}>{t('נקה', 'Clear all')}</Text>
             </Pressable>
-          </View>
+          </ScrollView>
         ) : null}
 
         {panel === 'kind' ? (
-          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
+          <ScrollView keyboardShouldPersistTaps="handled" style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
             <TypePick label={t('סילבר', 'Silver')} kind="silver" active={filters.kind === 'silver'} onPress={() => toggleKind('silver')} />
             <TypePick label={t('גולד', 'Gold')} kind="gold" active={filters.kind === 'gold'} onPress={() => toggleKind('gold')} />
             <TypePick label={t('אייקון', 'Icon')} kind="icon" active={filters.kind === 'icon'} onPress={() => toggleKind('icon')} />
@@ -139,7 +141,7 @@ export function PlayerFilter({
         ) : null}
 
         {panel === 'nation' ? (
-          <ScrollView style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', gap: 8 }}>
+          <ScrollView keyboardShouldPersistTaps="handled" style={{ flex: 1, minHeight: 0 }} contentContainerStyle={{ flexDirection: 'row', direction: 'rtl', flexWrap: 'wrap', gap: 8 }}>
             {choices.nations.map((nation) => (
               <Pressable
                 key={nation}
@@ -174,7 +176,7 @@ export function PlayerFilter({
                 placeholderTextColor={QUIET}
                 style={{ color: TEXT, borderBottomWidth: 1, borderBottomColor: LINE, paddingVertical: 6, textAlign: rtl ? 'right' : 'left', fontWeight: '500' }}
               />
-              <ScrollView style={{ flex: 1, minHeight: 0 }}>
+              <ScrollView keyboardShouldPersistTaps="handled" style={{ flex: 1, minHeight: 0 }}>
                 {leagues.map((league) => (
                   <Pressable key={league} accessibilityRole="button" onPress={() => toggleLeague(league)} style={{ minHeight: 40, flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
                     {LEAGUE_LOGO[league] ? <Image source={LEAGUE_LOGO[league]} style={{ width: 18, height: 18 }} resizeMode="contain" /> : null}
@@ -186,7 +188,7 @@ export function PlayerFilter({
             <View style={{ width: 1, backgroundColor: LINE }} />
             <View style={{ flex: 1, minWidth: 0, minHeight: 0, gap: 8, overflow: 'hidden' }}>
               <Text style={{ color: QUIET, fontWeight: '500', textAlign: rtl ? 'right' : 'left' }}>{t('קבוצה', 'Club')}</Text>
-              <ScrollView style={{ flex: 1, minHeight: 0 }}>
+              <ScrollView keyboardShouldPersistTaps="handled" style={{ flex: 1, minHeight: 0 }}>
                 {filters.league ? (
                   clubs.map((club) => (
                     <Pressable key={club} accessibilityRole="button" onPress={() => toggleClub(club)} style={{ minHeight: 40, justifyContent: 'center' }}>
@@ -248,7 +250,7 @@ export function PlayerFilter({
         ) : null}
         </View>
       </View>
-    </View>
+    </AppModal>
   );
 }
 

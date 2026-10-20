@@ -1,11 +1,13 @@
 import { useRouter } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/ui';
 import { useLanguage, type AppLanguage } from '@/lib/language';
 
 export default function LanguageScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { chooseLanguage, language } = useLanguage();
 
   async function select(language: AppLanguage) {
@@ -14,7 +16,7 @@ export default function LanguageScreen() {
   }
 
   return (
-    <View style={{ flex: 1, minHeight: '100%', backgroundColor: '#08120E', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#08120E' }} contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16, paddingTop: insets.top + 24, paddingBottom: insets.bottom + 24 }}>
       <View style={{ width: '100%', maxWidth: 520, borderWidth: 1, borderColor: 'rgba(218,176,75,0.42)', borderRadius: 24, padding: 28, backgroundColor: '#101C16', gap: 18 }}>
         <Text style={{ color: colors.gold, fontSize: 12, fontWeight: '900', letterSpacing: 4, textAlign: 'center' }}>ONE CLUB · FC27</Text>
         <Text style={{ color: colors.text, fontSize: 32, fontWeight: '900', textAlign: 'center' }}>Choose your language</Text>
@@ -37,6 +39,6 @@ export default function LanguageScreen() {
         </Pressable>
         <Text style={{ color: '#748078', fontSize: 11, textAlign: 'center' }}>You can change your language later.</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }

@@ -11,9 +11,10 @@ import {
   View,
 } from 'react-native';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SceneAtmosphere } from '@/components/MarketAtmosphere';
 import { PlayerFilter } from '@/components/PlayerFilter';
-import { PortraitCard, PORTRAIT_RATIO } from '@/components/PortraitCard';
+import { PortraitCard } from '@/components/PortraitCard';
 import { SiteNav } from '@/components/SiteNav';
 import { useColumns } from '@/components/TileGrid';
 import { Button, colors, Muted, Title } from '@/components/ui';
@@ -138,6 +139,7 @@ export default function MarketScreen() {
   const listRef = useRef<FlatList>(null);
   const columns = useColumns(5, 2);
   const { width } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   const maxWidth = 1120;
   const contentWidth = Math.min(width, maxWidth) - 32;
   const gap = 12;
@@ -199,7 +201,6 @@ export default function MarketScreen() {
     return next;
   }, [pagePlayers, columns]);
 
-  const rowHeight = Math.round(cardWidth * PORTRAIT_RATIO) + gap;
   const from = players.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1;
   const to = Math.min(safePage * PAGE_SIZE, players.length);
 
@@ -231,11 +232,12 @@ export default function MarketScreen() {
         maxToRenderPerBatch={4}
         windowSize={3}
         removeClippedSubviews={Platform.OS !== 'web'}
-        getItemLayout={(_, index) => ({ length: rowHeight, offset: rowHeight * index, index })}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
         style={{ flex: 1, backgroundColor: 'transparent' }}
         contentContainerStyle={{
           paddingHorizontal: 16,
-          paddingBottom: 28,
+          paddingBottom: Math.max(28, insets.bottom + 16),
           gap,
           width: '100%',
           maxWidth,

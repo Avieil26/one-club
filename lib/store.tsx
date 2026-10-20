@@ -18,6 +18,8 @@ import type {
 
 type AppValue = Snapshot & {
   ready: boolean;
+  startupError: boolean;
+  retryStartup: () => void;
   busy: boolean;
   signInDemo: (profileId: string) => Promise<void>;
   signInNamed: (name: string) => Promise<void>;
@@ -74,24 +76,31 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [snap, setSnap] = useState<Snapshot>(EMPTY);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [startupError, setStartupError] = useState(false);
+  const [startupAttempt, setStartupAttempt] = useState(0);
 
   useEffect(() => {
     let alive = true;
+    const timeout = setTimeout(() => { if (alive) setStartupError(true); }, 20000);
     backend.init().then((next) => {
       if (!alive) return;
       setSnap(next);
       setReady(true);
-    });
+      setStartupError(false);
+    }).catch(() => {
+      if (alive) setStartupError(true);
+    }).finally(() => clearTimeout(timeout));
     const unsubscribe = backend.subscribe(() => {
       backend.reload().then((next) => {
         if (alive) setSnap(next);
-      });
+      }).catch(() => { /* Keep the current screen during a transient connection failure. */ });
     });
     return () => {
       alive = false;
+      clearTimeout(timeout);
       unsubscribe();
     };
-  }, [backend]);
+  }, [backend, startupAttempt]);
 
   async function run<T>(work: () => Promise<T>, apply: (result: T) => void): Promise<T> {
     setBusy(true);
@@ -107,6 +116,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const value: AppValue = {
     ...snap,
     ready,
+    startupError,
+    retryStartup: () => { setStartupError(false); setStartupAttempt((attempt) => attempt + 1); },
     busy,
     signInDemo: (profileId) => run(() => backend.signInDemo(profileId), setSnap).then(() => undefined),
     signInNamed: (name) => run(() => backend.signInNamed(name), setSnap).then(() => undefined),

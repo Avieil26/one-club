@@ -1,12 +1,13 @@
 import { useLanguage } from '@/lib/language';
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AppModal } from '@/components/AppModal';
 
 import { colors } from '@/components/ui';
 import { dismissNotice, subscribeNotice, type Notice } from '@/lib/notice';
 
 export function NoticeHost() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [notice, setNotice] = useState<Notice | null>(null);
 
   useEffect(() => subscribeNotice(setNotice), []);
@@ -14,11 +15,16 @@ export function NoticeHost() {
   if (!notice) return null;
 
   return (
-    <View style={[StyleSheet.absoluteFill, styles.backdrop]}>
-      <View style={styles.card}>
+    <AppModal onClose={() => {
+      const cancel = notice.buttons.find((button) => button.style === 'cancel');
+      dismissNotice();
+      cancel?.onPress?.();
+    }}>
+      <View style={[styles.card, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
         <View style={styles.edge} />
-        <Text style={styles.title}>{notice.title}</Text>
-        {notice.message ? <Text style={styles.message}>{notice.message}</Text> : null}
+        <ScrollView contentContainerStyle={{ gap: 12 }}>
+        <Text style={[styles.title, { textAlign: language === 'he' ? 'right' : 'left' }]}>{notice.title}</Text>
+        {notice.message ? <Text style={[styles.message, { textAlign: language === 'he' ? 'right' : 'left' }]}>{notice.message}</Text> : null}
         <View style={{ gap: 8 }}>
           {notice.buttons.map((button, index) => {
             const quiet = button.style === 'cancel' || index > 0;
@@ -39,22 +45,17 @@ export function NoticeHost() {
             );
           })}
         </View>
+        </ScrollView>
       </View>
-    </View>
+    </AppModal>
   );
 }
 
 const styles = StyleSheet.create({
-  backdrop: {
-    zIndex: 80,
-    backgroundColor: 'rgba(0,0,0,0.62)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 22,
-  },
   card: {
     width: '100%',
     maxWidth: 440,
+    maxHeight: '100%',
     borderRadius: 22,
     borderWidth: 1,
     borderColor: 'rgba(227,179,65,0.62)',

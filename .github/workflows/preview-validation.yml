@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - fix/continue-preview-20261019
+      - fix/android-mobile-20261020
       - preview/star-performers-20261018
       - preview/fc27-complete-english-starsafe-20261018
       - preview/fc27-20118-english-starsafe-fix-20261019
@@ -63,5 +64,9 @@ jobs:
         run: npm run verify:preservation
       - name: Verify English copy and preserve Hebrew
         run: npm run verify:localization
+      - name: Verify phone layouts and standalone APK configuration
+        run: npm run verify:mobile
       - name: Export web build
         run: npx expo export -p web
+      - name: Export Android Hermes bundle
+        run: npx expo export -p android --output-dir dist-android --max-workers 2

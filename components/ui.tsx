@@ -82,11 +82,12 @@ export function Screen({
           style={{ backgroundColor: 'transparent' }}
           contentContainerStyle={[
             styles.content,
-            { paddingBottom: bottomPad, direction: rtl ? 'rtl' : 'ltr' },
+            { paddingBottom: bottomPad, paddingTop: !web && !showNav ? insets.top + 16 : 16, direction: rtl ? 'rtl' : 'ltr' },
             web && (isMobile ? styles.mobileWebContent : styles.webContent),
             web && { paddingBottom: bottomPad },
           ]}
           keyboardShouldPersistTaps="handled"
+          keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
           refreshControl={
             onRefresh ? (
               <RefreshControl refreshing={Boolean(refreshing)} onRefresh={onRefresh} tintColor={colors.blue} />
@@ -192,6 +193,8 @@ export function Field({
         multiline={multiline}
         keyboardType={keyboardType}
         secureTextEntry={secure}
+        autoCapitalize={secure || keyboardType === 'email-address' ? 'none' : 'sentences'}
+        autoCorrect={secure || keyboardType === 'email-address' ? false : undefined}
         maxLength={maxLength}
         style={[styles.input, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
