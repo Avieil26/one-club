@@ -16,6 +16,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import { SiteNav } from '@/components/SiteNav';
 import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/lib/labels';
 import { GROUNDS_PLAYSTYLES } from '@/lib/groundsPlaystyles';
 import { useApp } from '@/lib/store';
@@ -326,10 +327,10 @@ export default function GroundsV22Screen() {
       <LinearGradient colors={['rgba(2,8,15,0.02)', 'rgba(2,8,15,0.10)', 'rgba(2,8,15,0.26)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
       <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false, title: 'THE GROUNDS — ONE CLUB' }} />
-      <NavBar onNavigate={navigate} loggedIn={Boolean(app.user)} />
+      {Platform.OS !== 'web' || compact ? <SiteNav /> : <NavBar onNavigate={navigate} loggedIn={Boolean(app.user)} />}
       {notice ? <Pressable onPress={() => setNotice('')} style={s.noticeBar}><Ionicons name="information-circle-outline" size={18} color={C.cyan} /><Text style={s.noticeText}>{notice}</Text><Ionicons name="close" size={16} color={C.muted} /></Pressable> : null}
 
-      <ScrollView ref={scrollRef} style={[s.scroll, Platform.OS === 'web' ? { minHeight: 0 } : undefined]} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={Platform.OS === 'web'} scrollEnabled={true}>
+      <ScrollView ref={scrollRef} style={[s.scroll, Platform.OS === 'web' ? { minHeight: 0 } : undefined]} contentContainerStyle={s.scrollContent} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" showsVerticalScrollIndicator={Platform.OS === 'web'} scrollEnabled={true}>
         <View style={s.shell}>
           <View style={[s.heroBackground, compact && s.heroBackgroundCompact]}>
             <LinearGradient colors={['rgba(2,8,15,0.00)', 'rgba(2,10,18,0.06)', 'rgba(2,8,15,0.24)']} locations={[0, 0.48, 1]} style={FILL} pointerEvents="none" />
@@ -370,7 +371,7 @@ export default function GroundsV22Screen() {
               </View>
               <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('סוג מודעה', 'Listing type')}</Text><View style={s.chipRow}><Chip label={t('הכל', 'All')} active={intent === 'all'} onPress={() => setIntent('all')} /><Chip label={t('מחפש קבוצה', 'Looking for a club')} active={intent === 'looking_for_club'} onPress={() => setIntent('looking_for_club')} /><Chip label={t('גיוס שחקנים', 'Recruiting players')} active={intent === 'need_player'} onPress={() => setIntent('need_player')} /></View></View>
               <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('עמדה', 'Position')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{POSITIONS.map((item) => <Chip key={item.id} label={t(item.label, ({ all: 'All positions', 'שוער': 'Goalkeeper', 'חלוץ': 'Striker', 'כנף': 'Winger', 'קשר התקפי': 'Attacking midfielder', 'קשר': 'Central midfielder', 'קשר הגנתי': 'Defensive midfielder', 'בלם': 'Centre back', 'מגן': 'Full back' } as Record<string, string>)[item.id] || item.label)} active={position === item.id} onPress={() => setPosition(item.id)} />)}</ScrollView></View>
-              <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('פלטפורמה', 'Platform')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{PLATFORMS.map((item) => <Chip key={item.id} label={t(item.label, ({ all: 'All platforms', 'PlayStation 5': 'PlayStation 5', Xbox: 'Xbox', PC: 'PC', 'Switch 2': 'Switch 2' } as Record<string, string>)[item.label] || item.label)} active={platform === item.id} onPress={() => setPlatform(item.id)} />)}</ScrollView></View>
+              <View style={s.filterGroup}><Text style={[s.filterLabel, { textAlign: rtl ? 'right' : 'left' }]}>{t('פלטפורמה', 'Platform')}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.horizontalChips}>{PLATFORMS.map((item) => <Chip key={item.id} label={t(item.label, item.id === 'all' ? 'All platforms' : displayPlatform(item.id, 'en'))} active={platform === item.id} onPress={() => setPlatform(item.id)} />)}</ScrollView></View>
             </View>
 
             <View style={s.playersSection}>

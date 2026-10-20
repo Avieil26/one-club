@@ -7,9 +7,11 @@ import { inlineLatin } from '@/lib/legalBidi';
 import { hasAcceptedTerms, recordAcceptedTerms } from '@/lib/legal';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function TermsConsentModal() {
   const app = useApp();
+  const insets = useSafeAreaInsets();
   const { language, t } = useLanguage();
   const rtl = language === 'he';
   const router = useRouter();
@@ -72,6 +74,8 @@ export function TermsConsentModal() {
           justifyContent: 'center',
           alignItems: 'center',
           padding: 16,
+          paddingTop: Math.max(16, insets.top + 8),
+          paddingBottom: Math.max(16, insets.bottom + 8),
         }}
       >
         <View
@@ -103,9 +107,9 @@ export function TermsConsentModal() {
               justifyContent: 'space-between',
             }}
           >
-            <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
+            <View style={{ flex: 1, minWidth: 0, flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 8 }}>
               <Text style={{ fontSize: 18 }}>⚖️</Text>
-              <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 14, letterSpacing: 0.5 }}>
+              <Text style={{ flex: 1, color: colors.gold, fontWeight: '900', fontSize: 14, letterSpacing: 0.5 }}>
                 {t('אישור תנאים נדרש • LEGAL CONSENT', 'Terms approval required • LEGAL CONSENT')}
               </Text>
             </View>

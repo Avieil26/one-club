@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Image, Pressable, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { Alert, Image, Platform, Pressable, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, Path } from 'react-native-svg';
 
@@ -571,7 +571,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const accent = iconPage ? '#E8C86A' : '#E3B341';
 
   return (
-    <View style={{ width: '100%', maxWidth: 1120, alignSelf: 'center', gap: 40 }}>
+    <View style={{ width: '100%', maxWidth: 1120, alignSelf: 'center', gap: 40, ...(Platform.OS !== 'web' ? { minWidth: 0, overflow: 'hidden', direction: 'ltr' } : {}) }}>
     <View
       style={{
         width: '100%',
@@ -736,7 +736,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       ) : null}
 
       <View style={{ flexDirection: wide && showChem ? 'row' : 'column', direction: 'ltr', gap: 18, alignItems: 'flex-start' }}>
-        <View style={{ flex: 1, gap: 10, minWidth: 0 }}>
+        <View style={{ flex: 1, gap: 10, minWidth: 0, ...(Platform.OS !== 'web' && !(wide && showChem) ? { width: '100%', flexGrow: 0, flexShrink: 0, flexBasis: 'auto' } : {}) }}>
           {chunk(groups, columns).map((row, index) => (
             <View key={index} style={{ width: '100%', flexDirection: 'row', direction: 'ltr', gap: compact ? 8 : 12 }}>
               {row.map((group) => (

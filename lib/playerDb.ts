@@ -73,8 +73,11 @@ const baseCatalogueIds = new Set(basePlayers.map((player) => player.id));
 const unpairedFutureStars = FUTURE_STARS_PLAYERS.filter((player) => !baseCatalogueIds.has(player.baseId ?? ''));
 const unpairedTotw = TOTW_PROMO_PLAYERS.filter((player) => !baseCatalogueIds.has(player.baseId ?? ''));
 
+// Reuse one ICU collator instead of constructing one for every tied-rating comparison.
+const comparePlayerNames = new Intl.Collator('he').compare;
+
 export const DB_PLAYERS: FcPlayer[] = [...basePlayers, ...unpairedFutureStars, ...unpairedTotw]
-  .sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name, 'he'));
+  .sort((a, b) => b.rating - a.rating || comparePlayerNames(a.name, b.name));
 
 const mediaById = new Map<string, { en: string; photo?: string; face?: RosterFace }>();
 for (const entry of roster) {

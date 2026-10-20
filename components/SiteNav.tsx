@@ -57,7 +57,7 @@ export function SiteNav() {
           borderColor: 'rgba(255,255,255,0.28)',
         }}
       />
-      <Text
+      {width >= 360 ? <Text
         style={{
           color: '#F7F4EA',
           fontSize: isMobile ? 15 : 17,
@@ -69,7 +69,7 @@ export function SiteNav() {
         }}
       >
         1 CLUB
-      </Text>
+      </Text> : null}
     </Pressable>
   );
 
@@ -77,7 +77,7 @@ export function SiteNav() {
     <Pressable
       onPress={() => router.push(user?.email ? '/profile' : '/register')}
       style={{
-        minHeight: 32,
+        minHeight: 44,
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 16,
@@ -100,7 +100,7 @@ export function SiteNav() {
       accessibilityLabel={language === 'he' ? 'Switch language to English' : 'החלפת שפה לעברית'}
       onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
       style={{
-        minHeight: 32,
+        minHeight: 44,
         minWidth: 42,
         paddingHorizontal: 10,
         paddingVertical: 4,
@@ -162,7 +162,7 @@ export function SiteNav() {
       );
     });
 
-  if (isMobile) {
+  if (isMobile || mobile) {
     return (
       <View
         style={{
@@ -189,7 +189,7 @@ export function SiteNav() {
           {accountNode}
         </View>
 
-        <ScrollView
+        {!mobile ? <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
@@ -201,7 +201,16 @@ export function SiteNav() {
           }}
         >
           {renderLinks()}
-        </ScrollView>
+        </ScrollView> : null}
+        {mobile && (app.syncing || app.syncError) ? <Pressable
+          accessibilityRole="button"
+          disabled={!app.syncError}
+          onPress={app.refreshCommunity}
+          style={{ minHeight: 28, justifyContent: 'center' }}>
+          <Text style={{ color: app.syncError ? '#E3B341' : QUIET, fontSize: 12, textAlign: rtl ? 'right' : 'left' }}>
+            {app.syncError ? t('הרענון נכשל · לחץ לנסות שוב', 'Refresh failed · tap to retry') : t('מרענן נתוני קהילה…', 'Refreshing community data…')}
+          </Text>
+        </Pressable> : null}
       </View>
     );
   }

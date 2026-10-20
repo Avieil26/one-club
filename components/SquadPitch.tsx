@@ -8,53 +8,8 @@ import { PortraitCard } from '@/components/PortraitCard';
 import { colors } from '@/components/ui';
 import type { Formation } from '@/lib/chemistry';
 import type { FcPlayer } from '@/lib/fcPlayers';
-
-const CARD_W = 78;
-const CARD_H = Math.round(78 * 1.42);
-
-function spotsFor(formation: Formation): Record<string, { x: number; y: number }> {
-  const drawn = SPOTS[formation.id];
-  if (drawn && formation.lines.flat().every((slot) => drawn[slot.id])) return drawn;
-  const spots: Record<string, { x: number; y: number }> = {};
-  const rows = formation.lines.length;
-  formation.lines.forEach((line, row) => {
-    const y = rows === 1 ? 0.5 : 0.1 + (row / (rows - 1)) * 0.78;
-    line.forEach((slot, index) => {
-      const x = line.length === 1 ? 0.5 : 0.08 + (index / (line.length - 1)) * 0.84;
-      spots[slot.id] = { x, y };
-    });
-  });
-  return spots;
-}
-
-const SPOTS: Record<string, Record<string, { x: number; y: number }>> = {
-  '433': {
-    lw: { x: 0.18, y: 0.13 },
-    st: { x: 0.5, y: 0.09 },
-    rw: { x: 0.82, y: 0.13 },
-    lcm: { x: 0.24, y: 0.36 },
-    cm: { x: 0.5, y: 0.42 },
-    rcm: { x: 0.76, y: 0.36 },
-    lb: { x: 0.12, y: 0.64 },
-    lcb: { x: 0.37, y: 0.68 },
-    rcb: { x: 0.63, y: 0.68 },
-    rb: { x: 0.88, y: 0.64 },
-    gk: { x: 0.5, y: 0.88 },
-  },
-  '442': {
-    lst: { x: 0.34, y: 0.11 },
-    rst: { x: 0.66, y: 0.11 },
-    lm: { x: 0.12, y: 0.36 },
-    lcm: { x: 0.37, y: 0.4 },
-    rcm: { x: 0.63, y: 0.4 },
-    rm: { x: 0.88, y: 0.36 },
-    lb: { x: 0.12, y: 0.64 },
-    lcb: { x: 0.37, y: 0.68 },
-    rcb: { x: 0.63, y: 0.68 },
-    rb: { x: 0.88, y: 0.64 },
-    gk: { x: 0.5, y: 0.88 },
-  },
-};
+import { pitchCardPosition, spotsFor, squadPitchMetrics } from '@/lib/mobileLayout';
+import { playerDisplayName } from '@/lib/playerDisplayName';
 
 function ChemDiamonds({ chem, size = 7 }: { chem: number; size?: number }) {
   return (
@@ -99,13 +54,11 @@ export function SquadPitch({
   onSlot?: (slotId: string) => void;
   showChemHud?: boolean;
 }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [width, setWidth] = useState(0);
   const [opened, setOpened] = useState<FcPlayer | null>(null);
-  const height = 720;
   const widest = Math.max(...formation.lines.map((line) => line.length));
-  const cardW = widest >= 5 ? 62 : CARD_W;
-  const cardH = widest >= 5 ? Math.round(62 * 1.42) : CARD_H;
+  const { height, cardWidth: cardW, cardHeight: cardH } = squadPitchMetrics(width || 320, widest, formation.lines.length);
   const spots = spotsFor(formation);
   const teamChem = Object.values(playerChem).reduce((sum, value) => sum + value, 0);
 
@@ -295,6 +248,7 @@ export function SquadPitch({
                 <Pressable
                   key={slot.id}
                   accessibilityRole="button"
+                  accessibilityLabel={player ? `${slot.position}: ${playerDisplayName(player, language)}` : `${slot.position}: ${t('בחר שחקן', 'Choose player')}`}
                   onPress={() => {
                     if (onSlot) onSlot(slot.id);
                     else if (player) setOpened(player);
@@ -304,8 +258,7 @@ export function SquadPitch({
                   }}
                   style={{
                     position: 'absolute',
-                    left: spot.x * width - cardW / 2,
-                    top: spot.y * height - cardH / 2,
+                    ...pitchCardPosition(spot.x, spot.y, width, height, cardW, cardH),
                     zIndex: 2,
                   }}
                 >

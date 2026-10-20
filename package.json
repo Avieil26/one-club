@@ -52,7 +52,10 @@
     "verify:catalogue": "node scripts/verify-preview-catalogue.mjs",
     "build:web": "npm run verify:catalogue && npm run verify:preservation && npm run verify:localization && expo export -p web",
     "verify:preservation": "node scripts/verify-preview-preservation.mjs",
-    "verify:localization": "node scripts/verify-preview-localization.mjs && node scripts/verify-mini-game-localization.mjs"
+    "verify:localization": "node scripts/verify-preview-localization.mjs && node scripts/verify-mini-game-localization.mjs",
+    "verify:mobile": "node scripts/verify-mobile-layout.mjs",
+    "eas-build-post-install": "npm run typecheck && npm run verify:catalogue && npm run verify:preservation && npm run verify:localization && npm run verify:mobile && npm run verify:startup",
+    "verify:startup": "node scripts/verify-native-startup.mjs"
   },
   "private": true
 }

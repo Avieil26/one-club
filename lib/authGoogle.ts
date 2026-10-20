@@ -1,10 +1,10 @@
 import { Platform } from 'react-native';
-import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 
+import { NATIVE_AUTH_CALLBACK, isNativeAuthReturn, authReturnParams } from '@/lib/nativeAuthReturn';
 import { getSupabase } from '@/lib/supabase';
 
-/** Build an OAuth return URL that works in native builds and during Expo Go development. */
+/** Native sign-in must return to the installed app, never to the website. */
 function redirectUrl(): string {
   if (Platform.OS === 'web') {
     if (typeof window !== 'undefined' && window.location?.origin) {
@@ -13,28 +13,11 @@ function redirectUrl(): string {
     return 'https://fc27-israel.vercel.app/';
   }
 
-  return Linking.createURL('auth/callback');
-}
-
-function pickParams(url: string): Record<string, string> {
-  const params: Record<string, string> = {};
-  const hashIndex = url.indexOf('#');
-  const queryIndex = url.indexOf('?');
-  const query = queryIndex >= 0 ? url.slice(queryIndex + 1, hashIndex >= 0 ? hashIndex : undefined) : '';
-  const hash = hashIndex >= 0 ? url.slice(hashIndex + 1) : '';
-  for (const chunk of [query, hash]) {
-    if (!chunk) continue;
-    for (const part of chunk.split('&')) {
-      const [rawKey, rawValue = ''] = part.split('=');
-      if (!rawKey) continue;
-      params[decodeURIComponent(rawKey)] = decodeURIComponent(rawValue.replace(/\+/g, ' '));
-    }
-  }
-  return params;
+  return NATIVE_AUTH_CALLBACK;
 }
 
 async function sessionFromUrl(url: string): Promise<void> {
-  const params = pickParams(url);
+  const params = authReturnParams(url);
   if (params.error || params.error_description) {
     throw new Error(params.error_description || params.error || 'ההתחברות עם גוגל נכשלה');
   }
@@ -56,6 +39,21 @@ async function sessionFromUrl(url: string): Promise<void> {
   }
 
   throw new Error('לא התקבלה סשן מגוגל');
+}
+
+let completedReturn: string | null = null;
+let pendingReturn: { url: string; promise: Promise<void> } | null = null;
+
+/** Shared by the warm AuthSession result and the cold-launch callback route. */
+export function completeNativeAuthReturn(url: string): Promise<void> {
+  if (!isNativeAuthReturn(url)) return Promise.reject(new Error('Invalid app callback'));
+  if (completedReturn === url) return Promise.resolve();
+  if (pendingReturn?.url === url) return pendingReturn.promise;
+  const promise = sessionFromUrl(url).then(() => { completedReturn = url; }).finally(() => {
+    if (pendingReturn?.url === url) pendingReturn = null;
+  });
+  pendingReturn = { url, promise };
+  return promise;
 }
 
 export async function signInWithGoogleOAuth(): Promise<void> {
@@ -82,12 +80,12 @@ export async function signInWithGoogleOAuth(): Promise<void> {
   if (!data.url) throw new Error('לא התקבלה כתובת התחברות מגוגל');
 
   const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo, {
-    showInRecents: true,
+    showInRecents: false,
   });
 
   if (result.type !== 'success' || !result.url) {
     throw new Error('התחברות עם גוגל בוטלה');
   }
 
-  await sessionFromUrl(result.url);
+  await completeNativeAuthReturn(result.url);
 }

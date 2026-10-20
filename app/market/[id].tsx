@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
@@ -15,6 +15,7 @@ export default function PlayerPage() {
   const { t } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 900;
+  const native = Platform.OS !== 'web';
   const player = PLAYERS.find((item) => item.id === id);
   const iconPage = !!player?.icon;
   const maradona = player?.id === 'icon-diego-armando-maradona';
@@ -25,6 +26,7 @@ export default function PlayerPage() {
         flex: 1,
         minHeight: 0,
         backgroundColor: iconPage ? '#070604' : '#050A08',
+        ...(native ? { width: '100%', alignSelf: 'stretch', overflow: 'hidden', direction: 'ltr' } : {}),
       }}
     >
       <Stack.Screen options={{ headerShown: false }} />
@@ -44,11 +46,12 @@ export default function PlayerPage() {
       )}
       <SiteNav />
       <ScrollView
-        style={{ flex: 1, minHeight: 0, backgroundColor: 'transparent' }}
+        style={{ flex: 1, minHeight: 0, backgroundColor: 'transparent', ...(native ? { width: '100%' } : {}) }}
         contentContainerStyle={{
           padding: wide ? 28 : 14,
           paddingBottom: 140,
           gap: 16,
+          ...(native ? { width: '100%', alignItems: 'stretch', direction: 'ltr' } : {}),
         }}
         showsVerticalScrollIndicator={true}
         nestedScrollEnabled={true}
@@ -89,7 +92,7 @@ export default function PlayerPage() {
 
         {player && player.icon ? (
           <View style={{ width: '100%', direction: 'ltr', alignItems: 'flex-start', gap: 12 }}>
-            {wide ? null : <View style={{ height: 230, width: '100%' }} />}
+            {wide || native ? null : <View style={{ height: 230, width: '100%' }} />}
             <View style={{ width: wide ? '68%' : '100%', maxWidth: 1080, gap: 12 }}>
               <PlayerDossier player={player} />
             </View>

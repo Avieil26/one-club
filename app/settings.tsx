@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import Constants from 'expo-constants';
 
 import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
@@ -46,6 +47,7 @@ export default function SettingsScreen() {
       <SiteNav />
       <ScrollView contentContainerStyle={{ width: '100%', maxWidth: 920, alignSelf: 'center', padding: 20, paddingBottom: 64, gap: 18 }}>
         <Text style={{ color: colors.text, fontSize: 32, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{t('הגדרות', 'Settings')}</Text>
+        {Platform.OS !== 'web' ? <Text style={{ color: colors.muted, fontSize: 13, textAlign: rtl ? 'right' : 'left' }}>{t('גרסת אפליקציה', 'App version')} {Constants.expoConfig?.version}</Text> : null}
         <Text style={{ color: colors.muted, fontSize: 15, lineHeight: 24, textAlign: rtl ? 'right' : 'left' }}>
           {t('כאן אפשר לשנות את שפת האתר בכל עת. הבחירה נשמרת גם לביקורים הבאים.', 'Change the site language at any time. Your choice is saved for future visits.')}
         </Text>

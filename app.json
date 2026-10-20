@@ -2,7 +2,7 @@
   "expo": {
     "name": "1 CLUB",
     "slug": "fc27-israel",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "fc27israel",
@@ -47,7 +47,8 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "softwareKeyboardLayoutMode": "resize"
     },
     "web": {
       "bundler": "metro",
