@@ -1,445 +1,445 @@
 {
-  "sourceCommit": "b5ab5ae7c1d1e9dfeaa178e5f8ce33bb051ced86",
+  "sourceCommit": "3435f5b5d401b7f753b7006eb49c482965ce54c5",
   "assets": [
     {
       "index": 0,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/71.1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257.png",
-      "path": "assets/images/sbc-rewards/art-000.png",
-      "bytes": 634586,
-      "sha256": "1cc0648615e09c1eb533770249c32b11cb62a8bf7d185af8fb646c1fecba8257",
-      "blobSha": "1403e63619d10e5be7e4fd614ac394f151ac8daf"
+      "path": "assets/images/sbc-rewards/art-000.webp",
+      "bytes": 28028,
+      "sha256": "44612b6d5433cab7177be203e8beac4a07cfe3d9d97fad64e354c8b007a3146e",
+      "blobSha": "79ca146b9504726eb2d53d1c972653831cb27f31"
     },
     {
       "index": 1,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50413511.7ee28133a6d646c4fcd4bb3086d5be7a5dc2f79e02d4f426a6509181140fe2da.webp",
       "path": "assets/images/sbc-rewards/art-001.webp",
-      "bytes": 152786,
-      "sha256": "7ee28133a6d646c4fcd4bb3086d5be7a5dc2f79e02d4f426a6509181140fe2da",
-      "blobSha": "c9b8b76217f4dc9a42d63538a99790b518292a58"
+      "bytes": 21280,
+      "sha256": "b0623df68ab99b20c2c336cfac399e49a0a1e50b8a6f1016cfad2508139919e3",
+      "blobSha": "5493d85015af71703927821a7fe5ac5c20c82d32"
     },
     {
       "index": 2,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/45.307275040b6531f26bb980298820e1a50df6eb288379a2efc5e5eb3abdb5f1ea.png",
-      "path": "assets/images/sbc-rewards/art-002.png",
-      "bytes": 2355,
-      "sha256": "307275040b6531f26bb980298820e1a50df6eb288379a2efc5e5eb3abdb5f1ea",
-      "blobSha": "0d8f91d74260fa15f4982f63247c122818799378"
+      "path": "assets/images/sbc-rewards/art-002.webp",
+      "bytes": 656,
+      "sha256": "6d06ac2aa2d8d36b9054180f459db2af855f4f36c46f4aab6bd893a213b5cd02",
+      "blobSha": "96968f26c9648c74218bcf336c8ae76ef5ab1dd8"
     },
     {
       "index": 3,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/53.adf7c6700978e91b81c4fd4b4a82187dfea2d3074a907efa14caebfaffa461eb.png",
-      "path": "assets/images/sbc-rewards/art-003.png",
-      "bytes": 4719,
-      "sha256": "adf7c6700978e91b81c4fd4b4a82187dfea2d3074a907efa14caebfaffa461eb",
-      "blobSha": "ce2d766023ad999a3c43a379c9feeda74bcf0384"
+      "path": "assets/images/sbc-rewards/art-003.webp",
+      "bytes": 2846,
+      "sha256": "b2fc1407b943a935041baaa43fb6034f110f8f4d4fdb3428127c21324e961e8f",
+      "blobSha": "14aaa4054d855b3819de9b91baf1844e06f5308f"
     },
     {
       "index": 4,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/241.7884c3386636cb32eaaa8cb83d0995083f1c03dc15e25bd1c31f790ea0d70588.png",
-      "path": "assets/images/sbc-rewards/art-004.png",
-      "bytes": 6466,
-      "sha256": "7884c3386636cb32eaaa8cb83d0995083f1c03dc15e25bd1c31f790ea0d70588",
-      "blobSha": "2003a5262e199341f0f8626c20bfe432364b7696"
+      "path": "assets/images/sbc-rewards/art-004.webp",
+      "bytes": 3292,
+      "sha256": "6a89d245976a127c3be7b4d9a69f731231b03c08ef2ace4330dfb29e28c274d0",
+      "blobSha": "8b18aff405445b8c75a32caba72f478f16e1b92c"
     },
     {
       "index": 5,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50608342.4f5bdf848800acf04a6961d284338139fa24d1fd73afa837021579ba41cdc83c.webp",
       "path": "assets/images/sbc-rewards/art-005.webp",
-      "bytes": 148234,
-      "sha256": "4f5bdf848800acf04a6961d284338139fa24d1fd73afa837021579ba41cdc83c",
-      "blobSha": "1979f05d60f3a1e92c9c2f3cdb23210561979824"
+      "bytes": 21574,
+      "sha256": "1a9ea48bd57e6a6b4d5480f76c4ca18c0d625c497544eaba9c14d2c89d2a908a",
+      "blobSha": "e57d441fd545ae892291c7b6e1406214fa2c2e7d"
     },
     {
       "index": 6,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/47.43b66b0a05952a6d782199d3dd83fad7305a8f94c183e7421c3baac2a4258864.png",
-      "path": "assets/images/sbc-rewards/art-006.png",
-      "bytes": 2071,
-      "sha256": "43b66b0a05952a6d782199d3dd83fad7305a8f94c183e7421c3baac2a4258864",
-      "blobSha": "d01e2dad1eb4573d978296123fb4407426610704"
+      "path": "assets/images/sbc-rewards/art-006.webp",
+      "bytes": 646,
+      "sha256": "fb0b5cc1c8b7d2eee649be2cfe80b16ce7c18274e6ae3fc9d7822cc835c62031",
+      "blobSha": "33b663895793196607185393c6354d2ff3e8e847"
     },
     {
       "index": 7,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/13.c4f460c893b66c36c0bcd7b29919107d36f618772343eaedb21f946f16d80c96.png",
-      "path": "assets/images/sbc-rewards/art-007.png",
-      "bytes": 6468,
-      "sha256": "c4f460c893b66c36c0bcd7b29919107d36f618772343eaedb21f946f16d80c96",
-      "blobSha": "3e55b9126daf39bafb74be79b37456cf6350fbcb"
+      "path": "assets/images/sbc-rewards/art-007.webp",
+      "bytes": 3658,
+      "sha256": "fe246968ed752b247695c70acc9950db175eba353afb0ea6004cdf24a8761c06",
+      "blobSha": "72f167b3523f1c9cab1795597e712cc50c375c5e"
     },
     {
       "index": 8,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/2.0bf2cc2dd4effd284372989a5c226c74773c10050fcee391a5244c53dd7bc123.png",
-      "path": "assets/images/sbc-rewards/art-008.png",
-      "bytes": 6806,
-      "sha256": "0bf2cc2dd4effd284372989a5c226c74773c10050fcee391a5244c53dd7bc123",
-      "blobSha": "21ca4b931829cb7faba82168f3de11d9328548ec"
+      "path": "assets/images/sbc-rewards/art-008.webp",
+      "bytes": 2434,
+      "sha256": "d259ee033a70dfcdf080ba4f84fcfb1bf7de24c6dc27b40bb252b095760f7ebe",
+      "blobSha": "58087f3f1f166492d28bec302eb2d62afb1f8648"
     },
     {
       "index": 9,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50606972.304fee43aaf7aaa80a119ba1fb5fdf8f72a682cafa9c777437107e8714204966.webp",
       "path": "assets/images/sbc-rewards/art-009.webp",
-      "bytes": 118846,
-      "sha256": "304fee43aaf7aaa80a119ba1fb5fdf8f72a682cafa9c777437107e8714204966",
-      "blobSha": "8a33c36b4ca9bed56399f9aeac1fe269b9c779dc"
+      "bytes": 18508,
+      "sha256": "eef3bd3641b27ed5f23ccddc5bfaa78b3f5b87dbf8e5693a03d7bf84d7eb30be",
+      "blobSha": "4c194eda6fec0386a674121f471248163e78ec26"
     },
     {
       "index": 10,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/136.dbcccf7cc0d334b3b58ea20bf43448e05e565fe48823415de64a32af5781a459.png",
-      "path": "assets/images/sbc-rewards/art-010.png",
-      "bytes": 1532,
-      "sha256": "dbcccf7cc0d334b3b58ea20bf43448e05e565fe48823415de64a32af5781a459",
-      "blobSha": "2f093f81c8b35956fa5c6bf5bdd71f5bab4a9c58"
+      "path": "assets/images/sbc-rewards/art-010.webp",
+      "bytes": 568,
+      "sha256": "96b96b3dcb8598d1c6e43f07a6855aa7ead1eb345151a41e4c36870d734aeeed",
+      "blobSha": "573c4552e1072ca27374295131b027cfcd0e53f0"
     },
     {
       "index": 11,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/31.b1950cc3e90e9a2e75be5bbbf06967a217db45e22180c84bac2e5588ede83541.png",
-      "path": "assets/images/sbc-rewards/art-011.png",
-      "bytes": 5183,
-      "sha256": "b1950cc3e90e9a2e75be5bbbf06967a217db45e22180c84bac2e5588ede83541",
-      "blobSha": "a13f66735c33790842f37953889399d955a16507"
+      "path": "assets/images/sbc-rewards/art-011.webp",
+      "bytes": 1638,
+      "sha256": "647f5ece32ceb76af1eff21b2f51ea56adcb75222131580c05cadc223a96287a",
+      "blobSha": "f0b96cb5dedc17dac57bb922498ebbfc2d5ba8f8"
     },
     {
       "index": 12,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/1745.8c971f88a842823449a739210ba569a5e6ca095c65a839a166e3476a9b1c1468.png",
-      "path": "assets/images/sbc-rewards/art-012.png",
-      "bytes": 5255,
-      "sha256": "8c971f88a842823449a739210ba569a5e6ca095c65a839a166e3476a9b1c1468",
-      "blobSha": "78fe40f63c7d752df2899d2a941183bc95deeece"
+      "path": "assets/images/sbc-rewards/art-012.webp",
+      "bytes": 2850,
+      "sha256": "b2a39a5d3f8d3c6706acf3bb721603f88c8aa9ace345f82170750c708fbf7517",
+      "blobSha": "f2f811a656a6fe9f62a664a31f5bd1bc143b66f3"
     },
     {
       "index": 13,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50596705.cf8accc17e53acefc21d456bcfa1c0b5dfa988615a24bffb241953bfa3142156.webp",
       "path": "assets/images/sbc-rewards/art-013.webp",
-      "bytes": 137760,
-      "sha256": "cf8accc17e53acefc21d456bcfa1c0b5dfa988615a24bffb241953bfa3142156",
-      "blobSha": "77d60c7871577a09fb31a1a28e96d15ffdea6d1c"
+      "bytes": 18904,
+      "sha256": "0ba0d1595eef10b129b7370fb332d788855eda10d841aac70cdf57b8d590b588",
+      "blobSha": "0a63b2a8323f3161f7d9440ed5019a217b4d40c7"
     },
     {
       "index": 14,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/21.09e6201577ad206ca1927900d61876676ce53a98d69a6e8047ccfeac8c133cdd.png",
-      "path": "assets/images/sbc-rewards/art-014.png",
-      "bytes": 297,
-      "sha256": "09e6201577ad206ca1927900d61876676ce53a98d69a6e8047ccfeac8c133cdd",
-      "blobSha": "53d6565bdb2a7af59cdbede64bcee28bb6547c7c"
+      "path": "assets/images/sbc-rewards/art-014.webp",
+      "bytes": 262,
+      "sha256": "eccf5f11b32c015588a9a14281018b780c0185fe3d09fb2cf86f250446343c65",
+      "blobSha": "20a62383c0b82377470f8a420aff298df9877c65"
     },
     {
       "index": 15,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/2215.a8e7c4f76d6be4fa6858792035e7a2e4301d31d1afd0176004b0be27572638e8.png",
-      "path": "assets/images/sbc-rewards/art-015.png",
-      "bytes": 8123,
-      "sha256": "a8e7c4f76d6be4fa6858792035e7a2e4301d31d1afd0176004b0be27572638e8",
-      "blobSha": "7c7d396c13d1c20f35eb8abac7d5e0d00b9b017f"
+      "path": "assets/images/sbc-rewards/art-015.webp",
+      "bytes": 3946,
+      "sha256": "e4c0f719ae6f4788fa481f1f9de7395672dce74ffc49ab8d1c56a45234cb1936",
+      "blobSha": "895248c4aad1d496961182b719affc01ef2dce5a"
     },
     {
       "index": 16,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/175.079f6632f4c89cdf432b3b7dc640342506aaea25c5e1e94db2d05b0227c86636.png",
-      "path": "assets/images/sbc-rewards/art-016.png",
-      "bytes": 4914,
-      "sha256": "079f6632f4c89cdf432b3b7dc640342506aaea25c5e1e94db2d05b0227c86636",
-      "blobSha": "c33396e33195d4e3be21e0f77bfaf50f4b18f872"
+      "path": "assets/images/sbc-rewards/art-016.webp",
+      "bytes": 2576,
+      "sha256": "b0a08b916cd33bdfc49cdf050c467c9446221446be9c52269396982eba9014a2",
+      "blobSha": "f8fd06c62bc7a280de9fdae0f3a1814a12538d08"
     },
     {
       "index": 17,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/177.88f85522b6723d781dbed81b6d90c7396ed99636860ca2d9f0724de33dd48cb7.png",
-      "path": "assets/images/sbc-rewards/art-017.png",
-      "bytes": 242909,
-      "sha256": "88f85522b6723d781dbed81b6d90c7396ed99636860ca2d9f0724de33dd48cb7",
-      "blobSha": "1f3278dc3e650f5b22b679389e0ab79b2301930f"
+      "path": "assets/images/sbc-rewards/art-017.webp",
+      "bytes": 16778,
+      "sha256": "46030417f548933409292ff496fc7f805483bb3b60e8e04b4026ef81dca3f48a",
+      "blobSha": "ef78e0b371fe74b0a6632ee449d1f8b96823f708"
     },
     {
       "index": 18,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50594179.31827fa0f9007f2c517e4db88fa09025068dfbbdd9a102f68aa2f5f044bb8164.webp",
       "path": "assets/images/sbc-rewards/art-018.webp",
-      "bytes": 128220,
-      "sha256": "31827fa0f9007f2c517e4db88fa09025068dfbbdd9a102f68aa2f5f044bb8164",
-      "blobSha": "10b6d8c9d0c2087dd25f763db92a391dece9db8a"
+      "bytes": 17634,
+      "sha256": "b4491520e9577d00d63043ec3198b714ca468369dc36c46a99decd3f873fbaa9",
+      "blobSha": "1893a0b954aafe6e8b9434f44c9a3f127cecc38f"
     },
     {
       "index": 19,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/2222.fc11bb6ddeeef9c0ce026fb0ab0b84ea4aa5abee4874b05576899c33fe61d6b1.png",
-      "path": "assets/images/sbc-rewards/art-019.png",
-      "bytes": 4853,
-      "sha256": "fc11bb6ddeeef9c0ce026fb0ab0b84ea4aa5abee4874b05576899c33fe61d6b1",
-      "blobSha": "53f4bb6caaec8f076ff774f12112b7913184bfc3"
+      "path": "assets/images/sbc-rewards/art-019.webp",
+      "bytes": 2930,
+      "sha256": "cb3d3fa882ddde18463faade2fcc20736413b20cf59fc26a30589498b99c168e",
+      "blobSha": "118a15df6159a5a915d0875195c341f514ce1b09"
     },
     {
       "index": 20,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/79.06c34ce5fa2f351f0b827d57b2116b1abf4af6e042be7965d1ee1a05bf4e597d.png",
-      "path": "assets/images/sbc-rewards/art-020.png",
-      "bytes": 146665,
-      "sha256": "06c34ce5fa2f351f0b827d57b2116b1abf4af6e042be7965d1ee1a05bf4e597d",
-      "blobSha": "b04eb340c53a47c5ec4d134f9f4d1159e666eb51"
+      "path": "assets/images/sbc-rewards/art-020.webp",
+      "bytes": 9976,
+      "sha256": "cc1577802de9af096fa8eeb9cecebce3e981b2b2700584379317172bcf7de3ed",
+      "blobSha": "693d4aa8849d85643d016983461599be20c6464a"
     },
     {
       "index": 21,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-67350325.f3283a0d041bf690b5e277411062c8d875ef1e5dfe4736a85183965655ec140d.webp",
       "path": "assets/images/sbc-rewards/art-021.webp",
-      "bytes": 152922,
-      "sha256": "f3283a0d041bf690b5e277411062c8d875ef1e5dfe4736a85183965655ec140d",
-      "blobSha": "ace557b26ddd2c9dc2f8563533207c06058bd726"
+      "bytes": 21048,
+      "sha256": "1580280215e94cad76f317764e0b07f4f1ba3dfa8afbae49329eac04c7eef2f3",
+      "blobSha": "d08918e33b576ade31c42595d03b9b62a25ce588"
     },
     {
       "index": 22,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/16.16d2e597497f719153fb123b2f425ea2446b7eb52e4cb8d902e341fca08d2e88.png",
-      "path": "assets/images/sbc-rewards/art-022.png",
-      "bytes": 4188,
-      "sha256": "16d2e597497f719153fb123b2f425ea2446b7eb52e4cb8d902e341fca08d2e88",
-      "blobSha": "50d201a6149ccc8bfe1b754662ce41e706200a75"
+      "path": "assets/images/sbc-rewards/art-022.webp",
+      "bytes": 2522,
+      "sha256": "cbad8f9a6358c22b4e6445a2ec474ac84418efa9f2bf7f1c053561b51c07d1d3",
+      "blobSha": "d1dd59080122ceec34e6760aa3b80467207efcd0"
     },
     {
       "index": 23,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/73.848604e662811fcb98b923c1cef5d3149e95d815ca1bd56b912d801fbeb33f7b.png",
-      "path": "assets/images/sbc-rewards/art-023.png",
-      "bytes": 9380,
-      "sha256": "848604e662811fcb98b923c1cef5d3149e95d815ca1bd56b912d801fbeb33f7b",
-      "blobSha": "1847c20e49081ed1359c8d23a134d838367a89d4"
+      "path": "assets/images/sbc-rewards/art-023.webp",
+      "bytes": 3738,
+      "sha256": "5c5eb73529fed284f44df05971e2d797745fcfe308ead47b9528990b3817a4f9",
+      "blobSha": "5399d7a21a432b235358c459c5f15d10c02a18a7"
     },
     {
       "index": 24,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/86.40c6f402a13c2c37c892df1095aa680f88cda9d6fb4415aff7ef741cc5ca2c4c.png",
-      "path": "assets/images/sbc-rewards/art-024.png",
-      "bytes": 154865,
-      "sha256": "40c6f402a13c2c37c892df1095aa680f88cda9d6fb4415aff7ef741cc5ca2c4c",
-      "blobSha": "1a5b3bee8a82ce8cd81b245f98dba12e23a1d02b"
+      "path": "assets/images/sbc-rewards/art-024.webp",
+      "bytes": 9106,
+      "sha256": "0745324c3baa488446c90587fbed11d1826d9ead1376e4ea0b00638ccc644c48",
+      "blobSha": "24bbfd157f16b8ca1518fca9e6e093ade49854c6"
     },
     {
       "index": 25,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84119499.b3c11eda3492029701b3fdcd8e4c1be00556f2f0171baf5446be4b6ad36ea765.webp",
       "path": "assets/images/sbc-rewards/art-025.webp",
-      "bytes": 166984,
-      "sha256": "b3c11eda3492029701b3fdcd8e4c1be00556f2f0171baf5446be4b6ad36ea765",
-      "blobSha": "6f88e093e7c119d35301dbd0e74417772e408057"
+      "bytes": 21396,
+      "sha256": "f49356dba88d630edeff66a1ea442df47f1437b6e9e544054594dbd61019b785",
+      "blobSha": "54f718a6c0765bc0e5a54aac66ad36d200b28f12"
     },
     {
       "index": 26,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/54.d9dc910e9f0757f8cb3980b65ec126b38c7ccd8eacbf33812b324fb0acb499c0.png",
-      "path": "assets/images/sbc-rewards/art-026.png",
-      "bytes": 5006,
-      "sha256": "d9dc910e9f0757f8cb3980b65ec126b38c7ccd8eacbf33812b324fb0acb499c0",
-      "blobSha": "15fca82ab8ffeb07110373530984089027e4f5cc"
+      "path": "assets/images/sbc-rewards/art-026.webp",
+      "bytes": 1230,
+      "sha256": "b3d8a4db878bb581051e18d5c858ff404c2e83f4ae3d1a0963fe54542e5a2298",
+      "blobSha": "d7d03c5140a6ad31bba263e0bcbefa61939ea375"
     },
     {
       "index": 27,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/43.5d2dc0a3dbfe139573e85227bdd299727146169f1c4e9417b8ec15192aac0260.png",
-      "path": "assets/images/sbc-rewards/art-027.png",
-      "bytes": 181592,
-      "sha256": "5d2dc0a3dbfe139573e85227bdd299727146169f1c4e9417b8ec15192aac0260",
-      "blobSha": "d0aa02f828c2169c827b242930281d8240198df3"
+      "path": "assets/images/sbc-rewards/art-027.webp",
+      "bytes": 7792,
+      "sha256": "864d527a64d8e1dc3a473e8a5cfc30d747d3adf151e4691150703706a9b5f148",
+      "blobSha": "9db1f2b9e7fa65fdf2fcd4b8eb9272411dedbd4d"
     },
     {
       "index": 28,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84076845.da2975c64d0d112a7422e7b7c48d22f53e84972e80e68c56edcb81aee88b3711.webp",
       "path": "assets/images/sbc-rewards/art-028.webp",
-      "bytes": 152966,
-      "sha256": "da2975c64d0d112a7422e7b7c48d22f53e84972e80e68c56edcb81aee88b3711",
-      "blobSha": "2d3a2a73bc3610a5621972c4a42ab0faadb71c18"
+      "bytes": 20516,
+      "sha256": "ea757faee038cd4950a0a71d0c5c66e11ef0dcfe9dee15eff4f86dde800ee99a",
+      "blobSha": "b0773d0618b997749ed5e89125a622146cdbbfd7"
     },
     {
       "index": 29,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/1808.3fcff2a5d489cdf45070bbe15839da401d6ee2797e008d5141e9a364b256c43d.png",
-      "path": "assets/images/sbc-rewards/art-029.png",
-      "bytes": 7287,
-      "sha256": "3fcff2a5d489cdf45070bbe15839da401d6ee2797e008d5141e9a364b256c43d",
-      "blobSha": "0c884b6e8bf9ea7cd220187a9e0460374f876736"
+      "path": "assets/images/sbc-rewards/art-029.webp",
+      "bytes": 3410,
+      "sha256": "85cb942d4701099479c5d66c8dc968883363a1b677832dd4cccf05c80ad09190",
+      "blobSha": "b7fdf0c2fb0aa82491c789f3ba94ad7ead378c06"
     },
     {
       "index": 30,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/87.ac798fa823433611bba06a89919d6d9d223af203ffad8a34cf2889fa74ebf12e.png",
-      "path": "assets/images/sbc-rewards/art-030.png",
-      "bytes": 622997,
-      "sha256": "ac798fa823433611bba06a89919d6d9d223af203ffad8a34cf2889fa74ebf12e",
-      "blobSha": "f6edec9ff16f4481499a149bde19b3ea984badb2"
+      "path": "assets/images/sbc-rewards/art-030.webp",
+      "bytes": 28624,
+      "sha256": "8f5e6af820fbe8d3320d5184aa5c8ebedd1cef289fb4b7f6215c7bce3ff8f335",
+      "blobSha": "2f08c84e7b26a9e7ead27237915f969526e511fd"
     },
     {
       "index": 31,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50558033.a14c65e2b85c388991c3a98203505a9a650ce363e203f8f5d019b0da66d2e8c8.webp",
       "path": "assets/images/sbc-rewards/art-031.webp",
-      "bytes": 156082,
-      "sha256": "a14c65e2b85c388991c3a98203505a9a650ce363e203f8f5d019b0da66d2e8c8",
-      "blobSha": "6f9cbd35357e7fe9bbd460ac9177b86c9a52a501"
+      "bytes": 20380,
+      "sha256": "8acb020a03dc86cae5ca7c585c83fa15e972ccf81417d0dae0a941be0c474ea4",
+      "blobSha": "539229de08c035352a358566e9e30c5c8c123771"
     },
     {
       "index": 32,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/52.411384d76f978ce88ee08880f79fd0b7c92d9f7a35a091c2fe2e58ad066e8a1a.png",
-      "path": "assets/images/sbc-rewards/art-032.png",
-      "bytes": 1412,
-      "sha256": "411384d76f978ce88ee08880f79fd0b7c92d9f7a35a091c2fe2e58ad066e8a1a",
-      "blobSha": "be98bb9be7fa25e5cc724a65d1fa081bbf871803"
+      "path": "assets/images/sbc-rewards/art-032.webp",
+      "bytes": 386,
+      "sha256": "eaabb66b56f8dd3113ad42448586d1f6925e80b43255137baf33cd6efbb5ee60",
+      "blobSha": "1951ad9113bd82dfcde9167746844b8d40363cb2"
     },
     {
       "index": 33,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/39.ea32ac1d4c5aeb379cec48a5132b135cd9c8767b603cd69fe3083092b4ef9eb3.png",
-      "path": "assets/images/sbc-rewards/art-033.png",
-      "bytes": 6325,
-      "sha256": "ea32ac1d4c5aeb379cec48a5132b135cd9c8767b603cd69fe3083092b4ef9eb3",
-      "blobSha": "8a607ea5ba8e055ff255e476f8bbefc9adc3ed24"
+      "path": "assets/images/sbc-rewards/art-033.webp",
+      "bytes": 2746,
+      "sha256": "8c056deb4e127e7b77cd060f5a30062cb2c59d83dfe15ff73effa435a1d2ede1",
+      "blobSha": "221ff282a93c3f0fa42816a24c794d51b6d48935"
     },
     {
       "index": 34,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/114162.10abc10d372053e10629c836fb357e0e00afb4425a9e0e539829dd3ef63534a0.png",
-      "path": "assets/images/sbc-rewards/art-034.png",
-      "bytes": 4602,
-      "sha256": "10abc10d372053e10629c836fb357e0e00afb4425a9e0e539829dd3ef63534a0",
-      "blobSha": "fb47195119f14071abc5630cf4fe9955504bfa62"
+      "path": "assets/images/sbc-rewards/art-034.webp",
+      "bytes": 2298,
+      "sha256": "4aa2458cd328ffc1fadb08f149a3e3c51b72557658a991c159aa970166df954f",
+      "blobSha": "2d34b75e8dbf163603fb7c189bbd95496e36d3d7"
     },
     {
       "index": 35,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/42.72384b5eb7506cd558d7ee4270e17302507e32650b4e4cce80293581272f9425.png",
-      "path": "assets/images/sbc-rewards/art-035.png",
-      "bytes": 262318,
-      "sha256": "72384b5eb7506cd558d7ee4270e17302507e32650b4e4cce80293581272f9425",
-      "blobSha": "7c5fe101962cc060391f81ab1cfd7931edd2d5d1"
+      "path": "assets/images/sbc-rewards/art-035.webp",
+      "bytes": 9258,
+      "sha256": "a43574bb93d4dc2cd7f8c6e09f1550916622a2afc0751edc72ca93039db77d99",
+      "blobSha": "77fa1688005eead6d52f5308cab6298eb6710bd2"
     },
     {
       "index": 36,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-84133907.131241b07dcb61a7a7de97716d4f72f8d4d53fbe4bf3cddc6e2243e75aecf6f4.webp",
       "path": "assets/images/sbc-rewards/art-036.webp",
-      "bytes": 132702,
-      "sha256": "131241b07dcb61a7a7de97716d4f72f8d4d53fbe4bf3cddc6e2243e75aecf6f4",
-      "blobSha": "e812381c10f696b2b5820b5af006a778bafcb749"
+      "bytes": 21356,
+      "sha256": "85aac52621a7ce78582f59194f4edfba806035de14ee54bb71becf0610bf36b6",
+      "blobSha": "0e58fca45c3160b9e224911d64442a9b66d84fcc"
     },
     {
       "index": 37,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/18.1913b72e6c1685cc8b67c4126ed88119ac29293b1fc11688ebfb464631a7a654.png",
-      "path": "assets/images/sbc-rewards/art-037.png",
-      "bytes": 380,
-      "sha256": "1913b72e6c1685cc8b67c4126ed88119ac29293b1fc11688ebfb464631a7a654",
-      "blobSha": "17c237caa119f4ae9af20a7838f96210983f4caa"
+      "path": "assets/images/sbc-rewards/art-037.webp",
+      "bytes": 298,
+      "sha256": "e5513d49df7888786af807df0dcd3112a014f721972b2e0d57a2db0d9ea04a3e",
+      "blobSha": "a074c9c5a8885985d135d2b7d1983549aa372ea5"
     },
     {
       "index": 38,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/league/19.2052e58944544251cec9a9c60ef432ace07775c8a00e407b147046d54c930776.png",
-      "path": "assets/images/sbc-rewards/art-038.png",
-      "bytes": 4841,
-      "sha256": "2052e58944544251cec9a9c60ef432ace07775c8a00e407b147046d54c930776",
-      "blobSha": "60bc7ca4ff1ede0d74b1ab54956e553abe56088b"
+      "path": "assets/images/sbc-rewards/art-038.webp",
+      "bytes": 2616,
+      "sha256": "375c9818574a09bc72c0f0747d3253fc60fb3a84acd3b4104facf83a9c6778db",
+      "blobSha": "975deee44d37b4721193c30e55557532050df2ba"
     },
     {
       "index": 39,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/21.01fbe64716257eb78bc4ff4bbc1969afa82e32bd73a43d7c30abe1ab4fd8d223.png",
-      "path": "assets/images/sbc-rewards/art-039.png",
-      "bytes": 10873,
-      "sha256": "01fbe64716257eb78bc4ff4bbc1969afa82e32bd73a43d7c30abe1ab4fd8d223",
-      "blobSha": "069a5d3fa53d3febef6505d7c47bbe1ff4b0c2f8"
+      "path": "assets/images/sbc-rewards/art-039.webp",
+      "bytes": 4750,
+      "sha256": "362113883e47736c322c338a67508134aa14b6ea235205f2bcfe51e7496dcada",
+      "blobSha": "c9fc1c6ea7e03c757c1ac9c1e86674eb336c3bba"
     },
     {
       "index": 40,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/rarities-level-0-large/114.55c3cba75f9d4fa59932c14f503cc9ad50401cc3551f356dcce12bc5a7fa3899.png",
-      "path": "assets/images/sbc-rewards/art-040.png",
-      "bytes": 157486,
-      "sha256": "55c3cba75f9d4fa59932c14f503cc9ad50401cc3551f356dcce12bc5a7fa3899",
-      "blobSha": "9740fe1c1b5e49fafb2b7d147e67347b240e08e6"
+      "path": "assets/images/sbc-rewards/art-040.webp",
+      "bytes": 9148,
+      "sha256": "616195ec821f0d87fc37d93e506432241a8681ed851deb4ba42a3f707eceeac2",
+      "blobSha": "569a2330d034f35428a69f1faf4d5ceac241a9fc"
     },
     {
       "index": 41,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=300,format=auto/2027/player-item/27-50563095.44ca1ed070c0e7354f77567b7a44112883e94b04750ae8ee56dbe32856260522.webp",
       "path": "assets/images/sbc-rewards/art-041.webp",
-      "bytes": 164064,
-      "sha256": "44ca1ed070c0e7354f77567b7a44112883e94b04750ae8ee56dbe32856260522",
-      "blobSha": "3610737d651910c167670c576aa72f66d19f16cf"
+      "bytes": 22348,
+      "sha256": "5d5da8655e66d638c7750ce17bec6ac19df4c2ca4f4f81db0179b9b74360d6df",
+      "blobSha": "69838a61a50238f095ba5457648d716bb969abe4"
     },
     {
       "index": 42,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/nation/34.23bd5b7123ba01a19652dd318088ee023e48622f156dbdabd6d8e1c1805b2f77.png",
-      "path": "assets/images/sbc-rewards/art-042.png",
-      "bytes": 332,
-      "sha256": "23bd5b7123ba01a19652dd318088ee023e48622f156dbdabd6d8e1c1805b2f77",
-      "blobSha": "c18b2c564f50a1ea6d78f60df9d737ad504375c2"
+      "path": "assets/images/sbc-rewards/art-042.webp",
+      "bytes": 238,
+      "sha256": "3fd191734e2b115a1545f47867e408088677120da73e716b77d91824df41d42c",
+      "blobSha": "1f6fc744ad2a1acecbcffcc65f5615ecced849bb"
     },
     {
       "index": 43,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,width=80,format=auto/2027/club/52.7370fe7e3ecd40a6e2a9fe3bdcf665686d07d582cc234ce87ebf1cb706a4897b.png",
-      "path": "assets/images/sbc-rewards/art-043.png",
-      "bytes": 6909,
-      "sha256": "7370fe7e3ecd40a6e2a9fe3bdcf665686d07d582cc234ce87ebf1cb706a4897b",
-      "blobSha": "4ee8dd08e79b2e8f1e437cc94556ba3c89c43f17"
+      "path": "assets/images/sbc-rewards/art-043.webp",
+      "bytes": 2694,
+      "sha256": "af58cbc37fd5d6f46e5ba1e96b288b821b338eb74a96b2ea129e435c93f1cc46",
+      "blobSha": "3b351370d9d94c6d476d463b55e659ce28b302b3"
     },
     {
       "index": 44,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/64.png",
-      "path": "assets/images/sbc-rewards/art-044.png",
-      "bytes": 172298,
-      "sha256": "2c9dc01e2657667ad3312e3f30403a5cd77bbf89a1dad4849a1e6ebca7e66bf9",
-      "blobSha": "186ff1ad7bba62a37a7d3f20a4db99d08114dee8"
+      "path": "assets/images/sbc-rewards/art-044.webp",
+      "bytes": 28426,
+      "sha256": "2e05d0395e53c2820e3a3641ecc60f1e8a62723859455a872ce3950012061e82",
+      "blobSha": "299b96635a3888d22e190e189fdfd26fda5eb5fc"
     },
     {
       "index": 45,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/69.png",
-      "path": "assets/images/sbc-rewards/art-045.png",
-      "bytes": 188618,
-      "sha256": "fb14a1720064534fefd46eb626ae83ee03df01d00b71111b6486d7e936cea69f",
-      "blobSha": "18a5e93842cc40f74befa10eead918e92b68e0c6"
+      "path": "assets/images/sbc-rewards/art-045.webp",
+      "bytes": 33052,
+      "sha256": "6ba67e5c8aa85ae424819e66f43d61492954513c1861742d7c1042bd2c0cba60",
+      "blobSha": "55f431e9c5c3bf81c06e947405030421c8b4dd23"
     },
     {
       "index": 46,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/62.png",
-      "path": "assets/images/sbc-rewards/art-046.png",
-      "bytes": 172298,
-      "sha256": "2c9dc01e2657667ad3312e3f30403a5cd77bbf89a1dad4849a1e6ebca7e66bf9",
-      "blobSha": "186ff1ad7bba62a37a7d3f20a4db99d08114dee8"
+      "path": "assets/images/sbc-rewards/art-046.webp",
+      "bytes": 28426,
+      "sha256": "2e05d0395e53c2820e3a3641ecc60f1e8a62723859455a872ce3950012061e82",
+      "blobSha": "299b96635a3888d22e190e189fdfd26fda5eb5fc"
     },
     {
       "index": 47,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/sbcs/66.png",
-      "path": "assets/images/sbc-rewards/art-047.png",
-      "bytes": 177079,
-      "sha256": "35e28fbb11d537c45983101aedcd5436b4b72eef818f9ca7b64e70213fcb0d61",
-      "blobSha": "9ce9fd97659ba94b2830993b2f4d4d67a479b823"
+      "path": "assets/images/sbc-rewards/art-047.webp",
+      "bytes": 28496,
+      "sha256": "a0f11085ff2882e67f08c4ad0ce8dae428c851cd310240b0baaf589d44f335b0",
+      "blobSha": "b0f2c9f89f26ad3b7bd2f6c507dcc5bcd0d9b21b"
     },
     {
       "index": 48,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50413511.47490212818e976ef9412e866d2b54252a2a7e3b9fb125f725dac04ab1c5999e.webp",
       "path": "assets/images/sbc-rewards/art-048.webp",
-      "bytes": 286152,
-      "sha256": "47490212818e976ef9412e866d2b54252a2a7e3b9fb125f725dac04ab1c5999e",
-      "blobSha": "6170925d003243d18048cf51958f17e7d6ce8138"
+      "bytes": 33956,
+      "sha256": "23a8efb51a4f2da88cc1430788fcef6e5fb4e8670b64810e2ee7ca9febc27815",
+      "blobSha": "b924214f11b9d18f0b7257b7e1b52e5c3cd0a8b4"
     },
     {
       "index": 49,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50608342.f51161e3fe08365eb0d953bda06d1490beaa141499045a08998a730a320fd6c7.webp",
       "path": "assets/images/sbc-rewards/art-049.webp",
-      "bytes": 278670,
-      "sha256": "f51161e3fe08365eb0d953bda06d1490beaa141499045a08998a730a320fd6c7",
-      "blobSha": "ebd3b6f2e8355d989ce2cfdc4257a48faba914ff"
+      "bytes": 32554,
+      "sha256": "591800019b4798942b00c391af6a1928287b6ea55480a6ae43f07e67ba3df8fe",
+      "blobSha": "a907644c7e301e5540bfa794607b748a8d5db11f"
     },
     {
       "index": 50,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50606972.d8d3597b2b580624b0f5a55336ba025260792c600c48e3c1a65121ad773e39dd.webp",
       "path": "assets/images/sbc-rewards/art-050.webp",
-      "bytes": 266814,
-      "sha256": "d8d3597b2b580624b0f5a55336ba025260792c600c48e3c1a65121ad773e39dd",
-      "blobSha": "b754bc0254a8857b9bbe51de65559c7acb986a11"
+      "bytes": 31324,
+      "sha256": "e2fb17d3ab43d82c18fdcccdad7da602fcefc5746219d18f9089850509451a13",
+      "blobSha": "f9351fcfe2cfb28cc6a6d0a68049c2c3d35326d0"
     },
     {
       "index": 51,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50596705.83a1beab5bbf68a116756250c88e0588b31b964729afb479dfeedbd28d310f18.webp",
       "path": "assets/images/sbc-rewards/art-051.webp",
-      "bytes": 271158,
-      "sha256": "83a1beab5bbf68a116756250c88e0588b31b964729afb479dfeedbd28d310f18",
-      "blobSha": "07dab89742cba8b74ceae6a459ca9cc612a23b80"
+      "bytes": 31546,
+      "sha256": "f882c0be62427e25b04ff52a2766cd037e580ca50d0d8b5cc82b829a17993d0a",
+      "blobSha": "bfee4246841e59207f44b576e23209efd546bc86"
     },
     {
       "index": 52,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-84076845.9db8427a90d290c8a352e210f7bdf30d716a581bb3ecb3942356d67e33768813.webp",
       "path": "assets/images/sbc-rewards/art-052.webp",
-      "bytes": 173188,
-      "sha256": "9db8427a90d290c8a352e210f7bdf30d716a581bb3ecb3942356d67e33768813",
-      "blobSha": "eef9eed54e5a98baa738a0ddf2c8eefbbc3e5305"
+      "bytes": 20300,
+      "sha256": "d4f0456297615e81cd6714aa7226363cf3da273e515201959a34206718f62950",
+      "blobSha": "5ad370bc485a5c469108c6bf15938ed59d8138e0"
     },
     {
       "index": 53,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50558033.6f5ecad666e298fecbfc0113a4c6ed0493bd1c7a7a13829c9c34af9abb375582.webp",
       "path": "assets/images/sbc-rewards/art-053.webp",
-      "bytes": 282274,
-      "sha256": "6f5ecad666e298fecbfc0113a4c6ed0493bd1c7a7a13829c9c34af9abb375582",
-      "blobSha": "46250360e17459f45bb26e2867d6a5938d5a9f8b"
+      "bytes": 32774,
+      "sha256": "7ef945ab72151ca1dc3f5471d70a7681b571ef5b8827dc4d781b26aed147e219",
+      "blobSha": "afe11496b5e246739e5e17c2ce56429d99bc0e25"
     },
     {
       "index": 54,
       "url": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50563095.e8a634499a3a4edca7650a86222f0289a05eedad34a5dab89578cb9be7bfd9df.webp",
       "path": "assets/images/sbc-rewards/art-054.webp",
-      "bytes": 172238,
-      "sha256": "e8a634499a3a4edca7650a86222f0289a05eedad34a5dab89578cb9be7bfd9df",
-      "blobSha": "a697fc2e7e7a98b7d9dced2f202c575dc7428018"
+      "bytes": 21892,
+      "sha256": "0161a1180584e6021a8044fe53af9f90b66d7b4defd12fddd6ed3c476f6a5d71",
+      "blobSha": "460dd671a93f1b3d07abdb3cd494fd17488d712e"
     }
   ],
   "complete": {
