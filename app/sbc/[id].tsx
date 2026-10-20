@@ -6,8 +6,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Image, Linking, Platform, Text, useWindowDimensions, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
-import { ClubBadge } from '@/components/ClubBadge';
-import { NationFlag } from '@/components/NationFlag';
 import { SquadPitch } from '@/components/SquadPitch';
 import { Badge, Button, Card, colors, Muted, Screen, Title } from '@/components/ui';
 import { evaluateSquad, formationById } from '@/lib/chemistry';
@@ -68,23 +66,15 @@ export default function SbcDetailScreen() {
   const remaining = formatRemaining(challenge.endsAt, now, language);
   const ready = preparedRoute(challengeId);
   const solutions = solutionsFor(app.solutions, challengeId);
-  const clubs = challenge.clubs ?? [];
-  const nations = challenge.nations ?? [];
   const face = sbcFace(challenge);
   const split = Platform.OS === 'web' && windowWidth >= 1000;
 
   return (
     <Screen scene="sbc">
       <Stack.Screen options={{ title: 'SBC' }} />
-      <View style={{ flexDirection: 'row-reverse', alignItems: 'center', gap: 10 }}>
-        <SbcRewardVisual challenge={challenge} width={110} />
-        {nations.map((nation) => (
-          <NationFlag key={nation} nation={nation} size={28} />
-        ))}
-        {clubs.map((club) => (
-          <ClubBadge key={club} size={54} club={club} />
-        ))}
-        <View style={{ flex: 1 }}>
+      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', gap: 18 }}>
+        <SbcRewardVisual challenge={challenge} width={windowWidth < 600 ? 132 : 180} />
+        <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
           <Badge text={face.category} tone={challenge.kind === 'streamlined' ? 'copper' : 'blue'} />
           <Title>{face.en}</Title>
           {language === 'he' && face.he !== face.en ? <Muted>{face.he}</Muted> : null}

@@ -136,7 +136,7 @@ const PACK_ART = {
 } as const;
 
 function packArt(visual: PackVisual, label?: string) {
-  const stamp = label?.trim() ?? '';
+  const stamp = label?.trim().replace(/^\d+\s*[×x]\s*/i, '') ?? '';
   if (stamp === 'TOTW') return PACK_ART.totw;
   if (stamp === 'OTW') return PACK_ART.otw;
   if (stamp === '83+') return PACK_ART.p83;

@@ -84,3 +84,23 @@ const squadReport = evaluateSquad(formationById(readyClassic.previewFormation), 
 assert.equal(new Set(Object.values(readyClassic.previewSquad)).size, 11);
 assert(squadReport.ready, 'Ready example squad must meet every published rule');
 assert(squadReport.chemistry >= 18);
+
+const crypto = await import('node:crypto');
+const media = JSON.parse(fs.readFileSync('assets/data/sbc-local-art-manifest.json', 'utf8'));
+const urls = new Set(media.assets.map((a) => a.url));
+for (const asset of media.assets) {
+ const bytes = fs.readFileSync(asset.path);
+ assert.equal(bytes.length, asset.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), asset.sha256, 'Corrupted reward artwork: '+asset.path);
+}
+for (const [id, art] of Object.entries(artwork)) {
+ for (const field of ['background','portrait','nation','league','club','image']) if (art[field]) assert(urls.has(art[field]), id+': missing local '+field);
+}
+for (const [id, url] of Object.entries(media.complete)) {
+ const item = artwork[id].sourceUrl.split('/').filter(Boolean).at(-1);
+ assert(url.includes('/2027/futgg-player-item-card/'+item+'.'), 'Wrong complete card edition: '+id);
+ assert(urls.has(url));
+}
+const { sbcTileTheme } = loadRepositoryModule('lib/sbcTileTheme.ts');
+assert.equal(sbcTileTheme(catalogChallenge('sbc-upgrade-83x2-20261020')).packLabel, '83+');
+console.log('All SBC reward images are locally bundled, intact and mapped to the correct current card edition.');

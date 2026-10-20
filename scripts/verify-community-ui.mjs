@@ -12,7 +12,7 @@ const launchOptions = {
  headless: true,
 };
 const root=path.resolve(process.env.FC27_WEB_DIR || 'dist');
-const server=http.createServer((req,res)=>{let file=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!fs.existsSync(file)||fs.statSync(file).isDirectory())file=root+'/index.html';res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.html')?'text/html':file.endsWith('.png')?'image/png':'application/octet-stream');fs.createReadStream(file).pipe(res);});
+const server=http.createServer((req,res)=>{let file=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!fs.existsSync(file)||fs.statSync(file).isDirectory())file=root+'/index.html';res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.html')?'text/html':file.endsWith('.png')?'image/png':file.endsWith('.webp')?'image/webp':'application/octet-stream');fs.createReadStream(file).pipe(res);});
 await new Promise(resolve=>server.listen(8094,'127.0.0.1',resolve));
 let browser=await playwright.launch(launchOptions);
 const uid='10000000-0000-4000-8000-000000000001',other='10000000-0000-4000-8000-000000000002';
@@ -32,6 +32,8 @@ try {
    localStorage.setItem('fc27-language',language);localStorage.setItem('futz-cookie-notice','essential-2026-09-27');localStorage.setItem('futz-terms-accepted-'+uid,'2026-09-28-v1');
    if(localStorage.getItem('fc27-browser-signed-out')!=='1')localStorage.setItem('sb-hxjgphhcspzjnkkzdmpk-auth-token',JSON.stringify({access_token:token,refresh_token:'mock-only',expires_at:Math.floor(Date.now()/1000)+3600,token_type:'bearer',user:{id:uid,email:'mock@example.invalid',aud:'authenticated',role:'authenticated',user_metadata:{display_name:'Preview player'},app_metadata:{provider:'email'},created_at:new Date().toISOString()}}));
   },{language,uid});
+  await context.route('https://game-assets.fut.gg/**', route => route.abort());
+  await context.route('https://cdn*.futbin.com/**', route => route.abort());
   await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
    const request=route.request(),url=new URL(request.url());let body=[];
    if(url.pathname.endsWith('/rpc/community_activity')){
@@ -102,6 +104,10 @@ try {
   await page.goto('http://127.0.0.1:8094/career?tab=journeys');
   await page.getByRole('tab',{name:t('Shared journeys','מסעות משותפים'),exact:true}).waitFor();
   await button(t('Start a journey','פתיחת מסע')).waitFor();
+  const careerHero = page.getByTestId('community-hero-journeys');
+  const careerImages = await careerHero.locator('img').evaluateAll(nodes => nodes.map(n => n.src));
+  assert(careerImages.some(src=>src.includes('scene-career-scout')), 'Career hero must use the Career image');
+  assert(!careerImages.some(src=>src.startsWith('data:')), 'Grounds data image leaked into Career hero');
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-career-tab-${language}.png`)});
   await page.goto('http://127.0.0.1:8094/sbc');
   await page.getByRole('button',{name:'2×83+ Upgrade',exact:true}).waitFor();
@@ -109,11 +115,37 @@ try {
   const sbcTiles=await page.locator('[role="button"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('aria-label')));
   const newest=sbcTiles.indexOf('MLS Future Stars Player Pick'), ferran=sbcTiles.indexOf('Ferran Torres');
   assert(newest>=0 && ferran>=0 && newest<ferran,'Newest SBCs must precede Ferran');
+  async function assertRewards() {
+   await page.waitForFunction(()=>{
+    const rewards=[...document.querySelectorAll('[data-testid^="sbc-reward-"]')];
+    return rewards.length>20 && rewards.every(node=>{
+     const images=[...node.querySelectorAll('img')];
+     return (node.getAttribute('aria-label')==='Coin Boost' || images.length>0) && images.every(img=>img.complete&&img.naturalWidth>0);
+    });
+   },{},{timeout:25000});
+   const invalid=await page.locator('[data-testid^="sbc-reward-"] img').evaluateAll(nodes=>nodes.filter(img=>{
+    const rect=img.getBoundingClientRect();
+    const own=img.src.startsWith(location.origin+'/')||img.src.startsWith('data:');
+    return !own || rect.width<1 || rect.height<1 || !img.complete || img.naturalWidth<1;
+   }).map(img=>({src:img.src,width:img.getBoundingClientRect().width})));
+   assert.deepEqual(invalid,[],'Every reward must remain visible without external image hosts');
+  }
+  for (const width of [390, 768, 1280, 1920]) {
+   await page.setViewportSize({width,height:1000}); await assertRewards();
+   const overflow=await page.locator('[data-testid^="sbc-reward-"]').evaluateAll(nodes=>nodes.filter(n=>{const r=n.getBoundingClientRect();return r.left<0||r.right>innerWidth;}).map(n=>n.dataset.testid));
+   assert.deepEqual(overflow,[],'SBC rewards clip at '+width);
+  }
+  await page.setViewportSize({width:1280,height:1000});
+  await page.getByRole('button',{name:'Ferran Torres',exact:true}).scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`sbc-player-cards-${language}.png`)});
+  await page.setViewportSize({width:390,height:844});
+  await page.getByRole('button',{name:'MLS Future Stars Player Pick',exact:true}).scrollIntoViewIfNeeded();
+
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-sbc-${language}.png`)});
   await page.goto('http://127.0.0.1:8094/sbc/sbc-potm-ferran');
   await page.getByText(t('Ready rating combination','צירוף דירוגים מוכן'),{exact:true}).waitFor();
   await page.getByRole('img',{name:'Ferran Torres 85 ST'}).waitFor();
-  await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('img')].filter(i=>i.src.includes('game-assets.fut.gg'));return imgs.length>=5 && imgs.every(i=>i.complete&&i.naturalWidth>0);},{},{timeout:25000});
+  await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('[data-testid="sbc-reward-sbc-potm-ferran"] img')];return imgs.length>0&&imgs.every(i=>i.complete&&i.naturalWidth>0&&i.src.startsWith(location.origin+'/'));},{},{timeout:25000});
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-ferran-${language}.png`)});
   // Invitation links survive the register/login boundary, including a page reload.
   const savedAuth = await page.evaluate(() => localStorage.getItem('sb-hxjgphhcspzjnkkzdmpk-auth-token'));
@@ -136,7 +168,7 @@ try {
   await context.close();
  }
  assert.deepEqual(errors,[]);
- for(const name of ['community-session-form-en','community-journey-form-en','community-career-tab-he','community-sbc-en','community-ferran-en']) {
+ for(const name of ['community-session-form-en','community-journey-form-en','community-career-tab-he','community-sbc-en','community-ferran-en','sbc-player-cards-en']) {
   const filename=path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',name+'.png');
   console.log('UI_SCREENSHOT='+JSON.stringify({name,data:fs.readFileSync(filename).toString('base64')}));
  }

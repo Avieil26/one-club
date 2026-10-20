@@ -9,11 +9,13 @@ concurrency:
   group: community-preview-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
-  reward-assets:
+  verify:
+    if: github.head_ref == 'preview/community-sbc-20261020'
     runs-on: ubuntu-latest
-    timeout-minutes: 8
-    permissions:
-      contents: write
+    timeout-minutes: 15
+    env:
+      EXPO_OFFLINE: '1'
+      CI: '1'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -22,8 +24,21 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-          package-manager-cache: false
-      - run: node scripts/collect-sbc-art-assets.mjs
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          FC27_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/generate-sbc-ready-squad.mjs
+      - run: npm run typecheck
+      - run: npm run verify:mobile
+      - run: npm run verify:startup
+      - run: npm run build:web -- --max-workers 2
+      - name: Export Android JavaScript
+        run: npx expo export -p android --output-dir /tmp/fc27-android-check --max-workers 2
+      - name: Lint changed feature files
+        run: npx eslint components/CountryPicker.tsx components/CommunityActivityUI.tsx components/PartnerSessions.tsx components/CareerJourneys.tsx components/SbcRewardVisual.tsx components/SbcRewardPack.tsx assets/sbcRewardAssets.ts 'app/(tabs)/career.tsx' 'app/(tabs)/sbc.tsx' 'app/sbc/[id].tsx' 'app/grounds/new.tsx' components/GroundsV22Screen.tsx lib/countries.ts lib/sbcPrepared.ts lib/sbcTileTheme.ts lib/sbcLocalization.ts lib/selectors.ts
+      - name: Record repository lint baseline
+        continue-on-error: true
+        run: npm run lint
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/verify-community-ui.mjs
+        timeout-minutes: 5

@@ -37,14 +37,15 @@ function compactRemaining(iso: string | null, now: number) {
 }
 
 function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: number; onPress: () => void }) {
+ const viewportWidth = useWindowDimensions().width;
  const { language, t } = useLanguage(); const rtl = language === 'he'; const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now);
  return <Pressable accessibilityRole="button" accessibilityLabel={face.en} onPress={onPress} style={{ flex: 1, minWidth: 0, backgroundColor: 'rgba(5,12,22,0.96)', borderWidth: 1, borderColor: '#30404D', borderRadius: 7, overflow: 'hidden' }}>
   <View style={{ height: 3, backgroundColor: face.edge }} />
   <View style={{ padding: 14, gap: 14, flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center' }}>
-   <SbcRewardVisual challenge={challenge} width={96} />
+   <SbcRewardVisual challenge={challenge} width={viewportWidth < 760 ? 116 : 132} />
    <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
     <Text style={{ color: '#D6B46B', fontSize: 9, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>{face.category}</Text>
-    <Text numberOfLines={2} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'he' ? face.he : face.en}</Text>
+    <Text numberOfLines={3} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'he' ? face.he : face.en}</Text>
     {remaining ? <Text style={{ color: '#C3CED6', fontSize: 12, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>{t('נותרו ', 'Ends in ')}{remaining}</Text> : null}
     <Text style={{ color: '#83DCE4', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('דרישות ופתרונות', 'Requirements & solutions')} →</Text>
    </View>

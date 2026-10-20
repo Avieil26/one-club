@@ -55,7 +55,7 @@ export function Panel({ eyebrow, title, children }: { eyebrow?: string; title: s
 }
 export function ActivityHero({ kind, title, description, children }: { kind: 'sessions' | 'journeys'; title: string; description: string; children?: ReactNode }) {
  const { t, language } = useLanguage(); const rtl = language === 'he'; const career = kind === 'journeys'; const accent = career ? '#E9C36A' : '#44D8E5';
- return <ImageBackground source={{ uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" style={activityStyles.hero} imageStyle={{ opacity: 0.55 }}>
+ return <ImageBackground testID={career ? 'community-hero-journeys' : 'community-hero-sessions'} source={career ? require('@/assets/images/scene-career-scout.png') : { uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" style={activityStyles.hero} imageStyle={{ opacity: 0.55 }}>
   <LinearGradient colors={['rgba(3,12,20,0.42)', 'rgba(3,12,20,0.98)']} style={activityStyles.heroContent}>
    <View style={[activityStyles.heroTop, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
     <View style={[activityStyles.heroIcon, { borderColor: accent }]}><Ionicons name={career ? 'trophy-outline' : 'people-outline'} size={22} color={accent} /></View>

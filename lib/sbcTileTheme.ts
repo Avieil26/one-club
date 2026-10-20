@@ -309,7 +309,7 @@ export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   if (challenge.id === 'sbc-gold-upgrade' || challenge.id === 'sbc-gold-reroll') return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2×78+' };
   if (known) return known;
   const reward = challenge.reward ?? '';
-  const rating = reward.match(/(?:×|x)\\s*(\\d{2})\\+/i)?.[1] ?? reward.match(/(\\d{2})\\+/)?.[1];
+  const rating = reward.match(/(?:×|x)\s*(\d{2})\+/i)?.[1] ?? reward.match(/(\d{2})\+/)?.[1];
   if (/pick/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: 'pick', packLabel: rating ? `${rating}+` : 'PICK' };
   if (/electrum/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: /small/i.test(reward) ? 'electrum-small' : 'electrum', packLabel: '' };
   if (/mixed/i.test(reward)) return { ...FALLBACK_CLASSIC, pack: 'mixed', packLabel: '' };
