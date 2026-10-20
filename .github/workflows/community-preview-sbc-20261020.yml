@@ -31,8 +31,10 @@ jobs:
       - run: npm run verify:mobile
       - run: npm run verify:startup
       - run: npm run build:web -- --max-workers 2
+      - name: Export Android JavaScript
+        run: npx expo export -p android --output-dir /tmp/fc27-android-check --max-workers 2
       - name: Lint changed feature files
-        run: npx eslint components/CountryPicker.tsx components/CommunityActivityUI.tsx components/PartnerSessions.tsx components/CareerJourneys.tsx components/SbcRewardVisual.tsx 'app/(tabs)/career.tsx' 'app/(tabs)/sbc.tsx' 'app/sbc/[id].tsx' 'app/grounds/new.tsx' lib/countries.ts lib/sbcPrepared.ts
+        run: npx eslint components/CountryPicker.tsx components/CommunityActivityUI.tsx components/PartnerSessions.tsx components/CareerJourneys.tsx components/SbcRewardVisual.tsx 'app/(tabs)/career.tsx' 'app/(tabs)/sbc.tsx' 'app/sbc/[id].tsx' 'app/grounds/new.tsx' components/GroundsV22Screen.tsx lib/countries.ts lib/sbcPrepared.ts lib/sbcTileTheme.ts lib/sbcLocalization.ts lib/selectors.ts
       - name: Record repository lint baseline
         continue-on-error: true
         run: npm run lint

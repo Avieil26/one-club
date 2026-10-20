@@ -270,7 +270,7 @@ export default function GroundsV22Screen() {
         .filter(Boolean).join(' ').toLocaleLowerCase();
       return !query || haystack.includes(query);
     });
-  }, [posts, intent, platform, position, search, app.profiles]);
+  }, [posts, intent, platform, position, search, app.profiles, language]);
   const recruiting = useMemo(() => posts.filter((post) => post.intent === 'need_player').slice(0, 3), [posts]);
   const profileFor = (post: GroundsPost) => app.profiles.find((profile) => profile.id === post.userId);
   const isFollowing = (userId: string) => app.follows.some((follow) => follow.followerId === app.user?.id && follow.followingId === userId);
