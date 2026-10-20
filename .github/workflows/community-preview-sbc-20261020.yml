@@ -1,0 +1,46 @@
+name: Community Preview checks
+on:
+  pull_request:
+    branches: ['fix/android-mobile-20261020']
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+concurrency:
+  group: community-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  source-facts:
+    if: github.head_ref == 'preview/community-sbc-20261020'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: node scripts/inspect-sbc-evening-20261020.mjs
+  verify:
+    if: github.head_ref == 'preview/community-sbc-20261020'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EXPO_OFFLINE: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run verify:mobile
+      - run: npm run verify:startup
+      - run: npm run build:web -- --max-workers 2
