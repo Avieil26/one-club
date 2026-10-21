@@ -17,6 +17,7 @@ export function HomeSbcOverview() {
  useEffect(() => { const timer = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(timer); }, []);
  const open = openSbcChallenges(app.sbcChallenges, now);
  const ending = open.filter(c => endsSoon(c, now)).sort((a,b) => Date.parse(a.endsAt!) - Date.parse(b.endsAt!));
+ const secondary = ending.length ? ending.slice(0,2) : open.slice(3,5);
  const mine = app.user ? app.submissions.filter(s => s.userId === app.user?.id) : [];
  const row = (challenge: SbcChallenge) => {
   const face = sbcFace(challenge); const hours = challenge.endsAt ? Math.max(1, Math.ceil((Date.parse(challenge.endsAt)-now)/3600000)) : null;
@@ -34,9 +35,9 @@ export function HomeSbcOverview() {
   </View>
   <View style={{flex:1,minWidth:0,gap:18}}>
    <View style={{backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#ED997E',padding:17,borderRadius:5,gap:8}}>
-    <Text accessibilityRole="header" style={{color:colors.text,fontSize:23,fontWeight:'900',textAlign:rtl?'right':'left'}}>{t('לפני שנגמר הזמן','Before time runs out')}</Text>
-    {ending.slice(0,2).map(row)}
-    {!ending.length?<Muted>{t('אין אתגרים שמסתיימים ב־24 השעות הקרובות.','No challenges expire in the next 24 hours.')}</Muted>:null}
+    <Text accessibilityRole="header" style={{color:colors.text,fontSize:23,fontWeight:'900',textAlign:rtl?'right':'left'}}>{ending.length?t('לפני שנגמר הזמן','Before time runs out'):t('עוד אתגרים פעילים','More active challenges')}</Text>
+    {secondary.map(row)}
+    {!secondary.length?<Muted>{t('בחרו מוד כדי להתחיל לשחק.','Choose a game mode to get started.')}</Muted>:null}
    </View>
    <Pressable accessibilityRole="button" onPress={()=>router.push(app.user?'/career?tab=challenges':'/grounds')} style={{backgroundColor:'rgba(5,12,20,0.96)',borderWidth:1,borderColor:'#30424C',padding:19,borderRadius:5,gap:10}}>
     <Text style={{color:'#7ED0C8',fontSize:11,fontWeight:'900',textAlign:rtl?'right':'left'}}>{app.user?t('ההתקדמות שלך','YOUR PROGRESS'):t('משחקים יחד','PLAY TOGETHER')}</Text>

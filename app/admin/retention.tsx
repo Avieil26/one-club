@@ -23,7 +23,7 @@ export default function RetentionScreen() {
   <Title>{t('שימוש וחזרה','Usage & returns')}</Title>
   {!user?.isAdmin?<Muted>{t('העמוד פתוח למנהל בלבד.','This page is for the administrator only.')}</Muted>:<>
    <Muted>{t('הדוח כולל רק חשבונות שאפשרו מדידה. חשבון המנהל אינו נספר. הימים לפי שעון ישראל.','Only accounts that opted in are counted. Administrator activity is excluded. Dates use Israel time.')}</Muted>
-   <Muted>{t('יום 1 ויום 7 נמדדים מהיום הראשון שנצפה במדידה, ולא מתאריך הרשמה היסטורי. אחוז מחושב רק לאחר שעבר יום החזרה הנדרש.','Day 1 and Day 7 are measured from the first observed active day, not a historical signup date. Rates are calculated only after the required return day has elapsed.')}</Muted>
+   <Muted>{t('יום 1 ויום 7 נמדדים מהיום הראשון שנצפה במדידה, ולא מתאריך הרשמה היסטורי. אחוז מחושב מרגע שמגיע יום החזרה הנדרש; הנתונים של היום הנוכחי עדיין חלקיים.','Day 1 and Day 7 are measured from the first observed active day, not a historical signup date. Rates start when the required return day is reached; the current day is still partial.')}</Muted>
    <Button label={t('רענון נתונים','Refresh data')} variant="ghost" onPress={()=>setRevision(v=>v+1)} />
    {error?<Muted>{t('לא הצלחנו לטעון את הדוח. נסו שוב.','Could not load the report. Please try again.')}</Muted>:null}
    {!report&&!error?<Muted>{t('טוען…','Loading…')}</Muted>:null}

@@ -20,7 +20,9 @@ export function newlyReleased(challenge: SbcChallenge, now: number): boolean {
 export function filterSbcs(challenges: SbcChallenge[], query: string, filter: SbcFilter, now: number) {
   const text = query.trim().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
   return challenges.filter(challenge => {
-    if (filter === 'ending' ? !endsSoon(challenge, now) : filter !== 'all' && rewardKind(challenge) !== filter) return false;
+    if (filter === 'ending' && !endsSoon(challenge, now)) return false;
+    if (filter === 'upgrades' && !/upgrade|reroll/i.test(challenge.id + ' ' + sbcFace(challenge).category)) return false;
+    if (filter !== 'all' && filter !== 'ending' && filter !== 'upgrades' && rewardKind(challenge) !== filter) return false;
     const face = sbcFace(challenge);
     const haystack = [face.he, face.en, challenge.title, challenge.reward ?? '', face.category].join(' ').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
     return !text || haystack.includes(text);

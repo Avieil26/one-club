@@ -29,7 +29,7 @@ export function useDailyActivity(userId: string | undefined, admin: boolean, pat
   if (!userId || admin || !enabled || pathname.startsWith('/admin') || pathname.startsWith('/auth')) return;
   let alive = true; let pending = false;
   async function record() {
-   if (!alive || pending || AppState.currentState === 'background' || (Platform.OS === 'web' && document.visibilityState !== 'visible')) return;
+   if (!alive || pending || (Platform.OS !== 'web' && AppState.currentState !== 'active') || (Platform.OS === 'web' && document.visibilityState !== 'visible')) return;
    const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
    if (recordedDays.get(userId!) === today || recording.has(userId!)) return;
    pending = true; recording.add(userId!);
