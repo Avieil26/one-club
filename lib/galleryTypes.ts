@@ -1,0 +1,10 @@
+export const GALLERY_GRADES = ['D', 'C', 'B', 'A', 'S'] as const;
+export type GalleryGrade = typeof GALLERY_GRADES[number];
+export type GalleryReward = { type: string; value: number; count: number; label: string; imagePath: string | null };
+export type GallerySet = { id: number; name: string; slug: string; categoryId: number; category: string; categorySlug: string; description: string; requiredCards: number; clubEaId: number | null; totalTokens: number; grades: { name: GalleryGrade; threshold: number; rewards: GalleryReward[] }[]; itemIds: number[]; plans: GalleryPlan[]; badge?: string; checkedAt: string };
+export type GalleryItem = { he?: string; eaId: number; playerEaId: number; score: number; overall: number; gender: number; clubEaId: number; leagueEaId: number; nationEaId: number; rarityEaId: number; positions: string[]; weakFoot: number; skillMoves: number; holographic: boolean; cardName: string; commonName: string; rarityName: string; cardImageUrl: string; price: number | null };
+export type GalleryTag = { id: number; name: string; tiers: { minItems: number; bonus: number }[]; rules: { target: string; type: string; attribute: string; values: string[] }[] };
+export type GalleryPlan = { id: string; grade: GalleryGrade; itemIds: number[]; expectedScore: number; firstOwnerIds: number[]; checkedAt: string; validation: 'calculated' };
+export type GalleryCatalogue = { checkedAt: string; definitionsCapturedAt: string; sets: GallerySet[]; items: GalleryItem[]; tags: GalleryTag[] };
+export type GallerySelection = { ids: number[]; firstOwnerIds: number[]; collectedIds: number[]; graded: GalleryGrade | null };
+export type GallerySubmission = { id: string; set_id: number; user_id: string; title: string; note: string; item_ids: number[]; first_owner_ids: number[]; claimed_grade: GalleryGrade; game_score: number; proof_paths: string[]; status: 'pending' | 'approved' | 'rejected'; reviewed_by: string | null; reviewed_at: string | null; created_at: string };

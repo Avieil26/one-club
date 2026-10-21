@@ -38,6 +38,7 @@ export default function TabLayout() {
       <Tabs.Screen name="champions" options={{ title: 'FUT Champions', tabBarActiveTintColor: '#F04A52', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="🏆" color={color} focused={focused} /> }} />
       <Tabs.Screen name="grounds" options={{ title: t('גראונדס', 'Grounds'), tabBarActiveTintColor: colors.green, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="☰" color={color} focused={focused} /> }} />
       <Tabs.Screen name="sbc" options={{ title: 'SBC', tabBarActiveTintColor: colors.copper, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▦" color={color} focused={focused} /> }} />
+      <Tabs.Screen name="gallery" options={{ title: t('גלריה', 'Gallery'), tabBarActiveTintColor: colors.copper, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▧" color={color} focused={focused} /> }} />
       <Tabs.Screen name="games" options={{ title: t('משחקונים', 'Mini-games'), tabBarActiveTintColor: '#E23B57', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="✦" color={color} focused={focused} /> }} />
       <Tabs.Screen name="board" options={{ title: t('לוח', 'Community Board'), tabBarActiveTintColor: '#F4F6F8', tabBarIcon: ({ color, focused }) => <TabGlyph glyph="⬡" color={color} focused={focused} /> }} />
       <Tabs.Screen name="market" options={{ title: t('שחקנים', 'Players'), tabBarActiveTintColor: colors.gold, tabBarIcon: ({ color, focused }) => <TabGlyph glyph="▨" color={color} focused={focused} /> }} />

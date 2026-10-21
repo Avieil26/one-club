@@ -18,6 +18,7 @@ const LINKS = [
   { href: '/champions' as const, label: 'FUT Champions', en: 'FUT Champions' },
   { href: '/grounds' as const, label: 'גראונדס', en: 'Grounds' },
   { href: '/sbc' as const, label: 'SBC', en: 'SBC' },
+  { href: '/gallery' as const, label: 'גלריה', en: 'Gallery' },
   { href: '/games' as const, label: 'משחקונים', en: 'Mini-games' },
   { href: '/board' as const, label: 'לוח', en: 'Community Board' },
   { href: '/market' as const, label: 'שחקנים', en: 'Players' },
@@ -153,7 +154,7 @@ export function SiteNav() {
               textAlign: 'center',
             }}
           >
-            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : item.href === '/settings' ? 'Settings' : 'Players')}
+            {t(item.label, item.href === '/' ? 'Home' : item.href === '/career' ? 'Career' : item.href === '/ultimate' ? 'Ultimate Team' : item.href === '/champions' ? 'FUT Champions' : item.href === '/grounds' ? 'The Grounds' : item.href === '/sbc' ? 'SBC' : item.href === '/gallery' ? 'Gallery' : item.href === '/games' ? 'Mini-games' : item.href === '/board' ? 'Community Board' : item.href === '/settings' ? 'Settings' : 'Players')}
           </Text>
           {!isMobile ? (
             <View style={{ marginTop: 3, height: 2, width: on ? 18 : 0, borderRadius: 1, backgroundColor: TEXT }} />

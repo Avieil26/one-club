@@ -31,7 +31,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!futz-beta\\.apk|api/|career-preview\\.png).*)",
+      "source": "/((?!futz-beta\\.apk|api/|gallery-data/|career-preview\\.png).*)",
       "destination": "/"
     }
   ]

@@ -1,0 +1,3484 @@
+{
+  "checkedAt": "2026-10-21T20:25:19.514Z",
+  "sources": [
+    "https://help.ea.com/en/articles/ea-sports-fc/gallery-hub/",
+    "https://www.fut.gg/fut-gallery/",
+    "https://www.futbin.com/27/gallery"
+  ],
+  "sets": 128,
+  "audits": [
+    {
+      "setId": 127,
+      "target": "D",
+      "expected": 13607,
+      "calculated": 13607,
+      "matches": true
+    },
+    {
+      "setId": 127,
+      "target": "C",
+      "expected": 25200,
+      "calculated": 25200,
+      "matches": true
+    },
+    {
+      "setId": 127,
+      "target": "B",
+      "expected": 60132,
+      "calculated": 60132,
+      "matches": true
+    },
+    {
+      "setId": 127,
+      "target": "A",
+      "expected": 100083,
+      "calculated": 100083,
+      "matches": true
+    },
+    {
+      "setId": 127,
+      "target": "S",
+      "expected": 150081,
+      "calculated": 150081,
+      "matches": true
+    },
+    {
+      "setId": 127,
+      "target": "S",
+      "expected": 357483,
+      "calculated": 357483,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "D",
+      "expected": 6186,
+      "calculated": 6186,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "C",
+      "expected": 125037,
+      "calculated": 125037,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "B",
+      "expected": 175532,
+      "calculated": 175532,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "A",
+      "expected": 302346,
+      "calculated": 302346,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "S",
+      "expected": 550496,
+      "calculated": 550496,
+      "matches": true
+    },
+    {
+      "setId": 99,
+      "target": "S",
+      "expected": 814657,
+      "calculated": 814657,
+      "matches": true
+    },
+    {
+      "setId": 102,
+      "target": "D",
+      "expected": 24336,
+      "calculated": 24336,
+      "matches": true
+    },
+    {
+      "setId": 102,
+      "target": "C",
+      "expected": 50310,
+      "calculated": 50310,
+      "matches": true
+    },
+    {
+      "setId": 102,
+      "target": "B",
+      "expected": 75382,
+      "calculated": 75382,
+      "matches": true
+    },
+    {
+      "setId": 102,
+      "target": "A",
+      "expected": 103925,
+      "calculated": 103925,
+      "matches": true
+    },
+    {
+      "setId": 102,
+      "target": "A",
+      "expected": 134061,
+      "calculated": 134061,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "D",
+      "expected": 2023,
+      "calculated": 2023,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "C",
+      "expected": 76072,
+      "calculated": 76072,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "B",
+      "expected": 151382,
+      "calculated": 151382,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "A",
+      "expected": 205625,
+      "calculated": 205625,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "S",
+      "expected": 254473,
+      "calculated": 254473,
+      "matches": true
+    },
+    {
+      "setId": 113,
+      "target": "S",
+      "expected": 510635,
+      "calculated": 510635,
+      "matches": true
+    },
+    {
+      "setId": 114,
+      "target": "S",
+      "expected": 3315,
+      "calculated": 3315,
+      "matches": true
+    },
+    {
+      "setId": 116,
+      "target": "S",
+      "expected": 2005,
+      "calculated": 2005,
+      "matches": true
+    },
+    {
+      "setId": 116,
+      "target": "S",
+      "expected": 92080,
+      "calculated": 92080,
+      "matches": true
+    },
+    {
+      "setId": 30,
+      "target": "D",
+      "expected": 5998,
+      "calculated": 5998,
+      "matches": true
+    },
+    {
+      "setId": 30,
+      "target": "C",
+      "expected": 110022,
+      "calculated": 110022,
+      "matches": true
+    },
+    {
+      "setId": 30,
+      "target": "C",
+      "expected": 282942,
+      "calculated": 282942,
+      "matches": true
+    },
+    {
+      "setId": 61,
+      "target": "D",
+      "expected": 960,
+      "calculated": 960,
+      "matches": true
+    },
+    {
+      "setId": 61,
+      "target": "D",
+      "expected": 8292,
+      "calculated": 8292,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "D",
+      "expected": 895,
+      "calculated": 895,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "C",
+      "expected": 895,
+      "calculated": 895,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "B",
+      "expected": 895,
+      "calculated": 895,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "A",
+      "expected": 895,
+      "calculated": 895,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "S",
+      "expected": 1017,
+      "calculated": 1017,
+      "matches": true
+    },
+    {
+      "setId": 76,
+      "target": "S",
+      "expected": 1047,
+      "calculated": 1047,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "D",
+      "expected": 2009,
+      "calculated": 2009,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "C",
+      "expected": 2009,
+      "calculated": 2009,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "B",
+      "expected": 9445,
+      "calculated": 9445,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "A",
+      "expected": 9445,
+      "calculated": 9445,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "S",
+      "expected": 9445,
+      "calculated": 9445,
+      "matches": true
+    },
+    {
+      "setId": 22,
+      "target": "S",
+      "expected": 98201,
+      "calculated": 98201,
+      "matches": true
+    },
+    {
+      "setId": 17,
+      "target": "D",
+      "expected": 2177,
+      "calculated": 2177,
+      "matches": true
+    },
+    {
+      "setId": 17,
+      "target": "C",
+      "expected": 2177,
+      "calculated": 2177,
+      "matches": true
+    },
+    {
+      "setId": 17,
+      "target": "B",
+      "expected": 2705,
+      "calculated": 2705,
+      "matches": true
+    },
+    {
+      "setId": 17,
+      "target": "A",
+      "expected": 4007,
+      "calculated": 4007,
+      "matches": true
+    },
+    {
+      "setId": 17,
+      "target": "A",
+      "expected": 4498,
+      "calculated": 4498,
+      "matches": true
+    },
+    {
+      "setId": 26,
+      "target": "D",
+      "expected": 1436,
+      "calculated": 1436,
+      "matches": true
+    },
+    {
+      "setId": 26,
+      "target": "C",
+      "expected": 4052,
+      "calculated": 4052,
+      "matches": true
+    },
+    {
+      "setId": 26,
+      "target": "C",
+      "expected": 8163,
+      "calculated": 8163,
+      "matches": true
+    },
+    {
+      "setId": 14,
+      "target": "D",
+      "expected": 520,
+      "calculated": 520,
+      "matches": true
+    },
+    {
+      "setId": 14,
+      "target": "C",
+      "expected": 520,
+      "calculated": 520,
+      "matches": true
+    },
+    {
+      "setId": 14,
+      "target": "B",
+      "expected": 520,
+      "calculated": 520,
+      "matches": true
+    },
+    {
+      "setId": 14,
+      "target": "A",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 14,
+      "target": "A",
+      "expected": 881,
+      "calculated": 881,
+      "matches": true
+    },
+    {
+      "setId": 94,
+      "target": "D",
+      "expected": 4121,
+      "calculated": 4121,
+      "matches": true
+    },
+    {
+      "setId": 94,
+      "target": "C",
+      "expected": 50203,
+      "calculated": 50203,
+      "matches": true
+    },
+    {
+      "setId": 94,
+      "target": "C",
+      "expected": 128753,
+      "calculated": 128753,
+      "matches": true
+    },
+    {
+      "setId": 71,
+      "target": "D",
+      "expected": 1018,
+      "calculated": 1018,
+      "matches": true
+    },
+    {
+      "setId": 71,
+      "target": "C",
+      "expected": 1018,
+      "calculated": 1018,
+      "matches": true
+    },
+    {
+      "setId": 71,
+      "target": "B",
+      "expected": 1108,
+      "calculated": 1108,
+      "matches": true
+    },
+    {
+      "setId": 71,
+      "target": "A",
+      "expected": 1703,
+      "calculated": 1703,
+      "matches": true
+    },
+    {
+      "setId": 71,
+      "target": "A",
+      "expected": 1835,
+      "calculated": 1835,
+      "matches": true
+    },
+    {
+      "setId": 85,
+      "target": "D",
+      "expected": 2904,
+      "calculated": 2904,
+      "matches": true
+    },
+    {
+      "setId": 85,
+      "target": "C",
+      "expected": 3031,
+      "calculated": 3031,
+      "matches": true
+    },
+    {
+      "setId": 85,
+      "target": "C",
+      "expected": 3294,
+      "calculated": 3294,
+      "matches": true
+    },
+    {
+      "setId": 56,
+      "target": "D",
+      "expected": 949,
+      "calculated": 949,
+      "matches": true
+    },
+    {
+      "setId": 56,
+      "target": "C",
+      "expected": 3006,
+      "calculated": 3006,
+      "matches": true
+    },
+    {
+      "setId": 56,
+      "target": "C",
+      "expected": 5185,
+      "calculated": 5185,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "D",
+      "expected": 1854,
+      "calculated": 1854,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "C",
+      "expected": 1854,
+      "calculated": 1854,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "B",
+      "expected": 2703,
+      "calculated": 2703,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "A",
+      "expected": 5407,
+      "calculated": 5407,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "S",
+      "expected": 5725,
+      "calculated": 5725,
+      "matches": true
+    },
+    {
+      "setId": 54,
+      "target": "S",
+      "expected": 13102,
+      "calculated": 13102,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "D",
+      "expected": 780,
+      "calculated": 780,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "C",
+      "expected": 780,
+      "calculated": 780,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "B",
+      "expected": 780,
+      "calculated": 780,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "A",
+      "expected": 1112,
+      "calculated": 1112,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "S",
+      "expected": 1521,
+      "calculated": 1521,
+      "matches": true
+    },
+    {
+      "setId": 45,
+      "target": "S",
+      "expected": 2284,
+      "calculated": 2284,
+      "matches": true
+    },
+    {
+      "setId": 6,
+      "target": "D",
+      "expected": 1419,
+      "calculated": 1419,
+      "matches": true
+    },
+    {
+      "setId": 6,
+      "target": "C",
+      "expected": 1419,
+      "calculated": 1419,
+      "matches": true
+    },
+    {
+      "setId": 6,
+      "target": "B",
+      "expected": 1419,
+      "calculated": 1419,
+      "matches": true
+    },
+    {
+      "setId": 6,
+      "target": "B",
+      "expected": 2067,
+      "calculated": 2067,
+      "matches": true
+    },
+    {
+      "setId": 20,
+      "target": "D",
+      "expected": 1457,
+      "calculated": 1457,
+      "matches": true
+    },
+    {
+      "setId": 20,
+      "target": "C",
+      "expected": 1457,
+      "calculated": 1457,
+      "matches": true
+    },
+    {
+      "setId": 20,
+      "target": "B",
+      "expected": 2305,
+      "calculated": 2305,
+      "matches": true
+    },
+    {
+      "setId": 20,
+      "target": "B",
+      "expected": 2825,
+      "calculated": 2825,
+      "matches": true
+    },
+    {
+      "setId": 46,
+      "target": "D",
+      "expected": 3071,
+      "calculated": 3071,
+      "matches": true
+    },
+    {
+      "setId": 46,
+      "target": "C",
+      "expected": 60059,
+      "calculated": 60059,
+      "matches": true
+    },
+    {
+      "setId": 46,
+      "target": "C",
+      "expected": 164304,
+      "calculated": 164304,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "D",
+      "expected": 2070,
+      "calculated": 2070,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "C",
+      "expected": 5341,
+      "calculated": 5341,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "B",
+      "expected": 25265,
+      "calculated": 25265,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "A",
+      "expected": 31594,
+      "calculated": 31594,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "S",
+      "expected": 44004,
+      "calculated": 44004,
+      "matches": true
+    },
+    {
+      "setId": 25,
+      "target": "S",
+      "expected": 175360,
+      "calculated": 175360,
+      "matches": true
+    },
+    {
+      "setId": 49,
+      "target": "D",
+      "expected": 4903,
+      "calculated": 4903,
+      "matches": true
+    },
+    {
+      "setId": 49,
+      "target": "C",
+      "expected": 60028,
+      "calculated": 60028,
+      "matches": true
+    },
+    {
+      "setId": 49,
+      "target": "C",
+      "expected": 315736,
+      "calculated": 315736,
+      "matches": true
+    },
+    {
+      "setId": 44,
+      "target": "D",
+      "expected": 5573,
+      "calculated": 5573,
+      "matches": true
+    },
+    {
+      "setId": 44,
+      "target": "C",
+      "expected": 20266,
+      "calculated": 20266,
+      "matches": true
+    },
+    {
+      "setId": 44,
+      "target": "C",
+      "expected": 106576,
+      "calculated": 106576,
+      "matches": true
+    },
+    {
+      "setId": 92,
+      "target": "D",
+      "expected": 3134,
+      "calculated": 3134,
+      "matches": true
+    },
+    {
+      "setId": 92,
+      "target": "C",
+      "expected": 12653,
+      "calculated": 12653,
+      "matches": true
+    },
+    {
+      "setId": 92,
+      "target": "C",
+      "expected": 23155,
+      "calculated": 23155,
+      "matches": true
+    },
+    {
+      "setId": 48,
+      "target": "D",
+      "expected": 3252,
+      "calculated": 3252,
+      "matches": true
+    },
+    {
+      "setId": 48,
+      "target": "C",
+      "expected": 3252,
+      "calculated": 3252,
+      "matches": true
+    },
+    {
+      "setId": 48,
+      "target": "C",
+      "expected": 3639,
+      "calculated": 3639,
+      "matches": true
+    },
+    {
+      "setId": 86,
+      "target": "D",
+      "expected": 2124,
+      "calculated": 2124,
+      "matches": true
+    },
+    {
+      "setId": 86,
+      "target": "C",
+      "expected": 2505,
+      "calculated": 2505,
+      "matches": true
+    },
+    {
+      "setId": 86,
+      "target": "B",
+      "expected": 11060,
+      "calculated": 11060,
+      "matches": true
+    },
+    {
+      "setId": 86,
+      "target": "B",
+      "expected": 11625,
+      "calculated": 11625,
+      "matches": true
+    },
+    {
+      "setId": 8,
+      "target": "D",
+      "expected": 2155,
+      "calculated": 2155,
+      "matches": true
+    },
+    {
+      "setId": 8,
+      "target": "C",
+      "expected": 9067,
+      "calculated": 9067,
+      "matches": true
+    },
+    {
+      "setId": 8,
+      "target": "C",
+      "expected": 19130,
+      "calculated": 19130,
+      "matches": true
+    },
+    {
+      "setId": 9,
+      "target": "D",
+      "expected": 1677,
+      "calculated": 1677,
+      "matches": true
+    },
+    {
+      "setId": 9,
+      "target": "C",
+      "expected": 1677,
+      "calculated": 1677,
+      "matches": true
+    },
+    {
+      "setId": 9,
+      "target": "B",
+      "expected": 2006,
+      "calculated": 2006,
+      "matches": true
+    },
+    {
+      "setId": 9,
+      "target": "B",
+      "expected": 2287,
+      "calculated": 2287,
+      "matches": true
+    },
+    {
+      "setId": 16,
+      "target": "D",
+      "expected": 1231,
+      "calculated": 1231,
+      "matches": true
+    },
+    {
+      "setId": 16,
+      "target": "C",
+      "expected": 7009,
+      "calculated": 7009,
+      "matches": true
+    },
+    {
+      "setId": 16,
+      "target": "C",
+      "expected": 25530,
+      "calculated": 25530,
+      "matches": true
+    },
+    {
+      "setId": 53,
+      "target": "D",
+      "expected": 5006,
+      "calculated": 5006,
+      "matches": true
+    },
+    {
+      "setId": 53,
+      "target": "C",
+      "expected": 20008,
+      "calculated": 20008,
+      "matches": true
+    },
+    {
+      "setId": 53,
+      "target": "C",
+      "expected": 111649,
+      "calculated": 111649,
+      "matches": true
+    },
+    {
+      "setId": 12,
+      "target": "D",
+      "expected": 1498,
+      "calculated": 1498,
+      "matches": true
+    },
+    {
+      "setId": 12,
+      "target": "C",
+      "expected": 1498,
+      "calculated": 1498,
+      "matches": true
+    },
+    {
+      "setId": 12,
+      "target": "B",
+      "expected": 1807,
+      "calculated": 1807,
+      "matches": true
+    },
+    {
+      "setId": 12,
+      "target": "B",
+      "expected": 2200,
+      "calculated": 2200,
+      "matches": true
+    },
+    {
+      "setId": 81,
+      "target": "D",
+      "expected": 1590,
+      "calculated": 1590,
+      "matches": true
+    },
+    {
+      "setId": 81,
+      "target": "C",
+      "expected": 1590,
+      "calculated": 1590,
+      "matches": true
+    },
+    {
+      "setId": 81,
+      "target": "C",
+      "expected": 3424,
+      "calculated": 3424,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "D",
+      "expected": 1037,
+      "calculated": 1037,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "C",
+      "expected": 1037,
+      "calculated": 1037,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "B",
+      "expected": 1037,
+      "calculated": 1037,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "A",
+      "expected": 1037,
+      "calculated": 1037,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "S",
+      "expected": 1037,
+      "calculated": 1037,
+      "matches": true
+    },
+    {
+      "setId": 89,
+      "target": "S",
+      "expected": 1308,
+      "calculated": 1308,
+      "matches": true
+    },
+    {
+      "setId": 62,
+      "target": "D",
+      "expected": 669,
+      "calculated": 669,
+      "matches": true
+    },
+    {
+      "setId": 62,
+      "target": "C",
+      "expected": 669,
+      "calculated": 669,
+      "matches": true
+    },
+    {
+      "setId": 62,
+      "target": "B",
+      "expected": 741,
+      "calculated": 741,
+      "matches": true
+    },
+    {
+      "setId": 62,
+      "target": "A",
+      "expected": 1100,
+      "calculated": 1100,
+      "matches": true
+    },
+    {
+      "setId": 62,
+      "target": "A",
+      "expected": 1231,
+      "calculated": 1231,
+      "matches": true
+    },
+    {
+      "setId": 80,
+      "target": "D",
+      "expected": 693,
+      "calculated": 693,
+      "matches": true
+    },
+    {
+      "setId": 80,
+      "target": "C",
+      "expected": 693,
+      "calculated": 693,
+      "matches": true
+    },
+    {
+      "setId": 80,
+      "target": "C",
+      "expected": 1030,
+      "calculated": 1030,
+      "matches": true
+    },
+    {
+      "setId": 40,
+      "target": "D",
+      "expected": 1527,
+      "calculated": 1527,
+      "matches": true
+    },
+    {
+      "setId": 40,
+      "target": "C",
+      "expected": 1527,
+      "calculated": 1527,
+      "matches": true
+    },
+    {
+      "setId": 40,
+      "target": "B",
+      "expected": 1527,
+      "calculated": 1527,
+      "matches": true
+    },
+    {
+      "setId": 40,
+      "target": "A",
+      "expected": 1527,
+      "calculated": 1527,
+      "matches": true
+    },
+    {
+      "setId": 40,
+      "target": "A",
+      "expected": 1785,
+      "calculated": 1785,
+      "matches": true
+    },
+    {
+      "setId": 68,
+      "target": "D",
+      "expected": 5175,
+      "calculated": 5175,
+      "matches": true
+    },
+    {
+      "setId": 68,
+      "target": "C",
+      "expected": 170146,
+      "calculated": 170146,
+      "matches": true
+    },
+    {
+      "setId": 68,
+      "target": "C",
+      "expected": 559422,
+      "calculated": 559422,
+      "matches": true
+    },
+    {
+      "setId": 13,
+      "target": "D",
+      "expected": 808,
+      "calculated": 808,
+      "matches": true
+    },
+    {
+      "setId": 13,
+      "target": "C",
+      "expected": 900,
+      "calculated": 900,
+      "matches": true
+    },
+    {
+      "setId": 13,
+      "target": "B",
+      "expected": 1300,
+      "calculated": 1300,
+      "matches": true
+    },
+    {
+      "setId": 13,
+      "target": "B",
+      "expected": 1411,
+      "calculated": 1411,
+      "matches": true
+    },
+    {
+      "setId": 24,
+      "target": "D",
+      "expected": 978,
+      "calculated": 978,
+      "matches": true
+    },
+    {
+      "setId": 24,
+      "target": "C",
+      "expected": 978,
+      "calculated": 978,
+      "matches": true
+    },
+    {
+      "setId": 24,
+      "target": "B",
+      "expected": 978,
+      "calculated": 978,
+      "matches": true
+    },
+    {
+      "setId": 24,
+      "target": "B",
+      "expected": 1162,
+      "calculated": 1162,
+      "matches": true
+    },
+    {
+      "setId": 97,
+      "target": "D",
+      "expected": 648,
+      "calculated": 648,
+      "matches": true
+    },
+    {
+      "setId": 97,
+      "target": "C",
+      "expected": 648,
+      "calculated": 648,
+      "matches": true
+    },
+    {
+      "setId": 97,
+      "target": "B",
+      "expected": 648,
+      "calculated": 648,
+      "matches": true
+    },
+    {
+      "setId": 97,
+      "target": "A",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 97,
+      "target": "A",
+      "expected": 825,
+      "calculated": 825,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "D",
+      "expected": 694,
+      "calculated": 694,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "C",
+      "expected": 694,
+      "calculated": 694,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "B",
+      "expected": 694,
+      "calculated": 694,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "A",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "S",
+      "expected": 900,
+      "calculated": 900,
+      "matches": true
+    },
+    {
+      "setId": 90,
+      "target": "S",
+      "expected": 1047,
+      "calculated": 1047,
+      "matches": true
+    },
+    {
+      "setId": 79,
+      "target": "D",
+      "expected": 837,
+      "calculated": 837,
+      "matches": true
+    },
+    {
+      "setId": 79,
+      "target": "C",
+      "expected": 837,
+      "calculated": 837,
+      "matches": true
+    },
+    {
+      "setId": 79,
+      "target": "B",
+      "expected": 837,
+      "calculated": 837,
+      "matches": true
+    },
+    {
+      "setId": 79,
+      "target": "A",
+      "expected": 1010,
+      "calculated": 1010,
+      "matches": true
+    },
+    {
+      "setId": 79,
+      "target": "A",
+      "expected": 1181,
+      "calculated": 1181,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "D",
+      "expected": 1635,
+      "calculated": 1635,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "C",
+      "expected": 1635,
+      "calculated": 1635,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "B",
+      "expected": 2212,
+      "calculated": 2212,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "A",
+      "expected": 4614,
+      "calculated": 4614,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "S",
+      "expected": 4925,
+      "calculated": 4925,
+      "matches": true
+    },
+    {
+      "setId": 91,
+      "target": "S",
+      "expected": 11134,
+      "calculated": 11134,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "D",
+      "expected": 1199,
+      "calculated": 1199,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "C",
+      "expected": 1199,
+      "calculated": 1199,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "B",
+      "expected": 7253,
+      "calculated": 7253,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "A",
+      "expected": 7253,
+      "calculated": 7253,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "S",
+      "expected": 7814,
+      "calculated": 7814,
+      "matches": true
+    },
+    {
+      "setId": 41,
+      "target": "S",
+      "expected": 17762,
+      "calculated": 17762,
+      "matches": true
+    },
+    {
+      "setId": 2,
+      "target": "D",
+      "expected": 749,
+      "calculated": 749,
+      "matches": true
+    },
+    {
+      "setId": 2,
+      "target": "C",
+      "expected": 811,
+      "calculated": 811,
+      "matches": true
+    },
+    {
+      "setId": 2,
+      "target": "B",
+      "expected": 1501,
+      "calculated": 1501,
+      "matches": true
+    },
+    {
+      "setId": 2,
+      "target": "B",
+      "expected": 1727,
+      "calculated": 1727,
+      "matches": true
+    },
+    {
+      "setId": 96,
+      "target": "D",
+      "expected": 2840,
+      "calculated": 2840,
+      "matches": true
+    },
+    {
+      "setId": 96,
+      "target": "C",
+      "expected": 2840,
+      "calculated": 2840,
+      "matches": true
+    },
+    {
+      "setId": 96,
+      "target": "B",
+      "expected": 7350,
+      "calculated": 7350,
+      "matches": true
+    },
+    {
+      "setId": 96,
+      "target": "B",
+      "expected": 7973,
+      "calculated": 7973,
+      "matches": true
+    },
+    {
+      "setId": 74,
+      "target": "D",
+      "expected": 4140,
+      "calculated": 4140,
+      "matches": true
+    },
+    {
+      "setId": 74,
+      "target": "C",
+      "expected": 70185,
+      "calculated": 70185,
+      "matches": true
+    },
+    {
+      "setId": 74,
+      "target": "C",
+      "expected": 349159,
+      "calculated": 349159,
+      "matches": true
+    },
+    {
+      "setId": 42,
+      "target": "D",
+      "expected": 1938,
+      "calculated": 1938,
+      "matches": true
+    },
+    {
+      "setId": 42,
+      "target": "C",
+      "expected": 3504,
+      "calculated": 3504,
+      "matches": true
+    },
+    {
+      "setId": 42,
+      "target": "B",
+      "expected": 22009,
+      "calculated": 22009,
+      "matches": true
+    },
+    {
+      "setId": 42,
+      "target": "B",
+      "expected": 24167,
+      "calculated": 24167,
+      "matches": true
+    },
+    {
+      "setId": 32,
+      "target": "D",
+      "expected": 634,
+      "calculated": 634,
+      "matches": true
+    },
+    {
+      "setId": 32,
+      "target": "C",
+      "expected": 1504,
+      "calculated": 1504,
+      "matches": true
+    },
+    {
+      "setId": 32,
+      "target": "C",
+      "expected": 2358,
+      "calculated": 2358,
+      "matches": true
+    },
+    {
+      "setId": 69,
+      "target": "D",
+      "expected": 945,
+      "calculated": 945,
+      "matches": true
+    },
+    {
+      "setId": 69,
+      "target": "C",
+      "expected": 1308,
+      "calculated": 1308,
+      "matches": true
+    },
+    {
+      "setId": 69,
+      "target": "B",
+      "expected": 1810,
+      "calculated": 1810,
+      "matches": true
+    },
+    {
+      "setId": 69,
+      "target": "B",
+      "expected": 1922,
+      "calculated": 1922,
+      "matches": true
+    },
+    {
+      "setId": 5,
+      "target": "D",
+      "expected": 2823,
+      "calculated": 2823,
+      "matches": true
+    },
+    {
+      "setId": 5,
+      "target": "C",
+      "expected": 2823,
+      "calculated": 2823,
+      "matches": true
+    },
+    {
+      "setId": 5,
+      "target": "B",
+      "expected": 4131,
+      "calculated": 4131,
+      "matches": true
+    },
+    {
+      "setId": 5,
+      "target": "A",
+      "expected": 6205,
+      "calculated": 6205,
+      "matches": true
+    },
+    {
+      "setId": 5,
+      "target": "A",
+      "expected": 6515,
+      "calculated": 6515,
+      "matches": true
+    },
+    {
+      "setId": 65,
+      "target": "D",
+      "expected": 2195,
+      "calculated": 2195,
+      "matches": true
+    },
+    {
+      "setId": 65,
+      "target": "C",
+      "expected": 9022,
+      "calculated": 9022,
+      "matches": true
+    },
+    {
+      "setId": 65,
+      "target": "C",
+      "expected": 16058,
+      "calculated": 16058,
+      "matches": true
+    },
+    {
+      "setId": 4,
+      "target": "D",
+      "expected": 3651,
+      "calculated": 3651,
+      "matches": true
+    },
+    {
+      "setId": 4,
+      "target": "C",
+      "expected": 13691,
+      "calculated": 13691,
+      "matches": true
+    },
+    {
+      "setId": 4,
+      "target": "C",
+      "expected": 45531,
+      "calculated": 45531,
+      "matches": true
+    },
+    {
+      "setId": 31,
+      "target": "D",
+      "expected": 620,
+      "calculated": 620,
+      "matches": true
+    },
+    {
+      "setId": 31,
+      "target": "C",
+      "expected": 1154,
+      "calculated": 1154,
+      "matches": true
+    },
+    {
+      "setId": 31,
+      "target": "C",
+      "expected": 1585,
+      "calculated": 1585,
+      "matches": true
+    },
+    {
+      "setId": 59,
+      "target": "D",
+      "expected": 458,
+      "calculated": 458,
+      "matches": true
+    },
+    {
+      "setId": 59,
+      "target": "D",
+      "expected": 7263,
+      "calculated": 7263,
+      "matches": true
+    },
+    {
+      "setId": 10,
+      "target": "D",
+      "expected": 722,
+      "calculated": 722,
+      "matches": true
+    },
+    {
+      "setId": 10,
+      "target": "C",
+      "expected": 801,
+      "calculated": 801,
+      "matches": true
+    },
+    {
+      "setId": 10,
+      "target": "C",
+      "expected": 1423,
+      "calculated": 1423,
+      "matches": true
+    },
+    {
+      "setId": 52,
+      "target": "D",
+      "expected": 7074,
+      "calculated": 7074,
+      "matches": true
+    },
+    {
+      "setId": 52,
+      "target": "C",
+      "expected": 60076,
+      "calculated": 60076,
+      "matches": true
+    },
+    {
+      "setId": 52,
+      "target": "C",
+      "expected": 387713,
+      "calculated": 387713,
+      "matches": true
+    },
+    {
+      "setId": 15,
+      "target": "D",
+      "expected": 455,
+      "calculated": 455,
+      "matches": true
+    },
+    {
+      "setId": 15,
+      "target": "C",
+      "expected": 1004,
+      "calculated": 1004,
+      "matches": true
+    },
+    {
+      "setId": 15,
+      "target": "B",
+      "expected": 1702,
+      "calculated": 1702,
+      "matches": true
+    },
+    {
+      "setId": 15,
+      "target": "A",
+      "expected": 2538,
+      "calculated": 2538,
+      "matches": true
+    },
+    {
+      "setId": 15,
+      "target": "A",
+      "expected": 2965,
+      "calculated": 2965,
+      "matches": true
+    },
+    {
+      "setId": 73,
+      "target": "D",
+      "expected": 609,
+      "calculated": 609,
+      "matches": true
+    },
+    {
+      "setId": 73,
+      "target": "C",
+      "expected": 609,
+      "calculated": 609,
+      "matches": true
+    },
+    {
+      "setId": 73,
+      "target": "B",
+      "expected": 609,
+      "calculated": 609,
+      "matches": true
+    },
+    {
+      "setId": 73,
+      "target": "B",
+      "expected": 823,
+      "calculated": 823,
+      "matches": true
+    },
+    {
+      "setId": 64,
+      "target": "D",
+      "expected": 521,
+      "calculated": 521,
+      "matches": true
+    },
+    {
+      "setId": 64,
+      "target": "C",
+      "expected": 900,
+      "calculated": 900,
+      "matches": true
+    },
+    {
+      "setId": 64,
+      "target": "B",
+      "expected": 1303,
+      "calculated": 1303,
+      "matches": true
+    },
+    {
+      "setId": 64,
+      "target": "B",
+      "expected": 1715,
+      "calculated": 1715,
+      "matches": true
+    },
+    {
+      "setId": 33,
+      "target": "D",
+      "expected": 513,
+      "calculated": 513,
+      "matches": true
+    },
+    {
+      "setId": 33,
+      "target": "C",
+      "expected": 1003,
+      "calculated": 1003,
+      "matches": true
+    },
+    {
+      "setId": 33,
+      "target": "B",
+      "expected": 2201,
+      "calculated": 2201,
+      "matches": true
+    },
+    {
+      "setId": 33,
+      "target": "B",
+      "expected": 2548,
+      "calculated": 2548,
+      "matches": true
+    },
+    {
+      "setId": 67,
+      "target": "D",
+      "expected": 608,
+      "calculated": 608,
+      "matches": true
+    },
+    {
+      "setId": 67,
+      "target": "C",
+      "expected": 608,
+      "calculated": 608,
+      "matches": true
+    },
+    {
+      "setId": 67,
+      "target": "B",
+      "expected": 1000,
+      "calculated": 1000,
+      "matches": true
+    },
+    {
+      "setId": 67,
+      "target": "B",
+      "expected": 1357,
+      "calculated": 1357,
+      "matches": true
+    },
+    {
+      "setId": 28,
+      "target": "D",
+      "expected": 2911,
+      "calculated": 2911,
+      "matches": true
+    },
+    {
+      "setId": 28,
+      "target": "C",
+      "expected": 7020,
+      "calculated": 7020,
+      "matches": true
+    },
+    {
+      "setId": 28,
+      "target": "C",
+      "expected": 11635,
+      "calculated": 11635,
+      "matches": true
+    },
+    {
+      "setId": 21,
+      "target": "D",
+      "expected": 492,
+      "calculated": 492,
+      "matches": true
+    },
+    {
+      "setId": 21,
+      "target": "C",
+      "expected": 2003,
+      "calculated": 2003,
+      "matches": true
+    },
+    {
+      "setId": 21,
+      "target": "C",
+      "expected": 2867,
+      "calculated": 2867,
+      "matches": true
+    },
+    {
+      "setId": 47,
+      "target": "D",
+      "expected": 625,
+      "calculated": 625,
+      "matches": true
+    },
+    {
+      "setId": 47,
+      "target": "C",
+      "expected": 625,
+      "calculated": 625,
+      "matches": true
+    },
+    {
+      "setId": 47,
+      "target": "B",
+      "expected": 625,
+      "calculated": 625,
+      "matches": true
+    },
+    {
+      "setId": 47,
+      "target": "B",
+      "expected": 791,
+      "calculated": 791,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "D",
+      "expected": 672,
+      "calculated": 672,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "C",
+      "expected": 672,
+      "calculated": 672,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "B",
+      "expected": 672,
+      "calculated": 672,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "A",
+      "expected": 3758,
+      "calculated": 3758,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "S",
+      "expected": 3758,
+      "calculated": 3758,
+      "matches": true
+    },
+    {
+      "setId": 57,
+      "target": "S",
+      "expected": 9337,
+      "calculated": 9337,
+      "matches": true
+    },
+    {
+      "setId": 38,
+      "target": "D",
+      "expected": 614,
+      "calculated": 614,
+      "matches": true
+    },
+    {
+      "setId": 38,
+      "target": "C",
+      "expected": 614,
+      "calculated": 614,
+      "matches": true
+    },
+    {
+      "setId": 38,
+      "target": "B",
+      "expected": 614,
+      "calculated": 614,
+      "matches": true
+    },
+    {
+      "setId": 38,
+      "target": "B",
+      "expected": 772,
+      "calculated": 772,
+      "matches": true
+    },
+    {
+      "setId": 19,
+      "target": "D",
+      "expected": 485,
+      "calculated": 485,
+      "matches": true
+    },
+    {
+      "setId": 19,
+      "target": "C",
+      "expected": 3011,
+      "calculated": 3011,
+      "matches": true
+    },
+    {
+      "setId": 19,
+      "target": "C",
+      "expected": 3615,
+      "calculated": 3615,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "D",
+      "expected": 672,
+      "calculated": 672,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "C",
+      "expected": 1589,
+      "calculated": 1589,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "B",
+      "expected": 4722,
+      "calculated": 4722,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "A",
+      "expected": 7018,
+      "calculated": 7018,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "S",
+      "expected": 9962,
+      "calculated": 9962,
+      "matches": true
+    },
+    {
+      "setId": 37,
+      "target": "S",
+      "expected": 39626,
+      "calculated": 39626,
+      "matches": true
+    },
+    {
+      "setId": 88,
+      "target": "D",
+      "expected": 1520,
+      "calculated": 1520,
+      "matches": true
+    },
+    {
+      "setId": 88,
+      "target": "C",
+      "expected": 4009,
+      "calculated": 4009,
+      "matches": true
+    },
+    {
+      "setId": 88,
+      "target": "C",
+      "expected": 10342,
+      "calculated": 10342,
+      "matches": true
+    },
+    {
+      "setId": 34,
+      "target": "D",
+      "expected": 531,
+      "calculated": 531,
+      "matches": true
+    },
+    {
+      "setId": 34,
+      "target": "D",
+      "expected": 1463,
+      "calculated": 1463,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "D",
+      "expected": 463,
+      "calculated": 463,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "C",
+      "expected": 510,
+      "calculated": 510,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "B",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "A",
+      "expected": 1002,
+      "calculated": 1002,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "S",
+      "expected": 1509,
+      "calculated": 1509,
+      "matches": true
+    },
+    {
+      "setId": 75,
+      "target": "S",
+      "expected": 1536,
+      "calculated": 1536,
+      "matches": true
+    },
+    {
+      "setId": 87,
+      "target": "D",
+      "expected": 683,
+      "calculated": 683,
+      "matches": true
+    },
+    {
+      "setId": 87,
+      "target": "C",
+      "expected": 683,
+      "calculated": 683,
+      "matches": true
+    },
+    {
+      "setId": 87,
+      "target": "B",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 87,
+      "target": "B",
+      "expected": 952,
+      "calculated": 952,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "D",
+      "expected": 1650,
+      "calculated": 1650,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "C",
+      "expected": 1706,
+      "calculated": 1706,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "B",
+      "expected": 16052,
+      "calculated": 16052,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "A",
+      "expected": 16052,
+      "calculated": 16052,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "S",
+      "expected": 16052,
+      "calculated": 16052,
+      "matches": true
+    },
+    {
+      "setId": 98,
+      "target": "S",
+      "expected": 44714,
+      "calculated": 44714,
+      "matches": true
+    },
+    {
+      "setId": 78,
+      "target": "D",
+      "expected": 519,
+      "calculated": 519,
+      "matches": true
+    },
+    {
+      "setId": 78,
+      "target": "C",
+      "expected": 519,
+      "calculated": 519,
+      "matches": true
+    },
+    {
+      "setId": 78,
+      "target": "B",
+      "expected": 610,
+      "calculated": 610,
+      "matches": true
+    },
+    {
+      "setId": 78,
+      "target": "B",
+      "expected": 747,
+      "calculated": 747,
+      "matches": true
+    },
+    {
+      "setId": 77,
+      "target": "D",
+      "expected": 909,
+      "calculated": 909,
+      "matches": true
+    },
+    {
+      "setId": 77,
+      "target": "C",
+      "expected": 1315,
+      "calculated": 1315,
+      "matches": true
+    },
+    {
+      "setId": 77,
+      "target": "C",
+      "expected": 1509,
+      "calculated": 1509,
+      "matches": true
+    },
+    {
+      "setId": 60,
+      "target": "D",
+      "expected": 666,
+      "calculated": 666,
+      "matches": true
+    },
+    {
+      "setId": 60,
+      "target": "C",
+      "expected": 666,
+      "calculated": 666,
+      "matches": true
+    },
+    {
+      "setId": 60,
+      "target": "B",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 60,
+      "target": "B",
+      "expected": 1027,
+      "calculated": 1027,
+      "matches": true
+    },
+    {
+      "setId": 23,
+      "target": "D",
+      "expected": 666,
+      "calculated": 666,
+      "matches": true
+    },
+    {
+      "setId": 23,
+      "target": "C",
+      "expected": 666,
+      "calculated": 666,
+      "matches": true
+    },
+    {
+      "setId": 23,
+      "target": "B",
+      "expected": 755,
+      "calculated": 755,
+      "matches": true
+    },
+    {
+      "setId": 23,
+      "target": "B",
+      "expected": 901,
+      "calculated": 901,
+      "matches": true
+    },
+    {
+      "setId": 7,
+      "target": "D",
+      "expected": 497,
+      "calculated": 497,
+      "matches": true
+    },
+    {
+      "setId": 7,
+      "target": "C",
+      "expected": 501,
+      "calculated": 501,
+      "matches": true
+    },
+    {
+      "setId": 7,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 7,
+      "target": "B",
+      "expected": 822,
+      "calculated": 822,
+      "matches": true
+    },
+    {
+      "setId": 82,
+      "target": "D",
+      "expected": 545,
+      "calculated": 545,
+      "matches": true
+    },
+    {
+      "setId": 82,
+      "target": "C",
+      "expected": 545,
+      "calculated": 545,
+      "matches": true
+    },
+    {
+      "setId": 82,
+      "target": "B",
+      "expected": 545,
+      "calculated": 545,
+      "matches": true
+    },
+    {
+      "setId": 82,
+      "target": "A",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 82,
+      "target": "A",
+      "expected": 837,
+      "calculated": 837,
+      "matches": true
+    },
+    {
+      "setId": 43,
+      "target": "D",
+      "expected": 1314,
+      "calculated": 1314,
+      "matches": true
+    },
+    {
+      "setId": 43,
+      "target": "C",
+      "expected": 1314,
+      "calculated": 1314,
+      "matches": true
+    },
+    {
+      "setId": 43,
+      "target": "B",
+      "expected": 2505,
+      "calculated": 2505,
+      "matches": true
+    },
+    {
+      "setId": 43,
+      "target": "B",
+      "expected": 3243,
+      "calculated": 3243,
+      "matches": true
+    },
+    {
+      "setId": 55,
+      "target": "D",
+      "expected": 677,
+      "calculated": 677,
+      "matches": true
+    },
+    {
+      "setId": 55,
+      "target": "C",
+      "expected": 677,
+      "calculated": 677,
+      "matches": true
+    },
+    {
+      "setId": 55,
+      "target": "B",
+      "expected": 677,
+      "calculated": 677,
+      "matches": true
+    },
+    {
+      "setId": 55,
+      "target": "A",
+      "expected": 707,
+      "calculated": 707,
+      "matches": true
+    },
+    {
+      "setId": 55,
+      "target": "A",
+      "expected": 934,
+      "calculated": 934,
+      "matches": true
+    },
+    {
+      "setId": 1,
+      "target": "D",
+      "expected": 664,
+      "calculated": 664,
+      "matches": true
+    },
+    {
+      "setId": 1,
+      "target": "C",
+      "expected": 1207,
+      "calculated": 1207,
+      "matches": true
+    },
+    {
+      "setId": 1,
+      "target": "C",
+      "expected": 1539,
+      "calculated": 1539,
+      "matches": true
+    },
+    {
+      "setId": 18,
+      "target": "D",
+      "expected": 1154,
+      "calculated": 1154,
+      "matches": true
+    },
+    {
+      "setId": 18,
+      "target": "D",
+      "expected": 2679,
+      "calculated": 2679,
+      "matches": true
+    },
+    {
+      "setId": 36,
+      "target": "D",
+      "expected": 1702,
+      "calculated": 1702,
+      "matches": true
+    },
+    {
+      "setId": 36,
+      "target": "C",
+      "expected": 58409,
+      "calculated": 58409,
+      "matches": true
+    },
+    {
+      "setId": 36,
+      "target": "C",
+      "expected": 118584,
+      "calculated": 118584,
+      "matches": true
+    },
+    {
+      "setId": 3,
+      "target": "D",
+      "expected": 491,
+      "calculated": 491,
+      "matches": true
+    },
+    {
+      "setId": 3,
+      "target": "C",
+      "expected": 5006,
+      "calculated": 5006,
+      "matches": true
+    },
+    {
+      "setId": 3,
+      "target": "C",
+      "expected": 6166,
+      "calculated": 6166,
+      "matches": true
+    },
+    {
+      "setId": 95,
+      "target": "D",
+      "expected": 5117,
+      "calculated": 5117,
+      "matches": true
+    },
+    {
+      "setId": 95,
+      "target": "C",
+      "expected": 80161,
+      "calculated": 80161,
+      "matches": true
+    },
+    {
+      "setId": 95,
+      "target": "C",
+      "expected": 287936,
+      "calculated": 287936,
+      "matches": true
+    },
+    {
+      "setId": 51,
+      "target": "D",
+      "expected": 619,
+      "calculated": 619,
+      "matches": true
+    },
+    {
+      "setId": 51,
+      "target": "C",
+      "expected": 1500,
+      "calculated": 1500,
+      "matches": true
+    },
+    {
+      "setId": 51,
+      "target": "C",
+      "expected": 1999,
+      "calculated": 1999,
+      "matches": true
+    },
+    {
+      "setId": 66,
+      "target": "D",
+      "expected": 1374,
+      "calculated": 1374,
+      "matches": true
+    },
+    {
+      "setId": 66,
+      "target": "C",
+      "expected": 1374,
+      "calculated": 1374,
+      "matches": true
+    },
+    {
+      "setId": 66,
+      "target": "B",
+      "expected": 22512,
+      "calculated": 22512,
+      "matches": true
+    },
+    {
+      "setId": 66,
+      "target": "B",
+      "expected": 25013,
+      "calculated": 25013,
+      "matches": true
+    },
+    {
+      "setId": 58,
+      "target": "D",
+      "expected": 633,
+      "calculated": 633,
+      "matches": true
+    },
+    {
+      "setId": 58,
+      "target": "C",
+      "expected": 702,
+      "calculated": 702,
+      "matches": true
+    },
+    {
+      "setId": 58,
+      "target": "B",
+      "expected": 1000,
+      "calculated": 1000,
+      "matches": true
+    },
+    {
+      "setId": 58,
+      "target": "B",
+      "expected": 1123,
+      "calculated": 1123,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "D",
+      "expected": 1864,
+      "calculated": 1864,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "C",
+      "expected": 1864,
+      "calculated": 1864,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "B",
+      "expected": 4963,
+      "calculated": 4963,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "A",
+      "expected": 7022,
+      "calculated": 7022,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "S",
+      "expected": 9915,
+      "calculated": 9915,
+      "matches": true
+    },
+    {
+      "setId": 27,
+      "target": "S",
+      "expected": 11371,
+      "calculated": 11371,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "D",
+      "expected": 466,
+      "calculated": 466,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "C",
+      "expected": 508,
+      "calculated": 508,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "A",
+      "expected": 1105,
+      "calculated": 1105,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "S",
+      "expected": 1608,
+      "calculated": 1608,
+      "matches": true
+    },
+    {
+      "setId": 72,
+      "target": "S",
+      "expected": 1813,
+      "calculated": 1813,
+      "matches": true
+    },
+    {
+      "setId": 83,
+      "target": "D",
+      "expected": 2475,
+      "calculated": 2475,
+      "matches": true
+    },
+    {
+      "setId": 83,
+      "target": "C",
+      "expected": 2475,
+      "calculated": 2475,
+      "matches": true
+    },
+    {
+      "setId": 83,
+      "target": "B",
+      "expected": 6818,
+      "calculated": 6818,
+      "matches": true
+    },
+    {
+      "setId": 83,
+      "target": "A",
+      "expected": 6818,
+      "calculated": 6818,
+      "matches": true
+    },
+    {
+      "setId": 83,
+      "target": "A",
+      "expected": 7108,
+      "calculated": 7108,
+      "matches": true
+    },
+    {
+      "setId": 93,
+      "target": "D",
+      "expected": 1371,
+      "calculated": 1371,
+      "matches": true
+    },
+    {
+      "setId": 93,
+      "target": "C",
+      "expected": 1371,
+      "calculated": 1371,
+      "matches": true
+    },
+    {
+      "setId": 93,
+      "target": "C",
+      "expected": 2649,
+      "calculated": 2649,
+      "matches": true
+    },
+    {
+      "setId": 39,
+      "target": "D",
+      "expected": 698,
+      "calculated": 698,
+      "matches": true
+    },
+    {
+      "setId": 39,
+      "target": "C",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 39,
+      "target": "B",
+      "expected": 1000,
+      "calculated": 1000,
+      "matches": true
+    },
+    {
+      "setId": 39,
+      "target": "B",
+      "expected": 1058,
+      "calculated": 1058,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "D",
+      "expected": 3035,
+      "calculated": 3035,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "C",
+      "expected": 3035,
+      "calculated": 3035,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "B",
+      "expected": 13206,
+      "calculated": 13206,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "A",
+      "expected": 18532,
+      "calculated": 18532,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "S",
+      "expected": 20193,
+      "calculated": 20193,
+      "matches": true
+    },
+    {
+      "setId": 63,
+      "target": "S",
+      "expected": 54926,
+      "calculated": 54926,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "D",
+      "expected": 1334,
+      "calculated": 1334,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "C",
+      "expected": 1905,
+      "calculated": 1905,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "B",
+      "expected": 15639,
+      "calculated": 15639,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "A",
+      "expected": 15639,
+      "calculated": 15639,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "S",
+      "expected": 15639,
+      "calculated": 15639,
+      "matches": true
+    },
+    {
+      "setId": 70,
+      "target": "S",
+      "expected": 47588,
+      "calculated": 47588,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "D",
+      "expected": 696,
+      "calculated": 696,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "C",
+      "expected": 696,
+      "calculated": 696,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "B",
+      "expected": 696,
+      "calculated": 696,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "A",
+      "expected": 696,
+      "calculated": 696,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "S",
+      "expected": 742,
+      "calculated": 742,
+      "matches": true
+    },
+    {
+      "setId": 123,
+      "target": "S",
+      "expected": 2848,
+      "calculated": 2848,
+      "matches": true
+    },
+    {
+      "setId": 126,
+      "target": "D",
+      "expected": 680,
+      "calculated": 680,
+      "matches": true
+    },
+    {
+      "setId": 126,
+      "target": "C",
+      "expected": 680,
+      "calculated": 680,
+      "matches": true
+    },
+    {
+      "setId": 126,
+      "target": "B",
+      "expected": 900,
+      "calculated": 900,
+      "matches": true
+    },
+    {
+      "setId": 126,
+      "target": "B",
+      "expected": 1152,
+      "calculated": 1152,
+      "matches": true
+    },
+    {
+      "setId": 119,
+      "target": "D",
+      "expected": 3674,
+      "calculated": 3674,
+      "matches": true
+    },
+    {
+      "setId": 119,
+      "target": "C",
+      "expected": 12042,
+      "calculated": 12042,
+      "matches": true
+    },
+    {
+      "setId": 119,
+      "target": "C",
+      "expected": 38688,
+      "calculated": 38688,
+      "matches": true
+    },
+    {
+      "setId": 110,
+      "target": "D",
+      "expected": 1741,
+      "calculated": 1741,
+      "matches": true
+    },
+    {
+      "setId": 110,
+      "target": "C",
+      "expected": 2004,
+      "calculated": 2004,
+      "matches": true
+    },
+    {
+      "setId": 110,
+      "target": "B",
+      "expected": 3473,
+      "calculated": 3473,
+      "matches": true
+    },
+    {
+      "setId": 110,
+      "target": "B",
+      "expected": 3972,
+      "calculated": 3972,
+      "matches": true
+    },
+    {
+      "setId": 124,
+      "target": "D",
+      "expected": 773,
+      "calculated": 773,
+      "matches": true
+    },
+    {
+      "setId": 124,
+      "target": "C",
+      "expected": 773,
+      "calculated": 773,
+      "matches": true
+    },
+    {
+      "setId": 124,
+      "target": "B",
+      "expected": 801,
+      "calculated": 801,
+      "matches": true
+    },
+    {
+      "setId": 124,
+      "target": "A",
+      "expected": 1604,
+      "calculated": 1604,
+      "matches": true
+    },
+    {
+      "setId": 124,
+      "target": "A",
+      "expected": 1695,
+      "calculated": 1695,
+      "matches": true
+    },
+    {
+      "setId": 107,
+      "target": "D",
+      "expected": 3515,
+      "calculated": 3515,
+      "matches": true
+    },
+    {
+      "setId": 107,
+      "target": "C",
+      "expected": 41364,
+      "calculated": 41364,
+      "matches": true
+    },
+    {
+      "setId": 107,
+      "target": "C",
+      "expected": 78280,
+      "calculated": 78280,
+      "matches": true
+    },
+    {
+      "setId": 29,
+      "target": "D",
+      "expected": 1868,
+      "calculated": 1868,
+      "matches": true
+    },
+    {
+      "setId": 29,
+      "target": "C",
+      "expected": 10065,
+      "calculated": 10065,
+      "matches": true
+    },
+    {
+      "setId": 29,
+      "target": "C",
+      "expected": 36725,
+      "calculated": 36725,
+      "matches": true
+    },
+    {
+      "setId": 105,
+      "target": "D",
+      "expected": 682,
+      "calculated": 682,
+      "matches": true
+    },
+    {
+      "setId": 105,
+      "target": "C",
+      "expected": 682,
+      "calculated": 682,
+      "matches": true
+    },
+    {
+      "setId": 105,
+      "target": "B",
+      "expected": 704,
+      "calculated": 704,
+      "matches": true
+    },
+    {
+      "setId": 105,
+      "target": "B",
+      "expected": 1016,
+      "calculated": 1016,
+      "matches": true
+    },
+    {
+      "setId": 112,
+      "target": "D",
+      "expected": 3625,
+      "calculated": 3625,
+      "matches": true
+    },
+    {
+      "setId": 112,
+      "target": "C",
+      "expected": 13918,
+      "calculated": 13918,
+      "matches": true
+    },
+    {
+      "setId": 112,
+      "target": "C",
+      "expected": 27562,
+      "calculated": 27562,
+      "matches": true
+    },
+    {
+      "setId": 125,
+      "target": "D",
+      "expected": 699,
+      "calculated": 699,
+      "matches": true
+    },
+    {
+      "setId": 125,
+      "target": "C",
+      "expected": 699,
+      "calculated": 699,
+      "matches": true
+    },
+    {
+      "setId": 125,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 125,
+      "target": "B",
+      "expected": 1071,
+      "calculated": 1071,
+      "matches": true
+    },
+    {
+      "setId": 104,
+      "target": "D",
+      "expected": 3177,
+      "calculated": 3177,
+      "matches": true
+    },
+    {
+      "setId": 104,
+      "target": "C",
+      "expected": 10683,
+      "calculated": 10683,
+      "matches": true
+    },
+    {
+      "setId": 104,
+      "target": "C",
+      "expected": 11650,
+      "calculated": 11650,
+      "matches": true
+    },
+    {
+      "setId": 118,
+      "target": "D",
+      "expected": 699,
+      "calculated": 699,
+      "matches": true
+    },
+    {
+      "setId": 118,
+      "target": "C",
+      "expected": 699,
+      "calculated": 699,
+      "matches": true
+    },
+    {
+      "setId": 118,
+      "target": "C",
+      "expected": 1529,
+      "calculated": 1529,
+      "matches": true
+    },
+    {
+      "setId": 117,
+      "target": "D",
+      "expected": 842,
+      "calculated": 842,
+      "matches": true
+    },
+    {
+      "setId": 117,
+      "target": "C",
+      "expected": 1137,
+      "calculated": 1137,
+      "matches": true
+    },
+    {
+      "setId": 117,
+      "target": "C",
+      "expected": 1644,
+      "calculated": 1644,
+      "matches": true
+    },
+    {
+      "setId": 106,
+      "target": "D",
+      "expected": 669,
+      "calculated": 669,
+      "matches": true
+    },
+    {
+      "setId": 106,
+      "target": "C",
+      "expected": 669,
+      "calculated": 669,
+      "matches": true
+    },
+    {
+      "setId": 106,
+      "target": "B",
+      "expected": 722,
+      "calculated": 722,
+      "matches": true
+    },
+    {
+      "setId": 106,
+      "target": "A",
+      "expected": 1205,
+      "calculated": 1205,
+      "matches": true
+    },
+    {
+      "setId": 106,
+      "target": "A",
+      "expected": 1491,
+      "calculated": 1491,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "D",
+      "expected": 643,
+      "calculated": 643,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "C",
+      "expected": 643,
+      "calculated": 643,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "B",
+      "expected": 643,
+      "calculated": 643,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "A",
+      "expected": 1019,
+      "calculated": 1019,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "S",
+      "expected": 1503,
+      "calculated": 1503,
+      "matches": true
+    },
+    {
+      "setId": 101,
+      "target": "S",
+      "expected": 1642,
+      "calculated": 1642,
+      "matches": true
+    },
+    {
+      "setId": 108,
+      "target": "D",
+      "expected": 5722,
+      "calculated": 5722,
+      "matches": true
+    },
+    {
+      "setId": 108,
+      "target": "C",
+      "expected": 400239,
+      "calculated": 400239,
+      "matches": true
+    },
+    {
+      "setId": 108,
+      "target": "C",
+      "expected": 772879,
+      "calculated": 772879,
+      "matches": true
+    },
+    {
+      "setId": 100,
+      "target": "D",
+      "expected": 1190,
+      "calculated": 1190,
+      "matches": true
+    },
+    {
+      "setId": 100,
+      "target": "C",
+      "expected": 200452,
+      "calculated": 200452,
+      "matches": true
+    },
+    {
+      "setId": 100,
+      "target": "C",
+      "expected": 494968,
+      "calculated": 494968,
+      "matches": true
+    },
+    {
+      "setId": 111,
+      "target": "D",
+      "expected": 1204,
+      "calculated": 1204,
+      "matches": true
+    },
+    {
+      "setId": 111,
+      "target": "C",
+      "expected": 75146,
+      "calculated": 75146,
+      "matches": true
+    },
+    {
+      "setId": 111,
+      "target": "B",
+      "expected": 275037,
+      "calculated": 275037,
+      "matches": true
+    },
+    {
+      "setId": 111,
+      "target": "B",
+      "expected": 529079,
+      "calculated": 529079,
+      "matches": true
+    },
+    {
+      "setId": 115,
+      "target": "D",
+      "expected": 1178,
+      "calculated": 1178,
+      "matches": true
+    },
+    {
+      "setId": 115,
+      "target": "C",
+      "expected": 75038,
+      "calculated": 75038,
+      "matches": true
+    },
+    {
+      "setId": 115,
+      "target": "C",
+      "expected": 233500,
+      "calculated": 233500,
+      "matches": true
+    },
+    {
+      "setId": 109,
+      "target": "D",
+      "expected": 1200,
+      "calculated": 1200,
+      "matches": true
+    },
+    {
+      "setId": 109,
+      "target": "C",
+      "expected": 275300,
+      "calculated": 275300,
+      "matches": true
+    },
+    {
+      "setId": 109,
+      "target": "B",
+      "expected": 728115,
+      "calculated": 728115,
+      "matches": true
+    },
+    {
+      "setId": 109,
+      "target": "B",
+      "expected": 835979,
+      "calculated": 835979,
+      "matches": true
+    },
+    {
+      "setId": 121,
+      "target": "D",
+      "expected": 1214,
+      "calculated": 1214,
+      "matches": true
+    },
+    {
+      "setId": 121,
+      "target": "C",
+      "expected": 125030,
+      "calculated": 125030,
+      "matches": true
+    },
+    {
+      "setId": 121,
+      "target": "C",
+      "expected": 406356,
+      "calculated": 406356,
+      "matches": true
+    },
+    {
+      "setId": 103,
+      "target": "D",
+      "expected": 1260,
+      "calculated": 1260,
+      "matches": true
+    },
+    {
+      "setId": 103,
+      "target": "C",
+      "expected": 100044,
+      "calculated": 100044,
+      "matches": true
+    },
+    {
+      "setId": 103,
+      "target": "B",
+      "expected": 425173,
+      "calculated": 425173,
+      "matches": true
+    },
+    {
+      "setId": 103,
+      "target": "B",
+      "expected": 558938,
+      "calculated": 558938,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "D",
+      "expected": 1208,
+      "calculated": 1208,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "C",
+      "expected": 100012,
+      "calculated": 100012,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "B",
+      "expected": 400801,
+      "calculated": 400801,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "B",
+      "expected": 632129,
+      "calculated": 632129,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "D",
+      "expected": 1181,
+      "calculated": 1181,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "C",
+      "expected": 50048,
+      "calculated": 50048,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "B",
+      "expected": 200001,
+      "calculated": 200001,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "B",
+      "expected": 221735,
+      "calculated": 221735,
+      "matches": true
+    }
+  ],
+  "failures": [
+    {
+      "id": 116,
+      "grade": "D",
+      "reason": "invalid lineup"
+    },
+    {
+      "id": 116,
+      "grade": "C",
+      "reason": "invalid lineup"
+    },
+    {
+      "id": 116,
+      "grade": "B",
+      "reason": "invalid lineup"
+    },
+    {
+      "id": 116,
+      "grade": "A",
+      "reason": "invalid lineup"
+    }
+  ]
+}
