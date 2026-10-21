@@ -29,6 +29,8 @@ try{
    const search=page.getByRole('textbox',{name:language==='he'?'חיפוש שחקן להשלמה':'Find a player for this SBC',exact:true});
    await search.fill('60');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-search-card"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('60 OVR'));});
    assert(await page.getByTestId('sbc-search-card').first().getByRole('img').count()>0,'Search must render the player card');
+   await page.getByTestId('sbc-search-card').first().scrollIntoViewIfNeeded();
+   console.log('SBC_SOLUTION_SCREENSHOT='+JSON.stringify({name:`sbc-search-${language}-${width}`,mimeType:'image/jpeg',data:(await page.screenshot({type:'jpeg',quality:75,fullPage:true})).toString('base64')}));
    await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
    assert.equal(await search.inputValue(),'','Adding an item should reveal the selected collection');
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/20/);
@@ -60,6 +62,8 @@ try{
    await page.getByRole('button',{name:language==='he'?'שחקן חלופי באותו ניקוד':'Alternative player with the same score'}).first().click();
    assert.notEqual(await checkPrices(),firstTotal,'Swapping the player must refresh the price');
    await page.getByRole('button',{name:'PC',exact:true}).click();await checkPrices();
+   await page.getByTestId('sbc-option-card').first().scrollIntoViewIfNeeded();
+   console.log('SBC_SOLUTION_SCREENSHOT='+JSON.stringify({name:`sbc-player-prices-${language}-${width}`,mimeType:'image/jpeg',data:(await page.screenshot({type:'jpeg',quality:75,fullPage:true})).toString('base64')}));
    await page.getByRole('button',{name:language==='he'?'שחקנים שונים ללא כפילויות':'Different players, no duplicates',exact:true}).click();
    for(const card of await page.getByTestId('sbc-option-card').all())assert.match(await card.innerText(),/× 1/);
    await own.click();
