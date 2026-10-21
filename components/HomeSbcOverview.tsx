@@ -26,7 +26,7 @@ export function HomeSbcOverview() {
    <View style={{flex:1,minWidth:0,gap:8}}><Text style={{color:'#A6BAC6',fontSize:10,fontWeight:'800',letterSpacing:1,textAlign:rtl?'right':'left'}}>{face.category}</Text><Text numberOfLines={2} style={{color:colors.text,fontSize:17,fontWeight:'800',textAlign:rtl?'right':'left'}}>{language==='he'?face.he:face.en}</Text><Text style={{color:endsSoon(challenge,now)?'#FFB59C':'#88D5D9',fontSize:12,textAlign:rtl?'right':'left'}}>{hours && hours<=24?t(`נותרו כ־${hours} שעות`,`About ${hours} hours left`):t('דרישות ופתרונות','Requirements & solutions')}</Text></View>
   </Pressable>;
  };
- return <View style={{direction:'ltr',flexDirection:wide?(rtl?'row-reverse':'row'):'column',gap:18}}>
+ return <View testID="home-sbc-overview" style={{direction:'ltr',flexDirection:wide?(rtl?'row-reverse':'row'):'column',gap:18}}>
   <View testID="home-new-sbcs" style={{flex:wide?1:undefined,minWidth:0,backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#E9C36A',padding:17,borderRadius:5,gap:6}}>
    <Text accessibilityRole="header" style={{color:colors.text,fontSize:23,fontWeight:'900',textAlign:rtl?'right':'left'}}>{t('חדש ב־SBC','New in SBCs')}</Text>
    {open.slice(0,3).map(row)}

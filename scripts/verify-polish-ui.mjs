@@ -33,6 +33,7 @@ try{
   for(const width of [390,768,1280,1920]){
    await page.setViewportSize({width,height:1000});
    await page.getByText(t('חדש ב־SBC','New in SBCs'),{exact:true}).waitFor();
+   await page.waitForFunction(direction=>{const node=document.querySelector('[data-testid="home-sbc-overview"]');return node&&getComputedStyle(node).flexDirection===direction;},width<900?'column':language==='he'?'row-reverse':'row');
    assert.equal(await page.locator('body').evaluate(n=>n.scrollWidth>innerWidth),false,'Home overflows at '+width);
    if(width<900){const top=await page.getByTestId('home-new-sbcs').boundingBox();const next=await page.getByTestId('home-secondary-sbcs').boundingBox();const link=await page.getByRole('button',{name:t('לכל האתגרים','All challenges'),exact:true}).boundingBox();assert(top&&next&&link&&top.y+top.height<=next.y&&link.y+link.height<=top.y+top.height,'Home sections or footer overlap');}
    if(width===390)await page.screenshot({type:'jpeg',quality:85,path:path.join(shots,`polish-home-${language}.jpg`)});
