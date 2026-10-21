@@ -28,7 +28,7 @@ try{
    for(const testId of ['sbc-points-heading','sbc-selection-heading'])assert.equal(await page.getByTestId(testId).evaluate(el=>getComputedStyle(el).textAlign),language==='he'?'right':'left');
    const search=page.getByRole('textbox',{name:language==='he'?'חיפוש שחקן להשלמה':'Find a player for this SBC',exact:true});
    await search.fill('60');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-search-card"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('60 OVR'));});
-   assert(await page.getByTestId('sbc-search-card').first().locator('img').count()>0,'Search must render the player card');
+   assert(await page.getByTestId('sbc-search-card').first().getByRole('img').count()>0,'Search must render the player card');
    await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
    assert.equal(await search.inputValue(),'','Adding an item should reveal the selected collection');
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/20/);
@@ -36,7 +36,7 @@ try{
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/120/);
    assert.match(await page.getByTestId('sbc-score-remaining').innerText(),/5,380/);
    assert.equal(await page.getByTestId('sbc-selected-card').count(),2);
-   assert(await page.getByTestId('sbc-selected-card').first().locator('img').count()>0,'Selected items must retain their player card');
+   assert(await page.getByTestId('sbc-selected-card').first().getByRole('img').count()>0,'Selected items must retain their player card');
    await page.getByTestId('sbc-selected-items').getByRole('button',{name:language==='he'?/^הגדלת כמות/:/^Increase quantity of/}).last().click();
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/220/);
    await page.getByTestId('sbc-selected-items').getByRole('button',{name:language==='he'?/^הפחתת/:/^Remove one/}).first().click();

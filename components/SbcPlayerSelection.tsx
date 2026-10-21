@@ -33,7 +33,7 @@ export function SbcPlayerSelection({ segment, basket, onChange, onReset }: { seg
       {results.map((player) => {
         const name = playerDisplayName(player, language);
         return <View key={player.id} testID="sbc-search-card" style={{ flexBasis: '46%', flexGrow: 1, maxWidth: 210, minWidth: 128, alignItems: 'center', gap: 10, padding: 10, backgroundColor: '#141E2D', borderWidth: 1, borderColor: '#536078', borderRadius: 10 }}>
-          <View style={{ direction: 'ltr' }}><PortraitCard player={player} edition="base" width={118} /></View>
+          <View accessibilityRole="image" accessibilityLabel={t(`קלף ${name}, דירוג ${player.rating}`, `${name} player card, ${player.rating} OVR`)} style={{ direction: 'ltr' }}><PortraitCard player={player} edition="base" width={118} /></View>
           <SbcText tone="label" center>{name}</SbcText>
           <SbcText tone="caption" center>{player.rating} OVR · {t('גרסה רגילה', 'Base version')}</SbcText>
           <ItemScore value={itemScore(player)!} size={20} />
@@ -50,7 +50,7 @@ export function SbcPlayerSelection({ segment, basket, onChange, onReset }: { seg
         {items.slice(0, visible).map((item) => {
           const name = playerDisplayName(item.player, language);
           return <View key={item.player.id} testID="sbc-selected-card" style={{ flexBasis: '46%', flexGrow: 1, minWidth: 128, maxWidth: 210, alignItems: 'center', padding: 10, gap: 10, backgroundColor: '#1A2434', borderRadius: 10, borderWidth: 1, borderColor: '#7A705B' }}>
-            <View style={{ direction: 'ltr' }}><PortraitCard player={item.player} edition="base" width={118} /></View>
+            <View accessibilityRole="image" accessibilityLabel={t(`קלף ${name}, דירוג ${item.player.rating}`, `${name} player card, ${item.player.rating} OVR`)} style={{ direction: 'ltr' }}><PortraitCard player={item.player} edition="base" width={118} /></View>
             <SbcText tone="label" center>{name}</SbcText>
             <SbcText tone="caption" center>{item.player.rating} OVR · {t('גרסה רגילה', 'Base version')}</SbcText>
             <ItemScore value={item.scoreEach} size={20} />
