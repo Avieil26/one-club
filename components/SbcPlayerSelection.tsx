@@ -37,7 +37,7 @@ export function SbcPlayerSelection({ segment, basket, onChange, onReset }: { seg
           <SbcText tone="label" center>{name}</SbcText>
           <SbcText tone="caption" center>{player.rating} OVR · {t('גרסה רגילה', 'Base version')}</SbcText>
           <ItemScore value={itemScore(player)!} size={20} />
-          <Pressable accessibilityRole="button" accessibilityLabel={t(`הוספת ${name}`, `Add ${name}`)} onPress={() => quantity(player.id, 1)} style={{ alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', minHeight: 46, borderRadius: 6, borderWidth: 1, borderColor: '#CBB581', backgroundColor: '#333746' }}><Text style={{ color: '#F5E2B7', fontSize: 15, fontWeight: '700' }}>{t('הוספה לבחירה', 'Add item')} ＋</Text></Pressable>
+          <Pressable accessibilityRole="button" accessibilityLabel={t(`הוספת ${name}`, `Add ${name}`)} onPress={() => { quantity(player.id, 1); setQuery(''); }} style={{ alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', minHeight: 46, borderRadius: 6, borderWidth: 1, borderColor: '#CBB581', backgroundColor: '#333746' }}><Text style={{ color: '#F5E2B7', fontSize: 15, fontWeight: '700' }}>{t('הוספה לבחירה', 'Add item')} ＋</Text></Pressable>
           {basket[player.id] ? <SbcText tone="caption" center>{t(`בבחירה: ${basket[player.id]}`, `Selected: ${basket[player.id]}`)}</SbcText> : null}
         </View>;
       })}

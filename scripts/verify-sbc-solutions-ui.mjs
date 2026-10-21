@@ -30,6 +30,7 @@ try{
    await search.fill('60');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-search-card"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('60 OVR'));});
    assert(await page.getByTestId('sbc-search-card').first().locator('img').count()>0,'Search must render the player card');
    await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
+   assert.equal(await search.inputValue(),'','Adding an item should reveal the selected collection');
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/20/);
    await search.fill('76');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-search-card"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('76 OVR'));});await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
    assert.match(await page.getByTestId('sbc-selected-score').innerText(),/120/);
