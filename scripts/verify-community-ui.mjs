@@ -152,6 +152,8 @@ try {
 
   await page.screenshot({path:path.join(process.env.FC27_UI_ARTIFACTS || '/tmp',`community-sbc-${language}.png`)});
   await page.goto('http://127.0.0.1:8094/sbc/sbc-potm-ferran');
+  await page.getByTestId('sbc-empty-selection').waitFor();
+  await page.getByRole('button',{name:language==='he'?'פתרונות מוכנים':'Ready-made options',exact:true}).click();
   await page.getByTestId('sbc-verified-points-plan').waitFor();
   await page.getByRole('img',{name:'Ferran Torres 85 ST'}).waitFor();
   await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('[data-testid="sbc-reward-sbc-potm-ferran"] img')];return imgs.length>0&&imgs.every(i=>i.complete&&i.naturalWidth>0&&i.src.startsWith(location.origin+'/'));},{},{timeout:25000});
