@@ -40,9 +40,9 @@ jobs:
         run: npm run lint
       - run: npm install --no-save --package-lock=false playwright@1.56.1
       - run: npx playwright install --with-deps chromium
-      - run: node scripts/verify-community-ui.mjs
-        timeout-minutes: 5
-      - run: node scripts/verify-site-polish.mjs
       - run: node scripts/verify-polish-ui.mjs
         if: github.head_ref == 'preview/site-polish-20261021'
         timeout-minutes: 5
+      - run: node scripts/verify-community-ui.mjs
+        timeout-minutes: 5
+      - run: node scripts/verify-site-polish.mjs
