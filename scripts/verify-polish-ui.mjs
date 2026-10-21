@@ -26,7 +26,8 @@ try{
   await page.goto('http://127.0.0.1:8095/');
   await page.getByRole('button',{name:language==='he'?'🇮🇱 עברית המשך בעברית ←':'🇬🇧 English Continue in English →',exact:true}).click();
   await page.getByText(t('מה משחקים היום?','What are we playing today?'),{exact:true}).waitFor();
-  await page.getByRole('button',{name:t('רק אחסון חיוני','Essential only'),exact:true}).click();
+  await page.getByRole('button',{name:t('הבנתי','Got it'),exact:true}).click();
+  assert.equal(await page.evaluate(()=>localStorage.getItem('fc27-daily-measurement-v1')),null,'Got it enabled or changed measurement');
   assert(!new URL(page.url()).pathname.includes('register'),'Guest was forced to register');
   assert.equal(await page.getByRole('button',{name:'FUT Champions',exact:true}).count(),1,'Home mislabels Champions');
   const nav=await page.getByTestId('site-navigation').innerText();

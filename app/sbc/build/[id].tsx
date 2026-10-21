@@ -190,6 +190,7 @@ export default function SquadBuildScreen() {
       </LinearGradient>
 
       <SquadPitch
+        appearance="sbc"
         formation={formation}
         placed={placed}
         playerChem={report.playerChem}

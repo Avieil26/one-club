@@ -98,7 +98,7 @@ export default function SbcDetailScreen() {
                 : t("בלי דרישת כימיה", "No chemistry requirement")}
               {report.rating === null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
             </Text>
-            <SquadPitch formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
+            <SquadPitch appearance="sbc" formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
           </View>
           <View style={split ? { width: 320, gap: 14 } : { gap: 14 }}>
             <Card>

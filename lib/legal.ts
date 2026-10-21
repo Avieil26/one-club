@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const COOKIE_NOTICE_KEY = 'futz-cookie-notice';
-export const COOKIE_NOTICE_VALUE = 'daily-choice-2026-10-21';
+export const COOKIE_NOTICE_VALUE = 'essential-2026-09-27';
 
 export const TERMS_ACCEPTED_KEY = 'futz-terms-accepted';
 export const TERMS_VERSION = '2026-09-28-v1';
@@ -14,7 +14,8 @@ export const LEGAL_LINKS = [
 ];
 
 export async function hasCookieNotice(): Promise<boolean> {
-  return (await AsyncStorage.getItem(COOKIE_NOTICE_KEY)) === COOKIE_NOTICE_VALUE;
+  const value = await AsyncStorage.getItem(COOKIE_NOTICE_KEY);
+  return value === COOKIE_NOTICE_VALUE || value === 'daily-choice-2026-10-21';
 }
 
 export async function acceptCookieNotice(): Promise<void> {

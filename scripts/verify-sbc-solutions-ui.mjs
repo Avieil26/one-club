@@ -25,6 +25,24 @@ try{
    await progress.fill('5499');await page.getByTestId('sbc-verified-points-plan').waitFor();
    await progress.fill('5500');await page.getByText(language==='he'?'לפי הניקוד שהזנתם, הגעתם ליעד.':'Your entered progress reaches the target.',{exact:true}).waitFor();
    await progress.fill('0');await page.getByTestId('sbc-verified-points-plan').waitFor();
+   await page.getByRole('button',{name:language==='he'?'בחירת שחקנים שיש לי':'Choose players I own',exact:true}).click();
+   const search=page.getByRole('textbox',{name:language==='he'?'חיפוש שחקן להשלמה':'Find a player for this SBC',exact:true});
+   await search.fill('60');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-player-search-results"] [role="button"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('60 OVR'));});await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
+   assert.match(await page.getByTestId('sbc-selected-score').innerText(),/20/);
+   await search.fill('76');await page.waitForFunction(()=>{const rows=[...document.querySelectorAll('[data-testid="sbc-player-search-results"] [role="button"]')];return rows.length>0&&rows.every(row=>row.textContent.includes('76 OVR'));});await page.getByTestId('sbc-player-search-results').getByRole('button').first().click();
+   assert.match(await page.getByTestId('sbc-selected-score').innerText(),/120/);
+   assert.match(await page.getByTestId('sbc-score-remaining').innerText(),/5,380/);
+   await page.getByTestId('sbc-selected-items').getByRole('button',{name:language==='he'?/^הגדלת כמות/:/^Increase quantity of/}).last().click();
+   assert.match(await page.getByTestId('sbc-selected-score').innerText(),/220/);
+   await page.getByTestId('sbc-selected-items').getByRole('button',{name:language==='he'?/^הפחתת/:/^Remove one/}).first().click();
+   assert.match(await page.getByTestId('sbc-selected-score').innerText(),/200/);
+   await page.getByRole('button',{name:language==='he'?'פתרונות להשלמה':'Completion options',exact:true}).click();
+   await page.getByRole('button',{name:language==='he'?'שחקנים שונים ללא כפילויות':'Different players, no duplicates',exact:true}).click();
+   await page.getByRole('button',{name:language==='he'?'בחירת הפתרון ועריכת הקלפים':'Use this option and edit items',exact:true}).click();
+   assert.match(await page.getByTestId('sbc-score-remaining').innerText(),/\b0\b/);
+   await page.getByRole('button',{name:language==='he'?'ניקוי הבחירה':'Clear selected items',exact:true}).click();
+   assert.match(await page.getByTestId('sbc-selected-score').innerText(),/\b0\b/);
+   await page.getByRole('button',{name:language==='he'?'פתרונות להשלמה':'Completion options',exact:true}).click();
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Points layout overflow');
    console.log('SBC_SOLUTION_SCREENSHOT='+JSON.stringify({name:`sbc-points-${language}-${width}`,mimeType:'image/jpeg',data:(await page.screenshot({type:'jpeg',quality:75,fullPage:true})).toString('base64')}));
    await page.goto('http://127.0.0.1:8096/sbc/sbc-league-nation-advanced');
@@ -36,5 +54,5 @@ try{
   }
   await context.close();
  }
- assert.deepEqual(errors,[]);console.log('SBC solutions UI passed: HE/EN, phone/desktop, source-checked cards, item score icon, swaps, partial/completed progress, multi-segment squads and no overflow.');
+ assert.deepEqual(errors,[]);console.log('SBC solutions UI passed: owned-player search, 20+100 points, quantities, removal, distinct options, preset editing, clear basket; HE/EN, phone/desktop, source-checked cards, item score icon, swaps, partial/completed progress, multi-segment squads and no overflow.');
 }catch(error){if(page&&!page.isClosed())console.log('SBC_SOLUTION_SCREENSHOT='+JSON.stringify({name:'sbc-solution-failure',mimeType:'image/jpeg',data:(await page.screenshot({type:'jpeg',quality:75,fullPage:true})).toString('base64')}));throw error;}finally{await browser.close();server.close();}

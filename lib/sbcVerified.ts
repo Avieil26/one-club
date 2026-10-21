@@ -1,31 +1,25 @@
+import { eligiblePointsPlayer } from '@/lib/sbcEligibility';
+import { itemScore } from '@/lib/sbcItemScore';
 import snapshot from '@/assets/data/sbc-verified-20261021.json';
 import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
+
+export { eligiblePointsPlayer } from '@/lib/sbcEligibility';
 
 export type ItemRate = { overall: number; rarity: number; score: number; price: number; players: string[]; eaIds: number[] };
 export type PointsSegment = { eaId: number; name: string; target: number; requirements: string[]; platforms: Record<'ps5' | 'pc', { pricedAt: string; rates: ItemRate[]; routes?: { key: string; groups: { overall: number; rarity: number; count: number; unitScore: number }[] }[] }> };
 export type PointsLine = { player: FcPlayer; alternatives: FcPlayer[]; count: number; scoreEach: number; priceEach: number };
-export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost: number; count: number };
+export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost: number; count: number; priceKnown?: boolean };
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
   return (snapshot.challenges as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
-export function eligiblePointsPlayer(player: FcPlayer, requirements: string[]): boolean {
-  if (player.edition || player.icon) return false;
-  return requirements.every((text) => {
-    let match = /^Rating: Min\. (\d+)$/.exec(text);
-    if (match) return player.rating >= Number(match[1]);
-    match = /^Rating: (\d+) to (\d+)$/.exec(text);
-    if (match) return player.rating >= Number(match[1]) && player.rating <= Number(match[2]);
-    if (text === 'League: Premier League') return player.league === 'פרמייר ליג' || player.league === 'Premier League';
-    return false; // Unknown eligibility must never produce a verified plan.
-  });
-}
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
   if (!Number.isSafeInteger(segment.target) || segment.target <= 0 || !plan.lines.length) return false;
   for (const line of plan.lines) {
     const rate = segment.platforms[platform].rates.find((r) => r.rarity === 0 && r.overall === line.player.rating && r.players.includes(line.player.id));
-    if (!rate || rate.score !== line.scoreEach || rate.price !== line.priceEach || !eligiblePointsPlayer(line.player, segment.requirements) || !Number.isSafeInteger(line.count) || line.count <= 0) return false;
+    if (itemScore(line.player) !== line.scoreEach || !eligiblePointsPlayer(line.player, segment.requirements) || !Number.isSafeInteger(line.count) || line.count <= 0) return false;
+    if (plan.priceKnown === false ? line.priceEach !== 0 : !rate || rate.score !== line.scoreEach || rate.price !== line.priceEach) return false;
   }
   return plan.total === plan.lines.reduce((sum, l) => sum + l.count * l.scoreEach, 0)
     && plan.count === plan.lines.reduce((sum, l) => sum + l.count, 0)
@@ -56,7 +50,12 @@ export function pointsPlans(segment: PointsSegment, platform: 'ps5' | 'pc', subm
   let best = target;
   for (let score = target + 1; score <= limit; score++) if (costs[score] < costs[best]) best = score;
   function make(key: string, counts: Map<number, number>): PointsPlan {
-    const lines = [...counts].map(([i, count]) => ({ player: rates[i].candidates[0], alternatives: rates[i].candidates, count, scoreEach: rates[i].score, priceEach: rates[i].price }));
+    const lines = [...counts].flatMap(([i, count]) => {
+      const candidates = rates[i].candidates;
+      return candidates.slice(0, Math.min(count, candidates.length)).map((player, n) => ({
+        player, alternatives: candidates, count: Math.floor(count / candidates.length) + (n < count % candidates.length ? 1 : 0), scoreEach: rates[i].score, priceEach: rates[i].price,
+      }));
+    });
     return { key, lines, total: lines.reduce((n, l) => n + l.count * l.scoreEach, 0), cost: lines.reduce((n, l) => n + l.count * l.priceEach, 0), count: lines.reduce((n, l) => n + l.count, 0) };
   }
   const counts = new Map<number, number>();
