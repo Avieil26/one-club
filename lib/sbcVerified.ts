@@ -79,6 +79,6 @@ export function pointsPlans(segment: PointsSegment, platform: 'ps5' | 'pc', subm
   }
   const high = rates.reduce((best, r, i) => r.score > rates[best].score ? i : best, 0);
   const fewer = make('fewer', new Map([[high, Math.ceil(target / rates[high].score)]]));
-  if (fewer.count < result[0].count) result.push(fewer);
+  if (fewer.count < Math.min(...result.map((p) => p.count))) result.push(fewer);
   return result.filter((plan) => pointsPlanValid({ ...segment, target }, plan, platform));
 }
