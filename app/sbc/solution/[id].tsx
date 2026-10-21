@@ -1,3 +1,5 @@
+import { classicSegments, communitySquadStatus, checkClassicSquad } from '@/lib/sbcClassic';
+import { sbcCheckText } from '@/lib/sbcLocalization';
 import { rememberCommunityReturn } from '@/lib/communityReturn';
 import { useLanguage } from '@/lib/language';
 import { useMemo } from 'react';
@@ -15,7 +17,7 @@ import { catalogChallenge, placedPreview } from '@/lib/sbcCatalog';
 import { useApp } from '@/lib/store';
 
 export default function SbcSolutionScreen() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -42,6 +44,9 @@ export default function SbcSolutionScreen() {
 
   const ups = solution.workedUserIds.length;
   const downs = solution.failedUserIds?.length ?? 0;
+  const status = communitySquadStatus(solution.challengeId, solution.formation, solution.squad);
+  const checkedSegment = classicSegments(solution.challengeId)[0];
+  const checkedReport = checkedSegment && solution.squad && solution.formation ? checkClassicSquad(checkedSegment, solution.formation, solution.squad) : null;
   const mine = solution.userId === app.user?.id;
   const votedUp = app.user ? solution.workedUserIds.includes(app.user.id) : false;
   const votedDown = app.user ? (solution.failedUserIds ?? []).includes(app.user.id) : false;
@@ -61,6 +66,8 @@ export default function SbcSolutionScreen() {
       <Stack.Screen options={{ title: t("פתרון SBC", "SBC solution") }} />
       <Button label={t("חזרה לאתגר", "Back to challenge")} variant="ghost" onPress={() => router.replace(`/sbc/${challenge.id}`)} />
       <Title>{displayName(app.profiles, solution.userId)}</Title>
+      <Text style={{ color: status === 'checked' ? colors.green : colors.gold, fontWeight: '800' }}>{status === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : status === 'invalid' ? t('ההרכב אינו עומד בדרישות הנוכחיות — אין להשתמש בו להשלמת האתגר.', 'This squad does not meet the current requirements. Do not use it to complete this challenge.') : t('פתרון קהילה — טרם אומת מול כל הדרישות', 'Community solution — not yet checked against all requirements')}</Text>
+      {status === 'invalid' && checkedReport ? <Card>{checkedReport.checks.filter((c) => !c.ok).map((c) => <Muted key={c.label}>✗ {sbcCheckText(c.label, language)}</Muted>)}</Card> : null}
       <Muted>{solution.explanation}</Muted>
       {solution.squad ? (
         <View style={{ gap: 10 }}>

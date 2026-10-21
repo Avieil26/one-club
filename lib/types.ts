@@ -146,6 +146,13 @@ export type SbcKind = 'streamlined' | 'classic';
 export type CardQuality = 'bronze' | 'silver' | 'gold';
 
 export type SquadRules = {
+  playerCount?: number;
+  maxRating?: number;
+  maxPlayerRating?: number;
+  minLeagues?: number;
+  maxSameNation?: number;
+  exactLeagues?: number;
+  exactNations?: number;
   chemistry: number;
   minRating?: number;
   minNations?: number;

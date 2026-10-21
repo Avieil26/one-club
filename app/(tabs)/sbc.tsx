@@ -1,3 +1,4 @@
+import { ItemScore } from '@/components/ItemScore';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Pressable, Text, useWindowDimensions, View, TextInput } from 'react-native';
@@ -48,6 +49,7 @@ function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: nu
     {endsSoon(challenge, now) || newlyReleased(challenge, now) ? <Text style={{ color: endsSoon(challenge, now) ? '#FFB59C' : '#88E1BE', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{endsSoon(challenge, now) ? t('מסתיים ב־24 השעות הקרובות', 'Ends within 24 hours') : t('חדש', 'New')}</Text> : null}
     <Text style={{ color: '#D6B46B', fontSize: 9, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>{face.category}</Text>
     <Text numberOfLines={3} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'he' ? face.he : face.en}</Text>
+    {challenge.kind === 'streamlined' && challenge.targetScore ? <ItemScore value={challenge.targetScore} size={16} /> : null}
     {remaining ? <Text style={{ color: '#C3CED6', fontSize: 12, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>{t('נותרו ', 'Ends in ')}{remaining}</Text> : null}
     <Text style={{ color: '#83DCE4', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('דרישות ופתרונות', 'Requirements & solutions')} →</Text>
    </View>
@@ -74,7 +76,7 @@ export default function SbcScreen() {
         <Text style={{ width: '100%', color: '#F7F8FA', fontSize: 38, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>SBC</Text>
       </View>
       <Pressable accessibilityRole="button" onPress={() => router.push('/sbc/calculator')} style={{ width: '100%', alignItems: rtl ? 'flex-start' : 'flex-end' }}>
-        <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: rtl ? 'right' : 'left', width: '100%' }}>{t('מחשבון Streamlined', 'Streamlined calculator')}</Text>
+        <Text style={{ color: '#E3B341', fontWeight: '800', textAlign: rtl ? 'right' : 'left', width: '100%' }}>{t('תכנון השלמת נקודות', 'Plan your remaining points')}</Text>
       </Pressable>
       <TextInput accessibilityLabel={t('חיפוש SBC', 'Search SBCs')} placeholder={t('חיפוש שחקן, חבילה או אתגר', 'Search player, pack or challenge')} value={query} onChangeText={setQuery} placeholderTextColor="#94A6B5" style={{ minHeight: 48, borderWidth: 1, borderColor: '#3B4A58', borderRadius: 6, padding: 13, color: '#F7F8FA', backgroundColor: '#080F17', textAlign: rtl ? 'right' : 'left' }} />
       <View accessibilityRole="tablist" style={{ flexDirection: rtl ? 'row-reverse' : 'row', flexWrap: 'wrap', gap: 8 }}>

@@ -403,13 +403,13 @@ export function evaluateSquad(
         playerChem[slot.id] = 0;
         continue;
       }
-      playerChem[slot.id] = modernPlayerChem(player, filledPlayers, positionFits(player.position, slot.position));
+      playerChem[slot.id] = modernPlayerChem(player, filledPlayers, (player.positions ?? [player.position]).includes(slot.position));
     }
   }
 
   const chemistry = Object.values(playerChem).reduce((sum, value) => sum + value, 0);
   const nations = new Set(filledPlayers.map((player) => player.nation)).size;
-  const rating = filledPlayers.length === 11 ? squadRating(filledPlayers.map((player) => player.rating)) : null;
+  const rating = filledPlayers.length === (rules?.playerCount ?? 11) ? squadRating(filledPlayers.map((player) => player.rating)) : null;
   const checks = buildChecks(filledPlayers, chemistry, rating, rules);
   return {
     chemistry,
@@ -437,11 +437,22 @@ function buildChecks(
   rating: number | null,
   rules: SquadRules | null,
 ): RuleCheck[] {
-  const checks: RuleCheck[] = [{ label: `11 שחקנים (${players.length})`, ok: players.length === 11 }];
+  const count = rules?.playerCount ?? 11;
+  const identities = players.map((p) => p.baseId ?? p.id);
+  const checks: RuleCheck[] = [
+    { label: `${count} שחקנים (${players.length})`, ok: players.length === count },
+    { label: 'ללא שחקנים כפולים', ok: new Set(identities).size === identities.length },
+  ];
   const targetChem = rules?.chemistry ?? 0;
   if (targetChem > 0) checks.push({ label: `כימיה ${targetChem} (עכשיו ${chemistry})`, ok: chemistry >= targetChem });
   if (!rules) return checks;
 
+  if (rules.maxPlayerRating) checks.push({ label: `דירוג קלף עד ${rules.maxPlayerRating}`, ok: players.every((p) => p.rating <= rules.maxPlayerRating!) });
+  if (rules.maxRating) checks.push({ label: `דירוג קבוצה עד ${rules.maxRating}`, ok: rating !== null && rating <= rules.maxRating });
+  if (rules.minLeagues) checks.push({ label: `לפחות ${rules.minLeagues} ליגות`, ok: new Set(players.map((p) => p.league)).size >= rules.minLeagues });
+  if (rules.maxSameNation) checks.push({ label: `עד ${rules.maxSameNation} מאותה מדינה`, ok: Math.max(0, ...countBy(players, (p) => p.nation).values()) <= rules.maxSameNation });
+  if (rules.exactLeagues) checks.push({ label: `בדיוק ${rules.exactLeagues} ליגות`, ok: new Set(players.map((p) => p.league)).size === rules.exactLeagues });
+  if (rules.exactNations) checks.push({ label: `בדיוק ${rules.exactNations} מדינות`, ok: new Set(players.map((p) => p.nation)).size === rules.exactNations });
   if (rules.minRating) {
     checks.push({
       label: `דירוג קבוצה ${rules.minRating}${rating === null ? '' : ` (עכשיו ${rating})`}`,
@@ -535,7 +546,7 @@ function buildChecks(
   if (rules.exactQuality) {
     const label = rules.exactQuality === 'gold' ? 'זהב' : rules.exactQuality === 'silver' ? 'כסף' : 'ארד';
     const count = players.filter((player) => cardQuality(player.rating) === rules.exactQuality).length;
-    checks.push({ label: `כל הכרטיסים ${label} (${count}/11)`, ok: players.length === 11 && count === 11 });
+    checks.push({ label: `כל הכרטיסים ${label} (${count}/${rules.playerCount ?? 11})`, ok: players.length === (rules.playerCount ?? 11) && count === (rules.playerCount ?? 11) });
   }
   return checks;
 }

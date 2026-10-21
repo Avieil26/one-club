@@ -1,5 +1,8 @@
+import { SbcClassicSolution } from '@/components/SbcClassicSolution';
+import { classicSegments, communitySquadStatus } from '@/lib/sbcClassic';
 import { SbcRewardVisual } from '@/components/SbcRewardVisual';
-import { preparedRoute } from '@/lib/sbcPrepared';
+import { SbcPointsSolution } from '@/components/SbcPointsSolution';
+import { ItemScore } from '@/components/ItemScore';
 import { sbcCheckText, sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
@@ -62,10 +65,9 @@ export default function SbcDetailScreen() {
   }
 
   const challengeId = challenge.id;
-  const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
   const remaining = formatRemaining(challenge.endsAt, now, language);
-  const ready = preparedRoute(challengeId);
-  const solutions = solutionsFor(app.solutions, challengeId);
+  const allSolutions = solutionsFor(app.solutions, challengeId);
+  const solutions = allSolutions.filter((s) => communitySquadStatus(challengeId, s.formation, s.squad) !== 'invalid');
   const face = sbcFace(challenge);
   const split = Platform.OS === 'web' && windowWidth >= 1000;
 
@@ -86,10 +88,10 @@ export default function SbcDetailScreen() {
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
       {challenge.lastCheckedAt ? <Muted>{t('נבדק לאחרונה: ', 'Last checked: ')}{new Date(challenge.lastCheckedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted> : null}
-      {challenge.kind === 'classic' && challenge.previewSquad ? (
+      {challenge.kind === 'classic' && classicSegments(challengeId).length ? <SbcClassicSolution key={challengeId} challengeId={challengeId} /> : challenge.kind === 'classic' && challenge.previewSquad && !challenge.manualValidation && challenge.rules && report.ready ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
-            <Title>{t('סגל מוכן לדוגמה', 'Ready example squad')}</Title>
+            <Title>{t('הרכב שנבדק מול הדרישות', 'Squad checked against requirements')}</Title>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
               {challenge.rules?.chemistry
                 ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
@@ -111,23 +113,15 @@ export default function SbcDetailScreen() {
       ) : (
         <Card>
           <Muted>{sbcText(challenge.requirements, language)}</Muted>
-          {challenge.targetScore ? <Muted>{t("יעד ניקוד:", "Target score:")}{challenge.targetScore}</Muted> : null}
+          {challenge.targetScore ? <ItemScore value={challenge.targetScore} /> : null}
         </Card>
       )}
-      {ready && challenge.kind === 'streamlined' ? <Card>
-        <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 20, textAlign: language === 'he' ? 'right' : 'left' }}>{t('צירוף דירוגים מוכן', 'Ready rating combination')}</Text>
-        <Muted>{t('קלפים רגילים נדירים לפי הדירוגים הבאים:', 'Use base rare player items with these ratings:')}</Muted>
-        {ready.lines.map((line) => <View key={line.rating} style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', justifyContent: 'space-between', gap: 12, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.line }}>
-          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '900' }}>{line.rating} OVR</Text>
-          <Text style={{ color: colors.gold, fontWeight: '800' }}>{line.count} × {t('קלפים נדירים', 'rare items')}</Text>
-        </View>)}
-        <Muted>{t('לפני ההגשה ודאו במשחק שהגעתם ליעד הניקוד. גרסאות מיוחדות של קלפים עשויות לשנות את הניקוד.', 'Confirm the target score in-game before submitting. Special card versions can affect the score.')}</Muted>
-      </Card> : null}
+      {challenge.kind === 'streamlined' ? <SbcPointsSolution challengeId={challengeId} /> : null}
       {challenge.kind === 'streamlined' ? (
         <Button
           label={t("פתיחת המחשבון", "Open calculator")}
           variant="copper"
-          onPress={() => router.push(`/sbc/calculator?target=${challenge.targetScore ?? ''}`)}
+          onPress={() => router.push(`/sbc/calculator?challenge=${challenge.id}`)}
         />
       ) : null}
 
@@ -154,12 +148,13 @@ export default function SbcDetailScreen() {
       {solutions.map((solution) => {
         const ups = solution.workedUserIds.length;
         const downs = solution.failedUserIds?.length ?? 0;
-        const shot = solution.imageUris[0];
+        const shot = solution.imageUris.find((uri) => uri !== 'squad');
         return (
           <Card key={solution.id} onPress={() => router.push(`/sbc/solution/${solution.id}`)}>
             <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: 'right' }}>
               {displayName(app.profiles, solution.userId)}
             </Text>
+            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : t('פתרון קהילה · טרם אומת מול כל הדרישות', 'Community solution · not yet checked against all requirements')}</Muted>
             <Muted>{solution.explanation}</Muted>
             {shot ? (
               <Image
