@@ -57,10 +57,10 @@ const SCENES: Record<
     base: '#07080A',
   },
   gallery: {
-    source: require('@/assets/images/scene-sbc-tunnel.png'),
-    tint: ['rgba(8,10,14,0.60)', 'rgba(12,14,18,0.48)', 'rgba(8,10,14,0.82)'],
-    wash: 'rgba(12,14,18,0.2)',
-    vignette: ['rgba(0,0,0,0.35)', 'transparent', 'transparent', 'rgba(0,0,0,0.65)'],
+    source: require('@/assets/images/gallery-hall.webp'),
+    tint: ['rgba(5,10,14,0.16)', 'rgba(5,10,14,0.10)', 'rgba(5,10,14,0.42)'],
+    wash: 'transparent',
+    vignette: ['rgba(0,0,0,0.16)', 'transparent', 'transparent', 'rgba(0,0,0,0.38)'],
     base: '#0D1015',
   },
   market: {
