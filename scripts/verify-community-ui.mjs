@@ -118,11 +118,14 @@ try {
   async function assertRewards() {
    await page.waitForFunction(()=>{
     const rewards=[...document.querySelectorAll('[data-testid^="sbc-reward-"]')];
+    const expectedWidth=innerWidth<760?116:132;
     return rewards.length>20 && rewards.every(node=>{
+     if(Math.abs(node.getBoundingClientRect().width-expectedWidth)>1)return false;
      const images=[...node.querySelectorAll('img')];
      return (node.getAttribute('aria-label')==='Coin Boost' || images.length>0) && images.every(img=>img.complete&&img.naturalWidth>0);
     });
    },{},{timeout:25000});
+   await page.locator('[data-testid^="sbc-reward-"] img').evaluateAll(images=>Promise.all(images.map(img=>img.decode())));
    const invalid=await page.locator('[data-testid^="sbc-reward-"] img').evaluateAll(nodes=>nodes.filter(img=>{
     const rect=img.getBoundingClientRect();
     const own=img.src.startsWith(location.origin+'/')||img.src.startsWith('data:');

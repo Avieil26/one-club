@@ -27,14 +27,14 @@ export function HomeSbcOverview() {
   </Pressable>;
  };
  return <View style={{direction:'ltr',flexDirection:wide?(rtl?'row-reverse':'row'):'column',gap:18}}>
-  <View style={{flex:1,minWidth:0,backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#E9C36A',padding:17,borderRadius:5,gap:6}}>
+  <View testID="home-new-sbcs" style={{flex:wide?1:undefined,minWidth:0,backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#E9C36A',padding:17,borderRadius:5,gap:6}}>
    <Text accessibilityRole="header" style={{color:colors.text,fontSize:23,fontWeight:'900',textAlign:rtl?'right':'left'}}>{t('חדש ב־SBC','New in SBCs')}</Text>
    {open.slice(0,3).map(row)}
    {!open.length?<Muted>{t('אין כרגע אתגרים פעילים.','No active challenges right now.')}</Muted>:null}
    <Pressable accessibilityRole="button" onPress={()=>router.push('/sbc')} style={{minHeight:44,justifyContent:'center'}}><Text style={{color:'#E9C36A',fontWeight:'800',textAlign:rtl?'right':'left'}}>{t('לכל האתגרים','All challenges')}</Text></Pressable>
   </View>
-  <View style={{flex:1,minWidth:0,gap:18}}>
-   <View style={{backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#ED997E',padding:17,borderRadius:5,gap:8}}>
+  <View style={{flex:wide?1:undefined,minWidth:0,gap:18}}>
+   <View testID="home-secondary-sbcs" style={{backgroundColor:'rgba(5,12,20,0.96)',borderTopWidth:2,borderTopColor:'#ED997E',padding:17,borderRadius:5,gap:8}}>
     <Text accessibilityRole="header" style={{color:colors.text,fontSize:23,fontWeight:'900',textAlign:rtl?'right':'left'}}>{ending.length?t('לפני שנגמר הזמן','Before time runs out'):t('עוד אתגרים פעילים','More active challenges')}</Text>
     {secondary.map(row)}
     {!secondary.length?<Muted>{t('בחרו מוד כדי להתחיל לשחק.','Choose a game mode to get started.')}</Muted>:null}
