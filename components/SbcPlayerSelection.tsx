@@ -22,7 +22,7 @@ export function SbcPlayerSelection({ segment, basket, onChange }: { segment: Poi
   }
   return <View style={{ gap: 14 }}>
     <Muted>{t('חפשו ובחרו את הקלפים שיש לכם. הניקוד מחושב לגרסה הרגילה שמוצגת כאן.', 'Search and select items you own. Points are calculated for the base version shown here.')}</Muted>
-    <Field label={t('חיפוש שחקן להשלמה', 'Find a player for this SBC')} value={query} onChangeText={setQuery} placeholder={t('שם בעברית, באנגלית או דירוג', 'Player name or rating')} />
+    <Field tone="sbc" label={t('חיפוש שחקן להשלמה', 'Find a player for this SBC')} value={query} onChangeText={setQuery} placeholder={t('שם בעברית, באנגלית או דירוג', 'Player name or rating')} />
     <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', gap: 12 }}><Text style={{ color: colors.text, fontWeight: '800' }}>{t('הניקוד שבחרת', 'Selected points')}</Text><ItemScore value={selectedScore(items)} size={20} /></View>
     <View testID="sbc-player-search-results" style={{ gap: 8 }}>
       {results.map((player) => {

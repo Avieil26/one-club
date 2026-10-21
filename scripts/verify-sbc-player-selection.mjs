@@ -24,7 +24,10 @@ assert.equal(selectedScore(selectedItems(segment,{[gold.id]:2})),200);
 assert.equal(selectedScore(selectedItems(segment,{})),0);
 assert.deepEqual(selectedItems(segment,{missing:1,[gold.id]:-1,[bronze.id]:1.5}),[]);
 const restricted=pointsSegments('sbc-gold-reroll')[0];
-assert.equal(searchPointPlayers(restricted,'60').length,0);assert.equal(selectedScore(selectedItems(restricted,basket)),0);
+assert.equal(searchPointPlayers(restricted,'84').length,0);assert.equal(selectedScore(selectedItems(restricted,basket)),120);
+assert(searchPointPlayers(restricted,'83').length>0);
+const bronzeOnly=pointsSegments('sbc-bronze-silver-reroll')[0];assert.equal(searchPointPlayers(bronzeOnly,'79').length,0);assert(searchPointPlayers(bronzeOnly,'74').length>0);assert.equal(selectedScore(selectedItems(bronzeOnly,basket)),20);
+for(const intro of pointsSegments('sbc-getting-started').filter(s=>[19,33].includes(s.eaId))){assert.equal(searchPointPlayers(intro,'65').length,0);assert(searchPointPlayers(intro,'60').length>0);}
 let checked=0;
 for(const c of officialChallenges)for(const s of pointsSegments(c.id))for(const platform of ['ps5','pc']){
  const preset=pointsPlans(s,platform);

@@ -1,3 +1,4 @@
+import { pointsEligibilityLabel } from '@/lib/sbcEligibility';
 import { useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { PortraitCard } from '@/components/PortraitCard';
@@ -36,19 +37,20 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
   const completion = validInput ? Math.min(100, ((number + ownScore) / segment.target) * 100) : 0;
   return <SbcSurface>
     <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900' }}>{segment.name}</Text>
+    <Muted>{pointsEligibilityLabel(segment.requirements, language)}</Muted>
     <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'space-between', gap: 14 }}>
       <View style={{ gap: 5 }}><Muted>{t('יעד האתגר', 'Challenge target')}</Muted><ItemScore value={segment.target} size={24} /></View>
       <View testID="sbc-selected-score" style={{ gap: 5 }}><Muted>{t('נקודות מהבחירה שלך', 'Points from your items')}</Muted><ItemScore value={ownScore} size={24} /></View>
       <View testID="sbc-score-remaining" style={{ gap: 5 }}><Muted>{t('נותר להשלמה', 'Still needed')}</Muted><ItemScore value={remaining} size={24} /></View>
     </View>
     <View accessibilityRole="progressbar" accessibilityLabel={t('התקדמות בתכנון ההשלמה', 'Planned completion progress')} accessibilityValue={{ min: 0, max: segment.target, now: validInput ? Math.min(segment.target, number + ownScore) : 0 }} style={{ height: 5, width: '100%', borderRadius: 3, overflow: 'hidden', backgroundColor: '#3D4556', direction: 'ltr' }}><View style={{ height: 5, width: `${completion}%`, backgroundColor: '#D1B77C' }} /></View>
-    <Field label={t('נקודות שכבר הגשת במשחק', 'Points already submitted in-game')} value={submitted} onChangeText={setSubmitted} keyboardType="number-pad" />
+    <Field tone="sbc" label={t('נקודות שכבר הגשת במשחק', 'Points already submitted in-game')} value={submitted} onChangeText={setSubmitted} keyboardType="number-pad" />
     {!validInput ? <Muted>{t('הכניסו מספר שלם בין 0 ליעד האתגר.', 'Enter a whole number between zero and the target.')}</Muted> : null}
     <SbcChoices label={t('פלטפורמה', 'Platform')} value={platform} options={[{ id: 'ps5', label: 'PS / Xbox' }, { id: 'pc', label: 'PC' }]} onChange={(id) => setPlatform(id as 'ps5' | 'pc')} />
     <SbcChoices label={t('איך תרצו להשלים?', 'How would you like to complete it?')} value={mode} options={[{ id: 'suggestions', label: t('פתרונות להשלמה', 'Completion options') }, { id: 'my-items', label: t('בחירת שחקנים שיש לי', 'Choose players I own') }]} onChange={setMode} />
     {mode === 'my-items' ? <SbcPlayerSelection segment={segment} basket={basket} onChange={setBasket} /> : <View style={{ gap: 16 }}>
       {ownScore > 0 ? <Muted>{t('הפתרונות משלימים את היתרה אחרי הקלפים שכבר בחרת.', 'Options cover what remains after your selected items.')}</Muted> : null}
-      {plans.length > 1 ? <SbcChoices label={t('דרך להשלמה', 'Completion route')} value={plan?.key ?? 'value'} options={plans.map((p) => ({ id: p.key, label: p.key === 'value' ? t('עלות נמוכה מהאפשרויות שנבדקו', 'Lower cost among checked options') : p.key === 'balanced' ? t('איזון בין עלות לכמות', 'Balance cost and item count') : p.key === 'unique' ? t('שחקנים שונים ללא כפילויות', 'Different players, no duplicates') : t('פחות קלפים', 'Fewer cards') }))} onChange={(key) => { setSelected(key); setVisible(12); }} /> : null}
+      {plans.length > 1 ? <SbcChoices label={t('דרך להשלמה', 'Completion route')} value={plan?.key ?? 'value'} options={plans.map((p) => ({ id: p.key, label: p.key === 'value' ? t('עלות משוערת נמוכה', 'Lower estimated cost') : p.key === 'balanced' ? t('איזון בין עלות לכמות', 'Balance cost and item count') : p.key === 'unique' ? t('שחקנים שונים ללא כפילויות', 'Different players, no duplicates') : t('פחות קלפים', 'Fewer cards') }))} onChange={(key) => { setSelected(key); setVisible(12); }} /> : null}
       {plan ? <View testID="sbc-verified-points-plan" style={{ gap: 16 }}>
         <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', gap: 18, paddingVertical: 12, borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#455167' }}>
           <View><Muted>{t('ניקוד הפתרון', 'Option points')}</Muted><ItemScore value={plan.total} /></View>

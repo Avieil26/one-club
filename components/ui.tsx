@@ -170,6 +170,7 @@ export function Field({
   keyboardType,
   secure,
   maxLength,
+  tone,
 }: {
   label: string;
   value: string;
@@ -179,6 +180,7 @@ export function Field({
   keyboardType?: KeyboardTypeOptions;
   secure?: boolean;
   maxLength?: number;
+  tone?: 'sbc';
 }) {
   const { t, language } = useLanguage();
   const rtl = language === 'he';
@@ -198,7 +200,7 @@ export function Field({
         autoCapitalize={secure || keyboardType === 'email-address' ? 'none' : 'sentences'}
         autoCorrect={secure || keyboardType === 'email-address' ? false : undefined}
         maxLength={maxLength}
-        style={[styles.input, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
+        style={[styles.input, tone === 'sbc' && { backgroundColor: '#101724', borderColor: '#46516A', borderRadius: 6 }, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
       {maxLength != null ? (
         <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t(`נשארו ${remaining}`, `${remaining} left`)}</Text>

@@ -1,7 +1,7 @@
-import { SbcSurface } from '@/components/SbcSurface';
+import { SbcChoices, SbcSurface } from '@/components/SbcSurface';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { ChoiceGroup, colors, Muted } from '@/components/ui';
+import { colors, Muted } from '@/components/ui';
 import { PortraitCard } from '@/components/PortraitCard';
 import { SquadPitch } from '@/components/SquadPitch';
 import { formationById } from '@/lib/chemistry';
@@ -19,7 +19,7 @@ export function SbcClassicSolution({ challengeId }: { challengeId: string }) {
   const report = checkClassicSquad(segment, segment.formation, segment.squad);
   if (!report.ready) return null;
   return <View testID="sbc-checked-classic" style={{ gap: 14 }}>
-    {segments.length > 1 ? <ChoiceGroup label={t('חלק באתגר', 'Challenge segment')} value={index} options={segments.map((s, i) => ({ id: String(i), label: s.name }))} onChange={setIndex} /> : null}
+    {segments.length > 1 ? <SbcChoices label={t('חלק באתגר', 'Challenge segment')} value={index} options={segments.map((s, i) => ({ id: String(i), label: s.name }))} onChange={setIndex} /> : null}
     <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900' }}>{segment.name}</Text>
     {(segment.rules.playerCount ?? 11) === 11 ? <Muted>{t('מערך האתגר: ', 'Challenge formation: ')}{formationById(segment.formation).label}</Muted> : null}
     <Text style={{ color: colors.green, fontWeight: '800' }}>✓ {t('ההרכב עומד בכל הדרישות שנבדקו', 'Squad meets all checked requirements')}</Text>
