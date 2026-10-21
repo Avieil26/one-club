@@ -43,3 +43,13 @@ for(const c of officialChallenges)for(const s of pointsSegments(c.id))for(const 
 assert(pointsPlans(segment,'ps5')[0].lines.length>1,'Default option still repeats one player despite available alternatives');
 assert.equal(players.filter(p=>itemScore(p)!==null).length,players.filter(p=>!p.edition&&!p.icon).length);
 console.log(`SBC selection passed: 19,798 searchable base cards, official scores, HE/EN and OVR search, 20+100=120 basket math, quantity/removal, eligibility, ${checked} distinct-player options and diversified presets.`);
+
+const { pricePointsItems } = loadRepositoryModule('lib/sbcPlanPrices.ts');
+const prices = {bronze:200,first:650,alternate:1200};
+const quote = id => prices[id];
+assert.deepEqual(pricePointsItems([{id:'first',count:2},{id:'bronze',count:1}],quote),{lines:[{unit:650,total:1300},{unit:200,total:200}],total:1500});
+assert.equal(pricePointsItems([{id:'alternate',count:2},{id:'bronze',count:1}],quote).total,2600,'Swapped player must change the shown price');
+assert.equal(pricePointsItems([{id:'missing',count:1}],quote).total,null,'Unknown price cannot become free');
+assert.equal(pricePointsItems([{id:'first',count:1},{id:'missing',count:1}],quote).total,null,'A partial quote is not the full squad price');
+assert.equal(pricePointsItems([{id:'zero',count:1}],()=>0).total,null);
+console.log('SBC price breakdown passed: per-player quotes, quantities, swapped player totals and unavailable prices.');

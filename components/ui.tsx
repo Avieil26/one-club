@@ -187,13 +187,13 @@ export function Field({
   const remaining = maxLength != null ? Math.max(0, maxLength - value.length) : 0;
   return (
     <View style={styles.field}>
-      <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{label}</Text>
+      <Text style={[styles.label, tone === 'sbc' && { color: '#F3F5FA', fontSize: 15, lineHeight: 23, fontWeight: '700' }, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{label}</Text>
       <TextInput
         accessibilityLabel={label}
         value={value}
         onChangeText={(text) => onChangeText(maxLength ? text.slice(0, maxLength) : text)}
         placeholder={placeholder}
-        placeholderTextColor={colors.muted}
+        placeholderTextColor={tone === 'sbc' ? '#C2CBDA' : colors.muted}
         multiline={multiline}
         keyboardType={keyboardType}
         secureTextEntry={secure}
