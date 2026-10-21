@@ -442,26 +442,25 @@ async function fetchSnapshot(): Promise<Snapshot> {
   const demoProfile = demoId ? DEMO_PROFILES[demoId] : null;
 
   if (!session && !demoProfile) {
-    return toSnapshot(
-      {
-        sessionUserId: null,
-        profiles: [],
-        careerChallenges: [],
-        careerSubmissions: [],
-        futPosts: [],
-        futRatings: [],
-        futLikes: [],
-        comments: [],
-        commentLikes: [],
-        groundsPosts: [],
-        sbcChallenges: mergeOfficialSbcs([]),
-        sbcSolutions: [],
-        reports: [],
-        follows: [],
-        messages: [],
-      },
-      'remote',
-    );
+    type BrowseData = { profiles?: ProfileRow[]; careerChallenges?: ChallengeRow[]; futPosts?: FutRow[]; groundsPosts?: GroundsRow[]; sbcChallenges?: SbcRow[]; sbcSolutions?: SolutionRow[] };
+    let browse: BrowseData = {};
+    try {
+      const { data, error } = await supabase.rpc('browse_site');
+      if (!error && data && typeof data === 'object') browse = data as BrowseData;
+    } catch { /* The bundled catalogue remains available when community browsing is offline. */ }
+    const sbcs = browse.sbcChallenges ?? [];
+    const keys = new Map(sbcs.map(row => [row.id, row.catalog_key || row.id] as const));
+    return toSnapshot({
+      sessionUserId: null,
+      profiles: (browse.profiles ?? []).map(mapProfile),
+      careerChallenges: mergeFeaturedCareer((browse.careerChallenges ?? []).map(mapChallenge)),
+      careerSubmissions: [], futPosts: (browse.futPosts ?? []).map(mapFut),
+      futRatings: [], futLikes: [], comments: [], commentLikes: [],
+      groundsPosts: (browse.groundsPosts ?? []).map(mapGrounds),
+      sbcChallenges: mergeOfficialSbcs(sbcs.map(mapSbc)),
+      sbcSolutions: (browse.sbcSolutions ?? []).map(row => mapSolution(row, [], [], keys)),
+      reports: [], follows: [], messages: [],
+    }, 'remote');
   }
 
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);

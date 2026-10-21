@@ -1,3 +1,5 @@
+import { useRouter, usePathname } from 'expo-router';
+import { rememberCommunityReturn } from '@/lib/communityReturn';
 import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
@@ -14,12 +16,15 @@ const LIMIT = 120;
 export function Comments({ targetType, targetId }: { targetType: CommentTarget; targetId: string }) {
   const { t, language } = useLanguage();
   const app = useApp();
+  const router = useRouter(); const pathname = usePathname();
+  async function signIn() { await rememberCommunityReturn(pathname); router.push('/register'); }
   const [body, setBody] = useState('');
   const [replyTo, setReplyTo] = useState<string | null>(null);
   const items = app.comments.filter((comment) => comment.targetType === targetType && comment.targetId === targetId);
   const roots = useMemo(() => items.filter((item) => !item.parentId), [items]);
 
   async function send() {
+    if (!app.user) { await signIn(); return; }
     try {
       const held = await app.addComment({ targetType, targetId, preset: null, body, parentId: replyTo });
       setBody('');
@@ -31,6 +36,7 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
   }
 
   async function report(commentId: string) {
+    if (!app.user) { await signIn(); return; }
     try {
       await app.reportComment(commentId);
       Alert.alert(t("תודה", "Thank you"), t("התגובה ירדה מהפיד ומחכה לבדיקה.", "The comment has been removed from the feed and is awaiting review."));
@@ -40,6 +46,7 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
   }
 
   async function like(commentId: string) {
+    if (!app.user) { await signIn(); return; }
     try {
       await app.toggleCommentLike(commentId);
     } catch (error) {
@@ -106,8 +113,8 @@ export function Comments({ targetType, targetId }: { targetType: CommentTarget; 
           <Pressable onPress={() => setReplyTo(null)}><Text style={{ color: '#D5E2F2', fontSize: 12 }}>{t("ביטול", "Cancel")}</Text></Pressable>
         </View>
       ) : null}
-      <Field label={replyTo ? t("תגובה לתגובה", "Reply") : t("תגובה", "Comment")} value={body} onChangeText={setBody} maxLength={LIMIT} multiline placeholder={replyTo ? t("כתוב תשובה...", "Write a reply…") : t("כתוב תגובה...", "Write a comment…")} />
-      <Button label={replyTo ? t("שליחת תשובה", "Send reply") : t("פרסום תגובה", "Post comment")} onPress={send} disabled={app.busy || !body.trim()} />
+      {app.user ? <><Field label={replyTo ? t("תגובה לתגובה", "Reply") : t("תגובה", "Comment")} value={body} onChangeText={setBody} maxLength={LIMIT} multiline placeholder={replyTo ? t("כתוב תשובה...", "Write a reply…") : t("כתוב תגובה...", "Write a comment…")} />
+      <Button label={replyTo ? t("שליחת תשובה", "Send reply") : t("פרסום תגובה", "Post comment")} onPress={send} disabled={app.busy || !body.trim()} /></> : <Button label={t('התחברות כדי להגיב', 'Sign in to comment')} variant="ghost" onPress={() => void signIn()} />}
     </View>
   );
 }

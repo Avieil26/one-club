@@ -108,6 +108,7 @@ export default function ProfileScreen() {
         </View>
       ) : null}
       <Text style={{ color: colors.gold, fontSize: 32, fontWeight: '700', textAlign: 'right' }}>{app.user?.reputation ?? 0}</Text>
+      {app.user?.isAdmin ? <Button label={t('שימוש וחזרה לאתר', 'Site usage & returns')} variant="ghost" onPress={() => router.push('/admin/retention')} /> : null}
       <Muted>{t('נקודות מוניטין. זה לא מטבע ולא פרס שאפשר למשוך.', 'Reputation points. They are not currency and cannot be withdrawn.')}</Muted>
       <Muted>{t('הגשות שאושרו:', 'Approved submissions:')} {app.user?.approvedCount ?? 0}</Muted>
       {app.user ? (

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const COOKIE_NOTICE_KEY = 'futz-cookie-notice';
-export const COOKIE_NOTICE_VALUE = 'essential-2026-09-27';
+export const COOKIE_NOTICE_VALUE = 'daily-choice-2026-10-21';
 
 export const TERMS_ACCEPTED_KEY = 'futz-terms-accepted';
 export const TERMS_VERSION = '2026-09-28-v1';

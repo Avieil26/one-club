@@ -29,7 +29,7 @@ try {
   await context.addInitScript(({language,uid})=>{
    if(location.origin==='null')return;
    const token=btoa(JSON.stringify({alg:'HS256',typ:'JWT'}))+'.'+btoa(JSON.stringify({sub:uid,exp:Math.floor(Date.now()/1000)+3600,role:'authenticated'}))+'.test';
-   localStorage.setItem('fc27-language',language);localStorage.setItem('futz-cookie-notice','essential-2026-09-27');localStorage.setItem('futz-terms-accepted-'+uid,'2026-09-28-v1');
+   localStorage.setItem('fc27-language',language);localStorage.setItem('futz-cookie-notice','daily-choice-2026-10-21');localStorage.setItem('futz-terms-accepted-'+uid,'2026-09-28-v1');
    if(localStorage.getItem('fc27-browser-signed-out')!=='1')localStorage.setItem('sb-hxjgphhcspzjnkkzdmpk-auth-token',JSON.stringify({access_token:token,refresh_token:'mock-only',expires_at:Math.floor(Date.now()/1000)+3600,token_type:'bearer',user:{id:uid,email:'mock@example.invalid',aud:'authenticated',role:'authenticated',user_metadata:{display_name:'Preview player'},app_metadata:{provider:'email'},created_at:new Date().toISOString()}}));
   },{language,uid});
   await context.route('https://game-assets.fut.gg/**', route => route.abort());

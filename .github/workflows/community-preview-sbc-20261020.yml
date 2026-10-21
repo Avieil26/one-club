@@ -1,7 +1,7 @@
 name: Community Preview checks
 on:
   pull_request:
-    branches: ['fix/android-mobile-20261020']
+    branches: ['fix/android-mobile-20261020', 'preview/community-sbc-20261020']
     types: [opened, synchronize, reopened]
 permissions:
   contents: read
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
-    if: github.head_ref == 'preview/community-sbc-20261020'
+    if: github.head_ref == 'preview/community-sbc-20261020' || github.head_ref == 'preview/site-polish-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -41,4 +41,8 @@ jobs:
       - run: npm install --no-save --package-lock=false playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node scripts/verify-community-ui.mjs
+        timeout-minutes: 5
+      - run: node scripts/verify-site-polish.mjs
+      - run: node scripts/verify-polish-ui.mjs
+        if: github.head_ref == 'preview/site-polish-20261021'
         timeout-minutes: 5

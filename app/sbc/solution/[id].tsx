@@ -1,3 +1,4 @@
+import { rememberCommunityReturn } from '@/lib/communityReturn';
 import { useLanguage } from '@/lib/language';
 import { useMemo } from 'react';
 import { Alert, Text, View } from 'react-native';
@@ -93,7 +94,7 @@ export default function SbcSolutionScreen() {
           </View>
         </View>
         {mine ? <Muted>{t("אי אפשר לדרג פתרון של עצמך.", "You cannot rate your own solution.")}</Muted> : null}
-        {!app.user ? <Muted>{t("צריך להתחבר כדי לסמן אם הפתרון עבד.", "Sign in to rate this solution.")}</Muted> : null}
+        {!app.user ? <Button label={t("התחברות כדי לדרג", "Sign in to rate")} variant="ghost" onPress={() => { void rememberCommunityReturn(`/sbc/solution/${solution.id}`).then(() => router.push('/register')); }} /> : null}
       </Card>
       <Comments targetType="sbc_solution" targetId={solution.id} />
     </Screen>

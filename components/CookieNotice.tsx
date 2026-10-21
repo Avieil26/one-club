@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Platform, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { allowDailyMeasurement } from '@/lib/dailyActivity';
 import { colors } from '@/components/ui';
 import { inlineLatin } from '@/lib/legalBidi';
 import { acceptCookieNotice, hasCookieNotice } from '@/lib/legal';
@@ -49,19 +50,20 @@ export function CookieNotice() {
       </Text>
       <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }}>
         {rtl ? inlineLatin(
-          '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום ואין מעקב אנליטי. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
-        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies or analytics tracking. You can keep browsing without clicking this notice, and sign-in will continue to work.'}
+          '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום. לבחירתכם, אפשר לעזור בשיפור האתר באמצעות רישום יום שימוש אחד לחשבון מחובר, בלי פירוט העמודים שביקרתם בהם. אפשר לסרב ולשנות את הבחירה בהגדרות.',
+        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. If you choose, help improve the site by recording one active day per signed-in account, without recording visited pages. You can decline and change this in Settings.'}
       </Text>
-      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8, justifyContent: rtl ? 'flex-start' : 'flex-start' }}>
+      <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8, flexWrap: 'wrap', justifyContent: rtl ? 'flex-start' : 'flex-start' }}>
         <Pressable
           accessibilityRole="button"
           onPress={() => {
-            void acceptCookieNotice().then(() => setOpen(false));
+            void allowDailyMeasurement(false).then(acceptCookieNotice).then(() => setOpen(false));
           }}
           style={{ minHeight: 44, paddingHorizontal: 16, borderRadius: 10, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>{t('הבנתי', 'Got it')}</Text>
+          <Text style={{ color: colors.goldInk, fontWeight: '900' }}>{t('רק אחסון חיוני', 'Essential only')}</Text>
         </Pressable>
+        <Pressable accessibilityRole="button" onPress={() => { void allowDailyMeasurement(true).then(acceptCookieNotice).then(() => setOpen(false)); }} style={{ minHeight: 44, paddingHorizontal: 12, justifyContent: 'center' }}><Text style={{ color: colors.text, fontWeight: '800' }}>{t('אפשר מדידת שימוש יומית', 'Allow daily usage measurement')}</Text></Pressable>
         <Pressable
           accessibilityRole="link"
           onPress={() => router.push('/legal/cookies')}

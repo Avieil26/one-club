@@ -5,6 +5,8 @@ import { DarkTheme, Stack, ThemeProvider, useRouter, useSegments, usePathname, t
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 
+import { isPublicPath } from '@/lib/siteAccess';
+import { useDailyActivity } from '@/lib/dailyActivity';
 import { rememberCommunityReturn, readCommunityReturn, clearCommunityReturn } from '@/lib/communityReturn';
 import { validCommunityReturn } from '@/lib/communityActivityLogic';
 
@@ -121,6 +123,7 @@ function Gate({ children }: { children: React.ReactNode }) {
   const { ready: languageReady, hasSelection, t } = useLanguage();
   const segments = useSegments();
   const pathname = usePathname();
+  useDailyActivity(user?.id, Boolean(user?.isAdmin), pathname);
   const returnWrite = useRef<Promise<void>>(Promise.resolve());
   const router = useRouter();
   const fromLogin = useRef(segments[0] === 'login' || segments[0] === 'register');
@@ -132,11 +135,11 @@ function Gate({ children }: { children: React.ReactNode }) {
     const onLanguage = segments[0] === 'language';
     const onLegal = segments[0] === 'legal';
     const onNativeCallback = Platform.OS !== 'web' && segments.join('/') === 'auth/callback';
-    if (!user && !onAuth && !onLanguage && !onLegal && !onNativeCallback) {
+    if (!user && !onAuth && !onLanguage && !onLegal && !onNativeCallback && !isPublicPath(pathname)) {
       if (validCommunityReturn(pathname)) returnWrite.current = rememberCommunityReturn(pathname);
       router.replace(hasSelection ? '/register' : '/language');
     }
-    if (!user && onAuth && !hasSelection) router.replace('/language');
+    if (!user && !hasSelection && !onLanguage && !onLegal && !onNativeCallback) router.replace('/language');
     let active = true;
     if (user && validCommunityReturn(pathname)) void returnWrite.current.then(clearCommunityReturn);
     if (user && (onAuth || onLanguage || pathname === '/')) {
@@ -178,6 +181,8 @@ function Gate({ children }: { children: React.ReactNode }) {
       </View>
     );
   }
+  const publicOrAuth = isPublicPath(pathname) || ['login','register','language','legal','auth'].includes(String(segments[0]));
+  if (!user && !publicOrAuth) return <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' }}><ActivityIndicator color={colors.green} /></View>;
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <View style={{ flex: 1 }}>{children}</View>

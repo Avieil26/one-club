@@ -12,7 +12,7 @@ export default function LanguageScreen() {
 
   async function select(language: AppLanguage) {
     await chooseLanguage(language);
-    router.replace('/register');
+    router.replace('/');
   }
 
   return (
