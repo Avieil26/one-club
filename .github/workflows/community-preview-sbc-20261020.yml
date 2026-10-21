@@ -45,6 +45,8 @@ jobs:
         timeout-minutes: 5
       - run: node scripts/verify-sbc-solutions-ui.mjs
         timeout-minutes: 5
+      - run: node scripts/verify-sbc-moderation-ui.mjs
+        timeout-minutes: 5
       - run: node scripts/verify-community-ui.mjs
         timeout-minutes: 5
       - run: node scripts/verify-site-polish.mjs
