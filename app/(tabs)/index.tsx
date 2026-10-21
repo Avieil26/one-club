@@ -88,6 +88,7 @@ function DoorButton({
   return (
     <Pressable
       accessibilityRole="button"
+      accessibilityLabel={label}
       onPress={onPress}
       style={({ pressed }) => ({
         borderRadius: 5,

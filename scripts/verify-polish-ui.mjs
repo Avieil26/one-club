@@ -59,6 +59,7 @@ try{
   assert.equal(recorded(),0,'Guests must not be measured');
   await context.close();
  }
+ const invitation=await setup('en');await invitation.page.goto('http://127.0.0.1:8095/grounds/new');await invitation.page.getByRole('button',{name:'🇬🇧 English Continue in English →',exact:true}).click();await invitation.page.waitForURL('**/register');assert.equal(await invitation.page.evaluate(()=>JSON.parse(localStorage.getItem('fc27-community-return-v1')).path),'/grounds/new');await invitation.context.close();
  const signed=await setup('en',true);await signed.page.goto('http://127.0.0.1:8095/settings');
  const consent=signed.page.getByRole('switch',{name:'Daily usage measurement',exact:true});await consent.waitFor();assert.equal(await consent.getAttribute('aria-checked'),'false');assert.equal(signed.recorded(),0,'Measurement ran without consent');
  const measurement=signed.page.waitForResponse(response=>response.url().endsWith('/rpc/record_daily_activity'));

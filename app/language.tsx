@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { readCommunityReturn } from '@/lib/communityReturn';
 import { colors } from '@/components/ui';
 import { useLanguage, type AppLanguage } from '@/lib/language';
 
@@ -12,7 +13,8 @@ export default function LanguageScreen() {
 
   async function select(language: AppLanguage) {
     await chooseLanguage(language);
-    router.replace('/');
+    const pendingAction = await readCommunityReturn();
+    router.replace(pendingAction ? '/register' : '/');
   }
 
   return (
