@@ -1,0 +1,51 @@
+begin;
+do $$
+declare
+ author_id uuid:=gen_random_uuid(); admin_id uuid:=gen_random_uuid(); voter_id uuid:=gen_random_uuid();
+ challenge uuid:=gen_random_uuid(); solution uuid; forced uuid; denied boolean; changed integer;
+begin
+ insert into auth.users(id,aud,role,email,raw_user_meta_data,created_at,updated_at)
+ select id,'authenticated','authenticated',id::text||'@example.invalid','{"display_name":"Rollback SBC review QA"}'::jsonb,now(),now() from unnest(array[author_id,admin_id,voter_id]) id;
+ insert into public.profiles(id,display_name) values(author_id,'Rollback SBC author'),(admin_id,'Rollback SBC admin'),(voter_id,'Rollback SBC voter') on conflict do nothing;
+ perform set_config('app.trusted','1',true);
+ update public.profiles set is_admin=true where id=admin_id;
+ perform set_config('app.trusted','',true);
+ insert into public.sbc_challenges(id,title,kind,requirements,created_by) values(challenge,'Rollback review fixture','classic','Fixture',admin_id);
+ perform set_config('request.jwt.claim.sub',author_id::text,true);
+ set local role authenticated;
+ solution:=public.add_sbc_solution(challenge::text,'Review required',array['https://example.invalid/proof.png']);
+ if not exists(select 1 from public.sbc_solutions where id=solution and status='pending' and reviewed_by is null and reviewed_at is null) then raise exception 'Submission was published or hidden from author'; end if;
+ denied:=false;begin perform public.moderate_sbc_solution(solution,'approved');exception when raise_exception then denied:=true;end;
+ if not denied then raise exception 'Author could self approve';end if;
+ denied:=false;begin update public.sbc_solutions set status='approved' where id=solution;get diagnostics changed=row_count;denied:=changed=0;exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Direct self approval was permitted';end if;
+ perform set_config('request.jwt.claim.sub',voter_id::text,true);
+ if exists(select 1 from public.sbc_solutions where id=solution) then raise exception 'Pending solution leaked';end if;
+ denied:=false;begin perform public.vote_sbc_solution(solution,'up');exception when raise_exception then denied:=true;end;
+ if not denied then raise exception 'Voting before approval succeeded';end if;
+ denied:=false;begin perform public.mark_sbc_worked(solution);exception when raise_exception then denied:=true;end;
+ if not denied then raise exception 'Legacy vote bypassed review';end if;
+ perform set_config('request.jwt.claim.sub',admin_id::text,true);
+ if not exists(select 1 from public.sbc_solutions where id=solution) then raise exception 'Admin cannot review pending content';end if;
+ perform public.moderate_sbc_solution(solution,'approved');
+ if not exists(select 1 from public.sbc_solutions where id=solution and status='approved' and reviewed_by=admin_id and reviewed_at is not null) then raise exception 'Missing audit';end if;
+ perform public.moderate_sbc_solution(solution,'approved');
+ perform set_config('request.jwt.claim.sub',voter_id::text,true);
+ perform public.mark_sbc_worked(solution);perform public.vote_sbc_solution(solution,'up');
+ if (select reputation from public.profiles where id=author_id)<>2 then raise exception 'Vote credit duplicated';end if;
+ perform set_config('request.jwt.claim.sub',admin_id::text,true);
+ perform public.moderate_sbc_solution(solution,'rejected');perform public.moderate_sbc_solution(solution,'rejected');
+ if (select reputation from public.profiles where id=author_id)<>0 then raise exception 'Revocation credit incorrect';end if;
+ perform set_config('request.jwt.claim.sub',voter_id::text,true);
+ if exists(select 1 from public.sbc_solutions where id=solution) or exists(select 1 from public.sbc_worked where solution_id=solution) then raise exception 'Rejected content or votes leaked';end if;
+ if (public.browse_site()->'sbcSolutions') @> jsonb_build_array(jsonb_build_object('id',solution)) then raise exception 'Public snapshot exposed rejected solution';end if;
+ perform set_config('request.jwt.claim.sub',admin_id::text,true);
+ perform public.moderate_sbc_solution(solution,'approved');
+ if (select reputation from public.profiles where id=author_id)<>2 then raise exception 'Reapproval credit incorrect';end if;
+ reset role;
+ insert into public.sbc_solutions(challenge_id,user_id,explanation,image_uris,status) values(challenge,author_id,'Legacy insert',array['https://example.invalid/proof.png'],'approved') returning id into forced;
+ if not exists(select 1 from public.sbc_solutions where id=forced and status='pending' and reviewed_by is null) then raise exception 'Insert trigger allowed automatic approval';end if;
+end;
+$$;
+rollback;
+select 'SBC SQL review checks passed. All fixtures rolled back.' as verification;
