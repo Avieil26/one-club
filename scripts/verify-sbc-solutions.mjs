@@ -36,6 +36,7 @@ for(const c of officialChallenges)for(const segment of classicSegments(c.id)){
  const slots=Object.keys(segment.squad);const broken={...segment.squad,[slots[0]]:'missing-player'};assert(!checkClassicSquad(segment,segment.formation,broken).ready);
  if(slots.length>1){const dup={...segment.squad,[slots[1]]:segment.squad[slots[0]]};assert(!checkClassicSquad(segment,segment.formation,dup).ready);}
  assert.equal(Object.keys(segment.squad).length,segment.rules.playerCount??11);
+ if(segment.rules.minRating)assert(Object.values(segment.squad).every(id=>ps.find(p=>p.id===id).rating>=segment.rules.minRating),'Rated example must also pass without depending on rounding boosts');
  if(!segment.rules.chemistry)assert.equal(checkClassicSquad(segment,segment.formation,segment.squad).ready,true);
  classic++;
 }

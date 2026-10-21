@@ -8,7 +8,7 @@ const pick = (a) => a[Math.floor(random() * a.length)];
 const counts = (ps, key) => { const m = new Map(); for (const p of ps) m.set(p[key], (m.get(p[key]) ?? 0) + 1); return [...m.values()]; };
 for (const [id, challenge] of Object.entries(data)) for (const segment of challenge.segments) {
   const rules = segment.rules, formation = formationById(segment.formation), slots = formation.lines.flat().slice(0, rules.playerCount ?? 11);
-  let pool = players.filter((p) => (!rules.exactQuality || (p.rating >= 75 ? 'gold' : p.rating >= 65 ? 'silver' : 'bronze') === rules.exactQuality) && (!rules.minQuality || p.rating >= (rules.minQuality === 'gold' ? 75 : 65)) && (!rules.maxPlayerRating || p.rating <= rules.maxPlayerRating));
+  let pool = players.filter((p) => (!rules.exactQuality || (p.rating >= 75 ? 'gold' : p.rating >= 65 ? 'silver' : 'bronze') === rules.exactQuality) && (!rules.minQuality || p.rating >= (rules.minQuality === 'gold' ? 75 : 65)) && (!rules.maxPlayerRating || p.rating <= rules.maxPlayerRating) && (!rules.minRating || p.rating >= rules.minRating));
   // Use canonical catalogue club labels, retaining each source's OR requirement.
   if (rules.clubsAtLeast) rules.clubsAtLeast.clubs = rules.clubsAtLeast.clubs.filter((club) => pool.some((p) => p.club === club));
   if (!rules.chemistry && !rules.minRating) {
@@ -22,7 +22,7 @@ for (const [id, challenge] of Object.entries(data)) for (const segment of challe
   }
   if (segment.squad) {
     const placed = Object.fromEntries(Object.entries(segment.squad).map(([slot, id]) => [slot, players.find((p) => p.id === id)]));
-    if (evaluateSquad(formation, placed, rules).ready) { console.log('RECHECK', id, segment.name); continue; }
+    if (evaluateSquad(formation, placed, rules).ready && (!rules.minRating || Object.values(placed).every((p) => p.rating >= rules.minRating))) { console.log('RECHECK', id, segment.name); continue; }
   }
   const candidates = slots.map((s) => pool.filter((p) => !rules.chemistry || (p.positions ?? [p.position]).includes(s.position)));
   if (candidates.some((c) => !c.length)) throw Error('No candidates '+id);
