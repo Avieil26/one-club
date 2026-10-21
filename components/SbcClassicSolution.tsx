@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Card, ChoiceGroup, colors, Muted } from '@/components/ui';
+import { PortraitCard } from '@/components/PortraitCard';
 import { SquadPitch } from '@/components/SquadPitch';
 import { formationById } from '@/lib/chemistry';
 import { classicSegments, checkClassicSquad } from '@/lib/sbcClassic';
@@ -21,7 +22,7 @@ export function SbcClassicSolution({ challengeId }: { challengeId: string }) {
     <Text style={{ color: colors.text, fontSize: 22, fontWeight: '900' }}>{segment.name}</Text>
     <Text style={{ color: colors.green, fontWeight: '800' }}>✓ {t('ההרכב עומד בכל הדרישות שנבדקו', 'Squad meets all checked requirements')}</Text>
     <Muted>{t('הרכב לדוגמה עם גרסאות רגילות. יש לבחור את אותו חלק ואת אותן גרסאות במשחק. זה אינו אישור הגשה מ־EA או הבטחה למחיר הנמוך ביותר.', 'Example squad using base versions. Select the same segment and versions in-game. This is not an EA submission confirmation or a lowest-price guarantee.')}</Muted>
-    <SquadPitch formation={formationById(segment.formation)} placed={placedPreview(segment.squad)} playerChem={report.playerChem} showChemHud={false} />
+    {(segment.rules.playerCount ?? 11) < 11 ? <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>{Object.values(placedPreview(segment.squad)).map((player) => player ? <View key={player.id} style={{ width: 126, alignItems: 'center', gap: 6 }}><PortraitCard player={player} edition="base" width={116} /><Text style={{ color: colors.text, textAlign: 'center' }}>{language === 'en' ? player.en ?? player.name : player.name}</Text></View> : null)}</View> : <SquadPitch formation={formationById(segment.formation)} placed={placedPreview(segment.squad)} playerChem={report.playerChem} showChemHud={false} />}
     <Card>{report.checks.map((check) => <Text key={check.label} style={{ color: colors.green, textAlign: language === 'he' ? 'right' : 'left' }}>✓ {sbcCheckText(check.label, language)}</Text>)}</Card>
   </View>;
 }

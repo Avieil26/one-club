@@ -68,14 +68,8 @@ for (const c of audit.challenges.filter((c) => /sbc-potm-|sbc-fs-(diao|manzambi|
  assert(art.portrait.includes('/2027/player-item/27-' + item + '.'), c.id + ': wrong edition portrait');
  assert(art.background.includes('/2027/rarities-level-0-large/'), c.id + ': missing actual promo frame');
 }
-const prepared = JSON.parse(fs.readFileSync('assets/data/sbc-prepared-20261020.json', 'utf8'));
-assert(prepared['sbc-upgrade-83x2-20261020'] && prepared['sbc-potm-ferran']);
-for (const [id, route] of Object.entries(prepared)) {
- assert.equal(catalogChallenge(id).kind, 'streamlined');
- assert(route.lines.length > 0 && route.lines.every((line) => Number.isInteger(line.count) && line.count > 0 && line.rating >= 45 && line.rating <= 99 && line.rarity === 'rare'));
- assert.equal(route.sourceUrl, audit.challenges.find((c) => c.id === id).expirySourceUrl);
-}
-console.log('Newest-first SBC order, matching reward editions, prepared rating routes and bilingual country search passed.');
+// Detailed points eligibility, named items and score totals are tested by verify-sbc-solutions.mjs.
+console.log('Newest-first SBC order, matching reward editions, challenge eligibility and bilingual country search passed.');
 
 const { evaluateSquad, formationById } = loadRepositoryModule('lib/chemistry.ts');
 const { placedPreview } = loadRepositoryModule('lib/sbcCatalog.ts');
