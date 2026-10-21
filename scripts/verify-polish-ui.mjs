@@ -57,6 +57,7 @@ try{
   await page.goto('http://127.0.0.1:8095/grounds/new');await page.waitForURL('**/register');
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('fc27-community-return-v1')).path),'/grounds/new');
   assert.equal(recorded(),0,'Guests must not be measured');
+  for(const name of [`polish-home-${language}`,`polish-grounds-${language}`,`polish-sbc-${language}`])console.log('POLISH_SCREENSHOT='+JSON.stringify({name,mimeType:'image/jpeg',data:fs.readFileSync(path.join(shots,name+'.jpg')).toString('base64')}));
   await context.close();
  }
  const invitation=await setup('en');await invitation.page.goto('http://127.0.0.1:8095/grounds/new');await invitation.page.getByRole('button',{name:'🇬🇧 English Continue in English →',exact:true}).click();await invitation.page.waitForURL('**/register');assert.equal(await invitation.page.evaluate(()=>JSON.parse(localStorage.getItem('fc27-community-return-v1')).path),'/grounds/new');await invitation.context.close();
@@ -69,6 +70,5 @@ try{
  await signed.page.goto('http://127.0.0.1:8095/sbc');await signed.page.getByRole('textbox',{name:'Search SBCs',exact:true}).waitFor();assert.equal(signed.recorded(),1,'Opt-out did not stop recording');await signed.context.close();
  const admin=await setup('en',true,true);await admin.page.goto('http://127.0.0.1:8095/admin/retention');await admin.page.getByText('Measurement is ready',{exact:true}).waitFor();assert.equal(admin.recorded(),0,'Admin activity is counted');await admin.context.close();
  assert.deepEqual(errors,[]);
- for(const name of ['polish-home-en','polish-home-he','polish-grounds-en','polish-sbc-en'])console.log('POLISH_SCREENSHOT='+JSON.stringify({name,mimeType:'image/jpeg',data:fs.readFileSync(path.join(shots,name+'.jpg')).toString('base64')}));
  console.log('Site polish browser checks passed: bilingual guest entry, stable global nav, private action return, Home responsive widths, SBC search/filters, explicit daily measurement opt-in/out and admin report. All API requests mocked.');
 }catch(error){if(lastPage&&!lastPage.isClosed())console.log('POLISH_SCREENSHOT='+JSON.stringify({name:'polish-failure',mimeType:'image/jpeg',data:(await lastPage.screenshot({type:'jpeg',quality:85})).toString('base64')}));throw error;}finally{await browser.close();server.close();}
