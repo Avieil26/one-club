@@ -636,7 +636,7 @@ begin
   if v_kind <> 'classic' then raise exception 'פתרון קהילה מיועד ל-SBC קלאסי. ל-Streamlined יש מחשבון.'; end if;
 
   insert into public.sbc_solutions (challenge_id, user_id, explanation, image_uris, status)
-  values (v_challenge, v_user, trim(p_explanation), p_images, 'approved')
+  values (v_challenge, v_user, trim(p_explanation), p_images, 'pending')
   returning id into v_id;
   return v_id;
 end;

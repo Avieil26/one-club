@@ -109,7 +109,7 @@ function approvedChallenges(submissions: CareerSubmission[], userId: string): nu
 }
 
 function confirmedSolutions(solutions: SbcSolution[], userId: string): SbcSolution[] {
-  return solutions.filter((item) => item.userId === userId && item.workedUserIds.length > 0);
+  return solutions.filter((item) => item.userId === userId && item.status === 'approved' && item.workedUserIds.length > 0);
 }
 
 function squadXp(posts: FutPost[], ratings: FutRating[], userId: string): number {
@@ -182,7 +182,7 @@ function communityActivityXp(
   );
 
   const workedSolutions = solutions.filter(
-    (solution) => solution.userId !== userId && solution.workedUserIds.includes(userId),
+    (solution) => solution.status === 'approved' && solution.userId !== userId && solution.workedUserIds.includes(userId),
   ).length * 2;
 
   return approvedPacks + approvedGrounds + ratingsGiven + commentsGiven + workedSolutions;
@@ -210,7 +210,7 @@ function solvedOf(userId: string, submissions: CareerSubmission[], solutions: Sb
 }
 
 function supportOf(userId: string, solutions: SbcSolution[], posts: FutPost[], ratings: FutRating[]): number {
-  const worked = solutions.filter((item) => item.userId !== userId && item.workedUserIds.includes(userId)).length;
+  const worked = solutions.filter((item) => item.status === 'approved' && item.userId !== userId && item.workedUserIds.includes(userId)).length;
   const rated = ratings.filter((rating) => {
     if (rating.userId !== userId) return false;
     const post = posts.find((item) => item.id === rating.postId);

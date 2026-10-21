@@ -364,20 +364,41 @@ export function addSolution(db: Database, input: NewSolution) {
     formation: squad?.formation ?? null,
     workedUserIds: [],
     failedUserIds: [],
-    status: 'approved',
+    status: 'pending',
+    reviewedBy: null,
+    reviewedAt: null,
     createdAt: nowIso(),
   });
+}
+
+export function moderateSolution(db: Database, id: string, status: 'approved' | 'rejected') {
+  const admin = mustAdmin(db);
+  if (status !== 'approved' && status !== 'rejected') throw new Error('סטטוס לא תקין');
+  const solution = db.sbcSolutions.find((item) => item.id === id);
+  if (!solution) throw new Error('הפתרון לא נמצא');
+  if (solution.status === status) return;
+  const author = db.profiles.find((p) => p.id === solution.userId);
+  const credit = solution.workedUserIds.length * 2;
+  if (author && solution.status === 'approved') bump(author, 0, -credit);
+  if (author && status === 'approved') bump(author, 0, credit);
+  solution.status = status;
+  solution.reviewedBy = admin.id;
+  solution.reviewedAt = nowIso();
 }
 
 export function voteSolution(db: Database, solutionId: string, vote: 'up' | 'down' | 'clear') {
   const user = mustUser(db);
   const solution = db.sbcSolutions.find((item) => item.id === solutionId);
-  if (!solution) throw new Error('הפתרון לא נמצא');
+  if (!solution || solution.status !== 'approved') throw new Error('הפתרון לא נמצא');
   if (solution.userId === user.id) throw new Error('אי אפשר לדרג פתרון של עצמך');
   if (!solution.failedUserIds) solution.failedUserIds = [];
   const wasUp = solution.workedUserIds.includes(user.id);
   solution.workedUserIds = solution.workedUserIds.filter((id) => id !== user.id);
   solution.failedUserIds = solution.failedUserIds.filter((id) => id !== user.id);
+  if (wasUp && vote !== 'up') {
+    const author = db.profiles.find((p) => p.id === solution.userId);
+    if (author) bump(author, 0, -2);
+  }
   if (vote === 'clear') return;
   if (vote === 'up') {
     solution.workedUserIds.push(user.id);

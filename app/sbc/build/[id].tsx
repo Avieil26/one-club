@@ -141,7 +141,7 @@ export default function SquadBuildScreen() {
         squad,
         formation: formationId,
       });
-      Alert.alert(t("פורסם", "Published"), t(`הסגל עלה כפתרון ל«${challenge.title}».`, `Your squad was published as a solution for “${challenge.title}”.`));
+      Alert.alert(t("נשלח לאישור", "Submitted for review"), t(`הסגל ל«${challenge.title}» ממתין לאישור מנהל.`, `Your squad for “${challenge.title}” is awaiting administrator review.`));
       router.replace(`/sbc/${challenge.id}`);
     } catch (error) {
       Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
@@ -242,7 +242,7 @@ export default function SquadBuildScreen() {
         placeholder={t("למשל: כסף מליגת העל הבלגית, עם בלגים לכימיה", "For example: silver cards from the Belgian league, with Belgian players for chemistry")}
       />
       <Button
-        label={t("שליחת הסגל כפתרון", "Submit squad as a solution")}
+        label={t("שליחת הסגל לאישור", "Submit squad for review")}
         onPress={publish}
         disabled={app.busy || !report.ready}
       />

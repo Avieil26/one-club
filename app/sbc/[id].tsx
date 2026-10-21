@@ -145,6 +145,12 @@ export default function SbcDetailScreen() {
         </View>
       ) : null}
 
+      {app.solutions.filter((solution) => solution.challengeId === challengeId && solution.userId === app.user?.id && solution.status !== 'approved').map((solution) => <Card key={solution.id}>
+        <Badge text={solution.status === 'pending' ? t('הפתרון שלך ממתין לאישור מנהל', 'Your solution is awaiting administrator review') : t('הפתרון שלך לא אושר', 'Your solution was not approved')} tone="amber" />
+        <Muted>{solution.explanation}</Muted>
+        <Button label={t('צפייה בהגשה שלי', 'View my submission')} variant="ghost" onPress={() => router.push(`/sbc/solution/${solution.id}`)} />
+      </Card>)}
+
       {solutions.map((solution) => {
         const ups = solution.workedUserIds.length;
         const downs = solution.failedUserIds?.length ?? 0;
@@ -154,7 +160,7 @@ export default function SbcDetailScreen() {
             <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {displayName(app.profiles, solution.userId)}
             </Text>
-            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : t('פתרון קהילה · טרם אומת מול כל הדרישות', 'Community solution · not yet checked against all requirements')}</Muted>
+            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : t('אושר על ידי מנהל', 'Approved by an administrator')}</Muted>
             <Muted>{solution.explanation}</Muted>
             {shot ? (
               <Image

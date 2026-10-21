@@ -217,6 +217,8 @@ export type SbcSolution = {
   /** Users who marked this solution as not working. */
   failedUserIds: string[];
   status: ModerationStatus;
+  reviewedBy?: string | null;
+  reviewedAt?: string | null;
   createdAt: string;
 };
 
