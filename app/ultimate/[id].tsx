@@ -1,7 +1,7 @@
 import { useLanguage } from '@/lib/language';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 import { AuthorNote } from '@/components/AuthorNote';
 import { Comments } from '@/components/Comments';
@@ -12,12 +12,14 @@ import { Button, Muted, ScorePicker, Screen, Title } from '@/components/ui';
 import { errorMessage, formatScore } from '@/lib/format';
 import { displayName, platformLabel, rarityLabel } from '@/lib/labels';
 import { averageRating } from '@/lib/selectors';
+import { rememberCommunityReturn } from '@/lib/communityReturn';
 import { useApp } from '@/lib/store';
 
 export default function FutDetailScreen() {
   const { t, language } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
+  const router = useRouter();
   const post = app.futPosts.find((item) => item.id === id);
   const mine = app.ratings.find((rating) => rating.postId === id && rating.userId === app.user?.id);
   const [fit, setFit] = useState(mine?.fit ?? 0);
@@ -39,6 +41,7 @@ export default function FutDetailScreen() {
   const liked = likes.some((like) => like.userId === app.user?.id);
 
   async function rate() {
+    if (!app.user) { await rememberCommunityReturn(`/ultimate/${id}`); router.push('/register'); return; }
     try {
       await app.rateFut(postId, fit, fun, creativity);
     } catch (error) {
@@ -47,6 +50,7 @@ export default function FutDetailScreen() {
   }
 
   async function like() {
+    if (!app.user) { await rememberCommunityReturn(`/ultimate/${id}`); router.push('/register'); return; }
     try {
       await app.toggleFutLike(postId);
     } catch (error) {

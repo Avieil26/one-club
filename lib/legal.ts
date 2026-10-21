@@ -14,7 +14,8 @@ export const LEGAL_LINKS = [
 ];
 
 export async function hasCookieNotice(): Promise<boolean> {
-  return (await AsyncStorage.getItem(COOKIE_NOTICE_KEY)) === COOKIE_NOTICE_VALUE;
+  const value = await AsyncStorage.getItem(COOKIE_NOTICE_KEY);
+  return value === COOKIE_NOTICE_VALUE || value === 'daily-choice-2026-10-21';
 }
 
 export async function acceptCookieNotice(): Promise<void> {

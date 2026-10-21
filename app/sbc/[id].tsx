@@ -1,5 +1,8 @@
+import { SbcClassicSolution } from '@/components/SbcClassicSolution';
+import { classicSegments, communitySquadStatus } from '@/lib/sbcClassic';
 import { SbcRewardVisual } from '@/components/SbcRewardVisual';
-import { preparedRoute } from '@/lib/sbcPrepared';
+import { SbcPointsSolution } from '@/components/SbcPointsSolution';
+import { ItemScore } from '@/components/ItemScore';
 import { sbcCheckText, sbcText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 import { useEffect, useMemo, useState } from 'react';
@@ -62,10 +65,9 @@ export default function SbcDetailScreen() {
   }
 
   const challengeId = challenge.id;
-  const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
   const remaining = formatRemaining(challenge.endsAt, now, language);
-  const ready = preparedRoute(challengeId);
-  const solutions = solutionsFor(app.solutions, challengeId);
+  const allSolutions = solutionsFor(app.solutions, challengeId);
+  const solutions = allSolutions.filter((s) => communitySquadStatus(challengeId, s.formation, s.squad) !== 'invalid');
   const face = sbcFace(challenge);
   const split = Platform.OS === 'web' && windowWidth >= 1000;
 
@@ -86,54 +88,46 @@ export default function SbcDetailScreen() {
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
       {challenge.lastCheckedAt ? <Muted>{t('נבדק לאחרונה: ', 'Last checked: ')}{new Date(challenge.lastCheckedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted> : null}
-      {challenge.kind === 'classic' && challenge.previewSquad ? (
+      {challenge.kind === 'classic' && classicSegments(challengeId).length ? <SbcClassicSolution key={challengeId} challengeId={challengeId} /> : challenge.kind === 'classic' && challenge.previewSquad && !challenge.manualValidation && challenge.rules && report.ready ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
-            <Title>{t('סגל מוכן לדוגמה', 'Ready example squad')}</Title>
-            <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
+            <Title>{t('הרכב שנבדק מול הדרישות', 'Squad checked against requirements')}</Title>
+            <Text style={{ color: colors.text, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {challenge.rules?.chemistry
                 ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
                 : t("בלי דרישת כימיה", "No chemistry requirement")}
               {report.rating === null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
             </Text>
-            <SquadPitch formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
+            <SquadPitch appearance="sbc" formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
           </View>
           <View style={split ? { width: 320, gap: 14 } : { gap: 14 }}>
             <Card>
               {report.checks.map((check) => (
-                <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
+                <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
                   {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
                 </Text>
               ))}
             </Card>
           </View>
         </View>
-      ) : (
+      ) : challenge.kind !== 'streamlined' ? (
         <Card>
           <Muted>{sbcText(challenge.requirements, language)}</Muted>
-          {challenge.targetScore ? <Muted>{t("יעד ניקוד:", "Target score:")}{challenge.targetScore}</Muted> : null}
+          {challenge.targetScore ? <ItemScore value={challenge.targetScore} /> : null}
         </Card>
-      )}
-      {ready && challenge.kind === 'streamlined' ? <Card>
-        <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 20, textAlign: language === 'he' ? 'right' : 'left' }}>{t('צירוף דירוגים מוכן', 'Ready rating combination')}</Text>
-        <Muted>{t('קלפים רגילים נדירים לפי הדירוגים הבאים:', 'Use base rare player items with these ratings:')}</Muted>
-        {ready.lines.map((line) => <View key={line.rating} style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', justifyContent: 'space-between', gap: 12, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.line }}>
-          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '900' }}>{line.rating} OVR</Text>
-          <Text style={{ color: colors.gold, fontWeight: '800' }}>{line.count} × {t('קלפים נדירים', 'rare items')}</Text>
-        </View>)}
-        <Muted>{t('לפני ההגשה ודאו במשחק שהגעתם ליעד הניקוד. גרסאות מיוחדות של קלפים עשויות לשנות את הניקוד.', 'Confirm the target score in-game before submitting. Special card versions can affect the score.')}</Muted>
-      </Card> : null}
+      ) : null}
+      {challenge.kind === 'streamlined' ? <SbcPointsSolution challengeId={challengeId} /> : null}
       {challenge.kind === 'streamlined' ? (
         <Button
           label={t("פתיחת המחשבון", "Open calculator")}
           variant="copper"
-          onPress={() => router.push(`/sbc/calculator?target=${challenge.targetScore ?? ''}`)}
+          onPress={() => router.push(`/sbc/calculator?challenge=${challenge.id}`)}
         />
       ) : null}
 
       {challenge.kind === 'classic' ? (
         <View style={{ gap: 10, marginTop: 4 }}>
-          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13, textAlign: 'right', letterSpacing: 0.4 }}>{t("הצעת פתרון לאתגר", "Submit a challenge solution")}</Text>
+          <Text style={{ color: colors.gold, fontWeight: '800', fontSize: 13, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr', letterSpacing: 0.4 }}>{t("הצעת פתרון לאתגר", "Submit a challenge solution")}</Text>
           <Muted>{t("בניית סגל פותחת מגרש ריק: לוחצים על עמדה, מחפשים שחקן, ומניחים את הקלף. צילום מעלה תמונה מהמשחק.", "Build a squad by selecting positions and adding players to an empty pitch, or upload a screenshot from the game.")}</Muted>
           {!challenge.manualValidation ? <Button label={t("בניית סגל באפליקציה", "Build a squad in the app")} variant="copper" onPress={() => router.push(`/sbc/build/${challengeId}`)} /> : <Muted>{t('באתגר הזה משתפים צילום מהמשחק עם שם החלק והסבר קצר.', 'For this challenge, share an in-game screenshot with the segment name and a short explanation.')}</Muted>}
           <Button label={t("צילום פתרון מהמשחק", "Upload an in-game solution")} variant="gold" onPress={() => router.push(`/sbc/upload/${challengeId}`)} />
@@ -142,7 +136,7 @@ export default function SbcDetailScreen() {
 
       {challenge.kind === 'classic' ? (
         <View style={{ gap: 6, marginTop: 12 }}>
-          <Text style={{ color: colors.text, fontSize: 22, fontWeight: '800', textAlign: 'right' }}>{t("פתרונות הקהילה", "Community solutions")}</Text>
+          <Text style={{ color: colors.text, fontSize: 22, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>{t("פתרונות הקהילה", "Community solutions")}</Text>
           <Muted>
             {solutions.length
               ? t(`${solutions.length} פתרונות. לחצו על כרטיס כדי לפתוח את המגרש, התמונה והתגובות.`, `${solutions.length} solutions. Select a card to view the pitch, images and comments.`)
@@ -151,15 +145,22 @@ export default function SbcDetailScreen() {
         </View>
       ) : null}
 
+      {app.solutions.filter((solution) => solution.challengeId === challengeId && solution.userId === app.user?.id && solution.status !== 'approved').map((solution) => <Card key={solution.id}>
+        <Badge text={solution.status === 'pending' ? t('הפתרון שלך ממתין לאישור מנהל', 'Your solution is awaiting administrator review') : t('הפתרון שלך לא אושר', 'Your solution was not approved')} tone="amber" />
+        <Muted>{solution.explanation}</Muted>
+        <Button label={t('צפייה בהגשה שלי', 'View my submission')} variant="ghost" onPress={() => router.push(`/sbc/solution/${solution.id}`)} />
+      </Card>)}
+
       {solutions.map((solution) => {
         const ups = solution.workedUserIds.length;
         const downs = solution.failedUserIds?.length ?? 0;
-        const shot = solution.imageUris[0];
+        const shot = solution.imageUris.find((uri) => uri !== 'squad');
         return (
           <Card key={solution.id} onPress={() => router.push(`/sbc/solution/${solution.id}`)}>
-            <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: 'right' }}>
+            <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {displayName(app.profiles, solution.userId)}
             </Text>
+            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : t('אושר על ידי מנהל', 'Approved by an administrator')}</Muted>
             <Muted>{solution.explanation}</Muted>
             {shot ? (
               <Image
@@ -171,9 +172,9 @@ export default function SbcDetailScreen() {
             ) : (
               <Muted>{solution.squad ? t("סגל שנבנה באפליקציה", "Squad built in the app") : t("בלי תמונה", "No image")}</Muted>
             )}
-            <Text style={{ color: colors.gold, fontWeight: '800', textAlign: 'right' }}>{t("עבד לי", "Worked for me")}{ups}{t("· לא עבד", "· Did not work")}{downs}
+            <Text style={{ color: colors.gold, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>{t("עבד לי", "Worked for me")}{ups}{t("· לא עבד", "· Did not work")}{downs}
             </Text>
-            <Text style={{ color: colors.link, fontWeight: '700', textAlign: 'right' }}>{t("פתיחת הפתרון המלא", "View full solution")}</Text>
+            <Text style={{ color: colors.link, fontWeight: '700', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>{t("פתיחת הפתרון המלא", "View full solution")}</Text>
           </Card>
         );
       })}

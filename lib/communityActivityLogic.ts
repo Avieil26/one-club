@@ -22,5 +22,5 @@ export function sessionMatches(session: PartnerSession, filters: { platform: str
 
 /** Only our new routes may survive authentication; never accept an external URL. */
 export function validCommunityReturn(path: string): boolean {
- return /^\/(grounds\/sessions|career\/journeys)(\/(new|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}))?$/.test(path);
+ return /^\/(grounds\/sessions|career\/journeys)(\/(new|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}))?$/.test(path) || /^\/(career|ultimate|market|player)\/(?!new$|journeys$)[a-zA-Z0-9_-]+$/.test(path) || /^\/(profile|squad)$/.test(path) || /^\/(grounds\/chat|sbc\/(build|upload|solution)|career\/submit)\/[a-zA-Z0-9_-]+$/.test(path) || /^\/(grounds|sbc|ultimate|career)\/new$/.test(path);
 }

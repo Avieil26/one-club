@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-10-21",
+  "sourceUrl": "https://www.ea.com/games/ea-sports-fc/fc-27/news/pitch-notes-fc27-launch-update",
+  "tableUrl": "https://drop-assets.ea.com/images/5umx6fyLpF0gL1bvp8gVUL/886531a04e657f47196f8e419f8c67ca/Item-Scores.jpg",
+  "bronze": { "min": 45, "max": 64, "score": 20 },
+  "silver": { "min": 65, "max": 74, "score": 35 },
+  "gold": { "75": 90, "76": 100, "77": 120, "78": 140, "79": 160, "80": 180, "81": 280, "82": 340, "83": 410, "84": 830, "85": 2100, "86": 4100, "87": 5500, "88": 8300, "89": 11000, "90": 14000, "91": 19000, "92": 20000, "93": 25000, "94": 30000, "95": 40000, "96": 55000, "97": 85000, "98": 90000, "99": 100000 }
+}

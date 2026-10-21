@@ -48,6 +48,7 @@ type AppValue = Snapshot & {
   sendMessage: (toUserId: string, body: string) => Promise<void>;
   createSbc: (input: NewSbc) => Promise<void>;
   addSolution: (input: NewSolution) => Promise<void>;
+  moderateSolution: (id: string, status: 'approved' | 'rejected') => Promise<void>;
   markWorked: (solutionId: string) => Promise<void>;
   voteSolution: (solutionId: string, vote: 'up' | 'down' | 'clear') => Promise<void>;
   setAvatar: (uri: string) => Promise<void>;
@@ -166,6 +167,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     sendMessage: (toUserId, body) => run(() => backend.sendMessage(toUserId, body), setSnap).then(() => undefined),
     createSbc: (input) => run(() => backend.createSbc(input), setSnap).then(() => undefined),
     addSolution: (input) => run(() => backend.addSolution(input), setSnap).then(() => undefined),
+    moderateSolution: (id, status) => run(() => backend.moderateSolution(id, status), setSnap).then(() => undefined),
     markWorked: (solutionId) => run(() => backend.markWorked(solutionId), setSnap).then(() => undefined),
     voteSolution: (solutionId, vote) => run(() => backend.voteSolution(solutionId, vote), setSnap).then(() => undefined),
     setAvatar: (uri) => run(() => backend.setAvatar(uri), setSnap).then(() => undefined),

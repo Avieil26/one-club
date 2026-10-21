@@ -74,12 +74,14 @@ export function pendingCount(input: {
   submissions: { status: string }[];
   grounds: GroundsPost[];
   comments: { status: string }[];
+  solutions?: { status: string }[];
 }): number {
   if (!input.user?.isAdmin) return 0;
   return (
     input.submissions.filter((item) => item.status === 'pending').length +
     input.grounds.filter((item) => item.levelStatus === 'pending').length +
-    input.comments.filter((item) => item.status === 'hidden_pending').length
+    input.comments.filter((item) => item.status === 'hidden_pending').length +
+    (input.solutions ?? []).filter((item) => item.status === 'pending').length
   );
 }
 

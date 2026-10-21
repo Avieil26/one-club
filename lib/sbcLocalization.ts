@@ -73,9 +73,17 @@ export function sbcText(text: string, language: 'he' | 'en'): string {
 export function sbcCheckText(label: string, language: 'he' | 'en'): string {
  if (language === 'he') return label;
  return label
-  .replace(/11 שחקנים/g, '11 players')
+  .replace(/(\d+) שחקנים/g, '$1 players')
+  .replace(/ללא שחקנים כפולים/g, 'No duplicate players')
+  .replace(/מבאיירן מינכן/g, 'from Bayern Munich')
+  .replace(/מיובנטוס/g, 'from Juventus')
+  .replace(/מברצלונה/g, 'from FC Barcelona')
+  .replace(/ממנצ׳סטר יונייטד/g, 'from Manchester United')
+  .replace(/ או /g, ' or ')
+  .replace(/בדיוק/g, 'Exactly')
   .replace(/כימיה/g, 'Chemistry')
   .replace(/דירוג קבוצה/g, 'Squad rating')
+  .replace(/דירוג קלף/g, 'Item rating')
   .replace(/עכשיו/g, 'current')
   .replace(/לפחות/g, 'At least')
   .replace(/עד /g, 'Max. ')

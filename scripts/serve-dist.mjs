@@ -46,7 +46,7 @@ try {
   localStorage.setItem('futz-terms-accepted-admin', '2026-09-28-v1');
   localStorage.setItem('futz-terms-accepted-maya', '2026-09-28-v1');
   localStorage.setItem('futz-terms-accepted-noam', '2026-09-28-v1');
-  localStorage.setItem('futz-cookie-notice', 'essential-2026-09-27');
+  localStorage.setItem('futz-cookie-notice', 'daily-choice-2026-10-21');
   const dbKey = 'fc27-community-db-v1';
   let raw = localStorage.getItem(dbKey);
   if (raw) {

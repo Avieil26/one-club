@@ -1,11 +1,8 @@
+/** Base-item scores cross-checked on 21 October; special editions must use their own score. */
 export const DEFAULT_ITEM_SCORES: Record<number, number> = {
-  74: 35,
-  75: 90,
-  83: 410,
-  85: 2900,
-  88: 8300,
-  93: 25000,
-  99: 100000,
+  64: 20, 74: 35, 75: 90, 76: 100, 77: 120, 78: 140, 79: 160,
+  80: 180, 81: 280, 82: 340, 83: 410, 84: 830, 85: 2100,
+  86: 4100, 87: 5500, 88: 8300, 89: 11000, 90: 14000, 91: 19000,
 };
 
 export type ScoreLine = {

@@ -165,6 +165,8 @@ export function SiteNav() {
   if (isMobile || mobile) {
     return (
       <View
+        testID="site-navigation"
+        role="navigation"
         style={{
           zIndex: 100,
           elevation: 24,
@@ -217,6 +219,8 @@ export function SiteNav() {
 
   return (
     <View
+      testID="site-navigation"
+      role="navigation"
       style={{
         zIndex: 100,
         elevation: 24,

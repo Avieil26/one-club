@@ -152,6 +152,8 @@ type SolutionRow = {
   explanation: string;
   image_uris: string[];
   status: ModerationStatus;
+  reviewed_by?: string | null;
+  reviewed_at?: string | null;
   created_at: string;
 };
 type WorkedRow = { solution_id: string; user_id: string };
@@ -345,6 +347,8 @@ function mapSolution(
     workedUserIds: worked.filter((item) => item.solution_id === row.id).map((item) => item.user_id),
     failedUserIds: failed.filter((item) => item.solution_id === row.id).map((item) => item.user_id),
     status: row.status,
+    reviewedBy: row.reviewed_by ?? null,
+    reviewedAt: row.reviewed_at ?? null,
     createdAt: row.created_at,
   };
 }
@@ -442,26 +446,25 @@ async function fetchSnapshot(): Promise<Snapshot> {
   const demoProfile = demoId ? DEMO_PROFILES[demoId] : null;
 
   if (!session && !demoProfile) {
-    return toSnapshot(
-      {
-        sessionUserId: null,
-        profiles: [],
-        careerChallenges: [],
-        careerSubmissions: [],
-        futPosts: [],
-        futRatings: [],
-        futLikes: [],
-        comments: [],
-        commentLikes: [],
-        groundsPosts: [],
-        sbcChallenges: mergeOfficialSbcs([]),
-        sbcSolutions: [],
-        reports: [],
-        follows: [],
-        messages: [],
-      },
-      'remote',
-    );
+    type BrowseData = { profiles?: ProfileRow[]; careerChallenges?: ChallengeRow[]; futPosts?: FutRow[]; groundsPosts?: GroundsRow[]; sbcChallenges?: SbcRow[]; sbcSolutions?: SolutionRow[] };
+    let browse: BrowseData = {};
+    try {
+      const { data, error } = await supabase.rpc('browse_site');
+      if (!error && data && typeof data === 'object') browse = data as BrowseData;
+    } catch { /* The bundled catalogue remains available when community browsing is offline. */ }
+    const sbcs = browse.sbcChallenges ?? [];
+    const keys = new Map(sbcs.map(row => [row.id, row.catalog_key || row.id] as const));
+    return toSnapshot({
+      sessionUserId: null,
+      profiles: (browse.profiles ?? []).map(mapProfile),
+      careerChallenges: mergeFeaturedCareer((browse.careerChallenges ?? []).map(mapChallenge)),
+      careerSubmissions: [], futPosts: (browse.futPosts ?? []).map(mapFut),
+      futRatings: [], futLikes: [], comments: [], commentLikes: [],
+      groundsPosts: (browse.groundsPosts ?? []).map(mapGrounds),
+      sbcChallenges: mergeOfficialSbcs(sbcs.map(mapSbc)),
+      sbcSolutions: (browse.sbcSolutions ?? []).map(row => mapSolution(row, [], [], keys)),
+      reports: [], follows: [], messages: [],
+    }, 'remote');
   }
 
   let profiles = (await rows<ProfileRow>('profiles')).map(mapProfile);
@@ -902,6 +905,10 @@ export function createRemoteBackend(): Backend {
         p_ends: catalog?.endsAt ?? null,
         p_target: catalog?.targetScore ?? null,
       });
+      return readSnapshot();
+    },
+    async moderateSolution(id, status) {
+      await call('moderate_sbc_solution', { p_id: id, p_status: status });
       return readSnapshot();
     },
     async markWorked(solutionId) {

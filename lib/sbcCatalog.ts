@@ -1,3 +1,4 @@
+import { classicSegments } from '@/lib/sbcClassic';
 import { C, L, N, PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { isOpen } from '@/lib/selectors';
 import { ARCHIVED_SBC_IDS, LIVE_SBC_CHALLENGES } from '@/lib/sbcLive20261020';
@@ -809,7 +810,12 @@ const liveById = new Map(LIVE_SBC_CHALLENGES.map((challenge) => [challenge.id, c
 export const officialChallenges: SbcChallenge[] = [
   ...legacyChallenges.map((challenge) => ({ ...challenge, ...liveById.get(challenge.id), ...(RETIRED_SBC_IDS.has(challenge.id) ? { archived: true } : {}) })),
   ...LIVE_SBC_CHALLENGES.filter((challenge) => !legacyChallenges.some((old) => old.id === challenge.id)),
-];
+].map((challenge) => {
+  const segments = classicSegments(challenge.id);
+  if (segments.length !== 1 || !segments[0].squad) return challenge;
+  const segment = segments[0];
+  return { ...challenge, rules: segment.rules, previewFormation: segment.formation, previewSquad: segment.squad };
+});
 
 const byId = new Map(officialChallenges.map((challenge) => [challenge.id, challenge]));
 

@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
+import { allowDailyMeasurement, useDailyMeasurementPreference } from '@/lib/dailyActivity';
 import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
 import { useLanguage, type AppLanguage } from '@/lib/language';
@@ -9,6 +10,7 @@ import { useLanguage, type AppLanguage } from '@/lib/language';
 export default function SettingsScreen() {
   const { language, chooseLanguage, t } = useLanguage();
   const rtl = language === 'he';
+  const measurement = useDailyMeasurementPreference();
 
   const option = (value: AppLanguage, flag: string, title: string, subtitle: string) => {
     const selected = language === value;
@@ -54,6 +56,11 @@ export default function SettingsScreen() {
         <View style={{ gap: 10 }}>
           {option('en', '🇬🇧', 'English', 'Use the site in English, left to right.')}
           {option('he', '🇮🇱', 'עברית', 'שימוש באתר בעברית, מימין לשמאל.')}
+        </View>
+        <View style={{gap:10,marginTop:16,paddingTop:20,borderTopWidth:1,borderTopColor:'#30404D'}}>
+          <Text style={{color:colors.text,fontSize:20,fontWeight:'800',textAlign:rtl?'right':'left'}}>{t('שיפור האתר','Improve the site')}</Text>
+          <Text style={{color:colors.muted,lineHeight:23,textAlign:rtl?'right':'left'}}>{t('אפשר לשתף יום שימוש אחד לחשבון מחובר, בלי היסטוריית עמודים ובלי פרסום. כיבוי מפסיק את המדידה במכשיר הזה.','Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.')}</Text>
+          <Pressable accessibilityRole="switch" aria-checked={measurement} accessibilityState={{checked:measurement}} accessibilityLabel={t('מדידת שימוש יומית','Daily usage measurement')} onPress={()=>void allowDailyMeasurement(!measurement)} style={{minHeight:48,borderWidth:1,borderColor:'#50616D',padding:12,borderRadius:6}}><Text style={{color:colors.text,fontWeight:'800',textAlign:rtl?'right':'left'}}>{measurement?t('פעיל · לחצו לכיבוי','On · tap to turn off'):t('כבוי · לחצו להפעלה','Off · tap to turn on')}</Text></Pressable>
         </View>
       </ScrollView>
     </View>

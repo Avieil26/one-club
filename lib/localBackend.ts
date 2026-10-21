@@ -45,6 +45,7 @@ export type Backend = {
   sendMessage(toUserId: string, body: string): Promise<Snapshot>;
   createSbc(input: NewSbc): Promise<Snapshot>;
   addSolution(input: NewSolution): Promise<Snapshot>;
+  moderateSolution(id: string, status: 'approved' | 'rejected'): Promise<Snapshot>;
   markWorked(solutionId: string): Promise<Snapshot>;
   voteSolution(solutionId: string, vote: 'up' | 'down' | 'clear'): Promise<Snapshot>;
   setAvatar(uri: string): Promise<Snapshot>;
@@ -207,6 +208,10 @@ export function createLocalBackend(): Backend {
     },
     async addSolution(input) {
       logic.addSolution(db, input);
+      return commit();
+    },
+    async moderateSolution(id, status) {
+      logic.moderateSolution(db, id, status);
       return commit();
     },
     async markWorked(solutionId) {

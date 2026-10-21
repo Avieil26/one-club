@@ -146,6 +146,13 @@ export type SbcKind = 'streamlined' | 'classic';
 export type CardQuality = 'bronze' | 'silver' | 'gold';
 
 export type SquadRules = {
+  playerCount?: number;
+  maxRating?: number;
+  maxPlayerRating?: number;
+  minLeagues?: number;
+  maxSameNation?: number;
+  exactLeagues?: number;
+  exactNations?: number;
   chemistry: number;
   minRating?: number;
   minNations?: number;
@@ -210,6 +217,8 @@ export type SbcSolution = {
   /** Users who marked this solution as not working. */
   failedUserIds: string[];
   status: ModerationStatus;
+  reviewedBy?: string | null;
+  reviewedAt?: string | null;
   createdAt: string;
 };
 

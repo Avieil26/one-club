@@ -49,8 +49,8 @@ export function CookieNotice() {
       </Text>
       <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }}>
         {rtl ? inlineLatin(
-          '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום ואין מעקב אנליטי. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
-        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies or analytics tracking. You can keep browsing without clicking this notice, and sign-in will continue to work.'}
+          '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
+        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.'}
       </Text>
       <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8, justifyContent: rtl ? 'flex-start' : 'flex-start' }}>
         <Pressable

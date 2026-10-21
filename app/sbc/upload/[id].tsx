@@ -1,5 +1,5 @@
 import { useLanguage } from '@/lib/language';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Animated, Pressable, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
@@ -27,7 +27,7 @@ export default function SbcUploadSolutionScreen() {
   const [imageUris, setImageUris] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
-  const scale = useRef(new Animated.Value(1)).current;
+  const [scale] = useState(() => new Animated.Value(1));
   useEffect(() => {
     if (!imageUris.length) return;
     scale.setValue(0.96);
@@ -76,7 +76,7 @@ export default function SbcUploadSolutionScreen() {
     setSaving(true);
     try {
       await app.addSolution({ challengeId, explanation, imageUris });
-      Alert.alert(t("הפתרון פורסם", "Solution published"), t(`הפתרון שלך ל«${challengeTitle}» עלה וגלוי לכל הקהילה.`, `Your solution for “${challengeTitle}” is now visible to the community.`));
+      Alert.alert(t("נשלח לאישור", "Submitted for review"), t(`הפתרון שלך ל«${challengeTitle}» ממתין לאישור מנהל. הוא יופיע בקהילה רק אחרי אישור.`, `Your solution for “${challengeTitle}” is awaiting administrator review. It will appear in the community after approval.`));
       router.replace(`/sbc/${challengeId}`);
     } catch (error) {
       Alert.alert(t("שגיאה בהעלאה", "Upload error"), errorMessage(error));
@@ -193,7 +193,7 @@ export default function SbcUploadSolutionScreen() {
 
       {/* SUBMIT BUTTON */}
       <Button
-        label={saving || app.busy ? t("מפרסם פתרון...", "Publishing solution…") : t("פרסום הפתרון לקהילה ✨", "Share solution with the community ✨")}
+        label={saving || app.busy ? t("שולח לאישור...", "Submitting for review…") : t("שליחת הפתרון לאישור", "Submit solution for review")}
         variant="gold"
         disabled={saving || app.busy}
         onPress={save}

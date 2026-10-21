@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { FutCard } from '@/components/FutCard';
 import { PortraitCard } from '@/components/PortraitCard';
-import { colors } from '@/components/ui';
 import type { Formation } from '@/lib/chemistry';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { pitchCardPosition, spotsFor, squadPitchMetrics } from '@/lib/mobileLayout';
@@ -46,6 +45,7 @@ export function SquadPitch({
   activeSlot,
   onSlot,
   showChemHud = false,
+  appearance = 'pitch',
 }: {
   formation: Formation;
   placed: Record<string, FcPlayer | null>;
@@ -53,6 +53,7 @@ export function SquadPitch({
   activeSlot?: string | null;
   onSlot?: (slotId: string) => void;
   showChemHud?: boolean;
+  appearance?: 'pitch' | 'sbc';
 }) {
   const { t, language } = useLanguage();
   const [width, setWidth] = useState(0);
@@ -72,8 +73,8 @@ export function SquadPitch({
           overflow: 'hidden',
           direction: 'ltr',
           borderWidth: 1,
-          borderColor: 'rgba(80, 200, 160, 0.28)',
-          shadowColor: '#0EF3A3',
+          borderColor: appearance === 'sbc' ? '#586078' : 'rgba(80, 200, 160, 0.28)',
+          shadowColor: appearance === 'sbc' ? '#080B13' : '#0EF3A3',
           shadowOpacity: 0.18,
           shadowRadius: 18,
           shadowOffset: { width: 0, height: 8 },
@@ -81,12 +82,12 @@ export function SquadPitch({
         }}
       >
         <LinearGradient
-          colors={['#061510', '#0B2A1F', '#0A1C16', '#07140F']}
+          colors={appearance === 'sbc' ? ['#232B3D', '#121A28', '#1B1C29', '#2A2430'] : ['#061510', '#0B2A1F', '#0A1C16', '#07140F']}
           locations={[0, 0.35, 0.7, 1]}
           style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
         />
         <LinearGradient
-          colors={['rgba(14, 243, 163, 0.12)', 'transparent', 'rgba(59, 130, 246, 0.08)']}
+          colors={appearance === 'sbc' ? ['rgba(193, 164, 105, 0.09)', 'transparent', 'rgba(128, 145, 189, 0.09)'] : ['rgba(14, 243, 163, 0.12)', 'transparent', 'rgba(59, 130, 246, 0.08)']}
           start={{ x: 0.2, y: 0 }}
           end={{ x: 0.9, y: 1 }}
           style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
@@ -101,7 +102,7 @@ export function SquadPitch({
             top: 14,
             bottom: 14,
             borderWidth: 1.5,
-            borderColor: 'rgba(160, 230, 200, 0.22)',
+            borderColor: appearance === 'sbc' ? 'rgba(191, 199, 219, 0.22)' : 'rgba(160, 230, 200, 0.22)',
             borderRadius: 12,
           }}
         />
@@ -114,7 +115,7 @@ export function SquadPitch({
             width: 84,
             height: 48,
             borderWidth: 1.5,
-            borderColor: 'rgba(160, 230, 200, 0.22)',
+            borderColor: appearance === 'sbc' ? 'rgba(191, 199, 219, 0.22)' : 'rgba(160, 230, 200, 0.22)',
             borderBottomLeftRadius: 8,
             borderBottomRightRadius: 8,
           }}
@@ -128,7 +129,7 @@ export function SquadPitch({
             width: 84,
             height: 48,
             borderWidth: 1.5,
-            borderColor: 'rgba(160, 230, 200, 0.22)',
+            borderColor: appearance === 'sbc' ? 'rgba(191, 199, 219, 0.22)' : 'rgba(160, 230, 200, 0.22)',
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
           }}
@@ -140,7 +141,7 @@ export function SquadPitch({
             right: '22%',
             top: height / 2 - 0.75,
             height: 1.5,
-            backgroundColor: 'rgba(160, 230, 200, 0.2)',
+            backgroundColor: appearance === 'sbc' ? 'rgba(191, 199, 219, 0.22)' : 'rgba(160, 230, 200, 0.2)',
           }}
         />
         <View
@@ -153,7 +154,7 @@ export function SquadPitch({
             height: 56,
             borderRadius: 28,
             borderWidth: 1.5,
-            borderColor: 'rgba(160, 230, 200, 0.18)',
+            borderColor: appearance === 'sbc' ? 'rgba(191, 199, 219, 0.22)' : 'rgba(160, 230, 200, 0.18)',
           }}
         />
 

@@ -1,3 +1,6 @@
+import { sbcCheckText } from '@/lib/sbcLocalization';
+import { sbcFace } from '@/lib/sbcTileTheme';
+import { classicSegments } from '@/lib/sbcClassic';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
@@ -12,6 +15,7 @@ import {
   evaluateSquad,
   FORMATIONS,
   formationById,
+  isFormationId,
   positionFits,
   slotPosition,
   type FormationId,
@@ -38,11 +42,13 @@ export default function SquadBuildScreen() {
   const challenge = stored
     ? { ...catalogChallenge(String(id)), ...stored, ...catalogChallenge(String(id)) }
     : catalogChallenge(String(id));
-  const [formationId, setFormationId] = useState<FormationId>(challenge?.previewFormation === '442' ? '442' : '433');
+  const initialFormation = challenge?.previewFormation && isFormationId(challenge.previewFormation) ? challenge.previewFormation : '433';
+  const fixedFormation = classicSegments(String(id))[0]?.formation;
+  const [formationId, setFormationId] = useState<FormationId>(initialFormation);
   const [placed, setPlaced] = useState<Record<string, FcPlayer | null>>(() =>
-    blankSquad(challenge?.previewFormation === '442' ? '442' : '433'),
+    blankSquad(initialFormation),
   );
-  const [active, setActive] = useState<string | null>(challenge?.previewFormation === '442' ? 'lst' : 'st');
+  const [active, setActive] = useState<string | null>(formationById(initialFormation).lines[0]?.[0]?.id ?? null);
   const [query, setQuery] = useState('');
   const [explanation, setExplanation] = useState('');
   const formation = formationById(formationId);
@@ -135,7 +141,7 @@ export default function SquadBuildScreen() {
         squad,
         formation: formationId,
       });
-      Alert.alert(t("פורסם", "Published"), t(`הסגל עלה כפתרון ל«${challenge.title}».`, `Your squad was published as a solution for “${challenge.title}”.`));
+      Alert.alert(t("נשלח לאישור", "Submitted for review"), t(`הסגל ל«${challenge.title}» ממתין לאישור מנהל.`, `Your squad for “${challenge.title}” is awaiting administrator review.`));
       router.replace(`/sbc/${challenge.id}`);
     } catch (error) {
       Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
@@ -145,11 +151,11 @@ export default function SquadBuildScreen() {
   return (
     <Screen scene="sbc">
       <Stack.Screen options={{ title: t("בניית סגל", "Build squad") }} />
-      <Title>{challenge.title}</Title>
+      <Title>{language === 'en' ? sbcFace(challenge).en : sbcFace(challenge).he}</Title>
       <Muted>{t("מגרש ריק. לחצו על עמדה, חפשו את שם השחקן באנגלית, והניחו את הקלף.", "Start with an empty pitch. Select a position, search for a player in English and add their card.")}</Muted>
       <ChoiceGroup
         label={t("מערך", "Formation")}
-        options={FORMATIONS.map((item) => ({ id: item.id, label: item.label }))}
+        options={FORMATIONS.filter((item) => !fixedFormation || item.id === fixedFormation).map((item) => ({ id: item.id, label: item.label }))}
         value={formationId}
         onChange={(next) => {
           setFormationId(next);
@@ -178,12 +184,13 @@ export default function SquadBuildScreen() {
         </View>
         {report.checks.map((check) => (
           <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
-            {check.ok ? '✓' : '✗'} {check.label}
+            {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
           </Text>
         ))}
       </LinearGradient>
 
       <SquadPitch
+        appearance="sbc"
         formation={formation}
         placed={placed}
         playerChem={report.playerChem}
@@ -235,7 +242,7 @@ export default function SquadBuildScreen() {
         placeholder={t("למשל: כסף מליגת העל הבלגית, עם בלגים לכימיה", "For example: silver cards from the Belgian league, with Belgian players for chemistry")}
       />
       <Button
-        label={t("שליחת הסגל כפתרון", "Submit squad as a solution")}
+        label={t("שליחת הסגל לאישור", "Submit squad for review")}
         onPress={publish}
         disabled={app.busy || !report.ready}
       />
