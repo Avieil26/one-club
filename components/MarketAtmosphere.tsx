@@ -1,7 +1,7 @@
 import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board' | 'champions';
+export type SceneId = 'home' | 'career' | 'ultimate' | 'grounds' | 'sbc' | 'market' | 'modal' | 'games' | 'draft' | 'board' | 'champions' | 'gallery';
 
 const SCENES: Record<
   SceneId,
@@ -55,6 +55,13 @@ const SCENES: Record<
     wash: 'transparent',
     vignette: ['rgba(0,0,0,0.2)', 'transparent', 'transparent', 'rgba(0,0,0,0.35)'],
     base: '#07080A',
+  },
+  gallery: {
+    source: require('@/assets/images/scene-sbc-tunnel.png'),
+    tint: ['rgba(8,10,14,0.60)', 'rgba(12,14,18,0.48)', 'rgba(8,10,14,0.82)'],
+    wash: 'rgba(12,14,18,0.2)',
+    vignette: ['rgba(0,0,0,0.35)', 'transparent', 'transparent', 'rgba(0,0,0,0.65)'],
+    base: '#0D1015',
   },
   market: {
     source: require('@/assets/images/market-stadium-bg.png'),

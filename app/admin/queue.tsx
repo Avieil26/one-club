@@ -2,6 +2,7 @@ import { useLanguage } from '@/lib/language';
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
+import { GalleryCommunity } from '@/components/GalleryCommunity';
 import { SbcModerationActions } from '@/components/SbcModerationActions';
 import { SolutionGallery } from '@/components/SolutionGallery';
 import { catalogChallenge } from '@/lib/sbcCatalog';
@@ -31,6 +32,7 @@ export default function QueueScreen() {
   const { t, language } = useLanguage();
   const router = useRouter();
   const app = useApp();
+  const [galleryPending, setGalleryPending] = useState<number | null>(null);
   const [champions, setChampions] = useState<ChampionsPending[]>([]);
   const submissions = app.submissions.filter((item) => item.status === 'pending');
   const solutions = app.solutions.filter((item) => item.status === 'pending');
@@ -88,7 +90,9 @@ export default function QueueScreen() {
     <Screen scene="home" refreshing={app.busy} onRefresh={app.refresh}>
       <Stack.Screen options={{ title: t("תור אישור", "Approval queue") }} />
       <Title>{t("תור אישור", "Approval queue")}</Title>
-      {submissions.length + levels.length + comments.length + champions.length + solutions.length === 0 ? <Muted>{t("אין כרגע פריטים לאישור.", "There are no items awaiting approval.")}</Muted> : null}
+      {submissions.length + levels.length + comments.length + champions.length + solutions.length === 0 && galleryPending === 0 ? <Muted>{t("אין כרגע פריטים לאישור.", "There are no items awaiting approval.")}</Muted> : null}
+
+      <GalleryCommunity pendingOnly onCount={setGalleryPending} />
 
       {solutions.map((solution) => {
         const challenge = catalogChallenge(solution.challengeId) ?? app.sbcChallenges.find((c) => c.id === solution.challengeId);

@@ -10,7 +10,7 @@ import { useLanguage } from '@/lib/language';
 const PRIMARY = ['index', 'grounds', 'market', 'games'];
 const ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
   index: 'home-outline', grounds: 'people-outline', market: 'albums-outline', games: 'game-controller-outline',
-  career: 'star-outline', ultimate: 'football-outline', champions: 'trophy-outline', sbc: 'grid-outline', board: 'chatbubbles-outline',
+  gallery: 'library-outline', career: 'star-outline', ultimate: 'football-outline', champions: 'trophy-outline', sbc: 'grid-outline', board: 'chatbubbles-outline',
 };
 
 export function MobileTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
