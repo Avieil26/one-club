@@ -50,7 +50,7 @@ const pos = (id: string, position: string): PitchSlot => ({ id, position });
 
 const back4 = [pos('lb', 'LB'), pos('lcb', 'CB'), pos('rcb', 'CB'), pos('rb', 'RB')];
 const back3 = [pos('lcb', 'CB'), pos('cb', 'CB'), pos('rcb', 'CB')];
-const back5 = [pos('lwb', 'LWB'), pos('lcb', 'CB'), pos('cb', 'CB'), pos('rcb', 'CB'), pos('rwb', 'RWB')];
+const back5 = [pos('lwb', 'LB'), pos('lcb', 'CB'), pos('cb', 'CB'), pos('rcb', 'CB'), pos('rwb', 'RB')];
 const keeper = [pos('gk', 'GK')];
 
 function shape(id: FormationId, label: string, lines: PitchSlot[][]): Formation {
@@ -396,6 +396,11 @@ export function evaluateSquad(
     }
   }
 
+  const contributors = formation.lines.flatMap((line) => line.flatMap((slot) => {
+    const player = placed[slot.id];
+    return player && (player.positions ?? [player.position]).includes(slot.position) ? [player] : [];
+  }));
+
   for (const line of formation.lines) {
     for (const slot of line) {
       const player = placed[slot.id];
@@ -403,7 +408,7 @@ export function evaluateSquad(
         playerChem[slot.id] = 0;
         continue;
       }
-      playerChem[slot.id] = modernPlayerChem(player, filledPlayers, (player.positions ?? [player.position]).includes(slot.position));
+      playerChem[slot.id] = modernPlayerChem(player, contributors, (player.positions ?? [player.position]).includes(slot.position));
     }
   }
 

@@ -7,7 +7,7 @@ let seed = 271021; const random = () => { seed = (Math.imul(seed, 1664525) + 101
 const pick = (a) => a[Math.floor(random() * a.length)];
 const counts = (ps, key) => { const m = new Map(); for (const p of ps) m.set(p[key], (m.get(p[key]) ?? 0) + 1); return [...m.values()]; };
 for (const [id, challenge] of Object.entries(data)) for (const segment of challenge.segments) {
-  const rules = segment.rules, formation = formationById('433'), slots = formation.lines.flat().slice(0, rules.playerCount ?? 11);
+  const rules = segment.rules, formation = formationById(segment.formation), slots = formation.lines.flat().slice(0, rules.playerCount ?? 11);
   let pool = players.filter((p) => (!rules.exactQuality || (p.rating >= 75 ? 'gold' : p.rating >= 65 ? 'silver' : 'bronze') === rules.exactQuality) && (!rules.minQuality || p.rating >= (rules.minQuality === 'gold' ? 75 : 65)) && (!rules.maxPlayerRating || p.rating <= rules.maxPlayerRating));
   // Use canonical catalogue club labels, retaining each source's OR requirement.
   if (rules.clubsAtLeast) rules.clubsAtLeast.clubs = rules.clubsAtLeast.clubs.filter((club) => pool.some((p) => p.club === club));

@@ -39,6 +39,9 @@ for(const c of officialChallenges)for(const segment of classicSegments(c.id)){
  if(!segment.rules.chemistry)assert.equal(checkClassicSquad(segment,segment.formation,segment.squad).ready,true);
  classic++;
 }
+assert.equal(classicSegments('sbc-fs-challenge-3')[0].formation,'442');
+assert.equal(classicSegments('sbc-mm-leeds-manutd-20261015')[0].formation,'5212');
+assert.deepEqual(classicSegments('sbc-league-nation-advanced').map(s=>s.formation),['343','4141','3142']);
 assert.equal(communitySquadStatus('sbc-gold-upgrade',null,null),'unverified');
 const gold=classicSegments('sbc-gold-upgrade')[0];
 assert.equal(communitySquadStatus('sbc-gold-upgrade',gold.formation,gold.squad),'checked');
