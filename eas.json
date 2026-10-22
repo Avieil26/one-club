@@ -26,6 +26,11 @@
       "developmentClient": false,
       "channel": "android-hotfix-20261020",
       "environment": "production"
+    },
+    "apk-season2": {
+      "extends": "apk",
+      "channel": "android-season2-20261022",
+      "environment": "production"
     }
   },
   "submit": {

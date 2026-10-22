@@ -25,6 +25,8 @@ export default function PlayerPage() {
       style={{
         flex: 1,
         minHeight: 0,
+        width: '100%',
+        overflow: 'hidden',
         backgroundColor: iconPage ? '#070604' : '#050A08',
         ...(native ? { width: '100%', alignSelf: 'stretch', overflow: 'hidden', direction: 'ltr' } : {}),
       }}

@@ -146,7 +146,7 @@ export default function MarketScreen() {
   const cardWidth = Math.floor((contentWidth - gap * (columns - 1)) / columns);
 
   useEffect(() => {
-    setFilters(routeKind === 'future-stars' ? { ...EMPTY_FILTERS, kind: 'future-stars' } : EMPTY_FILTERS);
+    setFilters(routeKind === 'future-stars' || routeKind === 'season2' ? { ...EMPTY_FILTERS, kind: routeKind } : EMPTY_FILTERS);
     setQuery('');
     setDebouncedQuery('');
     setFilterOpen(false);

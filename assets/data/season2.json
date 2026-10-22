@@ -1,0 +1,3494 @@
+[
+  {
+    "id": "season2-50531562",
+    "baseId": "ea-199914-allan",
+    "itemId": 50531562,
+    "baseItemId": 199914,
+    "name": "אלאן",
+    "en": "Allan",
+    "rating": 84,
+    "position": "CDM",
+    "positions": [
+      "CM"
+    ],
+    "nation": "Brazil",
+    "league": "CONMEBOL Sudamericana",
+    "club": "Botafogo",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 77,
+      "sho": 70,
+      "pas": 80,
+      "dri": 84,
+      "def": 82,
+      "phy": 81
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 175,
+    "weightKg": 67,
+    "age": 35,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 75,
+      "agility": 80,
+      "balance": 90,
+      "jumping": 78,
+      "stamina": 80,
+      "strength": 78,
+      "reactions": 80,
+      "aggression": 88,
+      "composure": 88,
+      "interceptions": 83,
+      "positioning": 76,
+      "vision": 78,
+      "ballControl": 80,
+      "crossing": 80,
+      "dribbling": 86,
+      "finishing": 70,
+      "freeKickAccuracy": 56,
+      "headingAccuracy": 70,
+      "longPassing": 80,
+      "shortPassing": 84,
+      "defensiveAwareness": 83,
+      "shotPower": 76,
+      "longShots": 68,
+      "standingTackle": 84,
+      "slidingTackle": 83,
+      "volleys": 56,
+      "curve": 78,
+      "penalties": 55,
+      "gkDiving": 13,
+      "gkHandling": 13,
+      "gkKicking": 5,
+      "gkReflexes": 8,
+      "gkPositioning": 5
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50531562.e5c6dcecbdf1c4b1006323dab7f34ad669aa5ecf177c69fa416fcb09019adc84.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 5,
+      "seasonPoints": 5000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/199914-allan/27-50531562/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50524753",
+    "baseId": "ea-193105-alphonse-areola",
+    "itemId": 50524753,
+    "baseItemId": 193105,
+    "name": "אלפונס אראולה",
+    "en": "Alphonse Areola",
+    "rating": 84,
+    "position": "GK",
+    "positions": [],
+    "nation": "France",
+    "league": "EFL Championship",
+    "club": "West Ham",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 84,
+      "sho": 83,
+      "pas": 81,
+      "dri": 84,
+      "def": 53,
+      "phy": 83
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 1,
+    "heightCm": 195,
+    "weightKg": 94,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Far Throw",
+        "plus": false
+      },
+      {
+        "name": "Footwork",
+        "plus": false
+      },
+      {
+        "name": "Far Reach",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        101,
+        102,
+        145
+      ]
+    },
+    "attributes": {
+      "acceleration": 54,
+      "sprintSpeed": 52,
+      "agility": 58,
+      "balance": 58,
+      "jumping": 71,
+      "stamina": 38,
+      "strength": 79,
+      "reactions": 83,
+      "aggression": 26,
+      "composure": 64,
+      "interceptions": 23,
+      "positioning": 17,
+      "vision": 59,
+      "ballControl": 22,
+      "crossing": 20,
+      "dribbling": 15,
+      "finishing": 19,
+      "freeKickAccuracy": 16,
+      "headingAccuracy": 14,
+      "longPassing": 55,
+      "shortPassing": 48,
+      "defensiveAwareness": 13,
+      "shotPower": 54,
+      "longShots": 14,
+      "standingTackle": 18,
+      "slidingTackle": 12,
+      "volleys": 16,
+      "curve": 16,
+      "penalties": 25,
+      "gkDiving": 84,
+      "gkHandling": 83,
+      "gkKicking": 81,
+      "gkReflexes": 84,
+      "gkPositioning": 83
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50524753.5cc274c1298b3a9dc3776f90ae4f1c999bd1b826e7eaf8ff90d73abeb4fe2a1b.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 5,
+      "seasonPoints": 5000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/193105-alphonse-areola/27-50524753/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50535753",
+    "baseId": "ea-204105-kenny-lala",
+    "itemId": 50535753,
+    "baseItemId": 204105,
+    "name": "קני לאלה",
+    "en": "Kenny Lala",
+    "rating": 84,
+    "position": "RB",
+    "positions": [
+      "RM"
+    ],
+    "nation": "France",
+    "league": "Ligue 1 McDonald's",
+    "club": "Stade Brestois 29",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 87,
+      "sho": 75,
+      "pas": 81,
+      "dri": 82,
+      "def": 82,
+      "phy": 82
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 178,
+    "weightKg": 78,
+    "age": 35,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Long Throw",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        123,
+        124,
+        125,
+        126,
+        146
+      ]
+    },
+    "attributes": {
+      "acceleration": 84,
+      "sprintSpeed": 89,
+      "agility": 77,
+      "balance": 80,
+      "jumping": 84,
+      "stamina": 85,
+      "strength": 81,
+      "reactions": 80,
+      "aggression": 82,
+      "composure": 81,
+      "interceptions": 83,
+      "positioning": 89,
+      "vision": 80,
+      "ballControl": 83,
+      "crossing": 80,
+      "dribbling": 82,
+      "finishing": 73,
+      "freeKickAccuracy": 82,
+      "headingAccuracy": 75,
+      "longPassing": 80,
+      "shortPassing": 83,
+      "defensiveAwareness": 82,
+      "shotPower": 87,
+      "longShots": 66,
+      "standingTackle": 84,
+      "slidingTackle": 76,
+      "volleys": 54,
+      "curve": 82,
+      "penalties": 92,
+      "gkDiving": 14,
+      "gkHandling": 6,
+      "gkKicking": 7,
+      "gkReflexes": 15,
+      "gkPositioning": 6
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50535753.d6d4bf1a85f755457540c1c57f168fd7b645e6e5abf8a915aa699624edbc190b.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 15,
+      "seasonPoints": 15000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/204105-kenny-lala/27-50535753/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50593388",
+    "baseId": "ea-261740-jule-brand",
+    "itemId": 50593388,
+    "baseItemId": 261740,
+    "name": "יולה בראנד",
+    "en": "Jule Brand",
+    "rating": 84,
+    "position": "LW",
+    "positions": [
+      "LM",
+      "CAM"
+    ],
+    "nation": "Germany",
+    "league": "Arkema Première Ligue",
+    "club": "OL Lyonnes",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 92,
+      "sho": 78,
+      "pas": 81,
+      "dri": 84,
+      "def": 56,
+      "phy": 74
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 177,
+    "weightKg": 62,
+    "age": 24,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 90,
+      "sprintSpeed": 93,
+      "agility": 88,
+      "balance": 75,
+      "jumping": 76,
+      "stamina": 80,
+      "strength": 73,
+      "reactions": 85,
+      "aggression": 68,
+      "composure": 77,
+      "interceptions": 50,
+      "positioning": 86,
+      "vision": 82,
+      "ballControl": 86,
+      "crossing": 83,
+      "dribbling": 83,
+      "finishing": 82,
+      "freeKickAccuracy": 60,
+      "headingAccuracy": 68,
+      "longPassing": 73,
+      "shortPassing": 87,
+      "defensiveAwareness": 53,
+      "shotPower": 73,
+      "longShots": 80,
+      "standingTackle": 59,
+      "slidingTackle": 55,
+      "volleys": 63,
+      "curve": 77,
+      "penalties": 60,
+      "gkDiving": 8,
+      "gkHandling": 13,
+      "gkKicking": 9,
+      "gkReflexes": 7,
+      "gkPositioning": 13
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50593388.60f41d576b275f52ab6b82ac817c145524ceb9ba4dcd279003588c3a6bbc6e3b.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 15,
+      "seasonPoints": 15000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/261740-jule-brand/27-50593388/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50543836",
+    "baseId": "ea-212188-timo-werner",
+    "itemId": 50543836,
+    "baseItemId": 212188,
+    "name": "טימו ורנר",
+    "en": "Timo Werner",
+    "rating": 84,
+    "position": "LM",
+    "positions": [
+      "CAM",
+      "ST",
+      "LW"
+    ],
+    "nation": "Germany",
+    "league": "Major League Soccer",
+    "club": "SJ Earthquakes",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 92,
+      "sho": 80,
+      "pas": 75,
+      "dri": 84,
+      "def": 42,
+      "phy": 76
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 180,
+    "weightKg": 75,
+    "age": 30,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 95,
+      "sprintSpeed": 90,
+      "agility": 84,
+      "balance": 82,
+      "jumping": 90,
+      "stamina": 80,
+      "strength": 75,
+      "reactions": 83,
+      "aggression": 70,
+      "composure": 80,
+      "interceptions": 45,
+      "positioning": 84,
+      "vision": 75,
+      "ballControl": 82,
+      "crossing": 75,
+      "dribbling": 85,
+      "finishing": 80,
+      "freeKickAccuracy": 64,
+      "headingAccuracy": 82,
+      "longPassing": 61,
+      "shortPassing": 82,
+      "defensiveAwareness": 48,
+      "shotPower": 83,
+      "longShots": 78,
+      "standingTackle": 25,
+      "slidingTackle": 29,
+      "volleys": 80,
+      "curve": 77,
+      "penalties": 80,
+      "gkDiving": 9,
+      "gkHandling": 9,
+      "gkKicking": 8,
+      "gkReflexes": 9,
+      "gkPositioning": 15
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50543836.d80f6096e69b6d26d8d311f5c18e870f0fa1b23eaea3df1c38875f3746a22460.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 20,
+      "seasonPoints": 20000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/212188-timo-werner/27-50543836/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50577588",
+    "baseId": "ea-245940-silas",
+    "itemId": 50577588,
+    "baseItemId": 245940,
+    "name": "סילאס",
+    "en": "Silas",
+    "rating": 85,
+    "position": "ST",
+    "positions": [
+      "RM",
+      "RW"
+    ],
+    "nation": "DR Congo",
+    "league": "Bundesliga",
+    "club": "1. FSV Mainz 05",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 88,
+      "sho": 81,
+      "pas": 71,
+      "dri": 85,
+      "def": 56,
+      "phy": 81
+    },
+    "foot": "R",
+    "weakFoot": 2,
+    "skillMoves": 5,
+    "heightCm": 189,
+    "weightKg": 82,
+    "age": 28,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        135,
+        136,
+        137,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 88,
+      "agility": 84,
+      "balance": 82,
+      "jumping": 90,
+      "stamina": 80,
+      "strength": 86,
+      "reactions": 82,
+      "aggression": 69,
+      "composure": 76,
+      "interceptions": 61,
+      "positioning": 88,
+      "vision": 70,
+      "ballControl": 83,
+      "crossing": 78,
+      "dribbling": 89,
+      "finishing": 87,
+      "freeKickAccuracy": 39,
+      "headingAccuracy": 73,
+      "longPassing": 53,
+      "shortPassing": 80,
+      "defensiveAwareness": 50,
+      "shotPower": 82,
+      "longShots": 65,
+      "standingTackle": 56,
+      "slidingTackle": 44,
+      "volleys": 76,
+      "curve": 70,
+      "penalties": 90,
+      "gkDiving": 8,
+      "gkHandling": 13,
+      "gkKicking": 13,
+      "gkReflexes": 11,
+      "gkPositioning": 9
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50577588.1ea36d98ea150760763b2a82de76e19ede2d0e5d5b089b9f7fa1b30986679462.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 20,
+      "seasonPoints": 20000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/245940-silas/27-50577588/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50558661",
+    "baseId": "ea-227013-fridolina-rolfo",
+    "itemId": 50558661,
+    "baseItemId": 227013,
+    "name": "פרידולינה רולפו",
+    "en": "Fridolina Rolfö",
+    "rating": 85,
+    "position": "CM",
+    "positions": [
+      "LB",
+      "CDM",
+      "LM",
+      "CAM",
+      "LW"
+    ],
+    "nation": "Sweden",
+    "league": "Barclays Women’s Super League",
+    "club": "Manchester Utd",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 82,
+      "sho": 82,
+      "pas": 82,
+      "dri": 85,
+      "def": 82,
+      "phy": 82
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 178,
+    "weightKg": 68,
+    "age": 32,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Trickster",
+        "plus": true
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        147,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 83,
+      "sprintSpeed": 81,
+      "agility": 80,
+      "balance": 78,
+      "jumping": 85,
+      "stamina": 83,
+      "strength": 86,
+      "reactions": 88,
+      "aggression": 70,
+      "composure": 83,
+      "interceptions": 81,
+      "positioning": 80,
+      "vision": 83,
+      "ballControl": 86,
+      "crossing": 81,
+      "dribbling": 85,
+      "finishing": 81,
+      "freeKickAccuracy": 64,
+      "headingAccuracy": 77,
+      "longPassing": 76,
+      "shortPassing": 88,
+      "defensiveAwareness": 84,
+      "shotPower": 86,
+      "longShots": 80,
+      "standingTackle": 82,
+      "slidingTackle": 78,
+      "volleys": 78,
+      "curve": 71,
+      "penalties": 83,
+      "gkDiving": 7,
+      "gkHandling": 11,
+      "gkKicking": 16,
+      "gkReflexes": 9,
+      "gkPositioning": 14
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50558661.0d349e2e8950b969e85310376ee69370aa5d211a7a0579170b56be6076e27e74.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 25,
+      "seasonPoints": 25000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/227013-fridolina-rolfo/27-50558661/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50548036",
+    "baseId": "ea-216388-allan-saintmaximin",
+    "itemId": 50548036,
+    "baseItemId": 216388,
+    "name": "אלן סן־מקסימן",
+    "en": "Allan Saint-Maximin",
+    "rating": 85,
+    "position": "LW",
+    "positions": [
+      "LM"
+    ],
+    "nation": "France",
+    "league": "Major League Soccer",
+    "club": "Charlotte FC",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 90,
+      "sho": 76,
+      "pas": 76,
+      "dri": 88,
+      "def": 39,
+      "phy": 72
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 5,
+    "heightCm": 173,
+    "weightKg": 67,
+    "age": 29,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Technical",
+        "plus": true
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 92,
+      "sprintSpeed": 88,
+      "agility": 93,
+      "balance": 94,
+      "jumping": 85,
+      "stamina": 73,
+      "strength": 77,
+      "reactions": 75,
+      "aggression": 53,
+      "composure": 82,
+      "interceptions": 31,
+      "positioning": 77,
+      "vision": 77,
+      "ballControl": 85,
+      "crossing": 76,
+      "dribbling": 91,
+      "finishing": 72,
+      "freeKickAccuracy": 64,
+      "headingAccuracy": 71,
+      "longPassing": 72,
+      "shortPassing": 78,
+      "defensiveAwareness": 40,
+      "shotPower": 88,
+      "longShots": 77,
+      "standingTackle": 34,
+      "slidingTackle": 31,
+      "volleys": 73,
+      "curve": 84,
+      "penalties": 64,
+      "gkDiving": 10,
+      "gkHandling": 9,
+      "gkKicking": 12,
+      "gkReflexes": 7,
+      "gkPositioning": 7
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50548036.0bfda5a794bf611fef4a989f75117d5d9d9223e2069de0ad9c5196870f222ce8.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "standard-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 30,
+      "seasonPoints": 30000,
+      "premium": false
+    },
+    "sourceUrl": "https://www.fut.gg/players/216388-allan-saint-maximin/27-50548036/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50534077",
+    "baseId": "ea-202429-danny-da-costa",
+    "itemId": 50534077,
+    "baseItemId": 202429,
+    "name": "דני דה קוסטה",
+    "en": "Danny da Costa",
+    "rating": 84,
+    "position": "CB",
+    "positions": [
+      "RB",
+      "RM"
+    ],
+    "nation": "Germany",
+    "league": "Bundesliga",
+    "club": "1. FSV Mainz 05",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 86,
+      "sho": 58,
+      "pas": 70,
+      "dri": 73,
+      "def": 81,
+      "phy": 82
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 187,
+    "weightKg": 87,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        111,
+        112,
+        113,
+        123,
+        124,
+        125,
+        126,
+        146,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 84,
+      "sprintSpeed": 87,
+      "agility": 70,
+      "balance": 71,
+      "jumping": 85,
+      "stamina": 79,
+      "strength": 82,
+      "reactions": 79,
+      "aggression": 83,
+      "composure": 71,
+      "interceptions": 80,
+      "positioning": 73,
+      "vision": 74,
+      "ballControl": 72,
+      "crossing": 73,
+      "dribbling": 75,
+      "finishing": 53,
+      "freeKickAccuracy": 54,
+      "headingAccuracy": 78,
+      "longPassing": 66,
+      "shortPassing": 69,
+      "defensiveAwareness": 81,
+      "shotPower": 70,
+      "longShots": 57,
+      "standingTackle": 83,
+      "slidingTackle": 84,
+      "volleys": 56,
+      "curve": 72,
+      "penalties": 41,
+      "gkDiving": 15,
+      "gkHandling": 15,
+      "gkKicking": 12,
+      "gkReflexes": 6,
+      "gkPositioning": 6
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50534077.0b772a5773ac29229c37de91bf8b1406d8c2ac2268125b81908f01d94a95b55e.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 3,
+      "seasonPoints": 3000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/202429-danny-da-costa/27-50534077/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50529867",
+    "baseId": "ea-198219-lorenzo-insigne",
+    "itemId": 50529867,
+    "baseItemId": 198219,
+    "name": "לורנצו אינסינייה",
+    "en": "Lorenzo Insigne",
+    "rating": 84,
+    "position": "CAM",
+    "positions": [
+      "LM",
+      "ST",
+      "LW"
+    ],
+    "nation": "Italy",
+    "league": "Serie BKT",
+    "club": "Sampdoria",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 88,
+      "sho": 81,
+      "pas": 83,
+      "dri": 88,
+      "def": 42,
+      "phy": 53
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 163,
+    "weightKg": 59,
+    "age": 35,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 88,
+      "agility": 90,
+      "balance": 92,
+      "jumping": 67,
+      "stamina": 80,
+      "strength": 39,
+      "reactions": 84,
+      "aggression": 52,
+      "composure": 89,
+      "interceptions": 40,
+      "positioning": 80,
+      "vision": 84,
+      "ballControl": 88,
+      "crossing": 80,
+      "dribbling": 87,
+      "finishing": 80,
+      "freeKickAccuracy": 93,
+      "headingAccuracy": 75,
+      "longPassing": 80,
+      "shortPassing": 82,
+      "defensiveAwareness": 50,
+      "shotPower": 84,
+      "longShots": 80,
+      "standingTackle": 28,
+      "slidingTackle": 33,
+      "volleys": 82,
+      "curve": 94,
+      "penalties": 83,
+      "gkDiving": 8,
+      "gkHandling": 4,
+      "gkKicking": 14,
+      "gkReflexes": 10,
+      "gkPositioning": 9
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50529867.a5ccfc7c04ec075d644848b1a6b653d32e09703c0c2d43604ce866eedf73ad04.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 7,
+      "seasonPoints": 7000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/198219-lorenzo-insigne/27-50529867/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50524728",
+    "baseId": "ea-193080-de-gea",
+    "itemId": 50524728,
+    "baseItemId": 193080,
+    "name": "דויד דה חאה",
+    "en": "De Gea",
+    "rating": 84,
+    "position": "GK",
+    "positions": [],
+    "nation": "Spain",
+    "league": "Serie A Enilive",
+    "club": "ACF Fiorentina",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 85,
+      "sho": 81,
+      "pas": 77,
+      "dri": 88,
+      "def": 50,
+      "phy": 85
+    },
+    "foot": "R",
+    "weakFoot": 2,
+    "skillMoves": 1,
+    "heightCm": 192,
+    "weightKg": 76,
+    "age": 35,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Footwork",
+        "plus": false
+      },
+      {
+        "name": "1v1 Close Down",
+        "plus": false
+      },
+      {
+        "name": "Far Reach",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        101,
+        102,
+        145
+      ]
+    },
+    "attributes": {
+      "acceleration": 51,
+      "sprintSpeed": 49,
+      "agility": 60,
+      "balance": 40,
+      "jumping": 56,
+      "stamina": 30,
+      "strength": 38,
+      "reactions": 86,
+      "aggression": 15,
+      "composure": 45,
+      "interceptions": 21,
+      "positioning": 9,
+      "vision": 50,
+      "ballControl": 32,
+      "crossing": 17,
+      "dribbling": 18,
+      "finishing": 13,
+      "freeKickAccuracy": 19,
+      "headingAccuracy": 18,
+      "longPassing": 39,
+      "shortPassing": 40,
+      "defensiveAwareness": 15,
+      "shotPower": 57,
+      "longShots": 12,
+      "standingTackle": 20,
+      "slidingTackle": 15,
+      "volleys": 13,
+      "curve": 21,
+      "penalties": 29,
+      "gkDiving": 85,
+      "gkHandling": 81,
+      "gkKicking": 77,
+      "gkReflexes": 88,
+      "gkPositioning": 85
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50524728.2c771715167218c243ab17bf3b169f3c04bb365f24b1cbe2a5ff430b40efecec.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 15,
+      "seasonPoints": 15000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/193080-de-gea/27-50524728/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50591020",
+    "baseId": "ea-259372-athenea",
+    "itemId": 50591020,
+    "baseItemId": 259372,
+    "name": "אתנאה",
+    "en": "Athenea",
+    "rating": 85,
+    "position": "RW",
+    "positions": [
+      "RM",
+      "LM",
+      "LW"
+    ],
+    "nation": "Spain",
+    "league": "Liga F",
+    "club": "Real Madrid",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 91,
+      "sho": 80,
+      "pas": 79,
+      "dri": 86,
+      "def": 33,
+      "phy": 78
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 4,
+    "heightCm": 160,
+    "weightKg": 52,
+    "age": 25,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 90,
+      "sprintSpeed": 91,
+      "agility": 90,
+      "balance": 74,
+      "jumping": 88,
+      "stamina": 91,
+      "strength": 72,
+      "reactions": 82,
+      "aggression": 74,
+      "composure": 73,
+      "interceptions": 37,
+      "positioning": 84,
+      "vision": 82,
+      "ballControl": 88,
+      "crossing": 87,
+      "dribbling": 87,
+      "finishing": 84,
+      "freeKickAccuracy": 63,
+      "headingAccuracy": 79,
+      "longPassing": 64,
+      "shortPassing": 83,
+      "defensiveAwareness": 22,
+      "shotPower": 77,
+      "longShots": 74,
+      "standingTackle": 28,
+      "slidingTackle": 23,
+      "volleys": 87,
+      "curve": 76,
+      "penalties": 65,
+      "gkDiving": 10,
+      "gkHandling": 10,
+      "gkKicking": 11,
+      "gkReflexes": 8,
+      "gkPositioning": 11
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50591020.82786faa5dbdb439c3638101299d720112e17f0efdff786c9eed9c4aa0808829.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 15,
+      "seasonPoints": 15000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/259372-athenea/27-50591020/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50548242",
+    "baseId": "ea-216594-nabil-fekir",
+    "itemId": 50548242,
+    "baseItemId": 216594,
+    "name": "נביל פקיר",
+    "en": "Nabil Fekir",
+    "rating": 85,
+    "position": "CAM",
+    "positions": [
+      "CM",
+      "ST"
+    ],
+    "nation": "France",
+    "league": "ROSHN Saudi League",
+    "club": "Abha",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 82,
+      "sho": 84,
+      "pas": 84,
+      "dri": 87,
+      "def": 49,
+      "phy": 78
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 173,
+    "weightKg": null,
+    "age": 33,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 83,
+      "sprintSpeed": 81,
+      "agility": 84,
+      "balance": 90,
+      "jumping": 75,
+      "stamina": 78,
+      "strength": 76,
+      "reactions": 85,
+      "aggression": 84,
+      "composure": 90,
+      "interceptions": 45,
+      "positioning": 82,
+      "vision": 85,
+      "ballControl": 86,
+      "crossing": 84,
+      "dribbling": 88,
+      "finishing": 82,
+      "freeKickAccuracy": 83,
+      "headingAccuracy": 63,
+      "longPassing": 80,
+      "shortPassing": 86,
+      "defensiveAwareness": 45,
+      "shotPower": 89,
+      "longShots": 84,
+      "standingTackle": 53,
+      "slidingTackle": 38,
+      "volleys": 82,
+      "curve": 87,
+      "penalties": 80,
+      "gkDiving": 15,
+      "gkHandling": 9,
+      "gkKicking": 8,
+      "gkReflexes": 15,
+      "gkPositioning": 14
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50548242.3a1b32593789a189df0c5c2203519b2c955bf24c68707693694a8597fcfa7f9b.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 20,
+      "seasonPoints": 20000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/216594-nabil-fekir/27-50548242/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50560266",
+    "baseId": "ferland",
+    "itemId": 50560266,
+    "baseItemId": 228618,
+    "name": "פרלאן מנדי",
+    "en": "Ferland Mendy",
+    "rating": 85,
+    "position": "LB",
+    "positions": [],
+    "nation": "France",
+    "league": "LALIGA EA SPORTS",
+    "club": "Real Madrid",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 89,
+      "sho": 70,
+      "pas": 79,
+      "dri": 81,
+      "def": 79,
+      "phy": 83
+    },
+    "foot": "L",
+    "weakFoot": 5,
+    "skillMoves": 3,
+    "heightCm": 180,
+    "weightKg": 73,
+    "age": 31,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        147
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 89,
+      "agility": 83,
+      "balance": 85,
+      "jumping": 87,
+      "stamina": 81,
+      "strength": 84,
+      "reactions": 86,
+      "aggression": 81,
+      "composure": 82,
+      "interceptions": 80,
+      "positioning": 84,
+      "vision": 79,
+      "ballControl": 80,
+      "crossing": 79,
+      "dribbling": 80,
+      "finishing": 67,
+      "freeKickAccuracy": 48,
+      "headingAccuracy": 71,
+      "longPassing": 80,
+      "shortPassing": 82,
+      "defensiveAwareness": 78,
+      "shotPower": 78,
+      "longShots": 72,
+      "standingTackle": 81,
+      "slidingTackle": 80,
+      "volleys": 56,
+      "curve": 77,
+      "penalties": 55,
+      "gkDiving": 7,
+      "gkHandling": 16,
+      "gkKicking": 9,
+      "gkReflexes": 9,
+      "gkPositioning": 10
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50560266.1a8797bbf1775996f0e98c6a734440d738dc026a3ff11e6bc2d3eddb6c4d6edb.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 24,
+      "seasonPoints": 24000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/228618-ferland-mendy/27-50560266/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50563721",
+    "baseId": "swanson",
+    "itemId": 50563721,
+    "baseItemId": 232073,
+    "name": "מלורי סוונסון",
+    "en": "Mallory Swanson",
+    "rating": 86,
+    "position": "LM",
+    "positions": [
+      "CAM",
+      "ST",
+      "LW"
+    ],
+    "nation": "United States",
+    "league": "National Women's Soccer League",
+    "club": "Chicago Stars FC",
+    "edition": "season2",
+    "face": {
+      "ovr": 86,
+      "pac": 90,
+      "sho": 82,
+      "pas": 84,
+      "dri": 85,
+      "def": 48,
+      "phy": 62
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 4,
+    "heightCm": 163,
+    "weightKg": 54,
+    "age": 28,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Quick Step",
+        "plus": true
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 90,
+      "agility": 80,
+      "balance": 80,
+      "jumping": 70,
+      "stamina": 85,
+      "strength": 44,
+      "reactions": 81,
+      "aggression": 75,
+      "composure": 80,
+      "interceptions": 49,
+      "positioning": 90,
+      "vision": 88,
+      "ballControl": 88,
+      "crossing": 80,
+      "dribbling": 86,
+      "finishing": 82,
+      "freeKickAccuracy": 74,
+      "headingAccuracy": 77,
+      "longPassing": 80,
+      "shortPassing": 88,
+      "defensiveAwareness": 41,
+      "shotPower": 83,
+      "longShots": 82,
+      "standingTackle": 47,
+      "slidingTackle": 44,
+      "volleys": 72,
+      "curve": 75,
+      "penalties": 72,
+      "gkDiving": 12,
+      "gkHandling": 11,
+      "gkKicking": 15,
+      "gkReflexes": 17,
+      "gkPositioning": 16
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50563721.52a546748725f976b072e10cd05d05c68bb1d63934c3f09868330a22641238df.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 29,
+      "seasonPoints": 29000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/232073-mallory-swanson/27-50563721/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50563325",
+    "baseId": "rashford",
+    "itemId": 50563325,
+    "baseItemId": 231677,
+    "name": "מרקוס רשפורד",
+    "en": "Marcus Rashford",
+    "rating": 86,
+    "position": "LW",
+    "positions": [
+      "LM",
+      "ST"
+    ],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Man Utd",
+    "edition": "season2",
+    "face": {
+      "ovr": 86,
+      "pac": 93,
+      "sho": 84,
+      "pas": 80,
+      "dri": 82,
+      "def": 39,
+      "phy": 71
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 5,
+    "heightCm": 188,
+    "weightKg": 80,
+    "age": 28,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 91,
+      "sprintSpeed": 94,
+      "agility": 80,
+      "balance": 74,
+      "jumping": 86,
+      "stamina": 78,
+      "strength": 73,
+      "reactions": 79,
+      "aggression": 54,
+      "composure": 79,
+      "interceptions": 32,
+      "positioning": 83,
+      "vision": 82,
+      "ballControl": 82,
+      "crossing": 84,
+      "dribbling": 85,
+      "finishing": 83,
+      "freeKickAccuracy": 81,
+      "headingAccuracy": 85,
+      "longPassing": 74,
+      "shortPassing": 80,
+      "defensiveAwareness": 35,
+      "shotPower": 94,
+      "longShots": 81,
+      "standingTackle": 34,
+      "slidingTackle": 29,
+      "volleys": 74,
+      "curve": 82,
+      "penalties": 85,
+      "gkDiving": 11,
+      "gkHandling": 6,
+      "gkKicking": 15,
+      "gkReflexes": 14,
+      "gkPositioning": 7
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50563325.c0ddf54bf5d611c3174b4386cc6d432823fda2c54446b5e7d8235d19181de7a7.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "premium-pass",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "level": 30,
+      "seasonPoints": 30000,
+      "premium": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/231677-marcus-rashford/27-50563325/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50594105",
+    "baseId": "ea-262457-olga-carmona",
+    "itemId": 50594105,
+    "baseItemId": 262457,
+    "name": "אולגה קרמונה",
+    "en": "Olga Carmona",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "LM"
+    ],
+    "nation": "Spain",
+    "league": "Arkema Première Ligue",
+    "club": "PSG",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 88,
+      "sho": 76,
+      "pas": 80,
+      "dri": 82,
+      "def": 82,
+      "phy": 77
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 160,
+    "weightKg": 51,
+    "age": 26,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        127,
+        128,
+        129,
+        130,
+        147
+      ]
+    },
+    "attributes": {
+      "acceleration": 87,
+      "sprintSpeed": 89,
+      "agility": 86,
+      "balance": 90,
+      "jumping": 87,
+      "stamina": 83,
+      "strength": 76,
+      "reactions": 85,
+      "aggression": 67,
+      "composure": 82,
+      "interceptions": 85,
+      "positioning": 78,
+      "vision": 72,
+      "ballControl": 85,
+      "crossing": 86,
+      "dribbling": 77,
+      "finishing": 76,
+      "freeKickAccuracy": 72,
+      "headingAccuracy": 75,
+      "longPassing": 76,
+      "shortPassing": 84,
+      "defensiveAwareness": 83,
+      "shotPower": 76,
+      "longShots": 78,
+      "standingTackle": 81,
+      "slidingTackle": 78,
+      "volleys": 50,
+      "curve": 75,
+      "penalties": 86,
+      "gkDiving": 8,
+      "gkHandling": 10,
+      "gkKicking": 13,
+      "gkReflexes": 6,
+      "gkPositioning": 7
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50594105.60e4603f0e220528f3f9ece2351a32dd9f65b9fe913a9019baceefc24736c794.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "objective",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "objectiveName": "Season 2 Daily Knockout Tournament",
+      "objectiveId": 154,
+      "summaryHe": "השלימו 7 מתוך 8 משימות בטורניר הנוקאאוט היומי.",
+      "summaryEn": "Complete 7 of 8 challenges in the Season 2 Daily Knockout Tournament and earn packs, coins, and exclusive rewards! All rewards are untradeable.",
+      "tasks": [
+        {
+          "name": "Win Tournament Five Times",
+          "he": "נצחו חמש פעמים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Win the Season 2 Daily Knockout Tournament five times."
+        },
+        {
+          "name": "Score in 50",
+          "he": "כבשו לפחות שער אחד ב־50 משחקים נפרדים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Score at least 1 goal in 50 separate matches in the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Win Tournament",
+          "he": "נצחו בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Win the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Score in 12",
+          "he": "כבשו לפחות שער אחד ב־12 משחקים נפרדים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Score at least 1 goal in 12 separate matches in the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Score 15",
+          "he": "כבשו 15 שערים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Score 15 goals in the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Play 20",
+          "he": "שחקו 20 משחקים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Play 20 matches in the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Play 10",
+          "he": "שחקו 10 משחקים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Play 10 matches in the Season 2 Daily Knockout Tournament."
+        },
+        {
+          "name": "Play 1",
+          "he": "שחקו 1 משחקים בטורניר הנוקאאוט היומי של עונה 2.",
+          "en": "Play 1 match in the Season 2 Daily Knockout Tournament."
+        }
+      ],
+      "dependencies": [],
+      "untradeable": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/262457-olga-carmona/27-50594105/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50516589",
+    "baseId": "ea-184941-alexis-sanchez",
+    "itemId": 50516589,
+    "baseItemId": 184941,
+    "name": "אלכסיס סאנצ׳ס",
+    "en": "Alexis Sánchez",
+    "rating": 85,
+    "position": "ST",
+    "positions": [
+      "CM",
+      "CAM"
+    ],
+    "nation": "Chile",
+    "league": "Major League Soccer",
+    "club": "CF Montréal",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 86,
+      "sho": 83,
+      "pas": 82,
+      "dri": 85,
+      "def": 56,
+      "phy": 72
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 169,
+    "weightKg": 65,
+    "age": 37,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 84,
+      "agility": 84,
+      "balance": 92,
+      "jumping": 78,
+      "stamina": 77,
+      "strength": 68,
+      "reactions": 82,
+      "aggression": 75,
+      "composure": 83,
+      "interceptions": 62,
+      "positioning": 83,
+      "vision": 82,
+      "ballControl": 84,
+      "crossing": 82,
+      "dribbling": 85,
+      "finishing": 83,
+      "freeKickAccuracy": 78,
+      "headingAccuracy": 80,
+      "longPassing": 78,
+      "shortPassing": 85,
+      "defensiveAwareness": 53,
+      "shotPower": 83,
+      "longShots": 83,
+      "standingTackle": 52,
+      "slidingTackle": 42,
+      "volleys": 79,
+      "curve": 86,
+      "penalties": 77,
+      "gkDiving": 10,
+      "gkHandling": 10,
+      "gkKicking": 15,
+      "gkReflexes": 13,
+      "gkPositioning": 12
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50516589.163fb91b771ef20e8d99107c53533d3c3654d02cac37ab539185d75b9c406b60.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "objective",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "objectiveName": "FC Heritage Circuit Tournament",
+      "objectiveId": 158,
+      "summaryHe": "השלימו את קבוצת המשימות בטורניר FC Heritage Circuit.",
+      "summaryEn": "Compete in the FC Heritage Circuit Tournament to earn a special FC Heritage Alexis Sánchez, packs and more. All rewards are untradeable.",
+      "tasks": [
+        {
+          "name": "Heritage Champion",
+          "he": "נצחו בטורניר FC Heritage Circuit שלוש פעמים.",
+          "en": "Win the FC Heritage Circuit Tournament 3 times."
+        },
+        {
+          "name": "Thunder Final",
+          "he": "נצחו בטורניר FC Heritage Circuit כשבהרכב הפותח לפחות שני שחקני פרמייר ליג.",
+          "en": "Win the FC Heritage Circuit Tournament while having Min. 2 Premier League players in your starting 11."
+        },
+        {
+          "name": "Ligue 1 Finest",
+          "he": "נצחו בשני משחקים בטורניר כשבהרכב הפותח לפחות שני שחקני Ligue 1.",
+          "en": "Win 2 matches while having Min. 2 Ligue 1 players in your starting 11 in the FC Heritage Circuit Tournament."
+        },
+        {
+          "name": "Oranje Legacy",
+          "he": "בשלו לפחות שער אחד בשלושה משחקים נפרדים בטורניר כשבהרכב הפותח לפחות שחקן הולנדי אחד.",
+          "en": "Assist at least 1 goal in 3 separate matches while having Min. 1 Dutch player in your starting 11 in the FC Heritage Circuit Tournament."
+        },
+        {
+          "name": "Madrid Royalty",
+          "he": "כבשו לפחות שער אחד בשלושה משחקים נפרדים בטורניר כשבהרכב הפותח לפחות שחקן ריאל מדריד אחד מ־LALIGA.",
+          "en": "Score at least 1 goal in 3 separate matches while having Min. 1 Real Madrid (LALIGA) player in your starting 11 in the FC Heritage Circuit Tournament."
+        },
+        {
+          "name": "French Thrill",
+          "he": "כבשו לפחות שני שערים במשחק אחד בטורניר כשבהרכב הפותח לפחות שחקן צרפתי אחד.",
+          "en": "Score at least 2 goals in 1 match while having Min. 1 French player in your starting 11 in the FC Heritage Circuit Tournament."
+        },
+        {
+          "name": "Serie A after Dark",
+          "he": "נצחו במשחק רבע גמר בטורניר כשבהרכב הפותח לפחות שני שחקני סרייה א׳.",
+          "en": "Win 1 Quarter-Finals match while having Min. 2 Serie A players in your starting 11 in the FC Heritage Circuit Tournament."
+        }
+      ],
+      "dependencies": [],
+      "untradeable": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/184941-alexis-sanchez/27-50516589/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50558501",
+    "baseId": "ea-226853-jeremiah-st-juste",
+    "itemId": 50558501,
+    "baseItemId": 226853,
+    "name": "ירמיה סנט יוסטה",
+    "en": "Jeremiah St. Juste",
+    "rating": 84,
+    "position": "CB",
+    "positions": [],
+    "nation": "Netherlands",
+    "league": "Eredivisie",
+    "club": "Feyenoord",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 90,
+      "sho": 66,
+      "pas": 70,
+      "dri": 73,
+      "def": 80,
+      "phy": 79
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 186,
+    "weightKg": 79,
+    "age": 30,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 91,
+      "agility": 77,
+      "balance": 71,
+      "jumping": 88,
+      "stamina": 78,
+      "strength": 78,
+      "reactions": 73,
+      "aggression": 78,
+      "composure": 70,
+      "interceptions": 80,
+      "positioning": 56,
+      "vision": 72,
+      "ballControl": 72,
+      "crossing": 62,
+      "dribbling": 73,
+      "finishing": 68,
+      "freeKickAccuracy": 45,
+      "headingAccuracy": 77,
+      "longPassing": 75,
+      "shortPassing": 78,
+      "defensiveAwareness": 80,
+      "shotPower": 76,
+      "longShots": 56,
+      "standingTackle": 81,
+      "slidingTackle": 78,
+      "volleys": 56,
+      "curve": 40,
+      "penalties": 68,
+      "gkDiving": 12,
+      "gkHandling": 14,
+      "gkKicking": 9,
+      "gkReflexes": 11,
+      "gkPositioning": 13
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50558501.ea0ddec0e3ae5e5a036c4565fe7498375f7a40f23d0d3b8ea0631fac9b8e9161.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "objective",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "objectiveName": "FC Heritage Circuit Completionist",
+      "objectiveId": 164,
+      "summaryHe": "השלימו את שלוש קבוצות המשימות Semi-Pro, Professional ו־World Class.",
+      "summaryEn": "Complete the FC Heritage Circuit Objectives to earn rewards. All rewards are untradeable.",
+      "tasks": [
+        {
+          "name": "FC Heritage Circuit World Class Challenge",
+          "he": "השלימו את קבוצת המשימות FC Heritage Circuit World Class Event.",
+          "en": "Complete the FC Heritage Circuit World Class Event objective."
+        },
+        {
+          "name": "FC Heritage Circuit Professional Challenge",
+          "he": "השלימו את קבוצת המשימות FC Heritage Circuit Professional Event.",
+          "en": "Complete the FC Heritage Circuit Professional Event objective."
+        },
+        {
+          "name": "FC Heritage Circuit Semi-Pro Challenge",
+          "he": "השלימו את קבוצת המשימות FC Heritage Circuit Semi-Pro Event.",
+          "en": "Complete the FC Heritage Circuit Semi-Pro Event objective."
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "FC Heritage Circuit Semi-Pro Event",
+          "tasks": [
+            {
+              "name": "Madrid After Midnight",
+              "he": "נצחו בשני משחקים באירוע Semi-Pro כשבהרכב הפותח לפחות שני שחקני ריאל מדריד מ־LALIGA.",
+              "en": "Win 2 matches while having Min. 2 Real Madrid (LALIGA) players in your starting 11 in the FC Heritage Circuit Semi-Pro Event."
+            },
+            {
+              "name": "MLS After Dark",
+              "he": "כבשו לפחות שני שערים במשחק אחד באירוע Semi-Pro כשבהרכב הפותח לפחות שחקן MLS אחד.",
+              "en": "Score at least 2 goals in one match while having Min. 1 MLS player in your starting 11 in the FC Heritage Circuit Semi-Pro Event."
+            },
+            {
+              "name": "French Fright",
+              "he": "בשלו לפחות שלושה שערים באירוע Semi-Pro כשבהרכב הפותח לפחות שחקן Ligue 1 אחד.",
+              "en": "Assist at least 3 goals while having Min. 1 Ligue 1 player in your starting 11 in the FC Heritage Circuit Semi-Pro Event."
+            },
+            {
+              "name": "Scream in Serie A",
+              "he": "כבשו בשני משחקים נפרדים באירוע Semi-Pro כשבהרכב הפותח לפחות שחקן סרייה א׳ אחד.",
+              "en": "Score in 2 separate matches while having Min. 1 Serie A player in your starting 11 in the FC Heritage Circuit Semi-Pro Event."
+            },
+            {
+              "name": "Win 1",
+              "he": "נצחו במשחק אחד באירוע Semi-Pro Event כדי להעפיל לשלב הבא.",
+              "en": "Win 1 match in the FC Heritage Circuit Semi-Pro Event and qualify for the FC Heritage Circuit Professional Event."
+            }
+          ]
+        },
+        {
+          "name": "FC Heritage Circuit Professional Event",
+          "tasks": [
+            {
+              "name": "Premier Pride",
+              "he": "נצחו בשני משחקים באירוע Professional כשבהרכב הפותח לפחות שלושה שחקני פרמייר ליג.",
+              "en": "Win 2 matches while having Min. 3 Premier League players in your starting 11 in the FC Heritage Circuit Professional Event."
+            },
+            {
+              "name": "French Connection",
+              "he": "כבשו לפחות שלושה שערים במשחק אחד באירוע Professional כשבהרכב הפותח לפחות שחקן צרפתי אחד.",
+              "en": "Score at least 3 goals in one match while having Min. 1 French player in your starting 11 in the FC Heritage Circuit Professional Event."
+            },
+            {
+              "name": "Belgian Tower",
+              "he": "בשלו לפחות שלושה שערים באירוע Professional כשבהרכב הפותח לפחות שחקן בלגי אחד.",
+              "en": "Assist at least 3 goals while having Min. 1 Belgian player in your starting 11 in the FC Heritage Circuit Professional Event."
+            },
+            {
+              "name": "Three Lions Legacy",
+              "he": "כבשו לפחות שער אחד בשני משחקים נפרדים באירוע Professional כשבהרכב הפותח לפחות שחקן אנגלי אחד.",
+              "en": "Score at least 1 goal in 2 separate matches while having Min. 1 English player in your starting 11 in the FC Heritage Circuit Professional Event."
+            },
+            {
+              "name": "Win 1",
+              "he": "נצחו במשחק אחד באירוע Professional Event כדי להעפיל לשלב הבא.",
+              "en": "Win 1 match in the FC Heritage Circuit Professional Event and qualify for the FC Heritage Circuit World Class Event."
+            }
+          ]
+        },
+        {
+          "name": "FC Heritage Circuit World Class Event",
+          "tasks": [
+            {
+              "name": "Bundesliga Backbone",
+              "he": "נצחו בשלושה משחקים באירוע World Class כשבהרכב הפותח לפחות שלושה שחקני בונדסליגה.",
+              "en": "Win 3 matches while having Min. 3 player items from Bundesliga in your starting 11 in the FC Heritage Circuit World Class Event."
+            },
+            {
+              "name": "Bavarian Thunder",
+              "he": "כבשו חמישה שערים באירוע World Class כשבהרכב הפותח לפחות שחקן באיירן מינכן אחד.",
+              "en": "Score 5 goals while having Min. 1 FC Bayern München (Bundesliga) player item in your starting 11 in the FC Heritage Circuit World Class Event."
+            },
+            {
+              "name": "Paris Power Surge",
+              "he": "בשלו ארבעה שערים באירוע World Class כשבהרכב הפותח לפחות שחקן PSG אחד.",
+              "en": "Assist 4 goals while having Min. 1 PSG (Ligue 1) player item in your starting 11 in the FC Heritage Circuit World Class Event."
+            },
+            {
+              "name": "Bernabéu Thunder",
+              "he": "כבשו לפחות שער אחד בשלושה משחקים נפרדים באירוע World Class כשבהרכב הפותח לפחות שחקן ריאל מדריד אחד מ־LALIGA.",
+              "en": "Score at least 1 goal in 3 separate matches while having Min. 1 Real Madrid (LALIGA) player item in your starting 11 in the FC Heritage Circuit World Class Event."
+            },
+            {
+              "name": "Win 1",
+              "he": "נצחו במשחק אחד באירוע World Class Event כדי להעפיל לשלב הבא.",
+              "en": "Win 1 match in the FC Heritage Circuit World Class Event and qualify for the FC Heritage Circuit Tournament."
+            }
+          ]
+        }
+      ],
+      "untradeable": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/226853-jeremiah-st-juste/27-50558501/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50509061",
+    "baseId": "ea-177413-axel-witsel",
+    "itemId": 50509061,
+    "baseItemId": 177413,
+    "name": "אקסל ויטסל",
+    "en": "Axel Witsel",
+    "rating": 84,
+    "position": "CDM",
+    "positions": [
+      "CB",
+      "CM"
+    ],
+    "nation": "Belgium",
+    "league": "Ligue 1 McDonald's",
+    "club": "OGC Nice",
+    "edition": "season2",
+    "face": {
+      "ovr": 84,
+      "pac": 79,
+      "sho": 74,
+      "pas": 84,
+      "dri": 80,
+      "def": 83,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 186,
+    "weightKg": 81,
+    "age": 37,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 79,
+      "agility": 73,
+      "balance": 75,
+      "jumping": 83,
+      "stamina": 78,
+      "strength": 88,
+      "reactions": 81,
+      "aggression": 82,
+      "composure": 85,
+      "interceptions": 86,
+      "positioning": 79,
+      "vision": 85,
+      "ballControl": 81,
+      "crossing": 78,
+      "dribbling": 80,
+      "finishing": 72,
+      "freeKickAccuracy": 72,
+      "headingAccuracy": 84,
+      "longPassing": 84,
+      "shortPassing": 90,
+      "defensiveAwareness": 82,
+      "shotPower": 74,
+      "longShots": 72,
+      "standingTackle": 81,
+      "slidingTackle": 80,
+      "volleys": 87,
+      "curve": 81,
+      "penalties": 88,
+      "gkDiving": 5,
+      "gkHandling": 7,
+      "gkKicking": 7,
+      "gkReflexes": 7,
+      "gkPositioning": 10
+    },
+    "backgroundId": 103,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50509061.11676e798ebfce52b963007a4d4b59520080de26de570612132ddee3590356fd.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/103.d0a1b07a7b79d33b9ab60d8490655479abeb214aa025c0a0b443afa6f2e20e2b.png",
+    "acquisition": {
+      "kind": "objective",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z",
+      "objectiveName": "Season 2 Daily Knockout Tournament Weekly Play Completionist",
+      "objectiveId": 167,
+      "summaryHe": "השלימו את קבוצת המשימות Weekly Play חמש פעמים.",
+      "summaryEn": "Complete all Season 2 Daily Knockout Tournament Weekly Play objectives to earn FC Heritage Axel Witsel and Coins! All rewards are untradeable.",
+      "tasks": [
+        {
+          "name": "5 Completions",
+          "he": "השלימו את קבוצת המשימות Weekly Play של טורניר הנוקאאוט היומי 5 פעמים.",
+          "en": "Complete the Season 2 Daily Knockout Tournament Weekly Play Objective 5 times."
+        },
+        {
+          "name": "4 Completions",
+          "he": "השלימו את קבוצת המשימות Weekly Play של טורניר הנוקאאוט היומי 4 פעמים.",
+          "en": "Complete the Season 2 Daily Knockout Tournament Weekly Play Objective 4 times."
+        },
+        {
+          "name": "3 Completions",
+          "he": "השלימו את קבוצת המשימות Weekly Play של טורניר הנוקאאוט היומי 3 פעמים.",
+          "en": "Complete the Season 2 Daily Knockout Tournament Weekly Play Objective 3 times."
+        },
+        {
+          "name": "2 Completions",
+          "he": "השלימו את קבוצת המשימות Weekly Play של טורניר הנוקאאוט היומי 2 פעמים.",
+          "en": "Complete the Season 2 Daily Knockout Tournament Weekly Play Objective 2 times."
+        },
+        {
+          "name": "1 Completion",
+          "he": "השלימו את קבוצת המשימות Weekly Play של טורניר הנוקאאוט היומי 1 פעמים.",
+          "en": "Complete the Season 2 Daily Knockout Tournament Weekly Play Objective 1 time."
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "Season 2 Daily Knockout Tournament Weekly Play",
+          "tasks": [
+            {
+              "name": "Score in 5",
+              "he": "כבשו לפחות שער אחד ב־5 משחקים נפרדים בטורניר הנוקאאוט היומי של עונה 2.",
+              "en": "Score at least 1 goal in 5 separate matches in the Season 2 Daily Knockout Tournament."
+            }
+          ]
+        }
+      ],
+      "untradeable": true
+    },
+    "sourceUrl": "https://www.fut.gg/players/177413-axel-witsel/27-50509061/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-84095411",
+    "baseId": "salah",
+    "itemId": 84095411,
+    "baseItemId": 209331,
+    "name": "מוחמד סלאח",
+    "en": "Mohamed Salah",
+    "rating": 87,
+    "position": "RM",
+    "positions": [
+      "CAM",
+      "RW",
+      "ST"
+    ],
+    "nation": "Egypt",
+    "league": "Trendyol Süper Lig",
+    "club": "Trabzonspor",
+    "edition": "season2",
+    "face": {
+      "ovr": 87,
+      "pac": 84,
+      "sho": 83,
+      "pas": 83,
+      "dri": 86,
+      "def": 45,
+      "phy": 72
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 175,
+    "weightKg": 72,
+    "age": 34,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        32,
+        43
+      ],
+      "plusPlus": [
+        126,
+        136
+      ]
+    },
+    "attributes": {
+      "acceleration": 85,
+      "sprintSpeed": 84,
+      "agility": 86,
+      "balance": 91,
+      "jumping": 77,
+      "stamina": 79,
+      "strength": 71,
+      "reactions": 87,
+      "aggression": 63,
+      "composure": 86,
+      "interceptions": 55,
+      "positioning": 86,
+      "vision": 86,
+      "ballControl": 86,
+      "crossing": 84,
+      "dribbling": 86,
+      "finishing": 85,
+      "freeKickAccuracy": 69,
+      "headingAccuracy": 59,
+      "longPassing": 79,
+      "shortPassing": 84,
+      "defensiveAwareness": 38,
+      "shotPower": 82,
+      "longShots": 78,
+      "standingTackle": 43,
+      "slidingTackle": 41,
+      "volleys": 83,
+      "curve": 87,
+      "penalties": 85,
+      "gkDiving": 14,
+      "gkHandling": 14,
+      "gkKicking": 9,
+      "gkReflexes": 14,
+      "gkPositioning": 11
+    },
+    "backgroundId": 134,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-84095411.27a211fccb89e13a4ef2f6095579fa88ba341e43d8cc712f0ee16321500f2a37.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/134.47dbecd569dfc3996bb6d0067af318c71ef8811cedc98fd7bd64be73895fff99.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/209331-mohamed-salah/27-84095411/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50521244",
+    "baseId": "ea-189596-thomas-muller",
+    "itemId": 50521244,
+    "baseItemId": 189596,
+    "name": "תומאס מולר",
+    "en": "Thomas Müller",
+    "rating": 80,
+    "position": "CAM",
+    "positions": [
+      "RM",
+      "RW",
+      "ST"
+    ],
+    "nation": "Germany",
+    "league": "Major League Soccer",
+    "club": "Whitecaps FC",
+    "edition": "season2",
+    "face": {
+      "ovr": 80,
+      "pac": 57,
+      "sho": 79,
+      "pas": 82,
+      "dri": 77,
+      "def": 55,
+      "phy": 65
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 185,
+    "weightKg": 76,
+    "age": 37,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        26,
+        32,
+        36,
+        43
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 53,
+      "sprintSpeed": 61,
+      "agility": 66,
+      "balance": 68,
+      "jumping": 73,
+      "stamina": 63,
+      "strength": 66,
+      "reactions": 88,
+      "aggression": 62,
+      "composure": 88,
+      "interceptions": 58,
+      "positioning": 90,
+      "vision": 87,
+      "ballControl": 80,
+      "crossing": 85,
+      "dribbling": 77,
+      "finishing": 81,
+      "freeKickAccuracy": 59,
+      "headingAccuracy": 79,
+      "longPassing": 79,
+      "shortPassing": 83,
+      "defensiveAwareness": 47,
+      "shotPower": 78,
+      "longShots": 74,
+      "standingTackle": 57,
+      "slidingTackle": 46,
+      "volleys": 84,
+      "curve": 81,
+      "penalties": 74,
+      "gkDiving": 6,
+      "gkHandling": 7,
+      "gkKicking": 11,
+      "gkReflexes": 14,
+      "gkPositioning": 14
+    },
+    "backgroundId": 134,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50521244.8f2e00c68b0b669a53ff0d3e6d61b7551fcab7d07d98841df142e032d621b5d0.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/134.47dbecd569dfc3996bb6d0067af318c71ef8811cedc98fd7bd64be73895fff99.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/189596-thomas-muller/27-50521244/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50535395",
+    "baseId": "ea-203747-hector-bellerin",
+    "itemId": 50535395,
+    "baseItemId": 203747,
+    "name": "הקטור ביירין",
+    "en": "Héctor Bellerín",
+    "rating": 76,
+    "position": "RB",
+    "positions": [
+      "RM"
+    ],
+    "nation": "Spain",
+    "league": "LALIGA EA SPORTS",
+    "club": "Real Betis",
+    "edition": "season2",
+    "face": {
+      "ovr": 76,
+      "pac": 78,
+      "sho": 54,
+      "pas": 70,
+      "dri": 74,
+      "def": 72,
+      "phy": 65
+    },
+    "foot": "R",
+    "weakFoot": 2,
+    "skillMoves": 3,
+    "heightCm": 178,
+    "weightKg": 74,
+    "age": 31,
+    "accelerate": "CONTROLLED",
+    "playstyles": [],
+    "roleIds": {
+      "plus": [
+        5,
+        24
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 77,
+      "sprintSpeed": 78,
+      "agility": 71,
+      "balance": 78,
+      "jumping": 72,
+      "stamina": 69,
+      "strength": 60,
+      "reactions": 74,
+      "aggression": 69,
+      "composure": 70,
+      "interceptions": 73,
+      "positioning": 70,
+      "vision": 69,
+      "ballControl": 75,
+      "crossing": 75,
+      "dribbling": 73,
+      "finishing": 59,
+      "freeKickAccuracy": 50,
+      "headingAccuracy": 60,
+      "longPassing": 66,
+      "shortPassing": 73,
+      "defensiveAwareness": 70,
+      "shotPower": 52,
+      "longShots": 43,
+      "standingTackle": 74,
+      "slidingTackle": 77,
+      "volleys": 44,
+      "curve": 69,
+      "penalties": 62,
+      "gkDiving": 8,
+      "gkHandling": 14,
+      "gkKicking": 14,
+      "gkReflexes": 12,
+      "gkPositioning": 13
+    },
+    "backgroundId": 134,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50535395.98b0ed231552c8d6f3440e47d8965ab929625f8382c5bea59e6e93adf92dedd2.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/134.47dbecd569dfc3996bb6d0067af318c71ef8811cedc98fd7bd64be73895fff99.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/203747-hector-bellerin/27-50535395/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50539776",
+    "baseId": "calhanoglu",
+    "itemId": 50539776,
+    "baseItemId": 208128,
+    "name": "הקאן צ׳להאנולו",
+    "en": "Hakan Çalhanoğlu",
+    "rating": 85,
+    "position": "CDM",
+    "positions": [
+      "CM"
+    ],
+    "nation": "Türkiye",
+    "league": "Serie A Enilive",
+    "club": "Lombardia FC",
+    "edition": "season2",
+    "face": {
+      "ovr": 85,
+      "pac": 68,
+      "sho": 81,
+      "pas": 85,
+      "dri": 82,
+      "def": 81,
+      "phy": 68
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 3,
+    "heightCm": 178,
+    "weightKg": 76,
+    "age": 32,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        15,
+        17,
+        20
+      ],
+      "plusPlus": [
+        116
+      ]
+    },
+    "attributes": {
+      "acceleration": 69,
+      "sprintSpeed": 68,
+      "agility": 84,
+      "balance": 82,
+      "jumping": 67,
+      "stamina": 78,
+      "strength": 56,
+      "reactions": 87,
+      "aggression": 84,
+      "composure": 85,
+      "interceptions": 84,
+      "positioning": 73,
+      "vision": 85,
+      "ballControl": 85,
+      "crossing": 79,
+      "dribbling": 78,
+      "finishing": 75,
+      "freeKickAccuracy": 85,
+      "headingAccuracy": 65,
+      "longPassing": 87,
+      "shortPassing": 88,
+      "defensiveAwareness": 84,
+      "shotPower": 88,
+      "longShots": 87,
+      "standingTackle": 82,
+      "slidingTackle": 79,
+      "volleys": 78,
+      "curve": 88,
+      "penalties": 92,
+      "gkDiving": 9,
+      "gkHandling": 14,
+      "gkKicking": 11,
+      "gkReflexes": 10,
+      "gkPositioning": 6
+    },
+    "backgroundId": 135,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50539776.48430055b91bc3592e7ae5416db6d0bbf4a81e30401c1455f5985bbfebb4dcd4.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/135.72935320adc3e37a16fe617069c3c06b63d76662f6f4b05610c25c6bd7e24dcc.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/208128-hakan-calhanoglu/27-50539776/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-84079428",
+    "baseId": "ea-193348-xherdan-shaqiri",
+    "itemId": 84079428,
+    "baseItemId": 193348,
+    "name": "ג׳רדאן שאקירי",
+    "en": "Xherdan Shaqiri",
+    "rating": 76,
+    "position": "CAM",
+    "positions": [
+      "RM",
+      "CM",
+      "RW",
+      "ST"
+    ],
+    "nation": "Switzerland",
+    "league": "Credit Suisse Super League",
+    "club": "FC Basel 1893",
+    "edition": "season2",
+    "face": {
+      "ovr": 76,
+      "pac": 67,
+      "sho": 79,
+      "pas": 78,
+      "dri": 78,
+      "def": 40,
+      "phy": 71
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 5,
+    "heightCm": 169,
+    "weightKg": 72,
+    "age": 35,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        21,
+        31,
+        32,
+        36,
+        43
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 69,
+      "sprintSpeed": 66,
+      "agility": 74,
+      "balance": 85,
+      "jumping": 68,
+      "stamina": 72,
+      "strength": 78,
+      "reactions": 66,
+      "aggression": 55,
+      "composure": 81,
+      "interceptions": 42,
+      "positioning": 75,
+      "vision": 79,
+      "ballControl": 83,
+      "crossing": 78,
+      "dribbling": 75,
+      "finishing": 76,
+      "freeKickAccuracy": 86,
+      "headingAccuracy": 45,
+      "longPassing": 75,
+      "shortPassing": 77,
+      "defensiveAwareness": 30,
+      "shotPower": 85,
+      "longShots": 80,
+      "standingTackle": 45,
+      "slidingTackle": 44,
+      "volleys": 75,
+      "curve": 86,
+      "penalties": 78,
+      "gkDiving": 13,
+      "gkHandling": 12,
+      "gkKicking": 12,
+      "gkReflexes": 11,
+      "gkPositioning": 11
+    },
+    "backgroundId": 135,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-84079428.18b294c6c06c9d3480801e470ba333655ee6c40e47bae17bc8842b5ea5bb37ff.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/135.72935320adc3e37a16fe617069c3c06b63d76662f6f4b05610c25c6bd7e24dcc.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/193348-xherdan-shaqiri/27-84079428/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50544067",
+    "baseId": "ea-212419-tyrone-mings",
+    "itemId": 50544067,
+    "baseItemId": 212419,
+    "name": "טיירון מינגס",
+    "en": "Tyrone Mings",
+    "rating": 77,
+    "position": "CB",
+    "positions": [],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Aston Villa",
+    "edition": "season2",
+    "face": {
+      "ovr": 77,
+      "pac": 57,
+      "sho": 44,
+      "pas": 67,
+      "dri": 61,
+      "def": 76,
+      "phy": 77
+    },
+    "foot": "L",
+    "weakFoot": 2,
+    "skillMoves": 2,
+    "heightCm": 196,
+    "weightKg": 77,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        11
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 49,
+      "sprintSpeed": 63,
+      "agility": 34,
+      "balance": 37,
+      "jumping": 80,
+      "stamina": 55,
+      "strength": 85,
+      "reactions": 74,
+      "aggression": 84,
+      "composure": 71,
+      "interceptions": 75,
+      "positioning": 53,
+      "vision": 57,
+      "ballControl": 65,
+      "crossing": 70,
+      "dribbling": 65,
+      "finishing": 37,
+      "freeKickAccuracy": 37,
+      "headingAccuracy": 77,
+      "longPassing": 75,
+      "shortPassing": 75,
+      "defensiveAwareness": 77,
+      "shotPower": 61,
+      "longShots": 42,
+      "standingTackle": 76,
+      "slidingTackle": 78,
+      "volleys": 34,
+      "curve": 53,
+      "penalties": 45,
+      "gkDiving": 7,
+      "gkHandling": 10,
+      "gkKicking": 13,
+      "gkReflexes": 15,
+      "gkPositioning": 7
+    },
+    "backgroundId": 135,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50544067.30a68063d26abd38fe9fc089782566a797a704d9cc8020171bef44894dc84ad1.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/135.72935320adc3e37a16fe617069c3c06b63d76662f6f4b05610c25c6bd7e24dcc.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/212419-tyrone-mings/27-50544067/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-67289794",
+    "baseId": "ea-180930-edin-dzeko",
+    "itemId": 67289794,
+    "baseItemId": 180930,
+    "name": "אדין דז׳קו",
+    "en": "Edin Džeko",
+    "rating": 78,
+    "position": "ST",
+    "positions": [],
+    "nation": "Bosnia Herzegovina",
+    "league": "Bundesliga",
+    "club": "FC Schalke 04",
+    "edition": "season2",
+    "face": {
+      "ovr": 78,
+      "pac": 47,
+      "sho": 81,
+      "pas": 73,
+      "dri": 76,
+      "def": 40,
+      "phy": 75
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 3,
+    "heightCm": 193,
+    "weightKg": 80,
+    "age": 40,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        44
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 44,
+      "sprintSpeed": 49,
+      "agility": 62,
+      "balance": 55,
+      "jumping": 75,
+      "stamina": 68,
+      "strength": 82,
+      "reactions": 76,
+      "aggression": 65,
+      "composure": 87,
+      "interceptions": 50,
+      "positioning": 84,
+      "vision": 77,
+      "ballControl": 80,
+      "crossing": 67,
+      "dribbling": 77,
+      "finishing": 83,
+      "freeKickAccuracy": 54,
+      "headingAccuracy": 86,
+      "longPassing": 75,
+      "shortPassing": 78,
+      "defensiveAwareness": 39,
+      "shotPower": 84,
+      "longShots": 76,
+      "standingTackle": 28,
+      "slidingTackle": 16,
+      "volleys": 83,
+      "curve": 67,
+      "penalties": 67,
+      "gkDiving": 9,
+      "gkHandling": 11,
+      "gkKicking": 13,
+      "gkReflexes": 15,
+      "gkPositioning": 15
+    },
+    "backgroundId": 136,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-67289794.e142f7e74ae86ec150b182a328ab955cbc8c0c9059463c91c17bf363fd44772a.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/136.354e5b2ef3a4e37ba984e8c52e648a9a5baeaa6cec14ec89e86c6bc976d32404.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/180930-edin-dzeko/27-67289794/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50524014",
+    "baseId": "ea-192366-nicolas-otamendi",
+    "itemId": 50524014,
+    "baseItemId": 192366,
+    "name": "ניקולס אוטמנדי",
+    "en": "Nicolás Otamendi",
+    "rating": 78,
+    "position": "CB",
+    "positions": [],
+    "nation": "Argentina",
+    "league": "Liga Profesional de Fútbol",
+    "club": "River Plate",
+    "edition": "season2",
+    "face": {
+      "ovr": 78,
+      "pac": 35,
+      "sho": 57,
+      "pas": 65,
+      "dri": 61,
+      "def": 79,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 2,
+    "heightCm": 183,
+    "weightKg": 78,
+    "age": 38,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        12
+      ],
+      "plusPlus": [
+        113
+      ]
+    },
+    "attributes": {
+      "acceleration": 35,
+      "sprintSpeed": 35,
+      "agility": 58,
+      "balance": 58,
+      "jumping": 82,
+      "stamina": 87,
+      "strength": 81,
+      "reactions": 77,
+      "aggression": 89,
+      "composure": 77,
+      "interceptions": 80,
+      "positioning": 55,
+      "vision": 62,
+      "ballControl": 65,
+      "crossing": 52,
+      "dribbling": 56,
+      "finishing": 54,
+      "freeKickAccuracy": 39,
+      "headingAccuracy": 80,
+      "longPassing": 76,
+      "shortPassing": 74,
+      "defensiveAwareness": 78,
+      "shotPower": 69,
+      "longShots": 56,
+      "standingTackle": 79,
+      "slidingTackle": 79,
+      "volleys": 57,
+      "curve": 50,
+      "penalties": 45,
+      "gkDiving": 12,
+      "gkHandling": 5,
+      "gkKicking": 8,
+      "gkReflexes": 12,
+      "gkPositioning": 11
+    },
+    "backgroundId": 136,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50524014.c2d95239a23a0ea58c57ab00e85e0651ba710537f83ae24a1bdf3f846880de4f.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/136.354e5b2ef3a4e37ba984e8c52e648a9a5baeaa6cec14ec89e86c6bc976d32404.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/192366-nicolas-otamendi/27-50524014/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  },
+  {
+    "id": "season2-50525180",
+    "baseId": "ea-193532-gary-medel",
+    "itemId": 50525180,
+    "baseItemId": 193532,
+    "name": "גארי מדל",
+    "en": "Gary Medel",
+    "rating": 68,
+    "position": "CDM",
+    "positions": [
+      "CB"
+    ],
+    "nation": "Chile",
+    "league": "CONMEBOL Libertadores",
+    "club": "Uni. Católica",
+    "edition": "season2",
+    "face": {
+      "ovr": 68,
+      "pac": 48,
+      "sho": 49,
+      "pas": 58,
+      "dri": 63,
+      "def": 68,
+      "phy": 71
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 172,
+    "weightKg": 79,
+    "age": 39,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [
+        12,
+        14,
+        15
+      ],
+      "plusPlus": []
+    },
+    "attributes": {
+      "acceleration": 47,
+      "sprintSpeed": 48,
+      "agility": 58,
+      "balance": 77,
+      "jumping": 67,
+      "stamina": 64,
+      "strength": 72,
+      "reactions": 70,
+      "aggression": 77,
+      "composure": 71,
+      "interceptions": 70,
+      "positioning": 58,
+      "vision": 56,
+      "ballControl": 64,
+      "crossing": 50,
+      "dribbling": 60,
+      "finishing": 36,
+      "freeKickAccuracy": 45,
+      "headingAccuracy": 64,
+      "longPassing": 66,
+      "shortPassing": 65,
+      "defensiveAwareness": 70,
+      "shotPower": 65,
+      "longShots": 59,
+      "standingTackle": 66,
+      "slidingTackle": 65,
+      "volleys": 56,
+      "curve": 35,
+      "penalties": 52,
+      "gkDiving": 14,
+      "gkHandling": 7,
+      "gkKicking": 9,
+      "gkReflexes": 6,
+      "gkPositioning": 6
+    },
+    "backgroundId": 136,
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50525180.d953195d5f3d3ae79df28bbf53832bbc74842510693bf78534a81e0aa653e48d.webp",
+    "backgroundUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/rarities-level-0-large/136.354e5b2ef3a4e37ba984e8c52e648a9a5baeaa6cec14ec89e86c6bc976d32404.png",
+    "acquisition": {
+      "kind": "unverified",
+      "startsAt": "2026-10-22T07:00:00Z",
+      "endsAt": "2026-12-03T07:59:59Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/193532-gary-medel/27-50525180/",
+    "checkedAt": "2026-10-22T07:46:27.906Z"
+  }
+]
