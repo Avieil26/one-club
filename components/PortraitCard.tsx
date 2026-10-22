@@ -12,6 +12,7 @@ import { playerMedia, type FaceStats } from '@/lib/playerMedia';
 import { HERO_ART } from '@/lib/heroArt';
 import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
+import { SEASON2_ART } from '@/lib/season2Art';
 
 export const PORTRAIT_RATIO = 1.6;
 
@@ -721,7 +722,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -733,6 +734,10 @@ export function PortraitCard({
   compactStats?: boolean;
 }) {
   const artId = player.baseId ?? player.id;
+  if (!shell && (edition === 'season2' || (edition === 'auto' && player.edition === 'season2'))) {
+    const art = SEASON2_ART[player.id];
+    if (art) return <Image accessibilityLabel={`${player.en || player.name} · ${player.rating} · Season 2`} source={art} resizeMode="contain" style={{ width, height: Math.round(width * 419 / 300) }} />;
+  }
   const showDestined = !shell && (edition === 'auto' ? player.edition === 'destined' : edition === 'destined');
   const destined = showDestined ? DESTINED_ART[artId] : undefined;
   if (destined) return <DestinedPortraitCard art={destined} width={width} />;
@@ -775,7 +780,7 @@ export function PortraitCard({
       width={width}
       variant={variant}
       shell={shell}
-      edition={edition}
+      edition={edition === 'season2' ? 'base' : edition}
       photoOverride={photoOverride}
       faceOverride={faceOverride}
       heightOverride={heightOverride}

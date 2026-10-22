@@ -7,6 +7,8 @@ import { ClubBadge } from '@/components/ClubBadge';
 import { MarketQuote } from '@/components/MarketQuote';
 import { NationFlag } from '@/components/NationFlag';
 import { PortraitCard } from '@/components/PortraitCard';
+import { Season2Acquisition } from '@/components/Season2Acquisition';
+import { season2For, season2CardMeta } from '@/lib/season2';
 import { destinedCardMeta, destinedEdition } from '@/lib/destinedEditions';
 import { futureStarsFor } from '@/lib/futureStars';
 import { marketQuote, useMarketPrices } from '@/lib/marketPrices';
@@ -17,7 +19,7 @@ import { playerMedia } from '@/lib/playerMedia';
 import { futureStarsCardMeta, otwCardMeta, playerCardMeta, statGroups, statTone, totwCardMeta, type MetaAttr } from '@/lib/playerMeta';
 import { boostedStat, chemFaceDelta, CHEM_STYLES, type ChemBoosts } from '@/lib/chemStyles';
 import { LEAGUE_LOGO } from '@/lib/leagueLogo';
-import { playerHeight } from '@/lib/playerHeight';
+import { cmToFeet, playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
 import { playerDisplayName } from '@/lib/playerDisplayName';
@@ -137,7 +139,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
     );
   }
   const logo = LEAGUE_LOGO[player.league];
-  const height = playerHeight(player.baseId ?? player.id);
+  const height = player.edition === 'season2' && player.heightCm ? { cm: player.heightCm, feet: cmToFeet(player.heightCm) } : playerHeight(player.baseId ?? player.id);
   return (
     <View style={{ gap: compact ? 6 : 8, alignItems: 'flex-end' }}>
       <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
@@ -248,7 +250,8 @@ function ago(iso: string, language: 'he' | 'en' = 'he') {
   return language === 'en' ? `${days}d ago` : `לפני ${days} ימים`;
 }
 
-function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' {
+function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2' {
+  if (player.edition === 'season2') return 'season2';
   if (player.edition === 'destined' || player.edition === 'hero' || player.edition === 'totw' || player.edition === 'otw' || player.edition === 'future-stars' || player.edition === 'star-performer') return player.edition;
   return 'base';
 }
@@ -263,7 +266,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const media = playerMedia(personId);
   const baseMeta = playerCardMeta(personId);
   const [talk, setTalk] = useState<PlayerTalk | null>(null);
-  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer'>(opening(player));
+  const [edition, setEdition] = useState<'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2'>(opening(player));
   const [shine, setShine] = useState(false);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -345,13 +348,15 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   const totw = totwFor(personId);
   const starPerformer = starPerformerFor(personId);
   const otw = otwFor(personId);
+  const season2 = season2For(player.id);
+  const viewingSeason2 = edition === 'season2' && season2 != null;
   const viewingPromo = edition === 'destined' && promo != null;
   const viewingFutureStars = edition === 'future-stars' && (futureStar != null || player.edition === 'future-stars');
   const viewingTotw = edition === 'totw' && (totw != null || player.edition === 'totw');
   const viewingStarPerformer = edition === 'star-performer' && (starPerformer != null || player.edition === 'star-performer');
   const viewingOtw = edition === 'otw' && (otw != null || player.edition === 'otw');
   const viewingHero = edition === 'hero';
-  const card: FcPlayer = viewingPromo
+  const card: FcPlayer = viewingSeason2 ? season2 : viewingPromo
     ? { ...player, rating: promo.rating, position: promo.position, club: promo.club, league: promo.league, edition: 'destined' }
     : viewingFutureStars
       ? {
@@ -433,8 +438,8 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       }),
     ) as Partial<Record<MetaAttr, number>>,
   } : null;
-  const meta = viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : viewingFutureStars ? (futureStarsCardMeta(personId) ?? baseMeta) : viewingOtw ? (otwCardMeta(personId) ?? baseMeta) : starMeta ?? baseMeta;
-  const face = viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingFutureStars || viewingOtw ? card.face : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
+  const meta = viewingSeason2 ? season2CardMeta(season2) : viewingPromo ? destinedCardMeta(personId) : viewingTotw ? (totwCardMeta(totw ? personId : player.id) ?? baseMeta) : viewingFutureStars ? (futureStarsCardMeta(personId) ?? baseMeta) : viewingOtw ? (otwCardMeta(personId) ?? baseMeta) : starMeta ?? baseMeta;
+  const face = viewingSeason2 ? season2.face : viewingPromo ? promo.face : viewingTotw ? (card.face ?? media.face) : viewingFutureStars || viewingOtw ? card.face : viewingStarPerformer ? (starPerformer?.face ?? player.face) : viewingHero ? player.face : media.face;
   const growth = Math.max(0, 89 - card.rating); // realistic potential delta if not strictly defined
   const metaStats = meta?.stats;
 
@@ -464,7 +469,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
       return value ? [{ ...row, value }] : [];
     }),
   }));
-  const shown = viewingStarPerformer ? 'star-performer' : viewingPromo
+  const shown = viewingSeason2 ? 'season2' : viewingStarPerformer ? 'star-performer' : viewingPromo
     ? 'destined'
     : viewingFutureStars
       ? 'future-stars'
@@ -475,7 +480,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           : viewingHero
             ? 'hero'
             : 'base';
-  const quoteId = viewingStarPerformer ? `${personId}--star-performer` : viewingPromo
+  const quoteId = viewingSeason2 ? season2.id : viewingStarPerformer ? `${personId}--star-performer` : viewingPromo
     ? `${personId}--destined`
     : viewingFutureStars
       ? `${personId}--future-stars`
@@ -486,15 +491,17 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           : personId;
   const shineId = quoteId.endsWith('--totw') ? `${quoteId}-shine` : '';
   const shineQuote = shineId ? marketQuote(shineId) : null;
-  const quote = shine && shineQuote ? shineQuote : marketQuote(quoteId);
+  const quote = viewingSeason2 ? null : shine && shineQuote ? shineQuote : marketQuote(quoteId);
   const hasRegular = player.edition !== 'hero' && !(player.edition === 'totw' && !player.baseId);
-  const alts: { edition: 'base' | 'destined' | 'totw' | 'otw' | 'future-stars' | 'star-performer'; label: string }[] = [];
+  const alts: { edition: 'base' | 'destined' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2'; label: string }[] = [];
   if (hasRegular && shown !== 'base') alts.push({ edition: 'base', label: t('קלף רגיל', 'Base card') });
   if (promo && shown !== 'destined') alts.push({ edition: 'destined', label: t('קלף פרומו', 'Promo card') });
   if ((totw || (player.edition === 'totw' && player.baseId)) && shown !== 'totw') alts.push({ edition: 'totw', label: 'TOTW' });
   if ((starPerformer || (player.edition === 'star-performer' && player.baseId)) && shown !== 'star-performer') alts.push({ edition: 'star-performer', label: 'Star Performer' });
   if (otw && shown !== 'otw') alts.push({ edition: 'otw', label: 'OTW' });
   if (futureStar && shown !== 'future-stars') alts.push({ edition: 'future-stars', label: 'Future Stars' });
+
+  if (viewingSeason2) alts.length = 0;
 
   const foot = meta?.foot;
   const iconPage = !!player.icon;
@@ -706,8 +713,10 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
         </View>
       ) : null}
 
+      {viewingSeason2 ? <Season2Acquisition card={season2} /> : null}
+
       {/* POTENTIAL TOGGLE IN ULTIMATE DOSSIER */}
-      {meta && (card.rating < 88) ? (
+      {meta && !viewingSeason2 && (card.rating < 88) ? (
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.03)', padding: 12, borderRadius: 14, borderWidth: 1, borderColor: showPotential ? '#38bdf8' : 'rgba(255,255,255,0.08)' }}>
           <View style={{ alignItems: 'flex-end', gap: 2 }}>
             <Text style={{ color: showPotential ? '#38bdf8' : '#F7F4EA', fontSize: 14, fontWeight: '800' }}>

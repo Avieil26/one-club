@@ -12,6 +12,7 @@ import { useColumns } from '@/components/TileGrid';
 import { Card, colors, Muted, Screen, Title } from '@/components/ui';
 import { displayName } from '@/lib/labels';
 import { HomeSbcOverview } from '@/components/HomeSbcOverview';
+import { HomeSeason2Overview } from '@/components/HomeSeason2Overview';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 
@@ -177,6 +178,7 @@ export default function HomeScreen() {
         <Title>{t('מה משחקים היום?', 'What are we playing today?')}</Title>
         <Muted>{user ? t(`היי ${user.displayName}, הנה מה שחדש ומה שכדאי להספיק.`, `Hi ${user.displayName}, see what is new and what ends soon.`) : t('פתרונות SBC, שחקנים ואתגרי קריירה — מתחילים בלי חשבון.', 'SBC solutions, players and Career challenges — start without an account.')}</Muted>
       </View>
+      <HomeSeason2Overview />
       <HomeSbcOverview />
       <Text accessibilityRole="header" style={{ color: colors.text, fontSize: 22, fontWeight: '900', marginTop: 14, textAlign: rtl ? 'right' : 'left' }}>{t('המגרשים שלכם', 'Your game modes')}</Text>
       <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', flexWrap: 'wrap', gap: 12 }}>

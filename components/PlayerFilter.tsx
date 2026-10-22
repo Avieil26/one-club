@@ -26,6 +26,7 @@ const KINDS: { id: CardKind; he: string; en: string }[] = [
   { id: 'totw', he: 'TOTW', en: 'TOTW' },
   { id: 'promo', he: 'OTW', en: 'OTW' },
   { id: 'future-stars', he: 'Future Stars', en: 'Future Stars' },
+  { id: 'season2', he: 'עונה 2', en: 'Season 2' },
 ];
 
 const TEXT = '#F4F7F2';
@@ -137,6 +138,9 @@ export function PlayerFilter({
             <TypePick label="TOTW" kind="totw" active={filters.kind === 'totw'} onPress={() => toggleKind('totw')} />
             <TypePick label="OTW" kind="otw" active={filters.kind === 'promo'} onPress={() => toggleKind('promo')} />
             <TypePick label="Future Stars" kind="future-stars" active={filters.kind === 'future-stars'} onPress={() => toggleKind('future-stars')} />
+            <Pressable accessibilityRole="button" onPress={() => toggleKind('season2')} style={{ padding: 20, borderRadius: 12, borderWidth: 1, borderColor: filters.kind === 'season2' ? '#FFAB65' : LINE }}>
+              <Text style={{ color: TEXT, fontWeight: '800' }}>{t('עונה 2 · כל העיצובים', 'Season 2 · All designs')}</Text>
+            </Pressable>
           </ScrollView>
         ) : null}
 
