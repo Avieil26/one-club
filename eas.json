@@ -31,6 +31,16 @@
       "extends": "apk",
       "channel": "android-season2-20261022",
       "environment": "production"
+    },
+    "play-store": {
+      "extends": "apk-season2",
+      "distribution": "store",
+      "developmentClient": false,
+      "environment": "production",
+      "autoIncrement": true,
+      "android": {
+        "buildType": "app-bundle"
+      }
     }
   },
   "submit": {
