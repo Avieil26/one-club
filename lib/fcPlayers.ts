@@ -1,6 +1,7 @@
 import { destinedEdition } from '@/lib/destinedEditions';
 import { futureStarsFor } from '@/lib/futureStars';
 import { DB_PLAYERS } from '@/lib/playerDb';
+import { RECENT_CARDS } from '@/lib/recentCards';
 import { SEASON2_CARDS } from '@/lib/season2';
 import { otwFor, starPerformerFor, totwFor } from '@/lib/specialCards';
 
@@ -18,7 +19,7 @@ export type FcPlayer = {
   positions?: string[];
   playstyles?: PlayStyle[];
   /** Promo card of an existing player. The regular card keeps the plain id. */
-  edition?: 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2';
+  edition?: 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2' | 'recent';
   /** English name used on the card and in search. */
   en?: string;
   face?: { ovr?: number; pac: number; sho: number; pas: number; dri: number; def: number; phy: number };
@@ -274,4 +275,4 @@ function withPromoCards(players: FcPlayer[]): FcPlayer[] {
 }
 
 /** Every card in the database, including promo versions beside their regular card. */
-export const PLAYERS: FcPlayer[] = [...withPromoCards(DB_PLAYERS), ...SEASON2_CARDS];
+export const PLAYERS: FcPlayer[] = [...withPromoCards(DB_PLAYERS), ...SEASON2_CARDS, ...RECENT_CARDS];

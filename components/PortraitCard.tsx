@@ -12,6 +12,7 @@ import { playerMedia, type FaceStats } from '@/lib/playerMedia';
 import { HERO_ART } from '@/lib/heroArt';
 import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
+import { RECENT_CARD_ART } from '@/lib/recentCardArt';
 import { SEASON2_ART } from '@/lib/season2Art';
 
 export const PORTRAIT_RATIO = 1.6;
@@ -722,7 +723,7 @@ export function PortraitCard({
   player: FcPlayer;
   width?: number;
   variant?: 'full' | 'pitch';
-  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2';
+  edition?: 'auto' | 'base' | 'destined' | 'hero' | 'totw' | 'otw' | 'future-stars' | 'star-performer' | 'season2' | 'recent';
   /** Same card chrome, with no player on it. */
   shell?: boolean;
   /** Purple aura around a TOTW card. Same card, only the glow changes. */
@@ -734,6 +735,10 @@ export function PortraitCard({
   compactStats?: boolean;
 }) {
   const artId = player.baseId ?? player.id;
+  if (!shell && (edition === 'recent' || (edition === 'auto' && player.edition === 'recent'))) {
+    const art = RECENT_CARD_ART[player.id];
+    if (art) return <Image accessibilityLabel={`${player.en || player.name} · ${player.rating} · New release`} source={art} resizeMode="contain" style={{ width, height: Math.round(width * 419 / 300) }} />;
+  }
   if (!shell && (edition === 'season2' || (edition === 'auto' && player.edition === 'season2'))) {
     const art = SEASON2_ART[player.id];
     if (art) return <Image accessibilityLabel={`${player.en || player.name} · ${player.rating} · Season 2`} source={art} resizeMode="contain" style={{ width, height: Math.round(width * 419 / 300) }} />;
@@ -780,7 +785,7 @@ export function PortraitCard({
       width={width}
       variant={variant}
       shell={shell}
-      edition={edition === 'season2' ? 'base' : edition}
+      edition={edition === 'season2' || edition === 'recent' ? 'base' : edition}
       photoOverride={photoOverride}
       faceOverride={faceOverride}
       heightOverride={heightOverride}

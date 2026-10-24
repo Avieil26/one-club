@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 
 import rows from '@/assets/data/marketPrices.json';
+import { RECENT_CARDS } from '@/lib/recentCards';
 
-let table = rows as unknown as Record<string, [number, number]>;
+const recentPrices = Object.fromEntries(RECENT_CARDS.filter(card => card.price.kind === 'market').map(card => [card.id, [card.price.console || 0, card.price.pc || 0] as [number, number]]));
+let table: Record<string, [number, number]> = { ...rows as unknown as Record<string, [number, number]>, ...recentPrices };
 let started = false;
 const listeners = new Set<() => void>();
 
@@ -48,6 +50,10 @@ export type MarketPrice = { console?: number; pc?: number };
 /** Real market price for a card that can be bought. TOTW cards with no live listing are explicitly shown as 0. */
 export function marketQuote(id: string): MarketPrice | null {
   const row = table[id];
+  if (id.startsWith('recent-')) {
+    if (!row) return null;
+    return { console: row[0] > 0 ? row[0] : undefined, pc: row[1] > 0 ? row[1] : undefined };
+  }
   if (row) return { console: row[0], pc: row[1] };
   if (id.endsWith('--totw')) return { console: 0, pc: 0 };
   return null;

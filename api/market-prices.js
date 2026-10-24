@@ -1,3 +1,4 @@
+import recentCards from '../assets/data/recentCards20261024.json';
 import eaByCard from '../assets/data/priceEaIds.json';
 import totw4EaByCard from '../assets/data/totw4PriceEaIds.json';
 
@@ -26,25 +27,27 @@ export default async function handler() {
       load(file('player-prices-pc')),
     ]);
 
+    const decodeMarket = data => {
+      let id = data.id0;
+      const ids = [id, ...data.d.map(delta => id += delta)];
+      return new Map(ids.map((eaId, i) => [eaId, data.s[i] === 0 ? data.p[i] || 0 : 0]));
+    };
+    const consolePrices = decodeMarket(ps);
+    const pcPrices = decodeMarket(pc);
     const byEa = new Map();
-    let current = index.id0;
-    const ids = [current];
-    for (const delta of index.d) {
-      current += delta;
-      ids.push(current);
+    let id = index.id0;
+    const ids = [id, ...index.d.map(delta => id += delta)];
+    for (const eaId of ids) {
+      const row = [consolePrices.get(eaId) || 0, pcPrices.get(eaId) || 0];
+      if (row.some(amount => amount > 0)) byEa.set(eaId, row);
     }
-    for (let i = 0; i < ids.length; i++) {
-      if (ps.s[i] !== 0) continue;
-      const consolePrice = ps.p[i] || 0;
-      const pcPrice = pc.p[i] || 0;
-      if (consolePrice <= 0 && pcPrice <= 0) continue;
-      byEa.set(ids[i], [consolePrice, pcPrice]);
-    }
+    const recentIds = Object.fromEntries(recentCards.filter(c => c.price.kind === 'market').map(c => [c.id, c.itemId]));
 
     const prices = {};
-    for (const [id, eaId] of Object.entries({ ...eaByCard, ...totw4EaByCard })) {
+    for (const [id, eaId] of Object.entries({ ...eaByCard, ...totw4EaByCard, ...recentIds })) {
       const row = byEa.get(eaId);
       if (row) prices[id] = row;
+      else if (id.startsWith('recent-')) prices[id] = [0, 0];
     }
 
     return new Response(JSON.stringify(prices), {

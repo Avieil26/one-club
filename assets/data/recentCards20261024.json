@@ -1,0 +1,6617 @@
+[
+  {
+    "id": "recent-67180169",
+    "baseId": "ea-71305-joaquin-seys",
+    "itemId": 67180169,
+    "baseItemId": 71305,
+    "name": "חואקין סייס",
+    "en": "Joaquin Seys",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "RB",
+      "RM",
+      "LM"
+    ],
+    "nation": "Belgium",
+    "league": "1A Pro League",
+    "club": "Club Brugge",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 85,
+      "sho": 65,
+      "pas": 81,
+      "dri": 83,
+      "def": 82,
+      "phy": 80
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 2,
+    "heightCm": 178,
+    "weightKg": 63,
+    "age": 21,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        146,
+        147
+      ]
+    },
+    "attributes": {
+      "acceleration": 85,
+      "sprintSpeed": 85,
+      "positioning": 80,
+      "finishing": 72,
+      "shotPower": 67,
+      "longShots": 45,
+      "volleys": 75,
+      "penalties": 50,
+      "vision": 80,
+      "crossing": 86,
+      "freeKickAccuracy": 40,
+      "shortPassing": 86,
+      "longPassing": 80,
+      "curve": 78,
+      "agility": 89,
+      "balance": 84,
+      "reactions": 75,
+      "ballControl": 86,
+      "dribbling": 81,
+      "composure": 82,
+      "interceptions": 81,
+      "headingAccuracy": 66,
+      "defensiveAwareness": 82,
+      "standingTackle": 85,
+      "slidingTackle": 86,
+      "jumping": 85,
+      "stamina": 85,
+      "strength": 79,
+      "aggression": 75,
+      "gkDiving": 12,
+      "gkHandling": 15,
+      "gkKicking": 14,
+      "gkReflexes": 12,
+      "gkPositioning": 10
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:41.003603Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "market",
+      "console": 700000,
+      "pc": 80000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/71305-joaquin-seys/27-67180169/",
+    "referenceUrl": "https://www.futbin.com/27/player/23688/joaquin-seys",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67180169.5c9af7dea082ff8d7f1a986593be003363063079b7a136bf4c38cfd9d20cd10b.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50562888",
+    "baseId": "ea-231240-emre-mor",
+    "itemId": 50562888,
+    "baseItemId": 231240,
+    "name": "אמרה מור",
+    "en": "Emre Mor",
+    "rating": 85,
+    "position": "ST",
+    "positions": [
+      "RM",
+      "CAM",
+      "RW"
+    ],
+    "nation": "Türkiye",
+    "league": "Eredivisie",
+    "club": "N.E.C. Nijmegen",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 89,
+      "sho": 85,
+      "pas": 71,
+      "dri": 87,
+      "def": 51,
+      "phy": 75
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 169,
+    "weightKg": 60,
+    "age": 29,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 90,
+      "sprintSpeed": 89,
+      "positioning": 80,
+      "finishing": 84,
+      "shotPower": 92,
+      "longShots": 85,
+      "volleys": 85,
+      "penalties": 80,
+      "vision": 70,
+      "crossing": 70,
+      "freeKickAccuracy": 70,
+      "shortPassing": 71,
+      "longPassing": 71,
+      "curve": 76,
+      "agility": 94,
+      "balance": 94,
+      "reactions": 77,
+      "ballControl": 86,
+      "dribbling": 88,
+      "composure": 80,
+      "interceptions": 47,
+      "headingAccuracy": 70,
+      "defensiveAwareness": 54,
+      "standingTackle": 48,
+      "slidingTackle": 44,
+      "jumping": 83,
+      "stamina": 80,
+      "strength": 70,
+      "aggression": 80,
+      "gkDiving": 13,
+      "gkHandling": 10,
+      "gkKicking": 7,
+      "gkReflexes": 6,
+      "gkPositioning": 13
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:26.219927Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "sbc",
+      "console": 31320,
+      "pc": 30740,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/231240-emre-mor/27-50562888/",
+    "referenceUrl": "https://www.futbin.com/27/player/23687/emre-mor",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50562888.543bd36d644af35d1226b418532a0c9bfeaaa2ee2b528af11684d6db490030cb.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50402953",
+    "baseId": "ea-71305-joaquin-seys",
+    "itemId": 50402953,
+    "baseItemId": 71305,
+    "name": "חואקין סייס",
+    "en": "Joaquin Seys",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "RB",
+      "RM",
+      "LM"
+    ],
+    "nation": "Belgium",
+    "league": "1A Pro League",
+    "club": "Club Brugge",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 85,
+      "sho": 65,
+      "pas": 81,
+      "dri": 83,
+      "def": 82,
+      "phy": 80
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 2,
+    "heightCm": 178,
+    "weightKg": 63,
+    "age": 21,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        146,
+        147
+      ]
+    },
+    "attributes": {
+      "acceleration": 85,
+      "sprintSpeed": 85,
+      "positioning": 80,
+      "finishing": 72,
+      "shotPower": 67,
+      "longShots": 45,
+      "volleys": 75,
+      "penalties": 50,
+      "vision": 80,
+      "crossing": 86,
+      "freeKickAccuracy": 40,
+      "shortPassing": 86,
+      "longPassing": 80,
+      "curve": 78,
+      "agility": 89,
+      "balance": 84,
+      "reactions": 75,
+      "ballControl": 86,
+      "dribbling": 81,
+      "composure": 82,
+      "interceptions": 81,
+      "headingAccuracy": 66,
+      "defensiveAwareness": 82,
+      "standingTackle": 85,
+      "slidingTackle": 86,
+      "jumping": 85,
+      "stamina": 85,
+      "strength": 79,
+      "aggression": 75,
+      "gkDiving": 12,
+      "gkHandling": 15,
+      "gkKicking": 14,
+      "gkReflexes": 12,
+      "gkPositioning": 10
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:42.744019Z",
+    "gradingScore": 2100,
+    "price": {
+      "kind": "market",
+      "console": 58500,
+      "pc": 59000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/71305-joaquin-seys/27-50402953/",
+    "referenceUrl": "https://www.futbin.com/27/player/23686/joaquin-seys",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50402953.dcab967196ea9b2f73e67bc9cc743f1a8c6bd4b7559507ab7c788e30ed3fa6c5.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84101521",
+    "baseId": "guirassy",
+    "itemId": 84101521,
+    "baseItemId": 215441,
+    "name": "סרו גיראסי",
+    "en": "Serhou Guirassy",
+    "rating": 86,
+    "position": "ST",
+    "positions": [],
+    "nation": "Guinea",
+    "league": "Bundesliga",
+    "club": "Borussia Dortmund",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 78,
+      "sho": 86,
+      "pas": 76,
+      "dri": 84,
+      "def": 46,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 187,
+    "weightKg": 82,
+    "age": 30,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 77,
+      "positioning": 88,
+      "finishing": 87,
+      "shotPower": 91,
+      "longShots": 81,
+      "volleys": 84,
+      "penalties": 81,
+      "vision": 80,
+      "crossing": 66,
+      "freeKickAccuracy": 68,
+      "shortPassing": 81,
+      "longPassing": 73,
+      "curve": 77,
+      "agility": 80,
+      "balance": 80,
+      "reactions": 86,
+      "ballControl": 85,
+      "dribbling": 83,
+      "composure": 89,
+      "interceptions": 34,
+      "headingAccuracy": 92,
+      "defensiveAwareness": 43,
+      "standingTackle": 45,
+      "slidingTackle": 34,
+      "jumping": 93,
+      "stamina": 82,
+      "strength": 86,
+      "aggression": 77,
+      "gkDiving": 11,
+      "gkHandling": 8,
+      "gkKicking": 12,
+      "gkReflexes": 8,
+      "gkPositioning": 12
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:39.015578Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 500000,
+      "pc": 580000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/215441-serhou-guirassy/27-84101521/",
+    "referenceUrl": "https://www.futbin.com/27/player/23685/serhou-guirassy",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84101521.36c986d01674af89018b47432cad64474154e7c32a789fed902e32a8072d5078.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67348701",
+    "baseId": "macallister",
+    "itemId": 67348701,
+    "baseItemId": 239837,
+    "name": "אלכסיס מק אליסטר",
+    "en": "Alexis Mac Allister",
+    "rating": 86,
+    "position": "CM",
+    "positions": [
+      "CDM"
+    ],
+    "nation": "Argentina",
+    "league": "Premier League",
+    "club": "Liverpool",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 77,
+      "sho": 83,
+      "pas": 85,
+      "dri": 84,
+      "def": 80,
+      "phy": 78
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 176,
+    "weightKg": 72,
+    "age": 27,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 78,
+      "sprintSpeed": 76,
+      "positioning": 76,
+      "finishing": 80,
+      "shotPower": 88,
+      "longShots": 87,
+      "volleys": 80,
+      "penalties": 88,
+      "vision": 87,
+      "crossing": 81,
+      "freeKickAccuracy": 84,
+      "shortPassing": 87,
+      "longPassing": 86,
+      "curve": 85,
+      "agility": 82,
+      "balance": 88,
+      "reactions": 88,
+      "ballControl": 85,
+      "dribbling": 82,
+      "composure": 86,
+      "interceptions": 82,
+      "headingAccuracy": 70,
+      "defensiveAwareness": 80,
+      "standingTackle": 83,
+      "slidingTackle": 77,
+      "jumping": 74,
+      "stamina": 85,
+      "strength": 72,
+      "aggression": 86,
+      "gkDiving": 7,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 10,
+      "gkPositioning": 15
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:36.830576Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 600000,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/239837-alexis-mac-allister/27-67348701/",
+    "referenceUrl": "https://www.futbin.com/27/player/23684/alexis-mac-allister",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67348701.9b2e37ad7e4c8c1336f785af19acb81d2950c12338e244b3fec3bb548385f331.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67324305",
+    "baseId": "guirassy",
+    "itemId": 67324305,
+    "baseItemId": 215441,
+    "name": "סרו גיראסי",
+    "en": "Serhou Guirassy",
+    "rating": 86,
+    "position": "ST",
+    "positions": [],
+    "nation": "Guinea",
+    "league": "Bundesliga",
+    "club": "Borussia Dortmund",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 78,
+      "sho": 86,
+      "pas": 76,
+      "dri": 84,
+      "def": 46,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 187,
+    "weightKg": 82,
+    "age": 30,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Chip Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Acrobatic",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 77,
+      "positioning": 88,
+      "finishing": 87,
+      "shotPower": 91,
+      "longShots": 81,
+      "volleys": 84,
+      "penalties": 81,
+      "vision": 80,
+      "crossing": 66,
+      "freeKickAccuracy": 68,
+      "shortPassing": 81,
+      "longPassing": 73,
+      "curve": 77,
+      "agility": 80,
+      "balance": 80,
+      "reactions": 86,
+      "ballControl": 85,
+      "dribbling": 83,
+      "composure": 89,
+      "interceptions": 34,
+      "headingAccuracy": 92,
+      "defensiveAwareness": 43,
+      "standingTackle": 45,
+      "slidingTackle": 34,
+      "jumping": 93,
+      "stamina": 82,
+      "strength": 86,
+      "aggression": 77,
+      "gkDiving": 11,
+      "gkHandling": 8,
+      "gkKicking": 12,
+      "gkReflexes": 8,
+      "gkPositioning": 12
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:35.078586Z",
+    "gradingScore": 4100,
+    "price": {
+      "kind": "market",
+      "console": 97000,
+      "pc": 206000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/215441-serhou-guirassy/27-67324305/",
+    "referenceUrl": "https://www.futbin.com/27/player/23683/serhou-guirassy",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67324305.07044ab85e4ff1d48f2108af592b65637f095eef18612732e2b276af97722765.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50571485",
+    "baseId": "macallister",
+    "itemId": 50571485,
+    "baseItemId": 239837,
+    "name": "אלכסיס מק אליסטר",
+    "en": "Alexis Mac Allister",
+    "rating": 86,
+    "position": "CM",
+    "positions": [
+      "CDM"
+    ],
+    "nation": "Argentina",
+    "league": "Premier League",
+    "club": "Liverpool",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 77,
+      "sho": 83,
+      "pas": 85,
+      "dri": 84,
+      "def": 80,
+      "phy": 78
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 176,
+    "weightKg": 72,
+    "age": 27,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Precision Header",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 78,
+      "sprintSpeed": 76,
+      "positioning": 76,
+      "finishing": 80,
+      "shotPower": 88,
+      "longShots": 87,
+      "volleys": 80,
+      "penalties": 88,
+      "vision": 87,
+      "crossing": 81,
+      "freeKickAccuracy": 84,
+      "shortPassing": 87,
+      "longPassing": 86,
+      "curve": 85,
+      "agility": 82,
+      "balance": 88,
+      "reactions": 88,
+      "ballControl": 85,
+      "dribbling": 82,
+      "composure": 86,
+      "interceptions": 82,
+      "headingAccuracy": 70,
+      "defensiveAwareness": 80,
+      "standingTackle": 83,
+      "slidingTackle": 77,
+      "jumping": 74,
+      "stamina": 85,
+      "strength": 72,
+      "aggression": 86,
+      "gkDiving": 7,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 10,
+      "gkPositioning": 15
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:33.680589Z",
+    "gradingScore": 4100,
+    "price": {
+      "kind": "market",
+      "console": 350000,
+      "pc": 460000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/239837-alexis-mac-allister/27-50571485/",
+    "referenceUrl": "https://www.futbin.com/27/player/23682/alexis-mac-allister",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50571485.009860a719288e45ae6b45c530fee5ac949f5ada8966315c03050a1cd2fd7a56.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67346556",
+    "baseId": "foden",
+    "itemId": 67346556,
+    "baseItemId": 237692,
+    "name": "פיל פודן",
+    "en": "Phil Foden",
+    "rating": 87,
+    "position": "RW",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Manchester City",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 83,
+      "sho": 87,
+      "pas": 86,
+      "dri": 90,
+      "def": 61,
+      "phy": 57
+    },
+    "foot": "L",
+    "weakFoot": 2,
+    "skillMoves": 4,
+    "heightCm": 171,
+    "weightKg": 70,
+    "age": 26,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    "attributes": {
+      "acceleration": 83,
+      "sprintSpeed": 83,
+      "positioning": 87,
+      "finishing": 87,
+      "shotPower": 90,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 70,
+      "vision": 88,
+      "crossing": 84,
+      "freeKickAccuracy": 77,
+      "shortPassing": 87,
+      "longPassing": 85,
+      "curve": 91,
+      "agility": 94,
+      "balance": 92,
+      "reactions": 86,
+      "ballControl": 90,
+      "dribbling": 90,
+      "composure": 87,
+      "interceptions": 63,
+      "headingAccuracy": 51,
+      "defensiveAwareness": 64,
+      "standingTackle": 63,
+      "slidingTackle": 51,
+      "jumping": 59,
+      "stamina": 81,
+      "strength": 41,
+      "aggression": 68,
+      "gkDiving": 8,
+      "gkHandling": 15,
+      "gkKicking": 6,
+      "gkReflexes": 13,
+      "gkPositioning": 10
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:32.151588Z",
+    "gradingScore": 8250,
+    "price": {
+      "kind": "market",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/237692-phil-foden/27-67346556/",
+    "referenceUrl": "https://www.futbin.com/27/player/23681/phil-foden",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67346556.516c3c62e20c335fc3e340ca255d08dd125bc7c5beb68cf7c856f6517cbf4e62.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50569340",
+    "baseId": "foden",
+    "itemId": 50569340,
+    "baseItemId": 237692,
+    "name": "פיל פודן",
+    "en": "Phil Foden",
+    "rating": 87,
+    "position": "RW",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Manchester City",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 83,
+      "sho": 87,
+      "pas": 86,
+      "dri": 90,
+      "def": 61,
+      "phy": 57
+    },
+    "foot": "L",
+    "weakFoot": 2,
+    "skillMoves": 4,
+    "heightCm": 171,
+    "weightKg": 70,
+    "age": 26,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    "attributes": {
+      "acceleration": 83,
+      "sprintSpeed": 83,
+      "positioning": 87,
+      "finishing": 87,
+      "shotPower": 90,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 70,
+      "vision": 88,
+      "crossing": 84,
+      "freeKickAccuracy": 77,
+      "shortPassing": 87,
+      "longPassing": 85,
+      "curve": 91,
+      "agility": 94,
+      "balance": 92,
+      "reactions": 86,
+      "ballControl": 90,
+      "dribbling": 90,
+      "composure": 87,
+      "interceptions": 63,
+      "headingAccuracy": 51,
+      "defensiveAwareness": 64,
+      "standingTackle": 63,
+      "slidingTackle": 51,
+      "jumping": 59,
+      "stamina": 81,
+      "strength": 41,
+      "aggression": 68,
+      "gkDiving": 8,
+      "gkHandling": 15,
+      "gkKicking": 6,
+      "gkReflexes": 13,
+      "gkPositioning": 10
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:30.849841Z",
+    "gradingScore": 5500,
+    "price": {
+      "kind": "market",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/237692-phil-foden/27-50569340/",
+    "referenceUrl": "https://www.futbin.com/27/player/23680/phil-foden",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50569340.452c8f410badf664564a40397789f4d92e4ca06ab80282ab211c659f84f4e3f0.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100941142",
+    "baseId": "ea-277846-nico-paz",
+    "itemId": 100941142,
+    "baseItemId": 277846,
+    "name": "ניקו פאס",
+    "en": "Nico Paz",
+    "rating": 88,
+    "position": "CAM",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Argentina",
+    "league": "Serie A Enilive",
+    "club": "Como 1907",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 88,
+      "sho": 85,
+      "pas": 84,
+      "dri": 90,
+      "def": 58,
+      "phy": 72
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 186,
+    "weightKg": 81,
+    "age": 22,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        131,
+        132,
+        133,
+        134,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 87,
+      "positioning": 85,
+      "finishing": 87,
+      "shotPower": 81,
+      "longShots": 94,
+      "volleys": 68,
+      "penalties": 67,
+      "vision": 85,
+      "crossing": 73,
+      "freeKickAccuracy": 85,
+      "shortPassing": 89,
+      "longPassing": 85,
+      "curve": 77,
+      "agility": 87,
+      "balance": 84,
+      "reactions": 90,
+      "ballControl": 92,
+      "dribbling": 90,
+      "composure": 88,
+      "interceptions": 65,
+      "headingAccuracy": 55,
+      "defensiveAwareness": 43,
+      "standingTackle": 72,
+      "slidingTackle": 52,
+      "jumping": 78,
+      "stamina": 86,
+      "strength": 75,
+      "aggression": 45,
+      "gkDiving": 14,
+      "gkHandling": 10,
+      "gkKicking": 15,
+      "gkReflexes": 8,
+      "gkPositioning": 12
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": "pristine",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:27.901005Z",
+    "gradingScore": 12450,
+    "price": {
+      "kind": "market",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/277846-nicolas-paz-martinez-nico-paz/27-100941142/",
+    "referenceUrl": "https://www.futbin.com/27/player/23679/nicolas-paz-martinez",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100941142.d5a32467f766bf2e31669980284150ce38c2be092e7084857498100c99e3b09d.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84163926",
+    "baseId": "ea-277846-nico-paz",
+    "itemId": 84163926,
+    "baseItemId": 277846,
+    "name": "ניקו פאס",
+    "en": "Nico Paz",
+    "rating": 88,
+    "position": "CAM",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Argentina",
+    "league": "Serie A Enilive",
+    "club": "Como 1907",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 88,
+      "sho": 85,
+      "pas": 84,
+      "dri": 90,
+      "def": 58,
+      "phy": 72
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 186,
+    "weightKg": 81,
+    "age": 22,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        131,
+        132,
+        133,
+        134,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 87,
+      "positioning": 85,
+      "finishing": 87,
+      "shotPower": 81,
+      "longShots": 94,
+      "volleys": 68,
+      "penalties": 67,
+      "vision": 85,
+      "crossing": 73,
+      "freeKickAccuracy": 85,
+      "shortPassing": 89,
+      "longPassing": 85,
+      "curve": 77,
+      "agility": 87,
+      "balance": 84,
+      "reactions": 90,
+      "ballControl": 92,
+      "dribbling": 90,
+      "composure": 88,
+      "interceptions": 65,
+      "headingAccuracy": 55,
+      "defensiveAwareness": 43,
+      "standingTackle": 72,
+      "slidingTackle": 52,
+      "jumping": 78,
+      "stamina": 86,
+      "strength": 75,
+      "aggression": 45,
+      "gkDiving": 14,
+      "gkHandling": 10,
+      "gkKicking": 15,
+      "gkReflexes": 8,
+      "gkPositioning": 12
+    },
+    "backgroundId": 8,
+    "family": "Star Performer",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-24",
+    "createdAt": "2026-10-24T17:00:29.409813Z",
+    "gradingScore": 8300,
+    "price": {
+      "kind": "market",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/277846-nicolas-paz-martinez-nico-paz/27-84163926/",
+    "referenceUrl": "https://www.futbin.com/27/player/23678/nicolas-paz-martinez",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84163926.182451ea4590ee8eaedfca4dd3ca8e55e2c5f0cb9272d01437649a53b0697198.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50555715",
+    "baseId": "ea-224067-jeppe-tverskov",
+    "itemId": 50555715,
+    "baseItemId": 224067,
+    "name": "יפה טברסקוב",
+    "en": "Jeppe Tverskov",
+    "rating": 83,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "Denmark",
+    "league": "Major League Soccer",
+    "club": "San Diego FC",
+    "edition": "recent",
+    "face": {
+      "ovr": 83,
+      "pac": 77,
+      "sho": 57,
+      "pas": 71,
+      "dri": 73,
+      "def": 81,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 2,
+    "heightCm": 185,
+    "weightKg": 85,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 75,
+      "positioning": 75,
+      "finishing": 61,
+      "shotPower": 55,
+      "longShots": 56,
+      "volleys": 38,
+      "penalties": 42,
+      "vision": 77,
+      "crossing": 46,
+      "freeKickAccuracy": 36,
+      "shortPassing": 84,
+      "longPassing": 85,
+      "curve": 45,
+      "agility": 56,
+      "balance": 61,
+      "reactions": 78,
+      "ballControl": 81,
+      "dribbling": 73,
+      "composure": 72,
+      "interceptions": 86,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 78,
+      "standingTackle": 81,
+      "slidingTackle": 76,
+      "jumping": 79,
+      "stamina": 87,
+      "strength": 89,
+      "aggression": 68,
+      "gkDiving": 15,
+      "gkHandling": 7,
+      "gkKicking": 10,
+      "gkReflexes": 13,
+      "gkPositioning": 10
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:32.672465Z",
+    "gradingScore": 615,
+    "price": {
+      "kind": "unavailable",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/224067-jeppe-tverskov/27-50555715/",
+    "referenceUrl": "https://www.futbin.com/27/player/23631/jeppe-tverskov",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50555715.9142ff9ec23c2f629902dfd11b8637a7f06271c82ca81d68933f6c5b8e035e1a.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67376248",
+    "baseId": "ea-267384-taylor-flint",
+    "itemId": 67376248,
+    "baseItemId": 267384,
+    "name": "טיילור פלינט",
+    "en": "Taylor Flint",
+    "rating": 85,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "United States",
+    "league": "National Women's Soccer League",
+    "club": "Rac. Louisville",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 77,
+      "sho": 76,
+      "pas": 76,
+      "dri": 81,
+      "def": 85,
+      "phy": 92
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 185,
+    "weightKg": 73,
+    "age": 27,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 77,
+      "sprintSpeed": 77,
+      "positioning": 75,
+      "finishing": 75,
+      "shotPower": 81,
+      "longShots": 75,
+      "volleys": 59,
+      "penalties": 84,
+      "vision": 79,
+      "crossing": 63,
+      "freeKickAccuracy": 70,
+      "shortPassing": 85,
+      "longPassing": 71,
+      "curve": 68,
+      "agility": 73,
+      "balance": 70,
+      "reactions": 85,
+      "ballControl": 86,
+      "dribbling": 79,
+      "composure": 87,
+      "interceptions": 91,
+      "headingAccuracy": 87,
+      "defensiveAwareness": 81,
+      "standingTackle": 88,
+      "slidingTackle": 69,
+      "jumping": 88,
+      "stamina": 92,
+      "strength": 95,
+      "aggression": 87,
+      "gkDiving": 15,
+      "gkHandling": 7,
+      "gkKicking": 5,
+      "gkReflexes": 12,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:22.239071Z",
+    "gradingScore": 4725,
+    "price": {
+      "kind": "market",
+      "console": 219000,
+      "pc": 274000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/267384-taylor-kornieck/27-67376248/",
+    "referenceUrl": "https://www.futbin.com/27/player/23630/taylor-flint",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67376248.b085f044f34e83a5c17b8daa80914a620604c96fa60d10272f4909006595c713.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67371002",
+    "baseId": "ea-262138-castello-lukeba",
+    "itemId": 67371002,
+    "baseItemId": 262138,
+    "name": "קסטלו לוקבה",
+    "en": "Castello Lukeba",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "CB"
+    ],
+    "nation": "France",
+    "league": "Bundesliga",
+    "club": "RB Leipzig",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 84,
+      "sho": 46,
+      "pas": 78,
+      "dri": 84,
+      "def": 86,
+      "phy": 80
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 2,
+    "heightCm": 183,
+    "weightKg": 84,
+    "age": 23,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        147,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 80,
+      "sprintSpeed": 87,
+      "positioning": 49,
+      "finishing": 44,
+      "shotPower": 59,
+      "longShots": 40,
+      "volleys": 44,
+      "penalties": 41,
+      "vision": 80,
+      "crossing": 78,
+      "freeKickAccuracy": 30,
+      "shortPassing": 84,
+      "longPassing": 83,
+      "curve": 70,
+      "agility": 80,
+      "balance": 78,
+      "reactions": 91,
+      "ballControl": 85,
+      "dribbling": 83,
+      "composure": 92,
+      "interceptions": 84,
+      "headingAccuracy": 86,
+      "defensiveAwareness": 85,
+      "standingTackle": 90,
+      "slidingTackle": 83,
+      "jumping": 93,
+      "stamina": 76,
+      "strength": 81,
+      "aggression": 81,
+      "gkDiving": 8,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 13,
+      "gkPositioning": 11
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:20.708481Z",
+    "gradingScore": 4725,
+    "price": {
+      "kind": "market",
+      "console": 140000,
+      "pc": 185000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/262138-castello-lukeba/27-67371002/",
+    "referenceUrl": "https://www.futbin.com/27/player/23629/castello-lukeba",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67371002.a5b3e10cf90f091b63620e3d7e0fb63c9702b2e809d4ced0c6a0859c66bffb3a.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67362886",
+    "baseId": "ea-254022-nick-woltemade",
+    "itemId": 67362886,
+    "baseItemId": 254022,
+    "name": "ניק וולטמאדה",
+    "en": "Nick Woltemade",
+    "rating": 85,
+    "position": "CAM",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Germany",
+    "league": "Serie A Enilive",
+    "club": "Juventus FC",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 83,
+      "sho": 84,
+      "pas": 85,
+      "dri": 86,
+      "def": 47,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 198,
+    "weightKg": 90,
+    "age": 24,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        131,
+        132,
+        133,
+        134,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 81,
+      "sprintSpeed": 85,
+      "positioning": 87,
+      "finishing": 86,
+      "shotPower": 86,
+      "longShots": 79,
+      "volleys": 83,
+      "penalties": 82,
+      "vision": 90,
+      "crossing": 80,
+      "freeKickAccuracy": 60,
+      "shortPassing": 91,
+      "longPassing": 80,
+      "curve": 83,
+      "agility": 80,
+      "balance": 78,
+      "reactions": 84,
+      "ballControl": 86,
+      "dribbling": 89,
+      "composure": 87,
+      "interceptions": 40,
+      "headingAccuracy": 90,
+      "defensiveAwareness": 37,
+      "standingTackle": 50,
+      "slidingTackle": 34,
+      "jumping": 91,
+      "stamina": 83,
+      "strength": 89,
+      "aggression": 70,
+      "gkDiving": 11,
+      "gkHandling": 8,
+      "gkKicking": 13,
+      "gkReflexes": 8,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:32.474637Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "sbc",
+      "console": 65450,
+      "pc": 64250,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/254022-nick-woltemade/27-67362886/",
+    "referenceUrl": "https://www.futbin.com/27/player/23628/nick-woltemade",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67362886.a1d10e105ec0a746024bc97837cb221b2e63fff0a4dfeecd68e0179ba65bf5a6.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67342374",
+    "baseId": "ea-233510-tahith-chong",
+    "itemId": 67342374,
+    "baseItemId": 233510,
+    "name": "טאהית צ׳ונג",
+    "en": "Tahith Chong",
+    "rating": 85,
+    "position": "RM",
+    "positions": [
+      "CM",
+      "CAM",
+      "RW"
+    ],
+    "nation": "Netherlands Antilles",
+    "league": "EFL Championship",
+    "club": "Sheffield Utd",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 89,
+      "sho": 81,
+      "pas": 83,
+      "dri": 87,
+      "def": 64,
+      "phy": 76
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 185,
+    "weightKg": 75,
+    "age": 26,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 89,
+      "positioning": 85,
+      "finishing": 82,
+      "shotPower": 86,
+      "longShots": 79,
+      "volleys": 74,
+      "penalties": 72,
+      "vision": 84,
+      "crossing": 84,
+      "freeKickAccuracy": 80,
+      "shortPassing": 84,
+      "longPassing": 80,
+      "curve": 83,
+      "agility": 87,
+      "balance": 78,
+      "reactions": 83,
+      "ballControl": 88,
+      "dribbling": 88,
+      "composure": 87,
+      "interceptions": 60,
+      "headingAccuracy": 63,
+      "defensiveAwareness": 64,
+      "standingTackle": 70,
+      "slidingTackle": 57,
+      "jumping": 75,
+      "stamina": 80,
+      "strength": 74,
+      "aggression": 78,
+      "gkDiving": 13,
+      "gkHandling": 7,
+      "gkKicking": 14,
+      "gkReflexes": 11,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:19.252800Z",
+    "gradingScore": 4725,
+    "price": {
+      "kind": "market",
+      "console": 121000,
+      "pc": 154000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/233510-tahith-chong/27-67342374/",
+    "referenceUrl": "https://www.futbin.com/27/player/23627/tahith-chong",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67342374.467ef4dcbc858c3d085d9a3d4a6456adb4c04b08f3085155d9fa4f93d8be3461.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67329201",
+    "baseId": "ea-220337-junior-alonso",
+    "itemId": 67329201,
+    "baseItemId": 220337,
+    "name": "ג׳וניור אלונסו",
+    "en": "Junior Alonso",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "CB"
+    ],
+    "nation": "Paraguay",
+    "league": "Major League Soccer",
+    "club": "Atlanta United",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 87,
+      "sho": 66,
+      "pas": 77,
+      "dri": 75,
+      "def": 81,
+      "phy": 83
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 2,
+    "heightCm": 185,
+    "weightKg": 83,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        147,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 86,
+      "sprintSpeed": 88,
+      "positioning": 66,
+      "finishing": 65,
+      "shotPower": 70,
+      "longShots": 66,
+      "volleys": 50,
+      "penalties": 76,
+      "vision": 70,
+      "crossing": 84,
+      "freeKickAccuracy": 50,
+      "shortPassing": 80,
+      "longPassing": 82,
+      "curve": 60,
+      "agility": 82,
+      "balance": 80,
+      "reactions": 80,
+      "ballControl": 74,
+      "dribbling": 72,
+      "composure": 80,
+      "interceptions": 80,
+      "headingAccuracy": 82,
+      "defensiveAwareness": 80,
+      "standingTackle": 81,
+      "slidingTackle": 80,
+      "jumping": 86,
+      "stamina": 80,
+      "strength": 86,
+      "aggression": 80,
+      "gkDiving": 15,
+      "gkHandling": 11,
+      "gkKicking": 15,
+      "gkReflexes": 7,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:30.246732Z",
+    "gradingScore": 4725,
+    "price": {
+      "kind": "market",
+      "console": 128000,
+      "pc": 142000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/220337-junior-alonso/27-67329201/",
+    "referenceUrl": "https://www.futbin.com/27/player/23626/junior-alonso",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67329201.e9bdfc6a4c48b33c4996d0d5b7cf8673008e7dbdec279c1884561332b70fb57d.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67180042",
+    "baseId": "ea-71178-said-el-mala",
+    "itemId": 67180042,
+    "baseItemId": 71178,
+    "name": "סעיד אל מלא",
+    "en": "Saïd El Mala",
+    "rating": 85,
+    "position": "ST",
+    "positions": [
+      "LM",
+      "CAM",
+      "LW"
+    ],
+    "nation": "Germany",
+    "league": "Bundesliga",
+    "club": "1. FC Köln",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 90,
+      "sho": 85,
+      "pas": 75,
+      "dri": 85,
+      "def": 46,
+      "phy": 72
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 187,
+    "weightKg": 80,
+    "age": 20,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 92,
+      "positioning": 85,
+      "finishing": 86,
+      "shotPower": 90,
+      "longShots": 85,
+      "volleys": 81,
+      "penalties": 63,
+      "vision": 76,
+      "crossing": 74,
+      "freeKickAccuracy": 60,
+      "shortPassing": 78,
+      "longPassing": 68,
+      "curve": 83,
+      "agility": 87,
+      "balance": 85,
+      "reactions": 79,
+      "ballControl": 81,
+      "dribbling": 89,
+      "composure": 73,
+      "interceptions": 44,
+      "headingAccuracy": 55,
+      "defensiveAwareness": 48,
+      "standingTackle": 42,
+      "slidingTackle": 44,
+      "jumping": 87,
+      "stamina": 78,
+      "strength": 74,
+      "aggression": 56,
+      "gkDiving": 14,
+      "gkHandling": 13,
+      "gkKicking": 12,
+      "gkReflexes": 9,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:31.503625Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "unavailable",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/71178-said-el-mala/27-67180042/",
+    "referenceUrl": "https://www.futbin.com/27/player/23625/said-el-mala",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67180042.49cad66e6c9fca39738bc641cf9b092ed41d243ac99d6b0e837b865bfe69edbe.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50599032",
+    "baseId": "ea-267384-taylor-flint",
+    "itemId": 50599032,
+    "baseItemId": 267384,
+    "name": "טיילור פלינט",
+    "en": "Taylor Flint",
+    "rating": 85,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "United States",
+    "league": "National Women's Soccer League",
+    "club": "Rac. Louisville",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 77,
+      "sho": 76,
+      "pas": 76,
+      "dri": 81,
+      "def": 85,
+      "phy": 92
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 185,
+    "weightKg": 73,
+    "age": 27,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 77,
+      "sprintSpeed": 77,
+      "positioning": 75,
+      "finishing": 75,
+      "shotPower": 81,
+      "longShots": 75,
+      "volleys": 59,
+      "penalties": 84,
+      "vision": 79,
+      "crossing": 63,
+      "freeKickAccuracy": 70,
+      "shortPassing": 85,
+      "longPassing": 71,
+      "curve": 68,
+      "agility": 73,
+      "balance": 70,
+      "reactions": 85,
+      "ballControl": 86,
+      "dribbling": 79,
+      "composure": 87,
+      "interceptions": 91,
+      "headingAccuracy": 87,
+      "defensiveAwareness": 81,
+      "standingTackle": 88,
+      "slidingTackle": 69,
+      "jumping": 88,
+      "stamina": 92,
+      "strength": 95,
+      "aggression": 87,
+      "gkDiving": 15,
+      "gkHandling": 7,
+      "gkKicking": 5,
+      "gkReflexes": 12,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:17.511148Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "market",
+      "console": 168000,
+      "pc": 140000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/267384-taylor-kornieck/27-50599032/",
+    "referenceUrl": "https://www.futbin.com/27/player/23624/taylor-flint",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50599032.3e4196c0e8e5e501fe406d8ab013ccc5f4d2e9f53d528490041d346ddaa9d859.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50593786",
+    "baseId": "ea-262138-castello-lukeba",
+    "itemId": 50593786,
+    "baseItemId": 262138,
+    "name": "קסטלו לוקבה",
+    "en": "Castello Lukeba",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "CB"
+    ],
+    "nation": "France",
+    "league": "Bundesliga",
+    "club": "RB Leipzig",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 84,
+      "sho": 46,
+      "pas": 78,
+      "dri": 84,
+      "def": 86,
+      "phy": 80
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 2,
+    "heightCm": 183,
+    "weightKg": 84,
+    "age": 23,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        147,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 80,
+      "sprintSpeed": 87,
+      "positioning": 49,
+      "finishing": 44,
+      "shotPower": 59,
+      "longShots": 40,
+      "volleys": 44,
+      "penalties": 41,
+      "vision": 80,
+      "crossing": 78,
+      "freeKickAccuracy": 30,
+      "shortPassing": 84,
+      "longPassing": 83,
+      "curve": 70,
+      "agility": 80,
+      "balance": 78,
+      "reactions": 91,
+      "ballControl": 85,
+      "dribbling": 83,
+      "composure": 92,
+      "interceptions": 84,
+      "headingAccuracy": 86,
+      "defensiveAwareness": 85,
+      "standingTackle": 90,
+      "slidingTackle": 83,
+      "jumping": 93,
+      "stamina": 76,
+      "strength": 81,
+      "aggression": 81,
+      "gkDiving": 8,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 13,
+      "gkPositioning": 11
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:29.114655Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "market",
+      "console": 143000,
+      "pc": 141000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/262138-castello-lukeba/27-50593786/",
+    "referenceUrl": "https://www.futbin.com/27/player/23623/castello-lukeba",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50593786.cc19a2b75519820ff13f36f18322fd51865d618a993cab332ae5766543a4ad3d.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50565158",
+    "baseId": "ea-233510-tahith-chong",
+    "itemId": 50565158,
+    "baseItemId": 233510,
+    "name": "טאהית צ׳ונג",
+    "en": "Tahith Chong",
+    "rating": 85,
+    "position": "RM",
+    "positions": [
+      "CM",
+      "CAM",
+      "RW"
+    ],
+    "nation": "Netherlands Antilles",
+    "league": "EFL Championship",
+    "club": "Sheffield Utd",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 89,
+      "sho": 81,
+      "pas": 83,
+      "dri": 87,
+      "def": 64,
+      "phy": 76
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 185,
+    "weightKg": 75,
+    "age": 26,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 89,
+      "positioning": 85,
+      "finishing": 82,
+      "shotPower": 86,
+      "longShots": 79,
+      "volleys": 74,
+      "penalties": 72,
+      "vision": 84,
+      "crossing": 84,
+      "freeKickAccuracy": 80,
+      "shortPassing": 84,
+      "longPassing": 80,
+      "curve": 83,
+      "agility": 87,
+      "balance": 78,
+      "reactions": 83,
+      "ballControl": 88,
+      "dribbling": 88,
+      "composure": 87,
+      "interceptions": 60,
+      "headingAccuracy": 63,
+      "defensiveAwareness": 64,
+      "standingTackle": 70,
+      "slidingTackle": 57,
+      "jumping": 75,
+      "stamina": 80,
+      "strength": 74,
+      "aggression": 78,
+      "gkDiving": 13,
+      "gkHandling": 7,
+      "gkKicking": 14,
+      "gkReflexes": 11,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:25.118432Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "market",
+      "console": 136000,
+      "pc": 138000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/233510-tahith-chong/27-50565158/",
+    "referenceUrl": "https://www.futbin.com/27/player/23622/tahith-chong",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50565158.1457e80c7bf94a1d76c98c97e354aa1b1d6a40f7753b4dacb8a1caf51a0e608a.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50551985",
+    "baseId": "ea-220337-junior-alonso",
+    "itemId": 50551985,
+    "baseItemId": 220337,
+    "name": "ג׳וניור אלונסו",
+    "en": "Junior Alonso",
+    "rating": 85,
+    "position": "LB",
+    "positions": [
+      "CB"
+    ],
+    "nation": "Paraguay",
+    "league": "Major League Soccer",
+    "club": "Atlanta United",
+    "edition": "recent",
+    "face": {
+      "ovr": 85,
+      "pac": 87,
+      "sho": 66,
+      "pas": 77,
+      "dri": 75,
+      "def": 81,
+      "phy": 83
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 2,
+    "heightCm": 185,
+    "weightKg": 83,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        147,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 86,
+      "sprintSpeed": 88,
+      "positioning": 66,
+      "finishing": 65,
+      "shotPower": 70,
+      "longShots": 66,
+      "volleys": 50,
+      "penalties": 76,
+      "vision": 70,
+      "crossing": 84,
+      "freeKickAccuracy": 50,
+      "shortPassing": 80,
+      "longPassing": 82,
+      "curve": 60,
+      "agility": 82,
+      "balance": 80,
+      "reactions": 80,
+      "ballControl": 74,
+      "dribbling": 72,
+      "composure": 80,
+      "interceptions": 80,
+      "headingAccuracy": 82,
+      "defensiveAwareness": 80,
+      "standingTackle": 81,
+      "slidingTackle": 80,
+      "jumping": 86,
+      "stamina": 80,
+      "strength": 86,
+      "aggression": 80,
+      "gkDiving": 15,
+      "gkHandling": 11,
+      "gkKicking": 15,
+      "gkReflexes": 7,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:16.079392Z",
+    "gradingScore": 3150,
+    "price": {
+      "kind": "market",
+      "console": 103000,
+      "pc": 101000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/220337-junior-alonso/27-50551985/",
+    "referenceUrl": "https://www.futbin.com/27/player/23621/junior-alonso",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50551985.c84a68eb7748851e70d774312209ecfddc0ebad38bd9a24bec79fae9481db879.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100882979",
+    "baseId": "ea-219683-corentin-tolisso",
+    "itemId": 100882979,
+    "baseItemId": 219683,
+    "name": "קורנטן טוליסו",
+    "en": "Corentin Tolisso",
+    "rating": 86,
+    "position": "CAM",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "France",
+    "league": "Ligue 1 McDonald's",
+    "club": "OL",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 80,
+      "sho": 87,
+      "pas": 87,
+      "dri": 84,
+      "def": 82,
+      "phy": 85
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 181,
+    "weightKg": 81,
+    "age": 32,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 80,
+      "sprintSpeed": 80,
+      "positioning": 90,
+      "finishing": 84,
+      "shotPower": 91,
+      "longShots": 90,
+      "volleys": 83,
+      "penalties": 80,
+      "vision": 87,
+      "crossing": 82,
+      "freeKickAccuracy": 75,
+      "shortPassing": 90,
+      "longPassing": 92,
+      "curve": 80,
+      "agility": 74,
+      "balance": 80,
+      "reactions": 91,
+      "ballControl": 89,
+      "dribbling": 82,
+      "composure": 90,
+      "interceptions": 82,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 80,
+      "standingTackle": 83,
+      "slidingTackle": 80,
+      "jumping": 90,
+      "stamina": 87,
+      "strength": 84,
+      "aggression": 84,
+      "gkDiving": 7,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 14,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:07.687191Z",
+    "gradingScore": 9225,
+    "price": {
+      "kind": "market",
+      "console": 212000,
+      "pc": 249000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/219683-corentin-tolisso/27-100882979/",
+    "referenceUrl": "https://www.futbin.com/27/player/23620/corentin-tolisso",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100882979.de2893dea5827b1a27bf3be29e932e49493e444f9b88014742bf3feb5f4f46a1.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84105763",
+    "baseId": "ea-219683-corentin-tolisso",
+    "itemId": 84105763,
+    "baseItemId": 219683,
+    "name": "קורנטן טוליסו",
+    "en": "Corentin Tolisso",
+    "rating": 86,
+    "position": "CAM",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "France",
+    "league": "Ligue 1 McDonald's",
+    "club": "OL",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 80,
+      "sho": 87,
+      "pas": 87,
+      "dri": 84,
+      "def": 82,
+      "phy": 85
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 181,
+    "weightKg": 81,
+    "age": 32,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 80,
+      "sprintSpeed": 80,
+      "positioning": 90,
+      "finishing": 84,
+      "shotPower": 91,
+      "longShots": 90,
+      "volleys": 83,
+      "penalties": 80,
+      "vision": 87,
+      "crossing": 82,
+      "freeKickAccuracy": 75,
+      "shortPassing": 90,
+      "longPassing": 92,
+      "curve": 80,
+      "agility": 74,
+      "balance": 80,
+      "reactions": 91,
+      "ballControl": 89,
+      "dribbling": 82,
+      "composure": 90,
+      "interceptions": 82,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 80,
+      "standingTackle": 83,
+      "slidingTackle": 80,
+      "jumping": 90,
+      "stamina": 87,
+      "strength": 84,
+      "aggression": 84,
+      "gkDiving": 7,
+      "gkHandling": 10,
+      "gkKicking": 14,
+      "gkReflexes": 14,
+      "gkPositioning": 9
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:10.282616Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 175000,
+      "pc": 148000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/219683-corentin-tolisso/27-84105763/",
+    "referenceUrl": "https://www.futbin.com/27/player/23619/corentin-tolisso",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84105763.a2be06432374adef126b881db05d288e4af761b5693c5bb5636904c1c574e303.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84094208",
+    "baseId": "calhanoglu",
+    "itemId": 84094208,
+    "baseItemId": 208128,
+    "name": "הקאן צ׳להאנולו",
+    "en": "Hakan Çalhanoğlu",
+    "rating": 86,
+    "position": "CAM",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "Türkiye",
+    "league": "Serie A Enilive",
+    "club": "Lombardia FC",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 78,
+      "sho": 86,
+      "pas": 88,
+      "dri": 85,
+      "def": 82,
+      "phy": 75
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 3,
+    "heightCm": 178,
+    "weightKg": 76,
+    "age": 32,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 78,
+      "positioning": 81,
+      "finishing": 81,
+      "shotPower": 93,
+      "longShots": 93,
+      "volleys": 80,
+      "penalties": 93,
+      "vision": 92,
+      "crossing": 80,
+      "freeKickAccuracy": 90,
+      "shortPassing": 89,
+      "longPassing": 88,
+      "curve": 89,
+      "agility": 87,
+      "balance": 85,
+      "reactions": 90,
+      "ballControl": 88,
+      "dribbling": 81,
+      "composure": 88,
+      "interceptions": 85,
+      "headingAccuracy": 70,
+      "defensiveAwareness": 85,
+      "standingTackle": 83,
+      "slidingTackle": 80,
+      "jumping": 78,
+      "stamina": 86,
+      "strength": 65,
+      "aggression": 87,
+      "gkDiving": 9,
+      "gkHandling": 14,
+      "gkKicking": 11,
+      "gkReflexes": 10,
+      "gkPositioning": 6
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:12.997152Z",
+    "gradingScore": 9225,
+    "price": {
+      "kind": "market",
+      "console": 405000,
+      "pc": 437000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/208128-hakan-calhanoglu/27-84094208/",
+    "referenceUrl": "https://www.futbin.com/27/player/23618/hakan-calhanoglu",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84094208.97a86255cb321a117a55c625467c5182ee971fbeeef6f191138eb3ee67205ac4.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67380703",
+    "baseId": "ea-271839-selina-vobian",
+    "itemId": 67380703,
+    "baseItemId": 271839,
+    "name": "סלינה ווביאן",
+    "en": "Selina Vobian",
+    "rating": 86,
+    "position": "LM",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM",
+      "RW",
+      "LW"
+    ],
+    "nation": "Germany",
+    "league": "Google Pixel Frauen-Bundesliga",
+    "club": "SC Freiburg",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 88,
+      "sho": 83,
+      "pas": 86,
+      "dri": 87,
+      "def": 60,
+      "phy": 75
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 167,
+    "weightKg": 59,
+    "age": 24,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 88,
+      "positioning": 86,
+      "finishing": 86,
+      "shotPower": 78,
+      "longShots": 83,
+      "volleys": 80,
+      "penalties": 83,
+      "vision": 85,
+      "crossing": 88,
+      "freeKickAccuracy": 80,
+      "shortPassing": 89,
+      "longPassing": 84,
+      "curve": 82,
+      "agility": 87,
+      "balance": 91,
+      "reactions": 81,
+      "ballControl": 90,
+      "dribbling": 87,
+      "composure": 80,
+      "interceptions": 58,
+      "headingAccuracy": 50,
+      "defensiveAwareness": 50,
+      "standingTackle": 70,
+      "slidingTackle": 77,
+      "jumping": 71,
+      "stamina": 80,
+      "strength": 75,
+      "aggression": 70,
+      "gkDiving": 12,
+      "gkHandling": 6,
+      "gkKicking": 13,
+      "gkReflexes": 11,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:53.827446Z",
+    "gradingScore": 9225,
+    "price": {
+      "kind": "market",
+      "console": 178000,
+      "pc": 237000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/271839-selina-vobian/27-67380703/",
+    "referenceUrl": "https://www.futbin.com/27/player/23617/selina-vobian",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67380703.6367d9110d5d57045a9ba4a7a8d0493c77bf6a86292d99f664a7d717348394ca.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67316992",
+    "baseId": "calhanoglu",
+    "itemId": 67316992,
+    "baseItemId": 208128,
+    "name": "הקאן צ׳להאנולו",
+    "en": "Hakan Çalhanoğlu",
+    "rating": 86,
+    "position": "CAM",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "Türkiye",
+    "league": "Serie A Enilive",
+    "club": "Lombardia FC",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 78,
+      "sho": 86,
+      "pas": 88,
+      "dri": 85,
+      "def": 82,
+      "phy": 75
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 3,
+    "heightCm": 178,
+    "weightKg": 76,
+    "age": 32,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Power Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 79,
+      "sprintSpeed": 78,
+      "positioning": 81,
+      "finishing": 81,
+      "shotPower": 93,
+      "longShots": 93,
+      "volleys": 80,
+      "penalties": 93,
+      "vision": 92,
+      "crossing": 80,
+      "freeKickAccuracy": 90,
+      "shortPassing": 89,
+      "longPassing": 88,
+      "curve": 89,
+      "agility": 87,
+      "balance": 85,
+      "reactions": 90,
+      "ballControl": 88,
+      "dribbling": 81,
+      "composure": 88,
+      "interceptions": 85,
+      "headingAccuracy": 70,
+      "defensiveAwareness": 85,
+      "standingTackle": 83,
+      "slidingTackle": 80,
+      "jumping": 78,
+      "stamina": 86,
+      "strength": 65,
+      "aggression": 87,
+      "gkDiving": 9,
+      "gkHandling": 14,
+      "gkKicking": 11,
+      "gkReflexes": 10,
+      "gkPositioning": 6
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:59.624016Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 349000,
+      "pc": 336000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/208128-hakan-calhanoglu/27-67316992/",
+    "referenceUrl": "https://www.futbin.com/27/player/23616/hakan-calhanoglu",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67316992.526e6a035369610e84ab46208699d5bd87b81e82e1286d507f2e60e88835d89c.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67310319",
+    "baseId": "ea-201455-geoffrey-kondogbia",
+    "itemId": 67310319,
+    "baseItemId": 201455,
+    "name": "ג׳ופרי קונדוגביה",
+    "en": "Geoffrey Kondogbia",
+    "rating": 86,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "CAR",
+    "league": "Ligue 1 McDonald's",
+    "club": "OM",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 77,
+      "sho": 75,
+      "pas": 79,
+      "dri": 81,
+      "def": 86,
+      "phy": 88
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 188,
+    "weightKg": 80,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 76,
+      "sprintSpeed": 77,
+      "positioning": 75,
+      "finishing": 72,
+      "shotPower": 86,
+      "longShots": 79,
+      "volleys": 60,
+      "penalties": 63,
+      "vision": 78,
+      "crossing": 71,
+      "freeKickAccuracy": 66,
+      "shortPassing": 85,
+      "longPassing": 83,
+      "curve": 73,
+      "agility": 73,
+      "balance": 70,
+      "reactions": 85,
+      "ballControl": 86,
+      "dribbling": 80,
+      "composure": 90,
+      "interceptions": 84,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 87,
+      "standingTackle": 87,
+      "slidingTackle": 85,
+      "jumping": 87,
+      "stamina": 80,
+      "strength": 94,
+      "aggression": 85,
+      "gkDiving": 15,
+      "gkHandling": 10,
+      "gkKicking": 10,
+      "gkReflexes": 10,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:58.137430Z",
+    "gradingScore": 9225,
+    "price": {
+      "kind": "market",
+      "console": 401000,
+      "pc": 401000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/201455-geoffrey-kondogbia/27-67310319/",
+    "referenceUrl": "https://www.futbin.com/27/player/23615/geoffrey-kondogbia",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67310319.2fd06cc52c86a0da0e9fae5c3761b99ad87684d1f88bd49751efdf2872a14e3b.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50603487",
+    "baseId": "ea-271839-selina-vobian",
+    "itemId": 50603487,
+    "baseItemId": 271839,
+    "name": "סלינה ווביאן",
+    "en": "Selina Vobian",
+    "rating": 86,
+    "position": "LM",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM",
+      "RW",
+      "LW"
+    ],
+    "nation": "Germany",
+    "league": "Google Pixel Frauen-Bundesliga",
+    "club": "SC Freiburg",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 88,
+      "sho": 83,
+      "pas": 86,
+      "dri": 87,
+      "def": 60,
+      "phy": 75
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 167,
+    "weightKg": 59,
+    "age": 24,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 88,
+      "positioning": 86,
+      "finishing": 86,
+      "shotPower": 78,
+      "longShots": 83,
+      "volleys": 80,
+      "penalties": 83,
+      "vision": 85,
+      "crossing": 88,
+      "freeKickAccuracy": 80,
+      "shortPassing": 89,
+      "longPassing": 84,
+      "curve": 82,
+      "agility": 87,
+      "balance": 91,
+      "reactions": 81,
+      "ballControl": 90,
+      "dribbling": 87,
+      "composure": 80,
+      "interceptions": 58,
+      "headingAccuracy": 50,
+      "defensiveAwareness": 50,
+      "standingTackle": 70,
+      "slidingTackle": 77,
+      "jumping": 71,
+      "stamina": 80,
+      "strength": 75,
+      "aggression": 70,
+      "gkDiving": 12,
+      "gkHandling": 6,
+      "gkKicking": 13,
+      "gkReflexes": 11,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:05.617478Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 98000,
+      "pc": 99500,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/271839-selina-vobian/27-50603487/",
+    "referenceUrl": "https://www.futbin.com/27/player/23614/selina-vobian",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50603487.8346d324617c0fb906c79c40ba9eadd85442c629d4a5252a00eddeced037d084.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50577998",
+    "baseId": "ea-246350-enzo-le-fee",
+    "itemId": 50577998,
+    "baseItemId": 246350,
+    "name": "אנזו לה פה",
+    "en": "Enzo Le Fée",
+    "rating": 86,
+    "position": "LM",
+    "positions": [
+      "CM",
+      "CAM",
+      "LW"
+    ],
+    "nation": "France",
+    "league": "Premier League",
+    "club": "Sunderland",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 87,
+      "sho": 82,
+      "pas": 84,
+      "dri": 88,
+      "def": 74,
+      "phy": 68
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 173,
+    "weightKg": 66,
+    "age": 26,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140
+      ]
+    },
+    "attributes": {
+      "acceleration": 90,
+      "sprintSpeed": 85,
+      "positioning": 87,
+      "finishing": 83,
+      "shotPower": 80,
+      "longShots": 78,
+      "volleys": 77,
+      "penalties": 87,
+      "vision": 86,
+      "crossing": 82,
+      "freeKickAccuracy": 74,
+      "shortPassing": 86,
+      "longPassing": 84,
+      "curve": 83,
+      "agility": 89,
+      "balance": 93,
+      "reactions": 88,
+      "ballControl": 89,
+      "dribbling": 87,
+      "composure": 88,
+      "interceptions": 77,
+      "headingAccuracy": 48,
+      "defensiveAwareness": 74,
+      "standingTackle": 79,
+      "slidingTackle": 77,
+      "jumping": 61,
+      "stamina": 90,
+      "strength": 58,
+      "aggression": 67,
+      "gkDiving": 8,
+      "gkHandling": 11,
+      "gkKicking": 14,
+      "gkReflexes": 10,
+      "gkPositioning": 13
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:55.723755Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "unavailable",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/246350-enzo-le-fee/27-50577998/",
+    "referenceUrl": "https://www.futbin.com/27/player/23613/enzo-le-fee",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50577998.3d44eab88a91410e441b9077ecafaf9dcf3204d553e7b7beda62986a32b23765.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50533103",
+    "baseId": "ea-201455-geoffrey-kondogbia",
+    "itemId": 50533103,
+    "baseItemId": 201455,
+    "name": "ג׳ופרי קונדוגביה",
+    "en": "Geoffrey Kondogbia",
+    "rating": 86,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "CAR",
+    "league": "Ligue 1 McDonald's",
+    "club": "OM",
+    "edition": "recent",
+    "face": {
+      "ovr": 86,
+      "pac": 77,
+      "sho": 75,
+      "pas": 79,
+      "dri": 81,
+      "def": 86,
+      "phy": 88
+    },
+    "foot": "L",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 188,
+    "weightKg": 80,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 76,
+      "sprintSpeed": 77,
+      "positioning": 75,
+      "finishing": 72,
+      "shotPower": 86,
+      "longShots": 79,
+      "volleys": 60,
+      "penalties": 63,
+      "vision": 78,
+      "crossing": 71,
+      "freeKickAccuracy": 66,
+      "shortPassing": 85,
+      "longPassing": 83,
+      "curve": 73,
+      "agility": 73,
+      "balance": 70,
+      "reactions": 85,
+      "ballControl": 86,
+      "dribbling": 80,
+      "composure": 90,
+      "interceptions": 84,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 87,
+      "standingTackle": 87,
+      "slidingTackle": 85,
+      "jumping": 87,
+      "stamina": 80,
+      "strength": 94,
+      "aggression": 85,
+      "gkDiving": 15,
+      "gkHandling": 10,
+      "gkKicking": 10,
+      "gkReflexes": 10,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:00.956858Z",
+    "gradingScore": 6150,
+    "price": {
+      "kind": "market",
+      "console": 105000,
+      "pc": 108000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/201455-geoffrey-kondogbia/27-50533103/",
+    "referenceUrl": "https://www.futbin.com/27/player/23612/geoffrey-kondogbia",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50533103.02a88a8c9f8919790712c1f10a2e01d5c338ea5dff24b9dc0ce9b7b809b2e4bd.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100845079",
+    "baseId": "hero-mandzukic",
+    "itemId": 100845079,
+    "baseItemId": 181783,
+    "name": "מריו מנדז׳וקיץ׳",
+    "en": "Mario Mandžukić",
+    "rating": 87,
+    "position": "LW",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Croatia",
+    "league": "Bundesliga",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 88,
+      "sho": 87,
+      "pas": 87,
+      "dri": 83,
+      "def": 64,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 190,
+    "weightKg": 84,
+    "age": 40,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 87,
+      "sprintSpeed": 88,
+      "positioning": 91,
+      "finishing": 88,
+      "shotPower": 89,
+      "longShots": 80,
+      "volleys": 90,
+      "penalties": 83,
+      "vision": 87,
+      "crossing": 88,
+      "freeKickAccuracy": 80,
+      "shortPassing": 90,
+      "longPassing": 84,
+      "curve": 84,
+      "agility": 80,
+      "balance": 76,
+      "reactions": 86,
+      "ballControl": 88,
+      "dribbling": 81,
+      "composure": 90,
+      "interceptions": 61,
+      "headingAccuracy": 95,
+      "defensiveAwareness": 59,
+      "standingTackle": 61,
+      "slidingTackle": 60,
+      "jumping": 96,
+      "stamina": 86,
+      "strength": 90,
+      "aggression": 90,
+      "gkDiving": 10,
+      "gkHandling": 8,
+      "gkKicking": 5,
+      "gkReflexes": 15,
+      "gkPositioning": 8
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": "holographic",
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:40.565106Z",
+    "gradingScore": 14438,
+    "price": {
+      "kind": "market",
+      "console": 1699000,
+      "pc": 1550000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/181783-mario-mandzukic/27-100845079/",
+    "referenceUrl": "https://www.futbin.com/27/player/23611/mandzukic",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100845079.3c8324dec3f8704d6f28a12b2043f845f650c09fe32538125d78f7c72764a052.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84129107",
+    "baseId": "hero-veron",
+    "itemId": 84129107,
+    "baseItemId": 243027,
+    "name": "חואן סבסטיאן ורון",
+    "en": "Juan Sebastián Verón",
+    "rating": 87,
+    "position": "CAM",
+    "positions": [
+      "CM"
+    ],
+    "nation": "Argentina",
+    "league": "Liga Profesional de Fútbol",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 82,
+      "sho": 86,
+      "pas": 88,
+      "dri": 86,
+      "def": 74,
+      "phy": 82
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 3,
+    "heightCm": 186,
+    "weightKg": 80,
+    "age": 51,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134
+      ]
+    },
+    "attributes": {
+      "acceleration": 83,
+      "sprintSpeed": 82,
+      "positioning": 83,
+      "finishing": 80,
+      "shotPower": 94,
+      "longShots": 92,
+      "volleys": 78,
+      "penalties": 91,
+      "vision": 88,
+      "crossing": 83,
+      "freeKickAccuracy": 86,
+      "shortPassing": 90,
+      "longPassing": 89,
+      "curve": 85,
+      "agility": 82,
+      "balance": 82,
+      "reactions": 86,
+      "ballControl": 91,
+      "dribbling": 83,
+      "composure": 89,
+      "interceptions": 80,
+      "headingAccuracy": 67,
+      "defensiveAwareness": 72,
+      "standingTackle": 78,
+      "slidingTackle": 64,
+      "jumping": 70,
+      "stamina": 86,
+      "strength": 80,
+      "aggression": 87,
+      "gkDiving": 9,
+      "gkHandling": 7,
+      "gkKicking": 9,
+      "gkReflexes": 13,
+      "gkPositioning": 13
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": null,
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:41.774832Z",
+    "gradingScore": 9625,
+    "price": {
+      "kind": "unavailable",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/243027-juan-sebastian-veron/27-84129107/",
+    "referenceUrl": "https://www.futbin.com/27/player/23610/veron",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84129107.7e9bda80eca1dbb1b53dca97fae9597889871409cd73dcd2132204e3439a3a04.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84113342",
+    "baseId": "hero-alexscott",
+    "itemId": 84113342,
+    "baseItemId": 227262,
+    "name": "ג׳יל סקוט",
+    "en": "Jill Scott",
+    "rating": 87,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "England",
+    "league": "Barclays Women’s Super League",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 81,
+      "sho": 79,
+      "pas": 83,
+      "dri": 80,
+      "def": 85,
+      "phy": 90
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 181,
+    "weightKg": 68,
+    "age": 39,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Relentless",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 76,
+      "sprintSpeed": 85,
+      "positioning": 81,
+      "finishing": 78,
+      "shotPower": 86,
+      "longShots": 81,
+      "volleys": 58,
+      "penalties": 69,
+      "vision": 86,
+      "crossing": 69,
+      "freeKickAccuracy": 59,
+      "shortPassing": 92,
+      "longPassing": 88,
+      "curve": 66,
+      "agility": 76,
+      "balance": 75,
+      "reactions": 86,
+      "ballControl": 82,
+      "dribbling": 79,
+      "composure": 85,
+      "interceptions": 84,
+      "headingAccuracy": 89,
+      "defensiveAwareness": 80,
+      "standingTackle": 90,
+      "slidingTackle": 80,
+      "jumping": 87,
+      "stamina": 94,
+      "strength": 91,
+      "aggression": 81,
+      "gkDiving": 10,
+      "gkHandling": 15,
+      "gkKicking": 12,
+      "gkReflexes": 9,
+      "gkPositioning": 17
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": null,
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:44.548813Z",
+    "gradingScore": 9625,
+    "price": {
+      "kind": "unavailable",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/227262-jill-scott/27-84113342/",
+    "referenceUrl": "https://www.futbin.com/27/player/23609/scott",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84113342.c72a5da525f7831e846d87fe958584e282da41dad36345a3a077aade7165f55f.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-84067863",
+    "baseId": "hero-mandzukic",
+    "itemId": 84067863,
+    "baseItemId": 181783,
+    "name": "מריו מנדז׳וקיץ׳",
+    "en": "Mario Mandžukić",
+    "rating": 87,
+    "position": "LW",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Croatia",
+    "league": "Bundesliga",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 88,
+      "sho": 87,
+      "pas": 87,
+      "dri": 83,
+      "def": 64,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 4,
+    "heightCm": 190,
+    "weightKg": 84,
+    "age": 40,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Finesse Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 87,
+      "sprintSpeed": 88,
+      "positioning": 91,
+      "finishing": 88,
+      "shotPower": 89,
+      "longShots": 80,
+      "volleys": 90,
+      "penalties": 83,
+      "vision": 87,
+      "crossing": 88,
+      "freeKickAccuracy": 80,
+      "shortPassing": 90,
+      "longPassing": 84,
+      "curve": 84,
+      "agility": 80,
+      "balance": 76,
+      "reactions": 86,
+      "ballControl": 88,
+      "dribbling": 81,
+      "composure": 90,
+      "interceptions": 61,
+      "headingAccuracy": 95,
+      "defensiveAwareness": 59,
+      "standingTackle": 61,
+      "slidingTackle": 60,
+      "jumping": 96,
+      "stamina": 86,
+      "strength": 90,
+      "aggression": 90,
+      "gkDiving": 10,
+      "gkHandling": 8,
+      "gkKicking": 5,
+      "gkReflexes": 15,
+      "gkPositioning": 8
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": null,
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:43.118226Z",
+    "gradingScore": 9625,
+    "price": {
+      "kind": "market",
+      "console": 960000,
+      "pc": 835000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/181783-mario-mandzukic/27-84067863/",
+    "referenceUrl": "https://www.futbin.com/27/player/23608/mandzukic",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-84067863.910365b7991842a5e25bf930038ff8042d8321fc90d55b614c356abae18a7b64.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67366398",
+    "baseId": "palmer",
+    "itemId": 67366398,
+    "baseItemId": 257534,
+    "name": "קול פאלמר",
+    "en": "Cole Palmer",
+    "rating": 87,
+    "position": "RW",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Chelsea",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 87,
+      "sho": 85,
+      "pas": 86,
+      "dri": 89,
+      "def": 54,
+      "phy": 66
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 185,
+    "weightKg": 77,
+    "age": 24,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 87,
+      "positioning": 86,
+      "finishing": 84,
+      "shotPower": 87,
+      "longShots": 85,
+      "volleys": 72,
+      "penalties": 92,
+      "vision": 89,
+      "crossing": 86,
+      "freeKickAccuracy": 83,
+      "shortPassing": 86,
+      "longPassing": 86,
+      "curve": 86,
+      "agility": 82,
+      "balance": 82,
+      "reactions": 89,
+      "ballControl": 91,
+      "dribbling": 89,
+      "composure": 92,
+      "interceptions": 54,
+      "headingAccuracy": 65,
+      "defensiveAwareness": 54,
+      "standingTackle": 54,
+      "slidingTackle": 43,
+      "jumping": 73,
+      "stamina": 81,
+      "strength": 62,
+      "aggression": 57,
+      "gkDiving": 7,
+      "gkHandling": 6,
+      "gkKicking": 10,
+      "gkReflexes": 14,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:46.074291Z",
+    "gradingScore": 12375,
+    "price": {
+      "kind": "market",
+      "console": 1499000,
+      "pc": 1265000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/257534-cole-palmer/27-67366398/",
+    "referenceUrl": "https://www.futbin.com/27/player/23607/cole-palmer",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67366398.0fda53d23a20b49e16734660e6906dae04bfe51435957813d77697004e9a01da.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67318363",
+    "baseId": "ea-209499-fabinho",
+    "itemId": 67318363,
+    "baseItemId": 209499,
+    "name": "פאביניו",
+    "en": "Fabinho",
+    "rating": 87,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "Brazil",
+    "league": "Trendyol Süper Lig",
+    "club": "Trabzonspor",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 78,
+      "sho": 71,
+      "pas": 80,
+      "dri": 79,
+      "def": 87,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 188,
+    "weightKg": 78,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 76,
+      "sprintSpeed": 80,
+      "positioning": 72,
+      "finishing": 65,
+      "shotPower": 82,
+      "longShots": 75,
+      "volleys": 55,
+      "penalties": 86,
+      "vision": 76,
+      "crossing": 79,
+      "freeKickAccuracy": 57,
+      "shortPassing": 85,
+      "longPassing": 84,
+      "curve": 74,
+      "agility": 65,
+      "balance": 65,
+      "reactions": 80,
+      "ballControl": 83,
+      "dribbling": 80,
+      "composure": 84,
+      "interceptions": 88,
+      "headingAccuracy": 83,
+      "defensiveAwareness": 86,
+      "standingTackle": 89,
+      "slidingTackle": 88,
+      "jumping": 86,
+      "stamina": 90,
+      "strength": 89,
+      "aggression": 87,
+      "gkDiving": 13,
+      "gkHandling": 12,
+      "gkKicking": 6,
+      "gkReflexes": 8,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "holographic",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:50.485429Z",
+    "gradingScore": 12375,
+    "price": {
+      "kind": "market",
+      "console": 263000,
+      "pc": 502000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/209499-fabinho/27-67318363/",
+    "referenceUrl": "https://www.futbin.com/27/player/23606/fabio-henrique-tavares",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67318363.7d3fed764ed3585017912e7edca92199c0f942d02f3d1aca7d5dc82ce4325463.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50589182",
+    "baseId": "palmer",
+    "itemId": 50589182,
+    "baseItemId": 257534,
+    "name": "קול פאלמר",
+    "en": "Cole Palmer",
+    "rating": 87,
+    "position": "RW",
+    "positions": [
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "England",
+    "league": "Premier League",
+    "club": "Chelsea",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 87,
+      "sho": 85,
+      "pas": 86,
+      "dri": 89,
+      "def": 54,
+      "phy": 66
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 185,
+    "weightKg": 77,
+    "age": 24,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Inventive",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "First Touch",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ]
+    },
+    "attributes": {
+      "acceleration": 88,
+      "sprintSpeed": 87,
+      "positioning": 86,
+      "finishing": 84,
+      "shotPower": 87,
+      "longShots": 85,
+      "volleys": 72,
+      "penalties": 92,
+      "vision": 89,
+      "crossing": 86,
+      "freeKickAccuracy": 83,
+      "shortPassing": 86,
+      "longPassing": 86,
+      "curve": 86,
+      "agility": 82,
+      "balance": 82,
+      "reactions": 89,
+      "ballControl": 91,
+      "dribbling": 89,
+      "composure": 92,
+      "interceptions": 54,
+      "headingAccuracy": 65,
+      "defensiveAwareness": 54,
+      "standingTackle": 54,
+      "slidingTackle": 43,
+      "jumping": 73,
+      "stamina": 81,
+      "strength": 62,
+      "aggression": 57,
+      "gkDiving": 7,
+      "gkHandling": 6,
+      "gkKicking": 10,
+      "gkReflexes": 14,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:48.440495Z",
+    "gradingScore": 8250,
+    "price": {
+      "kind": "market",
+      "console": 1000000,
+      "pc": 1300000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/257534-cole-palmer/27-50589182/",
+    "referenceUrl": "https://www.futbin.com/27/player/23605/cole-palmer",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50589182.0dfb8ae57b3becb8ece549635081c19d5628265a22abe23d1163db52baae6355.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50541147",
+    "baseId": "ea-209499-fabinho",
+    "itemId": 50541147,
+    "baseItemId": 209499,
+    "name": "פאביניו",
+    "en": "Fabinho",
+    "rating": 87,
+    "position": "CB",
+    "positions": [
+      "CDM",
+      "CM"
+    ],
+    "nation": "Brazil",
+    "league": "Trendyol Süper Lig",
+    "club": "Trabzonspor",
+    "edition": "recent",
+    "face": {
+      "ovr": 87,
+      "pac": 78,
+      "sho": 71,
+      "pas": 80,
+      "dri": 79,
+      "def": 87,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 188,
+    "weightKg": 78,
+    "age": 33,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Jockey",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 76,
+      "sprintSpeed": 80,
+      "positioning": 72,
+      "finishing": 65,
+      "shotPower": 82,
+      "longShots": 75,
+      "volleys": 55,
+      "penalties": 86,
+      "vision": 76,
+      "crossing": 79,
+      "freeKickAccuracy": 57,
+      "shortPassing": 85,
+      "longPassing": 84,
+      "curve": 74,
+      "agility": 65,
+      "balance": 65,
+      "reactions": 80,
+      "ballControl": 83,
+      "dribbling": 80,
+      "composure": 84,
+      "interceptions": 88,
+      "headingAccuracy": 83,
+      "defensiveAwareness": 86,
+      "standingTackle": 89,
+      "slidingTackle": 88,
+      "jumping": 86,
+      "stamina": 90,
+      "strength": 89,
+      "aggression": 87,
+      "gkDiving": 13,
+      "gkHandling": 12,
+      "gkKicking": 6,
+      "gkReflexes": 8,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:52.363618Z",
+    "gradingScore": 8250,
+    "price": {
+      "kind": "market",
+      "console": 136000,
+      "pc": 134000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/209499-fabinho/27-50541147/",
+    "referenceUrl": "https://www.futbin.com/27/player/23604/fabio-henrique-tavares",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50541147.ec3c9cc66384fc766d34bd6dcaa82ecf4a2800068debab2852066594e94ec91c.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100669036",
+    "baseId": "hero-stam",
+    "itemId": 100669036,
+    "baseItemId": 5740,
+    "name": "יאפ סטאם",
+    "en": "Jaap Stam",
+    "rating": 88,
+    "position": "CDM",
+    "positions": [
+      "CB"
+    ],
+    "nation": "Netherlands",
+    "league": "Premier League",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 85,
+      "sho": 53,
+      "pas": 71,
+      "dri": 70,
+      "def": 90,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 191,
+    "weightKg": 86,
+    "age": 54,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 82,
+      "sprintSpeed": 87,
+      "positioning": 53,
+      "finishing": 42,
+      "shotPower": 82,
+      "longShots": 53,
+      "volleys": 43,
+      "penalties": 53,
+      "vision": 58,
+      "crossing": 68,
+      "freeKickAccuracy": 44,
+      "shortPassing": 82,
+      "longPassing": 80,
+      "curve": 55,
+      "agility": 70,
+      "balance": 70,
+      "reactions": 84,
+      "ballControl": 80,
+      "dribbling": 60,
+      "composure": 88,
+      "interceptions": 86,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 90,
+      "standingTackle": 93,
+      "slidingTackle": 89,
+      "jumping": 83,
+      "stamina": 80,
+      "strength": 93,
+      "aggression": 92,
+      "gkDiving": 6,
+      "gkHandling": 14,
+      "gkKicking": 15,
+      "gkReflexes": 10,
+      "gkPositioning": 12
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": "pristine",
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:37.994820Z",
+    "gradingScore": 21788,
+    "price": {
+      "kind": "market",
+      "console": 9900000,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/5740-jaap-stam/27-100669036/",
+    "referenceUrl": "https://www.futbin.com/27/player/23603/stam",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100669036.653b20e317b642a0d5ebb271b25f1183d34a95af77b139ac583d07612d55c176.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-83891820",
+    "baseId": "hero-stam",
+    "itemId": 83891820,
+    "baseItemId": 5740,
+    "name": "יאפ סטאם",
+    "en": "Jaap Stam",
+    "rating": 88,
+    "position": "CDM",
+    "positions": [
+      "CB"
+    ],
+    "nation": "Netherlands",
+    "league": "Premier League",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 85,
+      "sho": 53,
+      "pas": 71,
+      "dri": 70,
+      "def": 90,
+      "phy": 89
+    },
+    "foot": "R",
+    "weakFoot": 3,
+    "skillMoves": 3,
+    "heightCm": 191,
+    "weightKg": 86,
+    "age": 54,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Block",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      },
+      {
+        "name": "Bruiser",
+        "plus": false
+      },
+      {
+        "name": "Jockey",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        148,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 82,
+      "sprintSpeed": 87,
+      "positioning": 53,
+      "finishing": 42,
+      "shotPower": 82,
+      "longShots": 53,
+      "volleys": 43,
+      "penalties": 53,
+      "vision": 58,
+      "crossing": 68,
+      "freeKickAccuracy": 44,
+      "shortPassing": 82,
+      "longPassing": 80,
+      "curve": 55,
+      "agility": 70,
+      "balance": 70,
+      "reactions": 84,
+      "ballControl": 80,
+      "dribbling": 60,
+      "composure": 88,
+      "interceptions": 86,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 90,
+      "standingTackle": 93,
+      "slidingTackle": 89,
+      "jumping": 83,
+      "stamina": 80,
+      "strength": 93,
+      "aggression": 92,
+      "gkDiving": 6,
+      "gkHandling": 14,
+      "gkKicking": 15,
+      "gkReflexes": 10,
+      "gkPositioning": 12
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": null,
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:39.199154Z",
+    "gradingScore": 14525,
+    "price": {
+      "kind": "market",
+      "console": 2999000,
+      "pc": 4900000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/5740-jaap-stam/27-83891820/",
+    "referenceUrl": "https://www.futbin.com/27/player/23602/stam",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-83891820.b464e3e242f177b8d318fb5fd3f82ab9a6aad101010b728e195797be70bcc4a3.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67378268",
+    "baseId": "paraluelo",
+    "itemId": 67378268,
+    "baseItemId": 269404,
+    "name": "סלמה פראיו",
+    "en": "Salma Paralluelo",
+    "rating": 88,
+    "position": "ST",
+    "positions": [
+      "RM",
+      "LM",
+      "CAM",
+      "RW",
+      "LW"
+    ],
+    "nation": "Spain",
+    "league": "Arkema Première Ligue",
+    "club": "OL",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 94,
+      "sho": 86,
+      "pas": 80,
+      "dri": 86,
+      "def": 47,
+      "phy": 79
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 175,
+    "weightKg": 68,
+    "age": 22,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 94,
+      "sprintSpeed": 94,
+      "positioning": 87,
+      "finishing": 89,
+      "shotPower": 83,
+      "longShots": 86,
+      "volleys": 82,
+      "penalties": 80,
+      "vision": 82,
+      "crossing": 82,
+      "freeKickAccuracy": 66,
+      "shortPassing": 83,
+      "longPassing": 71,
+      "curve": 78,
+      "agility": 90,
+      "balance": 88,
+      "reactions": 83,
+      "ballControl": 86,
+      "dribbling": 87,
+      "composure": 76,
+      "interceptions": 43,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 43,
+      "standingTackle": 46,
+      "slidingTackle": 41,
+      "jumping": 92,
+      "stamina": 83,
+      "strength": 84,
+      "aggression": 60,
+      "gkDiving": 6,
+      "gkHandling": 6,
+      "gkKicking": 12,
+      "gkReflexes": 13,
+      "gkPositioning": 6
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "pristine",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:44.165680Z",
+    "gradingScore": 18675,
+    "price": {
+      "kind": "market",
+      "console": 12999000,
+      "pc": 8000000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/269404-salma-paralluelo/27-67378268/",
+    "referenceUrl": "https://www.futbin.com/27/player/23601/salma-celeste-paralluelo-ayingono",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67378268.ea41b7c68f62c9c1d2ea5d5a708f9e9fae7501b24cc42430906de802002fe5d1.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67345636",
+    "baseId": "szoboszlai",
+    "itemId": 67345636,
+    "baseItemId": 236772,
+    "name": "דומיניק סובוסלאי",
+    "en": "Dominik Szoboszlai",
+    "rating": 88,
+    "position": "RB",
+    "positions": [
+      "CDM",
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "Hungary",
+    "league": "Premier League",
+    "club": "Liverpool",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 85,
+      "sho": 84,
+      "pas": 88,
+      "dri": 85,
+      "def": 85,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 186,
+    "weightKg": 74,
+    "age": 25,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        146,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 84,
+      "sprintSpeed": 86,
+      "positioning": 82,
+      "finishing": 80,
+      "shotPower": 91,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 85,
+      "vision": 88,
+      "crossing": 88,
+      "freeKickAccuracy": 90,
+      "shortPassing": 88,
+      "longPassing": 88,
+      "curve": 89,
+      "agility": 78,
+      "balance": 75,
+      "reactions": 89,
+      "ballControl": 88,
+      "dribbling": 86,
+      "composure": 87,
+      "interceptions": 83,
+      "headingAccuracy": 77,
+      "defensiveAwareness": 85,
+      "standingTackle": 88,
+      "slidingTackle": 85,
+      "jumping": 82,
+      "stamina": 94,
+      "strength": 80,
+      "aggression": 81,
+      "gkDiving": 10,
+      "gkHandling": 10,
+      "gkKicking": 13,
+      "gkReflexes": 6,
+      "gkPositioning": 10
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "pristine",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:40.806729Z",
+    "gradingScore": 18675,
+    "price": {
+      "kind": "market",
+      "console": 2050000,
+      "pc": 2900000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/236772-dominik-szoboszlai/27-67345636/",
+    "referenceUrl": "https://www.futbin.com/27/player/23600/dominik-szoboszlai",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67345636.38d50939affd4656a1d672c3f0cc6f182ddfa1d173b51e3466be845ab4fefce1.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50601052",
+    "baseId": "paraluelo",
+    "itemId": 50601052,
+    "baseItemId": 269404,
+    "name": "סלמה פראיו",
+    "en": "Salma Paralluelo",
+    "rating": 88,
+    "position": "ST",
+    "positions": [
+      "RM",
+      "LM",
+      "CAM",
+      "RW",
+      "LW"
+    ],
+    "nation": "Spain",
+    "league": "Arkema Première Ligue",
+    "club": "OL",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 94,
+      "sho": 86,
+      "pas": 80,
+      "dri": 86,
+      "def": 47,
+      "phy": 79
+    },
+    "foot": "L",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 175,
+    "weightKg": 68,
+    "age": 22,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 94,
+      "sprintSpeed": 94,
+      "positioning": 87,
+      "finishing": 89,
+      "shotPower": 83,
+      "longShots": 86,
+      "volleys": 82,
+      "penalties": 80,
+      "vision": 82,
+      "crossing": 82,
+      "freeKickAccuracy": 66,
+      "shortPassing": 83,
+      "longPassing": 71,
+      "curve": 78,
+      "agility": 90,
+      "balance": 88,
+      "reactions": 83,
+      "ballControl": 86,
+      "dribbling": 87,
+      "composure": 76,
+      "interceptions": 43,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 43,
+      "standingTackle": 46,
+      "slidingTackle": 41,
+      "jumping": 92,
+      "stamina": 83,
+      "strength": 84,
+      "aggression": 60,
+      "gkDiving": 6,
+      "gkHandling": 6,
+      "gkKicking": 12,
+      "gkReflexes": 13,
+      "gkPositioning": 6
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:42.484805Z",
+    "gradingScore": 12450,
+    "price": {
+      "kind": "market",
+      "console": 3375000,
+      "pc": 4000000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/269404-salma-paralluelo/27-50601052/",
+    "referenceUrl": "https://www.futbin.com/27/player/23599/salma-celeste-paralluelo-ayingono",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50601052.43e5df18fe6439ef288aa2620da372107b50965d8bf10e245a3f1c80a064c144.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-50568420",
+    "baseId": "szoboszlai",
+    "itemId": 50568420,
+    "baseItemId": 236772,
+    "name": "דומיניק סובוסלאי",
+    "en": "Dominik Szoboszlai",
+    "rating": 88,
+    "position": "RB",
+    "positions": [
+      "CDM",
+      "RM",
+      "CM",
+      "CAM"
+    ],
+    "nation": "Hungary",
+    "league": "Premier League",
+    "club": "Liverpool",
+    "edition": "recent",
+    "face": {
+      "ovr": 88,
+      "pac": 85,
+      "sho": 84,
+      "pas": 88,
+      "dri": 85,
+      "def": 85,
+      "phy": 84
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 186,
+    "weightKg": 74,
+    "age": 25,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Dead Ball",
+        "plus": false
+      },
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Intercept",
+        "plus": false
+      },
+      {
+        "name": "Slide Tackle",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Long Ball Pass",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        103,
+        104,
+        105,
+        106,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        131,
+        132,
+        133,
+        134,
+        146,
+        149
+      ]
+    },
+    "attributes": {
+      "acceleration": 84,
+      "sprintSpeed": 86,
+      "positioning": 82,
+      "finishing": 80,
+      "shotPower": 91,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 85,
+      "vision": 88,
+      "crossing": 88,
+      "freeKickAccuracy": 90,
+      "shortPassing": 88,
+      "longPassing": 88,
+      "curve": 89,
+      "agility": 78,
+      "balance": 75,
+      "reactions": 89,
+      "ballControl": 88,
+      "dribbling": 86,
+      "composure": 87,
+      "interceptions": 83,
+      "headingAccuracy": 77,
+      "defensiveAwareness": 85,
+      "standingTackle": 88,
+      "slidingTackle": 85,
+      "jumping": 82,
+      "stamina": 94,
+      "strength": 80,
+      "aggression": 81,
+      "gkDiving": 10,
+      "gkHandling": 10,
+      "gkKicking": 13,
+      "gkReflexes": 6,
+      "gkPositioning": 10
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:38.776112Z",
+    "gradingScore": 12450,
+    "price": {
+      "kind": "market",
+      "console": 1270000,
+      "pc": 1247000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/236772-dominik-szoboszlai/27-50568420/",
+    "referenceUrl": "https://www.futbin.com/27/player/23598/dominik-szoboszlai",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-50568420.84a4433c6b7a19980f4b6cba0eab75374cb2927a559f8c69bc69c5cc4743a1ec.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100664497",
+    "baseId": "hero-zola",
+    "itemId": 100664497,
+    "baseItemId": 1201,
+    "name": "ג׳אנפרנקו זולה",
+    "en": "Gianfranco Zola",
+    "rating": 89,
+    "position": "ST",
+    "positions": [
+      "CAM",
+      "LW"
+    ],
+    "nation": "Italy",
+    "league": "Premier League",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 89,
+      "pac": 88,
+      "sho": 89,
+      "pas": 87,
+      "dri": 90,
+      "def": 42,
+      "phy": 67
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 168,
+    "weightKg": 67,
+    "age": 60,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 87,
+      "positioning": 88,
+      "finishing": 91,
+      "shotPower": 89,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 87,
+      "vision": 87,
+      "crossing": 84,
+      "freeKickAccuracy": 92,
+      "shortPassing": 89,
+      "longPassing": 83,
+      "curve": 89,
+      "agility": 83,
+      "balance": 85,
+      "reactions": 89,
+      "ballControl": 90,
+      "dribbling": 92,
+      "composure": 87,
+      "interceptions": 33,
+      "headingAccuracy": 64,
+      "defensiveAwareness": 41,
+      "standingTackle": 44,
+      "slidingTackle": 37,
+      "jumping": 52,
+      "stamina": 80,
+      "strength": 64,
+      "aggression": 63,
+      "gkDiving": 15,
+      "gkHandling": 14,
+      "gkKicking": 14,
+      "gkReflexes": 8,
+      "gkPositioning": 7
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": "pristine",
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:36.852197Z",
+    "gradingScore": 28875,
+    "price": {
+      "kind": "market",
+      "console": null,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/1201-gianfranco-zola/27-100664497/",
+    "referenceUrl": "https://www.futbin.com/27/player/23597/zola",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100664497.64005b1ae03d3bca81c6f8ac2643453e24929be8ca0b7a0d539d36023a102184.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-83906881",
+    "baseId": "ea-20801-cristiano-ronaldo",
+    "itemId": 83906881,
+    "baseItemId": 20801,
+    "name": "כריסטיאנו רונאלדו",
+    "en": "Cristiano Ronaldo",
+    "rating": 89,
+    "position": "LW",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Portugal",
+    "league": "ROSHN Saudi League",
+    "club": "Al Nassr",
+    "edition": "recent",
+    "face": {
+      "ovr": 89,
+      "pac": 90,
+      "sho": 89,
+      "pas": 79,
+      "dri": 87,
+      "def": 37,
+      "phy": 77
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 5,
+    "heightCm": 187,
+    "weightKg": 85,
+    "age": 41,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 91,
+      "sprintSpeed": 90,
+      "positioning": 90,
+      "finishing": 90,
+      "shotPower": 91,
+      "longShots": 85,
+      "volleys": 86,
+      "penalties": 94,
+      "vision": 80,
+      "crossing": 80,
+      "freeKickAccuracy": 83,
+      "shortPassing": 80,
+      "longPassing": 73,
+      "curve": 82,
+      "agility": 85,
+      "balance": 86,
+      "reactions": 87,
+      "ballControl": 90,
+      "dribbling": 86,
+      "composure": 92,
+      "interceptions": 33,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 28,
+      "standingTackle": 36,
+      "slidingTackle": 28,
+      "jumping": 94,
+      "stamina": 75,
+      "strength": 83,
+      "aggression": 62,
+      "gkDiving": 7,
+      "gkHandling": 11,
+      "gkKicking": 15,
+      "gkReflexes": 11,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "pristine",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:35.178123Z",
+    "gradingScore": 24750,
+    "price": {
+      "kind": "market",
+      "console": 15000000,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/20801-cristiano-ronaldo/27-83906881/",
+    "referenceUrl": "https://www.futbin.com/27/player/23596/c-ronaldo-dos-santos-aveiro",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-83906881.173b8a917b8d36176ee8258cfeda805e669fa00469cfc3dc6a04cc15057e8721.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-83887281",
+    "baseId": "hero-zola",
+    "itemId": 83887281,
+    "baseItemId": 1201,
+    "name": "ג׳אנפרנקו זולה",
+    "en": "Gianfranco Zola",
+    "rating": 89,
+    "position": "ST",
+    "positions": [
+      "CAM",
+      "LW"
+    ],
+    "nation": "Italy",
+    "league": "Premier League",
+    "club": "",
+    "edition": "recent",
+    "face": {
+      "ovr": 89,
+      "pac": 88,
+      "sho": 89,
+      "pas": 87,
+      "dri": 90,
+      "def": 42,
+      "phy": 67
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 168,
+    "weightKg": 67,
+    "age": 60,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Quick Step",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        131,
+        132,
+        133,
+        134,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 89,
+      "sprintSpeed": 87,
+      "positioning": 88,
+      "finishing": 91,
+      "shotPower": 89,
+      "longShots": 88,
+      "volleys": 82,
+      "penalties": 87,
+      "vision": 87,
+      "crossing": 84,
+      "freeKickAccuracy": 92,
+      "shortPassing": 89,
+      "longPassing": 83,
+      "curve": 89,
+      "agility": 83,
+      "balance": 85,
+      "reactions": 89,
+      "ballControl": 90,
+      "dribbling": 92,
+      "composure": 87,
+      "interceptions": 33,
+      "headingAccuracy": 64,
+      "defensiveAwareness": 41,
+      "standingTackle": 44,
+      "slidingTackle": 37,
+      "jumping": 52,
+      "stamina": 80,
+      "strength": 64,
+      "aggression": 63,
+      "gkDiving": 15,
+      "gkHandling": 14,
+      "gkKicking": 14,
+      "gkReflexes": 8,
+      "gkPositioning": 7
+    },
+    "backgroundId": 168,
+    "family": "Ultimate Scream Hero",
+    "holographicType": null,
+    "isHero": true,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:01:35.729927Z",
+    "gradingScore": 19250,
+    "price": {
+      "kind": "market",
+      "console": 2200000,
+      "pc": 3000000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/1201-gianfranco-zola/27-83887281/",
+    "referenceUrl": "https://www.futbin.com/27/player/23595/zola",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-83887281.9275352bbba3169c41279ebee9e38c1d3905bd70b584e4c840fc56a22ced6cb1.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-67129665",
+    "baseId": "ea-20801-cristiano-ronaldo",
+    "itemId": 67129665,
+    "baseItemId": 20801,
+    "name": "כריסטיאנו רונאלדו",
+    "en": "Cristiano Ronaldo",
+    "rating": 89,
+    "position": "LW",
+    "positions": [
+      "ST"
+    ],
+    "nation": "Portugal",
+    "league": "ROSHN Saudi League",
+    "club": "Al Nassr",
+    "edition": "recent",
+    "face": {
+      "ovr": 89,
+      "pac": 90,
+      "sho": 89,
+      "pas": 79,
+      "dri": 87,
+      "def": 37,
+      "phy": 77
+    },
+    "foot": "R",
+    "weakFoot": 5,
+    "skillMoves": 5,
+    "heightCm": 187,
+    "weightKg": 85,
+    "age": 41,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Power Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": false
+      },
+      {
+        "name": "Trickster",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 91,
+      "sprintSpeed": 90,
+      "positioning": 90,
+      "finishing": 90,
+      "shotPower": 91,
+      "longShots": 85,
+      "volleys": 86,
+      "penalties": 94,
+      "vision": 80,
+      "crossing": 80,
+      "freeKickAccuracy": 83,
+      "shortPassing": 80,
+      "longPassing": 73,
+      "curve": 82,
+      "agility": 85,
+      "balance": 86,
+      "reactions": 87,
+      "ballControl": 90,
+      "dribbling": 86,
+      "composure": 92,
+      "interceptions": 33,
+      "headingAccuracy": 88,
+      "defensiveAwareness": 28,
+      "standingTackle": 36,
+      "slidingTackle": 28,
+      "jumping": 94,
+      "stamina": 75,
+      "strength": 83,
+      "aggression": 62,
+      "gkDiving": 7,
+      "gkHandling": 11,
+      "gkKicking": 15,
+      "gkReflexes": 11,
+      "gkPositioning": 14
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:36.950748Z",
+    "gradingScore": 16500,
+    "price": {
+      "kind": "market",
+      "console": 7700000,
+      "pc": 14900000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/20801-cristiano-ronaldo/27-67129665/",
+    "referenceUrl": "https://www.futbin.com/27/player/23594/c-ronaldo-dos-santos-aveiro",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-67129665.586b7978b35006cfdcceceb67dd96e2a3125296ec7ed85fe243f7c144004fddf.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-117673931",
+    "baseId": "raphinha",
+    "itemId": 117673931,
+    "baseItemId": 233419,
+    "name": "ראפיניה",
+    "en": "Raphinha",
+    "rating": 90,
+    "position": "CAM",
+    "positions": [
+      "RM",
+      "LM",
+      "RW",
+      "ST",
+      "LW"
+    ],
+    "nation": "Brazil",
+    "league": "LALIGA EA SPORTS",
+    "club": "FC Barcelona",
+    "edition": "recent",
+    "face": {
+      "ovr": 90,
+      "pac": 93,
+      "sho": 88,
+      "pas": 90,
+      "dri": 89,
+      "def": 57,
+      "phy": 79
+    },
+    "foot": "L",
+    "weakFoot": 5,
+    "skillMoves": 4,
+    "heightCm": 176,
+    "weightKg": 68,
+    "age": 29,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 92,
+      "sprintSpeed": 93,
+      "positioning": 91,
+      "finishing": 90,
+      "shotPower": 87,
+      "longShots": 87,
+      "volleys": 81,
+      "penalties": 84,
+      "vision": 91,
+      "crossing": 90,
+      "freeKickAccuracy": 90,
+      "shortPassing": 90,
+      "longPassing": 88,
+      "curve": 90,
+      "agility": 90,
+      "balance": 85,
+      "reactions": 89,
+      "ballControl": 90,
+      "dribbling": 88,
+      "composure": 87,
+      "interceptions": 61,
+      "headingAccuracy": 78,
+      "defensiveAwareness": 52,
+      "standingTackle": 58,
+      "slidingTackle": 42,
+      "jumping": 86,
+      "stamina": 94,
+      "strength": 70,
+      "aggression": 82,
+      "gkDiving": 8,
+      "gkHandling": 7,
+      "gkKicking": 13,
+      "gkReflexes": 14,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": "pristine",
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:29.747223Z",
+    "gradingScore": 31500,
+    "price": {
+      "kind": "market",
+      "console": 7500000,
+      "pc": null,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/233419-raphinha/27-117673931/",
+    "referenceUrl": "https://www.futbin.com/27/player/23593/raphael-dias-belloli",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-117673931.4e1a47866702139093fb6992d9026303fb1971c61bfc82a4071483d9db320c84.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  },
+  {
+    "id": "recent-100896715",
+    "baseId": "raphinha",
+    "itemId": 100896715,
+    "baseItemId": 233419,
+    "name": "ראפיניה",
+    "en": "Raphinha",
+    "rating": 90,
+    "position": "CAM",
+    "positions": [
+      "RM",
+      "LM",
+      "RW",
+      "ST",
+      "LW"
+    ],
+    "nation": "Brazil",
+    "league": "LALIGA EA SPORTS",
+    "club": "FC Barcelona",
+    "edition": "recent",
+    "face": {
+      "ovr": 90,
+      "pac": 93,
+      "sho": 88,
+      "pas": 90,
+      "dri": 89,
+      "def": 57,
+      "phy": 79
+    },
+    "foot": "L",
+    "weakFoot": 5,
+    "skillMoves": 4,
+    "heightCm": 176,
+    "weightKg": 68,
+    "age": 29,
+    "accelerate": "EXPLOSIVE",
+    "playstyles": [
+      {
+        "name": "Finesse Shot",
+        "plus": false
+      },
+      {
+        "name": "Low Driven Shot",
+        "plus": false
+      },
+      {
+        "name": "Gamechanger",
+        "plus": false
+      },
+      {
+        "name": "Incisive Pass",
+        "plus": false
+      },
+      {
+        "name": "Pinged Pass",
+        "plus": false
+      },
+      {
+        "name": "Rapid",
+        "plus": false
+      },
+      {
+        "name": "Technical",
+        "plus": true
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "attributes": {
+      "acceleration": 92,
+      "sprintSpeed": 93,
+      "positioning": 91,
+      "finishing": 90,
+      "shotPower": 87,
+      "longShots": 87,
+      "volleys": 81,
+      "penalties": 84,
+      "vision": 91,
+      "crossing": 90,
+      "freeKickAccuracy": 90,
+      "shortPassing": 90,
+      "longPassing": 88,
+      "curve": 90,
+      "agility": 90,
+      "balance": 85,
+      "reactions": 89,
+      "ballControl": 90,
+      "dribbling": 88,
+      "composure": 87,
+      "interceptions": 61,
+      "headingAccuracy": 78,
+      "defensiveAwareness": 52,
+      "standingTackle": 58,
+      "slidingTackle": 42,
+      "jumping": 86,
+      "stamina": 94,
+      "strength": 70,
+      "aggression": 82,
+      "gkDiving": 8,
+      "gkHandling": 7,
+      "gkKicking": 13,
+      "gkReflexes": 14,
+      "gkPositioning": 8
+    },
+    "backgroundId": 151,
+    "family": "Ultimate Scream",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-23",
+    "createdAt": "2026-10-23T17:00:31.143424Z",
+    "gradingScore": 21000,
+    "price": {
+      "kind": "market",
+      "console": 6400000,
+      "pc": 14000000,
+      "checkedAt": "2026-10-24T18:05:39.771Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/233419-raphinha/27-100896715/",
+    "referenceUrl": "https://www.futbin.com/27/player/23592/raphael-dias-belloli",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=400/2027/player-item-card/27-100896715.d2cc2ced8826b88d7c46d257742eef769a4af8c17740f47c3a558f0d5e2ac037.webp",
+    "checkedAt": "2026-10-24T18:05:39.771Z"
+  }
+]

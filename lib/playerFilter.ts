@@ -1,6 +1,6 @@
 import type { FcPlayer } from '@/lib/fcPlayers';
 
-export type CardKind = 'all' | 'gold' | 'silver' | 'icon' | 'promo' | 'hero' | 'totw' | 'future-stars' | 'season2';
+export type CardKind = 'all' | 'gold' | 'silver' | 'icon' | 'promo' | 'hero' | 'totw' | 'future-stars' | 'season2' | 'recent';
 
 export type PlayerFilters = {
   kind: CardKind;
@@ -35,6 +35,7 @@ export function filtersActive(filters: PlayerFilters) {
 
 export function playerMatches(player: FcPlayer, filters: PlayerFilters) {
   const special = Boolean(player.icon || player.edition);
+  if (filters.kind === 'recent' && player.edition !== 'recent') return false;
   if (filters.kind === 'season2' && player.edition !== 'season2') return false;
   if (filters.kind === 'gold' && (special || player.rating < 75)) return false;
   if (filters.kind === 'silver' && (special || player.rating < 65 || player.rating > 74)) return false;

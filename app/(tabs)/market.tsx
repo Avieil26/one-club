@@ -146,7 +146,7 @@ export default function MarketScreen() {
   const cardWidth = Math.floor((contentWidth - gap * (columns - 1)) / columns);
 
   useEffect(() => {
-    setFilters(routeKind === 'future-stars' || routeKind === 'season2' ? { ...EMPTY_FILTERS, kind: routeKind } : EMPTY_FILTERS);
+    setFilters(routeKind === 'future-stars' || routeKind === 'season2' || routeKind === 'recent' ? { ...EMPTY_FILTERS, kind: routeKind } : EMPTY_FILTERS);
     setQuery('');
     setDebouncedQuery('');
     setFilterOpen(false);
@@ -256,6 +256,9 @@ export default function MarketScreen() {
             }}
           >
             <Title>{t('שחקנים', 'Players')}</Title>
+            <Pressable accessibilityRole="button" accessibilityState={{ selected: filters.kind === 'recent' }} onPress={() => setFilters({ ...EMPTY_FILTERS, kind: filters.kind === 'recent' ? 'all' : 'recent' })} style={{ alignSelf: rtl ? 'flex-end' : 'flex-start', paddingHorizontal: 14, paddingVertical: 9, borderRadius: 20, borderWidth: 1, borderColor: '#A38461', backgroundColor: filters.kind === 'recent' ? '#3A2E24' : '#1B2028' }}>
+              <Text style={{ color: '#F4D6AE', fontWeight: '700', fontSize: 13 }}>{t('הקלפים החדשים · 23–24 באוקטובר', 'New releases · 23–24 October')}</Text>
+            </Pressable>
             <Muted>
               {PLAYERS.length.toLocaleString(language === 'he' ? 'he-IL' : 'en-US')} {t('קלפים במאגר', 'cards in the database')} · {PAGE_SIZE} {t('בעמוד', 'per page')} · {t('לחיצה פותחת פרטים מלאים.', 'Select a card to view full details.')}
             </Muted>
