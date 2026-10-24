@@ -57,6 +57,7 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
       const panel = page.getByTestId('recent-card-info');
       await panel.waitFor();
       const text = await panel.innerText();
+      assert.doesNotMatch(text,/פרטי הקלף נבדקו|אומדן נבדק|Card details checked|Estimate checked|FUT\.?GG|FUTBIN/i);
       assert(text.includes(card.family),card.id+' family');
       if(card.holographicType) assert(text.includes(card.holographicType==='pristine'?'Pristine':'Holographic'));
       if(card.price.kind==='sbc') {

@@ -87,11 +87,10 @@ export default function SbcDetailScreen() {
         {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
-      {challenge.lastCheckedAt ? <Muted>{t('נבדק לאחרונה: ', 'Last checked: ')}{new Date(challenge.lastCheckedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted> : null}
       {challenge.kind === 'classic' && classicSegments(challengeId).length ? <SbcClassicSolution key={challengeId} challengeId={challengeId} /> : challenge.kind === 'classic' && challenge.previewSquad && !challenge.manualValidation && challenge.rules && report.ready ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
           <View style={split ? { flex: 1, minWidth: 0, gap: 14 } : { gap: 14 }}>
-            <Title>{t('הרכב שנבדק מול הדרישות', 'Squad checked against requirements')}</Title>
+            <Title>{t('פתרון לאתגר', 'Challenge solution')}</Title>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {challenge.rules?.chemistry
                 ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
@@ -160,7 +159,7 @@ export default function SbcDetailScreen() {
             <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {displayName(app.profiles, solution.userId)}
             </Text>
-            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב נבדק מול הדרישות', '✓ Squad checked against requirements') : t('אושר על ידי מנהל', 'Approved by an administrator')}</Muted>
+            <Muted>{communitySquadStatus(challengeId, solution.formation, solution.squad) === 'checked' ? t('✓ ההרכב עומד בדרישות האתגר', '✓ Challenge solution') : t('אושר על ידי מנהל', 'Approved by an administrator')}</Muted>
             <Muted>{solution.explanation}</Muted>
             {shot ? (
               <Image

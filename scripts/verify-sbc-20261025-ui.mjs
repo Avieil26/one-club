@@ -31,17 +31,17 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
     assert.match(await panel.innerText(),language==='he'?/עומדים בדרישות/:/meet this segment/);
    }else{
     panel=page.getByTestId('sbc-checked-classic');await panel.waitFor();
-    assert.match(await panel.innerText(),language==='he'?/עומד בכל הדרישות/:/meets all checked requirements/);
+    assert.match(await panel.innerText(),language==='he'?/עומד בדרישות האתגר/:/meets challenge requirements/);
     if(challenge.id==='sbc-spooky-20261025')for(const slot of ['lm','rm','lw','rw'])await panel.getByTestId('sbc-locked-'+slot).waitFor();
-    if(challenge.id.includes('sbc-mm-'))assert.match(await panel.innerText(),language==='he'?/דוגמה שנבנתה באתר/:/Example assembled here/);
    }
+   assert.doesNotMatch(await page.locator('body').innerText(),/FUT\.?GG|FUTBIN|מקור הפתרון|מקור הדרישות|נבדק לאחרונה|נבדק:|Requirements source|Solution source|Last checked|Checked:|Requirements and points checked/i);
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),challenge.id+' horizontal overflow');
    const bounds=await panel.boundingBox();assert(bounds&&bounds.x>=-2&&bounds.x+bounds.width<=width+2,challenge.id+' panel clipped');
    const visual=challenge.kind==='classic'?panel.getByTestId('squad-pitch'):panel.getByTestId('sbc-option-card').first();
    await visual.scrollIntoViewIfNeeded();
    await page.screenshot({path:path.join(output,challenge.id+'-'+language+'-'+width+'.png')});
    if(challenge.kind==='classic'){
-    await panel.getByRole('link').scrollIntoViewIfNeeded();
+    await panel.getByTestId('sbc-surface').scrollIntoViewIfNeeded();
     await page.screenshot({path:path.join(output,challenge.id+'-checks-'+language+'-'+width+'.png')});
    }
    if(['sbc-mor-20261025','sbc-woltemade-20261025'].includes(challenge.id)){
