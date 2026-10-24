@@ -1,3 +1,4 @@
+import { loadRepositoryModule } from './load-player-catalogue.mjs';
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import http from 'node:http';
 const {chromium}=await import(process.env.FC27_PLAYWRIGHT_MODULE||'playwright');
 const root=path.resolve('dist');const output=process.env.FC27_QA_OUTPUT||'preview/new-cards-qa';fs.mkdirSync(output,{recursive:true});
@@ -8,7 +9,7 @@ const cards=JSON.parse(fs.readFileSync('assets/data/recentCards20261024.json','u
 
 async function noOverflow(page,label) {
   assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2), label+' document overflow');
-  const clipped = await page.locator('[data-testid="recent-card-info"], img[alt$="New release"]').evaluateAll(es=>es.filter(e=>{const r=e.getBoundingClientRect();if(!r.width)return false;if(r.left< -2||r.right>innerWidth+2)return true;for(let p=e.parentElement;p;p=p.parentElement){const pr=p.getBoundingClientRect();if(['hidden','clip'].includes(getComputedStyle(p).overflowX)&&(r.left<pr.left-2||r.right>pr.right+2))return true;}return false;}).length);
+  const clipped = await page.locator('[data-testid="recent-card-info"], [data-testid="player-edition-links"], img[alt$="New release"]').evaluateAll(es=>es.filter(e=>{const r=e.getBoundingClientRect();if(!r.width)return false;if(r.left< -2||r.right>innerWidth+2)return true;for(let p=e.parentElement;p;p=p.parentElement){const pr=p.getBoundingClientRect();if(['hidden','clip'].includes(getComputedStyle(p).overflowX)&&(r.left<pr.left-2||r.right>pr.right+2))return true;}return false;}).length);
   assert.equal(clipped, 0, label+' clipped card/panel');
 }
 async function art(page,card) {
@@ -16,8 +17,10 @@ async function art(page,card) {
   await image.waitFor();
   await image.evaluate(i=>i.decode());
   assert(await image.evaluate(i=>i.complete&&i.naturalWidth>0));
+  assert((await image.getAttribute('src')).includes(`${card.itemId}.`),'Wrong exact edition artwork: '+card.id);
   return image;
 }
+const {playerEditionsFor}=loadRepositoryModule('lib/playerEditions.ts');
 const report = [];
 try {
   for (const language of ['he','en']) for (const width of [360,390,1280]) {
@@ -64,7 +67,12 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
       } else if(card.price.console) {
         await page.getByText(card.price.console.toLocaleString('en-US'),{exact:true}).first().waitFor();
       }
-      assert.equal(await page.getByRole('button',{name:/Base card|קלף רגיל/}).count(),0);
+      const siblings = playerEditionsFor(card).filter(c=>c.id!==card.id);
+      const strip = page.getByTestId('player-edition-links');
+      await strip.waitFor();
+      assert.equal(await strip.getByRole('button').count(),siblings.length);
+      assert.equal(await strip.getByTestId(`edition-link-${card.id}`).count(),0);
+      for(const sibling of siblings) assert.equal(await strip.getByTestId(`edition-link-${sibling.id}`).count(),1);
       assert.equal(await page.getByText(/Full-potential projection|תחזית נתונים במלוא הפוטנציאל/).count(),0);
       await noOverflow(page,card.id);
       const key=[card.family,card.holographicType,card.price.kind,card.position==='GK'].join('-');
@@ -74,7 +82,26 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
         await panel.screenshot({path:path.join(output,`${card.itemId}-info-${language}-${width}.png`)});
       }
     }
-    report.push({language,width,routes:cards.length,designs:[...seen]});
+    // Exercise real one-click navigation to every available version and back, including originals.
+    for (const itemId of [100896715,67346556,100664497,67378268]) {
+      const anchor=cards.find(c=>c.itemId===itemId);
+      await page.goto(base+'/market/'+anchor.id);
+      await art(page,anchor);
+      for(const sibling of playerEditionsFor(anchor).filter(c=>c.id!==anchor.id)) {
+        await page.getByTestId(`edition-link-${sibling.id}`).click();
+        await page.waitForURL(base+'/market/'+sibling.id);
+        await page.waitForFunction(id=>!document.querySelector(`[data-testid="edition-link-${id}"]`),sibling.id);
+        if(sibling.edition==='recent') await art(page,sibling);
+        await page.getByTestId(`edition-link-${anchor.id}`).waitFor();
+        await noOverflow(page,sibling.id+' edition navigation');
+        if(itemId===100896715) await page.screenshot({path:path.join(output,`raphinha-${sibling.id}-${language}-${width}.png`)});
+        await page.getByTestId(`edition-link-${anchor.id}`).click();
+        await page.waitForURL(base+'/market/'+anchor.id);
+        await page.waitForFunction(id=>!document.querySelector(`[data-testid="edition-link-${id}"]`),anchor.id);
+        await art(page,anchor);
+      }
+    }
+    report.push({language,width,routes:cards.length,editionNavigation:'Raphinha, Foden, Zola, Salma: all variants and originals, both directions',designs:[...seen]});
     await context.close();
     console.log('PASS',language,width,'all 51 exact routes, artwork, prices, variants and overflow');
   }

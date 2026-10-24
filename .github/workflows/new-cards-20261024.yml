@@ -1,9 +1,8 @@
 name: New card releases validation
 on:
-  push:
-    branches: ['preview/new-cards-20261024']
   pull_request:
-    paths: ['assets/images/cards/recent/**', 'assets/data/recentCards20261024.json', 'scripts/verify-new-cards*', '.github/workflows/new-cards-20261024.yml']
+    branches: ['handoff/new-cards-20261024']
+    paths: ['assets/images/cards/recent/**', 'assets/data/recentCards20261024.json', 'scripts/verify-new-cards*', 'components/PlayerEditionLinks.tsx', 'components/PlayerDossier.tsx', 'app/market/[id].tsx', 'lib/playerEditions.ts', '.github/workflows/new-cards-20261024.yml']
 permissions:
   contents: read
 concurrency:
@@ -12,7 +11,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     env:
       EXPO_OFFLINE: '1'
       CI: '1'
@@ -27,7 +26,7 @@ jobs:
       - run: npm run build:web -- --max-workers 2
       - run: npm run verify:mobile && npm run verify:startup && node scripts/verify-gallery.mjs
       - run: npx expo export -p android --output-dir /tmp/new-cards-android --max-workers 2
-      - run: npx eslint components/RecentCardInfo.tsx lib/recentCards.ts lib/recentCardArt.ts lib/fcPlayers.ts lib/marketPrices.ts lib/playerFilter.ts api/market-prices.js
+      - run: npx eslint components/RecentCardInfo.tsx lib/recentCards.ts lib/recentCardArt.ts lib/fcPlayers.ts lib/marketPrices.ts lib/playerFilter.ts lib/playerEditions.ts components/PlayerEditionLinks.tsx api/market-prices.js
       - name: Existing repository lint baseline
         continue-on-error: true
         run: npm run lint
@@ -38,7 +37,7 @@ jobs:
           echo "FC27_CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
       - name: All editions and bilingual phone layouts
         run: node scripts/verify-new-cards-ui.mjs
-        timeout-minutes: 12
+        timeout-minutes: 16
       - uses: actions/upload-artifact@v4
         if: always()
         with:

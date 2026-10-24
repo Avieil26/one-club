@@ -76,3 +76,16 @@ assert.deepEqual(prices['recent-100896715'], [6400000,14000000]);
 assert.deepEqual(prices['recent-117673931'], [0,0]);
 for (const card of cards.filter(c=>c.price.kind !== 'market')) assert.equal(prices[card.id], undefined);
 console.log('PASS: 20,198 unique cards; prior 20,147 unchanged; 51 exact editions, 34 attributes, CRC/inflated original artwork, missing prices and independent-platform market API fixture.');
+
+// Edition navigation is grouped by stable person identity, never by display name.
+const { playerEditionsFor } = loadRepositoryModule('lib/playerEditions.ts');
+for (const card of cards) {
+  const identity = card.baseId ?? card.id;
+  const expected = all.filter(c => (c.baseId ?? c.id) === identity);
+  assert.deepEqual(playerEditionsFor(card).map(c=>c.id), expected.map(c=>c.id));
+  assert(expected.some(c=>c.id === card.id));
+  for (const sibling of expected) assert.deepEqual(playerEditionsFor(sibling), expected, 'Navigation must work back from original editions');
+}
+assert.deepEqual(playerEditionsFor(all.find(c=>c.id==='recent-100896715')).map(c=>c.id), ['raphinha','raphinha--totw','recent-117673931','recent-100896715']);
+assert(playerEditionsFor(all.find(c=>c.id==='recent-100664497')).some(c=>c.id==='hero-zola'));
+console.log('PASS: every new edition has all exact same-person catalogue versions, including original and legacy special cards; Raphinha and hero identity navigation verified.');
