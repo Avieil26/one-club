@@ -1,3 +1,4 @@
+import { RECENT_CARD_ART } from '@/lib/recentCardArt';
 import { Ionicons } from '@expo/vector-icons';
 import { Image, Text, View } from 'react-native';
 import { SBC_COMPLETE_CARDS, SBC_REWARD_IMAGES } from '@/assets/sbcRewardAssets';
@@ -16,6 +17,8 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
+ const recentReward = ({ 'sbc-mor-20261025': 'recent-50562888', 'sbc-woltemade-20261025': 'recent-67362886' } as Record<string, string>)[challenge.id];
+ if (recentReward) return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel={challenge.reward ?? challenge.title} style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={RECENT_CARD_ART[recentReward]} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  const art = artById[challenge.id]; const height = width * 1.4;
  const testID = `sbc-reward-${challenge.id}`;
  const complete = SBC_COMPLETE_CARDS[challenge.id];

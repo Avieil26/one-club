@@ -15,7 +15,7 @@ export function openChallenges(list: CareerChallenge[], at = Date.now()): Career
 /** Active SBCs only — expired timed challenges are removed from the site automatically. */
 export function openSbcChallenges(list: SbcChallenge[], at = Date.now()): SbcChallenge[] {
   return list
-    .filter((challenge) => isOpen(challenge, at))
+    .filter((challenge) => isOpen(challenge, at) && Date.parse(challenge.createdAt) <= at)
     .sort((a, b) => {
       const created = b.createdAt.localeCompare(a.createdAt);
       return created || a.id.localeCompare(b.id);

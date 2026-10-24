@@ -109,7 +109,7 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
       {number > 0 && validInput ? <SbcText>{t(`הוגשו במשחק: ${number.toLocaleString('en-US')} נקודות.`, `Submitted in-game: ${number.toLocaleString('en-US')} points.`)}</SbcText> : null}
       {!validInput ? <SbcText>{t('הכניסו מספר שלם בין 0 ליעד האתגר.', 'Enter a whole number between zero and the target.')}</SbcText> : null}
     </View>
-    <SbcText tone="caption">{t('דרישות וניקוד נבדקו: ', 'Requirements and points checked: ')}{new Date(SBC_SOLUTION_CHECKED_AT).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</SbcText>
+    <SbcText tone="caption">{t('דרישות וניקוד נבדקו: ', 'Requirements and points checked: ')}{new Date(segment.checkedAt ?? SBC_SOLUTION_CHECKED_AT).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</SbcText>
   </SbcSurface>;
 }
 export function SbcPointsSolution({ challengeId }: { challengeId: string }) {

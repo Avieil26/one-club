@@ -1,3 +1,4 @@
+import refresh from '@/assets/data/sbc-refresh-20261025.json';
 import { eligiblePointsPlayer } from '@/lib/sbcEligibility';
 import { itemScore } from '@/lib/sbcItemScore';
 import snapshot from '@/assets/data/sbc-verified-20261021.json';
@@ -6,13 +7,13 @@ import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 export { eligiblePointsPlayer } from '@/lib/sbcEligibility';
 
 export type ItemRate = { overall: number; rarity: number; score: number; price: number; players: string[]; eaIds: number[] };
-export type PointsSegment = { eaId: number; name: string; target: number; requirements: string[]; platforms: Record<'ps5' | 'pc', { pricedAt: string; rates: ItemRate[]; routes?: { key: string; groups: { overall: number; rarity: number; count: number; unitScore: number }[] }[] }> };
+export type PointsSegment = { eaId: number; name: string; target: number; requirements: string[]; sourceUrl?: string; checkedAt?: string; platforms: Record<'ps5' | 'pc', { pricedAt: string; rates: ItemRate[]; routes?: { key: string; groups: { overall: number; rarity: number; count: number; unitScore: number }[] }[] }> };
 export type PointsLine = { player: FcPlayer; alternatives: FcPlayer[]; count: number; scoreEach: number; priceEach: number };
 export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost: number; count: number; priceKnown?: boolean };
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
-  return (snapshot.challenges as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
+  return ({ ...snapshot.challenges, ...refresh.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
   if (!Number.isSafeInteger(segment.target) || segment.target <= 0 || !plan.lines.length) return false;
