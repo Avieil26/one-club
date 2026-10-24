@@ -19,7 +19,7 @@ export function PlayerEditionLinks({ player, width }: { player: FcPlayer; width:
           const recent = recentCardFor(card.id);
           const label = recent
             ? recent.holographicType === 'pristine' ? 'Pristine' : recent.holographicType === 'holographic' ? 'Holo' : recent.family.includes('Hero') ? 'Scream Hero' : recent.family.includes('Scream') ? 'Scream' : 'Star Performer'
-            : card.edition === 'hero' ? 'Hero' : card.edition === 'totw' ? 'TOTW' : card.edition ?? t('רגיל', 'Base');
+            : card.edition ? { hero: 'Hero', totw: 'TOTW', destined: 'Destined', otw: 'OTW', 'future-stars': 'Future Stars', 'star-performer': 'Star Performer', season2: t('עונה 2', 'Season 2'), recent: t('חדש', 'New') }[card.edition] : t('רגיל', 'Base');
           const description = recent ? `${recent.family}${recent.holographicType ? ` · ${recent.holographicType}` : ''}` : label;
           return (
             <Pressable key={card.id} testID={`edition-link-${card.id}`} accessibilityRole="button"
