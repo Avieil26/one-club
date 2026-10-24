@@ -17,6 +17,8 @@ jobs:
       CI: '1'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -27,6 +29,8 @@ jobs:
       - run: npm run verify:mobile && npm run verify:startup && node scripts/verify-gallery.mjs
       - run: npx expo export -p android --output-dir /tmp/new-cards-android --max-workers 2
       - run: npx eslint components/RecentCardInfo.tsx lib/recentCards.ts lib/recentCardArt.ts lib/fcPlayers.ts lib/marketPrices.ts lib/playerFilter.ts lib/playerEditions.ts components/PlayerEditionLinks.tsx api/market-prices.js
+      - name: Focused SBC lint
+        run: npx eslint components/SbcClassicSolution.tsx components/SbcPointsSolution.tsx components/SbcRewardVisual.tsx components/SquadPitch.tsx lib/sbcClassic.ts lib/sbcLive20261020.ts lib/sbcVerified.ts lib/sbcSourceRules.ts lib/sbcLocalization.ts lib/selectors.ts 'app/sbc/build/[id].tsx'
       - name: Existing repository lint baseline
         continue-on-error: true
         run: npm run lint
@@ -35,7 +39,18 @@ jobs:
         run: |
           google-chrome --version
           echo "FC27_CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+      # The f2efabf production baseline passed the complete 306-screen suite.
+      # SBC-only changes rerun their own screens; card changes rerun all 306.
+      - name: Detect card screen changes since the validated production baseline
+        id: cards
+        run: |
+          if git diff --quiet f2efabf6dea978af7271ef2810e199e3dd0be1af HEAD -- app/market 'app/(tabs)/market.tsx' app/_layout.tsx components/PlayerDossier.tsx components/PlayerEditionLinks.tsx components/PortraitCard.tsx components/RecentCardInfo.tsx components/ui.tsx lib/fcPlayers.ts lib/playerDb.ts lib/recentCards.ts lib/recentCardArt.ts lib/playerEditions.ts lib/marketPrices.ts lib/playerFilter.ts lib/store.tsx lib/language.tsx assets/images/cards/recent assets/data/recentCards20261024.json assets/data/players.json assets/data/marketPrices.json package-lock.json; then
+            echo 'required=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'required=true' >> "$GITHUB_OUTPUT"
+          fi
       - name: All editions and bilingual phone layouts
+        if: steps.cards.outputs.required == 'true'
         run: node scripts/verify-new-cards-ui.mjs
         timeout-minutes: 16
       - name: New SBCs and locked-slot phone layouts

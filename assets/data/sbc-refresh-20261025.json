@@ -4,7 +4,8 @@
     "Requirements/rewards cross-checked on FUTBIN and FUT.GG. Data parsed as literals, never executed.",
     "FUTBIN squad pages required security verification: no FUTBIN roster claimed as imported.",
     "Spooky: published FUT.GG roster. Marquee: locally assembled validated examples, not cheapest claims.",
-    "Deadlines conservatively rounded down to UTC hour due to fractional-second source jitter."
+    "Deadlines conservatively rounded down to UTC hour due to fractional-second source jitter.",
+    "All existing active points targets and eligibility compared with the current source. Four previously documented FUT.GG eligibility errors remain corrected using the existing independent-source exceptions; never replace them with the raw reported minimum rating."
   ],
   "challenges": [
     {
@@ -3380,6 +3381,219 @@
       "siteIds": [
         "sbc-intro-sbcs"
       ]
+    }
+  ],
+  "existingPointsRequirementAudit": [
+    {
+      "id": "sbc-hero-max87-20261019",
+      "eaId": 109,
+      "target": 115000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-fs-mls-pick-20261020",
+      "eaId": 104,
+      "target": 13000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-upgrade-83x2-20261020",
+      "eaId": 111,
+      "target": 5500,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-fs-diao",
+      "eaId": 103,
+      "target": 41000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-ferran",
+      "eaId": 95,
+      "target": 123000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-pina",
+      "eaId": 76,
+      "target": 1125000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-raphinha",
+      "eaId": 63,
+      "target": 1300000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-gross",
+      "eaId": 64,
+      "target": 18750,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-olise",
+      "eaId": 72,
+      "target": 700000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-potm-malen",
+      "eaId": 62,
+      "target": 90000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-intro-espinoza",
+      "eaId": 47,
+      "target": 4000,
+      "reportedRequirements": [
+        "Rating: Min. 45"
+      ],
+      "effectiveRequirements": [
+        "Rating: Min. 45"
+      ]
+    },
+    {
+      "id": "sbc-gold-reroll",
+      "eaId": 24,
+      "target": 1250,
+      "reportedRequirements": [
+        "Rating: Min. 83"
+      ],
+      "effectiveRequirements": [
+        "Rating: Max. 83"
+      ],
+      "knownSourceDisagreement": true,
+      "correctionSources": [
+        "https://www.futgenie.gg/sbc/9",
+        "https://www.easysbc.io/streamline-sbc/gold-re-roll/9"
+      ],
+      "correctionCheckedAt": "2026-10-21"
+    },
+    {
+      "id": "sbc-bronze-silver-reroll",
+      "eaId": 23,
+      "target": 500,
+      "reportedRequirements": [
+        "Rating: Min. 79"
+      ],
+      "effectiveRequirements": [
+        "Rating: Max. 74"
+      ],
+      "knownSourceDisagreement": true,
+      "correctionSources": [
+        "https://x.com/EASFCDirect/status/2101973351597998559",
+        "https://www.futwiz.com/sbcs/solutions/bronze-and-silver-re-roll/34"
+      ],
+      "correctionCheckedAt": "2026-10-21"
+    },
+    {
+      "id": "sbc-getting-started",
+      "eaId": 19,
+      "target": 50,
+      "reportedRequirements": [
+        "Rating: Min. 64"
+      ],
+      "effectiveRequirements": [
+        "Rating: Max. 64"
+      ],
+      "knownSourceDisagreement": true,
+      "correctionSources": [
+        "https://futzip.com/fc27/sbc/points?challenge=19",
+        "https://www.futwiz.com/sbcs/getting-started/7"
+      ],
+      "correctionCheckedAt": "2026-10-21"
+    },
+    {
+      "id": "sbc-getting-started",
+      "eaId": 20,
+      "target": 100,
+      "reportedRequirements": [
+        "Rating: 45 to 74"
+      ],
+      "effectiveRequirements": [
+        "Rating: 45 to 74"
+      ]
+    },
+    {
+      "id": "sbc-getting-started",
+      "eaId": 22,
+      "target": 250,
+      "reportedRequirements": [
+        "League: Premier League"
+      ],
+      "effectiveRequirements": [
+        "League: Premier League"
+      ]
+    },
+    {
+      "id": "sbc-getting-started",
+      "eaId": 33,
+      "target": 600,
+      "reportedRequirements": [
+        "Rating: Min. 64"
+      ],
+      "effectiveRequirements": [
+        "Rating: Max. 64"
+      ],
+      "knownSourceDisagreement": true,
+      "correctionSources": [
+        "https://futzip.com/fc27/sbc/points?challenge=19",
+        "https://www.futwiz.com/sbcs/getting-started/7"
+      ],
+      "correctionCheckedAt": "2026-10-21"
     }
   ]
 }

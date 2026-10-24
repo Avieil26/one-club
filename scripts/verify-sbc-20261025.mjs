@@ -9,6 +9,14 @@ const {catalogChallenge,mergeOfficialSbcs}=loadRepositoryModule('lib/sbcCatalog.
 const {openSbcChallenges}=loadRepositoryModule('lib/selectors.ts');
 const players=new Map(loadPlayerCatalogue().map(p=>[p.id,p]));
 const eaIds={...Object.fromEntries(JSON.parse(fs.readFileSync('assets/data/players.json')).map(p=>[p.id,p.eaId])),...JSON.parse(fs.readFileSync('assets/data/priceEaIds.json'))};
+for(const audit of data.existingPointsRequirementAudit){
+ const segment=pointsSegments(audit.id).find(s=>s.eaId===audit.eaId);assert(segment);
+ assert.equal(segment.target,audit.target);assert.deepEqual(segment.requirements,audit.effectiveRequirements);
+ if(audit.knownSourceDisagreement){assert(audit.correctionSources.length>=2);assert.deepEqual(segment.reportedRequirements,audit.reportedRequirements);assert.notDeepEqual(segment.requirements,audit.reportedRequirements);}
+ else assert.deepEqual(segment.requirements,audit.reportedRequirements);
+}
+assert.equal(data.existingPointsRequirementAudit.filter(a=>a.knownSourceDisagreement).length,4);
+assert.deepEqual(data.challenges.filter(c=>c.kind==='streamlined').map(c=>c.targetScore),[24000,50000,22000,16000]);
 assert.equal(data.challenges.length,9);
 assert.equal(data.activeSets.length,27);
 for(const set of data.activeSets){assert(set.siteIds.length,set.name+' missing');for(const id of set.siteIds)assert(catalogChallenge(id),id);}
@@ -37,6 +45,7 @@ for(const c of data.challenges){
   assert(!checkClassicSquad({...s,sourceRequirements:[...s.sourceRequirements,'Rare: Min. 1']},s.formation,s.squad).ready);
   assert(!checkClassicSquad({...s,rules:{...s.rules,chemistry:0}},s.formation,s.squad).ready,'Rules must agree with source');
   assert.equal(parseClassicRequirements(['Unknown requirement']),null);
+  assert(!checkClassicSquad({...s,rules:{...s.rules,playerCount:1}},s.formation,s.squad).ready);
   const missing={...s.squad};delete missing[Object.keys(missing)[0]];assert(!checkClassicSquad(s,s.formation,missing).ready);
   const duplicate={...s.squad};duplicate[Object.keys(duplicate)[1]]=Object.values(duplicate)[0];assert(!checkClassicSquad(s,s.formation,duplicate).ready);
   const unknown={...s.squad};unknown[Object.keys(unknown)[0]]='not-a-player';assert(!checkClassicSquad(s,s.formation,unknown).ready);

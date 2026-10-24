@@ -45,7 +45,7 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
    report.push({id:challenge.id,language,width,passed:true});
   }
   await page.goto(base+'/sbc/build/sbc-spooky-20261025');
-  for(const slot of ['lm','rm','lw','rw'])assert(await page.getByTestId('sbc-locked-'+slot).isVisible());
+  for(const slot of ['lm','rm','lw','rw'])await page.getByTestId('sbc-locked-'+slot).waitFor({state:'visible'});
   await page.screenshot({path:path.join(output,'spooky-builder-'+language+'-'+width+'.png'),fullPage:true});
   await context.close();console.log('PASS',language,width,'nine SBCs and brick builder');
  }
@@ -53,3 +53,4 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
  fs.writeFileSync(path.join(output,'report.json'),JSON.stringify({report,errors,network:'synthetic account; all external requests blocked'},null,2));
 } catch(error){const page=browser.contexts().at(-1)?.pages().at(-1);if(page)await page.screenshot({path:path.join(output,'failure.png'),fullPage:true}).catch(()=>{});fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:String(error),url:page?.url(),report,errors},null,2));throw error;}
 finally{await browser.close();server?.close();}
+

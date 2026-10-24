@@ -32,6 +32,6 @@ function normalized(rules: SquadRules): string {
   return JSON.stringify(Object.entries(rules).sort(([a], [b]) => a.localeCompare(b)));
 }
 export function sourceClassicRulesMatch(requirements: string[], rules: SquadRules): boolean {
-  const parsed = parseClassicRequirements(requirements, rules.playerCount);
+  const parsed = parseClassicRequirements(requirements);
   return parsed !== null && normalized(parsed) === normalized(rules);
 }

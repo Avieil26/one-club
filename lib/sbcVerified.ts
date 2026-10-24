@@ -7,7 +7,7 @@ import { PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 export { eligiblePointsPlayer } from '@/lib/sbcEligibility';
 
 export type ItemRate = { overall: number; rarity: number; score: number; price: number; players: string[]; eaIds: number[] };
-export type PointsSegment = { eaId: number; name: string; target: number; requirements: string[]; sourceUrl?: string; checkedAt?: string; platforms: Record<'ps5' | 'pc', { pricedAt: string; rates: ItemRate[]; routes?: { key: string; groups: { overall: number; rarity: number; count: number; unitScore: number }[] }[] }> };
+export type PointsSegment = { eaId: number; name: string; target: number; requirements: string[]; reportedRequirements?: string[]; sourceUrl?: string; checkedAt?: string; platforms: Record<'ps5' | 'pc', { pricedAt: string; rates: ItemRate[]; routes?: { key: string; groups: { overall: number; rarity: number; count: number; unitScore: number }[] }[] }> };
 export type PointsLine = { player: FcPlayer; alternatives: FcPlayer[]; count: number; scoreEach: number; priceEach: number };
 export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost: number; count: number; priceKnown?: boolean };
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
