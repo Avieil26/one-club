@@ -37,7 +37,13 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
    }
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),challenge.id+' horizontal overflow');
    const bounds=await panel.boundingBox();assert(bounds&&bounds.x>=-2&&bounds.x+bounds.width<=width+2,challenge.id+' panel clipped');
-   await panel.screenshot({path:path.join(output,challenge.id+'-'+language+'-'+width+'.png')});
+   const visual=challenge.kind==='classic'?panel.getByTestId('squad-pitch'):panel.getByTestId('sbc-option-card').first();
+   await visual.scrollIntoViewIfNeeded();
+   await page.screenshot({path:path.join(output,challenge.id+'-'+language+'-'+width+'.png')});
+   if(challenge.kind==='classic'){
+    await panel.getByRole('link').scrollIntoViewIfNeeded();
+    await page.screenshot({path:path.join(output,challenge.id+'-checks-'+language+'-'+width+'.png')});
+   }
    if(['sbc-mor-20261025','sbc-woltemade-20261025'].includes(challenge.id)){
     const image=page.getByTestId('sbc-card-complete-'+challenge.id).locator('img').or(page.locator('img[data-testid="sbc-card-complete-'+challenge.id+'"]')).first();
     await image.waitFor();assert((await image.getAttribute('src')).includes(challenge.id.includes('mor')?'50562888':'67362886'));
@@ -46,7 +52,8 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
   }
   await page.goto(base+'/sbc/build/sbc-spooky-20261025');
   for(const slot of ['lm','rm','lw','rw'])await page.getByTestId('sbc-locked-'+slot).waitFor({state:'visible'});
-  await page.screenshot({path:path.join(output,'spooky-builder-'+language+'-'+width+'.png'),fullPage:true});
+  await page.getByTestId('squad-pitch').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(output,'spooky-builder-'+language+'-'+width+'.png')});
   await context.close();console.log('PASS',language,width,'nine SBCs and brick builder');
  }
  assert.deepEqual(errors,[]);

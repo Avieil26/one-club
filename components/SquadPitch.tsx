@@ -68,6 +68,7 @@ export function SquadPitch({
   return (
     <>
       <View
+        testID="squad-pitch"
         onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
         style={{
           height,
