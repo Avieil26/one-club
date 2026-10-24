@@ -21,6 +21,7 @@ async function art(page,card) {
   return image;
 }
 const {playerEditionsFor}=loadRepositoryModule('lib/playerEditions.ts');
+const savedPrices=JSON.parse(fs.readFileSync('assets/data/marketPrices.json','utf8'));
 const report = [];
 try {
   for (const language of ['he','en']) for (const width of [360,390,1280]) {
@@ -94,6 +95,11 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
         if(sibling.edition==='recent') await art(page,sibling);
         await page.getByTestId(`edition-link-${anchor.id}`).waitFor();
         await noOverflow(page,sibling.id+' edition navigation');
+        if(sibling.id==='raphinha--totw') {
+          const quote=page.getByText(savedPrices[sibling.id][0].toLocaleString('en-US'),{exact:true});
+          await quote.waitFor();
+          assert(await quote.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'TOTW price text clipped on phone');
+        }
         if(itemId===100896715) await page.screenshot({path:path.join(output,`raphinha-${sibling.id}-${language}-${width}.png`)});
         await page.getByTestId(`edition-link-${anchor.id}`).click();
         await page.waitForURL(base+'/market/'+anchor.id);

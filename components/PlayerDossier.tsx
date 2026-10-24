@@ -654,7 +654,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 10, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 8, flexShrink: 0 }}>
               {likes}
-              <PortraitCard player={card} width={shown === 'totw' ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
+              <PortraitCard player={card} width={shown === 'totw' && playerEditionsFor(player).length === 0 ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
               <PlayerEditionLinks player={player} width={wide ? 210 : 140} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>

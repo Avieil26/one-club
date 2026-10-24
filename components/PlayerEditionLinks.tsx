@@ -1,10 +1,27 @@
 import { Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { PortraitCard } from '@/components/PortraitCard';
+import { PortraitCard, PORTRAIT_RATIO } from '@/components/PortraitCard';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import { useLanguage } from '@/lib/language';
 import { playerEditionsFor } from '@/lib/playerEditions';
 import { recentCardFor } from '@/lib/recentCards';
+
+// Lay out a readable full-size card, then scale the complete design as one thumbnail.
+function EditionThumbnail({ player }: { player: FcPlayer }) {
+  const width = 62;
+  const fullWidth = 140;
+  const fullHeight = fullWidth * PORTRAIT_RATIO;
+  const height = Math.ceil(width * PORTRAIT_RATIO);
+  return (
+    <View style={{ width, height, overflow: 'hidden' }}>
+      <View style={{ position: 'absolute', width: fullWidth, height: fullHeight,
+        left: (width - fullWidth) / 2, top: (height - fullHeight) / 2,
+        transform: [{ scale: width / fullWidth }] }}>
+        <PortraitCard player={player} width={fullWidth} />
+      </View>
+    </View>
+  );
+}
 
 export function PlayerEditionLinks({ player, width }: { player: FcPlayer; width: number }) {
   const router = useRouter();
@@ -26,7 +43,7 @@ export function PlayerEditionLinks({ player, width }: { player: FcPlayer; width:
               accessibilityLabel={`${t('פתיחת גרסה', 'Open edition')}: ${card.en ?? card.name} · ${card.rating} · ${description}`}
               onPress={() => router.replace(`/market/${card.id}`)}
               style={({ pressed }) => ({ width: 62, alignItems: 'center', gap: 3, opacity: pressed ? 0.7 : 1 })}>
-              <PortraitCard player={card} width={62} />
+              <EditionThumbnail player={card} />
               <Text numberOfLines={2} style={{ color: '#D8D1BC', fontSize: 9, textAlign: 'center' }}>{label}</Text>
             </Pressable>
           );
