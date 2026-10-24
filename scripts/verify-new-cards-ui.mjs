@@ -8,7 +8,7 @@ const cards=JSON.parse(fs.readFileSync('assets/data/recentCards20261024.json','u
 
 async function noOverflow(page,label) {
   assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2), label+' document overflow');
-  const clipped = await page.locator('[data-testid="recent-card-info"], img[aria-label$="New release"]').evaluateAll(es=>es.filter(e=>{const r=e.getBoundingClientRect();if(!r.width)return false;if(r.left< -2||r.right>innerWidth+2)return true;for(let p=e.parentElement;p;p=p.parentElement){const pr=p.getBoundingClientRect();if(['hidden','clip'].includes(getComputedStyle(p).overflowX)&&(r.left<pr.left-2||r.right>pr.right+2))return true;}return false;}).length);
+  const clipped = await page.locator('[data-testid="recent-card-info"], img[alt$="New release"]').evaluateAll(es=>es.filter(e=>{const r=e.getBoundingClientRect();if(!r.width)return false;if(r.left< -2||r.right>innerWidth+2)return true;for(let p=e.parentElement;p;p=p.parentElement){const pr=p.getBoundingClientRect();if(['hidden','clip'].includes(getComputedStyle(p).overflowX)&&(r.left<pr.left-2||r.right>pr.right+2))return true;}return false;}).length);
   assert.equal(clipped, 0, label+' clipped card/panel');
 }
 async function art(page,card) {
@@ -41,10 +41,10 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
     // Search within recent filter, then navigate to that exact edition by touching its artwork.
     const chosen = cards.find(c=>c.en==='Emre Mor');
     await page.getByRole('textbox').first().fill('Emre Mor');
-    await page.waitForFunction(()=>document.querySelectorAll('img[aria-label$="New release"]').length===1);
+    await page.waitForFunction(()=>document.querySelectorAll('img[alt$="New release"]').length===1);
     const searched = await art(page,chosen);
     assert.equal(await page.getByRole('img',{name:/New release$/}).count(),1);
-    await searched.click();
+    await page.getByRole('button').filter({has:searched}).click();
     await page.waitForURL(new RegExp(chosen.id));
     const seen = new Set();
     for (const card of cards) {
