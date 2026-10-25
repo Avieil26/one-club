@@ -39,12 +39,12 @@ jobs:
         run: |
           google-chrome --version
           echo "FC27_CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
-      # The f2efabf production baseline passed the complete 306-screen suite.
+      # The 89983e0 production baseline passed the complete 306-screen suite.
       # SBC-only changes rerun their own screens; card changes rerun all 306.
       - name: Detect card screen changes since the validated production baseline
         id: cards
         run: |
-          if git diff --quiet f2efabf6dea978af7271ef2810e199e3dd0be1af HEAD -- app/market 'app/(tabs)/market.tsx' app/_layout.tsx components/PlayerDossier.tsx components/PlayerEditionLinks.tsx components/PortraitCard.tsx components/RecentCardInfo.tsx components/ui.tsx lib/fcPlayers.ts lib/playerDb.ts lib/recentCards.ts lib/recentCardArt.ts lib/playerEditions.ts lib/marketPrices.ts lib/playerFilter.ts lib/store.tsx lib/language.tsx assets/images/cards/recent assets/data/recentCards20261024.json assets/data/players.json assets/data/marketPrices.json package-lock.json; then
+          if git diff --quiet 89983e08a9f8e86767c64cb92181b94270bdc109 HEAD -- app/market 'app/(tabs)/market.tsx' app/_layout.tsx components/PlayerDossier.tsx components/PlayerEditionLinks.tsx components/PortraitCard.tsx components/RecentCardInfo.tsx components/ui.tsx lib/fcPlayers.ts lib/playerDb.ts lib/recentCards.ts lib/recentCardArt.ts lib/playerEditions.ts lib/marketPrices.ts lib/playerFilter.ts lib/store.tsx lib/language.tsx assets/images/cards/recent assets/data/recentCards20261024.json assets/data/players.json assets/data/marketPrices.json package-lock.json; then
             echo 'required=false' >> "$GITHUB_OUTPUT"
           else
             echo 'required=true' >> "$GITHUB_OUTPUT"
@@ -63,3 +63,4 @@ jobs:
           path: |
             preview/new-cards-qa/
             preview/sbc-20261025-qa/
+
