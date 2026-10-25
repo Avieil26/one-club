@@ -1,3 +1,6 @@
+import { Link } from 'expo-router';
+import { colors } from '@/components/ui';
+import { useLanguage } from '@/lib/language';
 import {
   LegalBulletItem,
   LegalScreen,
@@ -8,10 +11,12 @@ import {
 const UPDATED = '21 באוקטובר 2026';
 
 export default function PrivacyScreen() {
+  const { t } = useLanguage();
   return (
     <LegalScreen title="מדיניות פרטיות" updated={UPDATED}>
       {/* 1. PRIMARY DUAL-LANGUAGE NOTICE (FIRST) */}
       <PrimaryLegalNotice />
+      <Link href="/legal/delete-account" style={{ color: colors.gold, fontSize: 17, lineHeight: 26, fontWeight: '800', textDecorationLine: 'underline' }}>{t('בקשת מחיקת חשבון ונתונים', 'Request account and data deletion')}</Link>
 
       {/* 2. NON-AFFILIATION & INDEPENDENT DATA PROCESSING */}
       <LegalSection

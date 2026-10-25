@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -56,6 +56,10 @@ export default function SettingsScreen() {
         <View style={{ gap: 10 }}>
           {option('en', '🇬🇧', 'English', 'Use the site in English, left to right.')}
           {option('he', '🇮🇱', 'עברית', 'שימוש באתר בעברית, מימין לשמאל.')}
+        </View>
+        <View style={{ gap: 12, marginTop: 16 }}>
+          <Text style={{ color: colors.text, fontSize: 20, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('חשבון ופרטיות', 'Account and privacy')}</Text>
+          <Link href="/legal/delete-account" asChild><Pressable accessibilityRole="link" style={{ minHeight: 48, padding: 14, borderRadius: 12, borderWidth: 1, borderColor: colors.gold }}><Text style={{ color: colors.gold, fontSize: 16, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('בקשת מחיקת חשבון ונתונים', 'Request account and data deletion')}</Text></Pressable></Link>
         </View>
         <View style={{gap:10,marginTop:16,paddingTop:20,borderTopWidth:1,borderTopColor:'#30404D'}}>
           <Text style={{color:colors.text,fontSize:20,fontWeight:'800',textAlign:rtl?'right':'left'}}>{t('שיפור האתר','Improve the site')}</Text>
