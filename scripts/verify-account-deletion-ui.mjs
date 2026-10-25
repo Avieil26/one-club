@@ -23,7 +23,7 @@ try{
   assert.equal(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.endsWith('-auth-token'))),false,'Public deletion must not need an account session');
   const request=page.getByTestId('request-account-deletion');
   const href=await request.getAttribute('href');
-  assert(href?.startsWith('mailto:avielindapurkar717@gmail.com?'));
+  assert(href?.startsWith('mailto:avielindapurkar717@gmail.com?'), 'Unexpected deletion request destination: '+href);
   assert(decodeURIComponent(href).includes('Account and data deletion request'));
   assert.match(await page.getByTestId('deletion-contact').innerText(),/avielindapurkar717@gmail.com/);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Public request page overflows');

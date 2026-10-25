@@ -6,12 +6,16 @@ import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
 
 const email = 'avielindapurkar717@gmail.com';
+// Encode reserved punctuation too: Expo Router treats raw parentheses as route groups.
+function mailPart(value: string) {
+  return encodeURIComponent(value).replace(/[!'()*]/g, (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`);
+}
 export default function DeleteAccountScreen() {
   const { language, t } = useLanguage();
   const textStyle = { color: colors.text, fontSize: 16, lineHeight: 26, textAlign: language === 'he' ? 'right' as const : 'left' as const, writingDirection: language === 'he' ? 'rtl' as const : 'ltr' as const };
   const subject = 'ONE CLUB - Account and data deletion request';
   const body = t('שלום ONE CLUB,\nאני מבקש/ת למחוק את החשבון שלי ואת הנתונים המשויכים אליו.\nכתובת האימייל של החשבון:\nשם תצוגה (לא חובה):', 'Hello ONE CLUB,\nPlease delete my account and its associated data.\nAccount email:\nDisplay name (optional):');
-  const requestUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const requestUrl = `mailto:${email}?subject=${mailPart(subject)}&body=${mailPart(body)}`;
   return <View style={{ flex: 1, backgroundColor: colors.bg }}>
     <Stack.Screen options={{ headerShown: false, title: t('מחיקת חשבון ונתונים', 'Account and data deletion') }} />
     <ScrollView contentContainerStyle={{ width: '100%', maxWidth: 840, alignSelf: 'center', padding: 20, paddingBottom: 64, gap: 20 }}>
