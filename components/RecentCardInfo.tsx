@@ -6,7 +6,6 @@ export function RecentCardInfo({ card }: { card: RecentCard }) {
   const { t, language } = useLanguage();
   const { price } = card;
   const variant = card.holographicType === 'pristine' ? 'Pristine' : card.holographicType === 'holographic' ? 'Holographic' : '';
-  const date = new Date(price.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB');
   const align = { textAlign: language === 'he' ? 'right' as const : 'left' as const };
   return (
     <LinearGradient testID="recent-card-info" colors={['#1D2333', '#11151F']} style={styles.panel}>
@@ -20,7 +19,6 @@ export function RecentCardInfo({ card }: { card: RecentCard }) {
       ) : price.kind === 'unavailable' || (!price.console && !price.pc) ? (
         <Text style={[styles.text, align]}>{t('אין מחיר שוק זמין לגרסה הזאת כרגע.', 'No market price is currently available for this edition.')}</Text>
       ) : null}
-      <Text style={[styles.muted, align]}>{price.kind === 'sbc' ? t('אומדן נבדק בתאריך', 'Estimate checked on') : t('פרטי הקלף נבדקו בתאריך', 'Card details checked on')}: {date}</Text>
     </LinearGradient>
   );
 }

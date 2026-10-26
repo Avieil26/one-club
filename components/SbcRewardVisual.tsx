@@ -1,3 +1,5 @@
+import { HERO_ART } from '@/lib/heroArt';
+import { RECENT_CARD_ART } from '@/lib/recentCardArt';
 import { Ionicons } from '@expo/vector-icons';
 import { Image, Text, View } from 'react-native';
 import { SBC_COMPLETE_CARDS, SBC_REWARD_IMAGES } from '@/assets/sbcRewardAssets';
@@ -16,6 +18,16 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
+ if (challenge.id === 'sbc-hero-20261026') {
+  const heroes = ['hero-ruicosta', 'hero-luishernandez', 'hero-henriklarsson', 'hero-parkjisung'];
+  const cardWidth = width * 0.44;
+  return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="1 of 4 Base Hero Player Pick: Rui Costa, Hernández, Larsson, Park Ji-sung" style={{ width, height: width * 1.6, direction: 'ltr' }}>
+    {heroes.map((id, index) => <Image key={id} testID={`sbc-hero-choice-${id}`} source={HERO_ART[id]} resizeMode="contain" style={{ position: 'absolute', width: cardWidth, height: cardWidth * 1.6, left: index % 2 * width * 0.5 + width * 0.03, top: Math.floor(index / 2) * width * 0.65 }} />)}
+    <Text style={{ position: 'absolute', bottom: 0, width, textAlign: 'center', color: '#FFD0A1', fontSize: Math.max(10, width * 0.1), fontWeight: '900' }}>HERO · 1 OF 4</Text>
+  </View>;
+ }
+ const recentReward = ({ 'sbc-mor-20261025': 'recent-50562888', 'sbc-woltemade-20261025': 'recent-67362886' } as Record<string, string>)[challenge.id];
+ if (recentReward) return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel={challenge.reward ?? challenge.title} style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={RECENT_CARD_ART[recentReward]} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  const art = artById[challenge.id]; const height = width * 1.4;
  const testID = `sbc-reward-${challenge.id}`;
  const complete = SBC_COMPLETE_CARDS[challenge.id];

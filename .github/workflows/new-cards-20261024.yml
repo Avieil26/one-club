@@ -1,0 +1,69 @@
+name: New card releases validation
+on:
+  pull_request:
+    branches: ['handoff/new-cards-20261024']
+    paths: ['assets/data/sbc-refresh-20261025.json', 'assets/data/sbc-refresh-20261026.json', 'lib/sbc*.ts', 'lib/selectors.ts', 'lib/chemistry.ts', 'lib/types.ts', 'components/Sbc*.tsx', 'lib/sbcTileTheme.ts', 'components/SquadPitch.tsx', 'app/sbc/**', 'scripts/verify-sbc-20261025*', 'scripts/verify-sbc-20261026*', 'package.json', 'assets/images/cards/recent/**', 'assets/data/recentCards20261024.json', 'scripts/verify-new-cards*', 'components/PlayerEditionLinks.tsx', 'components/PlayerDossier.tsx', 'app/market/[id].tsx', 'lib/playerEditions.ts', '.github/workflows/new-cards-20261024.yml']
+permissions:
+  contents: read
+concurrency:
+  group: new-cards-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      EXPO_OFFLINE: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build:web -- --max-workers 2
+      - run: npm run verify:mobile && npm run verify:startup && node scripts/verify-gallery.mjs
+      - run: npx expo export -p android --output-dir /tmp/new-cards-android --max-workers 2
+      - run: npx eslint components/RecentCardInfo.tsx lib/recentCards.ts lib/recentCardArt.ts lib/fcPlayers.ts lib/marketPrices.ts lib/playerFilter.ts lib/playerEditions.ts components/PlayerEditionLinks.tsx api/market-prices.js
+      - name: Focused SBC lint
+        run: npx eslint components/SbcClassicSolution.tsx components/SbcPointsSolution.tsx components/SbcRewardVisual.tsx components/SbcRewardPack.tsx components/SquadPitch.tsx lib/sbcClassic.ts lib/sbcLive20261020.ts lib/sbcVerified.ts lib/sbcSourceRules.ts lib/sbcLocalization.ts lib/selectors.ts 'app/sbc/build/[id].tsx'
+      - name: Existing repository lint baseline
+        continue-on-error: true
+        run: npm run lint
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - name: Use the runner's installed Chrome
+        run: |
+          google-chrome --version
+          echo "FC27_CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+      # The 89983e0 production baseline passed the complete 306-screen suite.
+      # SBC-only changes rerun their own screens; card changes rerun all 306.
+      - name: Detect card screen changes since the validated production baseline
+        id: cards
+        run: |
+          if git diff --quiet 89983e08a9f8e86767c64cb92181b94270bdc109 HEAD -- app/market 'app/(tabs)/market.tsx' app/_layout.tsx components/PlayerDossier.tsx components/PlayerEditionLinks.tsx components/PortraitCard.tsx components/RecentCardInfo.tsx components/ui.tsx lib/fcPlayers.ts lib/playerDb.ts lib/recentCards.ts lib/recentCardArt.ts lib/playerEditions.ts lib/marketPrices.ts lib/playerFilter.ts lib/store.tsx lib/language.tsx assets/images/cards/recent assets/data/recentCards20261024.json assets/data/players.json assets/data/marketPrices.json package-lock.json; then
+            echo 'required=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'required=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: All editions and bilingual phone layouts
+        if: steps.cards.outputs.required == 'true'
+        run: node scripts/verify-new-cards-ui.mjs
+        timeout-minutes: 16
+      - name: New SBCs and locked-slot phone layouts
+        run: node scripts/verify-sbc-20261025-ui.mjs
+        timeout-minutes: 10
+      - name: Latest SBC segments and six-slot phone layouts
+        run: node scripts/verify-sbc-20261026-ui.mjs
+        timeout-minutes: 10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: new-cards-ui-screenshots
+          path: |
+            preview/new-cards-qa/
+            preview/sbc-20261025-qa/
+            preview/sbc-20261026-qa/

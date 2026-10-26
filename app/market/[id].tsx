@@ -96,11 +96,11 @@ export default function PlayerPage() {
           <View style={{ width: '100%', direction: 'ltr', alignItems: 'flex-start', gap: 12 }}>
             {wide || native ? null : <View style={{ height: 230, width: '100%' }} />}
             <View style={{ width: wide ? '68%' : '100%', maxWidth: 1080, gap: 12 }}>
-              <PlayerDossier player={player} />
+              <PlayerDossier key={player.id} player={player} />
             </View>
           </View>
         ) : player ? (
-          <PlayerDossier player={player} />
+          <PlayerDossier key={player.id} player={player} />
         ) : (
           <Text style={{ color: colors.text, textAlign: 'right' }}>{t('השחקן לא נמצא', 'Player not found')}</Text>
         )}

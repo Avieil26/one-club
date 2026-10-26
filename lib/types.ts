@@ -156,6 +156,7 @@ export type SquadRules = {
   chemistry: number;
   minRating?: number;
   minNations?: number;
+  maxNations?: number;
   maxSameLeague?: number;
   maxLeagues?: number;
   minClubs?: number;

@@ -1,0 +1,40 @@
+name: Account deletion access validation
+on:
+  pull_request:
+    branches: ['handoff/new-cards-20261024']
+    paths: ['app/legal/delete-account.tsx', 'app/legal/privacy.tsx', 'app/settings.tsx', 'scripts/verify-account-deletion-ui.mjs', '.github/workflows/account-deletion.yml']
+permissions:
+  contents: read
+concurrency:
+  group: account-deletion-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXPO_OFFLINE: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npx eslint app/legal/delete-account.tsx app/legal/privacy.tsx app/settings.tsx
+      - run: npm run build:web -- --max-workers 2
+      - run: npx expo export -p android --output-dir /tmp/account-deletion-android --max-workers 2
+      - name: Existing repository lint baseline
+        continue-on-error: true
+        run: npm run lint
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: echo "FC27_CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+      - name: Public request link, no-login access and in-app navigation
+        run: node scripts/verify-account-deletion-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: account-deletion-screens
+          path: preview/account-deletion-qa/

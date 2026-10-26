@@ -1,6 +1,6 @@
 import { sbcCheckText } from '@/lib/sbcLocalization';
 import { sbcFace } from '@/lib/sbcTileTheme';
-import { classicSegments } from '@/lib/sbcClassic';
+import { checkClassicSquad, classicSegments } from '@/lib/sbcClassic';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
@@ -43,18 +43,20 @@ export default function SquadBuildScreen() {
     ? { ...catalogChallenge(String(id)), ...stored, ...catalogChallenge(String(id)) }
     : catalogChallenge(String(id));
   const initialFormation = challenge?.previewFormation && isFormationId(challenge.previewFormation) ? challenge.previewFormation : '433';
-  const fixedFormation = classicSegments(String(id))[0]?.formation;
+  const classicSegment = classicSegments(String(id))[0];
+  const fixedFormation = classicSegment?.formation;
+  const activeSlots = classicSegment?.activeSlots;
   const [formationId, setFormationId] = useState<FormationId>(initialFormation);
   const [placed, setPlaced] = useState<Record<string, FcPlayer | null>>(() =>
     blankSquad(initialFormation),
   );
-  const [active, setActive] = useState<string | null>(formationById(initialFormation).lines[0]?.[0]?.id ?? null);
+  const [active, setActive] = useState<string | null>(activeSlots?.[0] ?? formationById(initialFormation).lines[0]?.[0]?.id ?? null);
   const [query, setQuery] = useState('');
   const [explanation, setExplanation] = useState('');
   const formation = formationById(formationId);
   const report = useMemo(
-    () => evaluateSquad(formation, placed, challenge?.rules ?? null),
-    [challenge?.rules, formation, placed],
+    () => classicSegment ? checkClassicSquad(classicSegment, formationId, Object.fromEntries(Object.entries(placed).flatMap(([slot, player]) => player ? [[slot, player.id]] : []))) : evaluateSquad(formation, placed, challenge?.rules ?? null),
+    [challenge?.rules, classicSegment, formation, formationId, placed],
   );
 
   const used = useMemo(() => {
@@ -129,6 +131,7 @@ export default function SquadBuildScreen() {
     for (const line of formation.lines) {
       for (const slot of line) {
         const player = placed[slot.id];
+        if (activeSlots && !activeSlots.includes(slot.id)) continue;
         if (!player) return;
         squad[slot.id] = player.id;
       }
@@ -190,6 +193,7 @@ export default function SquadBuildScreen() {
       </LinearGradient>
 
       <SquadPitch
+        activeSlots={activeSlots}
         appearance="sbc"
         formation={formation}
         placed={placed}

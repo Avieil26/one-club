@@ -457,6 +457,7 @@ function buildChecks(
   if (rules.minLeagues) checks.push({ label: `לפחות ${rules.minLeagues} ליגות`, ok: new Set(players.map((p) => p.league)).size >= rules.minLeagues });
   if (rules.maxSameNation) checks.push({ label: `עד ${rules.maxSameNation} מאותה מדינה`, ok: Math.max(0, ...countBy(players, (p) => p.nation).values()) <= rules.maxSameNation });
   if (rules.exactLeagues) checks.push({ label: `בדיוק ${rules.exactLeagues} ליגות`, ok: new Set(players.map((p) => p.league)).size === rules.exactLeagues });
+  if (rules.maxNations) checks.push({ label: `עד ${rules.maxNations} מדינות`, ok: new Set(players.map((p) => p.nation)).size <= rules.maxNations });
   if (rules.exactNations) checks.push({ label: `בדיוק ${rules.exactNations} מדינות`, ok: new Set(players.map((p) => p.nation)).size === rules.exactNations });
   if (rules.minRating) {
     checks.push({

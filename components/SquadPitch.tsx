@@ -46,6 +46,7 @@ export function SquadPitch({
   onSlot,
   showChemHud = false,
   appearance = 'pitch',
+  activeSlots,
 }: {
   formation: Formation;
   placed: Record<string, FcPlayer | null>;
@@ -54,6 +55,7 @@ export function SquadPitch({
   onSlot?: (slotId: string) => void;
   showChemHud?: boolean;
   appearance?: 'pitch' | 'sbc';
+  activeSlots?: string[];
 }) {
   const { t, language } = useLanguage();
   const [width, setWidth] = useState(0);
@@ -66,6 +68,7 @@ export function SquadPitch({
   return (
     <>
       <View
+        testID="squad-pitch"
         onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
         style={{
           height,
@@ -189,10 +192,17 @@ export function SquadPitch({
           ? formation.lines.flat().map((slot) => {
               const spot = spots[slot.id];
               if (!spot) return null;
-              const player = placed[slot.id];
+              const locked = activeSlots !== undefined && !activeSlots.includes(slot.id);
+              const player = locked ? null : placed[slot.id];
               const chem = playerChem[slot.id] ?? 0;
               const selected = activeSlot === slot.id;
-              const body = player ? (
+              const body = locked ? (
+                <View testID={`sbc-locked-${slot.id}`} accessibilityLabel={`${slot.position}: ${t('משבצת נעולה', 'Locked slot')}`} style={{ width: cardW, height: cardH, borderRadius: 12, backgroundColor: '#171B25', borderWidth: 1, borderColor: '#5C6470', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+                  <Text style={{ color: '#B3BAC7', fontSize: 20 }}>×</Text>
+                  <Text style={{ color: '#B3BAC7', fontSize: 10 }}>{slot.position}</Text>
+                  <Text style={{ color: '#B3BAC7', fontSize: 9 }}>{t('נעול', 'Locked')}</Text>
+                </View>
+              ) : player ? (
                 <View
                   style={{
                     borderRadius: 12,
@@ -248,8 +258,9 @@ export function SquadPitch({
               return (
                 <Pressable
                   key={slot.id}
+                  disabled={locked}
                   accessibilityRole="button"
-                  accessibilityLabel={player ? `${slot.position}: ${playerDisplayName(player, language)}` : `${slot.position}: ${t('בחר שחקן', 'Choose player')}`}
+                  accessibilityLabel={locked ? `${slot.position}: ${t('משבצת נעולה', 'Locked slot')}` : player ? `${slot.position}: ${playerDisplayName(player, language)}` : `${slot.position}: ${t('בחר שחקן', 'Choose player')}`}
                   onPress={() => {
                     if (onSlot) onSlot(slot.id);
                     else if (player) setOpened(player);

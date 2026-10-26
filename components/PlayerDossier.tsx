@@ -7,6 +7,8 @@ import { ClubBadge } from '@/components/ClubBadge';
 import { MarketQuote } from '@/components/MarketQuote';
 import { NationFlag } from '@/components/NationFlag';
 import { PortraitCard } from '@/components/PortraitCard';
+import { PlayerEditionLinks } from '@/components/PlayerEditionLinks';
+import { playerEditionsFor } from '@/lib/playerEditions';
 import { RecentCardInfo } from '@/components/RecentCardInfo';
 import { recentCardFor, recentCardMeta } from '@/lib/recentCards';
 import { Season2Acquisition } from '@/components/Season2Acquisition';
@@ -506,7 +508,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
   if (otw && shown !== 'otw') alts.push({ edition: 'otw', label: 'OTW' });
   if (futureStar && shown !== 'future-stars') alts.push({ edition: 'future-stars', label: 'Future Stars' });
 
-  if (viewingSeason2 || viewingRecent) alts.length = 0;
+  if (viewingSeason2 || viewingRecent || playerEditionsFor(player).length > 1) alts.length = 0;
 
   const foot = meta?.foot;
   const iconPage = !!player.icon;
@@ -611,6 +613,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             <View style={{ alignItems: 'center', gap: 10 }}>
               {likes}
               <PortraitCard player={card} width={shown === 'totw' ? 250 : 210} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
+              <PlayerEditionLinks player={player} width={wide ? 210 : 140} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
                   <PortraitCard player={card} width={78} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
@@ -651,7 +654,8 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
           <View style={{ flexDirection: 'row', direction: 'ltr', gap: 10, alignItems: 'flex-start' }}>
             <View style={{ alignItems: 'center', gap: 8, flexShrink: 0 }}>
               {likes}
-              <PortraitCard player={card} width={shown === 'totw' ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
+              <PortraitCard player={card} width={shown === 'totw' && playerEditionsFor(player).length === 0 ? 190 : 140} edition={shown} glow={shown === 'totw' && shine} photoOverride={viewingFutureStars ? futureStar?.photoUrl : undefined} />
+              <PlayerEditionLinks player={player} width={wide ? 210 : 140} />
               {alts.map((alt) => (
                 <Pressable key={alt.edition} accessibilityRole="button" accessibilityLabel={alt.label} onPress={() => setEdition(alt.edition)}>
                   <PortraitCard player={card} width={62} edition={alt.edition} photoOverride={alt.edition === 'future-stars' ? futureStar?.photoUrl : undefined} />
