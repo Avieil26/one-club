@@ -213,17 +213,20 @@ export const FORMATIONS: Formation[] = [
   },
   shape('433-2', '4-3-3 (2)', [
     [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
-    [pos('lcdm', 'CDM'), pos('cm', 'CM'), pos('rcdm', 'CDM')],
+    [pos('lcdm', 'CM'), pos('rcdm', 'CM')],
+    [pos('cm', 'CDM')],
     back4,
   ]),
   shape('433-3', '4-3-3 (3)', [
-    [pos('lw', 'LW'), pos('cf', 'CF'), pos('rw', 'RW')],
-    [pos('lcm', 'CM'), pos('cam', 'CAM'), pos('rcm', 'CM')],
+    [pos('lw', 'LW'), pos('cf', 'ST'), pos('rw', 'RW')],
+    [pos('cam', 'CM')],
+    [pos('lcm', 'CDM'), pos('rcm', 'CDM')],
     back4,
   ]),
   shape('433-4', '4-3-3 (4)', [
     [pos('lw', 'LW'), pos('st', 'ST'), pos('rw', 'RW')],
-    [pos('lcm', 'CM'), pos('cam', 'CAM'), pos('rcm', 'CM')],
+    [pos('cam', 'CAM')],
+    [pos('lcm', 'CM'), pos('rcm', 'CM')],
     back4,
   ]),
   shape('4411', '4-4-1-1', [

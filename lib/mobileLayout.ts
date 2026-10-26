@@ -16,6 +16,10 @@ export function spotsFor(formation: Formation): Record<string, { x: number; y: n
 }
 
 const SPOTS: Record<string, Record<string, { x: number; y: number }>> = {
+  // Retain persisted slot IDs while drawing the actual Holding / Defend / Attack positions.
+  '433-2': {lw:{x:0.18,y:0.10},rw:{x:0.82,y:0.10},lb:{x:0.12,y:0.73},lcb:{x:0.37,y:0.75},rcb:{x:0.63,y:0.75},rb:{x:0.88,y:0.73},gk:{x:0.5,y:0.97},st:{x:0.5,y:0.09},lcdm:{x:0.24,y:0.31},rcdm:{x:0.76,y:0.31},cm:{x:0.5,y:0.51}},
+  '433-3': {lw:{x:0.18,y:0.10},rw:{x:0.82,y:0.10},lb:{x:0.12,y:0.73},lcb:{x:0.37,y:0.75},rcb:{x:0.63,y:0.75},rb:{x:0.88,y:0.73},gk:{x:0.5,y:0.97},cf:{x:0.5,y:0.09},cam:{x:0.5,y:0.35},lcm:{x:0.24,y:0.53},rcm:{x:0.76,y:0.53}},
+  '433-4': {lw:{x:0.18,y:0.10},rw:{x:0.82,y:0.10},lb:{x:0.12,y:0.73},lcb:{x:0.37,y:0.75},rcb:{x:0.63,y:0.75},rb:{x:0.88,y:0.73},gk:{x:0.5,y:0.97},st:{x:0.5,y:0.09},cam:{x:0.5,y:0.29},lcm:{x:0.24,y:0.47},rcm:{x:0.76,y:0.47}},
   '433': {
     lw: { x: 0.18, y: 0.13 },
     st: { x: 0.5, y: 0.09 },
