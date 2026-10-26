@@ -1,31 +1,31 @@
 {
-  "checkedAt": "2026-10-21T20:25:19.514Z",
+  "checkedAt": "2026-10-26T21:14:28.908Z",
   "sources": [
     "https://help.ea.com/en/articles/ea-sports-fc/gallery-hub/",
     "https://www.fut.gg/fut-gallery/",
     "https://www.futbin.com/27/gallery"
   ],
-  "sets": 128,
+  "sets": 195,
   "audits": [
     {
       "setId": 127,
       "target": "D",
-      "expected": 13607,
-      "calculated": 13607,
+      "expected": 17905,
+      "calculated": 17905,
       "matches": true
     },
     {
       "setId": 127,
       "target": "C",
-      "expected": 25200,
-      "calculated": 25200,
+      "expected": 25000,
+      "calculated": 25000,
       "matches": true
     },
     {
       "setId": 127,
       "target": "B",
-      "expected": 60132,
-      "calculated": 60132,
+      "expected": 60402,
+      "calculated": 60402,
       "matches": true
     },
     {
@@ -38,8 +38,8 @@
     {
       "setId": 127,
       "target": "S",
-      "expected": 150081,
-      "calculated": 150081,
+      "expected": 150383,
+      "calculated": 150383,
       "matches": true
     },
     {
@@ -52,36 +52,36 @@
     {
       "setId": 99,
       "target": "D",
-      "expected": 6186,
-      "calculated": 6186,
+      "expected": 6182,
+      "calculated": 6182,
       "matches": true
     },
     {
       "setId": 99,
       "target": "C",
-      "expected": 125037,
-      "calculated": 125037,
+      "expected": 125356,
+      "calculated": 125356,
       "matches": true
     },
     {
       "setId": 99,
       "target": "B",
-      "expected": 175532,
-      "calculated": 175532,
+      "expected": 175239,
+      "calculated": 175239,
       "matches": true
     },
     {
       "setId": 99,
       "target": "A",
-      "expected": 302346,
-      "calculated": 302346,
+      "expected": 300661,
+      "calculated": 300661,
       "matches": true
     },
     {
       "setId": 99,
       "target": "S",
-      "expected": 550496,
-      "calculated": 550496,
+      "expected": 552340,
+      "calculated": 552340,
       "matches": true
     },
     {
@@ -94,29 +94,29 @@
     {
       "setId": 102,
       "target": "D",
-      "expected": 24336,
-      "calculated": 24336,
+      "expected": 28604,
+      "calculated": 28604,
       "matches": true
     },
     {
       "setId": 102,
       "target": "C",
-      "expected": 50310,
-      "calculated": 50310,
+      "expected": 51461,
+      "calculated": 51461,
       "matches": true
     },
     {
       "setId": 102,
       "target": "B",
-      "expected": 75382,
-      "calculated": 75382,
+      "expected": 75339,
+      "calculated": 75339,
       "matches": true
     },
     {
       "setId": 102,
       "target": "A",
-      "expected": 103925,
-      "calculated": 103925,
+      "expected": 100488,
+      "calculated": 100488,
       "matches": true
     },
     {
@@ -136,22 +136,22 @@
     {
       "setId": 113,
       "target": "C",
-      "expected": 76072,
-      "calculated": 76072,
+      "expected": 75949,
+      "calculated": 75949,
       "matches": true
     },
     {
       "setId": 113,
       "target": "B",
-      "expected": 151382,
-      "calculated": 151382,
+      "expected": 153290,
+      "calculated": 153290,
       "matches": true
     },
     {
       "setId": 113,
       "target": "A",
-      "expected": 205625,
-      "calculated": 205625,
+      "expected": 201866,
+      "calculated": 201866,
       "matches": true
     },
     {
@@ -178,8 +178,8 @@
     {
       "setId": 116,
       "target": "S",
-      "expected": 2005,
-      "calculated": 2005,
+      "expected": 2142,
+      "calculated": 2142,
       "matches": true
     },
     {
@@ -190,10 +190,52 @@
       "matches": true
     },
     {
+      "setId": 181,
+      "target": "D",
+      "expected": 21315,
+      "calculated": 21315,
+      "matches": true
+    },
+    {
+      "setId": 181,
+      "target": "C",
+      "expected": 25044,
+      "calculated": 25044,
+      "matches": true
+    },
+    {
+      "setId": 181,
+      "target": "B",
+      "expected": 53099,
+      "calculated": 53099,
+      "matches": true
+    },
+    {
+      "setId": 181,
+      "target": "A",
+      "expected": 81071,
+      "calculated": 81071,
+      "matches": true
+    },
+    {
+      "setId": 181,
+      "target": "S",
+      "expected": 116007,
+      "calculated": 116007,
+      "matches": true
+    },
+    {
+      "setId": 181,
+      "target": "S",
+      "expected": 149815,
+      "calculated": 149815,
+      "matches": true
+    },
+    {
       "setId": 30,
       "target": "D",
-      "expected": 5998,
-      "calculated": 5998,
+      "expected": 5987,
+      "calculated": 5987,
       "matches": true
     },
     {
@@ -213,50 +255,50 @@
     {
       "setId": 61,
       "target": "D",
-      "expected": 960,
-      "calculated": 960,
+      "expected": 1568,
+      "calculated": 1568,
       "matches": true
     },
     {
       "setId": 61,
       "target": "D",
-      "expected": 8292,
-      "calculated": 8292,
+      "expected": 4426,
+      "calculated": 4426,
       "matches": true
     },
     {
       "setId": 76,
       "target": "D",
-      "expected": 895,
-      "calculated": 895,
+      "expected": 894,
+      "calculated": 894,
       "matches": true
     },
     {
       "setId": 76,
       "target": "C",
-      "expected": 895,
-      "calculated": 895,
+      "expected": 894,
+      "calculated": 894,
       "matches": true
     },
     {
       "setId": 76,
       "target": "B",
-      "expected": 895,
-      "calculated": 895,
+      "expected": 894,
+      "calculated": 894,
       "matches": true
     },
     {
       "setId": 76,
       "target": "A",
-      "expected": 895,
-      "calculated": 895,
+      "expected": 894,
+      "calculated": 894,
       "matches": true
     },
     {
       "setId": 76,
       "target": "S",
-      "expected": 1017,
-      "calculated": 1017,
+      "expected": 1009,
+      "calculated": 1009,
       "matches": true
     },
     {
@@ -269,36 +311,36 @@
     {
       "setId": 22,
       "target": "D",
-      "expected": 2009,
-      "calculated": 2009,
+      "expected": 2331,
+      "calculated": 2331,
       "matches": true
     },
     {
       "setId": 22,
       "target": "C",
-      "expected": 2009,
-      "calculated": 2009,
+      "expected": 2331,
+      "calculated": 2331,
       "matches": true
     },
     {
       "setId": 22,
       "target": "B",
-      "expected": 9445,
-      "calculated": 9445,
+      "expected": 9805,
+      "calculated": 9805,
       "matches": true
     },
     {
       "setId": 22,
       "target": "A",
-      "expected": 9445,
-      "calculated": 9445,
+      "expected": 9805,
+      "calculated": 9805,
       "matches": true
     },
     {
       "setId": 22,
       "target": "S",
-      "expected": 9445,
-      "calculated": 9445,
+      "expected": 9805,
+      "calculated": 9805,
       "matches": true
     },
     {
@@ -311,29 +353,29 @@
     {
       "setId": 17,
       "target": "D",
-      "expected": 2177,
-      "calculated": 2177,
+      "expected": 2082,
+      "calculated": 2082,
       "matches": true
     },
     {
       "setId": 17,
       "target": "C",
-      "expected": 2177,
-      "calculated": 2177,
+      "expected": 2082,
+      "calculated": 2082,
       "matches": true
     },
     {
       "setId": 17,
       "target": "B",
-      "expected": 2705,
-      "calculated": 2705,
+      "expected": 2704,
+      "calculated": 2704,
       "matches": true
     },
     {
       "setId": 17,
       "target": "A",
-      "expected": 4007,
-      "calculated": 4007,
+      "expected": 4090,
+      "calculated": 4090,
       "matches": true
     },
     {
@@ -346,15 +388,15 @@
     {
       "setId": 26,
       "target": "D",
-      "expected": 1436,
-      "calculated": 1436,
+      "expected": 1027,
+      "calculated": 1027,
       "matches": true
     },
     {
       "setId": 26,
       "target": "C",
-      "expected": 4052,
-      "calculated": 4052,
+      "expected": 4003,
+      "calculated": 4003,
       "matches": true
     },
     {
@@ -367,29 +409,29 @@
     {
       "setId": 14,
       "target": "D",
-      "expected": 520,
-      "calculated": 520,
+      "expected": 524,
+      "calculated": 524,
       "matches": true
     },
     {
       "setId": 14,
       "target": "C",
-      "expected": 520,
-      "calculated": 520,
+      "expected": 524,
+      "calculated": 524,
       "matches": true
     },
     {
       "setId": 14,
       "target": "B",
-      "expected": 520,
-      "calculated": 520,
+      "expected": 524,
+      "calculated": 524,
       "matches": true
     },
     {
       "setId": 14,
       "target": "A",
-      "expected": 700,
-      "calculated": 700,
+      "expected": 719,
+      "calculated": 719,
       "matches": true
     },
     {
@@ -402,50 +444,50 @@
     {
       "setId": 94,
       "target": "D",
-      "expected": 4121,
-      "calculated": 4121,
+      "expected": 7466,
+      "calculated": 7466,
       "matches": true
     },
     {
       "setId": 94,
       "target": "C",
-      "expected": 50203,
-      "calculated": 50203,
+      "expected": 50022,
+      "calculated": 50022,
       "matches": true
     },
     {
       "setId": 94,
       "target": "C",
-      "expected": 128753,
-      "calculated": 128753,
+      "expected": 155082,
+      "calculated": 155082,
       "matches": true
     },
     {
       "setId": 71,
       "target": "D",
-      "expected": 1018,
-      "calculated": 1018,
+      "expected": 985,
+      "calculated": 985,
       "matches": true
     },
     {
       "setId": 71,
       "target": "C",
-      "expected": 1018,
-      "calculated": 1018,
+      "expected": 985,
+      "calculated": 985,
       "matches": true
     },
     {
       "setId": 71,
       "target": "B",
-      "expected": 1108,
-      "calculated": 1108,
+      "expected": 1113,
+      "calculated": 1113,
       "matches": true
     },
     {
       "setId": 71,
       "target": "A",
-      "expected": 1703,
-      "calculated": 1703,
+      "expected": 1702,
+      "calculated": 1702,
       "matches": true
     },
     {
@@ -458,15 +500,15 @@
     {
       "setId": 85,
       "target": "D",
-      "expected": 2904,
-      "calculated": 2904,
+      "expected": 2379,
+      "calculated": 2379,
       "matches": true
     },
     {
       "setId": 85,
       "target": "C",
-      "expected": 3031,
-      "calculated": 3031,
+      "expected": 3021,
+      "calculated": 3021,
       "matches": true
     },
     {
@@ -479,15 +521,15 @@
     {
       "setId": 56,
       "target": "D",
-      "expected": 949,
-      "calculated": 949,
+      "expected": 1091,
+      "calculated": 1091,
       "matches": true
     },
     {
       "setId": 56,
       "target": "C",
-      "expected": 3006,
-      "calculated": 3006,
+      "expected": 3007,
+      "calculated": 3007,
       "matches": true
     },
     {
@@ -500,15 +542,15 @@
     {
       "setId": 54,
       "target": "D",
-      "expected": 1854,
-      "calculated": 1854,
+      "expected": 1749,
+      "calculated": 1749,
       "matches": true
     },
     {
       "setId": 54,
       "target": "C",
-      "expected": 1854,
-      "calculated": 1854,
+      "expected": 1749,
+      "calculated": 1749,
       "matches": true
     },
     {
@@ -521,15 +563,15 @@
     {
       "setId": 54,
       "target": "A",
-      "expected": 5407,
-      "calculated": 5407,
+      "expected": 5229,
+      "calculated": 5229,
       "matches": true
     },
     {
       "setId": 54,
       "target": "S",
-      "expected": 5725,
-      "calculated": 5725,
+      "expected": 5757,
+      "calculated": 5757,
       "matches": true
     },
     {
@@ -542,36 +584,36 @@
     {
       "setId": 45,
       "target": "D",
-      "expected": 780,
-      "calculated": 780,
+      "expected": 741,
+      "calculated": 741,
       "matches": true
     },
     {
       "setId": 45,
       "target": "C",
-      "expected": 780,
-      "calculated": 780,
+      "expected": 741,
+      "calculated": 741,
       "matches": true
     },
     {
       "setId": 45,
       "target": "B",
-      "expected": 780,
-      "calculated": 780,
+      "expected": 741,
+      "calculated": 741,
       "matches": true
     },
     {
       "setId": 45,
       "target": "A",
-      "expected": 1112,
-      "calculated": 1112,
+      "expected": 1113,
+      "calculated": 1113,
       "matches": true
     },
     {
       "setId": 45,
       "target": "S",
-      "expected": 1521,
-      "calculated": 1521,
+      "expected": 1524,
+      "calculated": 1524,
       "matches": true
     },
     {
@@ -584,22 +626,22 @@
     {
       "setId": 6,
       "target": "D",
-      "expected": 1419,
-      "calculated": 1419,
+      "expected": 1600,
+      "calculated": 1600,
       "matches": true
     },
     {
       "setId": 6,
       "target": "C",
-      "expected": 1419,
-      "calculated": 1419,
+      "expected": 1600,
+      "calculated": 1600,
       "matches": true
     },
     {
       "setId": 6,
       "target": "B",
-      "expected": 1419,
-      "calculated": 1419,
+      "expected": 1600,
+      "calculated": 1600,
       "matches": true
     },
     {
@@ -612,22 +654,22 @@
     {
       "setId": 20,
       "target": "D",
-      "expected": 1457,
-      "calculated": 1457,
+      "expected": 1550,
+      "calculated": 1550,
       "matches": true
     },
     {
       "setId": 20,
       "target": "C",
-      "expected": 1457,
-      "calculated": 1457,
+      "expected": 1550,
+      "calculated": 1550,
       "matches": true
     },
     {
       "setId": 20,
       "target": "B",
-      "expected": 2305,
-      "calculated": 2305,
+      "expected": 2306,
+      "calculated": 2306,
       "matches": true
     },
     {
@@ -640,57 +682,57 @@
     {
       "setId": 46,
       "target": "D",
-      "expected": 3071,
-      "calculated": 3071,
+      "expected": 1352,
+      "calculated": 1352,
       "matches": true
     },
     {
       "setId": 46,
       "target": "C",
-      "expected": 60059,
-      "calculated": 60059,
+      "expected": 60115,
+      "calculated": 60115,
       "matches": true
     },
     {
       "setId": 46,
       "target": "C",
-      "expected": 164304,
-      "calculated": 164304,
+      "expected": 227155,
+      "calculated": 227155,
       "matches": true
     },
     {
       "setId": 25,
       "target": "D",
-      "expected": 2070,
-      "calculated": 2070,
+      "expected": 1797,
+      "calculated": 1797,
       "matches": true
     },
     {
       "setId": 25,
       "target": "C",
-      "expected": 5341,
-      "calculated": 5341,
+      "expected": 5048,
+      "calculated": 5048,
       "matches": true
     },
     {
       "setId": 25,
       "target": "B",
-      "expected": 25265,
-      "calculated": 25265,
+      "expected": 25236,
+      "calculated": 25236,
       "matches": true
     },
     {
       "setId": 25,
       "target": "A",
-      "expected": 31594,
-      "calculated": 31594,
+      "expected": 31791,
+      "calculated": 31791,
       "matches": true
     },
     {
       "setId": 25,
       "target": "S",
-      "expected": 44004,
-      "calculated": 44004,
+      "expected": 44050,
+      "calculated": 44050,
       "matches": true
     },
     {
@@ -703,36 +745,36 @@
     {
       "setId": 49,
       "target": "D",
-      "expected": 4903,
-      "calculated": 4903,
+      "expected": 5347,
+      "calculated": 5347,
       "matches": true
     },
     {
       "setId": 49,
       "target": "C",
-      "expected": 60028,
-      "calculated": 60028,
+      "expected": 60066,
+      "calculated": 60066,
       "matches": true
     },
     {
       "setId": 49,
       "target": "C",
-      "expected": 315736,
-      "calculated": 315736,
+      "expected": 326273,
+      "calculated": 326273,
       "matches": true
     },
     {
       "setId": 44,
       "target": "D",
-      "expected": 5573,
-      "calculated": 5573,
+      "expected": 3478,
+      "calculated": 3478,
       "matches": true
     },
     {
       "setId": 44,
       "target": "C",
-      "expected": 20266,
-      "calculated": 20266,
+      "expected": 20311,
+      "calculated": 20311,
       "matches": true
     },
     {
@@ -745,15 +787,15 @@
     {
       "setId": 92,
       "target": "D",
-      "expected": 3134,
-      "calculated": 3134,
+      "expected": 2818,
+      "calculated": 2818,
       "matches": true
     },
     {
       "setId": 92,
       "target": "C",
-      "expected": 12653,
-      "calculated": 12653,
+      "expected": 12337,
+      "calculated": 12337,
       "matches": true
     },
     {
@@ -766,15 +808,15 @@
     {
       "setId": 48,
       "target": "D",
-      "expected": 3252,
-      "calculated": 3252,
+      "expected": 2815,
+      "calculated": 2815,
       "matches": true
     },
     {
       "setId": 48,
       "target": "C",
-      "expected": 3252,
-      "calculated": 3252,
+      "expected": 2815,
+      "calculated": 2815,
       "matches": true
     },
     {
@@ -787,22 +829,22 @@
     {
       "setId": 86,
       "target": "D",
-      "expected": 2124,
-      "calculated": 2124,
+      "expected": 1514,
+      "calculated": 1514,
       "matches": true
     },
     {
       "setId": 86,
       "target": "C",
-      "expected": 2505,
-      "calculated": 2505,
+      "expected": 2513,
+      "calculated": 2513,
       "matches": true
     },
     {
       "setId": 86,
       "target": "B",
-      "expected": 11060,
-      "calculated": 11060,
+      "expected": 11063,
+      "calculated": 11063,
       "matches": true
     },
     {
@@ -815,15 +857,15 @@
     {
       "setId": 8,
       "target": "D",
-      "expected": 2155,
-      "calculated": 2155,
+      "expected": 2833,
+      "calculated": 2833,
       "matches": true
     },
     {
       "setId": 8,
       "target": "C",
-      "expected": 9067,
-      "calculated": 9067,
+      "expected": 9005,
+      "calculated": 9005,
       "matches": true
     },
     {
@@ -836,22 +878,22 @@
     {
       "setId": 9,
       "target": "D",
-      "expected": 1677,
-      "calculated": 1677,
+      "expected": 1495,
+      "calculated": 1495,
       "matches": true
     },
     {
       "setId": 9,
       "target": "C",
-      "expected": 1677,
-      "calculated": 1677,
+      "expected": 1495,
+      "calculated": 1495,
       "matches": true
     },
     {
       "setId": 9,
       "target": "B",
-      "expected": 2006,
-      "calculated": 2006,
+      "expected": 2037,
+      "calculated": 2037,
       "matches": true
     },
     {
@@ -864,15 +906,15 @@
     {
       "setId": 16,
       "target": "D",
-      "expected": 1231,
-      "calculated": 1231,
+      "expected": 544,
+      "calculated": 544,
       "matches": true
     },
     {
       "setId": 16,
       "target": "C",
-      "expected": 7009,
-      "calculated": 7009,
+      "expected": 7000,
+      "calculated": 7000,
       "matches": true
     },
     {
@@ -885,15 +927,15 @@
     {
       "setId": 53,
       "target": "D",
-      "expected": 5006,
-      "calculated": 5006,
+      "expected": 4730,
+      "calculated": 4730,
       "matches": true
     },
     {
       "setId": 53,
       "target": "C",
-      "expected": 20008,
-      "calculated": 20008,
+      "expected": 20021,
+      "calculated": 20021,
       "matches": true
     },
     {
@@ -906,22 +948,22 @@
     {
       "setId": 12,
       "target": "D",
-      "expected": 1498,
-      "calculated": 1498,
+      "expected": 1465,
+      "calculated": 1465,
       "matches": true
     },
     {
       "setId": 12,
       "target": "C",
-      "expected": 1498,
-      "calculated": 1498,
+      "expected": 1465,
+      "calculated": 1465,
       "matches": true
     },
     {
       "setId": 12,
       "target": "B",
-      "expected": 1807,
-      "calculated": 1807,
+      "expected": 1801,
+      "calculated": 1801,
       "matches": true
     },
     {
@@ -934,15 +976,15 @@
     {
       "setId": 81,
       "target": "D",
-      "expected": 1590,
-      "calculated": 1590,
+      "expected": 1677,
+      "calculated": 1677,
       "matches": true
     },
     {
       "setId": 81,
       "target": "C",
-      "expected": 1590,
-      "calculated": 1590,
+      "expected": 1677,
+      "calculated": 1677,
       "matches": true
     },
     {
@@ -955,36 +997,36 @@
     {
       "setId": 89,
       "target": "D",
-      "expected": 1037,
-      "calculated": 1037,
+      "expected": 1123,
+      "calculated": 1123,
       "matches": true
     },
     {
       "setId": 89,
       "target": "C",
-      "expected": 1037,
-      "calculated": 1037,
+      "expected": 1123,
+      "calculated": 1123,
       "matches": true
     },
     {
       "setId": 89,
       "target": "B",
-      "expected": 1037,
-      "calculated": 1037,
+      "expected": 1123,
+      "calculated": 1123,
       "matches": true
     },
     {
       "setId": 89,
       "target": "A",
-      "expected": 1037,
-      "calculated": 1037,
+      "expected": 1123,
+      "calculated": 1123,
       "matches": true
     },
     {
       "setId": 89,
       "target": "S",
-      "expected": 1037,
-      "calculated": 1037,
+      "expected": 1123,
+      "calculated": 1123,
       "matches": true
     },
     {
@@ -997,22 +1039,22 @@
     {
       "setId": 62,
       "target": "D",
-      "expected": 669,
-      "calculated": 669,
+      "expected": 623,
+      "calculated": 623,
       "matches": true
     },
     {
       "setId": 62,
       "target": "C",
-      "expected": 669,
-      "calculated": 669,
+      "expected": 623,
+      "calculated": 623,
       "matches": true
     },
     {
       "setId": 62,
       "target": "B",
-      "expected": 741,
-      "calculated": 741,
+      "expected": 737,
+      "calculated": 737,
       "matches": true
     },
     {
@@ -1032,15 +1074,15 @@
     {
       "setId": 80,
       "target": "D",
-      "expected": 693,
-      "calculated": 693,
+      "expected": 682,
+      "calculated": 682,
       "matches": true
     },
     {
       "setId": 80,
       "target": "C",
-      "expected": 693,
-      "calculated": 693,
+      "expected": 682,
+      "calculated": 682,
       "matches": true
     },
     {
@@ -1053,29 +1095,29 @@
     {
       "setId": 40,
       "target": "D",
-      "expected": 1527,
-      "calculated": 1527,
+      "expected": 1286,
+      "calculated": 1286,
       "matches": true
     },
     {
       "setId": 40,
       "target": "C",
-      "expected": 1527,
-      "calculated": 1527,
+      "expected": 1286,
+      "calculated": 1286,
       "matches": true
     },
     {
       "setId": 40,
       "target": "B",
-      "expected": 1527,
-      "calculated": 1527,
+      "expected": 1286,
+      "calculated": 1286,
       "matches": true
     },
     {
       "setId": 40,
       "target": "A",
-      "expected": 1527,
-      "calculated": 1527,
+      "expected": 1286,
+      "calculated": 1286,
       "matches": true
     },
     {
@@ -1088,43 +1130,43 @@
     {
       "setId": 68,
       "target": "D",
-      "expected": 5175,
-      "calculated": 5175,
+      "expected": 5177,
+      "calculated": 5177,
       "matches": true
     },
     {
       "setId": 68,
       "target": "C",
-      "expected": 170146,
-      "calculated": 170146,
+      "expected": 170010,
+      "calculated": 170010,
       "matches": true
     },
     {
       "setId": 68,
       "target": "C",
-      "expected": 559422,
-      "calculated": 559422,
+      "expected": 620583,
+      "calculated": 620583,
       "matches": true
     },
     {
       "setId": 13,
       "target": "D",
-      "expected": 808,
-      "calculated": 808,
+      "expected": 670,
+      "calculated": 670,
       "matches": true
     },
     {
       "setId": 13,
       "target": "C",
-      "expected": 900,
-      "calculated": 900,
+      "expected": 910,
+      "calculated": 910,
       "matches": true
     },
     {
       "setId": 13,
       "target": "B",
-      "expected": 1300,
-      "calculated": 1300,
+      "expected": 1308,
+      "calculated": 1308,
       "matches": true
     },
     {
@@ -1137,22 +1179,22 @@
     {
       "setId": 24,
       "target": "D",
-      "expected": 978,
-      "calculated": 978,
+      "expected": 676,
+      "calculated": 676,
       "matches": true
     },
     {
       "setId": 24,
       "target": "C",
-      "expected": 978,
-      "calculated": 978,
+      "expected": 676,
+      "calculated": 676,
       "matches": true
     },
     {
       "setId": 24,
       "target": "B",
-      "expected": 978,
-      "calculated": 978,
+      "expected": 744,
+      "calculated": 744,
       "matches": true
     },
     {
@@ -1186,8 +1228,8 @@
     {
       "setId": 97,
       "target": "A",
-      "expected": 700,
-      "calculated": 700,
+      "expected": 712,
+      "calculated": 712,
       "matches": true
     },
     {
@@ -1200,22 +1242,22 @@
     {
       "setId": 90,
       "target": "D",
-      "expected": 694,
-      "calculated": 694,
+      "expected": 698,
+      "calculated": 698,
       "matches": true
     },
     {
       "setId": 90,
       "target": "C",
-      "expected": 694,
-      "calculated": 694,
+      "expected": 698,
+      "calculated": 698,
       "matches": true
     },
     {
       "setId": 90,
       "target": "B",
-      "expected": 694,
-      "calculated": 694,
+      "expected": 698,
+      "calculated": 698,
       "matches": true
     },
     {
@@ -1228,8 +1270,8 @@
     {
       "setId": 90,
       "target": "S",
-      "expected": 900,
-      "calculated": 900,
+      "expected": 908,
+      "calculated": 908,
       "matches": true
     },
     {
@@ -1242,29 +1284,29 @@
     {
       "setId": 79,
       "target": "D",
-      "expected": 837,
-      "calculated": 837,
+      "expected": 834,
+      "calculated": 834,
       "matches": true
     },
     {
       "setId": 79,
       "target": "C",
-      "expected": 837,
-      "calculated": 837,
+      "expected": 834,
+      "calculated": 834,
       "matches": true
     },
     {
       "setId": 79,
       "target": "B",
-      "expected": 837,
-      "calculated": 837,
+      "expected": 834,
+      "calculated": 834,
       "matches": true
     },
     {
       "setId": 79,
       "target": "A",
-      "expected": 1010,
-      "calculated": 1010,
+      "expected": 1000,
+      "calculated": 1000,
       "matches": true
     },
     {
@@ -1277,36 +1319,36 @@
     {
       "setId": 91,
       "target": "D",
-      "expected": 1635,
-      "calculated": 1635,
+      "expected": 1597,
+      "calculated": 1597,
       "matches": true
     },
     {
       "setId": 91,
       "target": "C",
-      "expected": 1635,
-      "calculated": 1635,
+      "expected": 1597,
+      "calculated": 1597,
       "matches": true
     },
     {
       "setId": 91,
       "target": "B",
-      "expected": 2212,
-      "calculated": 2212,
+      "expected": 2205,
+      "calculated": 2205,
       "matches": true
     },
     {
       "setId": 91,
       "target": "A",
-      "expected": 4614,
-      "calculated": 4614,
+      "expected": 4909,
+      "calculated": 4909,
       "matches": true
     },
     {
       "setId": 91,
       "target": "S",
-      "expected": 4925,
-      "calculated": 4925,
+      "expected": 4909,
+      "calculated": 4909,
       "matches": true
     },
     {
@@ -1319,36 +1361,36 @@
     {
       "setId": 41,
       "target": "D",
-      "expected": 1199,
-      "calculated": 1199,
+      "expected": 1213,
+      "calculated": 1213,
       "matches": true
     },
     {
       "setId": 41,
       "target": "C",
-      "expected": 1199,
-      "calculated": 1199,
+      "expected": 1213,
+      "calculated": 1213,
       "matches": true
     },
     {
       "setId": 41,
       "target": "B",
-      "expected": 7253,
-      "calculated": 7253,
+      "expected": 6487,
+      "calculated": 6487,
       "matches": true
     },
     {
       "setId": 41,
       "target": "A",
-      "expected": 7253,
-      "calculated": 7253,
+      "expected": 6487,
+      "calculated": 6487,
       "matches": true
     },
     {
       "setId": 41,
       "target": "S",
-      "expected": 7814,
-      "calculated": 7814,
+      "expected": 7807,
+      "calculated": 7807,
       "matches": true
     },
     {
@@ -1361,22 +1403,22 @@
     {
       "setId": 2,
       "target": "D",
-      "expected": 749,
-      "calculated": 749,
+      "expected": 641,
+      "calculated": 641,
       "matches": true
     },
     {
       "setId": 2,
       "target": "C",
-      "expected": 811,
-      "calculated": 811,
+      "expected": 818,
+      "calculated": 818,
       "matches": true
     },
     {
       "setId": 2,
       "target": "B",
-      "expected": 1501,
-      "calculated": 1501,
+      "expected": 1539,
+      "calculated": 1539,
       "matches": true
     },
     {
@@ -1389,15 +1431,15 @@
     {
       "setId": 96,
       "target": "D",
-      "expected": 2840,
-      "calculated": 2840,
+      "expected": 2600,
+      "calculated": 2600,
       "matches": true
     },
     {
       "setId": 96,
       "target": "C",
-      "expected": 2840,
-      "calculated": 2840,
+      "expected": 2600,
+      "calculated": 2600,
       "matches": true
     },
     {
@@ -1417,15 +1459,15 @@
     {
       "setId": 74,
       "target": "D",
-      "expected": 4140,
-      "calculated": 4140,
+      "expected": 5054,
+      "calculated": 5054,
       "matches": true
     },
     {
       "setId": 74,
       "target": "C",
-      "expected": 70185,
-      "calculated": 70185,
+      "expected": 70156,
+      "calculated": 70156,
       "matches": true
     },
     {
@@ -1438,22 +1480,22 @@
     {
       "setId": 42,
       "target": "D",
-      "expected": 1938,
-      "calculated": 1938,
+      "expected": 1624,
+      "calculated": 1624,
       "matches": true
     },
     {
       "setId": 42,
       "target": "C",
-      "expected": 3504,
-      "calculated": 3504,
+      "expected": 3566,
+      "calculated": 3566,
       "matches": true
     },
     {
       "setId": 42,
       "target": "B",
-      "expected": 22009,
-      "calculated": 22009,
+      "expected": 22049,
+      "calculated": 22049,
       "matches": true
     },
     {
@@ -1466,15 +1508,15 @@
     {
       "setId": 32,
       "target": "D",
-      "expected": 634,
-      "calculated": 634,
+      "expected": 643,
+      "calculated": 643,
       "matches": true
     },
     {
       "setId": 32,
       "target": "C",
-      "expected": 1504,
-      "calculated": 1504,
+      "expected": 1534,
+      "calculated": 1534,
       "matches": true
     },
     {
@@ -1487,22 +1529,22 @@
     {
       "setId": 69,
       "target": "D",
-      "expected": 945,
-      "calculated": 945,
+      "expected": 1157,
+      "calculated": 1157,
       "matches": true
     },
     {
       "setId": 69,
       "target": "C",
-      "expected": 1308,
-      "calculated": 1308,
+      "expected": 1302,
+      "calculated": 1302,
       "matches": true
     },
     {
       "setId": 69,
       "target": "B",
-      "expected": 1810,
-      "calculated": 1810,
+      "expected": 1800,
+      "calculated": 1800,
       "matches": true
     },
     {
@@ -1515,29 +1557,29 @@
     {
       "setId": 5,
       "target": "D",
-      "expected": 2823,
-      "calculated": 2823,
+      "expected": 2248,
+      "calculated": 2248,
       "matches": true
     },
     {
       "setId": 5,
       "target": "C",
-      "expected": 2823,
-      "calculated": 2823,
+      "expected": 2248,
+      "calculated": 2248,
       "matches": true
     },
     {
       "setId": 5,
       "target": "B",
-      "expected": 4131,
-      "calculated": 4131,
+      "expected": 3575,
+      "calculated": 3575,
       "matches": true
     },
     {
       "setId": 5,
       "target": "A",
-      "expected": 6205,
-      "calculated": 6205,
+      "expected": 5540,
+      "calculated": 5540,
       "matches": true
     },
     {
@@ -1550,15 +1592,15 @@
     {
       "setId": 65,
       "target": "D",
-      "expected": 2195,
-      "calculated": 2195,
+      "expected": 894,
+      "calculated": 894,
       "matches": true
     },
     {
       "setId": 65,
       "target": "C",
-      "expected": 9022,
-      "calculated": 9022,
+      "expected": 9018,
+      "calculated": 9018,
       "matches": true
     },
     {
@@ -1571,36 +1613,36 @@
     {
       "setId": 4,
       "target": "D",
-      "expected": 3651,
-      "calculated": 3651,
+      "expected": 2294,
+      "calculated": 2294,
       "matches": true
     },
     {
       "setId": 4,
       "target": "C",
-      "expected": 13691,
-      "calculated": 13691,
+      "expected": 13017,
+      "calculated": 13017,
       "matches": true
     },
     {
       "setId": 4,
       "target": "C",
-      "expected": 45531,
-      "calculated": 45531,
+      "expected": 57745,
+      "calculated": 57745,
       "matches": true
     },
     {
       "setId": 31,
       "target": "D",
-      "expected": 620,
-      "calculated": 620,
+      "expected": 609,
+      "calculated": 609,
       "matches": true
     },
     {
       "setId": 31,
       "target": "C",
-      "expected": 1154,
-      "calculated": 1154,
+      "expected": 1117,
+      "calculated": 1117,
       "matches": true
     },
     {
@@ -1613,8 +1655,8 @@
     {
       "setId": 59,
       "target": "D",
-      "expected": 458,
-      "calculated": 458,
+      "expected": 462,
+      "calculated": 462,
       "matches": true
     },
     {
@@ -1627,15 +1669,15 @@
     {
       "setId": 10,
       "target": "D",
-      "expected": 722,
-      "calculated": 722,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
       "setId": 10,
       "target": "C",
-      "expected": 801,
-      "calculated": 801,
+      "expected": 802,
+      "calculated": 802,
       "matches": true
     },
     {
@@ -1648,15 +1690,15 @@
     {
       "setId": 52,
       "target": "D",
-      "expected": 7074,
-      "calculated": 7074,
+      "expected": 4131,
+      "calculated": 4131,
       "matches": true
     },
     {
       "setId": 52,
       "target": "C",
-      "expected": 60076,
-      "calculated": 60076,
+      "expected": 60021,
+      "calculated": 60021,
       "matches": true
     },
     {
@@ -1669,29 +1711,29 @@
     {
       "setId": 15,
       "target": "D",
-      "expected": 455,
-      "calculated": 455,
+      "expected": 475,
+      "calculated": 475,
       "matches": true
     },
     {
       "setId": 15,
       "target": "C",
-      "expected": 1004,
-      "calculated": 1004,
+      "expected": 1011,
+      "calculated": 1011,
       "matches": true
     },
     {
       "setId": 15,
       "target": "B",
-      "expected": 1702,
-      "calculated": 1702,
+      "expected": 1732,
+      "calculated": 1732,
       "matches": true
     },
     {
       "setId": 15,
       "target": "A",
-      "expected": 2538,
-      "calculated": 2538,
+      "expected": 2516,
+      "calculated": 2516,
       "matches": true
     },
     {
@@ -1704,22 +1746,22 @@
     {
       "setId": 73,
       "target": "D",
-      "expected": 609,
-      "calculated": 609,
+      "expected": 607,
+      "calculated": 607,
       "matches": true
     },
     {
       "setId": 73,
       "target": "C",
-      "expected": 609,
-      "calculated": 609,
+      "expected": 607,
+      "calculated": 607,
       "matches": true
     },
     {
       "setId": 73,
       "target": "B",
-      "expected": 609,
-      "calculated": 609,
+      "expected": 607,
+      "calculated": 607,
       "matches": true
     },
     {
@@ -1732,8 +1774,8 @@
     {
       "setId": 64,
       "target": "D",
-      "expected": 521,
-      "calculated": 521,
+      "expected": 512,
+      "calculated": 512,
       "matches": true
     },
     {
@@ -1746,8 +1788,8 @@
     {
       "setId": 64,
       "target": "B",
-      "expected": 1303,
-      "calculated": 1303,
+      "expected": 1320,
+      "calculated": 1320,
       "matches": true
     },
     {
@@ -1760,22 +1802,22 @@
     {
       "setId": 33,
       "target": "D",
-      "expected": 513,
-      "calculated": 513,
+      "expected": 519,
+      "calculated": 519,
       "matches": true
     },
     {
       "setId": 33,
       "target": "C",
-      "expected": 1003,
-      "calculated": 1003,
+      "expected": 1001,
+      "calculated": 1001,
       "matches": true
     },
     {
       "setId": 33,
       "target": "B",
-      "expected": 2201,
-      "calculated": 2201,
+      "expected": 2200,
+      "calculated": 2200,
       "matches": true
     },
     {
@@ -1816,64 +1858,78 @@
     {
       "setId": 28,
       "target": "D",
-      "expected": 2911,
-      "calculated": 2911,
+      "expected": 608,
+      "calculated": 608,
       "matches": true
     },
     {
       "setId": 28,
       "target": "C",
-      "expected": 7020,
-      "calculated": 7020,
+      "expected": 7021,
+      "calculated": 7021,
       "matches": true
     },
     {
       "setId": 28,
       "target": "C",
-      "expected": 11635,
-      "calculated": 11635,
+      "expected": 21760,
+      "calculated": 21760,
       "matches": true
     },
     {
       "setId": 21,
       "target": "D",
-      "expected": 492,
-      "calculated": 492,
+      "expected": 483,
+      "calculated": 483,
       "matches": true
     },
     {
       "setId": 21,
       "target": "C",
-      "expected": 2003,
-      "calculated": 2003,
+      "expected": 2011,
+      "calculated": 2011,
       "matches": true
     },
     {
       "setId": 21,
-      "target": "C",
-      "expected": 2867,
-      "calculated": 2867,
+      "target": "B",
+      "expected": 11521,
+      "calculated": 11521,
+      "matches": true
+    },
+    {
+      "setId": 21,
+      "target": "A",
+      "expected": 19604,
+      "calculated": 19604,
+      "matches": true
+    },
+    {
+      "setId": 21,
+      "target": "A",
+      "expected": 24097,
+      "calculated": 24097,
       "matches": true
     },
     {
       "setId": 47,
       "target": "D",
-      "expected": 625,
-      "calculated": 625,
+      "expected": 619,
+      "calculated": 619,
       "matches": true
     },
     {
       "setId": 47,
       "target": "C",
-      "expected": 625,
-      "calculated": 625,
+      "expected": 619,
+      "calculated": 619,
       "matches": true
     },
     {
       "setId": 47,
       "target": "B",
-      "expected": 625,
-      "calculated": 625,
+      "expected": 619,
+      "calculated": 619,
       "matches": true
     },
     {
@@ -1886,36 +1942,36 @@
     {
       "setId": 57,
       "target": "D",
-      "expected": 672,
-      "calculated": 672,
+      "expected": 665,
+      "calculated": 665,
       "matches": true
     },
     {
       "setId": 57,
       "target": "C",
-      "expected": 672,
-      "calculated": 672,
+      "expected": 665,
+      "calculated": 665,
       "matches": true
     },
     {
       "setId": 57,
       "target": "B",
-      "expected": 672,
-      "calculated": 672,
+      "expected": 665,
+      "calculated": 665,
       "matches": true
     },
     {
       "setId": 57,
       "target": "A",
-      "expected": 3758,
-      "calculated": 3758,
+      "expected": 3401,
+      "calculated": 3401,
       "matches": true
     },
     {
       "setId": 57,
       "target": "S",
-      "expected": 3758,
-      "calculated": 3758,
+      "expected": 3401,
+      "calculated": 3401,
       "matches": true
     },
     {
@@ -1928,22 +1984,22 @@
     {
       "setId": 38,
       "target": "D",
-      "expected": 614,
-      "calculated": 614,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
       "setId": 38,
       "target": "C",
-      "expected": 614,
-      "calculated": 614,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
       "setId": 38,
       "target": "B",
-      "expected": 614,
-      "calculated": 614,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
@@ -1956,15 +2012,15 @@
     {
       "setId": 19,
       "target": "D",
-      "expected": 485,
-      "calculated": 485,
+      "expected": 481,
+      "calculated": 481,
       "matches": true
     },
     {
       "setId": 19,
       "target": "C",
-      "expected": 3011,
-      "calculated": 3011,
+      "expected": 3003,
+      "calculated": 3003,
       "matches": true
     },
     {
@@ -1977,36 +2033,36 @@
     {
       "setId": 37,
       "target": "D",
-      "expected": 672,
-      "calculated": 672,
+      "expected": 627,
+      "calculated": 627,
       "matches": true
     },
     {
       "setId": 37,
       "target": "C",
-      "expected": 1589,
-      "calculated": 1589,
+      "expected": 1531,
+      "calculated": 1531,
       "matches": true
     },
     {
       "setId": 37,
       "target": "B",
-      "expected": 4722,
-      "calculated": 4722,
+      "expected": 4710,
+      "calculated": 4710,
       "matches": true
     },
     {
       "setId": 37,
       "target": "A",
-      "expected": 7018,
-      "calculated": 7018,
+      "expected": 7029,
+      "calculated": 7029,
       "matches": true
     },
     {
       "setId": 37,
       "target": "S",
-      "expected": 9962,
-      "calculated": 9962,
+      "expected": 9935,
+      "calculated": 9935,
       "matches": true
     },
     {
@@ -2019,8 +2075,8 @@
     {
       "setId": 88,
       "target": "D",
-      "expected": 1520,
-      "calculated": 1520,
+      "expected": 1576,
+      "calculated": 1576,
       "matches": true
     },
     {
@@ -2033,15 +2089,15 @@
     {
       "setId": 88,
       "target": "C",
-      "expected": 10342,
-      "calculated": 10342,
+      "expected": 6429,
+      "calculated": 6429,
       "matches": true
     },
     {
       "setId": 34,
       "target": "D",
-      "expected": 531,
-      "calculated": 531,
+      "expected": 535,
+      "calculated": 535,
       "matches": true
     },
     {
@@ -2054,29 +2110,29 @@
     {
       "setId": 75,
       "target": "D",
-      "expected": 463,
-      "calculated": 463,
+      "expected": 474,
+      "calculated": 474,
       "matches": true
     },
     {
       "setId": 75,
       "target": "C",
-      "expected": 510,
-      "calculated": 510,
+      "expected": 519,
+      "calculated": 519,
       "matches": true
     },
     {
       "setId": 75,
       "target": "B",
-      "expected": 701,
-      "calculated": 701,
+      "expected": 702,
+      "calculated": 702,
       "matches": true
     },
     {
       "setId": 75,
       "target": "A",
-      "expected": 1002,
-      "calculated": 1002,
+      "expected": 1007,
+      "calculated": 1007,
       "matches": true
     },
     {
@@ -2096,22 +2152,22 @@
     {
       "setId": 87,
       "target": "D",
-      "expected": 683,
-      "calculated": 683,
+      "expected": 667,
+      "calculated": 667,
       "matches": true
     },
     {
       "setId": 87,
       "target": "C",
-      "expected": 683,
-      "calculated": 683,
+      "expected": 667,
+      "calculated": 667,
       "matches": true
     },
     {
       "setId": 87,
       "target": "B",
-      "expected": 701,
-      "calculated": 701,
+      "expected": 708,
+      "calculated": 708,
       "matches": true
     },
     {
@@ -2124,36 +2180,36 @@
     {
       "setId": 98,
       "target": "D",
-      "expected": 1650,
-      "calculated": 1650,
+      "expected": 1508,
+      "calculated": 1508,
       "matches": true
     },
     {
       "setId": 98,
       "target": "C",
-      "expected": 1706,
-      "calculated": 1706,
+      "expected": 1712,
+      "calculated": 1712,
       "matches": true
     },
     {
       "setId": 98,
       "target": "B",
-      "expected": 16052,
-      "calculated": 16052,
+      "expected": 16957,
+      "calculated": 16957,
       "matches": true
     },
     {
       "setId": 98,
       "target": "A",
-      "expected": 16052,
-      "calculated": 16052,
+      "expected": 16957,
+      "calculated": 16957,
       "matches": true
     },
     {
       "setId": 98,
       "target": "S",
-      "expected": 16052,
-      "calculated": 16052,
+      "expected": 16957,
+      "calculated": 16957,
       "matches": true
     },
     {
@@ -2166,22 +2222,22 @@
     {
       "setId": 78,
       "target": "D",
-      "expected": 519,
-      "calculated": 519,
+      "expected": 535,
+      "calculated": 535,
       "matches": true
     },
     {
       "setId": 78,
       "target": "C",
-      "expected": 519,
-      "calculated": 519,
+      "expected": 535,
+      "calculated": 535,
       "matches": true
     },
     {
       "setId": 78,
       "target": "B",
-      "expected": 610,
-      "calculated": 610,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
@@ -2194,15 +2250,15 @@
     {
       "setId": 77,
       "target": "D",
-      "expected": 909,
-      "calculated": 909,
+      "expected": 911,
+      "calculated": 911,
       "matches": true
     },
     {
       "setId": 77,
       "target": "C",
-      "expected": 1315,
-      "calculated": 1315,
+      "expected": 1301,
+      "calculated": 1301,
       "matches": true
     },
     {
@@ -2215,22 +2271,22 @@
     {
       "setId": 60,
       "target": "D",
-      "expected": 666,
-      "calculated": 666,
+      "expected": 684,
+      "calculated": 684,
       "matches": true
     },
     {
       "setId": 60,
       "target": "C",
-      "expected": 666,
-      "calculated": 666,
+      "expected": 684,
+      "calculated": 684,
       "matches": true
     },
     {
       "setId": 60,
       "target": "B",
-      "expected": 701,
-      "calculated": 701,
+      "expected": 714,
+      "calculated": 714,
       "matches": true
     },
     {
@@ -2243,22 +2299,22 @@
     {
       "setId": 23,
       "target": "D",
-      "expected": 666,
-      "calculated": 666,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
       "setId": 23,
       "target": "C",
-      "expected": 666,
-      "calculated": 666,
+      "expected": 615,
+      "calculated": 615,
       "matches": true
     },
     {
       "setId": 23,
       "target": "B",
-      "expected": 755,
-      "calculated": 755,
+      "expected": 721,
+      "calculated": 721,
       "matches": true
     },
     {
@@ -2271,22 +2327,22 @@
     {
       "setId": 7,
       "target": "D",
-      "expected": 497,
-      "calculated": 497,
+      "expected": 468,
+      "calculated": 468,
       "matches": true
     },
     {
       "setId": 7,
       "target": "C",
-      "expected": 501,
-      "calculated": 501,
+      "expected": 507,
+      "calculated": 507,
       "matches": true
     },
     {
       "setId": 7,
       "target": "B",
-      "expected": 700,
-      "calculated": 700,
+      "expected": 701,
+      "calculated": 701,
       "matches": true
     },
     {
@@ -2299,22 +2355,22 @@
     {
       "setId": 82,
       "target": "D",
-      "expected": 545,
-      "calculated": 545,
+      "expected": 544,
+      "calculated": 544,
       "matches": true
     },
     {
       "setId": 82,
       "target": "C",
-      "expected": 545,
-      "calculated": 545,
+      "expected": 544,
+      "calculated": 544,
       "matches": true
     },
     {
       "setId": 82,
       "target": "B",
-      "expected": 545,
-      "calculated": 545,
+      "expected": 544,
+      "calculated": 544,
       "matches": true
     },
     {
@@ -2334,22 +2390,22 @@
     {
       "setId": 43,
       "target": "D",
-      "expected": 1314,
-      "calculated": 1314,
+      "expected": 1174,
+      "calculated": 1174,
       "matches": true
     },
     {
       "setId": 43,
       "target": "C",
-      "expected": 1314,
-      "calculated": 1314,
+      "expected": 1312,
+      "calculated": 1312,
       "matches": true
     },
     {
       "setId": 43,
       "target": "B",
-      "expected": 2505,
-      "calculated": 2505,
+      "expected": 2526,
+      "calculated": 2526,
       "matches": true
     },
     {
@@ -2362,29 +2418,29 @@
     {
       "setId": 55,
       "target": "D",
-      "expected": 677,
-      "calculated": 677,
+      "expected": 636,
+      "calculated": 636,
       "matches": true
     },
     {
       "setId": 55,
       "target": "C",
-      "expected": 677,
-      "calculated": 677,
+      "expected": 636,
+      "calculated": 636,
       "matches": true
     },
     {
       "setId": 55,
       "target": "B",
-      "expected": 677,
-      "calculated": 677,
+      "expected": 636,
+      "calculated": 636,
       "matches": true
     },
     {
       "setId": 55,
       "target": "A",
-      "expected": 707,
-      "calculated": 707,
+      "expected": 706,
+      "calculated": 706,
       "matches": true
     },
     {
@@ -2397,15 +2453,15 @@
     {
       "setId": 1,
       "target": "D",
-      "expected": 664,
-      "calculated": 664,
+      "expected": 532,
+      "calculated": 532,
       "matches": true
     },
     {
       "setId": 1,
       "target": "C",
-      "expected": 1207,
-      "calculated": 1207,
+      "expected": 1204,
+      "calculated": 1204,
       "matches": true
     },
     {
@@ -2418,36 +2474,43 @@
     {
       "setId": 18,
       "target": "D",
-      "expected": 1154,
-      "calculated": 1154,
+      "expected": 1086,
+      "calculated": 1086,
       "matches": true
     },
     {
       "setId": 18,
-      "target": "D",
-      "expected": 2679,
-      "calculated": 2679,
+      "target": "C",
+      "expected": 7587,
+      "calculated": 7587,
+      "matches": true
+    },
+    {
+      "setId": 18,
+      "target": "C",
+      "expected": 23268,
+      "calculated": 23268,
       "matches": true
     },
     {
       "setId": 36,
       "target": "D",
-      "expected": 1702,
-      "calculated": 1702,
+      "expected": 3377,
+      "calculated": 3377,
       "matches": true
     },
     {
       "setId": 36,
       "target": "C",
-      "expected": 58409,
-      "calculated": 58409,
+      "expected": 58359,
+      "calculated": 58359,
       "matches": true
     },
     {
       "setId": 36,
-      "target": "C",
-      "expected": 118584,
-      "calculated": 118584,
+      "target": "B",
+      "expected": 177738,
+      "calculated": 177738,
       "matches": true
     },
     {
@@ -2474,15 +2537,15 @@
     {
       "setId": 95,
       "target": "D",
-      "expected": 5117,
-      "calculated": 5117,
+      "expected": 5269,
+      "calculated": 5269,
       "matches": true
     },
     {
       "setId": 95,
       "target": "C",
-      "expected": 80161,
-      "calculated": 80161,
+      "expected": 80149,
+      "calculated": 80149,
       "matches": true
     },
     {
@@ -2495,15 +2558,15 @@
     {
       "setId": 51,
       "target": "D",
-      "expected": 619,
-      "calculated": 619,
+      "expected": 609,
+      "calculated": 609,
       "matches": true
     },
     {
       "setId": 51,
       "target": "C",
-      "expected": 1500,
-      "calculated": 1500,
+      "expected": 1510,
+      "calculated": 1510,
       "matches": true
     },
     {
@@ -2516,22 +2579,22 @@
     {
       "setId": 66,
       "target": "D",
-      "expected": 1374,
-      "calculated": 1374,
+      "expected": 801,
+      "calculated": 801,
       "matches": true
     },
     {
       "setId": 66,
       "target": "C",
-      "expected": 1374,
-      "calculated": 1374,
+      "expected": 1029,
+      "calculated": 1029,
       "matches": true
     },
     {
       "setId": 66,
       "target": "B",
-      "expected": 22512,
-      "calculated": 22512,
+      "expected": 22511,
+      "calculated": 22511,
       "matches": true
     },
     {
@@ -2544,15 +2607,15 @@
     {
       "setId": 58,
       "target": "D",
-      "expected": 633,
-      "calculated": 633,
+      "expected": 619,
+      "calculated": 619,
       "matches": true
     },
     {
       "setId": 58,
       "target": "C",
-      "expected": 702,
-      "calculated": 702,
+      "expected": 705,
+      "calculated": 705,
       "matches": true
     },
     {
@@ -2572,36 +2635,36 @@
     {
       "setId": 27,
       "target": "D",
-      "expected": 1864,
-      "calculated": 1864,
+      "expected": 1787,
+      "calculated": 1787,
       "matches": true
     },
     {
       "setId": 27,
       "target": "C",
-      "expected": 1864,
-      "calculated": 1864,
+      "expected": 1787,
+      "calculated": 1787,
       "matches": true
     },
     {
       "setId": 27,
       "target": "B",
-      "expected": 4963,
-      "calculated": 4963,
+      "expected": 4701,
+      "calculated": 4701,
       "matches": true
     },
     {
       "setId": 27,
       "target": "A",
-      "expected": 7022,
-      "calculated": 7022,
+      "expected": 7010,
+      "calculated": 7010,
       "matches": true
     },
     {
       "setId": 27,
       "target": "S",
-      "expected": 9915,
-      "calculated": 9915,
+      "expected": 9918,
+      "calculated": 9918,
       "matches": true
     },
     {
@@ -2621,29 +2684,29 @@
     {
       "setId": 72,
       "target": "C",
-      "expected": 508,
-      "calculated": 508,
+      "expected": 517,
+      "calculated": 517,
       "matches": true
     },
     {
       "setId": 72,
       "target": "B",
-      "expected": 700,
-      "calculated": 700,
+      "expected": 708,
+      "calculated": 708,
       "matches": true
     },
     {
       "setId": 72,
       "target": "A",
-      "expected": 1105,
-      "calculated": 1105,
+      "expected": 1100,
+      "calculated": 1100,
       "matches": true
     },
     {
       "setId": 72,
       "target": "S",
-      "expected": 1608,
-      "calculated": 1608,
+      "expected": 1602,
+      "calculated": 1602,
       "matches": true
     },
     {
@@ -2656,29 +2719,29 @@
     {
       "setId": 83,
       "target": "D",
-      "expected": 2475,
-      "calculated": 2475,
+      "expected": 2337,
+      "calculated": 2337,
       "matches": true
     },
     {
       "setId": 83,
       "target": "C",
-      "expected": 2475,
-      "calculated": 2475,
+      "expected": 2337,
+      "calculated": 2337,
       "matches": true
     },
     {
       "setId": 83,
       "target": "B",
-      "expected": 6818,
-      "calculated": 6818,
+      "expected": 6605,
+      "calculated": 6605,
       "matches": true
     },
     {
       "setId": 83,
       "target": "A",
-      "expected": 6818,
-      "calculated": 6818,
+      "expected": 6605,
+      "calculated": 6605,
       "matches": true
     },
     {
@@ -2691,15 +2754,15 @@
     {
       "setId": 93,
       "target": "D",
-      "expected": 1371,
-      "calculated": 1371,
+      "expected": 1357,
+      "calculated": 1357,
       "matches": true
     },
     {
       "setId": 93,
       "target": "C",
-      "expected": 1371,
-      "calculated": 1371,
+      "expected": 1357,
+      "calculated": 1357,
       "matches": true
     },
     {
@@ -2712,15 +2775,15 @@
     {
       "setId": 39,
       "target": "D",
-      "expected": 698,
-      "calculated": 698,
+      "expected": 694,
+      "calculated": 694,
       "matches": true
     },
     {
       "setId": 39,
       "target": "C",
-      "expected": 701,
-      "calculated": 701,
+      "expected": 700,
+      "calculated": 700,
       "matches": true
     },
     {
@@ -2740,78 +2803,78 @@
     {
       "setId": 63,
       "target": "D",
-      "expected": 3035,
-      "calculated": 3035,
+      "expected": 1981,
+      "calculated": 1981,
       "matches": true
     },
     {
       "setId": 63,
       "target": "C",
-      "expected": 3035,
-      "calculated": 3035,
+      "expected": 2002,
+      "calculated": 2002,
       "matches": true
     },
     {
       "setId": 63,
       "target": "B",
-      "expected": 13206,
-      "calculated": 13206,
+      "expected": 13394,
+      "calculated": 13394,
       "matches": true
     },
     {
       "setId": 63,
       "target": "A",
-      "expected": 18532,
-      "calculated": 18532,
+      "expected": 15515,
+      "calculated": 15515,
       "matches": true
     },
     {
       "setId": 63,
       "target": "S",
-      "expected": 20193,
-      "calculated": 20193,
+      "expected": 22889,
+      "calculated": 22889,
       "matches": true
     },
     {
       "setId": 63,
       "target": "S",
-      "expected": 54926,
-      "calculated": 54926,
+      "expected": 81248,
+      "calculated": 81248,
       "matches": true
     },
     {
       "setId": 70,
       "target": "D",
-      "expected": 1334,
-      "calculated": 1334,
+      "expected": 1576,
+      "calculated": 1576,
       "matches": true
     },
     {
       "setId": 70,
       "target": "C",
-      "expected": 1905,
-      "calculated": 1905,
+      "expected": 1909,
+      "calculated": 1909,
       "matches": true
     },
     {
       "setId": 70,
       "target": "B",
-      "expected": 15639,
-      "calculated": 15639,
+      "expected": 14938,
+      "calculated": 14938,
       "matches": true
     },
     {
       "setId": 70,
       "target": "A",
-      "expected": 15639,
-      "calculated": 15639,
+      "expected": 14938,
+      "calculated": 14938,
       "matches": true
     },
     {
       "setId": 70,
       "target": "S",
-      "expected": 15639,
-      "calculated": 15639,
+      "expected": 14938,
+      "calculated": 14938,
       "matches": true
     },
     {
@@ -2824,36 +2887,36 @@
     {
       "setId": 123,
       "target": "D",
-      "expected": 696,
-      "calculated": 696,
+      "expected": 815,
+      "calculated": 815,
       "matches": true
     },
     {
       "setId": 123,
       "target": "C",
-      "expected": 696,
-      "calculated": 696,
+      "expected": 815,
+      "calculated": 815,
       "matches": true
     },
     {
       "setId": 123,
       "target": "B",
-      "expected": 696,
-      "calculated": 696,
+      "expected": 815,
+      "calculated": 815,
       "matches": true
     },
     {
       "setId": 123,
       "target": "A",
-      "expected": 696,
-      "calculated": 696,
+      "expected": 815,
+      "calculated": 815,
       "matches": true
     },
     {
       "setId": 123,
       "target": "S",
-      "expected": 742,
-      "calculated": 742,
+      "expected": 815,
+      "calculated": 815,
       "matches": true
     },
     {
@@ -2866,22 +2929,22 @@
     {
       "setId": 126,
       "target": "D",
-      "expected": 680,
-      "calculated": 680,
+      "expected": 682,
+      "calculated": 682,
       "matches": true
     },
     {
       "setId": 126,
       "target": "C",
-      "expected": 680,
-      "calculated": 680,
+      "expected": 682,
+      "calculated": 682,
       "matches": true
     },
     {
       "setId": 126,
       "target": "B",
-      "expected": 900,
-      "calculated": 900,
+      "expected": 933,
+      "calculated": 933,
       "matches": true
     },
     {
@@ -2894,43 +2957,43 @@
     {
       "setId": 119,
       "target": "D",
-      "expected": 3674,
-      "calculated": 3674,
+      "expected": 2332,
+      "calculated": 2332,
       "matches": true
     },
     {
       "setId": 119,
       "target": "C",
-      "expected": 12042,
-      "calculated": 12042,
+      "expected": 12065,
+      "calculated": 12065,
       "matches": true
     },
     {
       "setId": 119,
       "target": "C",
-      "expected": 38688,
-      "calculated": 38688,
+      "expected": 42251,
+      "calculated": 42251,
       "matches": true
     },
     {
       "setId": 110,
       "target": "D",
-      "expected": 1741,
-      "calculated": 1741,
+      "expected": 1147,
+      "calculated": 1147,
       "matches": true
     },
     {
       "setId": 110,
       "target": "C",
-      "expected": 2004,
-      "calculated": 2004,
+      "expected": 2000,
+      "calculated": 2000,
       "matches": true
     },
     {
       "setId": 110,
       "target": "B",
-      "expected": 3473,
-      "calculated": 3473,
+      "expected": 3461,
+      "calculated": 3461,
       "matches": true
     },
     {
@@ -2943,29 +3006,29 @@
     {
       "setId": 124,
       "target": "D",
-      "expected": 773,
-      "calculated": 773,
+      "expected": 712,
+      "calculated": 712,
       "matches": true
     },
     {
       "setId": 124,
       "target": "C",
-      "expected": 773,
-      "calculated": 773,
+      "expected": 712,
+      "calculated": 712,
       "matches": true
     },
     {
       "setId": 124,
       "target": "B",
-      "expected": 801,
-      "calculated": 801,
+      "expected": 803,
+      "calculated": 803,
       "matches": true
     },
     {
       "setId": 124,
       "target": "A",
-      "expected": 1604,
-      "calculated": 1604,
+      "expected": 1545,
+      "calculated": 1545,
       "matches": true
     },
     {
@@ -2978,36 +3041,36 @@
     {
       "setId": 107,
       "target": "D",
-      "expected": 3515,
-      "calculated": 3515,
+      "expected": 3502,
+      "calculated": 3502,
       "matches": true
     },
     {
       "setId": 107,
       "target": "C",
-      "expected": 41364,
-      "calculated": 41364,
+      "expected": 41905,
+      "calculated": 41905,
       "matches": true
     },
     {
       "setId": 107,
       "target": "C",
-      "expected": 78280,
-      "calculated": 78280,
+      "expected": 98622,
+      "calculated": 98622,
       "matches": true
     },
     {
       "setId": 29,
       "target": "D",
-      "expected": 1868,
-      "calculated": 1868,
+      "expected": 1560,
+      "calculated": 1560,
       "matches": true
     },
     {
       "setId": 29,
       "target": "C",
-      "expected": 10065,
-      "calculated": 10065,
+      "expected": 10004,
+      "calculated": 10004,
       "matches": true
     },
     {
@@ -3020,22 +3083,22 @@
     {
       "setId": 105,
       "target": "D",
-      "expected": 682,
-      "calculated": 682,
+      "expected": 679,
+      "calculated": 679,
       "matches": true
     },
     {
       "setId": 105,
       "target": "C",
-      "expected": 682,
-      "calculated": 682,
+      "expected": 679,
+      "calculated": 679,
       "matches": true
     },
     {
       "setId": 105,
       "target": "B",
-      "expected": 704,
-      "calculated": 704,
+      "expected": 700,
+      "calculated": 700,
       "matches": true
     },
     {
@@ -3048,15 +3111,15 @@
     {
       "setId": 112,
       "target": "D",
-      "expected": 3625,
-      "calculated": 3625,
+      "expected": 3570,
+      "calculated": 3570,
       "matches": true
     },
     {
       "setId": 112,
       "target": "C",
-      "expected": 13918,
-      "calculated": 13918,
+      "expected": 13881,
+      "calculated": 13881,
       "matches": true
     },
     {
@@ -3069,22 +3132,22 @@
     {
       "setId": 125,
       "target": "D",
-      "expected": 699,
-      "calculated": 699,
+      "expected": 696,
+      "calculated": 696,
       "matches": true
     },
     {
       "setId": 125,
       "target": "C",
-      "expected": 699,
-      "calculated": 699,
+      "expected": 696,
+      "calculated": 696,
       "matches": true
     },
     {
       "setId": 125,
       "target": "B",
-      "expected": 700,
-      "calculated": 700,
+      "expected": 701,
+      "calculated": 701,
       "matches": true
     },
     {
@@ -3097,15 +3160,15 @@
     {
       "setId": 104,
       "target": "D",
-      "expected": 3177,
-      "calculated": 3177,
+      "expected": 4051,
+      "calculated": 4051,
       "matches": true
     },
     {
       "setId": 104,
       "target": "C",
-      "expected": 10683,
-      "calculated": 10683,
+      "expected": 10606,
+      "calculated": 10606,
       "matches": true
     },
     {
@@ -3118,15 +3181,15 @@
     {
       "setId": 118,
       "target": "D",
-      "expected": 699,
-      "calculated": 699,
+      "expected": 696,
+      "calculated": 696,
       "matches": true
     },
     {
       "setId": 118,
       "target": "C",
-      "expected": 699,
-      "calculated": 699,
+      "expected": 696,
+      "calculated": 696,
       "matches": true
     },
     {
@@ -3146,8 +3209,8 @@
     {
       "setId": 117,
       "target": "C",
-      "expected": 1137,
-      "calculated": 1137,
+      "expected": 1104,
+      "calculated": 1104,
       "matches": true
     },
     {
@@ -3160,22 +3223,22 @@
     {
       "setId": 106,
       "target": "D",
-      "expected": 669,
-      "calculated": 669,
+      "expected": 667,
+      "calculated": 667,
       "matches": true
     },
     {
       "setId": 106,
       "target": "C",
-      "expected": 669,
-      "calculated": 669,
+      "expected": 667,
+      "calculated": 667,
       "matches": true
     },
     {
       "setId": 106,
       "target": "B",
-      "expected": 722,
-      "calculated": 722,
+      "expected": 700,
+      "calculated": 700,
       "matches": true
     },
     {
@@ -3195,36 +3258,36 @@
     {
       "setId": 101,
       "target": "D",
-      "expected": 643,
-      "calculated": 643,
+      "expected": 646,
+      "calculated": 646,
       "matches": true
     },
     {
       "setId": 101,
       "target": "C",
-      "expected": 643,
-      "calculated": 643,
+      "expected": 646,
+      "calculated": 646,
       "matches": true
     },
     {
       "setId": 101,
       "target": "B",
-      "expected": 643,
-      "calculated": 643,
+      "expected": 646,
+      "calculated": 646,
       "matches": true
     },
     {
       "setId": 101,
       "target": "A",
-      "expected": 1019,
-      "calculated": 1019,
+      "expected": 1021,
+      "calculated": 1021,
       "matches": true
     },
     {
       "setId": 101,
       "target": "S",
-      "expected": 1503,
-      "calculated": 1503,
+      "expected": 1500,
+      "calculated": 1500,
       "matches": true
     },
     {
@@ -3237,36 +3300,43 @@
     {
       "setId": 108,
       "target": "D",
-      "expected": 5722,
-      "calculated": 5722,
+      "expected": 3570,
+      "calculated": 3570,
       "matches": true
     },
     {
       "setId": 108,
       "target": "C",
-      "expected": 400239,
-      "calculated": 400239,
+      "expected": 400145,
+      "calculated": 400145,
       "matches": true
     },
     {
       "setId": 108,
-      "target": "C",
-      "expected": 772879,
-      "calculated": 772879,
+      "target": "B",
+      "expected": 802553,
+      "calculated": 802553,
+      "matches": true
+    },
+    {
+      "setId": 108,
+      "target": "B",
+      "expected": 846099,
+      "calculated": 846099,
       "matches": true
     },
     {
       "setId": 100,
       "target": "D",
-      "expected": 1190,
-      "calculated": 1190,
+      "expected": 1176,
+      "calculated": 1176,
       "matches": true
     },
     {
       "setId": 100,
       "target": "C",
-      "expected": 200452,
-      "calculated": 200452,
+      "expected": 200410,
+      "calculated": 200410,
       "matches": true
     },
     {
@@ -3279,92 +3349,92 @@
     {
       "setId": 111,
       "target": "D",
-      "expected": 1204,
-      "calculated": 1204,
+      "expected": 1198,
+      "calculated": 1198,
       "matches": true
     },
     {
       "setId": 111,
       "target": "C",
-      "expected": 75146,
-      "calculated": 75146,
+      "expected": 75035,
+      "calculated": 75035,
       "matches": true
     },
     {
       "setId": 111,
       "target": "B",
-      "expected": 275037,
-      "calculated": 275037,
+      "expected": 275350,
+      "calculated": 275350,
       "matches": true
     },
     {
       "setId": 111,
       "target": "B",
-      "expected": 529079,
-      "calculated": 529079,
+      "expected": 549066,
+      "calculated": 549066,
       "matches": true
     },
     {
       "setId": 115,
       "target": "D",
-      "expected": 1178,
-      "calculated": 1178,
+      "expected": 1183,
+      "calculated": 1183,
       "matches": true
     },
     {
       "setId": 115,
       "target": "C",
-      "expected": 75038,
-      "calculated": 75038,
+      "expected": 75035,
+      "calculated": 75035,
       "matches": true
     },
     {
       "setId": 115,
       "target": "C",
-      "expected": 233500,
-      "calculated": 233500,
+      "expected": 283703,
+      "calculated": 283703,
       "matches": true
     },
     {
       "setId": 109,
       "target": "D",
-      "expected": 1200,
-      "calculated": 1200,
+      "expected": 1197,
+      "calculated": 1197,
       "matches": true
     },
     {
       "setId": 109,
       "target": "C",
-      "expected": 275300,
-      "calculated": 275300,
+      "expected": 276522,
+      "calculated": 276522,
       "matches": true
     },
     {
       "setId": 109,
       "target": "B",
-      "expected": 728115,
-      "calculated": 728115,
+      "expected": 727943,
+      "calculated": 727943,
       "matches": true
     },
     {
       "setId": 109,
       "target": "B",
-      "expected": 835979,
-      "calculated": 835979,
+      "expected": 896143,
+      "calculated": 896143,
       "matches": true
     },
     {
       "setId": 121,
       "target": "D",
-      "expected": 1214,
-      "calculated": 1214,
+      "expected": 1223,
+      "calculated": 1223,
       "matches": true
     },
     {
       "setId": 121,
       "target": "C",
-      "expected": 125030,
-      "calculated": 125030,
+      "expected": 125062,
+      "calculated": 125062,
       "matches": true
     },
     {
@@ -3377,89 +3447,2245 @@
     {
       "setId": 103,
       "target": "D",
-      "expected": 1260,
-      "calculated": 1260,
+      "expected": 1263,
+      "calculated": 1263,
       "matches": true
     },
     {
       "setId": 103,
       "target": "C",
-      "expected": 100044,
-      "calculated": 100044,
+      "expected": 100032,
+      "calculated": 100032,
       "matches": true
     },
     {
       "setId": 103,
       "target": "B",
-      "expected": 425173,
-      "calculated": 425173,
+      "expected": 425186,
+      "calculated": 425186,
       "matches": true
     },
     {
       "setId": 103,
       "target": "B",
-      "expected": 558938,
-      "calculated": 558938,
+      "expected": 570688,
+      "calculated": 570688,
       "matches": true
     },
     {
       "setId": 122,
+      "target": "D",
+      "expected": 1205,
+      "calculated": 1205,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "C",
+      "expected": 100010,
+      "calculated": 100010,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "B",
+      "expected": 400589,
+      "calculated": 400589,
+      "matches": true
+    },
+    {
+      "setId": 122,
+      "target": "B",
+      "expected": 643151,
+      "calculated": 643151,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "D",
+      "expected": 1182,
+      "calculated": 1182,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "C",
+      "expected": 50039,
+      "calculated": 50039,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "B",
+      "expected": 200057,
+      "calculated": 200057,
+      "matches": true
+    },
+    {
+      "setId": 120,
+      "target": "B",
+      "expected": 242022,
+      "calculated": 242022,
+      "matches": true
+    },
+    {
+      "setId": 155,
       "target": "D",
       "expected": 1208,
       "calculated": 1208,
       "matches": true
     },
     {
-      "setId": 122,
+      "setId": 155,
       "target": "C",
-      "expected": 100012,
-      "calculated": 100012,
+      "expected": 35026,
+      "calculated": 35026,
       "matches": true
     },
     {
-      "setId": 122,
-      "target": "B",
-      "expected": 400801,
-      "calculated": 400801,
+      "setId": 155,
+      "target": "C",
+      "expected": 119456,
+      "calculated": 119456,
       "matches": true
     },
     {
-      "setId": 122,
-      "target": "B",
-      "expected": 632129,
-      "calculated": 632129,
-      "matches": true
-    },
-    {
-      "setId": 120,
+      "setId": 173,
       "target": "D",
-      "expected": 1181,
-      "calculated": 1181,
+      "expected": 1211,
+      "calculated": 1211,
       "matches": true
     },
     {
-      "setId": 120,
+      "setId": 173,
       "target": "C",
-      "expected": 50048,
-      "calculated": 50048,
+      "expected": 15000,
+      "calculated": 15000,
       "matches": true
     },
     {
-      "setId": 120,
+      "setId": 173,
       "target": "B",
-      "expected": 200001,
-      "calculated": 200001,
+      "expected": 30018,
+      "calculated": 30018,
       "matches": true
     },
     {
-      "setId": 120,
+      "setId": 173,
       "target": "B",
-      "expected": 221735,
-      "calculated": 221735,
+      "expected": 114878,
+      "calculated": 114878,
+      "matches": true
+    },
+    {
+      "setId": 193,
+      "target": "D",
+      "expected": 1188,
+      "calculated": 1188,
+      "matches": true
+    },
+    {
+      "setId": 193,
+      "target": "C",
+      "expected": 65036,
+      "calculated": 65036,
+      "matches": true
+    },
+    {
+      "setId": 193,
+      "target": "C",
+      "expected": 327665,
+      "calculated": 327665,
+      "matches": true
+    },
+    {
+      "setId": 192,
+      "target": "D",
+      "expected": 444,
+      "calculated": 444,
+      "matches": true
+    },
+    {
+      "setId": 192,
+      "target": "C",
+      "expected": 579,
+      "calculated": 579,
+      "matches": true
+    },
+    {
+      "setId": 192,
+      "target": "B",
+      "expected": 718,
+      "calculated": 718,
+      "matches": true
+    },
+    {
+      "setId": 192,
+      "target": "B",
+      "expected": 885,
+      "calculated": 885,
+      "matches": true
+    },
+    {
+      "setId": 129,
+      "target": "D",
+      "expected": 482,
+      "calculated": 482,
+      "matches": true
+    },
+    {
+      "setId": 129,
+      "target": "C",
+      "expected": 1594,
+      "calculated": 1594,
+      "matches": true
+    },
+    {
+      "setId": 129,
+      "target": "C",
+      "expected": 2743,
+      "calculated": 2743,
+      "matches": true
+    },
+    {
+      "setId": 146,
+      "target": "D",
+      "expected": 446,
+      "calculated": 446,
+      "matches": true
+    },
+    {
+      "setId": 146,
+      "target": "C",
+      "expected": 531,
+      "calculated": 531,
+      "matches": true
+    },
+    {
+      "setId": 146,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 146,
+      "target": "B",
+      "expected": 790,
+      "calculated": 790,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "D",
+      "expected": 564,
+      "calculated": 564,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "C",
+      "expected": 564,
+      "calculated": 564,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "B",
+      "expected": 564,
+      "calculated": 564,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "A",
+      "expected": 601,
+      "calculated": 601,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "S",
+      "expected": 911,
+      "calculated": 911,
+      "matches": true
+    },
+    {
+      "setId": 144,
+      "target": "S",
+      "expected": 1293,
+      "calculated": 1293,
+      "matches": true
+    },
+    {
+      "setId": 154,
+      "target": "D",
+      "expected": 445,
+      "calculated": 445,
+      "matches": true
+    },
+    {
+      "setId": 154,
+      "target": "C",
+      "expected": 445,
+      "calculated": 445,
+      "matches": true
+    },
+    {
+      "setId": 154,
+      "target": "B",
+      "expected": 523,
+      "calculated": 523,
+      "matches": true
+    },
+    {
+      "setId": 154,
+      "target": "A",
+      "expected": 806,
+      "calculated": 806,
+      "matches": true
+    },
+    {
+      "setId": 154,
+      "target": "A",
+      "expected": 919,
+      "calculated": 919,
+      "matches": true
+    },
+    {
+      "setId": 160,
+      "target": "D",
+      "expected": 451,
+      "calculated": 451,
+      "matches": true
+    },
+    {
+      "setId": 160,
+      "target": "C",
+      "expected": 451,
+      "calculated": 451,
+      "matches": true
+    },
+    {
+      "setId": 160,
+      "target": "B",
+      "expected": 451,
+      "calculated": 451,
+      "matches": true
+    },
+    {
+      "setId": 160,
+      "target": "A",
+      "expected": 603,
+      "calculated": 603,
+      "matches": true
+    },
+    {
+      "setId": 190,
+      "target": "D",
+      "expected": 2883,
+      "calculated": 2883,
+      "matches": true
+    },
+    {
+      "setId": 190,
+      "target": "C",
+      "expected": 3007,
+      "calculated": 3007,
+      "matches": true
+    },
+    {
+      "setId": 190,
+      "target": "B",
+      "expected": 7503,
+      "calculated": 7503,
+      "matches": true
+    },
+    {
+      "setId": 190,
+      "target": "A",
+      "expected": 11054,
+      "calculated": 11054,
+      "matches": true
+    },
+    {
+      "setId": 190,
+      "target": "A",
+      "expected": 11449,
+      "calculated": 11449,
+      "matches": true
+    },
+    {
+      "setId": 196,
+      "target": "D",
+      "expected": 453,
+      "calculated": 453,
+      "matches": true
+    },
+    {
+      "setId": 196,
+      "target": "D",
+      "expected": 1641,
+      "calculated": 1641,
+      "matches": true
+    },
+    {
+      "setId": 185,
+      "target": "D",
+      "expected": 455,
+      "calculated": 455,
+      "matches": true
+    },
+    {
+      "setId": 185,
+      "target": "C",
+      "expected": 455,
+      "calculated": 455,
+      "matches": true
+    },
+    {
+      "setId": 185,
+      "target": "B",
+      "expected": 500,
+      "calculated": 500,
+      "matches": true
+    },
+    {
+      "setId": 185,
+      "target": "A",
+      "expected": 807,
+      "calculated": 807,
+      "matches": true
+    },
+    {
+      "setId": 185,
+      "target": "A",
+      "expected": 1008,
+      "calculated": 1008,
+      "matches": true
+    },
+    {
+      "setId": 138,
+      "target": "D",
+      "expected": 472,
+      "calculated": 472,
+      "matches": true
+    },
+    {
+      "setId": 138,
+      "target": "C",
+      "expected": 472,
+      "calculated": 472,
+      "matches": true
+    },
+    {
+      "setId": 138,
+      "target": "B",
+      "expected": 523,
+      "calculated": 523,
+      "matches": true
+    },
+    {
+      "setId": 138,
+      "target": "B",
+      "expected": 549,
+      "calculated": 549,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "D",
+      "expected": 1653,
+      "calculated": 1653,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "C",
+      "expected": 3045,
+      "calculated": 3045,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "B",
+      "expected": 19629,
+      "calculated": 19629,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "A",
+      "expected": 19629,
+      "calculated": 19629,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "S",
+      "expected": 24004,
+      "calculated": 24004,
+      "matches": true
+    },
+    {
+      "setId": 153,
+      "target": "S",
+      "expected": 65492,
+      "calculated": 65492,
+      "matches": true
+    },
+    {
+      "setId": 171,
+      "target": "D",
+      "expected": 1457,
+      "calculated": 1457,
+      "matches": true
+    },
+    {
+      "setId": 171,
+      "target": "C",
+      "expected": 1457,
+      "calculated": 1457,
+      "matches": true
+    },
+    {
+      "setId": 171,
+      "target": "B",
+      "expected": 1700,
+      "calculated": 1700,
+      "matches": true
+    },
+    {
+      "setId": 171,
+      "target": "A",
+      "expected": 2867,
+      "calculated": 2867,
+      "matches": true
+    },
+    {
+      "setId": 171,
+      "target": "S",
+      "expected": 4064,
+      "calculated": 4064,
+      "matches": true
+    },
+    {
+      "setId": 195,
+      "target": "D",
+      "expected": 485,
+      "calculated": 485,
+      "matches": true
+    },
+    {
+      "setId": 195,
+      "target": "C",
+      "expected": 485,
+      "calculated": 485,
+      "matches": true
+    },
+    {
+      "setId": 195,
+      "target": "B",
+      "expected": 522,
+      "calculated": 522,
+      "matches": true
+    },
+    {
+      "setId": 195,
+      "target": "B",
+      "expected": 685,
+      "calculated": 685,
+      "matches": true
+    },
+    {
+      "setId": 149,
+      "target": "D",
+      "expected": 449,
+      "calculated": 449,
+      "matches": true
+    },
+    {
+      "setId": 149,
+      "target": "C",
+      "expected": 500,
+      "calculated": 500,
+      "matches": true
+    },
+    {
+      "setId": 149,
+      "target": "B",
+      "expected": 1042,
+      "calculated": 1042,
+      "matches": true
+    },
+    {
+      "setId": 149,
+      "target": "B",
+      "expected": 1351,
+      "calculated": 1351,
+      "matches": true
+    },
+    {
+      "setId": 148,
+      "target": "D",
+      "expected": 444,
+      "calculated": 444,
+      "matches": true
+    },
+    {
+      "setId": 148,
+      "target": "C",
+      "expected": 600,
+      "calculated": 600,
+      "matches": true
+    },
+    {
+      "setId": 148,
+      "target": "B",
+      "expected": 813,
+      "calculated": 813,
+      "matches": true
+    },
+    {
+      "setId": 148,
+      "target": "B",
+      "expected": 960,
+      "calculated": 960,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "D",
+      "expected": 584,
+      "calculated": 584,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "C",
+      "expected": 682,
+      "calculated": 682,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "B",
+      "expected": 824,
+      "calculated": 824,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "A",
+      "expected": 1304,
+      "calculated": 1304,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "S",
+      "expected": 1909,
+      "calculated": 1909,
+      "matches": true
+    },
+    {
+      "setId": 189,
+      "target": "S",
+      "expected": 2090,
+      "calculated": 2090,
+      "matches": true
+    },
+    {
+      "setId": 145,
+      "target": "D",
+      "expected": 458,
+      "calculated": 458,
+      "matches": true
+    },
+    {
+      "setId": 145,
+      "target": "C",
+      "expected": 527,
+      "calculated": 527,
+      "matches": true
+    },
+    {
+      "setId": 145,
+      "target": "B",
+      "expected": 805,
+      "calculated": 805,
+      "matches": true
+    },
+    {
+      "setId": 145,
+      "target": "B",
+      "expected": 1056,
+      "calculated": 1056,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "D",
+      "expected": 597,
+      "calculated": 597,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "C",
+      "expected": 597,
+      "calculated": 597,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "B",
+      "expected": 716,
+      "calculated": 716,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "A",
+      "expected": 3865,
+      "calculated": 3865,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "S",
+      "expected": 3865,
+      "calculated": 3865,
+      "matches": true
+    },
+    {
+      "setId": 179,
+      "target": "S",
+      "expected": 10633,
+      "calculated": 10633,
+      "matches": true
+    },
+    {
+      "setId": 188,
+      "target": "D",
+      "expected": 527,
+      "calculated": 527,
+      "matches": true
+    },
+    {
+      "setId": 188,
+      "target": "C",
+      "expected": 527,
+      "calculated": 527,
+      "matches": true
+    },
+    {
+      "setId": 188,
+      "target": "B",
+      "expected": 721,
+      "calculated": 721,
+      "matches": true
+    },
+    {
+      "setId": 188,
+      "target": "B",
+      "expected": 721,
+      "calculated": 721,
+      "matches": true
+    },
+    {
+      "setId": 139,
+      "target": "D",
+      "expected": 490,
+      "calculated": 490,
+      "matches": true
+    },
+    {
+      "setId": 139,
+      "target": "C",
+      "expected": 523,
+      "calculated": 523,
+      "matches": true
+    },
+    {
+      "setId": 139,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 139,
+      "target": "B",
+      "expected": 767,
+      "calculated": 767,
+      "matches": true
+    },
+    {
+      "setId": 150,
+      "target": "D",
+      "expected": 506,
+      "calculated": 506,
+      "matches": true
+    },
+    {
+      "setId": 150,
+      "target": "C",
+      "expected": 506,
+      "calculated": 506,
+      "matches": true
+    },
+    {
+      "setId": 150,
+      "target": "B",
+      "expected": 739,
+      "calculated": 739,
+      "matches": true
+    },
+    {
+      "setId": 150,
+      "target": "B",
+      "expected": 958,
+      "calculated": 958,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "D",
+      "expected": 1485,
+      "calculated": 1485,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "C",
+      "expected": 1485,
+      "calculated": 1485,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "B",
+      "expected": 1485,
+      "calculated": 1485,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "A",
+      "expected": 1485,
+      "calculated": 1485,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "S",
+      "expected": 1502,
+      "calculated": 1502,
+      "matches": true
+    },
+    {
+      "setId": 191,
+      "target": "S",
+      "expected": 10148,
+      "calculated": 10148,
+      "matches": true
+    },
+    {
+      "setId": 158,
+      "target": "D",
+      "expected": 490,
+      "calculated": 490,
+      "matches": true
+    },
+    {
+      "setId": 158,
+      "target": "C",
+      "expected": 520,
+      "calculated": 520,
+      "matches": true
+    },
+    {
+      "setId": 158,
+      "target": "B",
+      "expected": 711,
+      "calculated": 711,
+      "matches": true
+    },
+    {
+      "setId": 158,
+      "target": "B",
+      "expected": 742,
+      "calculated": 742,
+      "matches": true
+    },
+    {
+      "setId": 169,
+      "target": "D",
+      "expected": 509,
+      "calculated": 509,
+      "matches": true
+    },
+    {
+      "setId": 169,
+      "target": "C",
+      "expected": 509,
+      "calculated": 509,
+      "matches": true
+    },
+    {
+      "setId": 169,
+      "target": "B",
+      "expected": 708,
+      "calculated": 708,
+      "matches": true
+    },
+    {
+      "setId": 169,
+      "target": "B",
+      "expected": 859,
+      "calculated": 859,
+      "matches": true
+    },
+    {
+      "setId": 167,
+      "target": "D",
+      "expected": 550,
+      "calculated": 550,
+      "matches": true
+    },
+    {
+      "setId": 167,
+      "target": "C",
+      "expected": 550,
+      "calculated": 550,
+      "matches": true
+    },
+    {
+      "setId": 167,
+      "target": "B",
+      "expected": 716,
+      "calculated": 716,
+      "matches": true
+    },
+    {
+      "setId": 167,
+      "target": "B",
+      "expected": 744,
+      "calculated": 744,
+      "matches": true
+    },
+    {
+      "setId": 186,
+      "target": "D",
+      "expected": 478,
+      "calculated": 478,
+      "matches": true
+    },
+    {
+      "setId": 186,
+      "target": "C",
+      "expected": 535,
+      "calculated": 535,
+      "matches": true
+    },
+    {
+      "setId": 186,
+      "target": "B",
+      "expected": 703,
+      "calculated": 703,
+      "matches": true
+    },
+    {
+      "setId": 186,
+      "target": "B",
+      "expected": 949,
+      "calculated": 949,
+      "matches": true
+    },
+    {
+      "setId": 152,
+      "target": "D",
+      "expected": 453,
+      "calculated": 453,
+      "matches": true
+    },
+    {
+      "setId": 152,
+      "target": "C",
+      "expected": 523,
+      "calculated": 523,
+      "matches": true
+    },
+    {
+      "setId": 152,
+      "target": "B",
+      "expected": 717,
+      "calculated": 717,
+      "matches": true
+    },
+    {
+      "setId": 152,
+      "target": "B",
+      "expected": 832,
+      "calculated": 832,
+      "matches": true
+    },
+    {
+      "setId": 133,
+      "target": "D",
+      "expected": 539,
+      "calculated": 539,
+      "matches": true
+    },
+    {
+      "setId": 133,
+      "target": "C",
+      "expected": 539,
+      "calculated": 539,
+      "matches": true
+    },
+    {
+      "setId": 133,
+      "target": "B",
+      "expected": 718,
+      "calculated": 718,
+      "matches": true
+    },
+    {
+      "setId": 133,
+      "target": "B",
+      "expected": 803,
+      "calculated": 803,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "D",
+      "expected": 1512,
+      "calculated": 1512,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "C",
+      "expected": 13799,
+      "calculated": 13799,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "B",
+      "expected": 13799,
+      "calculated": 13799,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "A",
+      "expected": 13799,
+      "calculated": 13799,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "S",
+      "expected": 13799,
+      "calculated": 13799,
+      "matches": true
+    },
+    {
+      "setId": 162,
+      "target": "S",
+      "expected": 14876,
+      "calculated": 14876,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "D",
+      "expected": 630,
+      "calculated": 630,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "C",
+      "expected": 630,
+      "calculated": 630,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "B",
+      "expected": 722,
+      "calculated": 722,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "A",
+      "expected": 1116,
+      "calculated": 1116,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "S",
+      "expected": 1501,
+      "calculated": 1501,
+      "matches": true
+    },
+    {
+      "setId": 137,
+      "target": "S",
+      "expected": 1573,
+      "calculated": 1573,
+      "matches": true
+    },
+    {
+      "setId": 140,
+      "target": "D",
+      "expected": 626,
+      "calculated": 626,
+      "matches": true
+    },
+    {
+      "setId": 140,
+      "target": "C",
+      "expected": 1012,
+      "calculated": 1012,
+      "matches": true
+    },
+    {
+      "setId": 140,
+      "target": "B",
+      "expected": 2002,
+      "calculated": 2002,
+      "matches": true
+    },
+    {
+      "setId": 140,
+      "target": "B",
+      "expected": 2932,
+      "calculated": 2932,
+      "matches": true
+    },
+    {
+      "setId": 176,
+      "target": "D",
+      "expected": 512,
+      "calculated": 512,
+      "matches": true
+    },
+    {
+      "setId": 176,
+      "target": "C",
+      "expected": 512,
+      "calculated": 512,
+      "matches": true
+    },
+    {
+      "setId": 176,
+      "target": "B",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 176,
+      "target": "B",
+      "expected": 847,
+      "calculated": 847,
+      "matches": true
+    },
+    {
+      "setId": 168,
+      "target": "D",
+      "expected": 513,
+      "calculated": 513,
+      "matches": true
+    },
+    {
+      "setId": 168,
+      "target": "C",
+      "expected": 513,
+      "calculated": 513,
+      "matches": true
+    },
+    {
+      "setId": 168,
+      "target": "B",
+      "expected": 703,
+      "calculated": 703,
+      "matches": true
+    },
+    {
+      "setId": 168,
+      "target": "A",
+      "expected": 1109,
+      "calculated": 1109,
+      "matches": true
+    },
+    {
+      "setId": 168,
+      "target": "A",
+      "expected": 1446,
+      "calculated": 1446,
+      "matches": true
+    },
+    {
+      "setId": 184,
+      "target": "D",
+      "expected": 492,
+      "calculated": 492,
+      "matches": true
+    },
+    {
+      "setId": 184,
+      "target": "C",
+      "expected": 511,
+      "calculated": 511,
+      "matches": true
+    },
+    {
+      "setId": 184,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 184,
+      "target": "B",
+      "expected": 1002,
+      "calculated": 1002,
+      "matches": true
+    },
+    {
+      "setId": 163,
+      "target": "D",
+      "expected": 468,
+      "calculated": 468,
+      "matches": true
+    },
+    {
+      "setId": 163,
+      "target": "C",
+      "expected": 520,
+      "calculated": 520,
+      "matches": true
+    },
+    {
+      "setId": 163,
+      "target": "B",
+      "expected": 714,
+      "calculated": 714,
+      "matches": true
+    },
+    {
+      "setId": 163,
+      "target": "B",
+      "expected": 913,
+      "calculated": 913,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "D",
+      "expected": 612,
+      "calculated": 612,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "C",
+      "expected": 612,
+      "calculated": 612,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "B",
+      "expected": 731,
+      "calculated": 731,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "A",
+      "expected": 1509,
+      "calculated": 1509,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "S",
+      "expected": 1509,
+      "calculated": 1509,
+      "matches": true
+    },
+    {
+      "setId": 175,
+      "target": "S",
+      "expected": 10678,
+      "calculated": 10678,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "D",
+      "expected": 512,
+      "calculated": 512,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "C",
+      "expected": 512,
+      "calculated": 512,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "A",
+      "expected": 1103,
+      "calculated": 1103,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "S",
+      "expected": 1523,
+      "calculated": 1523,
+      "matches": true
+    },
+    {
+      "setId": 164,
+      "target": "S",
+      "expected": 4384,
+      "calculated": 4384,
+      "matches": true
+    },
+    {
+      "setId": 141,
+      "target": "D",
+      "expected": 493,
+      "calculated": 493,
+      "matches": true
+    },
+    {
+      "setId": 141,
+      "target": "C",
+      "expected": 500,
+      "calculated": 500,
+      "matches": true
+    },
+    {
+      "setId": 141,
+      "target": "B",
+      "expected": 704,
+      "calculated": 704,
+      "matches": true
+    },
+    {
+      "setId": 141,
+      "target": "B",
+      "expected": 829,
+      "calculated": 829,
+      "matches": true
+    },
+    {
+      "setId": 170,
+      "target": "D",
+      "expected": 445,
+      "calculated": 445,
+      "matches": true
+    },
+    {
+      "setId": 170,
+      "target": "C",
+      "expected": 508,
+      "calculated": 508,
+      "matches": true
+    },
+    {
+      "setId": 170,
+      "target": "B",
+      "expected": 702,
+      "calculated": 702,
+      "matches": true
+    },
+    {
+      "setId": 170,
+      "target": "B",
+      "expected": 818,
+      "calculated": 818,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "D",
+      "expected": 448,
+      "calculated": 448,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "C",
+      "expected": 501,
+      "calculated": 501,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "A",
+      "expected": 4043,
+      "calculated": 4043,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "S",
+      "expected": 4043,
+      "calculated": 4043,
+      "matches": true
+    },
+    {
+      "setId": 156,
+      "target": "S",
+      "expected": 11396,
+      "calculated": 11396,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "D",
+      "expected": 451,
+      "calculated": 451,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "C",
+      "expected": 544,
+      "calculated": 544,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "B",
+      "expected": 708,
+      "calculated": 708,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "A",
+      "expected": 1795,
+      "calculated": 1795,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "S",
+      "expected": 1795,
+      "calculated": 1795,
+      "matches": true
+    },
+    {
+      "setId": 132,
+      "target": "S",
+      "expected": 2527,
+      "calculated": 2527,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "D",
+      "expected": 470,
+      "calculated": 470,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "C",
+      "expected": 545,
+      "calculated": 545,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "B",
+      "expected": 700,
+      "calculated": 700,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "A",
+      "expected": 1804,
+      "calculated": 1804,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "S",
+      "expected": 1804,
+      "calculated": 1804,
+      "matches": true
+    },
+    {
+      "setId": 165,
+      "target": "S",
+      "expected": 2328,
+      "calculated": 2328,
+      "matches": true
+    },
+    {
+      "setId": 194,
+      "target": "D",
+      "expected": 529,
+      "calculated": 529,
+      "matches": true
+    },
+    {
+      "setId": 194,
+      "target": "C",
+      "expected": 529,
+      "calculated": 529,
+      "matches": true
+    },
+    {
+      "setId": 194,
+      "target": "B",
+      "expected": 702,
+      "calculated": 702,
+      "matches": true
+    },
+    {
+      "setId": 194,
+      "target": "B",
+      "expected": 957,
+      "calculated": 957,
+      "matches": true
+    },
+    {
+      "setId": 166,
+      "target": "D",
+      "expected": 446,
+      "calculated": 446,
+      "matches": true
+    },
+    {
+      "setId": 166,
+      "target": "C",
+      "expected": 513,
+      "calculated": 513,
+      "matches": true
+    },
+    {
+      "setId": 166,
+      "target": "C",
+      "expected": 634,
+      "calculated": 634,
+      "matches": true
+    },
+    {
+      "setId": 174,
+      "target": "D",
+      "expected": 463,
+      "calculated": 463,
+      "matches": true
+    },
+    {
+      "setId": 174,
+      "target": "C",
+      "expected": 514,
+      "calculated": 514,
+      "matches": true
+    },
+    {
+      "setId": 174,
+      "target": "B",
+      "expected": 719,
+      "calculated": 719,
+      "matches": true
+    },
+    {
+      "setId": 174,
+      "target": "A",
+      "expected": 1115,
+      "calculated": 1115,
+      "matches": true
+    },
+    {
+      "setId": 174,
+      "target": "A",
+      "expected": 1427,
+      "calculated": 1427,
+      "matches": true
+    },
+    {
+      "setId": 135,
+      "target": "D",
+      "expected": 476,
+      "calculated": 476,
+      "matches": true
+    },
+    {
+      "setId": 135,
+      "target": "C",
+      "expected": 509,
+      "calculated": 509,
+      "matches": true
+    },
+    {
+      "setId": 135,
+      "target": "B",
+      "expected": 718,
+      "calculated": 718,
+      "matches": true
+    },
+    {
+      "setId": 135,
+      "target": "B",
+      "expected": 752,
+      "calculated": 752,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "D",
+      "expected": 651,
+      "calculated": 651,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "C",
+      "expected": 651,
+      "calculated": 651,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "B",
+      "expected": 701,
+      "calculated": 701,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "A",
+      "expected": 1978,
+      "calculated": 1978,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "S",
+      "expected": 1978,
+      "calculated": 1978,
+      "matches": true
+    },
+    {
+      "setId": 147,
+      "target": "S",
+      "expected": 2547,
+      "calculated": 2547,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "D",
+      "expected": 1132,
+      "calculated": 1132,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "C",
+      "expected": 1801,
+      "calculated": 1801,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "B",
+      "expected": 10028,
+      "calculated": 10028,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "A",
+      "expected": 10028,
+      "calculated": 10028,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "S",
+      "expected": 10028,
+      "calculated": 10028,
+      "matches": true
+    },
+    {
+      "setId": 187,
+      "target": "S",
+      "expected": 29421,
+      "calculated": 29421,
+      "matches": true
+    },
+    {
+      "setId": 157,
+      "target": "D",
+      "expected": 662,
+      "calculated": 662,
+      "matches": true
+    },
+    {
+      "setId": 157,
+      "target": "C",
+      "expected": 1618,
+      "calculated": 1618,
+      "matches": true
+    },
+    {
+      "setId": 157,
+      "target": "C",
+      "expected": 2051,
+      "calculated": 2051,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "D",
+      "expected": 1085,
+      "calculated": 1085,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "C",
+      "expected": 1085,
+      "calculated": 1085,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "B",
+      "expected": 1268,
+      "calculated": 1268,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "A",
+      "expected": 2258,
+      "calculated": 2258,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "S",
+      "expected": 3013,
+      "calculated": 3013,
+      "matches": true
+    },
+    {
+      "setId": 177,
+      "target": "S",
+      "expected": 3295,
+      "calculated": 3295,
+      "matches": true
+    },
+    {
+      "setId": 161,
+      "target": "D",
+      "expected": 921,
+      "calculated": 921,
+      "matches": true
+    },
+    {
+      "setId": 161,
+      "target": "C",
+      "expected": 3203,
+      "calculated": 3203,
+      "matches": true
+    },
+    {
+      "setId": 161,
+      "target": "B",
+      "expected": 3774,
+      "calculated": 3774,
+      "matches": true
+    },
+    {
+      "setId": 161,
+      "target": "B",
+      "expected": 4232,
+      "calculated": 4232,
+      "matches": true
+    },
+    {
+      "setId": 142,
+      "target": "D",
+      "expected": 872,
+      "calculated": 872,
+      "matches": true
+    },
+    {
+      "setId": 142,
+      "target": "C",
+      "expected": 5365,
+      "calculated": 5365,
+      "matches": true
+    },
+    {
+      "setId": 142,
+      "target": "B",
+      "expected": 5365,
+      "calculated": 5365,
+      "matches": true
+    },
+    {
+      "setId": 142,
+      "target": "A",
+      "expected": 6043,
+      "calculated": 6043,
+      "matches": true
+    },
+    {
+      "setId": 142,
+      "target": "A",
+      "expected": 8450,
+      "calculated": 8450,
+      "matches": true
+    },
+    {
+      "setId": 182,
+      "target": "D",
+      "expected": 1954,
+      "calculated": 1954,
+      "matches": true
+    },
+    {
+      "setId": 182,
+      "target": "C",
+      "expected": 4045,
+      "calculated": 4045,
+      "matches": true
+    },
+    {
+      "setId": 182,
+      "target": "C",
+      "expected": 23355,
+      "calculated": 23355,
+      "matches": true
+    },
+    {
+      "setId": 151,
+      "target": "D",
+      "expected": 1024,
+      "calculated": 1024,
+      "matches": true
+    },
+    {
+      "setId": 151,
+      "target": "C",
+      "expected": 1649,
+      "calculated": 1649,
+      "matches": true
+    },
+    {
+      "setId": 151,
+      "target": "B",
+      "expected": 2281,
+      "calculated": 2281,
+      "matches": true
+    },
+    {
+      "setId": 151,
+      "target": "A",
+      "expected": 3518,
+      "calculated": 3518,
+      "matches": true
+    },
+    {
+      "setId": 151,
+      "target": "A",
+      "expected": 3681,
+      "calculated": 3681,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "D",
+      "expected": 1232,
+      "calculated": 1232,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "C",
+      "expected": 7235,
+      "calculated": 7235,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "B",
+      "expected": 16341,
+      "calculated": 16341,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "A",
+      "expected": 24030,
+      "calculated": 24030,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "S",
+      "expected": 36517,
+      "calculated": 36517,
+      "matches": true
+    },
+    {
+      "setId": 178,
+      "target": "S",
+      "expected": 127760,
+      "calculated": 127760,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "D",
+      "expected": 524,
+      "calculated": 524,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "C",
+      "expected": 1158,
+      "calculated": 1158,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "B",
+      "expected": 1501,
+      "calculated": 1501,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "A",
+      "expected": 2864,
+      "calculated": 2864,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "S",
+      "expected": 3610,
+      "calculated": 3610,
+      "matches": true
+    },
+    {
+      "setId": 180,
+      "target": "S",
+      "expected": 3975,
+      "calculated": 3975,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "D",
+      "expected": 1488,
+      "calculated": 1488,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "C",
+      "expected": 2761,
+      "calculated": 2761,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "B",
+      "expected": 11003,
+      "calculated": 11003,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "A",
+      "expected": 11003,
+      "calculated": 11003,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "S",
+      "expected": 11003,
+      "calculated": 11003,
+      "matches": true
+    },
+    {
+      "setId": 159,
+      "target": "S",
+      "expected": 12585,
+      "calculated": 12585,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "D",
+      "expected": 1914,
+      "calculated": 1914,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "C",
+      "expected": 3813,
+      "calculated": 3813,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "B",
+      "expected": 11132,
+      "calculated": 11132,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "A",
+      "expected": 11132,
+      "calculated": 11132,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "S",
+      "expected": 12024,
+      "calculated": 12024,
+      "matches": true
+    },
+    {
+      "setId": 136,
+      "target": "S",
+      "expected": 64444,
+      "calculated": 64444,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "D",
+      "expected": 857,
+      "calculated": 857,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "C",
+      "expected": 1016,
+      "calculated": 1016,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "B",
+      "expected": 1264,
+      "calculated": 1264,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "A",
+      "expected": 2259,
+      "calculated": 2259,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "S",
+      "expected": 4206,
+      "calculated": 4206,
+      "matches": true
+    },
+    {
+      "setId": 131,
+      "target": "S",
+      "expected": 13112,
+      "calculated": 13112,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "D",
+      "expected": 2401,
+      "calculated": 2401,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "C",
+      "expected": 2401,
+      "calculated": 2401,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "B",
+      "expected": 3003,
+      "calculated": 3003,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "A",
+      "expected": 4857,
+      "calculated": 4857,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "S",
+      "expected": 7001,
+      "calculated": 7001,
+      "matches": true
+    },
+    {
+      "setId": 183,
+      "target": "S",
+      "expected": 7083,
+      "calculated": 7083,
+      "matches": true
+    },
+    {
+      "setId": 172,
+      "target": "D",
+      "expected": 972,
+      "calculated": 972,
+      "matches": true
+    },
+    {
+      "setId": 172,
+      "target": "C",
+      "expected": 1501,
+      "calculated": 1501,
+      "matches": true
+    },
+    {
+      "setId": 172,
+      "target": "C",
+      "expected": 1866,
+      "calculated": 1866,
+      "matches": true
+    },
+    {
+      "setId": 130,
+      "target": "D",
+      "expected": 905,
+      "calculated": 905,
+      "matches": true
+    },
+    {
+      "setId": 130,
+      "target": "C",
+      "expected": 1014,
+      "calculated": 1014,
+      "matches": true
+    },
+    {
+      "setId": 130,
+      "target": "B",
+      "expected": 1507,
+      "calculated": 1507,
+      "matches": true
+    },
+    {
+      "setId": 130,
+      "target": "B",
+      "expected": 1716,
+      "calculated": 1716,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "D",
+      "expected": 2998,
+      "calculated": 2998,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "C",
+      "expected": 2998,
+      "calculated": 2998,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "B",
+      "expected": 9333,
+      "calculated": 9333,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "A",
+      "expected": 9333,
+      "calculated": 9333,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "S",
+      "expected": 9333,
+      "calculated": 9333,
+      "matches": true
+    },
+    {
+      "setId": 134,
+      "target": "S",
+      "expected": 9612,
+      "calculated": 9612,
       "matches": true
     }
   ],
   "failures": [
+    {
+      "id": 99,
+      "grade": "D",
+      "expected": 6182,
+      "actual": 6182,
+      "reason": "below verified FUTBIN threshold"
+    },
     {
       "id": 116,
       "grade": "D",
@@ -3479,6 +5705,116 @@
       "id": 116,
       "grade": "A",
       "reason": "invalid lineup"
+    }
+  ],
+  "sourceDifferences": [
+    {
+      "setId": 99,
+      "name": "TOTW",
+      "grade": "D",
+      "secondaryThreshold": 10,
+      "futbinThreshold": 10000,
+      "secondaryTokens": 5,
+      "futbinTokens": 5
+    },
+    {
+      "setId": 181,
+      "name": "Ultimate Scream",
+      "grade": "D",
+      "secondaryThreshold": 1000,
+      "futbinThreshold": 10,
+      "secondaryTokens": 0,
+      "futbinTokens": 0
+    },
+    {
+      "setId": 61,
+      "name": "Aston Villa",
+      "grade": "C",
+      "secondaryThreshold": 9000,
+      "futbinThreshold": 9900,
+      "secondaryTokens": 0,
+      "futbinTokens": 0
+    },
+    {
+      "setId": 76,
+      "name": "Birmingham City",
+      "grade": "B",
+      "secondaryThreshold": 500,
+      "futbinThreshold": 500,
+      "secondaryTokens": 5,
+      "futbinTokens": 2
+    },
+    {
+      "setId": 10,
+      "name": "FC Augsburg",
+      "grade": "B",
+      "secondaryThreshold": 1600,
+      "futbinThreshold": 1600,
+      "secondaryTokens": 8,
+      "futbinTokens": 5
+    },
+    {
+      "setId": 77,
+      "name": "FC Fleury 91",
+      "grade": "B",
+      "secondaryThreshold": 1900,
+      "futbinThreshold": 1900,
+      "secondaryTokens": 5,
+      "futbinTokens": 8
+    },
+    {
+      "setId": 100,
+      "name": "Barclays WSL",
+      "grade": "B",
+      "secondaryThreshold": 725000,
+      "futbinThreshold": 725000,
+      "secondaryTokens": 50,
+      "futbinTokens": 20
+    },
+    {
+      "setId": 192,
+      "name": "Abha",
+      "grade": "A",
+      "secondaryThreshold": 1100,
+      "futbinThreshold": 125000,
+      "secondaryTokens": 8,
+      "futbinTokens": 8
+    },
+    {
+      "setId": 192,
+      "name": "Abha",
+      "grade": "S",
+      "secondaryThreshold": 1500,
+      "futbinThreshold": 300000,
+      "secondaryTokens": 15,
+      "futbinTokens": 15
+    },
+    {
+      "setId": 150,
+      "name": "Charlotte FC",
+      "grade": "D",
+      "secondaryThreshold": 11,
+      "futbinThreshold": 10,
+      "secondaryTokens": 0,
+      "futbinTokens": 0
+    },
+    {
+      "setId": 132,
+      "name": "San Diego FC",
+      "grade": "D",
+      "secondaryThreshold": 18,
+      "futbinThreshold": 10,
+      "secondaryTokens": 0,
+      "futbinTokens": 0
+    },
+    {
+      "setId": 172,
+      "name": "Seattle Reign FC",
+      "grade": "B",
+      "secondaryThreshold": 2000,
+      "futbinThreshold": 2000,
+      "secondaryTokens": 5,
+      "futbinTokens": 0
     }
   ]
 }

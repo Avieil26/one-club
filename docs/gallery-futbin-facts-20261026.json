@@ -1,0 +1,6837 @@
+{
+  "checkedAt": "2026-10-26T21:14:06.759Z",
+  "source": "https://www.futbin.com/27/gallery",
+  "excludedSecondaryOnlySets": [
+    {
+      "id": 143,
+      "name": "Al Fayha"
+    }
+  ],
+  "sets": [
+    {
+      "futbinId": 128,
+      "slug": "season-1",
+      "name": "Season 1",
+      "requiredCards": 10,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 25000,
+          "tokens": 5
+        },
+        {
+          "grade": "B",
+          "threshold": 60000,
+          "tokens": 10
+        },
+        {
+          "grade": "A",
+          "threshold": 100000,
+          "tokens": 20
+        },
+        {
+          "grade": "S",
+          "threshold": 150000,
+          "tokens": 50
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/128/season-1",
+      "setId": 127
+    },
+    {
+      "futbinId": 129,
+      "slug": "potm",
+      "name": "POTM",
+      "requiredCards": 7,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10000,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 100000,
+          "tokens": 10
+        },
+        {
+          "grade": "B",
+          "threshold": 150000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 200000,
+          "tokens": 30
+        },
+        {
+          "grade": "S",
+          "threshold": 250000,
+          "tokens": 50
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/129/potm",
+      "setId": 128
+    },
+    {
+      "futbinId": 123,
+      "slug": "totw",
+      "name": "TOTW",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10000,
+          "tokens": 5
+        },
+        {
+          "grade": "C",
+          "threshold": 125000,
+          "tokens": 15
+        },
+        {
+          "grade": "B",
+          "threshold": 175000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 300000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 550000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/123/totw",
+      "setId": 99
+    },
+    {
+      "futbinId": 124,
+      "slug": "heroes",
+      "name": "Heroes",
+      "requiredCards": 5,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 5
+        },
+        {
+          "grade": "C",
+          "threshold": 50000,
+          "tokens": 15
+        },
+        {
+          "grade": "B",
+          "threshold": 75000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 100000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 200000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/124/heroes",
+      "setId": 102
+    },
+    {
+      "futbinId": 125,
+      "slug": "holographics",
+      "name": "Holographics",
+      "requiredCards": 5,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 5
+        },
+        {
+          "grade": "C",
+          "threshold": 75000,
+          "tokens": 15
+        },
+        {
+          "grade": "B",
+          "threshold": 150000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 200000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 250000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/125/holographics",
+      "setId": 113
+    },
+    {
+      "futbinId": 126,
+      "slug": "squad-foundations",
+      "name": "Squad Foundations",
+      "requiredCards": 4,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 750,
+          "tokens": 0
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "S",
+          "threshold": 1250,
+          "tokens": 10
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/126/squad-foundations",
+      "setId": 114
+    },
+    {
+      "futbinId": 127,
+      "slug": "starter-set",
+      "name": "Starter Set",
+      "requiredCards": 5,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 250,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "S",
+          "threshold": 2000,
+          "tokens": 5
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/127/starter-set",
+      "setId": 116
+    },
+    {
+      "futbinId": 196,
+      "slug": "ultimate-scream",
+      "name": "Ultimate Scream",
+      "requiredCards": 5,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 25000,
+          "tokens": 5
+        },
+        {
+          "grade": "B",
+          "threshold": 50000,
+          "tokens": 10
+        },
+        {
+          "grade": "A",
+          "threshold": 80000,
+          "tokens": 20
+        },
+        {
+          "grade": "S",
+          "threshold": 115000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/196/ultimate-scream",
+      "setId": 181
+    },
+    {
+      "futbinId": 1,
+      "slug": "arsenal",
+      "name": "Arsenal",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 110000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1300000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/1/arsenal",
+      "setId": 30
+    },
+    {
+      "futbinId": 2,
+      "slug": "aston-villa",
+      "name": "Aston Villa",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 9900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 40000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 80000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 150000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/2/aston-villa",
+      "setId": 61
+    },
+    {
+      "futbinId": 3,
+      "slug": "birmingham-city",
+      "name": "Birmingham City",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 2
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/3/birmingham-city",
+      "setId": 76
+    },
+    {
+      "futbinId": 4,
+      "slug": "bournemouth",
+      "name": "Bournemouth",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2800,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 4200,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/4/bournemouth",
+      "setId": 22
+    },
+    {
+      "futbinId": 5,
+      "slug": "brentford",
+      "name": "Brentford",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 4000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5700,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/5/brentford",
+      "setId": 17
+    },
+    {
+      "futbinId": 6,
+      "slug": "brighton--hove-albion",
+      "name": "Brighton & Hove Albion",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 4000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 13000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 23500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 42500,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/6/brighton--hove-albion",
+      "setId": 26
+    },
+    {
+      "futbinId": 7,
+      "slug": "charlton",
+      "name": "Charlton",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/7/charlton",
+      "setId": 14
+    },
+    {
+      "futbinId": 8,
+      "slug": "chelsea",
+      "name": "Chelsea",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 50000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 900000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 1500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/8/chelsea",
+      "setId": 94
+    },
+    {
+      "futbinId": 9,
+      "slug": "coventry-city",
+      "name": "Coventry City",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 1700,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 2400,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/9/coventry-city",
+      "setId": 71
+    },
+    {
+      "futbinId": 10,
+      "slug": "crystal-palace",
+      "name": "Crystal Palace",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 27500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 30000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 35000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/10/crystal-palace",
+      "setId": 85
+    },
+    {
+      "futbinId": 11,
+      "slug": "everton",
+      "name": "Everton",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 15000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 22500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 36000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/11/everton",
+      "setId": 56
+    },
+    {
+      "futbinId": 12,
+      "slug": "fulham",
+      "name": "Fulham",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 4000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5700,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/12/fulham",
+      "setId": 54
+    },
+    {
+      "futbinId": 13,
+      "slug": "hull-city",
+      "name": "Hull City",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/13/hull-city",
+      "setId": 45
+    },
+    {
+      "futbinId": 14,
+      "slug": "ipswich-town",
+      "name": "Ipswich Town",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1400,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 2100,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 3000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/14/ipswich-town",
+      "setId": 6
+    },
+    {
+      "futbinId": 15,
+      "slug": "leeds-united",
+      "name": "Leeds United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2300,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 4800,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/15/leeds-united",
+      "setId": 20
+    },
+    {
+      "futbinId": 16,
+      "slug": "liverpool",
+      "name": "Liverpool",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 60000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1100000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/16/liverpool",
+      "setId": 46
+    },
+    {
+      "futbinId": 17,
+      "slug": "london-city-lionesses",
+      "name": "London City Lionesses",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 5000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 25000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 31500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 44000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/17/london-city-lionesses",
+      "setId": 25
+    },
+    {
+      "futbinId": 18,
+      "slug": "manchester-city",
+      "name": "Manchester City",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 60000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1300000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/18/manchester-city",
+      "setId": 49
+    },
+    {
+      "futbinId": 19,
+      "slug": "manchester-united",
+      "name": "Manchester United",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 20000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 300000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 700000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 1500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/19/manchester-united",
+      "setId": 44
+    },
+    {
+      "futbinId": 20,
+      "slug": "newcastle-united",
+      "name": "Newcastle United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 11500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 154000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 187500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 250000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/20/newcastle-united",
+      "setId": 92
+    },
+    {
+      "futbinId": 21,
+      "slug": "nottingham-forest",
+      "name": "Nottingham Forest",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 7200,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 10700,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 15200,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/21/nottingham-forest",
+      "setId": 48
+    },
+    {
+      "futbinId": 22,
+      "slug": "sunderland",
+      "name": "Sunderland",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 11000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 15000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 22500,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/22/sunderland",
+      "setId": 86
+    },
+    {
+      "futbinId": 23,
+      "slug": "tottenham-hotspur",
+      "name": "Tottenham Hotspur",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 9000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 40000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 100000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 200000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/23/tottenham-hotspur",
+      "setId": 8
+    },
+    {
+      "futbinId": 24,
+      "slug": "west-ham",
+      "name": "West Ham",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 3200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/24/west-ham",
+      "setId": 9
+    },
+    {
+      "futbinId": 25,
+      "slug": "athletic-club",
+      "name": "Athletic Club",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 7000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 52500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 79000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 128000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/25/athletic-club",
+      "setId": 16
+    },
+    {
+      "futbinId": 26,
+      "slug": "atletico-de-madrid",
+      "name": "Atlético de Madrid",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 20000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 400000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 700000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 1300000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/26/atletico-de-madrid",
+      "setId": 53
+    },
+    {
+      "futbinId": 27,
+      "slug": "ca-osasuna",
+      "name": "CA Osasuna",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4100,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/27/ca-osasuna",
+      "setId": 12
+    },
+    {
+      "futbinId": 28,
+      "slug": "celta-de-vigo",
+      "name": "Celta de Vigo",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4600,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 7000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 9900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/28/celta-de-vigo",
+      "setId": 81
+    },
+    {
+      "futbinId": 29,
+      "slug": "costa-adeje-tenerife",
+      "name": "Costa Adeje Tenerife",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/29/costa-adeje-tenerife",
+      "setId": 89
+    },
+    {
+      "futbinId": 30,
+      "slug": "deportivo-alaves",
+      "name": "Deportivo Alavés",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/30/deportivo-alaves",
+      "setId": 62
+    },
+    {
+      "futbinId": 31,
+      "slug": "elche-cf",
+      "name": "Elche CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1400,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 2000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 2900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/31/elche-cf",
+      "setId": 80
+    },
+    {
+      "futbinId": 32,
+      "slug": "fc-badalona-women",
+      "name": "FC Badalona Women",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1800,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/32/fc-badalona-women",
+      "setId": 40
+    },
+    {
+      "futbinId": 33,
+      "slug": "fc-barcelona",
+      "name": "FC Barcelona",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 170000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1200000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1800000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2800000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/33/fc-barcelona",
+      "setId": 68
+    },
+    {
+      "futbinId": 34,
+      "slug": "getafe-cf",
+      "name": "Getafe CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1300,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/34/getafe-cf",
+      "setId": 13
+    },
+    {
+      "futbinId": 35,
+      "slug": "granada-cf",
+      "name": "Granada CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/35/granada-cf",
+      "setId": 11
+    },
+    {
+      "futbinId": 36,
+      "slug": "levante-ud",
+      "name": "Levante UD",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1700,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/36/levante-ud",
+      "setId": 24
+    },
+    {
+      "futbinId": 37,
+      "slug": "logrono-united",
+      "name": "Logroño United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/37/logrono-united",
+      "setId": 97
+    },
+    {
+      "futbinId": 38,
+      "slug": "madrid-cff",
+      "name": "Madrid CFF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2400,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3600,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5100,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/38/madrid-cff",
+      "setId": 35
+    },
+    {
+      "futbinId": 39,
+      "slug": "malaga-cf",
+      "name": "Malaga CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 400,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 900,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/39/malaga-cf",
+      "setId": 90
+    },
+    {
+      "futbinId": 40,
+      "slug": "real-racing-club",
+      "name": "Real Racing Club",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/40/real-racing-club",
+      "setId": 79
+    },
+    {
+      "futbinId": 41,
+      "slug": "rayo-vallecano",
+      "name": "Rayo Vallecano",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2200,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3300,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 4700,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/41/rayo-vallecano",
+      "setId": 91
+    },
+    {
+      "futbinId": 42,
+      "slug": "rc-deportivo",
+      "name": "RC Deportivo",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5500,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 7800,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/42/rc-deportivo",
+      "setId": 41
+    },
+    {
+      "futbinId": 43,
+      "slug": "rcd-espanyol",
+      "name": "RCD Espanyol",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 800,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 2300,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 3200,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/43/rcd-espanyol",
+      "setId": 2
+    },
+    {
+      "futbinId": 44,
+      "slug": "real-betis-balompie",
+      "name": "Real Betis Balompié",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 7300,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 10900,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 15400,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/44/real-betis-balompie",
+      "setId": 96
+    },
+    {
+      "futbinId": 45,
+      "slug": "real-madrid",
+      "name": "Real Madrid",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 70000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1000000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1400000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2100000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/45/real-madrid",
+      "setId": 74
+    },
+    {
+      "futbinId": 46,
+      "slug": "real-sociedad",
+      "name": "Real Sociedad",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 22000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 37000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 65000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/46/real-sociedad",
+      "setId": 42
+    },
+    {
+      "futbinId": 47,
+      "slug": "sd-eibar",
+      "name": "SD Eibar",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/47/sd-eibar",
+      "setId": 84
+    },
+    {
+      "futbinId": 48,
+      "slug": "sevilla-fc",
+      "name": "Sevilla FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 5500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 7000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/48/sevilla-fc",
+      "setId": 32
+    },
+    {
+      "futbinId": 49,
+      "slug": "valencia-cf",
+      "name": "Valencia CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4100,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/49/valencia-cf",
+      "setId": 69
+    },
+    {
+      "futbinId": 50,
+      "slug": "villarreal-cf",
+      "name": "Villarreal CF",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5300,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 7500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/50/villarreal-cf",
+      "setId": 5
+    },
+    {
+      "futbinId": 51,
+      "slug": "bayer-04-leverkusen",
+      "name": "Bayer 04 Leverkusen",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 9000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 70000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 160000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 325000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/51/bayer-04-leverkusen",
+      "setId": 65
+    },
+    {
+      "futbinId": 52,
+      "slug": "borussia-dortmund",
+      "name": "Borussia Dortmund",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 13000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 150000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 320000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 625000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/52/borussia-dortmund",
+      "setId": 4
+    },
+    {
+      "futbinId": 53,
+      "slug": "borussia-monchengladbach",
+      "name": "Borussia Mönchengladbach",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2400,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3500,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/53/borussia-monchengladbach",
+      "setId": 31
+    },
+    {
+      "futbinId": 54,
+      "slug": "eintracht-frankfurt",
+      "name": "Eintracht Frankfurt",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 9000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 40000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 80000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 150000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/54/eintracht-frankfurt",
+      "setId": 59
+    },
+    {
+      "futbinId": 56,
+      "slug": "fc-augsburg",
+      "name": "FC Augsburg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 800,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 3500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/56/fc-augsburg",
+      "setId": 10
+    },
+    {
+      "futbinId": 57,
+      "slug": "fc-bayern-munchen",
+      "name": "FC Bayern München",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 60000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1400000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2800000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/57/fc-bayern-munchen",
+      "setId": 52
+    },
+    {
+      "futbinId": 58,
+      "slug": "fc-koln",
+      "name": "FC Köln",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 2500,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 3600,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/58/fc-koln",
+      "setId": 15
+    },
+    {
+      "futbinId": 59,
+      "slug": "1-fc-nurnberg",
+      "name": "1. FC Nürnberg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/59/1-fc-nurnberg",
+      "setId": 73
+    },
+    {
+      "futbinId": 60,
+      "slug": "fc-union-berlin",
+      "name": "FC Union Berlin",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1300,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/60/fc-union-berlin",
+      "setId": 64
+    },
+    {
+      "futbinId": 61,
+      "slug": "fsv-mainz-05",
+      "name": "FSV Mainz 05",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2200,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 4800,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/61/fsv-mainz-05",
+      "setId": 33
+    },
+    {
+      "futbinId": 62,
+      "slug": "hamburger-sv",
+      "name": "Hamburger SV",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 1400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 2000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/62/hamburger-sv",
+      "setId": 67
+    },
+    {
+      "futbinId": 63,
+      "slug": "rb-leipzig",
+      "name": "RB Leipzig",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 7000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 40000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 80000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 175000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/63/rb-leipzig",
+      "setId": 28
+    },
+    {
+      "futbinId": 64,
+      "slug": "sc-freiburg",
+      "name": "SC Freiburg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 11500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 18000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 30000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/64/sc-freiburg",
+      "setId": 21
+    },
+    {
+      "futbinId": 65,
+      "slug": "sc-paderborn-07",
+      "name": "SC Paderborn 07",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/65/sc-paderborn-07",
+      "setId": 47
+    },
+    {
+      "futbinId": 66,
+      "slug": "schalke-04",
+      "name": "Schalke 04",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/66/schalke-04",
+      "setId": 57
+    },
+    {
+      "futbinId": 67,
+      "slug": "sv-elversberg",
+      "name": "SV Elversberg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/67/sv-elversberg",
+      "setId": 38
+    },
+    {
+      "futbinId": 68,
+      "slug": "tsg-hoffenheim",
+      "name": "TSG Hoffenheim",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 10000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 100000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 250000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/68/tsg-hoffenheim",
+      "setId": 19
+    },
+    {
+      "futbinId": 69,
+      "slug": "vfb-stuttgart",
+      "name": "VfB Stuttgart",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 7000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 9900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/69/vfb-stuttgart",
+      "setId": 37
+    },
+    {
+      "futbinId": 70,
+      "slug": "vfl-wolfsburg",
+      "name": "VfL Wolfsburg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 4000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 30000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 46000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 75000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/70/vfl-wolfsburg",
+      "setId": 88
+    },
+    {
+      "futbinId": 71,
+      "slug": "werder-bremen",
+      "name": "Werder Bremen",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 5500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 7500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 11000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/71/werder-bremen",
+      "setId": 34
+    },
+    {
+      "futbinId": 72,
+      "slug": "aj-auxerre",
+      "name": "AJ Auxerre",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/72/aj-auxerre",
+      "setId": 75
+    },
+    {
+      "futbinId": 73,
+      "slug": "angers-sco",
+      "name": "Angers SCO",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/73/angers-sco",
+      "setId": 87
+    },
+    {
+      "futbinId": 74,
+      "slug": "as-monaco",
+      "name": "AS Monaco",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1700,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3100,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 4700,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 6600,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/74/as-monaco",
+      "setId": 98
+    },
+    {
+      "futbinId": 75,
+      "slug": "estac-troyes",
+      "name": "ESTAC Troyes",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1400,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/75/estac-troyes",
+      "setId": 78
+    },
+    {
+      "futbinId": 76,
+      "slug": "fc-fleury-91",
+      "name": "FC Fleury 91",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1900,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4300,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/76/fc-fleury-91",
+      "setId": 77
+    },
+    {
+      "futbinId": 77,
+      "slug": "fc-lorient",
+      "name": "FC Lorient",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/77/fc-lorient",
+      "setId": 60
+    },
+    {
+      "futbinId": 78,
+      "slug": "fc-nantes",
+      "name": "FC Nantes",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1700,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/78/fc-nantes",
+      "setId": 23
+    },
+    {
+      "futbinId": 79,
+      "slug": "le-havre-ac",
+      "name": "Le Havre AC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/79/le-havre-ac",
+      "setId": 7
+    },
+    {
+      "futbinId": 80,
+      "slug": "le-mans-fc",
+      "name": "Le Mans FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/80/le-mans-fc",
+      "setId": 82
+    },
+    {
+      "futbinId": 81,
+      "slug": "losc-lille",
+      "name": "LOSC Lille",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3700,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5200,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/81/losc-lille",
+      "setId": 43
+    },
+    {
+      "futbinId": 82,
+      "slug": "montpellier-herault-sc",
+      "name": "Montpellier Hérault SC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/82/montpellier-herault-sc",
+      "setId": 55
+    },
+    {
+      "futbinId": 83,
+      "slug": "ogc-nice",
+      "name": "OGC Nice",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1200,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2000,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 4200,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/83/ogc-nice",
+      "setId": 1
+    },
+    {
+      "futbinId": 84,
+      "slug": "olympique-de-marseille",
+      "name": "Olympique de Marseille",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 6000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 50000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 80000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 150000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/84/olympique-de-marseille",
+      "setId": 18
+    },
+    {
+      "futbinId": 85,
+      "slug": "olympique-lyonnais",
+      "name": "Olympique Lyonnais",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 58000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 170000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 400000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 800000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/85/olympique-lyonnais",
+      "setId": 36
+    },
+    {
+      "futbinId": 86,
+      "slug": "paris-fc",
+      "name": "Paris FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 5000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 20000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 60000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 125000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/86/paris-fc",
+      "setId": 3
+    },
+    {
+      "futbinId": 87,
+      "slug": "paris-saint-germain",
+      "name": "Paris Saint-Germain",
+      "requiredCards": 20,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 80000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 900000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1700000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 3100000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/87/paris-saint-germain",
+      "setId": 95
+    },
+    {
+      "futbinId": 88,
+      "slug": "rc-strasbourg",
+      "name": "RC Strasbourg",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 5000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 6500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 9500,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/88/rc-strasbourg",
+      "setId": 51
+    },
+    {
+      "futbinId": 89,
+      "slug": "rc-lens",
+      "name": "RC Lens",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 22500,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 38000,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 67000,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/89/rc-lens",
+      "setId": 66
+    },
+    {
+      "futbinId": 90,
+      "slug": "stade-brestois-29",
+      "name": "Stade Brestois 29",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 700,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1600,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 2300,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/90/stade-brestois-29",
+      "setId": 58
+    },
+    {
+      "futbinId": 91,
+      "slug": "stade-rennais-fc",
+      "name": "Stade Rennais FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4700,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 7000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 9900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/91/stade-rennais-fc",
+      "setId": 27
+    },
+    {
+      "futbinId": 92,
+      "slug": "toulouse-fc",
+      "name": "Toulouse FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/92/toulouse-fc",
+      "setId": 72
+    },
+    {
+      "futbinId": 93,
+      "slug": "us-saint-malo",
+      "name": "US Saint-Malo",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/93/us-saint-malo",
+      "setId": 50
+    },
+    {
+      "futbinId": 94,
+      "slug": "bergamo-calcio",
+      "name": "Bergamo Calcio",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2200,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3600,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 7600,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/94/bergamo-calcio",
+      "setId": 83
+    },
+    {
+      "futbinId": 95,
+      "slug": "bologna",
+      "name": "Bologna",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2800,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 4100,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 5900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/95/bologna",
+      "setId": 93
+    },
+    {
+      "futbinId": 96,
+      "slug": "cagliari",
+      "name": "Cagliari",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 700,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 2200,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/96/cagliari",
+      "setId": 39
+    },
+    {
+      "futbinId": 97,
+      "slug": "como",
+      "name": "Como",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 13000,
+          "tokens": 15
+        },
+        {
+          "grade": "A",
+          "threshold": 15500,
+          "tokens": 25
+        },
+        {
+          "grade": "S",
+          "threshold": 19500,
+          "tokens": 40
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/97/como",
+      "setId": 63
+    },
+    {
+      "futbinId": 98,
+      "slug": "fiorentina",
+      "name": "Fiorentina",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1900,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 5600,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 8400,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 11800,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/98/fiorentina",
+      "setId": 70
+    },
+    {
+      "futbinId": 99,
+      "slug": "frosinone",
+      "name": "Frosinone",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 200,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 320,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 480,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 720,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/99/frosinone",
+      "setId": 123
+    },
+    {
+      "futbinId": 100,
+      "slug": "genoa",
+      "name": "Genoa",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 900,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1400,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 2000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/100/genoa",
+      "setId": 126
+    },
+    {
+      "futbinId": 101,
+      "slug": "juventus",
+      "name": "Juventus",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 12000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 60000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 180000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 375000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/101/juventus",
+      "setId": 119
+    },
+    {
+      "futbinId": 102,
+      "slug": "ss-lazio",
+      "name": "SS Lazio",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3400,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5100,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 7200,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/102/ss-lazio",
+      "setId": 110
+    },
+    {
+      "futbinId": 103,
+      "slug": "lecce",
+      "name": "Lecce",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1700,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/103/lecce",
+      "setId": 124
+    },
+    {
+      "futbinId": 104,
+      "slug": "lombardia-fc",
+      "name": "Lombardia FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 41000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 220000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 440000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 825000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/104/lombardia-fc",
+      "setId": 107
+    },
+    {
+      "futbinId": 105,
+      "slug": "milano-fc",
+      "name": "Milano FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 10000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 180000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 400000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 825000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/105/milano-fc",
+      "setId": 29
+    },
+    {
+      "futbinId": 106,
+      "slug": "monza",
+      "name": "Monza",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1700,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/106/monza",
+      "setId": 105
+    },
+    {
+      "futbinId": 107,
+      "slug": "napoli",
+      "name": "Napoli",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 13000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 180000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 280000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 450000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/107/napoli",
+      "setId": 112
+    },
+    {
+      "futbinId": 108,
+      "slug": "parma",
+      "name": "Parma",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1600,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/108/parma",
+      "setId": 125
+    },
+    {
+      "futbinId": 109,
+      "slug": "roma",
+      "name": "Roma",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 10000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 80000,
+          "tokens": 30
+        },
+        {
+          "grade": "A",
+          "threshold": 160000,
+          "tokens": 50
+        },
+        {
+          "grade": "S",
+          "threshold": 300000,
+          "tokens": 75
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/109/roma",
+      "setId": 104
+    },
+    {
+      "futbinId": 110,
+      "slug": "sassuolo",
+      "name": "Sassuolo",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 5100,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 7300,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 9565,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/110/sassuolo",
+      "setId": 118
+    },
+    {
+      "futbinId": 111,
+      "slug": "torino",
+      "name": "Torino",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1800,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 2700,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 3900,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/111/torino",
+      "setId": 117
+    },
+    {
+      "futbinId": 112,
+      "slug": "udinese",
+      "name": "Udinese",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1700,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/112/udinese",
+      "setId": 106
+    },
+    {
+      "futbinId": 113,
+      "slug": "venezia",
+      "name": "Venezia",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 600,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/113/venezia",
+      "setId": 101
+    },
+    {
+      "futbinId": 114,
+      "slug": "premier-league",
+      "name": "Premier League",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 400000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 800000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1900000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/114/premier-league",
+      "setId": 108
+    },
+    {
+      "futbinId": 115,
+      "slug": "barclays-wsl",
+      "name": "Barclays WSL",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 200000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 725000,
+          "tokens": 20
+        },
+        {
+          "grade": "A",
+          "threshold": 1900000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/115/barclays-wsl",
+      "setId": 100
+    },
+    {
+      "futbinId": 116,
+      "slug": "ligue-1-mcdonalds",
+      "name": "Ligue 1 McDonald's",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 75000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 275000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1600000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/116/ligue-1-mcdonalds",
+      "setId": 111
+    },
+    {
+      "futbinId": 117,
+      "slug": "arkema-pl",
+      "name": "Arkema PL",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 75000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 575000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1800000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/117/arkema-pl",
+      "setId": 115
+    },
+    {
+      "futbinId": 118,
+      "slug": "laliga-ea-sports",
+      "name": "LALIGA EA SPORTS",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 275000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 725000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1900000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/118/laliga-ea-sports",
+      "setId": 109
+    },
+    {
+      "futbinId": 119,
+      "slug": "liga-f-moeve",
+      "name": "Liga F Moeve",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 125000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 625000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1800000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/119/liga-f-moeve",
+      "setId": 121
+    },
+    {
+      "futbinId": 120,
+      "slug": "serie-a-enilive",
+      "name": "Serie A Enilive",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 100000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 425000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1500000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 3500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/120/serie-a-enilive",
+      "setId": 103
+    },
+    {
+      "futbinId": 121,
+      "slug": "bundesliga",
+      "name": "Bundesliga",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 100000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 400000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1500000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 3500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/121/bundesliga",
+      "setId": 122
+    },
+    {
+      "futbinId": 122,
+      "slug": "frauen-bundesliga",
+      "name": "Frauen-Bundesliga",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 50000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 200000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1400000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 3500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/122/frauen-bundesliga",
+      "setId": 120
+    },
+    {
+      "futbinId": 193,
+      "slug": "saudi-league",
+      "name": "Saudi League",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 35000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 135000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1000000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 2500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/193/saudi-league",
+      "setId": 155
+    },
+    {
+      "futbinId": 194,
+      "slug": "mls",
+      "name": "MLS",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 15000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 30000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 500000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 1500000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/194/mls",
+      "setId": 173
+    },
+    {
+      "futbinId": 195,
+      "slug": "nwsl",
+      "name": "NWSL",
+      "requiredCards": 30,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 10
+        },
+        {
+          "grade": "C",
+          "threshold": 65000,
+          "tokens": 35
+        },
+        {
+          "grade": "B",
+          "threshold": 330000,
+          "tokens": 50
+        },
+        {
+          "grade": "A",
+          "threshold": 1600000,
+          "tokens": 70
+        },
+        {
+          "grade": "S",
+          "threshold": 4000000,
+          "tokens": 100
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/195/nwsl",
+      "setId": 193
+    },
+    {
+      "futbinId": 130,
+      "slug": "abha",
+      "name": "Abha",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 125000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 300000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/130/abha",
+      "setId": 192
+    },
+    {
+      "futbinId": 131,
+      "slug": "al-ahli",
+      "name": "Al Ahli",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 7500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/131/al-ahli",
+      "setId": 129
+    },
+    {
+      "futbinId": 132,
+      "slug": "al-ettifaq",
+      "name": "Al Ettifaq",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/132/al-ettifaq",
+      "setId": 146
+    },
+    {
+      "futbinId": 133,
+      "slug": "al-faisaly",
+      "name": "Al Faisaly",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 400,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 600,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 900,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/133/al-faisaly",
+      "setId": 144
+    },
+    {
+      "futbinId": 134,
+      "slug": "al-fateh",
+      "name": "Al Fateh",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1200,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/134/al-fateh",
+      "setId": 154
+    },
+    {
+      "futbinId": 135,
+      "slug": "al-hazem",
+      "name": "Al Hazem",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 300,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 400,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 600,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 900,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/135/al-hazem",
+      "setId": 160
+    },
+    {
+      "futbinId": 136,
+      "slug": "al-hilal",
+      "name": "Al Hilal",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 7500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 11000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 15500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/136/al-hilal",
+      "setId": 190
+    },
+    {
+      "futbinId": 137,
+      "slug": "al-ittihad",
+      "name": "Al Ittihad",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5500,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 8000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/137/al-ittihad",
+      "setId": 196
+    },
+    {
+      "futbinId": 138,
+      "slug": "al-khaleej",
+      "name": "Al Khaleej",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1200,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/138/al-khaleej",
+      "setId": 185
+    },
+    {
+      "futbinId": 139,
+      "slug": "al-kholood",
+      "name": "Al Kholood",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1200,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/139/al-kholood",
+      "setId": 138
+    },
+    {
+      "futbinId": 140,
+      "slug": "al-nassr",
+      "name": "Al Nassr",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 11500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 17000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 24000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/140/al-nassr",
+      "setId": 153
+    },
+    {
+      "futbinId": 141,
+      "slug": "al-qadsiah",
+      "name": "Al Qadsiah",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1200,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2700,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/141/al-qadsiah",
+      "setId": 171
+    },
+    {
+      "futbinId": 142,
+      "slug": "al-riyadh",
+      "name": "Al Riyadh",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 400,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 800,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1200,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/142/al-riyadh",
+      "setId": 195
+    },
+    {
+      "futbinId": 143,
+      "slug": "al-shabab",
+      "name": "Al Shabab",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 2500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/143/al-shabab",
+      "setId": 149
+    },
+    {
+      "futbinId": 144,
+      "slug": "al-taawoun",
+      "name": "Al Taawoun",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1300,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1900,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/144/al-taawoun",
+      "setId": 148
+    },
+    {
+      "futbinId": 145,
+      "slug": "diriyah",
+      "name": "Diriyah",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1300,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1900,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/145/diriyah",
+      "setId": 189
+    },
+    {
+      "futbinId": 146,
+      "slug": "neom",
+      "name": "Neom",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 800,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1200,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1800,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/146/neom",
+      "setId": 145
+    },
+    {
+      "futbinId": 147,
+      "slug": "atlanta-united",
+      "name": "Atlanta United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/147/atlanta-united",
+      "setId": 179
+    },
+    {
+      "futbinId": 148,
+      "slug": "austin-fc",
+      "name": "Austin FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/148/austin-fc",
+      "setId": 188
+    },
+    {
+      "futbinId": 149,
+      "slug": "cf-montreal",
+      "name": "CF Montreal",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/149/cf-montreal",
+      "setId": 139
+    },
+    {
+      "futbinId": 150,
+      "slug": "charlotte-fc",
+      "name": "Charlotte FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/150/charlotte-fc",
+      "setId": 150
+    },
+    {
+      "futbinId": 151,
+      "slug": "chicago-fire-fc",
+      "name": "Chicago Fire FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/151/chicago-fire-fc",
+      "setId": 191
+    },
+    {
+      "futbinId": 152,
+      "slug": "colorado-rapids",
+      "name": "Colorado Rapids",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/152/colorado-rapids",
+      "setId": 158
+    },
+    {
+      "futbinId": 153,
+      "slug": "columbus-crew",
+      "name": "Columbus Crew",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/153/columbus-crew",
+      "setId": 169
+    },
+    {
+      "futbinId": 154,
+      "slug": "dc-united",
+      "name": "DC United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/154/dc-united",
+      "setId": 167
+    },
+    {
+      "futbinId": 155,
+      "slug": "fc-cincinnati",
+      "name": "FC Cincinnati",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/155/fc-cincinnati",
+      "setId": 186
+    },
+    {
+      "futbinId": 156,
+      "slug": "fc-dallas",
+      "name": "FC Dallas",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/156/fc-dallas",
+      "setId": 152
+    },
+    {
+      "futbinId": 157,
+      "slug": "houston-dynamo",
+      "name": "Houston Dynamo",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/157/houston-dynamo",
+      "setId": 133
+    },
+    {
+      "futbinId": 158,
+      "slug": "inter-miami",
+      "name": "Inter Miami",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4000,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 5500,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 8000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/158/inter-miami",
+      "setId": 162
+    },
+    {
+      "futbinId": 159,
+      "slug": "la-galaxy",
+      "name": "LA Galaxy",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/159/la-galaxy",
+      "setId": 137
+    },
+    {
+      "futbinId": 160,
+      "slug": "lafc",
+      "name": "LAFC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2000,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 3000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 4000,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/160/lafc",
+      "setId": 140
+    },
+    {
+      "futbinId": 161,
+      "slug": "minnesota-united",
+      "name": "Minnesota United",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/161/minnesota-united",
+      "setId": 176
+    },
+    {
+      "futbinId": 162,
+      "slug": "nashville-sc",
+      "name": "Nashville SC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/162/nashville-sc",
+      "setId": 168
+    },
+    {
+      "futbinId": 163,
+      "slug": "new-england",
+      "name": "New England",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/163/new-england",
+      "setId": 184
+    },
+    {
+      "futbinId": 164,
+      "slug": "new-york-city-fc",
+      "name": "New York City FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/164/new-york-city-fc",
+      "setId": 163
+    },
+    {
+      "futbinId": 165,
+      "slug": "orlando-city",
+      "name": "Orlando City",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/165/orlando-city",
+      "setId": 175
+    },
+    {
+      "futbinId": 166,
+      "slug": "philadelphia",
+      "name": "Philadelphia",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/166/philadelphia",
+      "setId": 164
+    },
+    {
+      "futbinId": 167,
+      "slug": "portland-timbers",
+      "name": "Portland Timbers",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/167/portland-timbers",
+      "setId": 141
+    },
+    {
+      "futbinId": 168,
+      "slug": "real-salt-lake",
+      "name": "Real Salt Lake",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/168/real-salt-lake",
+      "setId": 170
+    },
+    {
+      "futbinId": 169,
+      "slug": "new-york-red-bulls",
+      "name": "New York Red Bulls",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/169/new-york-red-bulls",
+      "setId": 156
+    },
+    {
+      "futbinId": 170,
+      "slug": "san-diego-fc",
+      "name": "San Diego FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/170/san-diego-fc",
+      "setId": 132
+    },
+    {
+      "futbinId": 171,
+      "slug": "san-jose-earthquakes",
+      "name": "San Jose Earthquakes",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/171/san-jose-earthquakes",
+      "setId": 165
+    },
+    {
+      "futbinId": 172,
+      "slug": "sounders-fc",
+      "name": "Sounders FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/172/sounders-fc",
+      "setId": 194
+    },
+    {
+      "futbinId": 173,
+      "slug": "sporting-kc",
+      "name": "Sporting KC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/173/sporting-kc",
+      "setId": 166
+    },
+    {
+      "futbinId": 174,
+      "slug": "st-louis-city-sc",
+      "name": "St. Louis City SC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/174/st-louis-city-sc",
+      "setId": 174
+    },
+    {
+      "futbinId": 175,
+      "slug": "toronto-fc",
+      "name": "Toronto FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/175/toronto-fc",
+      "setId": 135
+    },
+    {
+      "futbinId": 176,
+      "slug": "whitecaps-fc",
+      "name": "Whitecaps FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 700,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 1100,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 1500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/176/whitecaps-fc",
+      "setId": 147
+    },
+    {
+      "futbinId": 177,
+      "slug": "angel-city",
+      "name": "Angel City",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1800,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 3750,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 5500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/177/angel-city",
+      "setId": 187
+    },
+    {
+      "futbinId": 178,
+      "slug": "bay-football-club",
+      "name": "Bay Football Club",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2250,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 3500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 5000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/178/bay-football-club",
+      "setId": 157
+    },
+    {
+      "futbinId": 180,
+      "slug": "boston-legacy",
+      "name": "Boston Legacy",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1250,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2250,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/180/boston-legacy",
+      "setId": 177
+    },
+    {
+      "futbinId": 182,
+      "slug": "chicago-stars-fc",
+      "name": "Chicago Stars FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2700,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3750,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 6000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 8750,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/182/chicago-stars-fc",
+      "setId": 161
+    },
+    {
+      "futbinId": 184,
+      "slug": "denver-summit",
+      "name": "Denver Summit",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 6000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 8500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/184/denver-summit",
+      "setId": 142
+    },
+    {
+      "futbinId": 186,
+      "slug": "gotham-fc",
+      "name": "Gotham FC",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 4000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 24500,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 37000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 52500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/186/gotham-fc",
+      "setId": 182
+    },
+    {
+      "futbinId": 187,
+      "slug": "houston-dash",
+      "name": "Houston Dash",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1600,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2250,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 3500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 5250,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/187/houston-dash",
+      "setId": 151
+    },
+    {
+      "futbinId": 188,
+      "slug": "kc-current",
+      "name": "KC Current",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 5000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 16000,
+          "tokens": 8
+        },
+        {
+          "grade": "A",
+          "threshold": 24000,
+          "tokens": 10
+        },
+        {
+          "grade": "S",
+          "threshold": 34500,
+          "tokens": 20
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/188/kc-current",
+      "setId": 178
+    },
+    {
+      "futbinId": 192,
+      "slug": "north-carolina-courage",
+      "name": "North Carolina Courage",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1100,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/192/north-carolina-courage",
+      "setId": 180
+    },
+    {
+      "futbinId": 191,
+      "slug": "orlando-pride",
+      "name": "Orlando Pride",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2700,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3750,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 6000,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 8750,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/191/orlando-pride",
+      "setId": 159
+    },
+    {
+      "futbinId": 190,
+      "slug": "portland-thorns",
+      "name": "Portland Thorns",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 3800,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 5250,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 8250,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 12000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/190/portland-thorns",
+      "setId": 136
+    },
+    {
+      "futbinId": 189,
+      "slug": "racing-louisville",
+      "name": "Racing Louisville",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1250,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2250,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/189/racing-louisville",
+      "setId": 131
+    },
+    {
+      "futbinId": 185,
+      "slug": "san-diego-wave",
+      "name": "San Diego Wave",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2200,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 3000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 4750,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 7000,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/185/san-diego-wave",
+      "setId": 183
+    },
+    {
+      "futbinId": 183,
+      "slug": "seattle-reign",
+      "name": "Seattle Reign",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 2000,
+          "tokens": 0
+        },
+        {
+          "grade": "A",
+          "threshold": 3250,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 4750,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/183/seattle-reign",
+      "setId": 172
+    },
+    {
+      "futbinId": 181,
+      "slug": "utah-royals",
+      "name": "Utah Royals",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 1000,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 1500,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 2250,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 3250,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/181/utah-royals",
+      "setId": 130
+    },
+    {
+      "futbinId": 179,
+      "slug": "washington-spirit",
+      "name": "Washington Spirit",
+      "requiredCards": 15,
+      "grades": [
+        {
+          "grade": "D",
+          "threshold": 10,
+          "tokens": 0
+        },
+        {
+          "grade": "C",
+          "threshold": 2500,
+          "tokens": 0
+        },
+        {
+          "grade": "B",
+          "threshold": 4000,
+          "tokens": 5
+        },
+        {
+          "grade": "A",
+          "threshold": 5500,
+          "tokens": 8
+        },
+        {
+          "grade": "S",
+          "threshold": 7500,
+          "tokens": 15
+        }
+      ],
+      "url": "https://www.futbin.com/27/gallery/set/179/washington-spirit",
+      "setId": 134
+    }
+  ]
+}

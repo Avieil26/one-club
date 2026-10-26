@@ -9,10 +9,24 @@ fs.writeFileSync(path.join(os.tmpdir(),'fc27-gallery-score.cjs'),compiled);
 const {galleryScore}=require(path.join(os.tmpdir(),'fc27-gallery-score.cjs'));
 const cache='scripts/gallery-cache',listing=JSON.parse(fs.readFileSync(cache+'/listing.json'));
 const roster=JSON.parse(fs.readFileSync('assets/data/players.json'));const byEa=new Map(roster.map(p=>[p.eaId,p]));
-const summaries=[],audits=[],failures=[];const now=new Date().toISOString();
+const facts=JSON.parse(fs.readFileSync('docs/gallery-futbin-facts-20261026.json'));
+const factsById=new Map(facts.sets.map(s=>[s.setId,s]));
+const summaries=[],audits=[],failures=[],sourceDifferences=[];const now=new Date().toISOString();
 fs.mkdirSync('public/gallery-data',{recursive:true});
 for(const category of listing.categories)for(const entry of category.sets){
+ if(!factsById.has(entry.id))continue;
  const d=JSON.parse(fs.readFileSync(cache+'/'+entry.id+'.json'));
+ const fact=factsById.get(entry.id);
+ if(d.set.requiredCards!==fact.requiredCards)throw Error('Source item-count mismatch '+entry.id);
+ for(const grade of d.set.grades){
+  const verified=fact.grades.find(g=>g.grade===grade.name);
+  if(!verified)throw Error('Missing FUTBIN grade '+entry.id);
+  const tokens=grade.rewards.filter(r=>r.type==='event_token_1').reduce((sum,r)=>sum+r.value*r.count,0);
+  if(grade.threshold!==verified.threshold||tokens!==verified.tokens)sourceDifferences.push({setId:entry.id,name:entry.name,grade:grade.name,secondaryThreshold:grade.threshold,futbinThreshold:verified.threshold,secondaryTokens:tokens,futbinTokens:verified.tokens});
+  grade.threshold=verified.threshold;
+  if(tokens!==verified.tokens){grade.rewards=grade.rewards.filter(r=>r.type!=='event_token_1');if(verified.tokens)grade.rewards.push({type:'event_token_1',value:verified.tokens,count:1,label:verified.tokens+' Gallery Tokens',imagePath:null});}
+ }
+ d.set.totalTokens=d.set.grades.flatMap(g=>g.rewards).reduce((sum,r)=>sum+(r.type==='event_token_1'?r.value*r.count:0),0);
  const poolFile=cache+'/pool-'+entry.id+'.json';
  if(!fs.existsSync(poolFile)){failures.push({id:entry.id,reason:'pool missing'});continue;}
  const pool=JSON.parse(fs.readFileSync(poolFile));
@@ -29,7 +43,7 @@ for(const category of listing.categories)for(const entry of category.sets){
   const threshold=d.set.grades.find(g=>g.name===candidate.grade)?.threshold;
   const matches=result.total===expected;
   audits.push({setId:entry.id,target:candidate.grade,expected,calculated:result.total,matches});
-  if(!matches||result.total<threshold){failures.push({id:entry.id,grade:candidate.grade,expected,actual:result.total,tags:result.tags.filter(t=>t.counted),sourceTags:candidate.tags});continue;}
+  if(!matches||result.total<threshold){failures.push({id:entry.id,grade:candidate.grade,expected,actual:result.total,reason:matches?'below verified FUTBIN threshold':'score mismatch'});continue;}
   const key=[...ids].sort((a,b)=>a-b).join(',');if(seen.has(key))continue;seen.add(key);
   plans.push({id:entry.id+'-'+candidate.grade+'-'+plans.length,grade:candidate.grade,itemIds:ids,firstOwnerIds:[],expectedScore:result.total,checkedAt:now,validation:'calculated'});
  }
@@ -41,5 +55,5 @@ for(const category of listing.categories)for(const entry of category.sets){
 }
 fs.writeFileSync('public/gallery-data/catalogue.json',JSON.stringify({checkedAt:now,definitionsCapturedAt:listing.capturedAt,sets:summaries}));
 fs.mkdirSync('docs',{recursive:true});
-fs.writeFileSync('docs/gallery-data-audit.json',JSON.stringify({checkedAt:now,sources:['https://help.ea.com/en/articles/ea-sports-fc/gallery-hub/','https://www.fut.gg/fut-gallery/','https://www.futbin.com/27/gallery'],sets:summaries.length,audits,failures},null,2));
+fs.writeFileSync('docs/gallery-data-audit.json',JSON.stringify({checkedAt:now,sources:['https://help.ea.com/en/articles/ea-sports-fc/gallery-hub/','https://www.fut.gg/fut-gallery/','https://www.futbin.com/27/gallery'],sets:summaries.length,audits,failures,sourceDifferences},null,2));
 console.log(JSON.stringify({sets:summaries.length,checked:audits.length,matches:audits.filter(a=>a.matches).length,failures:failures.map(f=>({id:f.id,grade:f.grade,expected:f.expected,actual:f.actual,reason:f.reason}))},null,2));
