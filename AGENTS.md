@@ -39,3 +39,9 @@ Docs: https://docs.expo.dev/eas/index.md
 - If `ios/` and `android/` directories do not exist, they are generated (Continuous Native Generation). Never create or edit them by hand — configure native behavior in `app.json` and config plugins.
 - Expo Go only includes its bundled native modules. After adding a library with native code, the app needs a development build: `npx expo run:ios|android` locally, or `eas build --profile development`.
 - Prefer recommended Expo modules over third-party libraries, and check your available skills before adding dependencies. Docs: https://docs.expo.dev/versions/latest/index.md
+
+## Production preservation — user requirement
+
+For every website update, identify the currently deployed Production source first. Start an isolated branch from that exact revision and transfer only an explicit allowlist for the requested feature. Never promote a whole older Preview over newer Production changes. Preserve unrelated screens, data, assets, settings, backend changes and build checks byte-for-byte; compare the complete Git diff before releasing. Recheck the current production deployment immediately before release and stop to reconcile if it changed.
+
+Verify the full runtime player catalogue and existing content checks before and after release. The confirmed baseline on 26 October 2026 is 20,198 unique cards, including all 51 recent editions; a Gallery-only change must preserve this complete catalogue and its assets. Increase the baseline only when new cards are explicitly included in the task. Do not replace newer package scripts with scripts from an older branch.

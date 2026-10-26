@@ -77,6 +77,13 @@ try{
   await page.getByTestId('gallery-selected-card').first().scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(output,`cards-${language}-${width}.png`),fullPage:false});
   if(language==='en')assert(!/[\u0590-\u05FF]/.test((await page.locator('body').innerText()).replace('עב','')),'Hebrew leaked into English screen');
+  for(const id of [181,162,153,193]) {
+   await page.goto('http://127.0.0.1:8098/gallery/'+id);
+   await page.getByRole('button',{name:t('דרגות ופרסים','Grades & rewards'),exact:true}).waitFor();
+   await page.getByRole('button',{name:t('דרגות ופרסים','Grades & rewards'),exact:true}).click();
+   for(const grade of ['D','C','B','A','S'])await page.getByTestId('gallery-reward-'+grade).waitFor();
+   await noOverflow(page,'New collection '+id);
+  }
   console.log('Gallery UI passed',language,width);
   await context.close();
  }

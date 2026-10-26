@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import crypto from 'node:crypto';
+import {loadPlayerCatalogue} from './load-player-catalogue.mjs';
+const base='b89a5be61844727f5cf6e46109f5cfd3ee4965a6';
+const allowed=new Set(['AGENTS.md','package.json','app/(tabs)/gallery.tsx','app/gallery/[id].tsx','app/gallery/planner.tsx','components/GalleryTokenPlanner.tsx','lib/galleryData.ts','lib/galleryPlanner.ts','assets/data/galleryPlannerMarket.json','scripts/build-gallery-catalogue.mjs','scripts/build-gallery-planner.mjs','scripts/import-gallery-planner-prices.mjs','scripts/verify-gallery.mjs','scripts/verify-gallery-planner.mjs','scripts/verify-gallery-planner-ui.mjs','scripts/verify-gallery-ui.mjs','scripts/verify-gallery-prod-preservation.mjs','docs/gallery-data-audit.json','docs/gallery-futbin-facts-20261026.json','docs/gallery-token-planner-20261026.md']);
+const changed=execFileSync('git',['diff','--name-only',base],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+for(const file of changed)assert(allowed.has(file)||/^public\/gallery-data\/(?:\d+|catalogue|planner)\.json$/.test(file),'Unrelated Production change: '+file);
+const before=JSON.parse(execFileSync('git',['show',base+':package.json'],{encoding:'utf8'})),after=JSON.parse(fs.readFileSync('package.json'));
+const build=before.scripts['build:web'];assert.equal(after.scripts['build:web'],build.replace(' && expo export',' && npm run verify:planner && expo export'));
+delete before.scripts['build:web'];delete after.scripts['build:web'];delete after.scripts['verify:planner'];assert.deepEqual(after,before,'Unrelated package or existing build check changed');
+const all=loadPlayerCatalogue();assert.equal(all.length,20198);assert.equal(new Set(all.map(p=>p.id)).size,20198);assert.equal(all.filter(p=>p.edition==='recent').length,51);
+console.log('Production preservation passed: only approved Gallery files changed; every existing package setting/check preserved; 20,198 unique cards with 51 recent editions. Catalogue SHA256:',crypto.createHash('sha256').update(JSON.stringify(all)).digest('hex'));

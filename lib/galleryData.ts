@@ -17,4 +17,5 @@ async function read<T>(file: string): Promise<T> {
  return cache.get(file)! as Promise<T>;
 }
 export const loadGalleryIndex = () => read<GalleryIndex>('catalogue');
-export const loadGallerySet = (id: number): Promise<GalleryDetail> => Number.isSafeInteger(id) && id >= 1 && id <= 128 ? read<GalleryDetail>(String(id)) : Promise.reject(new Error('Unknown set')); 
+export const loadGallerySet = (id: number): Promise<GalleryDetail> => Number.isSafeInteger(id) && id >= 1 ? loadGalleryIndex().then(index => index.sets.some(set => set.id === id) ? read<GalleryDetail>(String(id)) : Promise.reject(new Error('Unknown set'))) : Promise.reject(new Error('Unknown set')); 
+export const loadGalleryPlanner = () => read<import('./galleryPlanner').PlannerData>('planner');
