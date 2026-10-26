@@ -1,3 +1,4 @@
+import latest from '@/assets/data/sbc-refresh-20261026.json';
 import refresh from '@/assets/data/sbc-refresh-20261025.json';
 import { sourceClassicRulesMatch, knownClassicRules } from '@/lib/sbcSourceRules';
 import snapshot from '@/assets/data/sbc-classic-verified-20261021.json';
@@ -7,7 +8,7 @@ import type { SquadRules } from '@/lib/types';
 export type ClassicSegment = { name: string; rules: SquadRules; formation: string; squad?: Record<string, string>; activeSlots?: string[]; sourceUrl?: string; solutionUrl?: string; checkedAt?: string; provenance?: string; sourceRequirements?: string[] };
 const players = new Map(PLAYERS.map((p) => [p.id, p]));
 export function classicSegments(id: string): ClassicSegment[] {
-  return ({ ...snapshot, ...refresh.classic } as unknown as Record<string, { segments: ClassicSegment[] }>)[id]?.segments ?? [];
+  return ({ ...snapshot, ...refresh.classic, ...latest.classic } as unknown as Record<string, { segments: ClassicSegment[] }>)[id]?.segments ?? [];
 }
 export function checkClassicSquad(segment: ClassicSegment, formation: string, squad: Record<string, string>) {
   const expected = formationById(formation);

@@ -1,6 +1,6 @@
 import type { SquadRules } from '@/lib/types';
 
-const keys = new Set(['playerCount','maxRating','maxPlayerRating','minLeagues','maxSameNation','exactLeagues','exactNations','chemistry','minRating','minNations','maxSameLeague','maxLeagues','minClubs','maxClubs','minSameClub','maxSameClub','minSameLeague','sameNationAtLeast','nationsAtLeast','nationAtLeast','leagueAtLeast','clubsAtLeast','minGold','minSilver','minBronze','minQuality','exactQuality']);
+const keys = new Set(['playerCount','maxRating','maxPlayerRating','minLeagues','maxSameNation','exactLeagues','exactNations','chemistry','minRating','minNations','maxNations','maxSameLeague','maxLeagues','minClubs','maxClubs','minSameClub','maxSameClub','minSameLeague','sameNationAtLeast','nationsAtLeast','nationAtLeast','leagueAtLeast','clubsAtLeast','minGold','minSilver','minBronze','minQuality','exactQuality']);
 /** A newly introduced requirement must be implemented before any squad can pass. */
 export function knownClassicRules(rules: SquadRules): boolean {
   return Object.keys(rules).every((key) => keys.has(key));
@@ -23,6 +23,7 @@ export function parseClassicRequirements(requirements: string[], playerCount = 1
     else if ((m = text.match(/^Quality: Min\. (Gold|Silver|Bronze)$/))) rules.minQuality = m[1].toLowerCase() as SquadRules['minQuality'];
     else if ((m = text.match(/^Chemistry: Min\. (\d+)$/))) rules.chemistry = Number(m[1]);
     else if ((m = text.match(/^Team rating: Min\. (\d+)$/))) rules.minRating = Number(m[1]);
+    else if ((m = text.match(/^Nations: Max\. (\d+)$/))) rules.maxNations = Number(m[1]);
     else if ((m = text.match(/^Players: (\d+)$/))) rules.playerCount = Number(m[1]);
     else return null;
   }

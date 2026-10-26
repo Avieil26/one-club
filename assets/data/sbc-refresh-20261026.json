@@ -1,0 +1,3271 @@
+{
+  "checkedAt": "2026-10-26T10:44:42.715Z",
+  "challenges": [
+    {
+      "id": "sbc-hero-20261026",
+      "title": "Base Hero Player Pick",
+      "kind": "streamlined",
+      "requirements": "מגישים 200,000 נקודות פריט; דירוג שחקן מינימלי 45. בוחרים אחד מבין Rui Costa, Hernández, Larsson ו־Park Ji-sung.",
+      "requirementsEn": "Base Hero Player Pick: 200,000 item points; Rating: Min. 45; Choose one of Rui Costa, Hernández, Larsson and Park Ji-sung",
+      "reward": "1 of 4 Base Hero Player Pick (Untradeable)",
+      "createdBy": "admin",
+      "targetScore": 200000,
+      "rules": null,
+      "createdAt": "2026-10-25T18:00:30.978182Z",
+      "endsAt": "2026-11-08T18:00:00.000Z",
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/87",
+      "expirySourceUrl": "https://www.fut.gg/sbc/players/27-87-base-hero-player-pick/",
+      "lastCheckedAt": "2026-10-26T10:44:42.715Z"
+    },
+    {
+      "id": "sbc-laliga-20261026",
+      "title": "LALIGA & Liga F",
+      "kind": "streamlined",
+      "requirements": "שני שלבים נפרדים של 4,500 נקודות פריט כל אחד; דירוג שחקן מינימלי 45. בכל שלב חבילת ברונזה וכסף של הליגה המתאימה; בהשלמת שניהם חבילת 2 שחקני זהב עד דירוג 85.",
+      "requirementsEn": "LALIGA: 4,500 item points; Liga F: 4,500 item points; Rating: Min. 45; Each segment rewards its league Bronze & Silver Players Pack; group reward: 2x Max 85 Gold Players Pack",
+      "reward": "2x Max 85 Gold Players Pack (Untradeable)",
+      "createdBy": "admin",
+      "targetScore": 9000,
+      "rules": null,
+      "createdAt": "2026-10-25T18:00:21.042487Z",
+      "endsAt": "2026-11-01T18:00:00.000Z",
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/84",
+      "expirySourceUrl": "https://www.fut.gg/sbc/upgrades/27-84-laliga-liga-f/",
+      "lastCheckedAt": "2026-10-26T10:44:42.715Z"
+    },
+    {
+      "id": "sbc-premier-20261026",
+      "title": "Premier League & Barclays WSL",
+      "kind": "streamlined",
+      "requirements": "שני שלבים נפרדים של 6,000 נקודות פריט כל אחד; דירוג שחקן מינימלי 45. בכל שלב חבילת ברונזה וכסף של הליגה המתאימה; בהשלמת שניהם חבילת 2 שחקני זהב עד דירוג 85.",
+      "requirementsEn": "Premier League: 6,000 item points; Barclays WSL: 6,000 item points; Rating: Min. 45; Each segment rewards its league Bronze & Silver Players Pack; group reward: 2x Max 85 Gold Players Pack",
+      "reward": "2x Max 85 Gold Players Pack (Untradeable)",
+      "createdBy": "admin",
+      "targetScore": 12000,
+      "rules": null,
+      "createdAt": "2026-10-25T18:00:16.493646Z",
+      "endsAt": "2026-11-01T18:00:00.000Z",
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/83",
+      "expirySourceUrl": "https://www.fut.gg/sbc/upgrades/27-83-premier-league-barclays-wsl/",
+      "lastCheckedAt": "2026-10-26T10:44:42.715Z"
+    },
+    {
+      "id": "sbc-candy-20261026",
+      "title": "Scary Candy",
+      "kind": "classic",
+      "requirements": "עד 5 מאותה ליגה; לפחות 2 מאותו מועדון; עד 4 מדינות; לפחות 5 זהב; לפחות כסף; 16 כימיה; 6 שחקנים. משבצות הקישור נעולות.",
+      "requirementsEn": "Same league: Max. 5 players; Same club: Min. 2 players; Nations: Max. 4; Quality: Min. 5 Gold players; Quality: Min. Silver; Chemistry: Min. 16; Players: 6",
+      "reward": "Mixed Players Pack (Tradeable)",
+      "createdBy": "admin",
+      "targetScore": null,
+      "rules": {
+        "playerCount": 6,
+        "chemistry": 16,
+        "maxSameLeague": 5,
+        "minSameClub": 2,
+        "maxNations": 4,
+        "minGold": 5,
+        "minQuality": "silver"
+      },
+      "createdAt": "2026-10-25T18:00:10.534373Z",
+      "endsAt": "2026-10-28T18:00:00.000Z",
+      "sourceUrl": "https://www.futbin.com/27/squad-building-challenge/73",
+      "expirySourceUrl": "https://www.fut.gg/sbc/challenges/27-73-scary-candy/",
+      "lastCheckedAt": "2026-10-26T10:44:42.715Z"
+    }
+  ],
+  "points": {
+    "sbc-hero-20261026": {
+      "segments": [
+        {
+          "eaId": 132,
+          "name": "Base Hero Player Pick",
+          "target": 200000,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "platforms": {
+            "ps5": {
+              "pricedAt": "2026-10-26T10:35:32.818714Z",
+              "rates": [
+                {
+                  "overall": 90,
+                  "rarity": 0,
+                  "score": 14000,
+                  "price": 110425,
+                  "players": [
+                    "ea-246219-khadija-shaw",
+                    "kane",
+                    "rodri",
+                    "vitinha",
+                    "courtois",
+                    "olise",
+                    "bellingham",
+                    "yamal",
+                    "pedri",
+                    "aitana"
+                  ],
+                  "eaIds": [
+                    246219,
+                    202126,
+                    231866,
+                    255253,
+                    192119,
+                    247827,
+                    252371,
+                    277643,
+                    251854,
+                    241667
+                  ]
+                },
+                {
+                  "overall": 89,
+                  "rarity": 0,
+                  "score": 11000,
+                  "price": 78100,
+                  "players": [
+                    "gabriel",
+                    "ea-279799-temwa-chawinga",
+                    "bruno",
+                    "donnarumma",
+                    "messi",
+                    "mariona",
+                    "kvara",
+                    "ea-241846-ewa-pajor",
+                    "ea-256196-willian-pacho",
+                    "hansen"
+                  ],
+                  "eaIds": [
+                    232580,
+                    279799,
+                    212198,
+                    230621,
+                    158023,
+                    237288,
+                    247635,
+                    241846,
+                    256196,
+                    227102
+                  ]
+                },
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12950,
+                  "players": [
+                    "kimmich",
+                    "rice",
+                    "banda",
+                    "oblak",
+                    "raya",
+                    "mapi",
+                    "ea-245830-yui-hasegawa",
+                    "buhl",
+                    "russo",
+                    "neves"
+                  ],
+                  "eaIds": [
+                    212622,
+                    234378,
+                    276359,
+                    200389,
+                    220901,
+                    236479,
+                    245830,
+                    248822,
+                    258980,
+                    272834
+                  ]
+                },
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7400,
+                  "players": [
+                    "tah",
+                    "salah",
+                    "hemp",
+                    "berger",
+                    "rodman",
+                    "marquinhos",
+                    "dias",
+                    "ea-247819-nico-schlotterbeck",
+                    "musiala",
+                    "ea-263009-hannah-hampton"
+                  ],
+                  "eaIds": [
+                    213331,
+                    209331,
+                    257008,
+                    258310,
+                    266928,
+                    207865,
+                    239818,
+                    247819,
+                    256790,
+                    263009
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5500,
+                  "players": [
+                    "gyokeres",
+                    "ruiz",
+                    "ea-252154-marco-carnesecchi",
+                    "caicedo",
+                    "wirtz",
+                    "odegaard",
+                    "dimarco",
+                    "cucurella",
+                    "guimaraes"
+                  ],
+                  "eaIds": [
+                    241651,
+                    226271,
+                    252154,
+                    256079,
+                    256630,
+                    222665,
+                    226268,
+                    239231,
+                    247851
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 1030,
+                  "players": [
+                    "ea-193698-oliver-baumann",
+                    "lewandowski",
+                    "ea-223848-sergej-milinkovicsavic",
+                    "ea-239345-linda-dallmann",
+                    "zubimendi",
+                    "ea-261740-jule-brand",
+                    "ea-236987-boubacar-kamara",
+                    "ea-245824-ayaka-yamashita",
+                    "ea-254243-elliot-anderson",
+                    "ea-177683-yann-sommer"
+                  ],
+                  "eaIds": [
+                    193698,
+                    188545,
+                    223848,
+                    239345,
+                    248148,
+                    261740,
+                    236987,
+                    245824,
+                    254243,
+                    177683
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 241,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 18,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 97,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 35,
+                      "unitScore": 5500
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 7,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 26,
+                      "unitScore": 5500
+                    }
+                  ]
+                },
+                {
+                  "key": "20",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 15,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 13,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    }
+                  ]
+                },
+                {
+                  "key": "25",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 21,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 4,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    }
+                  ]
+                },
+                {
+                  "key": "30",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 23,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 90,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 14000
+                    },
+                    {
+                      "overall": 89,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 11000
+                    },
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 18,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            },
+            "pc": {
+              "pricedAt": "2026-10-26T10:35:33.236351Z",
+              "rates": [
+                {
+                  "overall": 90,
+                  "rarity": 0,
+                  "score": 14000,
+                  "price": 106200,
+                  "players": [
+                    "ea-246219-khadija-shaw",
+                    "vitinha",
+                    "rodri",
+                    "kane",
+                    "courtois",
+                    "olise",
+                    "bellingham",
+                    "yamal",
+                    "pedri",
+                    "aitana"
+                  ],
+                  "eaIds": [
+                    246219,
+                    255253,
+                    231866,
+                    202126,
+                    192119,
+                    247827,
+                    252371,
+                    277643,
+                    251854,
+                    241667
+                  ]
+                },
+                {
+                  "overall": 89,
+                  "rarity": 0,
+                  "score": 11000,
+                  "price": 79225,
+                  "players": [
+                    "gabriel",
+                    "bruno",
+                    "donnarumma",
+                    "ea-279799-temwa-chawinga",
+                    "messi",
+                    "kvara",
+                    "mariona",
+                    "ea-256196-willian-pacho",
+                    "ea-241846-ewa-pajor",
+                    "hansen"
+                  ],
+                  "eaIds": [
+                    232580,
+                    212198,
+                    230621,
+                    279799,
+                    158023,
+                    247635,
+                    237288,
+                    256196,
+                    241846,
+                    227102
+                  ]
+                },
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12600,
+                  "players": [
+                    "buhl",
+                    "mapi",
+                    "neves",
+                    "oblak",
+                    "raya",
+                    "rice",
+                    "ea-245830-yui-hasegawa",
+                    "kimmich",
+                    "russo",
+                    "banda"
+                  ],
+                  "eaIds": [
+                    248822,
+                    236479,
+                    272834,
+                    200389,
+                    220901,
+                    234378,
+                    245830,
+                    212622,
+                    258980,
+                    276359
+                  ]
+                },
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7650,
+                  "players": [
+                    "ea-259287-pernille-harder",
+                    "marquinhos",
+                    "berger",
+                    "maignan",
+                    "saka",
+                    "upamecano",
+                    "lautaro",
+                    "lavelle",
+                    "kobel",
+                    "barella"
+                  ],
+                  "eaIds": [
+                    259287,
+                    207865,
+                    258310,
+                    215698,
+                    246669,
+                    229558,
+                    231478,
+                    232075,
+                    235073,
+                    224232
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5710,
+                  "players": [
+                    "bremer",
+                    "ruiz",
+                    "cucurella",
+                    "guimaraes",
+                    "wirtz",
+                    "ea-265239-katie-mccabe",
+                    "bastoni",
+                    "cubarsi",
+                    "ea-246272-marie-katoto"
+                  ],
+                  "eaIds": [
+                    239580,
+                    226271,
+                    239231,
+                    247851,
+                    256630,
+                    265239,
+                    237383,
+                    278046,
+                    246272
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2910,
+                  "players": [
+                    "ea-240714-jill-roord",
+                    "ea-265293-maya-le-tissier",
+                    "ea-224293-ruben-neves",
+                    "ea-261733-sandy-baltimore",
+                    "ea-177003-luka-modric",
+                    "pickford",
+                    "tielemans",
+                    "osimhen",
+                    "tonali",
+                    "walsh"
+                  ],
+                  "eaIds": [
+                    240714,
+                    265293,
+                    224293,
+                    261733,
+                    177003,
+                    204935,
+                    216393,
+                    232293,
+                    241096,
+                    242830
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 990,
+                  "players": [
+                    "ea-245872-kim-little",
+                    "ea-229582-gianluca-mancini",
+                    "trent",
+                    "foden",
+                    "ea-247513-vanessa-gilles",
+                    "timber",
+                    "rogers",
+                    "ea-261740-jule-brand",
+                    "ea-212218-aymeric-laporte",
+                    "renard"
+                  ],
+                  "eaIds": [
+                    245872,
+                    229582,
+                    231281,
+                    237692,
+                    247513,
+                    251805,
+                    260247,
+                    261740,
+                    212218,
+                    227316
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 241,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 9,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 2,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 169,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 21,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 97,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 32,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 24,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "20",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 29,
+                      "unitScore": 5500
+                    }
+                  ]
+                },
+                {
+                  "key": "25",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 17,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 10,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    }
+                  ]
+                },
+                {
+                  "key": "30",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 23,
+                      "unitScore": 8300
+                    },
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    },
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 90,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 14000
+                    },
+                    {
+                      "overall": 89,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 11000
+                    },
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 18,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "sourceUrl": "https://www.fut.gg/sbc/players/27-87-base-hero-player-pick/",
+          "checkedAt": "2026-10-26T10:44:42.715Z"
+        }
+      ]
+    },
+    "sbc-laliga-20261026": {
+      "segments": [
+        {
+          "eaId": 128,
+          "name": "LALIGA",
+          "target": 4500,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "platforms": {
+            "ps5": {
+              "pricedAt": "2026-10-26T10:35:30.913120Z",
+              "rates": [
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7400,
+                  "players": [
+                    "tah",
+                    "salah",
+                    "hemp",
+                    "berger",
+                    "rodman",
+                    "marquinhos",
+                    "dias",
+                    "ea-247819-nico-schlotterbeck",
+                    "musiala",
+                    "ea-263009-hannah-hampton"
+                  ],
+                  "eaIds": [
+                    213331,
+                    209331,
+                    257008,
+                    258310,
+                    266928,
+                    207865,
+                    239818,
+                    247819,
+                    256790,
+                    263009
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5500,
+                  "players": [
+                    "gyokeres",
+                    "ruiz",
+                    "ea-252154-marco-carnesecchi",
+                    "caicedo",
+                    "wirtz",
+                    "odegaard",
+                    "dimarco",
+                    "cucurella",
+                    "guimaraes"
+                  ],
+                  "eaIds": [
+                    241651,
+                    226271,
+                    252154,
+                    256079,
+                    256630,
+                    222665,
+                    226268,
+                    239231,
+                    247851
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2780,
+                  "players": [
+                    "ea-177003-luka-modric",
+                    "ea-245882-erin-cuthbert",
+                    "ea-268942-cata-coll",
+                    "xhaka",
+                    "swanson",
+                    "ea-241159-marc-guehi",
+                    "ea-248343-emily-fox",
+                    "ea-224293-ruben-neves",
+                    "ea-227337-svenja-huth",
+                    "ea-240714-jill-roord"
+                  ],
+                  "eaIds": [
+                    177003,
+                    245882,
+                    268942,
+                    199503,
+                    232073,
+                    241159,
+                    248343,
+                    224293,
+                    227337,
+                    240714
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 1030,
+                  "players": [
+                    "ea-193698-oliver-baumann",
+                    "lewandowski",
+                    "ea-223848-sergej-milinkovicsavic",
+                    "ea-239345-linda-dallmann",
+                    "zubimendi",
+                    "ea-261740-jule-brand",
+                    "ea-236987-boubacar-kamara",
+                    "ea-245824-ayaka-yamashita",
+                    "ea-254243-elliot-anderson",
+                    "ea-177683-yann-sommer"
+                  ],
+                  "eaIds": [
+                    193698,
+                    188545,
+                    223848,
+                    239345,
+                    248148,
+                    261740,
+                    236987,
+                    245824,
+                    254243,
+                    177683
+                  ]
+                },
+                {
+                  "overall": 83,
+                  "rarity": 0,
+                  "score": 410,
+                  "price": 700,
+                  "players": [
+                    "ea-203980-konstantinos-fortounis",
+                    "ea-212228-ivan-toney",
+                    "depaul",
+                    "coman",
+                    "ea-226998-magdalena-eriksson",
+                    "schick",
+                    "ea-236015-morgan-gibbswhite",
+                    "ea-237086-kim-min-jae",
+                    "ea-244778-trincao",
+                    "ea-250959-angelo-stiller"
+                  ],
+                  "eaIds": [
+                    203980,
+                    212228,
+                    212616,
+                    213345,
+                    226998,
+                    234236,
+                    236015,
+                    237086,
+                    244778,
+                    250959
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "30",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    }
+                  ]
+                }
+              ]
+            },
+            "pc": {
+              "pricedAt": "2026-10-26T10:35:31.364362Z",
+              "rates": [
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7650,
+                  "players": [
+                    "ea-259287-pernille-harder",
+                    "marquinhos",
+                    "berger",
+                    "maignan",
+                    "saka",
+                    "upamecano",
+                    "lautaro",
+                    "lavelle",
+                    "kobel",
+                    "barella"
+                  ],
+                  "eaIds": [
+                    259287,
+                    207865,
+                    258310,
+                    215698,
+                    246669,
+                    229558,
+                    231478,
+                    232075,
+                    235073,
+                    224232
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5710,
+                  "players": [
+                    "bremer",
+                    "ruiz",
+                    "cucurella",
+                    "guimaraes",
+                    "wirtz",
+                    "ea-265239-katie-mccabe",
+                    "bastoni",
+                    "cubarsi",
+                    "ea-246272-marie-katoto"
+                  ],
+                  "eaIds": [
+                    239580,
+                    226271,
+                    239231,
+                    247851,
+                    256630,
+                    265239,
+                    237383,
+                    278046,
+                    246272
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2910,
+                  "players": [
+                    "ea-240714-jill-roord",
+                    "ea-265293-maya-le-tissier",
+                    "ea-224293-ruben-neves",
+                    "ea-261733-sandy-baltimore",
+                    "ea-177003-luka-modric",
+                    "pickford",
+                    "tielemans",
+                    "osimhen",
+                    "tonali",
+                    "walsh"
+                  ],
+                  "eaIds": [
+                    240714,
+                    265293,
+                    224293,
+                    261733,
+                    177003,
+                    204935,
+                    216393,
+                    232293,
+                    241096,
+                    242830
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 990,
+                  "players": [
+                    "ea-245872-kim-little",
+                    "ea-229582-gianluca-mancini",
+                    "trent",
+                    "foden",
+                    "ea-247513-vanessa-gilles",
+                    "timber",
+                    "rogers",
+                    "ea-261740-jule-brand",
+                    "ea-212218-aymeric-laporte",
+                    "renard"
+                  ],
+                  "eaIds": [
+                    245872,
+                    229582,
+                    231281,
+                    237692,
+                    247513,
+                    251805,
+                    260247,
+                    261740,
+                    212218,
+                    227316
+                  ]
+                },
+                {
+                  "overall": 83,
+                  "rarity": 0,
+                  "score": 410,
+                  "price": 710,
+                  "players": [
+                    "ea-227647-maximilian-mittelstadt",
+                    "ea-236403-evan-ndicka",
+                    "ea-253124-matheus-nunes",
+                    "ea-257279-alex-baena",
+                    "ea-264864-kessya-bussy",
+                    "ea-264895-constance-picaudinconnu",
+                    "ea-265377-vanessa-fudalla",
+                    "ea-267531-romee-leuchter",
+                    "coman",
+                    "merino"
+                  ],
+                  "eaIds": [
+                    227647,
+                    236403,
+                    253124,
+                    257279,
+                    264864,
+                    264895,
+                    265377,
+                    267531,
+                    213345,
+                    225193
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "40",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-84-laliga-liga-f/",
+          "checkedAt": "2026-10-26T10:44:42.715Z"
+        },
+        {
+          "eaId": 129,
+          "name": "Liga F",
+          "target": 4500,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "platforms": {
+            "ps5": {
+              "pricedAt": "2026-10-26T10:35:31.796217Z",
+              "rates": [
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7400,
+                  "players": [
+                    "tah",
+                    "salah",
+                    "hemp",
+                    "berger",
+                    "rodman",
+                    "marquinhos",
+                    "dias",
+                    "ea-247819-nico-schlotterbeck",
+                    "musiala",
+                    "ea-263009-hannah-hampton"
+                  ],
+                  "eaIds": [
+                    213331,
+                    209331,
+                    257008,
+                    258310,
+                    266928,
+                    207865,
+                    239818,
+                    247819,
+                    256790,
+                    263009
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5500,
+                  "players": [
+                    "gyokeres",
+                    "ruiz",
+                    "ea-252154-marco-carnesecchi",
+                    "caicedo",
+                    "wirtz",
+                    "odegaard",
+                    "dimarco",
+                    "cucurella",
+                    "guimaraes"
+                  ],
+                  "eaIds": [
+                    241651,
+                    226271,
+                    252154,
+                    256079,
+                    256630,
+                    222665,
+                    226268,
+                    239231,
+                    247851
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2780,
+                  "players": [
+                    "ea-177003-luka-modric",
+                    "ea-245882-erin-cuthbert",
+                    "ea-268942-cata-coll",
+                    "xhaka",
+                    "swanson",
+                    "ea-241159-marc-guehi",
+                    "ea-248343-emily-fox",
+                    "ea-224293-ruben-neves",
+                    "ea-227337-svenja-huth",
+                    "ea-240714-jill-roord"
+                  ],
+                  "eaIds": [
+                    177003,
+                    245882,
+                    268942,
+                    199503,
+                    232073,
+                    241159,
+                    248343,
+                    224293,
+                    227337,
+                    240714
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 1030,
+                  "players": [
+                    "ea-193698-oliver-baumann",
+                    "lewandowski",
+                    "ea-223848-sergej-milinkovicsavic",
+                    "ea-239345-linda-dallmann",
+                    "zubimendi",
+                    "ea-261740-jule-brand",
+                    "ea-236987-boubacar-kamara",
+                    "ea-245824-ayaka-yamashita",
+                    "ea-254243-elliot-anderson",
+                    "ea-177683-yann-sommer"
+                  ],
+                  "eaIds": [
+                    193698,
+                    188545,
+                    223848,
+                    239345,
+                    248148,
+                    261740,
+                    236987,
+                    245824,
+                    254243,
+                    177683
+                  ]
+                },
+                {
+                  "overall": 83,
+                  "rarity": 0,
+                  "score": 410,
+                  "price": 700,
+                  "players": [
+                    "ea-203980-konstantinos-fortounis",
+                    "ea-212228-ivan-toney",
+                    "depaul",
+                    "coman",
+                    "ea-226998-magdalena-eriksson",
+                    "schick",
+                    "ea-236015-morgan-gibbswhite",
+                    "ea-237086-kim-min-jae",
+                    "ea-244778-trincao",
+                    "ea-250959-angelo-stiller"
+                  ],
+                  "eaIds": [
+                    203980,
+                    212228,
+                    212616,
+                    213345,
+                    226998,
+                    234236,
+                    236015,
+                    237086,
+                    244778,
+                    250959
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "30",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    }
+                  ]
+                }
+              ]
+            },
+            "pc": {
+              "pricedAt": "2026-10-26T10:35:32.361289Z",
+              "rates": [
+                {
+                  "overall": 87,
+                  "rarity": 0,
+                  "score": 5500,
+                  "price": 7650,
+                  "players": [
+                    "ea-259287-pernille-harder",
+                    "marquinhos",
+                    "berger",
+                    "maignan",
+                    "saka",
+                    "upamecano",
+                    "lautaro",
+                    "lavelle",
+                    "kobel",
+                    "barella"
+                  ],
+                  "eaIds": [
+                    259287,
+                    207865,
+                    258310,
+                    215698,
+                    246669,
+                    229558,
+                    231478,
+                    232075,
+                    235073,
+                    224232
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5710,
+                  "players": [
+                    "bremer",
+                    "ruiz",
+                    "cucurella",
+                    "guimaraes",
+                    "wirtz",
+                    "ea-265239-katie-mccabe",
+                    "bastoni",
+                    "cubarsi",
+                    "ea-246272-marie-katoto"
+                  ],
+                  "eaIds": [
+                    239580,
+                    226271,
+                    239231,
+                    247851,
+                    256630,
+                    265239,
+                    237383,
+                    278046,
+                    246272
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2910,
+                  "players": [
+                    "ea-240714-jill-roord",
+                    "ea-265293-maya-le-tissier",
+                    "ea-224293-ruben-neves",
+                    "ea-261733-sandy-baltimore",
+                    "ea-177003-luka-modric",
+                    "pickford",
+                    "tielemans",
+                    "osimhen",
+                    "tonali",
+                    "walsh"
+                  ],
+                  "eaIds": [
+                    240714,
+                    265293,
+                    224293,
+                    261733,
+                    177003,
+                    204935,
+                    216393,
+                    232293,
+                    241096,
+                    242830
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 990,
+                  "players": [
+                    "ea-245872-kim-little",
+                    "ea-229582-gianluca-mancini",
+                    "trent",
+                    "foden",
+                    "ea-247513-vanessa-gilles",
+                    "timber",
+                    "rogers",
+                    "ea-261740-jule-brand",
+                    "ea-212218-aymeric-laporte",
+                    "renard"
+                  ],
+                  "eaIds": [
+                    245872,
+                    229582,
+                    231281,
+                    237692,
+                    247513,
+                    251805,
+                    260247,
+                    261740,
+                    212218,
+                    227316
+                  ]
+                },
+                {
+                  "overall": 83,
+                  "rarity": 0,
+                  "score": 410,
+                  "price": 710,
+                  "players": [
+                    "ea-227647-maximilian-mittelstadt",
+                    "ea-236403-evan-ndicka",
+                    "ea-253124-matheus-nunes",
+                    "ea-257279-alex-baena",
+                    "ea-264864-kessya-bussy",
+                    "ea-264895-constance-picaudinconnu",
+                    "ea-265377-vanessa-fudalla",
+                    "ea-267531-romee-leuchter",
+                    "coman",
+                    "merino"
+                  ],
+                  "eaIds": [
+                    227647,
+                    236403,
+                    253124,
+                    257279,
+                    264864,
+                    264895,
+                    265377,
+                    267531,
+                    213345,
+                    225193
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 3,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 83,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 410
+                    }
+                  ]
+                },
+                {
+                  "key": "40",
+                  "groups": [
+                    {
+                      "overall": 87,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 5500
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-84-laliga-liga-f/",
+          "checkedAt": "2026-10-26T10:44:42.715Z"
+        }
+      ]
+    },
+    "sbc-premier-20261026": {
+      "segments": [
+        {
+          "eaId": 126,
+          "name": "Premier League",
+          "target": 6000,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "platforms": {
+            "ps5": {
+              "pricedAt": "2026-10-26T10:35:29.004569Z",
+              "rates": [
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12950,
+                  "players": [
+                    "kimmich",
+                    "rice",
+                    "banda",
+                    "oblak",
+                    "raya",
+                    "mapi",
+                    "ea-245830-yui-hasegawa",
+                    "buhl",
+                    "russo",
+                    "neves"
+                  ],
+                  "eaIds": [
+                    212622,
+                    234378,
+                    276359,
+                    200389,
+                    220901,
+                    236479,
+                    245830,
+                    248822,
+                    258980,
+                    272834
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5500,
+                  "players": [
+                    "gyokeres",
+                    "ruiz",
+                    "ea-252154-marco-carnesecchi",
+                    "caicedo",
+                    "wirtz",
+                    "odegaard",
+                    "dimarco",
+                    "cucurella",
+                    "guimaraes"
+                  ],
+                  "eaIds": [
+                    241651,
+                    226271,
+                    252154,
+                    256079,
+                    256630,
+                    222665,
+                    226268,
+                    239231,
+                    247851
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2780,
+                  "players": [
+                    "ea-177003-luka-modric",
+                    "ea-245882-erin-cuthbert",
+                    "ea-268942-cata-coll",
+                    "xhaka",
+                    "swanson",
+                    "ea-241159-marc-guehi",
+                    "ea-248343-emily-fox",
+                    "ea-224293-ruben-neves",
+                    "ea-227337-svenja-huth",
+                    "ea-240714-jill-roord"
+                  ],
+                  "eaIds": [
+                    177003,
+                    245882,
+                    268942,
+                    199503,
+                    232073,
+                    241159,
+                    248343,
+                    224293,
+                    227337,
+                    240714
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 1030,
+                  "players": [
+                    "ea-193698-oliver-baumann",
+                    "lewandowski",
+                    "ea-223848-sergej-milinkovicsavic",
+                    "ea-239345-linda-dallmann",
+                    "zubimendi",
+                    "ea-261740-jule-brand",
+                    "ea-236987-boubacar-kamara",
+                    "ea-245824-ayaka-yamashita",
+                    "ea-254243-elliot-anderson",
+                    "ea-177683-yann-sommer"
+                  ],
+                  "eaIds": [
+                    193698,
+                    188545,
+                    223848,
+                    239345,
+                    248148,
+                    261740,
+                    236987,
+                    245824,
+                    254243,
+                    177683
+                  ]
+                },
+                {
+                  "overall": 81,
+                  "rarity": 0,
+                  "score": 280,
+                  "price": 650,
+                  "players": [
+                    "ea-72149-ainhoa-marin",
+                    "ea-73078-kaishu-sano",
+                    "ea-181458-ivan-perisic",
+                    "ea-192629-iago-aspas",
+                    "ea-192883-henrikh-mkhitaryan",
+                    "koke",
+                    "sabitzer",
+                    "kovacic",
+                    "ea-207439-leandro-paredes",
+                    "ea-208787-adrien-thomasson"
+                  ],
+                  "eaIds": [
+                    72149,
+                    73078,
+                    181458,
+                    192629,
+                    192883,
+                    193747,
+                    204923,
+                    207410,
+                    207439,
+                    208787
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 7,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 2,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            },
+            "pc": {
+              "pricedAt": "2026-10-26T10:35:29.500018Z",
+              "rates": [
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12600,
+                  "players": [
+                    "buhl",
+                    "mapi",
+                    "neves",
+                    "oblak",
+                    "raya",
+                    "rice",
+                    "ea-245830-yui-hasegawa",
+                    "kimmich",
+                    "russo",
+                    "banda"
+                  ],
+                  "eaIds": [
+                    248822,
+                    236479,
+                    272834,
+                    200389,
+                    220901,
+                    234378,
+                    245830,
+                    212622,
+                    258980,
+                    276359
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5710,
+                  "players": [
+                    "bremer",
+                    "ruiz",
+                    "cucurella",
+                    "guimaraes",
+                    "wirtz",
+                    "ea-265239-katie-mccabe",
+                    "bastoni",
+                    "cubarsi",
+                    "ea-246272-marie-katoto"
+                  ],
+                  "eaIds": [
+                    239580,
+                    226271,
+                    239231,
+                    247851,
+                    256630,
+                    265239,
+                    237383,
+                    278046,
+                    246272
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2910,
+                  "players": [
+                    "ea-240714-jill-roord",
+                    "ea-265293-maya-le-tissier",
+                    "ea-224293-ruben-neves",
+                    "ea-261733-sandy-baltimore",
+                    "ea-177003-luka-modric",
+                    "pickford",
+                    "tielemans",
+                    "osimhen",
+                    "tonali",
+                    "walsh"
+                  ],
+                  "eaIds": [
+                    240714,
+                    265293,
+                    224293,
+                    261733,
+                    177003,
+                    204935,
+                    216393,
+                    232293,
+                    241096,
+                    242830
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 990,
+                  "players": [
+                    "ea-245872-kim-little",
+                    "ea-229582-gianluca-mancini",
+                    "trent",
+                    "foden",
+                    "ea-247513-vanessa-gilles",
+                    "timber",
+                    "rogers",
+                    "ea-261740-jule-brand",
+                    "ea-212218-aymeric-laporte",
+                    "renard"
+                  ],
+                  "eaIds": [
+                    245872,
+                    229582,
+                    231281,
+                    237692,
+                    247513,
+                    251805,
+                    260247,
+                    261740,
+                    212218,
+                    227316
+                  ]
+                },
+                {
+                  "overall": 81,
+                  "rarity": 0,
+                  "score": 280,
+                  "price": 650,
+                  "players": [
+                    "ea-80028-dudinha",
+                    "ea-192123-chris-wood",
+                    "ea-192629-iago-aspas",
+                    "ea-192883-henrikh-mkhitaryan",
+                    "koke",
+                    "ea-202024-remo-freuler",
+                    "sabitzer",
+                    "kovacic",
+                    "ea-207439-leandro-paredes",
+                    "ea-216354-andrej-kramaric"
+                  ],
+                  "eaIds": [
+                    80028,
+                    192123,
+                    192629,
+                    192883,
+                    193747,
+                    202024,
+                    204923,
+                    207410,
+                    207439,
+                    216354
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 7,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-83-premier-league-barclays-wsl/",
+          "checkedAt": "2026-10-26T10:44:42.715Z"
+        },
+        {
+          "eaId": 127,
+          "name": "Barclays WSL",
+          "target": 6000,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "platforms": {
+            "ps5": {
+              "pricedAt": "2026-10-26T10:35:29.954727Z",
+              "rates": [
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12950,
+                  "players": [
+                    "kimmich",
+                    "rice",
+                    "banda",
+                    "oblak",
+                    "raya",
+                    "mapi",
+                    "ea-245830-yui-hasegawa",
+                    "buhl",
+                    "russo",
+                    "neves"
+                  ],
+                  "eaIds": [
+                    212622,
+                    234378,
+                    276359,
+                    200389,
+                    220901,
+                    236479,
+                    245830,
+                    248822,
+                    258980,
+                    272834
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5500,
+                  "players": [
+                    "gyokeres",
+                    "ruiz",
+                    "ea-252154-marco-carnesecchi",
+                    "caicedo",
+                    "wirtz",
+                    "odegaard",
+                    "dimarco",
+                    "cucurella",
+                    "guimaraes"
+                  ],
+                  "eaIds": [
+                    241651,
+                    226271,
+                    252154,
+                    256079,
+                    256630,
+                    222665,
+                    226268,
+                    239231,
+                    247851
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2780,
+                  "players": [
+                    "ea-177003-luka-modric",
+                    "ea-245882-erin-cuthbert",
+                    "ea-268942-cata-coll",
+                    "xhaka",
+                    "swanson",
+                    "ea-241159-marc-guehi",
+                    "ea-248343-emily-fox",
+                    "ea-224293-ruben-neves",
+                    "ea-227337-svenja-huth",
+                    "ea-240714-jill-roord"
+                  ],
+                  "eaIds": [
+                    177003,
+                    245882,
+                    268942,
+                    199503,
+                    232073,
+                    241159,
+                    248343,
+                    224293,
+                    227337,
+                    240714
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 1030,
+                  "players": [
+                    "ea-193698-oliver-baumann",
+                    "lewandowski",
+                    "ea-223848-sergej-milinkovicsavic",
+                    "ea-239345-linda-dallmann",
+                    "zubimendi",
+                    "ea-261740-jule-brand",
+                    "ea-236987-boubacar-kamara",
+                    "ea-245824-ayaka-yamashita",
+                    "ea-254243-elliot-anderson",
+                    "ea-177683-yann-sommer"
+                  ],
+                  "eaIds": [
+                    193698,
+                    188545,
+                    223848,
+                    239345,
+                    248148,
+                    261740,
+                    236987,
+                    245824,
+                    254243,
+                    177683
+                  ]
+                },
+                {
+                  "overall": 81,
+                  "rarity": 0,
+                  "score": 280,
+                  "price": 650,
+                  "players": [
+                    "ea-72149-ainhoa-marin",
+                    "ea-73078-kaishu-sano",
+                    "ea-181458-ivan-perisic",
+                    "ea-192629-iago-aspas",
+                    "ea-192883-henrikh-mkhitaryan",
+                    "koke",
+                    "sabitzer",
+                    "kovacic",
+                    "ea-207439-leandro-paredes",
+                    "ea-208787-adrien-thomasson"
+                  ],
+                  "eaIds": [
+                    72149,
+                    73078,
+                    181458,
+                    192629,
+                    192883,
+                    193747,
+                    204923,
+                    207410,
+                    207439,
+                    208787
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 7,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 2,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "10",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            },
+            "pc": {
+              "pricedAt": "2026-10-26T10:35:30.467462Z",
+              "rates": [
+                {
+                  "overall": 88,
+                  "rarity": 0,
+                  "score": 8300,
+                  "price": 12600,
+                  "players": [
+                    "buhl",
+                    "mapi",
+                    "neves",
+                    "oblak",
+                    "raya",
+                    "rice",
+                    "ea-245830-yui-hasegawa",
+                    "kimmich",
+                    "russo",
+                    "banda"
+                  ],
+                  "eaIds": [
+                    248822,
+                    236479,
+                    272834,
+                    200389,
+                    220901,
+                    234378,
+                    245830,
+                    212622,
+                    258980,
+                    276359
+                  ]
+                },
+                {
+                  "overall": 86,
+                  "rarity": 0,
+                  "score": 4100,
+                  "price": 5710,
+                  "players": [
+                    "bremer",
+                    "ruiz",
+                    "cucurella",
+                    "guimaraes",
+                    "wirtz",
+                    "ea-265239-katie-mccabe",
+                    "bastoni",
+                    "cubarsi",
+                    "ea-246272-marie-katoto"
+                  ],
+                  "eaIds": [
+                    239580,
+                    226271,
+                    239231,
+                    247851,
+                    256630,
+                    265239,
+                    237383,
+                    278046,
+                    246272
+                  ]
+                },
+                {
+                  "overall": 85,
+                  "rarity": 0,
+                  "score": 2100,
+                  "price": 2910,
+                  "players": [
+                    "ea-240714-jill-roord",
+                    "ea-265293-maya-le-tissier",
+                    "ea-224293-ruben-neves",
+                    "ea-261733-sandy-baltimore",
+                    "ea-177003-luka-modric",
+                    "pickford",
+                    "tielemans",
+                    "osimhen",
+                    "tonali",
+                    "walsh"
+                  ],
+                  "eaIds": [
+                    240714,
+                    265293,
+                    224293,
+                    261733,
+                    177003,
+                    204935,
+                    216393,
+                    232293,
+                    241096,
+                    242830
+                  ]
+                },
+                {
+                  "overall": 84,
+                  "rarity": 0,
+                  "score": 830,
+                  "price": 990,
+                  "players": [
+                    "ea-245872-kim-little",
+                    "ea-229582-gianluca-mancini",
+                    "trent",
+                    "foden",
+                    "ea-247513-vanessa-gilles",
+                    "timber",
+                    "rogers",
+                    "ea-261740-jule-brand",
+                    "ea-212218-aymeric-laporte",
+                    "renard"
+                  ],
+                  "eaIds": [
+                    245872,
+                    229582,
+                    231281,
+                    237692,
+                    247513,
+                    251805,
+                    260247,
+                    261740,
+                    212218,
+                    227316
+                  ]
+                },
+                {
+                  "overall": 81,
+                  "rarity": 0,
+                  "score": 280,
+                  "price": 650,
+                  "players": [
+                    "ea-80028-dudinha",
+                    "ea-192123-chris-wood",
+                    "ea-192629-iago-aspas",
+                    "ea-192883-henrikh-mkhitaryan",
+                    "koke",
+                    "ea-202024-remo-freuler",
+                    "sabitzer",
+                    "kovacic",
+                    "ea-207439-leandro-paredes",
+                    "ea-216354-andrej-kramaric"
+                  ],
+                  "eaIds": [
+                    80028,
+                    192123,
+                    192629,
+                    192883,
+                    193747,
+                    202024,
+                    204923,
+                    207410,
+                    207439,
+                    216354
+                  ]
+                }
+              ],
+              "routes": [
+                {
+                  "key": "cheapest",
+                  "groups": [
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 7,
+                      "unitScore": 830
+                    },
+                    {
+                      "overall": 81,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 280
+                    }
+                  ]
+                },
+                {
+                  "key": "5",
+                  "groups": [
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    },
+                    {
+                      "overall": 84,
+                      "rarity": 0,
+                      "count": 5,
+                      "unitScore": 830
+                    }
+                  ]
+                },
+                {
+                  "key": "15",
+                  "groups": [
+                    {
+                      "overall": 86,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 4100
+                    },
+                    {
+                      "overall": 85,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 2100
+                    }
+                  ]
+                },
+                {
+                  "key": "quickest",
+                  "groups": [
+                    {
+                      "overall": 88,
+                      "rarity": 0,
+                      "count": 1,
+                      "unitScore": 8300
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-83-premier-league-barclays-wsl/",
+          "checkedAt": "2026-10-26T10:44:42.715Z"
+        }
+      ]
+    }
+  },
+  "classic": {
+    "sbc-candy-20261026": {
+      "segments": [
+        {
+          "name": "Scary Candy",
+          "rules": {
+            "playerCount": 6,
+            "chemistry": 16,
+            "maxSameLeague": 5,
+            "minSameClub": 2,
+            "maxNations": 4,
+            "minGold": 5,
+            "minQuality": "silver"
+          },
+          "formation": "4231-2",
+          "activeSlots": [
+            "gk",
+            "lb",
+            "lcb",
+            "rcb",
+            "rb",
+            "st"
+          ],
+          "squad": {
+            "gk": "ea-201269-frederik-rnnow",
+            "lb": "ea-209846-christian-gunter",
+            "lcb": "ea-265576-leopold-querfeld",
+            "rcb": "ea-239340-julian-chabot",
+            "rb": "ea-257771-josip-juranovic",
+            "st": "ea-188335-ante-budimir"
+          },
+          "sourceRequirements": [
+            "Same league: Max. 5 players",
+            "Same club: Min. 2 players",
+            "Nations: Max. 4",
+            "Quality: Min. 5 Gold players",
+            "Quality: Min. Silver",
+            "Chemistry: Min. 16",
+            "Players: 6"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-73-scary-candy/",
+          "checkedAt": "2026-10-26T10:44:42.715Z",
+          "provenance": "local-validated-example"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "sbc-hero-20261026",
+      "setEaId": 87,
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-87-base-hero-player-pick/",
+      "sourceSha256": "1cfe158c059cf6f8c5cd5ff50cf986b24a89e3ce951f7590349a57f2ea83a127",
+      "requirements": [
+        {
+          "eaId": 132,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "target": 200000,
+          "reward": []
+        }
+      ],
+      "repeatability": "NON_REPEATABLE",
+      "groupReward": [
+        {
+          "id": 24572,
+          "game": "27",
+          "count": 1,
+          "isUntradeable": true,
+          "other": "1 of 4 Base Hero Player Pick",
+          "coins": null,
+          "eventToken": null,
+          "eventTokenId": null,
+          "pack": null,
+          "playerEaId": null,
+          "evolutionName": null,
+          "evolutionSlug": null,
+          "pool": null,
+          "player": null
+        }
+      ],
+      "comparisonUrls": [
+        "https://www.futbin.com/27/squad-building-challenge/87",
+        "https://futzip.com/fc27/sbc/points?challenge=129"
+      ]
+    },
+    {
+      "id": "sbc-laliga-20261026",
+      "setEaId": 84,
+      "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-84-laliga-liga-f/",
+      "sourceSha256": "e80f6a5a45a4f804b50906146145dbef828113cf2c362353e186e3e5555c5b49",
+      "requirements": [
+        {
+          "eaId": 128,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "target": 4500,
+          "reward": [
+            {
+              "id": 24570,
+              "game": "27",
+              "count": 1,
+              "isUntradeable": true,
+              "other": null,
+              "coins": null,
+              "eventToken": null,
+              "eventTokenId": null,
+              "pack": "LALIGA Bronze & Silver Players Pack",
+              "playerEaId": null,
+              "evolutionName": null,
+              "evolutionSlug": null,
+              "pool": null,
+              "player": null
+            }
+          ]
+        },
+        {
+          "eaId": 129,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "target": 4500,
+          "reward": [
+            {
+              "id": 24571,
+              "game": "27",
+              "count": 1,
+              "isUntradeable": true,
+              "other": null,
+              "coins": null,
+              "eventToken": null,
+              "eventTokenId": null,
+              "pack": "Liga F Bronze & Silver Players Pack",
+              "playerEaId": null,
+              "evolutionName": null,
+              "evolutionSlug": null,
+              "pool": null,
+              "player": null
+            }
+          ]
+        }
+      ],
+      "repeatability": "UNLIMITED",
+      "groupReward": [
+        {
+          "id": 24569,
+          "game": "27",
+          "count": 1,
+          "isUntradeable": true,
+          "other": null,
+          "coins": null,
+          "eventToken": null,
+          "eventTokenId": null,
+          "pack": "2x Max 85 Gold Players Pack",
+          "playerEaId": null,
+          "evolutionName": null,
+          "evolutionSlug": null,
+          "pool": null,
+          "player": null
+        }
+      ],
+      "comparisonUrls": [
+        "https://www.futbin.com/27/squad-building-challenge/84",
+        "https://futzip.com/fc27/sbc/points?challenge=129"
+      ]
+    },
+    {
+      "id": "sbc-premier-20261026",
+      "setEaId": 83,
+      "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-83-premier-league-barclays-wsl/",
+      "sourceSha256": "87b0a3ba64a93515e05d0119da54e7bbb66d362d5c5d0c7c6249b4e1d43fcc40",
+      "requirements": [
+        {
+          "eaId": 126,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "target": 6000,
+          "reward": [
+            {
+              "id": 24567,
+              "game": "27",
+              "count": 1,
+              "isUntradeable": true,
+              "other": null,
+              "coins": null,
+              "eventToken": null,
+              "eventTokenId": null,
+              "pack": "Premier League Bronze & Silver Players Pack",
+              "playerEaId": null,
+              "evolutionName": null,
+              "evolutionSlug": null,
+              "pool": null,
+              "player": null
+            }
+          ]
+        },
+        {
+          "eaId": 127,
+          "requirements": [
+            "Rating: Min. 45"
+          ],
+          "target": 6000,
+          "reward": [
+            {
+              "id": 24568,
+              "game": "27",
+              "count": 1,
+              "isUntradeable": true,
+              "other": null,
+              "coins": null,
+              "eventToken": null,
+              "eventTokenId": null,
+              "pack": "Barclays WSL Bronze & Silver Players Pack",
+              "playerEaId": null,
+              "evolutionName": null,
+              "evolutionSlug": null,
+              "pool": null,
+              "player": null
+            }
+          ]
+        }
+      ],
+      "repeatability": "UNLIMITED",
+      "groupReward": [
+        {
+          "id": 24566,
+          "game": "27",
+          "count": 1,
+          "isUntradeable": true,
+          "other": null,
+          "coins": null,
+          "eventToken": null,
+          "eventTokenId": null,
+          "pack": "2x Max 85 Gold Players Pack",
+          "playerEaId": null,
+          "evolutionName": null,
+          "evolutionSlug": null,
+          "pool": null,
+          "player": null
+        }
+      ],
+      "comparisonUrls": [
+        "https://www.futbin.com/27/squad-building-challenge/83",
+        "https://futzip.com/fc27/sbc/points?challenge=129"
+      ]
+    },
+    {
+      "id": "sbc-candy-20261026",
+      "setEaId": 73,
+      "sourceUrl": "https://www.fut.gg/sbc/challenges/27-73-scary-candy/",
+      "sourceSha256": "d2ece5f2e017b67881e3ff91e62fb524a97fd89cb8c18ab8fdf1fe5b28909f91",
+      "requirements": [
+        {
+          "eaId": 113,
+          "requirements": [
+            "Same league: Max. 5 players",
+            "Same club: Min. 2 players",
+            "Nations: Max. 4",
+            "Quality: Min. 5 Gold players",
+            "Quality: Min. Silver",
+            "Chemistry: Min. 16",
+            "Players: 6"
+          ],
+          "target": null,
+          "reward": []
+        }
+      ],
+      "repeatability": "NON_REPEATABLE",
+      "groupReward": [
+        {
+          "id": 24565,
+          "game": "27",
+          "count": 1,
+          "isUntradeable": false,
+          "other": null,
+          "coins": null,
+          "eventToken": null,
+          "eventTokenId": null,
+          "pack": "Mixed Players Pack",
+          "playerEaId": null,
+          "evolutionName": null,
+          "evolutionSlug": null,
+          "pool": null,
+          "player": null
+        }
+      ],
+      "comparisonUrls": [
+        "https://www.futbin.com/27/squad-building-challenge/73",
+        "https://www.futwiz.com/sbcs/scary-candy/73",
+        "https://futmind.com/challenges/113/scary-candy"
+      ]
+    }
+  ],
+  "notes": [
+    "New sets compared with FUTBIN, FUT.GG and FUTWIZ/FUT Mind. Streamlined item scores independently compared with FUTZIP.",
+    "Scary Candy is a locally assembled valid example, not an imported or cheapest roster. Public FUT.GG squad links returned a loading shell; alternative article rosters were not accepted without verifying exact item identities and positions.",
+    "Source credits and audit dates remain internal. Votes on an SBC are not solution-validity evidence."
+  ],
+  "activeSets": [
+    {
+      "eaId": 72,
+      "name": "Spooky Nights",
+      "url": "https://www.fut.gg/sbc/challenges/27-72-spooky-nights/",
+      "challengeEaIds": [
+        112
+      ],
+      "siteIds": [
+        "sbc-spooky-20261025"
+      ]
+    },
+    {
+      "eaId": 87,
+      "name": "Base Hero Player Pick",
+      "url": "https://www.fut.gg/sbc/players/27-87-base-hero-player-pick/",
+      "challengeEaIds": [
+        132
+      ],
+      "siteIds": [
+        "sbc-hero-20261026"
+      ]
+    },
+    {
+      "eaId": 84,
+      "name": "LALIGA & Liga F",
+      "url": "https://www.fut.gg/sbc/upgrades/27-84-laliga-liga-f/",
+      "challengeEaIds": [
+        128,
+        129
+      ],
+      "siteIds": [
+        "sbc-laliga-20261026"
+      ]
+    },
+    {
+      "eaId": 83,
+      "name": "Premier League & Barclays WSL",
+      "url": "https://www.fut.gg/sbc/upgrades/27-83-premier-league-barclays-wsl/",
+      "challengeEaIds": [
+        126,
+        127
+      ],
+      "siteIds": [
+        "sbc-premier-20261026"
+      ]
+    },
+    {
+      "eaId": 73,
+      "name": "Scary Candy",
+      "url": "https://www.fut.gg/sbc/challenges/27-73-scary-candy/",
+      "challengeEaIds": [
+        113
+      ],
+      "siteIds": [
+        "sbc-candy-20261026"
+      ]
+    },
+    {
+      "eaId": 85,
+      "name": "Emre Mor",
+      "url": "https://www.fut.gg/sbc/players/27-85-emre-mor/",
+      "challengeEaIds": [
+        130
+      ],
+      "siteIds": [
+        "sbc-mor-20261025"
+      ]
+    },
+    {
+      "eaId": 79,
+      "name": "Nick Woltemade",
+      "url": "https://www.fut.gg/sbc/players/27-79-nick-woltemade/",
+      "challengeEaIds": [
+        122
+      ],
+      "siteIds": [
+        "sbc-woltemade-20261025"
+      ]
+    },
+    {
+      "eaId": 86,
+      "name": "81+ TOTW 1-6 Upgrade",
+      "url": "https://www.fut.gg/sbc/upgrades/27-86-81-totw-1-6-upgrade/",
+      "challengeEaIds": [
+        131
+      ],
+      "siteIds": [
+        "sbc-totw6-20261025"
+      ]
+    },
+    {
+      "eaId": 59,
+      "name": "Marquee Matchups",
+      "url": "https://www.fut.gg/sbc/challenges/27-59-marquee-matchups/",
+      "challengeEaIds": [
+        96,
+        97,
+        98,
+        99
+      ],
+      "siteIds": [
+        "sbc-mm-96-20261022",
+        "sbc-mm-97-20261022",
+        "sbc-mm-98-20261022",
+        "sbc-mm-99-20261022"
+      ]
+    },
+    {
+      "eaId": 67,
+      "name": "NWSL Future Stars Player Pick",
+      "url": "https://www.fut.gg/sbc/players/27-67-nwsl-future-stars-player-pick/",
+      "challengeEaIds": [
+        107
+      ],
+      "siteIds": [
+        "sbc-nwsl-20261025"
+      ]
+    },
+    {
+      "eaId": 64,
+      "name": "MLS Future Stars Player Pick",
+      "url": "https://www.fut.gg/sbc/players/27-64-mls-future-stars-player-pick/",
+      "challengeEaIds": [
+        104
+      ],
+      "siteIds": [
+        "sbc-fs-mls-pick-20261020"
+      ]
+    },
+    {
+      "eaId": 71,
+      "name": "2x 83+ Upgrade",
+      "url": "https://www.fut.gg/sbc/upgrades/27-71-2x-83-upgrade/",
+      "challengeEaIds": [
+        111
+      ],
+      "siteIds": [
+        "sbc-upgrade-83x2-20261020"
+      ]
+    },
+    {
+      "eaId": 66,
+      "name": "1 of 3 79+ Gold Player Pick",
+      "url": "https://www.fut.gg/sbc/upgrades/27-66-1-of-3-79-gold-player-pick/",
+      "challengeEaIds": [
+        106
+      ],
+      "siteIds": [
+        "sbc-player-pick-79-20261019"
+      ]
+    },
+    {
+      "eaId": 58,
+      "name": "Ligue 1 POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-58-ligue-1-potm-september/",
+      "challengeEaIds": [
+        95
+      ],
+      "siteIds": [
+        "sbc-potm-ferran"
+      ]
+    },
+    {
+      "eaId": 42,
+      "name": "Liga F POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-42-liga-f-potm-september/",
+      "challengeEaIds": [
+        76
+      ],
+      "siteIds": [
+        "sbc-potm-pina"
+      ]
+    },
+    {
+      "eaId": 33,
+      "name": "LALIGA POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-33-laliga-potm-september/",
+      "challengeEaIds": [
+        63
+      ],
+      "siteIds": [
+        "sbc-potm-raphinha"
+      ]
+    },
+    {
+      "eaId": 34,
+      "name": "Premier League POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-34-premier-league-potm-september/",
+      "challengeEaIds": [
+        64
+      ],
+      "siteIds": [
+        "sbc-potm-gross"
+      ]
+    },
+    {
+      "eaId": 39,
+      "name": "Bundesliga POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-39-bundesliga-potm-september/",
+      "challengeEaIds": [
+        72
+      ],
+      "siteIds": [
+        "sbc-potm-olise"
+      ]
+    },
+    {
+      "eaId": 32,
+      "name": "Serie A POTM September",
+      "url": "https://www.fut.gg/sbc/players/27-32-serie-a-potm-september/",
+      "challengeEaIds": [
+        62
+      ],
+      "siteIds": [
+        "sbc-potm-malen"
+      ]
+    },
+    {
+      "eaId": 20,
+      "name": "Intro to Player SBCs",
+      "url": "https://www.fut.gg/sbc/foundations/27-20-intro-to-player-sbcs/",
+      "challengeEaIds": [
+        47
+      ],
+      "siteIds": [
+        "sbc-intro-espinoza"
+      ]
+    },
+    {
+      "eaId": 6,
+      "name": "Gold Upgrade",
+      "url": "https://www.fut.gg/sbc/upgrades/27-6-gold-upgrade/",
+      "challengeEaIds": [
+        18
+      ],
+      "siteIds": [
+        "sbc-gold-upgrade"
+      ]
+    },
+    {
+      "eaId": 5,
+      "name": "Silver Upgrade",
+      "url": "https://www.fut.gg/sbc/upgrades/27-5-silver-upgrade/",
+      "challengeEaIds": [
+        42
+      ],
+      "siteIds": [
+        "sbc-silver-upgrade"
+      ]
+    },
+    {
+      "eaId": 4,
+      "name": "Bronze Upgrade",
+      "url": "https://www.fut.gg/sbc/upgrades/27-4-bronze-upgrade/",
+      "challengeEaIds": [
+        16
+      ],
+      "siteIds": [
+        "sbc-bronze-upgrade"
+      ]
+    },
+    {
+      "eaId": 10,
+      "name": "League & Nation Advanced",
+      "url": "https://www.fut.gg/sbc/challenges/27-10-league-nation-advanced/",
+      "challengeEaIds": [
+        25,
+        26,
+        27
+      ],
+      "siteIds": [
+        "sbc-league-nation-advanced"
+      ]
+    },
+    {
+      "eaId": 9,
+      "name": "Gold Re-Roll",
+      "url": "https://www.fut.gg/sbc/foundations/27-9-gold-re-roll/",
+      "challengeEaIds": [
+        24
+      ],
+      "siteIds": [
+        "sbc-gold-reroll"
+      ]
+    },
+    {
+      "eaId": 8,
+      "name": "Bronze and Silver Re-roll",
+      "url": "https://www.fut.gg/sbc/foundations/27-8-bronze-and-silver-re-roll/",
+      "challengeEaIds": [
+        23
+      ],
+      "siteIds": [
+        "sbc-bronze-silver-reroll"
+      ]
+    },
+    {
+      "eaId": 7,
+      "name": "Intro to Streamlined SBCs",
+      "url": "https://www.fut.gg/sbc/foundations/27-7-getting-started/",
+      "challengeEaIds": [
+        19,
+        20,
+        22,
+        33
+      ],
+      "siteIds": [
+        "sbc-getting-started"
+      ]
+    },
+    {
+      "eaId": 3,
+      "name": "Intro to Upgrade SBCs",
+      "url": "https://www.fut.gg/sbc/foundations/27-3-intro-to-upgrade-sbcs/",
+      "challengeEaIds": [
+        13,
+        14,
+        15
+      ],
+      "siteIds": [
+        "sbc-intro-upgrades"
+      ]
+    },
+    {
+      "eaId": 1,
+      "name": "Intro to SBCs",
+      "url": "https://www.fut.gg/sbc/foundations/27-1-intro-to-sbcs/",
+      "challengeEaIds": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "siteIds": [
+        "sbc-intro-sbcs"
+      ]
+    }
+  ]
+}
