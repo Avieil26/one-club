@@ -1,0 +1,45 @@
+name: Gallery token planner checks
+on:
+  push:
+    branches: ['preview/gallery-token-planner-20261026']
+permissions:
+  contents: read
+concurrency:
+  group: gallery-token-planner-20261026
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXPO_OFFLINE: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: node scripts/verify-gallery.mjs
+      - run: npm run verify:mobile && npm run verify:startup
+      - run: npm run build:web -- --max-workers 2
+      - run: npx expo export -p android --output-dir /tmp/fc27-gallery-android --max-workers 2
+      - run: npx eslint components/GalleryTokenPlanner.tsx app/gallery/planner.tsx lib/galleryPlanner.ts components/GalleryUI.tsx components/GalleryCommunity.tsx 'app/(tabs)/gallery.tsx' 'app/gallery/[id].tsx' lib/galleryCommunity.ts lib/galleryData.ts lib/galleryScore.ts lib/galleryTypes.ts lib/useGallerySelection.ts components/SiteNav.tsx components/MobileTabBar.tsx 'app/(tabs)/_layout.tsx' app/admin/queue.tsx
+      - name: Existing repository lint baseline
+        continue-on-error: true
+        run: npm run lint
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/verify-gallery-ui.mjs
+        timeout-minutes: 5
+      - run: node scripts/verify-gallery-planner-ui.mjs
+        timeout-minutes: 6
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: gallery-planner-ui-screenshots
+          path: |
+            preview/gallery-qa/
+            preview/planner-qa/

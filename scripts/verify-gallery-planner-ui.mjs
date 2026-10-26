@@ -1,0 +1,95 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+const {chromium}=await import(process.env.FC27_PLAYWRIGHT_MODULE||'playwright');
+const root=path.resolve('dist'),errors=[],requests=[];
+const server=http.createServer((req,res)=>{let file=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!fs.existsSync(file)||fs.statSync(file).isDirectory())file=root+'/index.html';res.setHeader('Content-Type',({'.js':'application/javascript','.html':'text/html','.json':'application/json','.png':'image/png','.webp':'image/webp','.ico':'image/x-icon','.ttf':'font/ttf'})[path.extname(file)]||'application/octet-stream');fs.createReadStream(file).pipe(res);});
+await new Promise(r=>server.listen(8101,'127.0.0.1',r));
+const browser=await chromium.launch({headless:true,...(process.env.FC27_CHROMIUM_PATH?{executablePath:process.env.FC27_CHROMIUM_PATH}:{}),args:['--no-sandbox','--disable-dev-shm-usage']});
+const output=process.env.FC27_QA_OUTPUT || 'preview/planner-qa';
+fs.mkdirSync(output,{recursive:true});
+async function loadedCards(page, scope) {
+ const cards=page.getByTestId(scope).locator('img[src*="futgg-player-item-card"]');
+ assert(await cards.count()>0,'Real player card images must be rendered');
+ await cards.evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
+ assert(await cards.evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),'Player art did not load');
+}
+async function noOverflow(page, label) {
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),label+' page overflow');
+ const escaped=await page.locator('[data-testid="gallery-selected-card"], [data-testid="gallery-set-tile"], [data-testid="gallery-grade-selector"]').evaluateAll(elements=>elements.filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.left< -2||r.right>innerWidth+2);}).length);
+ assert.equal(escaped,0,label+' clipped cards or grade controls');
+}
+const imageCache=new Map();
+async function routeOriginalImages(context){
+ if(!process.env.FC27_PROXY_IMAGE_CURL)return;
+ const {promisify}=await import('node:util');const {execFile}=await import('node:child_process');const run=promisify(execFile);
+ await context.route('https://game-assets.fut.gg/**',async route=>{const url=route.request().url();if(!imageCache.has(url))imageCache.set(url,run('curl',['--fail','--max-time','35','-sS',url],{encoding:'buffer',maxBuffer:5*1024*1024}).then(r=>r.stdout));try{const body=await imageCache.get(url);await route.fulfill({status:200,contentType:body[0]===137?'image/png':'image/webp',body});}catch{await route.abort();}});
+}
+try{
+ for(const language of ['he','en'])for(const width of [360,390,1280]){
+  const context=await browser.newContext({viewport:{width,height:1000}});await routeOriginalImages(context);
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+  await context.addInitScript(language=>{
+   if(location.origin==='null')return;
+   const uid='50000000-0000-4000-8000-000000000001',exp=Math.floor(Date.now()/1000)+3600;
+   const token=btoa(JSON.stringify({alg:'HS256',typ:'JWT'}))+'.'+btoa(JSON.stringify({sub:uid,exp,role:'authenticated'}))+'.local-qa';
+   localStorage.setItem('fc27-language',language);localStorage.setItem('futz-cookie-notice','essential-2026-09-27');
+   localStorage.setItem('futz-terms-accepted-'+uid,'2026-09-28-v1');
+   localStorage.setItem('sb-hxjgphhcspzjnkkzdmpk-auth-token',JSON.stringify({access_token:token,refresh_token:'local-qa',expires_at:exp,token_type:'bearer',user:{id:uid,email:'gallery-qa@example.invalid',aud:'authenticated',role:'authenticated',user_metadata:{display_name:'Gallery QA'},app_metadata:{provider:'email'},created_at:new Date().toISOString()}}));
+  },language);
+  await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{const url=new URL(route.request().url());let body=[];if(url.pathname.endsWith('/rpc/browse_site'))body={};await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});});
+
+  const t=(he,en)=>language==='he'?he:en;
+  await page.goto('http://127.0.0.1:8101/gallery');
+  await page.getByTestId('gallery-open-planner').click();
+  await page.getByTestId('planner-calculate').waitFor();
+  await page.getByTestId('planner-calculate').click();
+  await page.getByTestId('planner-result').waitFor();
+  assert.equal(await page.getByTestId('planner-open-0').count(),1);
+  assert(Number((await page.getByTestId('planner-total-cost').innerText()).replace(/[^0-9]/g,''))<=75000);
+  await noOverflow(page,'Planner route');
+  await page.screenshot({path:path.join(output,`planner-${language}-${width}.png`),fullPage:false});
+  await page.getByTestId('planner-status').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(output,`route-${language}-${width}.png`),fullPage:false});
+  await page.getByRole('button',{name:t('שמירת המסלול וההתקדמות','Save route and progress'),exact:true}).click();
+  await page.getByTestId('planner-message').waitFor();
+  await page.reload();await page.getByTestId('planner-result').waitFor();
+  await page.getByTestId('planner-open-0').click();
+  await page.getByText(t('נבחר במתכנן הטוקנים','Selected by token planner'),{exact:false}).waitFor();
+  await page.getByRole('button',{name:t('צפייה ובחירת הפתרון','View and choose lineup'),exact:true}).first().click();
+  assert(await page.getByTestId('gallery-selected-card').count()>0);
+  await noOverflow(page,'Planner lineup');
+  await page.goto('http://127.0.0.1:8101/gallery/planner');await page.getByTestId('planner-result').waitFor();
+  await page.getByTestId('planner-progress-toggle').click();
+  await page.getByRole('textbox',{name:t('חיפוש אוסף שכבר השלמתם','Search a completed set')}).fill('Como');
+  await page.getByTestId('planner-progress-63').getByRole('button',{name:'Grade S',exact:true}).click();
+  assert.equal(await page.getByTestId('planner-result').count(),0,'Settings must invalidate stale results');
+  await page.getByTestId('planner-calculate').click();await page.getByTestId('planner-result').waitFor();
+  await page.getByRole('button',{name:t('שמירת המסלול וההתקדמות','Save route and progress'),exact:true}).click();await page.getByTestId('planner-message').waitFor();
+  await page.reload();await page.getByTestId('planner-result').waitFor();
+  await page.getByTestId('planner-progress-toggle').click();
+  await page.getByRole('textbox',{name:t('חיפוש אוסף שכבר השלמתם','Search a completed set')}).fill('Como');
+  assert.equal(await page.getByTestId('planner-progress-63').getByRole('button',{name:'Grade S',exact:true}).getAttribute('aria-pressed'),'true');
+  const starter=JSON.parse(fs.readFileSync('public/gallery-data/116.json'));
+  const ownedIds=starter.set.plans.find(p=>p.grade==='S').itemIds;
+  await page.evaluate(ids=>localStorage.setItem('fc27-gallery-v1:50000000-0000-4000-8000-000000000001:116',JSON.stringify({ids:[],firstOwnerIds:[],collectedIds:ids,graded:null})),ownedIds);
+  await page.getByRole('button',{name:t('רענון קלפים שנאספו','Refresh collected items'),exact:true}).click();
+  await page.getByTestId('planner-message').waitFor();
+  await page.getByTestId('planner-progress-toggle').click();
+  await page.getByRole('button',{name:t('לפי תקציב','Coin budget'),exact:true}).click();
+  await page.getByRole('textbox',{name:t('תקציב קוינס מרבי','Maximum coin budget'),exact:true}).fill('0');
+  await page.getByTestId('planner-calculate').click();await page.getByTestId('planner-result').waitFor();
+  assert.equal((await page.getByTestId('planner-total-cost').innerText()).replace(/[^0-9]/g,''),'0');
+  assert(await page.getByTestId('planner-open-0').count()>0,'Collected starter must produce a zero-cost route');
+  await page.getByRole('button',{name:t('לפי יעד טוקנים','Token goal'),exact:true}).click();
+  await page.getByRole('textbox',{name:t('כמה טוקנים נוספים תרצו?','How many additional tokens?'),exact:true}).fill('');
+  assert(await page.getByTestId('planner-calculate').isDisabled());
+  await noOverflow(page,'Planner inputs');
+  if(language==='en')assert(!/[\u0590-\u05FF]/.test((await page.locator('body').innerText()).replace('עב','')),'Hebrew leaked into English planner');
+  console.log('Planner UI passed',language,width);
+  await context.close();
+ }
+ assert.deepEqual(errors,[]);
+ console.log('Planner UI passed: entry, bounded route, save/reload, exact lineup handoff, claimed grades, stale-result invalidation, zero budget, invalid inputs and HE/EN mobile layouts.');
+}finally{await browser.close();server.close();}

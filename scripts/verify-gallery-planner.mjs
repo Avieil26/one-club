@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import ts from 'typescript';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),file=path.join(os.tmpdir(),'gallery-planner-verify.cjs');
+fs.writeFileSync(file,ts.transpileModule(fs.readFileSync('lib/galleryPlanner.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText);
+const {planGallery,parsePlannerNumber,plannerStorageKey}=require(file);
+const set=(id,tokens)=>({id,name:'Set '+id,category:'Fixture',requiredCards:2,tokens:{D:0,C:tokens/2,B:tokens,A:tokens,S:tokens}});
+const fixture={checkedAt:'2026-10-26',sets:[set(1,20),set(2,30)],prices:{1:100,2:200,3:300},options:[{id:'one',setId:1,grade:'B',tokens:20,itemIds:[1,2]},{id:'two',setId:2,grade:'B',tokens:30,itemIds:[2,3]}]};
+const input={target:50,budget:600,claimed:{},collectedIds:[]};
+const route=planGallery(fixture,input);
+assert.equal(route.tokens,50);assert.equal(route.cost,600);assert.equal(route.uniqueItems,3);assert(route.targetMet);assert.equal(route.steps.reduce((n,s)=>n+s.cost,0),600);
+assert.equal(new Set(route.steps.flatMap(s=>s.newItemIds)).size,3);
+assert.equal(planGallery(fixture,{...input,budget:599}).targetMet,false);
+assert(planGallery(fixture,{...input,budget:599}).cost<=599);
+assert.equal(planGallery(fixture,{...input,collectedIds:[2,2],budget:400}).cost,400);
+assert.equal(planGallery(fixture,{...input,claimed:{1:'S'}}).tokens,30);
+assert.equal(planGallery(fixture,{...input,claimed:{1:'C'},target:40}).tokens,40);
+assert.equal(planGallery(fixture,{...input,claimed:{1:'S',2:'S'}}).steps.length,0);
+assert.equal(planGallery(fixture,{...input,target:null,budget:300}).tokens,20);
+assert.equal(planGallery(fixture,{...input,target:null,budget:0}).tokens,0);
+assert.equal(planGallery(fixture,{...input,budget:0,collectedIds:[1,2,3]}).tokens,50);
+const missing=structuredClone(fixture);missing.prices[3]=null;
+assert.equal(planGallery(missing,input).unpricedOptions,1);assert.equal(planGallery(missing,input).tokens,20);
+assert.equal(planGallery(missing,{...input,collectedIds:[3]}).tokens,50);
+assert.equal(planGallery({...fixture,options:[...fixture.options,{...fixture.options[0],id:'duplicate',itemIds:[1,1]}]},input).tokens,50);
+assert.throws(()=>planGallery(fixture,{...input,target:-1}));assert.throws(()=>planGallery(fixture,{...input,budget:-1}));
+assert.equal(parsePlannerNumber('50,000'),50000);assert.equal(parsePlannerNumber(''),null);assert.equal(parsePlannerNumber('-1'),null);assert.equal(parsePlannerNumber('12.5'),null);assert.equal(parsePlannerNumber('1e6'),null);assert.equal(parsePlannerNumber('1000000001'),null);assert.equal(parsePlannerNumber('0'),0);
+assert.notEqual(plannerStorageKey('member-a'),plannerStorageKey('member-b'));assert.notEqual(plannerStorageKey('member-a'),plannerStorageKey());
+const data=JSON.parse(fs.readFileSync('public/gallery-data/planner.json')),index=JSON.parse(fs.readFileSync('public/gallery-data/catalogue.json'));
+assert.equal(data.sets.length,195);assert.equal(data.definitionsCheckedAt,index.checkedAt);assert.equal(data.checkedAt,JSON.parse(fs.readFileSync('assets/data/galleryPlannerMarket.json')).checkedAt);assert.equal(data.prices[50562888],null,'Emre Mor SBC cost must never be a market purchase quote');assert.equal(data.prices[67362886],null,'Woltemade SBC cost must never be a market purchase quote');assert.equal(data.options.length,682);
+for(const option of data.options){const detail=JSON.parse(fs.readFileSync(`public/gallery-data/${option.setId}.json`));const plan=detail.set.plans.find(p=>p.id===option.id);assert(plan);assert.deepEqual(option.itemIds,plan.itemIds);const tokens=detail.set.grades.slice(0,detail.set.grades.findIndex(g=>g.name===option.grade)+1).flatMap(g=>g.rewards).reduce((n,r)=>n+(r.type==='event_token_1'?r.value*r.count:0),0);assert.equal(option.tokens,tokens);}
+const start=performance.now();
+for(const settings of [{target:100,budget:50000},{target:1000,budget:null},{target:null,budget:50000},{target:1e9,budget:0}]){
+ const actual=planGallery(data,{...settings,claimed:{},collectedIds:[]});
+ assert.equal(new Set(actual.steps.map(s=>s.option.setId)).size,actual.steps.length);
+ assert.equal(actual.cost,actual.steps.reduce((n,s)=>n+s.cost,0));
+ const bought=new Set(actual.steps.flatMap(s=>s.newItemIds));assert.equal(actual.uniqueItems,bought.size);assert.equal(actual.cost,[...bought].reduce((n,id)=>n+data.prices[id],0));
+ if(settings.budget!==null)assert(actual.cost<=settings.budget);
+ assert(actual.steps.every(s=>s.newItemIds.every(id=>data.prices[id]>0)));
+ if(settings.target!==null)assert.equal(actual.shortfall,Math.max(0,settings.target-actual.tokens));
+ console.log('Real planner scenario',settings,{tokens:actual.tokens,cost:actual.cost,sets:actual.steps.length});
+}
+console.log(`Planner passed: shared items, claimed grades, owned items, unknown prices, zero budget, impossible target, account keys, 682 exact source lineups; real scenarios ${(performance.now()-start).toFixed(0)} ms.`);
