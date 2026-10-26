@@ -144,9 +144,9 @@ function packArt(visual: PackVisual, label?: string) {
   if (stamp === '75+') return PACK_ART.p75;
   if (visual === 'electrum' || visual === 'electrum-small') return PACK_ART.electrum;
   if (visual === 'silver-x2') return PACK_ART.silver;
-  if (visual === 'mixed') return PACK_ART.copper;
+  if (visual === 'mixed') return PACK_ART.gold;
   if (visual === 'otw') return PACK_ART.otw;
-  if (visual === 'pick') return PACK_ART.p79;
+  if (visual === 'pick') return PACK_ART.gold;
   if (visual === 'rare-75' || visual === 'practice') return PACK_ART.p75;
   return PACK_ART.gold;
 }
@@ -163,6 +163,18 @@ export function SbcRewardPack({
 }) {
   const w = size;
   const h = Math.round(size * 1.38);
+  if (visual === 'mixed') return (
+    <View testID="sbc-mixed-players-pack" accessibilityRole="image" accessibilityLabel="Mixed Players Pack" style={{ width: w, height: h, alignItems: 'center', justifyContent: 'center' }}>
+      <Image source={PACK_ART.gold} resizeMode="contain" style={{ width: w, height: h, position: 'absolute' }} />
+      <View style={{ width: w * 0.78, alignItems: 'center', gap: w * 0.06 }}>
+        <Text style={{ color: '#35220A', fontSize: w * 0.15, fontWeight: '900', textAlign: 'center' }}>MIXED</Text>
+        <View style={{ flexDirection: 'row', gap: w * 0.035 }}>
+          {['#E8BC51', '#C8D2DE', '#B87C54'].map(color => <View key={color} style={{ width: w * 0.18, height: w * 0.26, borderRadius: w * 0.035, borderWidth: 1, borderColor: '#62491F', backgroundColor: color, alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: '#34291C', fontSize: w * 0.14, fontWeight: '900' }}>4</Text></View>)}
+        </View>
+        <Text style={{ color: '#35220A', fontSize: w * 0.09, fontWeight: '800', textAlign: 'center' }}>PLAYERS PACK</Text>
+      </View>
+    </View>
+  );
   return (
     <Image
       source={packArt(visual, label)}

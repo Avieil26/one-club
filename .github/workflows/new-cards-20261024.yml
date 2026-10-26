@@ -2,7 +2,7 @@ name: New card releases validation
 on:
   pull_request:
     branches: ['handoff/new-cards-20261024']
-    paths: ['assets/data/sbc-refresh-20261025.json', 'assets/data/sbc-refresh-20261026.json', 'lib/sbc*.ts', 'lib/selectors.ts', 'lib/chemistry.ts', 'lib/types.ts', 'components/Sbc*.tsx', 'components/SquadPitch.tsx', 'app/sbc/**', 'scripts/verify-sbc-20261025*', 'scripts/verify-sbc-20261026*', 'package.json', 'assets/images/cards/recent/**', 'assets/data/recentCards20261024.json', 'scripts/verify-new-cards*', 'components/PlayerEditionLinks.tsx', 'components/PlayerDossier.tsx', 'app/market/[id].tsx', 'lib/playerEditions.ts', '.github/workflows/new-cards-20261024.yml']
+    paths: ['assets/data/sbc-refresh-20261025.json', 'assets/data/sbc-refresh-20261026.json', 'lib/sbc*.ts', 'lib/selectors.ts', 'lib/chemistry.ts', 'lib/types.ts', 'components/Sbc*.tsx', 'lib/sbcTileTheme.ts', 'components/SquadPitch.tsx', 'app/sbc/**', 'scripts/verify-sbc-20261025*', 'scripts/verify-sbc-20261026*', 'package.json', 'assets/images/cards/recent/**', 'assets/data/recentCards20261024.json', 'scripts/verify-new-cards*', 'components/PlayerEditionLinks.tsx', 'components/PlayerDossier.tsx', 'app/market/[id].tsx', 'lib/playerEditions.ts', '.github/workflows/new-cards-20261024.yml']
 permissions:
   contents: read
 concurrency:
@@ -30,7 +30,7 @@ jobs:
       - run: npx expo export -p android --output-dir /tmp/new-cards-android --max-workers 2
       - run: npx eslint components/RecentCardInfo.tsx lib/recentCards.ts lib/recentCardArt.ts lib/fcPlayers.ts lib/marketPrices.ts lib/playerFilter.ts lib/playerEditions.ts components/PlayerEditionLinks.tsx api/market-prices.js
       - name: Focused SBC lint
-        run: npx eslint components/SbcClassicSolution.tsx components/SbcPointsSolution.tsx components/SbcRewardVisual.tsx components/SquadPitch.tsx lib/sbcClassic.ts lib/sbcLive20261020.ts lib/sbcVerified.ts lib/sbcSourceRules.ts lib/sbcLocalization.ts lib/selectors.ts 'app/sbc/build/[id].tsx'
+        run: npx eslint components/SbcClassicSolution.tsx components/SbcPointsSolution.tsx components/SbcRewardVisual.tsx components/SbcRewardPack.tsx components/SquadPitch.tsx lib/sbcClassic.ts lib/sbcLive20261020.ts lib/sbcVerified.ts lib/sbcSourceRules.ts lib/sbcLocalization.ts lib/selectors.ts 'app/sbc/build/[id].tsx'
       - name: Existing repository lint baseline
         continue-on-error: true
         run: npm run lint

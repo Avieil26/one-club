@@ -19,8 +19,26 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
     await context.route('**/api/**', route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}));
     await context.route('https://**/*', route=>route.request().url().startsWith('https://hxjgphhcspzjnkkzdmpk.supabase.co/')?route.fallback():route.abort());
 
+  async function checkReward(challenge) {
+   const reward=page.getByTestId('sbc-reward-'+challenge.id);await reward.waitFor();
+   if(challenge.id==='sbc-hero-20261026'){
+    assert.match(await reward.innerText(),/HERO · 1 OF 4/);
+    for(const id of ['hero-ruicosta','hero-luishernandez','hero-henriklarsson','hero-parkjisung']){
+     const image=reward.getByTestId('sbc-hero-choice-'+id);await image.waitFor();assert((await image.innerHTML()).includes(id),'Wrong Hero picture '+id);
+    }
+    assert.doesNotMatch(await reward.innerHTML(),/pack-79|79\+/);
+   }
+   if(challenge.id==='sbc-candy-20261026'){
+    await reward.getByTestId('sbc-mixed-players-pack').waitFor();assert.match(await reward.innerText(),/MIXED/);assert.doesNotMatch(await reward.innerHTML(),/pack-copper|pack-79/);
+   }
+   if(['sbc-laliga-20261026','sbc-premier-20261026'].includes(challenge.id))assert.match(await reward.innerText(),/2× MAX 85/);
+   assert(await reward.evaluate(el=>el.scrollWidth<=el.clientWidth+2),'Reward art overflow '+challenge.id);
+  }
+  await page.goto(base+'/sbc');
+  for(const challenge of audit.challenges){await checkReward(challenge);const reward=page.getByTestId('sbc-reward-'+challenge.id);await reward.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(output,challenge.id+'-list-reward-'+language+'-'+width+'.png')});}
   for(const challenge of audit.challenges){
    await page.goto(base+'/sbc/'+challenge.id);
+   await checkReward(challenge);await page.getByTestId('sbc-reward-'+challenge.id).scrollIntoViewIfNeeded();await page.screenshot({path:path.join(output,challenge.id+'-detail-reward-'+language+'-'+width+'.png')});
    let panel;
    if(challenge.kind==='streamlined'){
     await page.getByTestId('sbc-empty-selection').first().waitFor();

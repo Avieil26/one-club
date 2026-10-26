@@ -247,6 +247,8 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-hero-20261026': { en: 'Base Hero Player Pick', category: 'HERO PICK', edge: '#ED9A64', rank: 0 },
+  'sbc-candy-20261026': { en: 'Scary Candy', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
   'sbc-fs-mls-pick-20261020': { en: 'MLS Future Stars Player Pick', category: 'FUTURE STARS / MLS', edge: '#AD89F8', rank: 0 },
   'sbc-fs-portugal-pick': { en: 'Liga Portugal Future Stars Player Pick', category: 'FUTURE STARS / PORTUGAL', edge: '#AD89F8', rank: 0 },
   'sbc-potm-ferran': { en: 'Ferran Torres', category: 'POTM', edge: '#5793FF', rank: 0 },
@@ -307,6 +309,7 @@ export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   if (challenge.id === 'sbc-silver-upgrade' || challenge.id === 'sbc-bronze-silver-reroll') return { ...FALLBACK_CLASSIC, pack: 'rare-75', packLabel: '75+' };
   if (challenge.id === 'sbc-bronze-upgrade') return { ...FALLBACK_CLASSIC, pack: 'silver-x2', packLabel: '2× SILVER' };
   if (challenge.id === 'sbc-gold-upgrade' || challenge.id === 'sbc-gold-reroll') return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2×78+' };
+  if (['sbc-laliga-20261026', 'sbc-premier-20261026'].includes(challenge.id)) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2× MAX 85' };
   if (known) return known;
   const reward = challenge.reward ?? '';
   const rating = reward.match(/(?:×|x)\s*(\d{2})\+/i)?.[1] ?? reward.match(/(\d{2})\+/)?.[1];
