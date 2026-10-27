@@ -5,16 +5,16 @@ import { countryName, countryOptions } from '@/lib/countries';
 import { useLanguage } from '@/lib/language';
 
 export function CountryPicker({ value, onChange, allowAll = false }: { value: string; onChange: (value: string) => void; allowAll?: boolean }) {
- const { t, language } = useLanguage(); const rtl = language === 'he';
+ const { t, locale, isRTL: rtl } = useLanguage();
  const [open, setOpen] = useState(false); const [search, setSearch] = useState('');
- const options = useMemo(() => countryOptions(search, language), [search, language]);
+ const options = useMemo(() => countryOptions(search, locale), [search, locale]);
  const close = () => { setOpen(false); setSearch(''); };
  const choose = (code: string) => { onChange(code); close(); };
  return <View style={{ gap: 8, minWidth: 0 }}>
   <Text style={[s.label, { textAlign: rtl ? 'right' : 'left' }]}>{t('מדינה', 'Country')}</Text>
   <Pressable accessibilityRole="button" accessibilityLabel={t('בחירת מדינה', 'Choose country')} onPress={() => setOpen(true)} style={[s.trigger, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
    <Ionicons name="globe-outline" size={19} color="#44D8E5" />
-   <Text style={[s.value, { textAlign: rtl ? 'right' : 'left' }]}>{!value ? allowAll ? t('כל המדינות', 'All countries') : t('בחירת מדינה', 'Choose country') : countryName(value, language)}</Text>
+   <Text style={[s.value, { textAlign: rtl ? 'right' : 'left' }]}>{!value ? allowAll ? t('כל המדינות', 'All countries') : t('בחירת מדינה', 'Choose country') : countryName(value, locale)}</Text>
    <Ionicons name="chevron-down" size={16} color="#A9BBC6" />
   </Pressable>
   <Modal visible={open} transparent animationType="fade" onRequestClose={close}>
@@ -23,8 +23,8 @@ export function CountryPicker({ value, onChange, allowAll = false }: { value: st
     <TextInput accessibilityLabel={t('חיפוש מדינה', 'Search countries')} value={search} onChangeText={setSearch} placeholder={t('שם מדינה או קוד…', 'Country name or code…')} placeholderTextColor="#8DA4B3" style={[s.search, { textAlign: rtl ? 'right' : 'left' }]} autoCorrect={false} />
     <ScrollView keyboardShouldPersistTaps="handled">
      {allowAll && !search ? <Pressable accessibilityRole="button" onPress={() => choose('')} style={s.option}><Text style={s.value}>{t('כל המדינות', 'All countries')}</Text></Pressable> : null}
-     {options.map((c) => <Pressable key={c.code} accessibilityRole="button" accessibilityLabel={c[language]} accessibilityState={{ selected: value === c.code }} onPress={() => choose(c.code)} style={[s.option, { flexDirection: rtl ? 'row-reverse' : 'row' }, value === c.code && s.selected]}>
-      <Text style={s.code}>{c.code}</Text><Text style={[s.value, { textAlign: rtl ? 'right' : 'left' }]}>{c[language]}</Text>{value === c.code ? <Ionicons name="checkmark" size={18} color="#44D8E5" /> : null}
+     {options.map((c) => <Pressable key={c.code} accessibilityRole="button" accessibilityLabel={countryName(c.code, locale)} accessibilityState={{ selected: value === c.code }} onPress={() => choose(c.code)} style={[s.option, { flexDirection: rtl ? 'row-reverse' : 'row' }, value === c.code && s.selected]}>
+      <Text style={s.code}>{c.code}</Text><Text style={[s.value, { textAlign: rtl ? 'right' : 'left' }]}>{countryName(c.code, locale)}</Text>{value === c.code ? <Ionicons name="checkmark" size={18} color="#44D8E5" /> : null}
      </Pressable>)}
      {!options.length ? <Text style={s.label}>{t('לא נמצאו מדינות', 'No countries found')}</Text> : null}
     </ScrollView>
