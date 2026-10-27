@@ -67,7 +67,7 @@ export function CareerJourneyForm() {
  </Screen>;
 }
 export function CareerJourneyDetail({ id }: { id: string }) {
- const { user } = useApp(); const uid = user?.id; const { t, language } = useLanguage(); const router = useRouter();
+ const { user } = useApp(); const uid = user?.id; const { t, language, locale } = useLanguage(); const router = useRouter();
  const loader = useCallback(async () => {
   const [record, updates] = await Promise.all([loadActivity('journey', id), loadJourneyUpdates(id)]);
   const journey = record as CareerJourney | null;
@@ -122,7 +122,7 @@ export function CareerJourneyDetail({ id }: { id: string }) {
    <Title>{t('יומן העונה', 'Season journal')}</Title>
    {!updates.length ? <Muted>{t('העדכון הראשון יופיע כאן. בינתיים מתחילים לשחק.', 'The first update will appear here. Time to kick off.')}</Muted> : null}
    {updates.map((u) => <Card key={u.id}>
-    <Muted>{query.data?.profiles.find((p) => p.id === u.user_id)?.display_name || t('שחקן קהילה', 'Community player')} · {new Date(u.created_at).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted>
+    <Muted>{query.data?.profiles.find((p) => p.id === u.user_id)?.display_name || t('שחקן קהילה', 'Community player')} · {new Date(u.created_at).toLocaleDateString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale)}</Muted>
     <Title>{u.milestone >= 0 ? journey.milestones[u.milestone] : t('עדכון מהעונה', 'Season update')}</Title><Muted>{u.note}</Muted>
    </Card>)}
    {open && mine?.active && !owner ? <Button disabled={busy} variant="ghost" label={t('עזיבת המסע (העדכונים נשמרים)', 'Leave journey (keep updates)')} onPress={() => void act('leave_journey')} /> : null}
