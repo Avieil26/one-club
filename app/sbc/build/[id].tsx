@@ -34,7 +34,7 @@ function blankSquad(formationId: FormationId): Record<string, FcPlayer | null> {
 }
 
 export default function SquadBuildScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -187,7 +187,7 @@ export default function SquadBuildScreen() {
         </View>
         {report.checks.map((check) => (
           <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: 'right' }}>
-            {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
+            {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, locale)}
           </Text>
         ))}
       </LinearGradient>
