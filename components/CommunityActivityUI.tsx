@@ -88,11 +88,11 @@ const ERRORS: Record<string, [string, string]> = {
  NOT_FOUND: ['הפעילות לא נמצאה.', 'Activity not found.'],
 };
 export function CommunityError({ error }: { error: unknown }) {
- const { language, t } = useLanguage(); if (!error) return null;
+ const { isRTL, t } = useLanguage(); if (!error) return null;
  const message = typeof error === 'object' && 'message' in error ? String(error.message) : '';
  const key = Object.keys(ERRORS).find((code) => message.includes(code));
- return <Text accessibilityRole="alert" style={{ color: colors.danger, lineHeight: 23, textAlign: language === 'he' ? 'right' : 'left' }}>
-  {key ? ERRORS[key][language === 'he' ? 0 : 1] : t('הפעולה לא הושלמה. בדקו את הפרטים והחיבור ונסו שוב.', 'Could not complete this action. Check your details and connection, then retry.')}
+ return <Text accessibilityRole="alert" style={{ color: colors.danger, lineHeight: 23, textAlign: isRTL ? 'right' : 'left' }}>
+  {key ? t(ERRORS[key][0], ERRORS[key][1]) : t('הפעולה לא הושלמה. בדקו את הפרטים והחיבור ונסו שוב.', 'Could not complete this action. Check your details and connection, then retry.')}
  </Text>;
 }
 export const activityStyles = StyleSheet.create({
