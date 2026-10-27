@@ -28,6 +28,7 @@ import {
 } from '@/lib/careerAttributes';
 import { statTone } from '@/lib/playerMeta';
 import { useLanguage } from '@/lib/language';
+import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { displayClub, displayNation } from '@/lib/footballLocalization';
 
 type FilterTab = 'all' | 'attack' | 'midfield' | 'defense';
@@ -703,7 +704,7 @@ function ScoutDossierModal({
                     ]}
                   >
                     {ps.plus ? '★ ' : ''}
-                    {displayPlayStyle(ps.name, language)}
+                    {localizedPlayStyle(displayPlayStyle(ps.name, language), locale)}
                   </Text>
                 </View>
               ))}
