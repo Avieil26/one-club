@@ -123,8 +123,7 @@ function displayContractYears(contractYears: string, language: AppLocale): strin
 }
 
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
-  const { language, locale, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, locale, t, isRTL: rtl } = useLanguage();
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [subFilter, setSubFilter] = useState<SubFilterTab>('all');
   const [page, setPage] = useState(1);
