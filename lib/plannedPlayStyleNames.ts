@@ -1,4 +1,4 @@
-// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot is provisional in Spanish and Rush Out is a descriptive draft.
+// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot is provisional in Spanish; Rush Out and additional scouting labels are descriptive drafts.
 // https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles
@@ -6,6 +6,19 @@ import type { AppLocale } from '@/lib/language';
 
 export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   "ar": {
+    "Aerial": "اللعب الهوائي",
+    "Cat-Like Reflexes": "ردود فعل كالقط",
+    "1v1 Rush": "الخروج في مواجهة فردية",
+    "Incisive": "ثاقب",
+    "Vision": "الرؤية",
+    "Finesse": "البراعة",
+    "Power Header": "ضربة رأس قوية",
+    "Volley": "التسديد الطائر",
+    "Interception": "الاعتراض",
+    "Whipped Cross": "عرضية ملتفة",
+    "Stand Tackle": "افتكاك واقف",
+    "Long Shots": "تسديدات بعيدة",
+    "Hold Up": "حماية الكرة",
     "Rush Out": "الخروج من المرمى",
     "Acrobatic": "حركات بهلوانية",
     "Chip Shot": "تسديدة ساقطة",
@@ -45,6 +58,19 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Power Shot": "تسديدة قوية"
   },
   "pt-BR": {
+    "Aerial": "Jogo aéreo",
+    "Cat-Like Reflexes": "Reflexos felinos",
+    "1v1 Rush": "Saída no mano a mano",
+    "Incisive": "Incisivo",
+    "Vision": "Visão",
+    "Finesse": "Precisão",
+    "Power Header": "Cabeceio potente",
+    "Volley": "Voleio",
+    "Interception": "Interceptação",
+    "Whipped Cross": "Cruzamento com efeito",
+    "Stand Tackle": "Desarme em pé",
+    "Long Shots": "Chutes de longe",
+    "Hold Up": "Proteção de bola",
     "Rush Out": "Saída do goleiro",
     "Acrobatic": "Acrobata",
     "Chip Shot": "Cavadinha",
@@ -84,6 +110,19 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Power Shot": "Superchute"
   },
   "es": {
+    "Aerial": "Juego aéreo",
+    "Cat-Like Reflexes": "Reflejos felinos",
+    "1v1 Rush": "Salida en uno contra uno",
+    "Incisive": "Incisivo",
+    "Vision": "Visión",
+    "Finesse": "Calidad",
+    "Power Header": "Cabezazo potente",
+    "Volley": "Volea",
+    "Interception": "Interceptación",
+    "Whipped Cross": "Centro con rosca",
+    "Stand Tackle": "Entrada de pie",
+    "Long Shots": "Tiros lejanos",
+    "Hold Up": "Retención del balón",
     "Rush Out": "Salida del portero",
     "Acrobatic": "Acrobático/a",
     "Chip Shot": "Vaselina",
