@@ -163,7 +163,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
 }
 
 export default function NewGroundsScreen() {
-  const { language, locale, t, isRTL: rtl } = useLanguage();
+  const { locale, t, isRTL: rtl } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const { width } = useWindowDimensions();
