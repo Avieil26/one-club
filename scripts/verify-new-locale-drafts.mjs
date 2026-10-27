@@ -64,7 +64,7 @@ for (const statement of communitySource.statements) if (ts.isVariableStatement(s
       for (const locale of locales) {
         const translation = plannedStructuredError(locale, english.text);
         assert(translation && translation !== english.text, `${locale}: missing community error: ${english.text}`);
-        assert.deepEqual([...translation.matchAll(/\\d+/g)].map(m => m[0]), [...english.text.matchAll(/\\d+/g)].map(m => m[0]), `${locale}: community error numbers differ`);
+        assert.deepEqual([...translation.matchAll(/\d+/g)].map(m => m[0]), [...english.text.matchAll(/\d+/g)].map(m => m[0]), `${locale}: community error numbers differ`);
       }
       communityErrorCount++;
     }
