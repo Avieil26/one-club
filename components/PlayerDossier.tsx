@@ -113,7 +113,7 @@ const CHEM_GROUPS = [
 ];
 
 function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) {
-  const { language } = useLanguage();
+  const { language, locale } = useLanguage();
   const text = compact ? 13 : 15;
   if (player.icon) {
     return (
@@ -121,7 +121,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
         <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>{language === 'en' ? 'Icon' : 'אייקון'}</Text>
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
           <NationFlag nation={player.nation} size={compact ? 14 : 16} />
-          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{displayNation(player.nation, language)}</Text>
+          <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{displayNation(player.nation, locale)}</Text>
         </View>
         {playerHeight(player.baseId ?? player.id) ? (
           <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
