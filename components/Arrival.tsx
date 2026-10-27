@@ -5,8 +5,8 @@ import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
 
 export function Arrival({ name, onDone }: { name: string; onDone?: () => void }) {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   const opacity = useRef(new Animated.Value(0)).current;
   const scale = useRef(new Animated.Value(0.92)).current;
 
