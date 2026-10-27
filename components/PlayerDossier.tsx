@@ -27,7 +27,7 @@ import { cmToFeet, playerHeight } from '@/lib/playerHeight';
 import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type PlayerTalk } from '@/lib/playerTalk';
 import { useApp } from '@/lib/store';
 import { playerDisplayName } from '@/lib/playerDisplayName';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 
@@ -247,8 +247,13 @@ function Group({
   );
 }
 
-function ago(iso: string, language: 'he' | 'en' = 'he') {
+function ago(iso: string, language: AppLocale = 'he') {
   const minutes = Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (language !== 'he' && language !== 'en') {
+    const hours = Math.round(minutes / 60);
+    const [value, unit] = minutes < 60 ? [minutes, 'minute'] as const : hours < 48 ? [hours, 'hour'] as const : [Math.round(hours / 24), 'day'] as const;
+    return new Intl.RelativeTimeFormat(language, { numeric: 'always' }).format(-value, unit);
+  }
   if (minutes < 60) return language === 'en' ? `${minutes}m ago` : `לפני ${minutes} דק׳`;
   const hours = Math.round(minutes / 60);
   if (hours < 48) return language === 'en' ? `${hours}h ago` : `לפני ${hours} שע׳`;
@@ -265,7 +270,7 @@ function opening(player: FcPlayer): 'base' | 'destined' | 'hero' | 'totw' | 'otw
 
 export function PlayerDossier({ player }: { player: FcPlayer }) {
   useMarketPrices();
-  const { t, language } = useLanguage();
+  const { t, language, locale, isRTL } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 900;
   const app = useApp();
@@ -874,7 +879,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
             }}
           >
             <Text style={{ color: '#F4F7F2', fontWeight: '800', textAlign: 'right' }}>{comment.name}</Text>
-            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: 'right' }}>{ago(comment.createdAt, language)}</Text>
+            <Text style={{ color: '#9AA89C', fontSize: 12, textAlign: isRTL ? 'right' : 'left' }}>{ago(comment.createdAt, locale)}</Text>
             <Text style={{ color: '#E7EEE8', textAlign: 'right', fontSize: 15 }}>{comment.body}</Text>
             <View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end' }}>
               <Pressable onPress={() => void voteRow(comment.id, -1)}>
