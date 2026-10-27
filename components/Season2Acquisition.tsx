@@ -3,7 +3,7 @@ import { useLanguage } from '@/lib/language';
 import type { Season2Card } from '@/lib/season2';
 
 export function Season2Acquisition({ card }: { card: Season2Card }) {
-  const { language, locale, isRTL: rtl, t } = useLanguage();
+  const { locale, isRTL: rtl, t } = useLanguage();
   const a = card.acquisition;
   const pass = a.kind === 'standard-pass' || a.kind === 'premium-pass';
   const textAlign = rtl ? 'right' as const : 'left' as const;
