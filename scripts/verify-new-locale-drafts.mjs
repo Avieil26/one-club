@@ -168,6 +168,20 @@ for (const locale of locales) {
   assert(groundsLabel('רמה 12', locale).includes('12'));
   assert(groundsLabel('חלוקה 3', locale).includes('3'));
 }
+// Grounds category names are passed dynamically to t().
+const groundsCategories = ts.createSourceFile('groundsPlaystyles.ts', fs.readFileSync('lib/groundsPlaystyles.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+let groundsCategoryCount = 0;
+for (const statement of groundsCategories.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(groundsCategories) === 'GROUNDS_PLAYSTYLE_CATEGORIES' && ts.isAsExpression(declaration.initializer) && ts.isArrayLiteralExpression(declaration.initializer.expression)) {
+    for (const item of declaration.initializer.expression.elements) if (ts.isObjectLiteralExpression(item)) {
+      const id = item.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(groundsCategories) === 'id');
+      assert(id && ts.isPropertyAssignment(id) && ts.isStringLiteral(id.initializer), 'Grounds category must have an id');
+      for (const locale of locales) assert(ui[locale][id.initializer.text], `${locale}: missing Grounds category ${id.initializer.text}`);
+      groundsCategoryCount++;
+    }
+  }
+}
+assert(groundsCategoryCount > 0, 'Grounds category list was not found');
 // Check PlayStyle names from the source without loading image assets.
 const stylesSource = ts.createSourceFile('lib/groundsPlaystyles.ts', fs.readFileSync('lib/groundsPlaystyles.ts', 'utf8'), ts.ScriptTarget.Latest, true);
 for (const statement of stylesSource.statements) if (ts.isVariableStatement(statement)) {
