@@ -1,6 +1,16 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "All positions": "كل المراكز",
+    "Goalkeeper": "حارس مرمى",
+    "Striker": "مهاجم",
+    "Winger": "جناح",
+    "Attacking midfielder": "وسط هجومي",
+    "Central midfielder": "وسط مركزي",
+    "Defensive midfielder": "وسط دفاعي",
+    "Centre back": "قلب دفاع",
+    "Full back": "ظهير",
+    "All platforms": "كل المنصات",
     "{name} selected. Select another position to move the player or swap cards.": "تم اختيار {name}. اختر مركزًا آخر لنقل اللاعب أو تبديل البطاقات.",
     "{name} selected from the bench. Select a position on the pitch.": "تم اختيار {name} من دكة البدلاء. اختر مركزًا في الملعب.",
     "Player": "لاعب",
@@ -1045,6 +1055,16 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "All positions": "Todas as posições",
+    "Goalkeeper": "Goleiro",
+    "Striker": "Atacante",
+    "Winger": "Ponta",
+    "Attacking midfielder": "Meia ofensivo",
+    "Central midfielder": "Meia central",
+    "Defensive midfielder": "Volante",
+    "Centre back": "Zagueiro",
+    "Full back": "Lateral",
+    "All platforms": "Todas as plataformas",
     "{name} selected. Select another position to move the player or swap cards.": "{name} selecionado. Selecione outra posição para mover o jogador ou trocar cartas.",
     "{name} selected from the bench. Select a position on the pitch.": "{name} selecionado do banco. Selecione uma posição no campo.",
     "Player": "Jogador",
@@ -2089,6 +2109,16 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "All positions": "Todas las posiciones",
+    "Goalkeeper": "Portero",
+    "Striker": "Delantero",
+    "Winger": "Extremo",
+    "Attacking midfielder": "Mediapunta",
+    "Central midfielder": "Centrocampista",
+    "Defensive midfielder": "Mediocentro defensivo",
+    "Centre back": "Defensa central",
+    "Full back": "Lateral",
+    "All platforms": "Todas las plataformas",
     "{name} selected. Select another position to move the player or swap cards.": "{name} seleccionado. Selecciona otra posición para mover al jugador o intercambiar cartas.",
     "{name} selected from the bench. Select a position on the pitch.": "{name} seleccionado del banquillo. Selecciona una posición en el campo.",
     "Player": "Jugador",
