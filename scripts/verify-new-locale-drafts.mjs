@@ -53,6 +53,16 @@ for (const locale of locales) {
   for (const date of ['1 באוקטובר 2026', '21 באוקטובר 2026']) assert(!/[\u0590-\u05ff]/u.test(localizedLegalDate(date, locale)));
   assert.throws(() => localizedLegal('UNTRANSLATED_LEGAL_SENTINEL', locale), 'Never silently fall back to English');
 }
+// Data-driven Season 2 objective descriptions are not visible to the literal t() audit.
+const seasonCards = JSON.parse(fs.readFileSync('assets/data/season2.json', 'utf8'));
+const seasonTexts = new Set();
+for (const card of seasonCards) {
+  const acquisition = card.acquisition;
+  if (acquisition.summaryEn) seasonTexts.add(acquisition.summaryEn);
+  for (const task of acquisition.tasks ?? []) seasonTexts.add(task.en);
+  for (const group of acquisition.dependencies ?? []) for (const task of group.tasks) seasonTexts.add(task.en);
+}
+for (const locale of locales) for (const text of seasonTexts) assert(ui[locale][text], `${locale}: missing Season 2 objective: ${text}`);
 // Test the generated validation patterns against the existing Hebrew-to-English error helper.
 const fields = ['כותרת', 'חוקים', 'דרישות צילום', 'שם שחקן או מועדון', 'תיאור', 'טקסט', 'תגובה', 'שם', 'הודעה', 'שם משתמש', 'מטרת הפרסום', 'עמדה', 'פלטפורמה', 'אזור'];
 const errors = fields.flatMap(field => [`חסר ${field}`, `${field} ארוך מדי`]).concat(['צריך 1 צילומים', 'צריך 3 צילומים']);
