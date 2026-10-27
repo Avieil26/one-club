@@ -168,6 +168,39 @@ for (const locale of locales) {
   assert(groundsLabel('רמה 12', locale).includes('12'));
   assert(groundsLabel('חלוקה 3', locale).includes('3'));
 }
+// Filter kinds and Grounds positions use dynamic lookup tables.
+const filterSource = ts.createSourceFile('PlayerFilter.tsx', fs.readFileSync('components/PlayerFilter.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+const unchangedBrands = new Set(['TOTW', 'OTW', 'Future Stars']);
+let filterKindCount = 0;
+for (const statement of filterSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(filterSource) === 'KINDS' && ts.isArrayLiteralExpression(declaration.initializer)) {
+    for (const item of declaration.initializer.elements) if (ts.isObjectLiteralExpression(item)) {
+      const english = item.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(filterSource) === 'en');
+      assert(english && ts.isPropertyAssignment(english) && ts.isStringLiteral(english.initializer));
+      for (const locale of locales) assert(ui[locale][english.initializer.text] || unchangedBrands.has(english.initializer.text), `${locale}: missing filter kind ${english.initializer.text}`);
+      filterKindCount++;
+    }
+  }
+}
+assert(filterKindCount > 0, 'Filter kind list was not found');
+const groundsPositionSource = ts.createSourceFile('GroundsV22Screen.tsx', fs.readFileSync('components/GroundsV22Screen.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+let groundsPositionCount = 0;
+function inspectGroundsPosition(node) {
+  if (ts.isFunctionDeclaration(node) && node.name?.text === 'positionLabel') {
+    function inspectPosition(node) {
+      if (ts.isVariableDeclaration(node) && node.name.getText(groundsPositionSource) === 'en' && ts.isObjectLiteralExpression(node.initializer)) {
+        for (const property of node.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.initializer)) {
+          for (const locale of locales) assert(ui[locale][property.initializer.text], `${locale}: missing Grounds position ${property.initializer.text}`);
+          groundsPositionCount++;
+        }
+      }
+      ts.forEachChild(node, inspectPosition);
+    }
+    inspectPosition(node);
+  } else ts.forEachChild(node, inspectGroundsPosition);
+}
+inspectGroundsPosition(groundsPositionSource);
+assert(groundsPositionCount > 0, 'Grounds position map was not found');
 // Grounds category names are passed dynamically to t().
 const groundsCategories = ts.createSourceFile('groundsPlaystyles.ts', fs.readFileSync('lib/groundsPlaystyles.ts', 'utf8'), ts.ScriptTarget.Latest, true);
 let groundsCategoryCount = 0;
