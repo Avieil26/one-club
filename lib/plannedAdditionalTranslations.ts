@@ -1,6 +1,11 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Correct": "صحيح",
+    "That player is already on the grid": "هذا اللاعب موجود بالفعل على الشبكة",
+    "Incorrect. One mistake left": "إجابة خاطئة. بقي خطأ واحد",
+    "Incorrect. No mistakes left": "إجابة خاطئة. لم تتبقَّ أخطاء",
+    "Incorrect. {count} mistakes left": "إجابة خاطئة. الأخطاء المتبقية: {count}",
     "Select the players who have won the Champions League": "اختر اللاعبين الذين فازوا بدوري أبطال أوروبا",
     "Select the players who have played alongside Messi": "اختر اللاعبين الذين لعبوا إلى جانب ميسي",
     "Select the players who have played alongside Ronaldo": "اختر اللاعبين الذين لعبوا إلى جانب رونالدو",
@@ -1079,6 +1084,11 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Correct": "Correto",
+    "That player is already on the grid": "Esse jogador já está na grade",
+    "Incorrect. One mistake left": "Incorreto. Resta um erro",
+    "Incorrect. No mistakes left": "Incorreto. Não restam erros",
+    "Incorrect. {count} mistakes left": "Incorreto. Erros restantes: {count}",
     "Select the players who have won the Champions League": "Selecione os jogadores que venceram a Liga dos Campeões",
     "Select the players who have played alongside Messi": "Selecione os jogadores que atuaram ao lado de Messi",
     "Select the players who have played alongside Ronaldo": "Selecione os jogadores que atuaram ao lado de Ronaldo",
@@ -2157,6 +2167,11 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Correct": "Correcto",
+    "That player is already on the grid": "Ese jugador ya está en la cuadrícula",
+    "Incorrect. One mistake left": "Incorrecto. Queda un error",
+    "Incorrect. No mistakes left": "Incorrecto. No quedan errores",
+    "Incorrect. {count} mistakes left": "Incorrecto. Errores restantes: {count}",
     "Select the players who have won the Champions League": "Selecciona a los jugadores que han ganado la Liga de Campeones",
     "Select the players who have played alongside Messi": "Selecciona a los jugadores que han jugado junto a Messi",
     "Select the players who have played alongside Ronaldo": "Selecciona a los jugadores que han jugado junto a Ronaldo",
