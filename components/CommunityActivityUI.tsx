@@ -27,14 +27,14 @@ export function useCommunityNow() {
  return now;
 }
 export function Choices({ label, value, options, onChange }: { label: string; value: string; options: { value: string; label: string }[]; onChange: (value: string) => void }) {
- const { language } = useLanguage(); const rtl = language === 'he';
+ const { language, isRTL: rtl } = useLanguage(); 
  return <View style={{ gap: 9, minWidth: 0 }}><Text style={[activityStyles.label, { textAlign: rtl ? 'right' : 'left' }]}>{label}</Text><View style={[activityStyles.wrap, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
   {options.map((o) => <Pressable key={o.value} accessibilityRole="button" accessibilityLabel={o.label} accessibilityState={{ selected: value === o.value }} onPress={() => onChange(o.value)} style={[activityStyles.chip, value === o.value && activityStyles.chipActive]}>
    <Text style={[activityStyles.chipText, value === o.value && { color: '#88F0F0' }]}>{o.label}</Text></Pressable>)}
  </View></View>;
 }
 export function ActivityField({ label, value, onChangeText, placeholder, maxLength, multiline = false }: { label: string; value: string; onChangeText: (value: string) => void; placeholder?: string; maxLength?: number; multiline?: boolean }) {
- const { language } = useLanguage(); const rtl = language === 'he';
+ const { language, isRTL: rtl } = useLanguage(); 
  return <View style={{ gap: 8, minWidth: 0 }}>
   <Text style={[activityStyles.label, { textAlign: rtl ? 'right' : 'left' }]}>{label}</Text>
   <TextInput accessibilityLabel={label} value={value} onChangeText={onChangeText} placeholder={placeholder} placeholderTextColor="#78909E" maxLength={maxLength} multiline={multiline} style={{ width: '100%', minHeight: multiline ? 106 : 48, borderWidth: 1, borderColor: '#2B4553', borderRadius: 5, backgroundColor: '#020C15', paddingHorizontal: 13, paddingVertical: 13, color: '#F5F8FA', fontSize: 14, lineHeight: 21, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', textAlignVertical: multiline ? 'top' : 'center' }} />
@@ -45,7 +45,7 @@ export function ActivitySurface({ children, onPress }: { children: ReactNode; on
  return <View style={activityStyles.surface}>{children}</View>;
 }
 export function Panel({ eyebrow, title, children }: { eyebrow?: string; title: string; children: ReactNode }) {
- const { language } = useLanguage(); const rtl = language === 'he';
+ const { language, isRTL: rtl } = useLanguage(); 
  return <View style={activityStyles.panel}>
   <View style={[activityStyles.sectionHead, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
    {eyebrow ? <Text style={activityStyles.eyebrow}>{eyebrow}</Text> : null}
@@ -54,7 +54,7 @@ export function Panel({ eyebrow, title, children }: { eyebrow?: string; title: s
  </View>;
 }
 export function ActivityHero({ kind, title, description, children }: { kind: 'sessions' | 'journeys'; title: string; description: string; children?: ReactNode }) {
- const { t, language } = useLanguage(); const rtl = language === 'he'; const career = kind === 'journeys'; const accent = career ? '#E9C36A' : '#44D8E5';
+ const { t, language, isRTL: rtl } = useLanguage();  const career = kind === 'journeys'; const accent = career ? '#E9C36A' : '#44D8E5';
  return <ImageBackground testID={career ? 'community-hero-journeys' : 'community-hero-sessions'} source={career ? require('@/assets/images/scene-career-scout.png') : { uri: GROUNDS_PREVIEW_BACKGROUND }} resizeMode="cover" style={activityStyles.hero} imageStyle={{ opacity: 0.55 }}>
   <LinearGradient colors={['rgba(3,12,20,0.42)', 'rgba(3,12,20,0.98)']} style={activityStyles.heroContent}>
    <View style={[activityStyles.heroTop, { flexDirection: rtl ? 'row-reverse' : 'row' }]}>
