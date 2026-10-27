@@ -35,9 +35,9 @@ const QUIET = 'rgba(214,222,232,0.72)';
 const LINE = 'rgba(170,186,204,0.28)';
 const PRESETS = [70, 75, 80, 85, 90];
 
-function kindLabel(kind: CardKind, language: 'he' | 'en') {
+function kindLabel(kind: CardKind, t: (he: string, en: string) => string) {
   const item = KINDS.find((option) => option.id === kind);
-  return item ? (language === 'he' ? item.he : item.en) : '';
+  return item ? t(item.he, item.en) : '';
 }
 
 function ratingLabel(filters: PlayerFilters, low: number, high: number) {
@@ -119,8 +119,8 @@ export function PlayerFilter({
 
         {panel === 'menu' ? (
           <ScrollView keyboardShouldPersistTaps="handled">
-            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, language)} onPress={() => setPanel('kind')} />
-            <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ?? ''} onPress={() => setPanel('nation')} />
+            <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, t)} onPress={() => setPanel('kind')} />
+            <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ? displayNation(filters.nation, locale) : ''} onPress={() => setPanel('nation')} />
             <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
             <MenuRow label={t('עמדה', 'Position')} value={filters.position ?? ''} onPress={() => setPanel('position')} />
             <MenuRow label={t('דירוג', 'Rating')} value={ratingLabel(filters, choices.ratingMin, choices.ratingMax)} onPress={() => setPanel('rating')} />
