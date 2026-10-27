@@ -1,6 +1,8 @@
+import { plannedAdditionalTranslations } from './plannedAdditionalTranslations';
 // Draft common interface copy. These locales are not enabled in production.
 export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   ar: {
+    ...plannedAdditionalTranslations["ar"],
     'Something went wrong': 'حدث خطأ', Close: 'إغلاق', Back: 'رجوع', 'Saving…': 'جارٍ الحفظ…',
     'Sign in required': 'يجب تسجيل الدخول', 'Community player': 'لاعب من المجتمع', Substitutes: 'البدلاء',
     All: 'الكل', 'Try again': 'حاول مجددًا', Rating: 'التقييم', 'Community players': 'لاعبو المجتمع',
@@ -60,6 +62,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
     'My Page': 'صفحتي', 'My profile': 'ملفي الشخصي', 'My squad': 'تشكيلتي', 'My platform': 'منصتي',
   },
   'pt-BR': {
+    ...plannedAdditionalTranslations["pt-BR"],
     'Something went wrong': 'Algo deu errado', Close: 'Fechar', Back: 'Voltar', 'Saving…': 'Salvando…',
     'Sign in required': 'É necessário entrar', 'Community player': 'Jogador da comunidade', Substitutes: 'Reservas',
     All: 'Todos', 'Try again': 'Tentar novamente', Rating: 'Classificação', 'Community players': 'Jogadores da comunidade',
@@ -119,6 +122,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
     'My Page': 'Minha página', 'My profile': 'Meu perfil', 'My squad': 'Meu elenco', 'My platform': 'Minha plataforma',
   },
   es: {
+    ...plannedAdditionalTranslations["es"],
     'Something went wrong': 'Se ha producido un error', Close: 'Cerrar', Back: 'Volver', 'Saving…': 'Guardando…',
     'Sign in required': 'Debes iniciar sesión', 'Community player': 'Jugador de la comunidad', Substitutes: 'Suplentes',
     All: 'Todos', 'Try again': 'Volver a intentar', Rating: 'Valoración', 'Community players': 'Jugadores de la comunidad',
