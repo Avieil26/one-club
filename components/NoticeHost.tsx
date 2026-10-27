@@ -7,7 +7,7 @@ import { colors } from '@/components/ui';
 import { dismissNotice, subscribeNotice, type Notice } from '@/lib/notice';
 
 export function NoticeHost() {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const [notice, setNotice] = useState<Notice | null>(null);
 
   useEffect(() => subscribeNotice(setNotice), []);
@@ -20,11 +20,11 @@ export function NoticeHost() {
       dismissNotice();
       cancel?.onPress?.();
     }}>
-      <View style={[styles.card, { direction: language === 'he' ? 'rtl' : 'ltr' }]}>
+      <View style={[styles.card, { direction: isRTL ? 'rtl' : 'ltr' }]}>
         <View style={styles.edge} />
         <ScrollView contentContainerStyle={{ gap: 12 }}>
-        <Text style={[styles.title, { textAlign: language === 'he' ? 'right' : 'left' }]}>{notice.title}</Text>
-        {notice.message ? <Text style={[styles.message, { textAlign: language === 'he' ? 'right' : 'left' }]}>{notice.message}</Text> : null}
+        <Text style={[styles.title, { textAlign: isRTL ? 'right' : 'left' }]}>{notice.title}</Text>
+        {notice.message ? <Text style={[styles.message, { textAlign: isRTL ? 'right' : 'left' }]}>{notice.message}</Text> : null}
         <View style={{ gap: 8 }}>
           {notice.buttons.map((button, index) => {
             const quiet = button.style === 'cancel' || index > 0;
