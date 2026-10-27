@@ -1,6 +1,9 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Change the site language at any time. Your choice is saved for future visits.": "يمكنك تغيير لغة الموقع في أي وقت. يُحفظ اختيارك للزيارات القادمة.",
+    "Request account and data deletion": "طلب حذف الحساب والبيانات",
+    "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "يمكنك اختيار مشاركة يوم نشاط واحد لكل حساب مسجّل الدخول، دون سجل للصفحات أو إعلانات. يؤدي إيقاف هذا الخيار إلى إيقاف القياس على هذا الجهاز.",
     "Terms acceptance required": "الموافقة على الشروط مطلوبة",
     "Please read and accept the Terms of Use and Privacy Policy to create an account.": "يرجى قراءة شروط الاستخدام وسياسة الخصوصية والموافقة عليهما لإنشاء حساب.",
     "Your name, email and password — then you are ready to join.": "أدخل اسمك وبريدك الإلكتروني وكلمة المرور للانضمام.",
@@ -386,6 +389,9 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Change the site language at any time. Your choice is saved for future visits.": "Altere o idioma do site a qualquer momento. Sua escolha será salva para as próximas visitas.",
+    "Request account and data deletion": "Solicitar exclusão da conta e dos dados",
+    "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "Opcionalmente, compartilhe um dia de atividade por conta conectada, sem histórico de páginas ou publicidade. Ao desativar, a medição é interrompida neste dispositivo.",
     "Terms acceptance required": "É necessário aceitar os termos",
     "Please read and accept the Terms of Use and Privacy Policy to create an account.": "Leia e aceite os Termos de Uso e a Política de Privacidade para criar uma conta.",
     "Your name, email and password — then you are ready to join.": "Informe seu nome, e-mail e senha para participar.",
@@ -771,6 +777,9 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Change the site language at any time. Your choice is saved for future visits.": "Puedes cambiar el idioma del sitio en cualquier momento. Tu elección se guarda para futuras visitas.",
+    "Request account and data deletion": "Solicitar la eliminación de la cuenta y los datos",
+    "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "Puedes compartir un día de actividad por cuenta con sesión iniciada, sin historial de páginas ni publicidad. Al desactivarlo, se detiene la medición en este dispositivo.",
     "Terms acceptance required": "Debes aceptar los términos",
     "Please read and accept the Terms of Use and Privacy Policy to create an account.": "Lee y acepta los Términos de uso y la Política de privacidad para crear una cuenta.",
     "Your name, email and password — then you are ready to join.": "Introduce tu nombre, correo electrónico y contraseña para unirte.",
