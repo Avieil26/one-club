@@ -252,7 +252,12 @@ function ago(iso: string, language: AppLocale = 'he') {
   if (language !== 'he' && language !== 'en') {
     const hours = Math.round(minutes / 60);
     const [value, unit] = minutes < 60 ? [minutes, 'minute'] as const : hours < 48 ? [hours, 'hour'] as const : [Math.round(hours / 24), 'day'] as const;
-    return new Intl.RelativeTimeFormat(language, { numeric: 'always' }).format(-value, unit);
+    try {
+      return new Intl.RelativeTimeFormat(language, { numeric: 'always' }).format(-value, unit);
+    } catch {
+      const words = { ar: { minute: 'دقيقة', hour: 'ساعة', day: 'يوم' }, 'pt-BR': { minute: 'min', hour: 'h', day: 'd' }, es: { minute: 'min', hour: 'h', day: 'd' } } as const;
+      return language === 'ar' ? `قبل ${value} ${words.ar[unit]}` : language === 'pt-BR' ? `Há ${value} ${words['pt-BR'][unit]}` : `Hace ${value} ${words.es[unit]}`;
+    }
   }
   if (minutes < 60) return language === 'en' ? `${minutes}m ago` : `לפני ${minutes} דק׳`;
   const hours = Math.round(minutes / 60);
