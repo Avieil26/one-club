@@ -1,6 +1,17 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "أوسكار غلوخ في أياكس (إمكانات 86)، وعنان خلايلي في كريستال بالاس (85)، ودانيال بيرتس في ساوثهامبتون (83)، إلى جانب مواهب إسرائيلية أخرى.",
+    "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "اطّلع على متطلبات نقاط الموسم ومكافآت Premium وأهداف اللعب. لا تزال طرق الحصول على النسخ الكلاسيكية قيد التحقق.",
+    "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "مسار مقترح من بين التشكيلات التي تم التحقق منها، ولا يضمن الحل الأقل تكلفة. لقطة أسعار المنصات:",
+    "The 1 CLUB APK has not been uploaded yet. Please try again after the next beta update.": "لم يُرفع ملف APK الخاص بـ 1 CLUB بعد. يرجى المحاولة مجددًا بعد تحديث النسخة التجريبية التالي.",
+    "The acquisition route for this retro version has not yet been verified. In-game availability is unconfirmed; no verified market price is available.": "لم يتم بعد التحقق من طريقة الحصول على هذه النسخة الكلاسيكية. توفرها داخل اللعبة غير مؤكد؛ ولا يتوفر سعر سوق تم التحقق منه.",
+    "The button is ready. The APK will be uploaded after the next beta build.": "الزر جاهز. سيُرفع ملف APK بعد إصدار النسخة التجريبية التالية.",
+    "Three cards per row on desktop, with pack artwork. Only offers within your selected token budget are shown.": "ثلاث بطاقات في كل صف على سطح المكتب، مع صور الحزم. تُعرض فقط العروض ضمن ميزانية الرموز التي حددتها.",
+    "Upload up to 3 in-game images of the squad that meets the requirements for “": "ارفع حتى 3 صور من داخل اللعبة للتشكيلة التي تستوفي متطلبات «",
+    "distinct items to buy. An item shared across sets is charged once.": "عناصر مختلفة للشراء. يُحتسب العنصر المشترك بين المجموعات مرة واحدة.",
+    "lineups excluded because uncollected items have missing prices.": "تشكيلات مستبعدة لأن أسعار عناصر غير مجمّعة مفقودة.",
+    "tokens. Try a larger budget or a smaller goal.": "رموز. جرّب ميزانية أكبر أو هدفًا أصغر.",
     " followers · ": " متابعون · ",
     " following · ": " يتابع · ",
     " in starting XI · ": " في التشكيلة الأساسية · ",
@@ -912,6 +923,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "Oscar Gloukh no Ajax (potencial 86), Anan Khalaili no Crystal Palace (85) e Daniel Peretz no Southampton (83), além de outras promessas israelenses.",
+    "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "Veja os requisitos de Pontos de Temporada, recompensas Premium e objetivos de jogo. As formas de obter as versões retrô ainda estão sendo verificadas.",
+    "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "Rota sugerida entre escalações verificadas, sem garantia de ser a solução mais barata. Registro de preços de console:",
+    "The 1 CLUB APK has not been uploaded yet. Please try again after the next beta update.": "O APK do 1 CLUB ainda não foi enviado. Tente novamente após a próxima atualização beta.",
+    "The acquisition route for this retro version has not yet been verified. In-game availability is unconfirmed; no verified market price is available.": "A forma de obter esta versão retrô ainda não foi verificada. A disponibilidade no jogo não está confirmada; não há preço de mercado verificado.",
+    "The button is ready. The APK will be uploaded after the next beta build.": "O botão está pronto. O APK será enviado após a próxima compilação beta.",
+    "Three cards per row on desktop, with pack artwork. Only offers within your selected token budget are shown.": "Três cartas por linha no computador, com imagens dos pacotes. Apenas ofertas dentro do seu orçamento de fichas são exibidas.",
+    "Upload up to 3 in-game images of the squad that meets the requirements for “": "Envie até 3 imagens do jogo do elenco que atende aos requisitos de “",
+    "distinct items to buy. An item shared across sets is charged once.": "itens distintos para comprar. Um item compartilhado entre conjuntos é cobrado uma vez.",
+    "lineups excluded because uncollected items have missing prices.": "escalações excluídas porque faltam preços de itens não coletados.",
+    "tokens. Try a larger budget or a smaller goal.": "fichas. Tente um orçamento maior ou uma meta menor.",
     " followers · ": " seguidores · ",
     " following · ": " seguindo · ",
     " in starting XI · ": " entre os titulares · ",
@@ -1823,6 +1845,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "Oscar Gloukh en el Ajax (potencial 86), Anan Khalaili en el Crystal Palace (85) y Daniel Peretz en el Southampton (83), además de otras promesas israelíes.",
+    "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "Consulta los requisitos de puntos de temporada, las recompensas Premium y los objetivos de juego. Las vías para conseguir las versiones retro siguen en revisión.",
+    "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "Ruta sugerida entre alineaciones verificadas, sin garantía de ser la solución más barata. Instantánea de precios de consola:",
+    "The 1 CLUB APK has not been uploaded yet. Please try again after the next beta update.": "El APK de 1 CLUB aún no se ha subido. Vuelve a intentarlo después de la próxima actualización beta.",
+    "The acquisition route for this retro version has not yet been verified. In-game availability is unconfirmed; no verified market price is available.": "La vía para conseguir esta versión retro aún no se ha verificado. Su disponibilidad en el juego no está confirmada; no hay un precio de mercado verificado.",
+    "The button is ready. The APK will be uploaded after the next beta build.": "El botón está listo. El APK se subirá después de la próxima compilación beta.",
+    "Three cards per row on desktop, with pack artwork. Only offers within your selected token budget are shown.": "Tres cartas por fila en ordenador, con imágenes de los sobres. Solo se muestran ofertas dentro del presupuesto de fichas seleccionado.",
+    "Upload up to 3 in-game images of the squad that meets the requirements for “": "Sube hasta 3 imágenes del juego de la plantilla que cumple los requisitos de «",
+    "distinct items to buy. An item shared across sets is charged once.": "artículos distintos para comprar. Un artículo compartido entre conjuntos se cobra una sola vez.",
+    "lineups excluded because uncollected items have missing prices.": "alineaciones excluidas porque faltan precios de artículos no recopilados.",
+    "tokens. Try a larger budget or a smaller goal.": "fichas. Prueba con un presupuesto mayor o un objetivo menor.",
     " followers · ": " seguidores · ",
     " following · ": " siguiendo · ",
     " in starting XI · ": " en el once inicial · ",
