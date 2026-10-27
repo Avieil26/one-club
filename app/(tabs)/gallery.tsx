@@ -9,12 +9,12 @@ import { GALLERY_GRADES } from '@/lib/galleryTypes';
 import { loadGalleryIndex, type GalleryIndex } from '@/lib/galleryData';
 import { useLanguage } from '@/lib/language';
 export default function GalleryScreen() {
- const { t, language } = useLanguage(), router = useRouter();
+ const { t, language, isRTL: rtl } = useLanguage(), router = useRouter();
  const [data, setData] = useState<GalleryIndex | null>(null), [failed, setFailed] = useState(false), [retry, setRetry] = useState(0);
  const [query, setQuery] = useState(''), [category, setCategory] = useState('all'), [visible, setVisible] = useState(18);
  const [filtersOpen, setFiltersOpen] = useState(false);
  const deferred = useDeferredValue(query), width = useWindowDimensions().width;
- const rtl = language === 'he', row = rtl ? 'row-reverse' : 'row';
+ const row = rtl ? 'row-reverse' : 'row';
  const columns = width >= 1150 ? 3 : width >= 700 ? 2 : 1;
  useEffect(() => { let active = true; void loadGalleryIndex().then(d => { if (active) { setData(d); setFailed(false); } }).catch(() => { if (active) setFailed(true); }); return () => { active = false; }; }, [retry]);
  const categories = useMemo(() => [...new Map(data?.sets.map(s => [s.categorySlug, s.category])).entries()], [data]);
