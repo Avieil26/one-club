@@ -1,4 +1,6 @@
 import { LIVE_SBC_TRANSLATIONS } from '@/lib/sbcLive20261020';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
+import type { AppLocale } from '@/lib/language';
 
 const SBC_ENGLISH: Record<string, string> = {
   "5× שחקני זהב 80+": "5× 80+ Gold Players",
@@ -65,8 +67,11 @@ const SBC_ENGLISH: Record<string, string> = {
 };
 
 /** Translate built-in copy exactly; preserve community-authored text. */
-export function sbcText(text: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (LIVE_SBC_TRANSLATIONS[text] ?? SBC_ENGLISH[text] ?? text) : text;
+export function sbcText(text: string, language: AppLocale): string {
+  if (language === 'he') return text;
+  const english = LIVE_SBC_TRANSLATIONS[text] ?? SBC_ENGLISH[text];
+  if (!english) return text; // Preserve community-authored text.
+  return language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
 }
 
 /** Generated rule labels belong to the app; community text is never translated. */
