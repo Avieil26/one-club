@@ -16,8 +16,7 @@ import { useLanguage } from '@/lib/language';
 
 export default function UltimateScreen() {
   const app = useApp();
-  const { language, locale, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, locale, t, isRTL: rtl } = useLanguage();
   const router = useRouter();
   const params = useLocalSearchParams<{ tab?: string; posted?: string }>();
   const [kind, setKind] = useState<FutKind>(params.tab === 'pack' ? 'pack' : 'squad');
