@@ -63,6 +63,20 @@ for (const card of seasonCards) {
   for (const group of acquisition.dependencies ?? []) for (const task of group.tasks) seasonTexts.add(task.en);
 }
 for (const locale of locales) for (const text of seasonTexts) assert(ui[locale][text], `${locale}: missing Season 2 objective: ${text}`);
+// Verify country coverage and search without changing the existing country dataset.
+const countries = loadRepositoryModule('lib/countries.ts');
+const countryNames = loadRepositoryModule('lib/plannedCountryNames.ts').plannedCountryNames;
+for (const locale of locales) {
+  for (const country of countries.COUNTRIES) {
+    const name = countryNames[locale][country.code];
+    assert(name && name !== country.code, `${locale}: missing country ${country.code}`);
+    assert.equal(countries.countryName(country.code, locale), name);
+    assert(countries.countryOptions(name, locale).some(option => option.code === country.code), `${locale}: country search failed for ${country.code}`);
+  }
+}
+for (const locale of ['he', 'en']) for (const country of countries.COUNTRIES) {
+  assert.equal(countries.countryName(country.code, locale), country[locale], `Preserve ${locale} country names`);
+}
 // Test the generated validation patterns against the existing Hebrew-to-English error helper.
 const fields = ['כותרת', 'חוקים', 'דרישות צילום', 'שם שחקן או מועדון', 'תיאור', 'טקסט', 'תגובה', 'שם', 'הודעה', 'שם משתמש', 'מטרת הפרסום', 'עמדה', 'פלטפורמה', 'אזור'];
 const errors = fields.flatMap(field => [`חסר ${field}`, `${field} ארוך מדי`]).concat(['צריך 1 צילומים', 'צריך 3 צילומים']);
