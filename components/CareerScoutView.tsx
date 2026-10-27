@@ -115,7 +115,7 @@ function displayContractYears(contractYears: string, language: 'he' | 'en'): str
 }
 
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const rtl = language === 'he';
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [subFilter, setSubFilter] = useState<SubFilterTab>('all');
@@ -386,7 +386,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   </Text>
                   <Text style={styles.metaDot}>•</Text>
                   <NationFlag nation={player.nation} size={14} />
-                  <Text style={styles.metaText}>{displayNation(player.nation, language)}</Text>
+                  <Text style={styles.metaText}>{displayNation(player.nation, locale)}</Text>
                   <Text style={styles.metaDot}>•</Text>
                   <Text style={styles.metaText}>{t('גיל', 'Age')} {player.age}</Text>
                 </View>
@@ -511,7 +511,7 @@ function ScoutDossierModal({
   player: CareerScoutPlayer;
   onClose: () => void;
 }) {
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const { height: windowHeight } = useWindowDimensions();
   const sheetHeight = Math.max(480, Math.round(windowHeight * 0.93));
   const [showPotential, setShowPotential] = useState(false);
@@ -568,7 +568,7 @@ function ScoutDossierModal({
                 <Text style={styles.metaText}>{displayClub(player.club, language)}</Text>
                 <Text style={styles.metaDot}>•</Text>
                 <NationFlag nation={player.nation} size={15} />
-                <Text style={styles.metaText}>{displayNation(player.nation, language)}</Text>
+                <Text style={styles.metaText}>{displayNation(player.nation, locale)}</Text>
               </View>
 
               <View style={styles.chipsWrap}>
