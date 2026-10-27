@@ -7,7 +7,7 @@ import Svg, { Defs, LinearGradient as SvgGradient, Path, Polygon, Stop } from 'r
 import { ProfileFace } from '@/components/ProfileFace';
 import { careerFont } from '@/lib/careerCardTheme';
 import type { BoardRow, CommunityBoards as BoardData } from '@/lib/communityBoard';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 
 const INK = '#241c14';
 
@@ -77,7 +77,7 @@ function Rank({ place }: { place: number }) {
 }
 
 function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
-  const { language, t, isRTL: rtl } = useLanguage();
+  const { language, locale, t, isRTL: rtl } = useLanguage();
   
   const router = useRouter();
   const value = row.value.toLocaleString('en-US');
@@ -111,7 +111,7 @@ function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark
             {row.name}
           </Text>
           <Text numberOfLines={1} style={{ color: '#8b939e', fontFamily: careerFont, fontSize: 11, fontWeight: '600', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
-            {joinedLabel(row.joined, language)}
+            {joinedLabel(row.joined, locale, t)}
           </Text>
         </View>
       </View>
@@ -166,13 +166,16 @@ function Column({
   );
 }
 
-function joinedLabel(value: string, language: 'he' | 'en') {
-  if (language === 'he') return value;
-  if (value === 'בקהילה') return 'Community member';
-  if (value === 'בקהילה החודש') return 'Joined this month';
+function joinedLabel(value: string, locale: AppLocale, t: (he: string, en: string) => string) {
+  if (locale === 'he') return value;
+  if (value === 'בקהילה') return t('בקהילה', 'Community member');
+  if (value === 'בקהילה החודש') return t('בקהילה החודש', 'Joined this month');
   const month = value.match(/^בקהילה מ(.+)$/)?.[1];
-  const months: Record<string, string> = { ינואר: 'January', פברואר: 'February', מרץ: 'March', אפריל: 'April', מאי: 'May', יוני: 'June', יולי: 'July', אוגוסט: 'August', ספטמבר: 'September', אוקטובר: 'October', נובמבר: 'November', דצמבר: 'December' };
-  return month ? `Member since ${months[month] ?? month}` : value;
+  if (!month) return value;
+  const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+  const index = months.indexOf(month);
+  const translatedMonth = index < 0 ? month : new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : locale, { month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(2024, index, 1)));
+  return t('חבר מאז {month}', 'Member since {month}').replace('{month}', translatedMonth);
 }
 
 const head = {
