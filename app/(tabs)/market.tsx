@@ -62,7 +62,7 @@ function Pager({
   onNext: () => void;
   onJump: (page: number) => void;
 }) {
-  const { t, language } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const windowPages = useMemo(() => {
     if (totalPages <= 1) return [] as number[];
     const pages: number[] = [];
@@ -77,14 +77,14 @@ function Pager({
 
   return (
     <View style={{ gap: 10, marginVertical: 8 }}>
-      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+      <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
         <Button label={t('הקודם', 'Previous')} variant="ghost" disabled={page <= 1} onPress={onPrev} />
         <Text style={{ color: colors.text, fontWeight: '800', minWidth: 88, textAlign: 'center' }}>
           {page} / {totalPages}
         </Text>
         <Button label={t('הבא', 'Next')} variant="ghost" disabled={page >= totalPages} onPress={onNext} />
       </View>
-      <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
+      <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6 }}>
         {windowPages[0] > 1 ? (
           <PageChip label="1" active={false} onPress={() => onJump(1)} />
         ) : null}
