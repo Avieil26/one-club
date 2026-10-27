@@ -3,6 +3,7 @@ import { plannedAdditionalTranslations } from './plannedAdditionalTranslations';
 export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   ar: {
     ...plannedAdditionalTranslations["ar"],
+    Left: 'اليسرى', Right: 'اليمنى', '{name} wrote': 'كتب {name}',
     'Something went wrong': 'حدث خطأ', Close: 'إغلاق', Back: 'رجوع', 'Saving…': 'جارٍ الحفظ…',
     'Sign in required': 'يجب تسجيل الدخول', 'Community player': 'لاعب من المجتمع', Substitutes: 'البدلاء',
     All: 'الكل', 'Try again': 'حاول مجددًا', Rating: 'التقييم', 'Community players': 'لاعبو المجتمع',
@@ -63,6 +64,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
   },
   'pt-BR': {
     ...plannedAdditionalTranslations["pt-BR"],
+    Left: 'Esquerdo', Right: 'Direito', '{name} wrote': '{name} escreveu',
     'Something went wrong': 'Algo deu errado', Close: 'Fechar', Back: 'Voltar', 'Saving…': 'Salvando…',
     'Sign in required': 'É necessário entrar', 'Community player': 'Jogador da comunidade', Substitutes: 'Reservas',
     All: 'Todos', 'Try again': 'Tentar novamente', Rating: 'Classificação', 'Community players': 'Jogadores da comunidade',
@@ -123,6 +125,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
   },
   es: {
     ...plannedAdditionalTranslations["es"],
+    Left: 'Izquierdo', Right: 'Derecho', '{name} wrote': '{name} escribió',
     'Something went wrong': 'Se ha producido un error', Close: 'Cerrar', Back: 'Volver', 'Saving…': 'Guardando…',
     'Sign in required': 'Debes iniciar sesión', 'Community player': 'Jugador de la comunidad', Substitutes: 'Suplentes',
     All: 'Todos', 'Try again': 'Volver a intentar', Rating: 'Valoración', 'Community players': 'Jugadores de la comunidad',
