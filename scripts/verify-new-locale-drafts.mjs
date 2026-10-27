@@ -53,6 +53,9 @@ for (const locale of locales) {
   for (const date of ['1 באוקטובר 2026', '21 באוקטובר 2026']) assert(!/[\u0590-\u05ff]/u.test(localizedLegalDate(date, locale)));
   assert.throws(() => localizedLegal('UNTRANSLATED_LEGAL_SENTINEL', locale), 'Never silently fall back to English');
 }
+// These choices come from dynamic lookup tables rather than literal t() arguments.
+const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
+for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
 // Data-driven Season 2 objective descriptions are not visible to the literal t() audit.
 const seasonCards = JSON.parse(fs.readFileSync('assets/data/season2.json', 'utf8'));
 const seasonTexts = new Set();
