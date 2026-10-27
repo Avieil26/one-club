@@ -77,6 +77,16 @@ for (const locale of locales) {
 for (const locale of ['he', 'en']) for (const country of countries.COUNTRIES) {
   assert.equal(countries.countryName(country.code, locale), country[locale], `Preserve ${locale} country names`);
 }
+const { formatRemaining } = loadRepositoryModule('lib/format.ts');
+const now = Date.parse('2026-10-27T00:00:00Z');
+for (const locale of locales) {
+  assert(formatRemaining(null, now, locale));
+  assert(formatRemaining('2026-10-26T23:59:00Z', now, locale));
+  assert(formatRemaining('2026-10-27T00:00:30Z', now, locale));
+  assert(formatRemaining('2026-10-28T01:02:00Z', now, locale));
+}
+assert.equal(formatRemaining('2026-10-28T01:02:00Z', now, 'en'), '1d 1h');
+assert.equal(formatRemaining('2026-10-28T01:02:00Z', now, 'he'), 'יום ו-1 שע׳');
 // Test the generated validation patterns against the existing Hebrew-to-English error helper.
 const fields = ['כותרת', 'חוקים', 'דרישות צילום', 'שם שחקן או מועדון', 'תיאור', 'טקסט', 'תגובה', 'שם', 'הודעה', 'שם משתמש', 'מטרת הפרסום', 'עמדה', 'פלטפורמה', 'אזור'];
 const errors = fields.flatMap(field => [`חסר ${field}`, `${field} ארוך מדי`]).concat(['צריך 1 צילומים', 'צריך 3 צילומים']);
