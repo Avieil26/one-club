@@ -18,8 +18,8 @@ function face(position: string): ImageStyle | null {
 
 export default function GamesScreen() {
   const router = useRouter();
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   const saka = portraitByEnglish('Bukayo Saka');
   const faces = ['Lamine Yamal', 'Erling Haaland', 'Bukayo Saka', 'Pedri']
     .map((name) => portraitByEnglish(name))
