@@ -18,7 +18,7 @@ import { catalogChallenge, placedPreview } from '@/lib/sbcCatalog';
 import { useApp } from '@/lib/store';
 
 export default function SbcSolutionScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -72,7 +72,7 @@ export default function SbcSolutionScreen() {
       {!published ? <Muted>{t('הפתרון אינו מפורסם בקהילה. דירוגים ותגמולים זמינים רק אחרי אישור.', 'This solution is not published in the community. Ratings and rewards are available only after approval.')}</Muted> : null}
       <SbcModerationActions solution={solution} />
       {status === 'checked' ? <Muted>{t('✓ ההרכב נבדק גם אוטומטית מול הדרישות', '✓ The squad also passes the automatic requirements check')}</Muted> : status === 'invalid' ? <Muted>{t('ההרכב אינו עומד בדרישות הנוכחיות — אין להשתמש בו להשלמת האתגר.', 'This squad does not meet the current requirements. Do not use it to complete this challenge.')}</Muted> : null}
-      {status === 'invalid' && checkedReport ? <Card>{checkedReport.checks.filter((c) => !c.ok).map((c) => <Muted key={c.label}>✗ {sbcCheckText(c.label, language)}</Muted>)}</Card> : null}
+      {status === 'invalid' && checkedReport ? <Card>{checkedReport.checks.filter((c) => !c.ok).map((c) => <Muted key={c.label}>✗ {sbcCheckText(c.label, locale)}</Muted>)}</Card> : null}
       <Muted>{solution.explanation}</Muted>
       {solution.squad ? (
         <View style={{ gap: 10 }}>
