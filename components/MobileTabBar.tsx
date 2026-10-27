@@ -14,7 +14,7 @@ const ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
 };
 
 export function MobileTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [more, setMore] = useState(false);
@@ -26,7 +26,7 @@ export function MobileTabBar({ state, descriptors, navigation }: BottomTabBarPro
   }, []);
   const active = state.routes[state.index].name;
   const secondary = state.routes.filter((route) => !PRIMARY.includes(route.name));
-  const direction = language === 'he' ? 'rtl' : 'ltr';
+  const direction = isRTL ? 'rtl' : 'ltr';
 
   function select(name: string) {
     const route = state.routes.find((item) => item.name === name);
@@ -73,7 +73,7 @@ export function MobileTabBar({ state, descriptors, navigation }: BottomTabBarPro
                 </Pressable>
               ))}
               {[{ href: '/profile' as const, label: t('הפרופיל שלי', 'My profile') }, { href: '/settings' as const, label: t('הגדרות', 'Settings') }].map((item) => (
-                <Pressable key={item.href} accessibilityRole="button" onPress={() => { setMore(false); router.push(item.href); }} style={{ minHeight: 52, padding: 12, justifyContent: 'center' }}><Text style={{ color: '#F4F7F2', fontSize: 16, textAlign: language === 'he' ? 'right' : 'left' }}>{item.label}</Text></Pressable>
+                <Pressable key={item.href} accessibilityRole="button" onPress={() => { setMore(false); router.push(item.href); }} style={{ minHeight: 52, padding: 12, justifyContent: 'center' }}><Text style={{ color: '#F4F7F2', fontSize: 16, textAlign: isRTL ? 'right' : 'left' }}>{item.label}</Text></Pressable>
               ))}
             </ScrollView>
           </View>
