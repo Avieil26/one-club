@@ -62,16 +62,16 @@ export function GalleryPlayerTile({ item, selected, collected, firstOwner, onAdd
  </LinearGradient>;
 }
 export function GalleryRewards({ set, target }: { set: GallerySet; target?: GalleryGrade }) {
- const { t, language } = useLanguage(), { width } = useWindowDimensions();
+ const { t, language, isRTL } = useLanguage(), { width } = useWindowDimensions();
  return <GalleryPanel><GalleryText size={23} style={{ fontWeight: '800' }}>{t('דרגות ופרסים', 'Grades & rewards')}</GalleryText><GalleryText quiet>{t('D היא הדרגה הראשונה, אחריה C, B, A ו־S הגבוהה ביותר. יש למלא את כל המקומות באוסף. הספים שונים בכל אוסף, והפרסים מצטברים.', 'D is the first grade, followed by C, B, A and S, the highest. Every slot must be filled. Thresholds vary by set and rewards are cumulative.')}</GalleryText>
-  <View style={{flexDirection:width>=1100?(language==='he'?'row-reverse':'row'):'column',gap:12}}>{set.grades.map(g => <LinearGradient key={g.name} testID={`gallery-reward-${g.name}`} colors={[gradeMetals[g.name].dark, '#111B23']} start={{x:0,y:0}} end={{x:1,y:1}} style={{ flex:width>=1100?1:undefined,minWidth:0,borderWidth: 1, borderColor: target === g.name ? gradeMetals[g.name].light : '#45505A', borderRadius:12, padding:16, gap:10 }}><View style={{ flexDirection:width>=1100?'column':'row', direction: 'ltr', justifyContent: 'space-between', alignItems: 'center',gap:12 }}><GalleryGradeBadge grade={g.name} size={76}/><GalleryPoints value={g.threshold} size={22}/></View>
+  <View style={{flexDirection:width>=1100?(isRTL?'row-reverse':'row'):'column',gap:12}}>{set.grades.map(g => <LinearGradient key={g.name} testID={`gallery-reward-${g.name}`} colors={[gradeMetals[g.name].dark, '#111B23']} start={{x:0,y:0}} end={{x:1,y:1}} style={{ flex:width>=1100?1:undefined,minWidth:0,borderWidth: 1, borderColor: target === g.name ? gradeMetals[g.name].light : '#45505A', borderRadius:12, padding:16, gap:10 }}><View style={{ flexDirection:width>=1100?'column':'row', direction: 'ltr', justifyContent: 'space-between', alignItems: 'center',gap:12 }}><GalleryGradeBadge grade={g.name} size={76}/><GalleryPoints value={g.threshold} size={22}/></View>
    {!g.rewards.length ? <GalleryText quiet size={13}>{t('ללא פרס בדרגה זו', 'No reward at this grade')}</GalleryText> : g.rewards.map((r,index) => r.type === 'event_token_1' ? <GalleryToken key={index} value={r.value * r.count} /> : <GalleryText key={index} size={14}>{r.imagePath?.includes('kit') ? t('ערכת מדים למועדון', 'Club kit') : r.imagePath?.includes('badge') ? t('סמל המועדון', 'Club badge') : r.label}</GalleryText>)}
   </LinearGradient>)}</View>
  </GalleryPanel>;
 }
 export function GalleryHero({ title, subtitle, children, art, scenery, compact = false }: { title: string; subtitle: string; children?: ReactNode; art?: ReactNode; scenery?: string; compact?: boolean }) {
- const { width } = useWindowDimensions(), { language } = useLanguage();
- return <View style={{ borderRadius: 12, overflow: 'hidden', minHeight:width<700?145:compact?130:190, padding:width<700||compact?18:28, flexDirection:language==='he'?'row-reverse':'row', alignItems:'center', gap:18 }}>
+ const { width } = useWindowDimensions(), { isRTL } = useLanguage();
+ return <View style={{ borderRadius: 12, overflow: 'hidden', minHeight:width<700?145:compact?130:190, padding:width<700||compact?18:28, flexDirection:isRTL?'row-reverse':'row', alignItems:'center', gap:18 }}>
   {scenery?<GallerySetBackdrop name={scenery}/>:null}
   <LinearGradient colors={['rgba(6,13,19,0.76)', 'rgba(6,13,19,0.10)', 'rgba(6,13,19,0.65)']} start={{x:0,y:0}} end={{x:1,y:0}} style={StyleSheet.absoluteFill}/>
   <View style={{ flex:1, minWidth:0, gap:7 }}><GalleryText size={11} style={{ letterSpacing: 2, color: '#D3BB8C' }}>ULTIMATE TEAM / FC 27</GalleryText><GalleryText size={width<700?36:48} style={{ fontWeight: '900', lineHeight:width<700?43:58 }}>{title}</GalleryText><GalleryText quiet>{subtitle}</GalleryText>{children}</View>
