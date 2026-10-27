@@ -9,7 +9,7 @@ import { localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { isOpen } from '@/lib/selectors';
 
 export default function CalculatorScreen() {
-  const { t, language, locale } = useLanguage();
+  const { t, locale } = useLanguage();
   const params = useLocalSearchParams<{ challenge?: string }>();
   const options = officialChallenges.filter((c) => isOpen(c) && pointsSegments(c.id).length);
   const [id, setId] = useState(params.challenge ?? options[0]?.id ?? '');
