@@ -28,6 +28,7 @@ import { addPlayerComment, loadPlayerTalk, voteOnComment, voteOnPlayer, type Pla
 import { useApp } from '@/lib/store';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
+import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { displayClub, displayLeague, displayNation } from '@/lib/footballLocalization';
 
 function Stars({ count }: { count: number }) {
@@ -113,19 +114,19 @@ const CHEM_GROUPS = [
 ];
 
 function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) {
-  const { language, locale } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const text = compact ? 13 : 15;
   if (player.icon) {
     return (
       <View style={{ gap: 8, alignItems: 'flex-end' }}>
-        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>{language === 'en' ? 'Icon' : 'אייקון'}</Text>
+        <Text style={{ color: '#E8C86A', fontWeight: '800', fontSize: compact ? 12 : 13, letterSpacing: 1.4 }}>{t('אייקון', 'Icon')}</Text>
         <View style={{ flexDirection: 'row', direction: 'rtl', alignItems: 'center', gap: 8 }}>
           <NationFlag nation={player.nation} size={compact ? 14 : 16} />
           <Text style={{ color: '#F4F7F2', fontWeight: '700', fontSize: text }}>{displayNation(player.nation, locale)}</Text>
         </View>
         {playerHeight(player.baseId ?? player.id) ? (
           <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} {language === 'en' ? 'cm' : 'ס״מ'}</Text>
+            <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{playerHeight(player.baseId ?? player.id)!.cm} {t('ס״מ', 'cm')}</Text>
             <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{playerHeight(player.baseId ?? player.id)!.feet}</Text>
           </View>
         ) : null}
@@ -133,7 +134,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end', maxWidth: 420 }}>
             {player.playstyles.map((style) => (
               <Text key={style.name} style={{ color: style.plus ? '#E8C86A' : '#C5D0C8', fontSize: 12, fontWeight: style.plus ? '800' : '600' }}>
-                {style.name}
+                {localizedPlayStyle(style.name, locale)}
                 {style.plus ? ' +' : ''}
               </Text>
             ))}
@@ -156,7 +157,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
       </View>
       {height ? (
         <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} {language === 'en' ? 'cm' : 'ס״מ'}</Text>
+          <Text style={{ color: '#C5D5C8', fontSize: compact ? 12 : 14 }}>{height.cm} {t('ס״מ', 'cm')}</Text>
           <Text style={{ color: '#F4F7F2', fontSize: compact ? 12 : 14, fontWeight: '800' }}>{'\u200E'}{height.feet}</Text>
         </View>
       ) : null}
@@ -164,7 +165,7 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end', maxWidth: 420 }}>
           {player.playstyles.map((style) => (
             <Text key={style.name} style={{ color: style.plus ? '#E8C86A' : '#C5D0C8', fontSize: 12, fontWeight: style.plus ? '800' : '600' }}>
-              {style.name}
+              {localizedPlayStyle(style.name, locale)}
               {style.plus ? ' +' : ''}
             </Text>
           ))}
