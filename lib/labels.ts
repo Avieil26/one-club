@@ -1,4 +1,6 @@
 import type { CareerMode, CommentPreset, ContactType, DivisionId, FutKind, GroundsIntent, PackRarity, PlatformId, SbcKind } from '@/lib/types';
+import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 
 export const TRUSTED_APPROVALS = 5;
 
@@ -77,9 +79,10 @@ export function rarityLabel(id: PackRarity, language: 'he' | 'en' = 'he'): strin
   return RARITIES.find((item) => item.id === id)?.label ?? id;
 }
 
-export function modeLabel(mode: CareerMode, language: 'he' | 'en' = 'he'): string {
-  if (language === 'en') return mode === 'manager' ? 'Manager career' : 'Player career';
-  return mode === 'manager' ? 'קריירת מאמן' : 'קריירת שחקן';
+export function modeLabel(mode: CareerMode, language: AppLocale = 'he'): string {
+  if (language === 'he') return mode === 'manager' ? 'קריירת מאמן' : 'קריירת שחקן';
+  const english = mode === 'manager' ? 'Manager career' : 'Player career';
+  return language === 'en' ? english : plannedUiTranslations[language][english];
 }
 
 export function futKindLabel(kind: FutKind): string {
