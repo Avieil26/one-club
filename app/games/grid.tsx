@@ -83,7 +83,7 @@ export default function GridGameScreen() {
         <View style={styles.veil} />
         <View style={styles.pad}>
           <View style={styles.top}>
-            <Text style={styles.pill}>{language === 'he' ? `מולאו ${placed}` : `${placed} filled`}</Text>
+            <Text style={styles.pill}>{t('מולאו {count}', '{count} filled').replace('{count}', String(placed))}</Text>
             <Hearts lives={lives} />
           </View>
           <Text style={styles.title}>{t('הרשת', 'The Grid')}</Text>
