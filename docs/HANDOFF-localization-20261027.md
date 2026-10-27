@@ -133,3 +133,9 @@ All 106 unique built-in SBC dictionary strings now have draft translations (audi
 - Literal coverage reports zero missing UI or built-in SBC strings. Thirteen syntactically dynamic calls remain flagged, including the now-tested community error map and Grounds categories; the count is not a count of missing translations. Continue checking dynamic sources, such as the chat day labels and other legacy language branches, and perform linguistic, legal and visual review before enabling any new locale. Production remains untouched.
 
 - Chat day separators now translate Today/Yesterday and format earlier dates with the chosen locale, retaining the prior Hebrew and English date formats. Draft verification now checks 1,626 UI strings per locale.
+
+
+### Continuation: career, community and Grounds labels
+
+- Localized career submission states, Gallery's community-member fallback, membership labels and month names on community boards, player filter selected types/nations, and Grounds player positions, intents, divisions and country labels. Preserved legacy Hebrew/English display behavior where explicitly checked. Market pagination uses locale-aware direction and Gallery dates use the selected locale.
+- Draft verifier now checks the source maps for player-filter kinds and Grounds positions, in addition to community errors and Grounds categories; approved unmodified brand labels are allowed. Drafts: 1,637 UI strings, 13 glossary entries, 164 legal entries per locale. Typecheck and draft verification pass in the reconstructed environment. Literal audit shows zero missing UI/SBC entries and 19 syntactically dynamic calls, some covered by these data-driven tests. This does not establish complete translation or review: continue audit and visual, linguistic and legal checks before rollout.
