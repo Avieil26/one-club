@@ -112,6 +112,22 @@ for (const rules of ruleSets) for (const placed of [{}, filled]) {
     assert.deepEqual(sbcNumbers(translated), sbcNumbers(check.label), `${locale}: SBC rule number mismatch: ${check.label}`);
   }
 }
+const groundsSource = ts.createSourceFile('lib/groundsLocalization.ts', fs.readFileSync('lib/groundsLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const { groundsLabel } = loadRepositoryModule('lib/groundsLocalization.ts');
+for (const statement of groundsSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(groundsSource) === 'GROUNDS_COPY' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.name) && ts.isStringLiteral(property.initializer)) {
+      for (const locale of locales) {
+        assert(ui[locale][property.initializer.text], `${locale}: missing Grounds label: ${property.initializer.text}`);
+        assert.equal(groundsLabel(property.name.text, locale), ui[locale][property.initializer.text]);
+      }
+    }
+  }
+}
+for (const locale of locales) {
+  assert(groundsLabel('רמה 12', locale).includes('12'));
+  assert(groundsLabel('חלוקה 3', locale).includes('3'));
+}
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
