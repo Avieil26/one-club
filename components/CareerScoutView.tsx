@@ -589,7 +589,7 @@ function ScoutDossierModal({
                   <Text style={styles.infoChipText}>{player.height} {t('ס״מ', 'cm')}</Text>
                 </View>
                 <View style={styles.infoChip}>
-                  <Text style={styles.infoChipText}>{t('רגל', 'Foot')} {language === 'he' ? player.foot : (player.foot === 'ימין' ? 'Right' : player.foot)}</Text>
+                  <Text style={styles.infoChipText}>{t('רגל', 'Foot')} {player.foot === 'ימין' ? t('ימין', 'Right') : t('שמאל', 'Left')}</Text>
                 </View>
                 <View style={styles.infoChip}>
                   <Text style={styles.infoChipText}>★{player.skills} {t('מיומנות', 'Skill moves')}</Text>
