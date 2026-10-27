@@ -80,7 +80,7 @@ for (const score of [0, 3, 6, 10, 15, 25]) {
   assert.equal(JSON.stringify(round), before, 'Localization must not mutate answers or round state');
 }
 for (const [filename, binding] of [
-  ['app/games/who.tsx', 'miniGamePrompt(round.prompt, language)'],
+  ['app/games/who.tsx', 'miniGamePrompt(round.prompt, locale)'],
   ['components/MiniGameChrome.tsx', 'miniGameMessage(text, language)'],
   ['app/games/grid.tsx', 'displayNation(nation, locale)'],
   ['app/games/club.tsx', 'displayClub(club, language)'],
