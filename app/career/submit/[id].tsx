@@ -14,7 +14,7 @@ import { useApp } from '@/lib/store';
 export default function SubmitChallengeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
-  const { language, locale, t } = useLanguage();
+  const { locale, t } = useLanguage();
   const router = useRouter();
   const challenge = app.challenges.find((item) => item.id === id);
   const [playerOrClubName, setPlayerOrClubName] = useState('');
