@@ -16,7 +16,7 @@ import { useLanguage } from '@/lib/language';
 
 export default function UltimateScreen() {
   const app = useApp();
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const rtl = language === 'he';
   const router = useRouter();
   const params = useLocalSearchParams<{ tab?: string; posted?: string }>();
@@ -31,7 +31,7 @@ export default function UltimateScreen() {
     try {
       await app.toggleFutLike(postId);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error, locale));
     }
   }
 
