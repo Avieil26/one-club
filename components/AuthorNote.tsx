@@ -5,7 +5,7 @@ import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
 
 export function AuthorNote({ name, body, avatarUrl }: { name: string; body: string; avatarUrl?: string | null }) {
-  const { language, isRTL: rtl } = useLanguage();
+  const { t, isRTL: rtl } = useLanguage();
   
   const words = body.trim();
   if (!words) return null;
@@ -25,7 +25,7 @@ export function AuthorNote({ name, body, avatarUrl }: { name: string; body: stri
       <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', gap: 10 }}>
         <ProfileFace name={name} uri={avatarUrl} size={40} />
         <Text style={{ color: '#F4F7F2', fontSize: 15, fontWeight: '600', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>
-          {language === 'he' ? `${name} כתב` : `${name} wrote`}
+          {t('{name} כתב', '{name} wrote').replace('{name}', name)}
         </Text>
       </View>
       <Text
