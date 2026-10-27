@@ -8,8 +8,8 @@ import type { GalleryGrade, GalleryItem, GallerySet } from '@/lib/galleryTypes';
 import { GALLERY_GRADES } from '@/lib/galleryTypes';
 export const galleryColors = { bg: '#0B1117', panel: '#141C23', line: '#394650', text: '#F4F1E9', muted: '#BDC2CB', orange: '#FF8B36', gold: '#D6BD85' };
 export function GalleryText({ children, size = 15, quiet = false, style, testID }: { children: ReactNode; size?: number; quiet?: boolean; style?: TextStyle; testID?: string }) {
- const { language } = useLanguage();
- return <Text testID={testID} style={{ color: quiet ? galleryColors.muted : galleryColors.text, fontSize: size, lineHeight: size * 1.45, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr', ...style }}>{children}</Text>;
+ const { isRTL } = useLanguage();
+ return <Text testID={testID} style={{ color: quiet ? galleryColors.muted : galleryColors.text, fontSize: size, lineHeight: size * 1.45, textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr', ...style }}>{children}</Text>;
 }
 export function GalleryPanel({ children, style }: { children: ReactNode; style?: ViewStyle }) {
  return <LinearGradient colors={['rgba(31,40,48,0.93)', 'rgba(12,19,25,0.95)']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.panel, style]}>{children}</LinearGradient>;
@@ -18,8 +18,8 @@ export function GalleryButton({ label, onPress, active = false, primary = false,
  return <Pressable testID={testID} accessibilityRole="button" accessibilityState={{ disabled, selected: active }} disabled={disabled} onPress={onPress} style={({ pressed }) => ({ minHeight: 46, justifyContent: 'center', alignItems: 'center', borderRadius: 8, paddingVertical: 10, paddingHorizontal: compact?8:15, borderWidth: 1, borderColor: active || primary ? galleryColors.orange : galleryColors.line, backgroundColor: primary ? '#F98732' : active ? '#38291D' : '#161C25', opacity: disabled ? 0.45 : pressed ? 0.75 : 1 })}><Text style={{ color: primary ? '#17110B' : active ? '#FFD6B1' : galleryColors.text, fontSize: compact?12:14, fontWeight: '700', textAlign: 'center' }}>{label}</Text></Pressable>;
 }
 export function GallerySearch({ value, onChangeText, placeholder }: { value: string; onChangeText: (value: string) => void; placeholder: string }) {
- const { language } = useLanguage();
- return <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', alignItems: 'center', gap: 10, backgroundColor: '#121820', borderWidth: 1, borderColor: galleryColors.line, borderRadius: 8, paddingHorizontal: 14 }}><Ionicons name="search-outline" size={20} color={galleryColors.muted} /><TextInput accessibilityLabel={placeholder} placeholder={placeholder} value={value} onChangeText={onChangeText} placeholderTextColor="#AAB2BF" style={{ flex: 1, minWidth: 0, minHeight: 50, color: galleryColors.text, fontSize: 15, textAlign: language === 'he' ? 'right' : 'left', paddingVertical: 12 }} /></View>;
+ const { isRTL } = useLanguage();
+ return <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'center', gap: 10, backgroundColor: '#121820', borderWidth: 1, borderColor: galleryColors.line, borderRadius: 8, paddingHorizontal: 14 }}><Ionicons name="search-outline" size={20} color={galleryColors.muted} /><TextInput accessibilityLabel={placeholder} placeholder={placeholder} value={value} onChangeText={onChangeText} placeholderTextColor="#AAB2BF" style={{ flex: 1, minWidth: 0, minHeight: 50, color: galleryColors.text, fontSize: 15, textAlign: isRTL ? 'right' : 'left', paddingVertical: 12 }} /></View>;
 }
 export function GalleryToken({ value, size = 18 }: { value?: number | string; size?: number }) {
  return <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 6 }}><Image accessibilityLabel="Gallery Token" source={require('@/assets/images/gallery-token.png')} resizeMode="contain" style={{ width: size + 6, height: size + 6 }} />{value !== undefined ? <Text style={{ color: '#E5CD99', fontSize: size, fontWeight: '700', fontVariant: ['tabular-nums'] }}>{value}</Text> : null}</View>;
