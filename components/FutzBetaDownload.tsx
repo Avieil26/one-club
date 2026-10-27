@@ -8,8 +8,8 @@ import { useLanguage } from '@/lib/language';
 
 /** Hero download card for Futz BETA APK — web + mobile. */
 export function FutzBetaDownload() {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   const [ready, setReady] = useState<boolean | null>(null);
 
   const refresh = useCallback(async () => {
