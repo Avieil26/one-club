@@ -84,7 +84,7 @@ function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={t(`פתיחת הפרופיל של ${row.name}`, `View ${row.name}’s profile`)}
+      accessibilityLabel={t('פתיחת הפרופיל של {name}', 'View {name}’s profile').replace('{name}', row.name)}
       onPress={() => router.push(`/player/${row.userId}`)}
       style={{
         minHeight: 58,
