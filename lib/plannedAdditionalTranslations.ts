@@ -1,6 +1,10 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Cookies and browser storage": "ملفات تعريف الارتباط وتخزين المتصفح",
+    "Device storage": "التخزين على الجهاز",
+    "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "يخزن 1 CLUB فقط ما يلزم لإبقائك مسجّل الدخول وتذكّر اطلاعك على هذا الإشعار. لا نستخدم ملفات تعريف ارتباط إعلانية. يمكنك متابعة التصفح دون الضغط على الإشعار، وسيستمر تسجيل الدخول في العمل.",
+    "Cookie details": "تفاصيل ملفات تعريف الارتباط",
     "Change the site language at any time. Your choice is saved for future visits.": "يمكنك تغيير لغة الموقع في أي وقت. يُحفظ اختيارك للزيارات القادمة.",
     "Request account and data deletion": "طلب حذف الحساب والبيانات",
     "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "يمكنك اختيار مشاركة يوم نشاط واحد لكل حساب مسجّل الدخول، دون سجل للصفحات أو إعلانات. يؤدي إيقاف هذا الخيار إلى إيقاف القياس على هذا الجهاز.",
@@ -389,6 +393,10 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Cookies and browser storage": "Cookies e armazenamento no navegador",
+    "Device storage": "Armazenamento no dispositivo",
+    "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "O 1 CLUB armazena apenas o necessário para manter sua sessão ativa e lembrar que você viu este aviso. Não usamos cookies de publicidade. Você pode continuar navegando sem clicar neste aviso, e o login continuará funcionando.",
+    "Cookie details": "Detalhes dos cookies",
     "Change the site language at any time. Your choice is saved for future visits.": "Altere o idioma do site a qualquer momento. Sua escolha será salva para as próximas visitas.",
     "Request account and data deletion": "Solicitar exclusão da conta e dos dados",
     "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "Opcionalmente, compartilhe um dia de atividade por conta conectada, sem histórico de páginas ou publicidade. Ao desativar, a medição é interrompida neste dispositivo.",
@@ -777,6 +785,10 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Cookies and browser storage": "Cookies y almacenamiento del navegador",
+    "Device storage": "Almacenamiento en el dispositivo",
+    "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "1 CLUB solo almacena lo necesario para mantener tu sesión iniciada y recordar que has visto este aviso. No usamos cookies publicitarias. Puedes seguir navegando sin pulsar este aviso y el inicio de sesión seguirá funcionando.",
+    "Cookie details": "Detalles de las cookies",
     "Change the site language at any time. Your choice is saved for future visits.": "Puedes cambiar el idioma del sitio en cualquier momento. Tu elección se guarda para futuras visitas.",
     "Request account and data deletion": "Solicitar la eliminación de la cuenta y los datos",
     "Optionally share one active day per signed-in account, without page history or advertising. Turning this off stops measurement on this device.": "Puedes compartir un día de actividad por cuenta con sesión iniciada, sin historial de páginas ni publicidad. Al desactivarlo, se detiene la medición en este dispositivo.",
