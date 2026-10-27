@@ -15,7 +15,7 @@ These sources support game terminology, not the accuracy of every interface sent
 
 ## FC 27 PlayStyle names
 
-EA's FC 27 PlayStyles article was consulted for the 35 names listed in its Arabic, Brazilian Portuguese and Spanish versions: https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles, https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles and https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles. Power Shot was not in those lists; the Arabic and Portuguese terms are supported by the EA Help guides above, while the Spanish label is provisional and needs independent review. Check terminology in the actual game before release.
+EA's FC 27 PlayStyles article was consulted for the 35 names listed in its Arabic, Brazilian Portuguese and Spanish versions: https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles, https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles and https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles. Power Shot was not in those lists; the Arabic, Brazilian Portuguese and Spanish names are supported by the localized EA Help PlayStyles guides (including https://help.ea.com/es/articles/ea-sports-fc/playstyles-guide/). Additional legacy scouting names and Rush Out remain descriptive drafts requiring review. Check terminology in the actual game before release.
 
 ## Checks and remaining work
 
