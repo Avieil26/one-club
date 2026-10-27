@@ -25,12 +25,12 @@ export function Hearts({ lives }: { lives: number }) {
 }
 
 export function RoundNote({ text, good }: { text: string; good?: boolean }) {
-  const { language } = useLanguage();
-  const localizedText = miniGameMessage(text, language);
+  const { locale, isRTL } = useLanguage();
+  const localizedText = miniGameMessage(text, locale);
   return (
     <View style={[styles.note, good ? styles.noteGood : styles.noteBad]}>
       <View style={[styles.noteStripe, good ? styles.noteStripeGood : null]} />
-      <Text style={[styles.noteText, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{localizedText}</Text>
+      <Text style={[styles.noteText, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{localizedText}</Text>
     </View>
   );
 }
@@ -44,18 +44,18 @@ export function GameEnd({
   onAgain: () => void;
   onBack: () => void;
 }) {
-  const { t, language } = useLanguage();
+  const { t, isRTL } = useLanguage();
   return (
     <View style={styles.end}>
-      <Text style={[styles.endTitle, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{title}</Text>
+      <Text style={[styles.endTitle, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{title}</Text>
       <Pressable accessibilityRole="button" onPress={onAgain} style={styles.againPress}>
         <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.again}>
           <View style={styles.againShine} />
-          <Text style={[styles.againText, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{t('עוד משחק', 'Play again')}</Text>
+          <Text style={[styles.againText, { writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('עוד משחק', 'Play again')}</Text>
         </LinearGradient>
       </Pressable>
       <Pressable accessibilityRole="button" onPress={onBack} style={styles.back}>
-        <Text style={[styles.backText, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{t('חזור למשחקונים', 'Back to mini-games')}</Text>
+        <Text style={[styles.backText, { writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{t('חזור למשחקונים', 'Back to mini-games')}</Text>
       </Pressable>
     </View>
   );
