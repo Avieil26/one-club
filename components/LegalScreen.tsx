@@ -7,7 +7,7 @@ import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
 import { inlineLatin, latinParts } from '@/lib/legalBidi';
 import { useLanguage } from '@/lib/language';
-import { legalEnglish } from '@/lib/legalTranslations';
+import { localizedLegal, localizedLegalDate } from '@/lib/legalLocalization';
 
 export { inlineLatin };
 
@@ -33,9 +33,9 @@ function Bidi({
   style?: TextStyle;
   header?: boolean;
 }) {
-  const { language } = useLanguage();
-  const localized = language === 'en' ? legalEnglish(text) : text;
-  if (language === 'en') {
+  const { locale, isRTL } = useLanguage();
+  const localized = localizedLegal(text, locale);
+  if (!isRTL) {
     return (
       <Text accessibilityRole={header ? 'header' : undefined} style={[ltr, style]}>
         {localized}
@@ -63,7 +63,7 @@ function Bidi({
  * both Privacy Policy and Terms of Service to prevent copyright issues with EA.
  */
 export function PrimaryLegalNotice() {
-  const { language } = useLanguage();
+  const { language, isRTL } = useLanguage();
   const he = language === 'he';
   return (
     <View
@@ -81,7 +81,7 @@ export function PrimaryLegalNotice() {
         shadowRadius: 12,
       }}
     >
-      <View style={{ flexDirection: 'row', direction: he ? 'rtl' : 'ltr', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', direction: isRTL ? 'rtl' : 'ltr', alignItems: 'center' }}>
         <View
           style={{
             backgroundColor: 'rgba(227, 179, 65, 0.16)',
@@ -91,7 +91,7 @@ export function PrimaryLegalNotice() {
             paddingHorizontal: 9,
             paddingVertical: 4,
             flexDirection: 'row',
-            direction: he ? 'rtl' : 'ltr',
+            direction: isRTL ? 'rtl' : 'ltr',
             alignItems: 'center',
             gap: 6,
           }}
@@ -111,8 +111,7 @@ export function PrimaryLegalNotice() {
 }
 
 export function LegalBulletItem({ text }: { text: string }) {
-  const { language } = useLanguage();
-  const he = language === 'he';
+  const { isRTL: he } = useLanguage();
   return (
     <View style={{ flexDirection: 'row', direction: he ? 'rtl' : 'ltr', alignItems: 'flex-start', gap: 8, width: '100%' }}>
       <Text style={{ color: colors.gold, fontSize: 15, lineHeight: 25, fontWeight: '800' }}>•</Text>
@@ -148,8 +147,7 @@ export function LegalScreen({
   updated: string;
   children: ReactNode;
 }) {
-  const { language } = useLanguage();
-  const he = language === 'he';
+  const { locale, isRTL: he } = useLanguage();
 
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return;
@@ -163,13 +161,13 @@ export function LegalScreen({
       #legal-doc { direction: ${he ? 'rtl' : 'ltr'}; text-align: ${he ? 'right' : 'left'}; }
       #legal-en, #legal-en * { direction: ltr; text-align: left; }
     `;
-    document.documentElement.lang = language;
+    document.documentElement.lang = locale;
     document.documentElement.dir = he ? 'rtl' : 'ltr';
-  }, [he, language]);
+  }, [he, locale]);
 
   return (
     <View nativeID="legal-doc" style={{ flex: 1, backgroundColor: '#050A08', direction: he ? 'rtl' : 'ltr' }}>
-      <Stack.Screen options={{ headerShown: false, title: he ? title : legalEnglish(title) }} />
+      <Stack.Screen options={{ headerShown: false, title: localizedLegal(title, locale) }} />
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 16,
@@ -184,7 +182,7 @@ export function LegalScreen({
       >
         <SiteNav />
         <Bidi text={title} header style={{ color: colors.text, fontSize: 34, fontWeight: '900' }} />
-        <Bidi text={language === 'en' ? `Updated: ${updated === '1 באוקטובר 2026' ? 'October 1, 2026' : legalEnglish(updated)}` : `עודכן: ${updated}`} style={{ color: colors.muted, fontWeight: '700' }} />
+        <Text style={[he ? rtl : ltr, { color: colors.muted, fontWeight: '700' }]}>{localizedLegalDate(updated, locale)}</Text>
         {children}
         <LegalLinks />
       </ScrollView>
