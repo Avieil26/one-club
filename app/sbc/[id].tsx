@@ -84,7 +84,7 @@ export default function SbcDetailScreen() {
       </View>
       <Muted>
         {challenge.reward ? `${sbcText(challenge.reward, language)} · ` : ''}
-        {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
+        {challenge.endsAt ? t('נשאר: {value}', 'Remaining: {value}').replace('{value}', remaining) : remaining}
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
       {challenge.kind === 'classic' && classicSegments(challengeId).length ? <SbcClassicSolution key={challengeId} challengeId={challengeId} /> : challenge.kind === 'classic' && challenge.previewSquad && !challenge.manualValidation && challenge.rules && report.ready ? (
@@ -93,9 +93,9 @@ export default function SbcDetailScreen() {
             <Title>{t('פתרון לאתגר', 'Challenge solution')}</Title>
             <Text style={{ color: colors.text, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
               {challenge.rules?.chemistry
-                ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`)
+                ? t('כימיה {value}/33', 'Chemistry {value}/33').replace('{value}', String(report.chemistry))
                 : t("בלי דרישת כימיה", "No chemistry requirement")}
-              {report.rating === null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
+              {report.rating === null ? '' : t(' · דירוג קבוצה {value}', ' · Squad rating {value}').replace('{value}', String(report.rating))}
             </Text>
             <SquadPitch appearance="sbc" formation={formation} placed={placed} playerChem={report.playerChem} showChemHud={false} />
           </View>
@@ -138,7 +138,7 @@ export default function SbcDetailScreen() {
           <Text style={{ color: colors.text, fontSize: 22, fontWeight: '800', textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>{t("פתרונות הקהילה", "Community solutions")}</Text>
           <Muted>
             {solutions.length
-              ? t(`${solutions.length} פתרונות. לחצו על כרטיס כדי לפתוח את המגרש, התמונה והתגובות.`, `${solutions.length} solutions. Select a card to view the pitch, images and comments.`)
+              ? t('{count} פתרונות. לחצו על כרטיס כדי לפתוח את המגרש, התמונה והתגובות.', '{count} solutions. Select a card to view the pitch, images and comments.').replace('{count}', String(solutions.length))
               : t("עדיין אין פתרונות לאתגר הזה. תהיו הראשונים לפרסם!", "No solutions yet. Be the first to submit one!")}
           </Muted>
         </View>
