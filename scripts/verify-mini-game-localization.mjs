@@ -64,6 +64,7 @@ for (const count of [0, 1, 2, 3]) {
   const message = game.missLine(count);
   assert.equal(miniGameMessage(message, 'he'), message);
   assert(!hebrew.test(miniGameMessage(message, 'en')));
+  for (const locale of ['ar', 'pt-BR', 'es']) assert(!hebrew.test(miniGameMessage(message, locale)) && miniGameMessage(message, locale) !== miniGameMessage(message, 'en'), `${locale}: untranslated mini-game feedback`);
 }
 for (const message of ['נכון', 'השחקן כבר על הלוח']) {
   assert.equal(miniGameMessage(message, 'he'), message);
@@ -90,7 +91,7 @@ for (const score of [0, 3, 6, 10, 15, 25]) {
 }
 for (const [filename, binding] of [
   ['app/games/who.tsx', 'miniGamePrompt(round.prompt, locale)'],
-  ['components/MiniGameChrome.tsx', 'miniGameMessage(text, language)'],
+  ['components/MiniGameChrome.tsx', 'miniGameMessage(text, locale)'],
   ['app/games/grid.tsx', 'displayNation(nation, locale)'],
   ['app/games/club.tsx', 'displayClub(club, language)'],
   ['app/games/draft.tsx', 'draftManagerName(item, language)'],
