@@ -1,6 +1,17 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Terms approval required • LEGAL CONSENT": "الموافقة على الشروط مطلوبة • الموافقة القانونية",
+    "Welcome to FC27 Israel!": "مرحبًا بك في FC27 Israel!",
+    "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "مرحبًا {name}، يرجى قراءة شروط الاستخدام وسياسة الخصوصية الحالية والموافقة عليهما قبل استخدام التطبيق.",
+    "This site is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game names, and player images belong to their respective owners and are used under applicable fair-use principles.": "هذا الموقع غير تابع لشركة Electronic Arts Inc. ولا يحظى بموافقتها أو دعمها. تعود جميع العلامات التجارية وأسماء الألعاب وصور اللاعبين إلى أصحابها وتُستخدم وفقًا لمبادئ الاستخدام العادل المعمول بها.",
+    "Real-money trading is prohibited:": "يُحظر التداول بأموال حقيقية:",
+    "Trading game coins, accounts, or virtual assets for real money is strictly prohibited.": "يُحظر تمامًا تداول عملات اللعبة أو الحسابات أو الأصول الافتراضية مقابل أموال حقيقية.",
+    "Privacy and safety:": "الخصوصية والسلامة:",
+    "We do not sell personal information. Users under 18 may use the site only with parent or legal-guardian consent.": "لا نبيع المعلومات الشخصية. لا يجوز لمن هم دون 18 عامًا استخدام الموقع إلا بموافقة أحد الوالدين أو الوصي القانوني.",
+    "I have read, understood, and agree to the 1 CLUB Terms of Use and Privacy Policy.": "قرأت وفهمت وأوافق على شروط استخدام 1 CLUB وسياسة الخصوصية.",
+    "⚠️ Please check the box above to accept the terms and enter the app.": "⚠️ يرجى تحديد المربع أعلاه للموافقة على الشروط ودخول التطبيق.",
+    "I do not agree (sign out and exit)": "لا أوافق (تسجيل الخروج والمغادرة)",
     "Cookies and browser storage": "ملفات تعريف الارتباط وتخزين المتصفح",
     "Device storage": "التخزين على الجهاز",
     "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "يخزن 1 CLUB فقط ما يلزم لإبقائك مسجّل الدخول وتذكّر اطلاعك على هذا الإشعار. لا نستخدم ملفات تعريف ارتباط إعلانية. يمكنك متابعة التصفح دون الضغط على الإشعار، وسيستمر تسجيل الدخول في العمل.",
@@ -393,6 +404,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Terms approval required • LEGAL CONSENT": "É necessário aceitar os termos • CONSENTIMENTO LEGAL",
+    "Welcome to FC27 Israel!": "Boas-vindas ao FC27 Israel!",
+    "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "Olá, {name}. Leia e aceite os Termos de Uso e a Política de Privacidade atuais antes de usar o aplicativo.",
+    "This site is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game names, and player images belong to their respective owners and are used under applicable fair-use principles.": "Este site não é afiliado, aprovado ou apoiado pela Electronic Arts Inc. Todas as marcas, nomes de jogos e imagens de jogadores pertencem aos respectivos proprietários e são usados conforme os princípios aplicáveis de uso justo.",
+    "Real-money trading is prohibited:": "É proibido negociar por dinheiro real:",
+    "Trading game coins, accounts, or virtual assets for real money is strictly prohibited.": "É estritamente proibido negociar moedas do jogo, contas ou ativos virtuais por dinheiro real.",
+    "Privacy and safety:": "Privacidade e segurança:",
+    "We do not sell personal information. Users under 18 may use the site only with parent or legal-guardian consent.": "Não vendemos informações pessoais. Menores de 18 anos só podem usar o site com o consentimento de um dos pais ou responsável legal.",
+    "I have read, understood, and agree to the 1 CLUB Terms of Use and Privacy Policy.": "Li, compreendi e concordo com os Termos de Uso e a Política de Privacidade do 1 CLUB.",
+    "⚠️ Please check the box above to accept the terms and enter the app.": "⚠️ Marque a caixa acima para aceitar os termos e entrar no aplicativo.",
+    "I do not agree (sign out and exit)": "Não concordo (sair da conta e fechar)",
     "Cookies and browser storage": "Cookies e armazenamento no navegador",
     "Device storage": "Armazenamento no dispositivo",
     "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "O 1 CLUB armazena apenas o necessário para manter sua sessão ativa e lembrar que você viu este aviso. Não usamos cookies de publicidade. Você pode continuar navegando sem clicar neste aviso, e o login continuará funcionando.",
@@ -785,6 +807,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Terms approval required • LEGAL CONSENT": "Debes aceptar los términos • CONSENTIMIENTO LEGAL",
+    "Welcome to FC27 Israel!": "¡Te damos la bienvenida a FC27 Israel!",
+    "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "Hola, {name}. Lee y acepta los Términos de uso y la Política de privacidad actuales antes de usar la aplicación.",
+    "This site is not affiliated with, endorsed, or supported by Electronic Arts Inc. All brands, game names, and player images belong to their respective owners and are used under applicable fair-use principles.": "Este sitio no está afiliado a Electronic Arts Inc. ni cuenta con su aprobación o apoyo. Todas las marcas, nombres de juegos e imágenes de jugadores pertenecen a sus respectivos propietarios y se utilizan conforme a los principios aplicables de uso legítimo.",
+    "Real-money trading is prohibited:": "Se prohíbe el comercio con dinero real:",
+    "Trading game coins, accounts, or virtual assets for real money is strictly prohibited.": "Está estrictamente prohibido comerciar con monedas del juego, cuentas o activos virtuales a cambio de dinero real.",
+    "Privacy and safety:": "Privacidad y seguridad:",
+    "We do not sell personal information. Users under 18 may use the site only with parent or legal-guardian consent.": "No vendemos información personal. Los menores de 18 años solo pueden usar el sitio con el consentimiento de un padre, madre o tutor legal.",
+    "I have read, understood, and agree to the 1 CLUB Terms of Use and Privacy Policy.": "He leído, comprendido y acepto los Términos de uso y la Política de privacidad de 1 CLUB.",
+    "⚠️ Please check the box above to accept the terms and enter the app.": "⚠️ Marca la casilla de arriba para aceptar los términos y entrar en la aplicación.",
+    "I do not agree (sign out and exit)": "No acepto (cerrar sesión y salir)",
     "Cookies and browser storage": "Cookies y almacenamiento del navegador",
     "Device storage": "Almacenamiento en el dispositivo",
     "1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.": "1 CLUB solo almacena lo necesario para mantener tu sesión iniciada y recordar que has visto este aviso. No usamos cookies publicitarias. Puedes seguir navegando sin pulsar este aviso y el inicio de sesión seguirá funcionando.",
