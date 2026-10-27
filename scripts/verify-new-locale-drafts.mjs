@@ -163,6 +163,15 @@ for (const statement of stylesSource.statements) if (ts.isVariableStatement(stat
     }
   }
 }
+const scoutSource = ts.createSourceFile('components/CareerScoutView.tsx', fs.readFileSync('components/CareerScoutView.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+for (const statement of scoutSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(scoutSource) === 'POSITION_NAMES_EN' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.initializer)) {
+      for (const locale of locales) assert(ui[locale][property.initializer.text], `${locale}: missing scout position ${property.initializer.text}`);
+    }
+  }
+}
+for (const player of scoutPlayers) assert(/(\d+)\s*שנים\s*\(עד\s*(\d{4})\)/.test(player.contractYears), `Unrecognized contract years: ${player.contractYears}`);
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
