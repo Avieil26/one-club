@@ -53,6 +53,24 @@ for (const locale of locales) {
   for (const date of ['1 באוקטובר 2026', '21 באוקטובר 2026']) assert(!/[\u0590-\u05ff]/u.test(localizedLegalDate(date, locale)));
   assert.throws(() => localizedLegal('UNTRANSLATED_LEGAL_SENTINEL', locale), 'Never silently fall back to English');
 }
+// Community errors are selected dynamically from a data map, so verify every entry.
+const communitySource = ts.createSourceFile('CommunityActivityUI.tsx', fs.readFileSync('components/CommunityActivityUI.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+let communityErrorCount = 0;
+for (const statement of communitySource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(communitySource) === 'ERRORS' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isArrayLiteralExpression(property.initializer)) {
+      const english = property.initializer.elements[1];
+      assert(ts.isStringLiteral(english), 'Community error must have an English source');
+      for (const locale of locales) {
+        const translation = plannedStructuredError(locale, english.text);
+        assert(translation && translation !== english.text, `${locale}: missing community error: ${english.text}`);
+        assert.deepEqual([...translation.matchAll(/\\d+/g)].map(m => m[0]), [...english.text.matchAll(/\\d+/g)].map(m => m[0]), `${locale}: community error numbers differ`);
+      }
+      communityErrorCount++;
+    }
+  }
+}
+assert(communityErrorCount > 0, 'Community error map was not found');
 // Fixed mini-game questions also live in a data lookup rather than literal t() calls.
 const miniGameSource = ts.createSourceFile('lib/miniGameLocalization.ts', fs.readFileSync('lib/miniGameLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
 const { miniGamePrompt } = loadRepositoryModule('lib/miniGameLocalization.ts');
