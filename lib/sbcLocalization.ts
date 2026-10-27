@@ -1,6 +1,7 @@
 import { LIVE_SBC_TRANSLATIONS } from '@/lib/sbcLive20261020';
 import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 import type { AppLocale } from '@/lib/language';
+import { plannedSbcRule } from '@/lib/plannedSbcRules';
 
 const SBC_ENGLISH: Record<string, string> = {
   "5× שחקני זהב 80+": "5× 80+ Gold Players",
@@ -75,8 +76,9 @@ export function sbcText(text: string, language: AppLocale): string {
 }
 
 /** Generated rule labels belong to the app; community text is never translated. */
-export function sbcCheckText(label: string, language: 'he' | 'en'): string {
+export function sbcCheckText(label: string, language: AppLocale): string {
  if (language === 'he') return label;
+ if (language !== 'en') return plannedSbcRule(label, language) ?? sbcCheckText(label, 'en');
  return label
   .replace(/(\d+) שחקנים/g, '$1 players')
   .replace(/ללא שחקנים כפולים/g, 'No duplicate players')
