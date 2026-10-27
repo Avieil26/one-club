@@ -21,7 +21,7 @@ function Coins({ value }: { value: number }) {
   </View>;
 }
 function SegmentSolution({ segment }: { segment: PointsSegment }) {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   useMarketPrices();
   const [platform, setPlatform] = useState<'ps5' | 'pc'>('ps5');
   const [submitted, setSubmitted] = useState('0');
@@ -54,16 +54,16 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
     return platform === 'pc' ? quote?.pc : quote?.console;
   });
   const completion = validInput ? Math.min(100, ((number + ownScore) / segment.target) * 100) : 0;
-  const row = language === 'he' ? 'row-reverse' : 'row';
+  const row = isRTL ? 'row-reverse' : 'row';
   function reset() { setBasket({}); setSubmitted('0'); setShowProgress(false); }
   return <SbcSurface>
     <View style={{ gap: 6 }}><SbcText tone="title" testID="sbc-points-heading">{segment.name}</SbcText><SbcText tone="caption">{pointsEligibilityLabel(segment.requirements, language)}</SbcText></View>
     <SbcChoices label={t('איך תרצו להשלים?', 'How would you like to complete it?')} value={mode} options={[{ id: 'my-items', label: t('בנייה עצמית', 'Build my own') }, { id: 'suggestions', label: t('פתרונות מוכנים', 'Ready-made options') }]} onChange={setMode} />
     {mode === 'my-items' ? <>
       <View testID="sbc-manual-summary" style={{ flexDirection: row, flexWrap: 'wrap', gap: 18, paddingVertical: 18, borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#536078' }}>
-        <View style={{ flexGrow: 1, gap: 7, alignItems: language === 'he' ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('יעד האתגר', 'Challenge target')}</SbcText><ItemScore value={segment.target} size={24} /></View>
-        <View testID="sbc-selected-score" style={{ flexGrow: 1, gap: 7, alignItems: language === 'he' ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('הניקוד שלך', 'Your selected points')}</SbcText><ItemScore value={ownScore} size={24} /></View>
-        <View testID="sbc-score-remaining" style={{ flexGrow: 1, gap: 7, alignItems: language === 'he' ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('נותר להשלמה', 'Still needed')}</SbcText><ItemScore value={remaining} size={24} /></View>
+        <View style={{ flexGrow: 1, gap: 7, alignItems: isRTL ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('יעד האתגר', 'Challenge target')}</SbcText><ItemScore value={segment.target} size={24} /></View>
+        <View testID="sbc-selected-score" style={{ flexGrow: 1, gap: 7, alignItems: isRTL ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('הניקוד שלך', 'Your selected points')}</SbcText><ItemScore value={ownScore} size={24} /></View>
+        <View testID="sbc-score-remaining" style={{ flexGrow: 1, gap: 7, alignItems: isRTL ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('נותר להשלמה', 'Still needed')}</SbcText><ItemScore value={remaining} size={24} /></View>
       </View>
       <View accessibilityRole="progressbar" accessibilityLabel={t('התקדמות בתכנון ההשלמה', 'Planned completion progress')} accessibilityValue={{ min: 0, max: segment.target, now: validInput ? Math.min(segment.target, number + ownScore) : 0 }} style={{ height: 5, width: '100%', borderRadius: 3, overflow: 'hidden', backgroundColor: '#3D4556', direction: 'ltr' }}><View style={{ height: 5, width: `${completion}%`, backgroundColor: '#D1B77C' }} /></View>
       <SbcPlayerSelection segment={segment} basket={basket} onChange={setBasket} onReset={reset} />
