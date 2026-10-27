@@ -72,9 +72,9 @@ for (const statement of communitySource.statements) if (ts.isVariableStatement(s
 }
 assert(communityErrorCount > 0, 'Community error map was not found');
 // Season headings and acceleration values come from the catalogue, not literal calls.
-const seasonCards = JSON.parse(fs.readFileSync('assets/data/season2.json', 'utf8'));
+const seasonHeadingCards = JSON.parse(fs.readFileSync('assets/data/season2.json', 'utf8'));
 let seasonHeadingCount = 0;
-for (const card of seasonCards) {
+for (const card of seasonHeadingCards) {
   const values = [card.accelerate, card.acquisition.objectiveName, ...(card.acquisition.dependencies ?? []).map(group => group.name)].filter(Boolean);
   for (const value of values) {
     for (const locale of locales) assert(ui[locale][value], `${locale}: missing season heading or acceleration ${value}`);
