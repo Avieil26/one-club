@@ -190,6 +190,14 @@ for (const player of scoutPlayers) for (const role of [player.primaryRole, playe
   for (const locale of locales) assert(ui[locale][english], `${locale}: missing scouting role ${english}`);
 }
 for (const player of scoutPlayers) assert(/(\d+)\s*שנים\s*\(עד\s*(\d{4})\)/.test(player.contractYears), `Unrecognized contract years: ${player.contractYears}`);
+const attributeSource = ts.createSourceFile('lib/careerAttributes.ts', fs.readFileSync('lib/careerAttributes.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+function inspectAttributes(node) {
+  if (ts.isPropertyAssignment(node) && node.name.getText(attributeSource) === 'label' && ts.isStringLiteral(node.initializer)) {
+    for (const locale of locales) assert(ui[locale][node.initializer.text], `${locale}: missing attribute label ${node.initializer.text}`);
+  }
+  ts.forEachChild(node, inspectAttributes);
+}
+inspectAttributes(attributeSource);
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
