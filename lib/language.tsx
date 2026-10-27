@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { Platform } from 'react-native';
 import { plannedLanguageGlossary } from './plannedLanguageGlossary';
 import { plannedUiTranslations } from './plannedUiTranslations';
+import { plannedStructuredError } from './plannedErrorTranslations';
 
 export type AppLanguage = 'he' | 'en';
 export type AppLocale = AppLanguage | 'ar' | 'pt-BR' | 'es';
@@ -81,7 +82,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         'Terms of Use': glossary.termsOfUse,
         'Privacy Policy': glossary.privacyPolicy,
       };
-      return plannedUiTranslations[locale][en] ?? dictionary[en] ?? en;
+      return plannedUiTranslations[locale][en] ?? dictionary[en] ?? plannedStructuredError(locale, en) ?? en;
     },
   }), [language, locale, isRTL, ready, hasSelection]);
 
