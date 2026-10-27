@@ -175,7 +175,7 @@ export default function HomeScreen() {
           1 CLUB
         </Text>
         <Title>{t('מה משחקים היום?', 'What are we playing today?')}</Title>
-        <Muted>{user ? t(`היי ${user.displayName}, הנה מה שחדש ומה שכדאי להספיק.`, `Hi ${user.displayName}, see what is new and what ends soon.`) : t('פתרונות SBC, שחקנים ואתגרי קריירה — מתחילים בלי חשבון.', 'SBC solutions, players and Career challenges — start without an account.')}</Muted>
+        <Muted>{user ? t('היי {name}, הנה מה שחדש ומה שכדאי להספיק.', 'Hi {name}, see what is new and what ends soon.').replace('{name}', user.displayName) : t('פתרונות SBC, שחקנים ואתגרי קריירה — מתחילים בלי חשבון.', 'SBC solutions, players and Career challenges — start without an account.')}</Muted>
       </View>
       <HomeSbcOverview />
       <Text accessibilityRole="header" style={{ color: colors.text, fontSize: 22, fontWeight: '900', marginTop: 14, textAlign: rtl ? 'right' : 'left' }}>{t('המגרשים שלכם', 'Your game modes')}</Text>
@@ -206,7 +206,7 @@ export default function HomeScreen() {
               body={featured.body}
               avatarUrl={profiles.find((profile) => profile.id === featured.userId)?.avatarUrl}
             />
-            <Muted>{featuredLikes ? t(`${featuredLikes} לייקים`, `${featuredLikes} likes`) : t('עדיין בלי לייקים', 'No likes yet')}</Muted>
+            <Muted>{featuredLikes ? t('{count} לייקים', '{count} likes').replace('{count}', String(featuredLikes)) : t('עדיין בלי לייקים', 'No likes yet')}</Muted>
           </Card>
         </View>
       ) : null}
