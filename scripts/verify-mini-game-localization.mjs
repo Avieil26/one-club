@@ -25,6 +25,7 @@ new Function('require', 'module', 'exports', outputText)(localRequire, module, m
 const game = module.exports;
 const { miniGamePrompt, miniGameMessage, draftManagerName } = loadRepositoryModule('lib/miniGameLocalization.ts');
 const { displayClub, displayNation, displayLeague } = loadRepositoryModule('lib/footballLocalization.ts');
+const { plannedMiniGamePrompt } = loadRepositoryModule('lib/plannedMiniGamePatterns.ts');
 const { DRAFT_MANAGERS } = loadRepositoryModule('lib/draftRun.ts');
 const hebrew = /[\u0590-\u05FF]/u;
 const prompts = new Set();
@@ -48,6 +49,10 @@ for (const prompt of prompts) {
   for (const locale of ['ar', 'pt-BR', 'es']) {
     const translated = miniGamePrompt(prompt, locale);
     assert(translated && !hebrew.test(translated) && translated !== english, `${locale}: untranslated mini-game prompt: ${prompt}`);
+    if (plannedMiniGamePrompt(prompt, locale)) {
+      const numbers = text => [...text.matchAll(/\d+/g)].map(match => match[0]).sort();
+      assert.deepEqual(numbers(translated), numbers(prompt), `${locale}: number mismatch in ${prompt}`);
+    }
   }
 }
 assert.equal(miniGamePrompt('סמנו מי שמשחק בפרמייר ליג ומדורג 88+', 'en'), 'Select players in Premier League rated 88+');
