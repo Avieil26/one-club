@@ -14,13 +14,13 @@ import { useApp } from '@/lib/store';
 export default function SubmitChallengeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const router = useRouter();
   const challenge = app.challenges.find((item) => item.id === id);
   const [playerOrClubName, setPlayerOrClubName] = useState('');
   const [note, setNote] = useState('');
   const [imageUris, setImageUris] = useState<string[]>([]);
-  const copy = challenge ? careerChallengeCopy(challenge, language) : null;
+  const copy = challenge ? careerChallengeCopy(challenge, locale) : null;
   const challengeTitle = copy?.title ?? t('האתגר', 'the challenge');
 
   async function choose() {
