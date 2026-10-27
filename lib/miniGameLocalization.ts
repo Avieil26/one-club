@@ -88,10 +88,15 @@ const MESSAGES_EN: Record<string, string> = {
   'טעית. נשאר לך עוד טעות אחת': 'Incorrect. One mistake left',
   'טעית. נגמרו הטעויות': 'Incorrect. No mistakes left',
 };
-export function miniGameMessage(message: string, language: Language): string {
+export function miniGameMessage(message: string, language: AppLocale): string {
   if (language === 'he') return message;
   const mistakes = message.match(/^טעית\. נשאר לך עוד (\d+) טעויות$/)?.[1];
-  return mistakes ? `Incorrect. ${mistakes} mistakes left` : MESSAGES_EN[message] ?? message;
+  if (mistakes) {
+    if (language === 'en') return `Incorrect. ${mistakes} mistakes left`;
+    return plannedUiTranslations[language]['Incorrect. {count} mistakes left'].replace('{count}', mistakes);
+  }
+  const english = MESSAGES_EN[message] ?? message;
+  return language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
 }
 
 const MANAGERS_EN: Record<string, string> = {
