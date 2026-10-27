@@ -733,7 +733,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
               {showPotential ? t('🚀 תחזית נתונים במלוא הפוטנציאל', '🚀 Full-potential projection') : t('📊 נתונים נוכחיים', '📊 Current stats')}
             </Text>
             <Text style={{ color: '#9AA8A0', fontSize: 11 }}>
-              {showPotential ? t(`דירוג שיא משוער: 89 (+${growth})`, `Estimated peak rating: 89 (+${growth})`) : t('הצג כיצד כל הנתונים יראו בשיא ההתפתחות', 'Preview the player at peak development')}
+              {showPotential ? t('דירוג שיא משוער: 89 (+{growth})', 'Estimated peak rating: 89 (+{growth})').replace('{growth}', String(growth)) : t('הצג כיצד כל הנתונים יראו בשיא ההתפתחות', 'Preview the player at peak development')}
             </Text>
           </View>
           <Pressable
