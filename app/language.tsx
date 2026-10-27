@@ -4,14 +4,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { readCommunityReturn } from '@/lib/communityReturn';
 import { colors } from '@/components/ui';
-import { useLanguage, type AppLanguage } from '@/lib/language';
+import { AVAILABLE_LANGUAGES, useLanguage, type AppLocale } from '@/lib/language';
 
 export default function LanguageScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { chooseLanguage, language } = useLanguage();
 
-  async function select(language: AppLanguage) {
+  async function select(language: AppLocale) {
     await chooseLanguage(language);
     const pendingAction = await readCommunityReturn();
     router.replace(pendingAction ? '/register' : '/');
@@ -39,6 +39,16 @@ export default function LanguageScreen() {
           </View>
           <Text style={{ color: colors.gold, fontSize: 22 }}>←</Text>
         </Pressable>
+        {AVAILABLE_LANGUAGES.filter(option => option.value !== 'en' && option.value !== 'he').map(option => (
+          <Pressable key={option.value} accessibilityRole="button" onPress={() => void select(option.value)} style={{ borderRadius: 14, borderWidth: 1, borderColor: 'rgba(160,180,164,0.25)', paddingVertical: 18, paddingHorizontal: 20, backgroundColor: 'rgba(255,255,255,0.025)', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Text style={{ fontSize: 24 }}>{option.flag}</Text>
+            <View style={{ flex: 1, marginHorizontal: 16, gap: 3 }}>
+              <Text style={{ color: colors.text, fontSize: 19, fontWeight: '800', textAlign: option.rtl ? 'right' : 'left' }}>{option.name}</Text>
+              <Text style={{ color: colors.muted, fontSize: 12, textAlign: option.rtl ? 'right' : 'left' }}>{option.continuation}</Text>
+            </View>
+            <Text style={{ color: colors.gold, fontSize: 22 }}>{option.rtl ? '←' : '→'}</Text>
+          </Pressable>
+        ))}
         <Text style={{ color: '#748078', fontSize: 11, textAlign: 'center' }}>You can change your language later.</Text>
       </View>
     </ScrollView>
