@@ -1,5 +1,7 @@
 import type { BadgeTone, PackVisual } from '@/components/SbcRewardPack';
 import type { SbcChallenge } from '@/lib/types';
+import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 
 export type SbcTileTheme = {
   colors: [string, string, string];
@@ -302,6 +304,14 @@ export function sbcFace(challenge: SbcChallenge) {
     edge: face?.edge ?? '#C9A227',
     rank: face?.rank ?? 4,
   };
+}
+
+/** Built-in titles are translated when available; names and community titles stay intact. */
+export function localizedSbcTitle(challenge: SbcChallenge, locale: AppLocale): string {
+  const face = sbcFace(challenge);
+  if (locale === 'he') return face.he;
+  if (locale === 'en') return face.en;
+  return plannedUiTranslations[locale][face.en] ?? face.en;
 }
 
 export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
