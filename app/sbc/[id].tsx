@@ -103,7 +103,7 @@ export default function SbcDetailScreen() {
             <Card>
               {report.checks.map((check) => (
                 <Text key={check.label} style={{ color: check.ok ? colors.green : colors.muted, textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }}>
-                  {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, language)}
+                  {check.ok ? '✓' : '✗'} {sbcCheckText(check.label, locale)}
                 </Text>
               ))}
             </Card>
