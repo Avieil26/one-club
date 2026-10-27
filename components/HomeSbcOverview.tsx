@@ -6,12 +6,12 @@ import { colors, Muted } from '@/components/ui';
 import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 import { openSbcChallenges } from '@/lib/selectors';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { sbcFace, localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { endsSoon } from '@/lib/sbcBrowse';
 import type { SbcChallenge } from '@/lib/types';
 
 export function HomeSbcOverview() {
- const app = useApp(); const { language, t, isRTL: rtl } = useLanguage();
+ const app = useApp(); const { locale, t, isRTL: rtl } = useLanguage();
  const router = useRouter(); const wide = useWindowDimensions().width >= 900;
  const [now, setNow] = useState(Date.now);
  useEffect(() => { const timer = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(timer); }, []);
@@ -21,9 +21,9 @@ export function HomeSbcOverview() {
  const mine = app.user ? app.submissions.filter(s => s.userId === app.user?.id) : [];
  const row = (challenge: SbcChallenge) => {
   const face = sbcFace(challenge); const hours = challenge.endsAt ? Math.max(1, Math.ceil((Date.parse(challenge.endsAt)-now)/3600000)) : null;
-  return <Pressable key={challenge.id} accessibilityRole="button" accessibilityLabel={language==='he'?face.he:face.en} onPress={()=>router.push(`/sbc/${challenge.id}`)} style={{ flexDirection:rtl?'row-reverse':'row',gap:13,alignItems:'center',paddingVertical:10,borderBottomWidth:1,borderBottomColor:'#273642' }}>
+  return <Pressable key={challenge.id} accessibilityRole="button" accessibilityLabel={localizedSbcTitle(challenge, locale)} onPress={()=>router.push(`/sbc/${challenge.id}`)} style={{ flexDirection:rtl?'row-reverse':'row',gap:13,alignItems:'center',paddingVertical:10,borderBottomWidth:1,borderBottomColor:'#273642' }}>
    <SbcRewardVisual challenge={challenge} width={72} />
-   <View style={{flex:1,minWidth:0,gap:8}}><Text style={{color:'#A6BAC6',fontSize:10,fontWeight:'800',letterSpacing:1,textAlign:rtl?'right':'left'}}>{face.category}</Text><Text numberOfLines={2} style={{color:colors.text,fontSize:17,fontWeight:'800',textAlign:rtl?'right':'left'}}>{language==='he'?face.he:face.en}</Text><Text style={{color:endsSoon(challenge,now)?'#FFB59C':'#88D5D9',fontSize:12,textAlign:rtl?'right':'left'}}>{hours && hours<=24?t('נותרו כ־{hours} שעות','About {hours} hours left').replace('{hours}', String(hours)):t('דרישות ופתרונות','Requirements & solutions')}</Text></View>
+   <View style={{flex:1,minWidth:0,gap:8}}><Text style={{color:'#A6BAC6',fontSize:10,fontWeight:'800',letterSpacing:1,textAlign:rtl?'right':'left'}}>{face.category}</Text><Text numberOfLines={2} style={{color:colors.text,fontSize:17,fontWeight:'800',textAlign:rtl?'right':'left'}}>{localizedSbcTitle(challenge, locale)}</Text><Text style={{color:endsSoon(challenge,now)?'#FFB59C':'#88D5D9',fontSize:12,textAlign:rtl?'right':'left'}}>{hours && hours<=24?t('נותרו כ־{hours} שעות','About {hours} hours left').replace('{hours}', String(hours)):t('דרישות ופתרונות','Requirements & solutions')}</Text></View>
   </Pressable>;
  };
  return <View testID="home-sbc-overview" style={{direction:'ltr',flexDirection:wide?(rtl?'row-reverse':'row'):'column',gap:18}}>
