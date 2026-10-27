@@ -80,6 +80,12 @@ for (const locale of locales) {
 for (const locale of ['he', 'en']) for (const country of countries.COUNTRIES) {
   assert.equal(countries.countryName(country.code, locale), country[locale], `Preserve ${locale} country names`);
 }
+const { displayNation, NATION_NAMES_EN } = loadRepositoryModule('lib/footballLocalization.ts');
+for (const locale of locales) {
+  for (const nation of Object.keys(NATION_NAMES_EN)) assert(!/[\u0590-\u05ff]/u.test(displayNation(nation, locale)), `${locale}: untranslated football nation ${nation}`);
+  const aliases = ['Korea Republic', 'Republic of Ireland', 'Czech Republic', 'Kosovo', 'Congo DR', 'Trinidad and Tobago', 'Cape Verde Islands', 'St. Kitts and Nevis', 'Chinese Taipei', 'Antigua and Barbuda', 'São Tomé e Príncipe', 'Korea DPR', 'Bosnia Herzegovina', 'Netherlands Antilles', 'CAR'];
+  for (const alias of aliases) assert(displayNation(alias, locale), `${locale}: missing football nation alias ${alias}`);
+}
 const { formatRemaining } = loadRepositoryModule('lib/format.ts');
 const now = Date.parse('2026-10-27T00:00:00Z');
 for (const locale of locales) {
