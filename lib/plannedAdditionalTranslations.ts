@@ -1,6 +1,8 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Level {level}": "المستوى {level}",
+    "{count} left": "المتبقي: {count}",
     "Add a short description before publishing.": "أضف وصفًا موجزًا قبل النشر.",
     "Add a short explanation of how you completed the challenge": "أضف شرحًا موجزًا لكيفية إكمال التحدي",
     "Add a short explanation of how you completed the challenge.": "أضف شرحًا موجزًا لكيفية إكمال التحدي.",
@@ -449,6 +451,8 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Level {level}": "Nível {level}",
+    "{count} left": "Restantes: {count}",
     "Add a short description before publishing.": "Adicione uma breve descrição antes de publicar.",
     "Add a short explanation of how you completed the challenge": "Adicione uma breve explicação de como você concluiu o desafio",
     "Add a short explanation of how you completed the challenge.": "Adicione uma breve explicação de como você concluiu o desafio.",
@@ -897,6 +901,8 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Level {level}": "Nivel {level}",
+    "{count} left": "Restantes: {count}",
     "Add a short description before publishing.": "Añade una breve descripción antes de publicar.",
     "Add a short explanation of how you completed the challenge": "Añade una breve explicación de cómo completaste el desafío",
     "Add a short explanation of how you completed the challenge.": "Añade una breve explicación de cómo completaste el desafío.",
