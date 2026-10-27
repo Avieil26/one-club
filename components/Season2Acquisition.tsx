@@ -3,14 +3,13 @@ import { useLanguage } from '@/lib/language';
 import type { Season2Card } from '@/lib/season2';
 
 export function Season2Acquisition({ card }: { card: Season2Card }) {
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, locale, isRTL: rtl, t } = useLanguage();
   const a = card.acquisition;
   const pass = a.kind === 'standard-pass' || a.kind === 'premium-pass';
   const textAlign = rtl ? 'right' as const : 'left' as const;
   return (
     <View testID="season2-acquisition" style={{ gap: 10, padding: 16, borderRadius: 14, borderWidth: 1, borderColor: '#8D633C', backgroundColor: '#211B17' }}>
-      <Text style={{ color: '#C9C3BC', lineHeight: 22, textAlign }}>{[card.position, ...(card.positions ?? [])].join(' / ')} · {card.heightCm} {t('ס״מ', 'cm')} · {card.weightKg} {t('ק״ג', 'kg')} · {t(`גיל ${card.age}`, `Age ${card.age}`)}</Text>
+      <Text style={{ color: '#C9C3BC', lineHeight: 22, textAlign }}>{[card.position, ...(card.positions ?? [])].join(' / ')} · {card.heightCm} {t('ס״מ', 'cm')} · {card.weightKg} {t('ק״ג', 'kg')} · {t('גיל {age}', 'Age {age}').replace('{age}', String(card.age))}</Text>
       <Text style={{ color: '#C9C3BC', textAlign }}>{t('סוג האצה', 'Acceleration type')}: {card.accelerate}</Text>
       <Text accessibilityRole="header" style={{ color: '#FFD1A1', fontWeight: '900', fontSize: 20, textAlign }}>{t('איך משיגים את הקלף?', 'How to earn this card')}</Text>
       {pass ? <>
@@ -27,7 +26,7 @@ export function Season2Acquisition({ card }: { card: Season2Card }) {
           {group.tasks.map((task) => <Text key={task.name} style={{ color: '#C9C3BC', lineHeight: 22, textAlign }}>• {t(task.he, task.en)}</Text>)}
         </View>)}
       </> : <Text style={{ color: '#E6E1DB', lineHeight: 22, textAlign }}>{t('דרך ההשגה של גרסת הרטרו הזו עדיין לא אומתה. זמינותה במשחק טרם אושרה; אין מחיר שוק מאומת.', 'The acquisition route for this retro version has not yet been verified. In-game availability is unconfirmed; no verified market price is available.')}</Text>}
-      {a.kind !== 'unverified' && a.endsAt ? <Text style={{ color: '#AFA69E', fontSize: 12, textAlign }}>{t('זמין עד', 'Available until')} {new Date(a.endsAt).toLocaleString(language === 'he' ? 'he-IL' : 'en-GB', { timeZone: 'Asia/Jerusalem', dateStyle: 'short', timeStyle: 'short' })} · {t('שעון ישראל', 'Israel time')}</Text> : null}
+      {a.kind !== 'unverified' && a.endsAt ? <Text style={{ color: '#AFA69E', fontSize: 12, textAlign }}>{t('זמין עד', 'Available until')} {new Date(a.endsAt).toLocaleString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale, { timeZone: 'Asia/Jerusalem', dateStyle: 'short', timeStyle: 'short' })} · {t('שעון ישראל', 'Israel time')}</Text> : null}
     </View>
   );
 }
