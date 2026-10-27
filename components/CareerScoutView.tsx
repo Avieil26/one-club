@@ -76,14 +76,13 @@ const SIMPLE_ROLES_EN: Record<string, string> = {
   'מגן שמאלי הגנתי': 'Defensive Left-Back', 'מגן ימני גיבוי': 'Backup Right-Back',
   'מגן תוקף': 'Attacking Fullback',
 };
-function displayRole(role: string, position: string, language: 'he' | 'en'): string {
+function displayRole(role: string, position: string, language: AppLocale): string {
   if (language === 'he') return role;
   const match = role.match(/\(([^)]+)\)/);
-  if (match) {
-    const suffix = role.slice((match.index ?? 0) + match[0].length).match(/^\s*(\+{1,2})/)?.[1];
-    return [match[1], suffix].filter(Boolean).join(' ');
-  }
-  return SIMPLE_ROLES_EN[role] ?? POSITION_NAMES_EN[position] ?? 'Player role';
+  const suffix = match ? role.slice((match.index ?? 0) + match[0].length).match(/^\s*(\+{1,2})/)?.[1] : undefined;
+  const english = match ? match[1] : SIMPLE_ROLES_EN[role] ?? POSITION_NAMES_EN[position] ?? 'Player role';
+  const label = language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
+  return [label, suffix].filter(Boolean).join(' ');
 }
 function displayPlayStyle(name: string, language: 'he' | 'en'): string {
   if (language === 'he') return name;
@@ -409,7 +408,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   </View>
                   <View style={styles.roleChip}>
                     <Text style={styles.roleChipText} numberOfLines={1}>
-                      {displayRole(player.primaryRole, player.position, language)}
+                      {displayRole(player.primaryRole, player.position, locale)}
                     </Text>
                   </View>
                 </View>
@@ -682,12 +681,12 @@ function ScoutDossierModal({
             <View style={styles.rolesRow}>
               <View style={[styles.roleBlock, styles.starRoleBlock]}>
                 <Text style={styles.starRoleText} numberOfLines={1}>
-                  {displayRole(player.primaryRole, player.position, language)}
+                  {displayRole(player.primaryRole, player.position, locale)}
                 </Text>
               </View>
               <View style={styles.roleBlock}>
                 <Text style={styles.normalRoleText} numberOfLines={1}>
-                  {displayRole(player.secondaryRole, player.position, language)}
+                  {displayRole(player.secondaryRole, player.position, locale)}
                 </Text>
               </View>
             </View>
