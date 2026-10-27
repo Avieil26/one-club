@@ -64,7 +64,7 @@ export function LevelChip({ progress }: { progress: XpProgress }) {
       <Pressable
         onPress={() => setOpen(true)}
         accessibilityRole="button"
-        accessibilityLabel={t(`רמה ${progress.level}`, `Level ${progress.level}`)}
+        accessibilityLabel={t('רמה {level}', 'Level {level}').replace('{level}', String(progress.level))}
         hitSlop={8}
       >
         <LevelMark progress={progress} />
