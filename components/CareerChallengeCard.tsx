@@ -57,7 +57,7 @@ export function CareerCreamButton({
 }
 
 function CareerPhoto({ theme, large, banner }: { theme: CareerCardTheme; large?: boolean; banner?: boolean }) {
-  const { language } = useLanguage();
+  const { locale } = useLanguage();
   return (
     <View style={[styles.panel, large && !banner && styles.panelLarge, banner && styles.panelBanner]}>
       {theme.photo ? (
@@ -75,7 +75,7 @@ function CareerPhoto({ theme, large, banner }: { theme: CareerCardTheme; large?:
         />
       )}
       <LinearGradient colors={['rgba(0,0,0,0.05)', 'rgba(0,0,0,0.62)']} style={styles.scrim} />
-      <Text style={styles.panelLabel}>{careerText(theme.panelLabel, language)}</Text>
+      <Text style={styles.panelLabel}>{careerText(theme.panelLabel, locale)}</Text>
     </View>
   );
 }
@@ -90,11 +90,11 @@ export function CareerChallengeCard({
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 520;
 
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={careerText(challenge.title, language)}
+      accessibilityLabel={careerText(challenge.title, locale)}
       onPress={onPress}
       style={[styles.card, { backgroundColor: theme.background }]}
     >
@@ -106,8 +106,8 @@ export function CareerChallengeCard({
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
-          <Text style={[styles.title, narrow && styles.titleNarrow]}>{careerText(challenge.title, language)}</Text>
-          <Text style={styles.rules}>{careerText(challenge.rules, language)}</Text>
+          <Text style={[styles.title, narrow && styles.titleNarrow]}>{careerText(challenge.title, locale)}</Text>
+          <Text style={styles.rules}>{careerText(challenge.rules, locale)}</Text>
           <CareerCreamButton theme={theme} label={t('לכרטיס האתגר', 'View challenge')} />
         </View>
         {narrow ? null : <CareerPhoto theme={theme} />}
@@ -123,7 +123,7 @@ export function CareerDetailBlock({
   challenge: CareerChallenge;
   children: ReactNode;
 }) {
-  const { language } = useLanguage();
+  const { language, locale } = useLanguage();
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 720;
   return (
@@ -136,7 +136,7 @@ export function CareerDetailBlock({
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
           </View>
-          <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{careerText(challenge.title, language)}</Text>
+          <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{careerText(challenge.title, locale)}</Text>
         </View>
         {narrow ? null : <CareerPhoto theme={theme} large />}
       </View>
