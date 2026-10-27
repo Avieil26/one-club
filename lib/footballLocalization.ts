@@ -157,12 +157,15 @@ export function displayClub(club: string, language: FootballLanguage): string {
 
 const COUNTRY_BY_EN = new Map(COUNTRIES.map(country => [country.en.toLocaleLowerCase(), country.code]));
 const COUNTRY_ALIASES: Record<string, string> = {
-  'Bosnia and Herzegovina': 'BA', 'Ivory Coast': 'CI', Congo: 'CG', 'DR Congo': 'CD',
+  'Bosnia and Herzegovina': 'BA', 'Bosnia Herzegovina': 'BA', 'Ivory Coast': 'CI', Congo: 'CG', 'DR Congo': 'CD', 'Congo DR': 'CD',
+  'Korea Republic': 'KR', 'Republic of Ireland': 'IE', 'Czech Republic': 'CZ', 'Trinidad and Tobago': 'TT',
+  'Cape Verde Islands': 'CV', 'St. Kitts and Nevis': 'KN', 'Antigua and Barbuda': 'AG',
+  'São Tomé e Príncipe': 'ST', 'Korea DPR': 'KP', CAR: 'CF',
 };
 const UK_NATIONS: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
-  ar: { England: 'إنجلترا', Scotland: 'اسكتلندا', Wales: 'ويلز', 'Northern Ireland': 'أيرلندا الشمالية' },
-  'pt-BR': { England: 'Inglaterra', Scotland: 'Escócia', Wales: 'País de Gales', 'Northern Ireland': 'Irlanda do Norte' },
-  es: { England: 'Inglaterra', Scotland: 'Escocia', Wales: 'Gales', 'Northern Ireland': 'Irlanda del Norte' },
+  ar: { England: 'إنجلترا', Scotland: 'اسكتلندا', Wales: 'ويلز', 'Northern Ireland': 'أيرلندا الشمالية', Kosovo: 'كوسوفو', 'Chinese Taipei': 'تايبيه الصينية', 'Netherlands Antilles': 'جزر الأنتيل الهولندية' },
+  'pt-BR': { England: 'Inglaterra', Scotland: 'Escócia', Wales: 'País de Gales', 'Northern Ireland': 'Irlanda do Norte', Kosovo: 'Kosovo', 'Chinese Taipei': 'Taipé Chinês', 'Netherlands Antilles': 'Antilhas Holandesas' },
+  es: { England: 'Inglaterra', Scotland: 'Escocia', Wales: 'Gales', 'Northern Ireland': 'Irlanda del Norte', Kosovo: 'Kosovo', 'Chinese Taipei': 'Taipéi Chino', 'Netherlands Antilles': 'Antillas Neerlandesas' },
 };
 
 export function displayNation(nation: string, language: AppLocale): string {
