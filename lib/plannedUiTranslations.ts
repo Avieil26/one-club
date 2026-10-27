@@ -3,7 +3,7 @@ import { plannedAdditionalTranslations } from './plannedAdditionalTranslations';
 export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   ar: {
     ...plannedAdditionalTranslations["ar"],
-    'Joined this month': 'انضم هذا الشهر', 'Member since {month}': 'عضو منذ {month}', 'Pending approval': 'بانتظار الموافقة', Approved: 'تمت الموافقة', Rejected: 'مرفوض', 'Community member': 'عضو في المجتمع', Today: 'اليوم', Yesterday: 'أمس', Left: 'اليسرى', Right: 'اليمنى', '{name} wrote': 'كتب {name}',
+    'New releases': 'إصدارات جديدة', 'Need a player': 'نحتاج إلى لاعب', 'Left back': 'ظهير أيسر', 'Right back': 'ظهير أيمن', 'Division {number}': 'القسم {number}', 'Joined this month': 'انضم هذا الشهر', 'Member since {month}': 'عضو منذ {month}', 'Pending approval': 'بانتظار الموافقة', Approved: 'تمت الموافقة', Rejected: 'مرفوض', 'Community member': 'عضو في المجتمع', Today: 'اليوم', Yesterday: 'أمس', Left: 'اليسرى', Right: 'اليمنى', '{name} wrote': 'كتب {name}',
     'Something went wrong': 'حدث خطأ', Close: 'إغلاق', Back: 'رجوع', 'Saving…': 'جارٍ الحفظ…',
     'Sign in required': 'يجب تسجيل الدخول', 'Community player': 'لاعب من المجتمع', Substitutes: 'البدلاء',
     All: 'الكل', 'Try again': 'حاول مجددًا', Rating: 'التقييم', 'Community players': 'لاعبو المجتمع',
@@ -64,7 +64,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
   },
   'pt-BR': {
     ...plannedAdditionalTranslations["pt-BR"],
-    'Joined this month': 'Entrou neste mês', 'Member since {month}': 'Membro desde {month}', 'Pending approval': 'Aguardando aprovação', Approved: 'Aprovado', Rejected: 'Rejeitado', 'Community member': 'Membro da comunidade', Today: 'Hoje', Yesterday: 'Ontem', Left: 'Esquerdo', Right: 'Direito', '{name} wrote': '{name} escreveu',
+    'New releases': 'Novos lançamentos', 'Need a player': 'Precisamos de jogador', 'Left back': 'Lateral esquerdo', 'Right back': 'Lateral direito', 'Division {number}': 'Divisão {number}', 'Joined this month': 'Entrou neste mês', 'Member since {month}': 'Membro desde {month}', 'Pending approval': 'Aguardando aprovação', Approved: 'Aprovado', Rejected: 'Rejeitado', 'Community member': 'Membro da comunidade', Today: 'Hoje', Yesterday: 'Ontem', Left: 'Esquerdo', Right: 'Direito', '{name} wrote': '{name} escreveu',
     'Something went wrong': 'Algo deu errado', Close: 'Fechar', Back: 'Voltar', 'Saving…': 'Salvando…',
     'Sign in required': 'É necessário entrar', 'Community player': 'Jogador da comunidade', Substitutes: 'Reservas',
     All: 'Todos', 'Try again': 'Tentar novamente', Rating: 'Classificação', 'Community players': 'Jogadores da comunidade',
@@ -125,7 +125,7 @@ export const plannedUiTranslations: Record<'ar' | 'pt-BR' | 'es', Record<string,
   },
   es: {
     ...plannedAdditionalTranslations["es"],
-    'Joined this month': 'Se unió este mes', 'Member since {month}': 'Miembro desde {month}', 'Pending approval': 'Pendiente de aprobación', Approved: 'Aprobado', Rejected: 'Rechazado', 'Community member': 'Miembro de la comunidad', Today: 'Hoy', Yesterday: 'Ayer', Left: 'Izquierdo', Right: 'Derecho', '{name} wrote': '{name} escribió',
+    'New releases': 'Novedades', 'Need a player': 'Necesitamos jugador', 'Left back': 'Lateral izquierdo', 'Right back': 'Lateral derecho', 'Division {number}': 'División {number}', 'Joined this month': 'Se unió este mes', 'Member since {month}': 'Miembro desde {month}', 'Pending approval': 'Pendiente de aprobación', Approved: 'Aprobado', Rejected: 'Rechazado', 'Community member': 'Miembro de la comunidad', Today: 'Hoy', Yesterday: 'Ayer', Left: 'Izquierdo', Right: 'Derecho', '{name} wrote': '{name} escribió',
     'Something went wrong': 'Se ha producido un error', Close: 'Cerrar', Back: 'Volver', 'Saving…': 'Guardando…',
     'Sign in required': 'Debes iniciar sesión', 'Community player': 'Jugador de la comunidad', Substitutes: 'Suplentes',
     All: 'Todos', 'Try again': 'Volver a intentar', Rating: 'Valoración', 'Community players': 'Jugadores de la comunidad',
