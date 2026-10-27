@@ -10,7 +10,7 @@ import type { CareerMode } from '@/lib/types';
 
 export default function NewChallengeScreen() {
   const app = useApp();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [mode, setMode] = useState<CareerMode>('manager');
@@ -32,7 +32,7 @@ export default function NewChallengeScreen() {
       await app.createChallenge({ title, mode, rules, proofRequirements, shareCode, endsAt });
       router.back();
     } catch (error) {
-      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'Something went wrong'), errorMessage(error, locale));
     }
   }
 
