@@ -1,4 +1,4 @@
-// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot is provisional in Spanish.
+// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot is provisional in Spanish and Rush Out is a descriptive draft.
 // https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles
@@ -6,6 +6,7 @@ import type { AppLocale } from '@/lib/language';
 
 export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   "ar": {
+    "Rush Out": "الخروج من المرمى",
     "Acrobatic": "حركات بهلوانية",
     "Chip Shot": "تسديدة ساقطة",
     "Dead Ball": "كرة مستحيلة",
@@ -44,6 +45,7 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Power Shot": "تسديدة قوية"
   },
   "pt-BR": {
+    "Rush Out": "Saída do goleiro",
     "Acrobatic": "Acrobata",
     "Chip Shot": "Cavadinha",
     "Dead Ball": "Bola Parada",
@@ -82,6 +84,7 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Power Shot": "Superchute"
   },
   "es": {
+    "Rush Out": "Salida del portero",
     "Acrobatic": "Acrobático/a",
     "Chip Shot": "Vaselina",
     "Dead Ball": "Balón parado",
@@ -123,5 +126,9 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
 
 export function localizedPlayStyle(name: string, locale: AppLocale): string {
   if (locale === 'he' || locale === 'en') return name;
-  return plannedPlayStyleNames[locale][name] ?? name;
+  const hasPlus = name.endsWith('+');
+  const base = hasPlus ? name.slice(0, -1).trimEnd() : name;
+  const aliases: Record<string, string> = { 'Game Changer': 'Gamechanger', 'Low Driven': 'Low Driven Shot', 'Long Ball': 'Long Ball Pass' };
+  const translated = plannedPlayStyleNames[locale][aliases[base] ?? base];
+  return translated ? translated + (hasPlus ? '+' : '') : name;
 }
