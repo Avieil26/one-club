@@ -66,6 +66,19 @@ for (const statement of miniGameSource.statements) if (ts.isVariableStatement(st
     }
   }
 }
+const careerSource = ts.createSourceFile('lib/careerLocalization.ts', fs.readFileSync('lib/careerLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const { careerText } = loadRepositoryModule('lib/careerLocalization.ts');
+for (const statement of careerSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(careerSource) === 'ENGLISH' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.name) && ts.isStringLiteral(property.initializer)) {
+      for (const locale of locales) {
+        assert(ui[locale][property.initializer.text], `${locale}: missing Career translation`);
+        assert.equal(careerText(property.name.text, locale), ui[locale][property.initializer.text]);
+      }
+    }
+  }
+}
+for (const locale of locales) assert.equal(careerText('USER_CREATED_CHALLENGE_SENTINEL', locale), 'USER_CREATED_CHALLENGE_SENTINEL');
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
