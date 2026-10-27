@@ -10,8 +10,7 @@ import { useLanguage } from '@/lib/language';
 
 export function AccountForm() {
   const app = useApp();
-  const { language, t, chooseLanguage } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -71,17 +70,6 @@ export function AccountForm() {
 
   return (
     <View style={{ gap: 14, width: '100%', maxWidth: 480 }}>
-      <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Muted>{t('שפת האתר', 'Website language')}</Muted>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={language === 'he' ? 'Switch language to English' : 'Switch language to Hebrew'}
-          onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
-          style={{ borderWidth: 1, borderColor: 'rgba(227,179,65,0.55)', backgroundColor: 'rgba(227,179,65,0.10)', borderRadius: 14, paddingVertical: 7, paddingHorizontal: 14 }}
-        >
-          <Text style={{ color: colors.gold, fontWeight: '900', fontSize: 13 }}>{language === 'he' ? '🇬🇧 English' : '🇮🇱 עברית'}</Text>
-        </Pressable>
-      </View>
       <Text style={{ color: colors.text, fontSize: 36, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{registering ? t('הרשמה', 'Create account') : t('כניסה', 'Sign in')}</Text>
       <Muted>{registering ? t('שם, אימייל וסיסמה. אחרי זה נכנסים לדף הבית.', 'Your name, email and password — then you are ready to join.') : t('אימייל וסיסמה של החשבון שנרשמתם איתו.', 'Enter the email and password for your account.')}</Muted>
       {registering ? <Field label={t("שם בקהילה", "Community name")} value={name} onChangeText={setName} placeholder={t("איך לקרוא לך", "How should we call you?")} /> : null}
@@ -131,7 +119,7 @@ export function AccountForm() {
 
             {/* Label and Links */}
             <View style={{ flex: 1, gap: 4 }}>
-              <Text style={{ color: colors.text, fontSize: 14, lineHeight: 22, textAlign: 'right' }}>
+              <Text style={{ color: colors.text, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left' }}>
                 {t("קראתי ואני מסכים/ה ל", "I have read and agree to the ")}
                 <Text
                   accessibilityRole="link"
@@ -156,7 +144,7 @@ export function AccountForm() {
                 </Text>
                 .
               </Text>
-              <Text style={{ color: colors.muted, fontSize: 11.5, textAlign: 'right', lineHeight: 17 }}>
+              <Text style={{ color: colors.muted, fontSize: 11.5, textAlign: rtl ? 'right' : 'left', lineHeight: 17 }}>
                 {t("השימוש מתחת לגיל 18 מותנה בהסכמת הורה או אפוטרופוס חוקי.", "Users under 18 need consent from a parent or legal guardian.")}
               </Text>
             </View>
