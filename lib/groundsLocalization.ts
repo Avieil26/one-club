@@ -1,3 +1,6 @@
+import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
+
 const GROUNDS_COPY: Record<string, string> = {
   "רשות": "Optional",
   "PlayStyle רגיל": "Base PlayStyle",
@@ -69,14 +72,14 @@ const GROUNDS_COPY: Record<string, string> = {
   "אונליין בלבד": "Online only"
 };
 
-export function groundsLabel(value: string, language: 'he' | 'en'): string {
+export function groundsLabel(value: string, language: AppLocale): string {
   if (language === 'he') return value;
   const exact = GROUNDS_COPY[value];
-  if (exact) return exact;
+  if (exact) return language === 'en' ? exact : plannedUiTranslations[language][exact] ?? exact;
   const level = value.match(/^רמה\s+(\d+)$/);
-  if (level) return `Level ${level[1]}`;
+  if (level) return language === 'en' ? `Level ${level[1]}` : plannedUiTranslations[language]['Level {level}'].replace('{level}', level[1]);
   const division = value.match(/^חלוקה\s+(\d+)$/);
-  if (division) return `Division ${division[1]}`;
+  if (division) return language === 'en' ? `Division ${division[1]}` : plannedUiTranslations[language]['Division {count}'].replace('{count}', division[1]);
   if (value.includes(' · ')) return value.split(' · ')[0];
   return value;
 }
