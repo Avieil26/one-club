@@ -5,15 +5,14 @@ import Constants from 'expo-constants';
 import { allowDailyMeasurement, useDailyMeasurementPreference } from '@/lib/dailyActivity';
 import { SiteNav } from '@/components/SiteNav';
 import { colors } from '@/components/ui';
-import { useLanguage, type AppLanguage } from '@/lib/language';
+import { AVAILABLE_LANGUAGES, useLanguage, type AppLocale } from '@/lib/language';
 
 export default function SettingsScreen() {
-  const { language, chooseLanguage, t } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl, chooseLanguage, t } = useLanguage();
   const measurement = useDailyMeasurementPreference();
 
-  const option = (value: AppLanguage, flag: string, title: string, subtitle: string) => {
-    const selected = language === value;
+  const option = (value: AppLocale, flag: string, title: string, subtitle: string) => {
+    const selected = locale === value;
     return (
       <Pressable
         key={value}
@@ -54,8 +53,7 @@ export default function SettingsScreen() {
           {t('כאן אפשר לשנות את שפת האתר בכל עת. הבחירה נשמרת גם לביקורים הבאים.', 'Change the site language at any time. Your choice is saved for future visits.')}
         </Text>
         <View style={{ gap: 10 }}>
-          {option('en', '🇬🇧', 'English', 'Use the site in English, left to right.')}
-          {option('he', '🇮🇱', 'עברית', 'שימוש באתר בעברית, מימין לשמאל.')}
+          {AVAILABLE_LANGUAGES.map(item => option(item.value, item.flag, item.name, item.continuation))}
         </View>
         <View style={{ gap: 12, marginTop: 16 }}>
           <Text style={{ color: colors.text, fontSize: 20, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('חשבון ופרטיות', 'Account and privacy')}</Text>
