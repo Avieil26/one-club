@@ -11,8 +11,7 @@ import { useLanguage } from '@/lib/language';
 export function CookieNotice() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, isRTL: rtl, t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -44,13 +43,13 @@ export function CookieNotice() {
         borderColor: 'rgba(227, 179, 65, 0.55)',
       }}
     >
-      <Text accessibilityRole="header" style={{ color: colors.text, fontWeight: '900', fontSize: 16, textAlign: 'right' }}>
-        {t(Platform.OS === 'web' ? 'עוגיות ואחסון בדפדפן' : 'אחסון במכשיר', Platform.OS === 'web' ? 'Cookies and browser storage' : 'Device storage')}
+      <Text accessibilityRole="header" style={{ color: colors.text, fontWeight: '900', fontSize: 16, textAlign: rtl ? 'right' : 'left' }}>
+        {Platform.OS === 'web' ? t('עוגיות ואחסון בדפדפן', 'Cookies and browser storage') : t('אחסון במכשיר', 'Device storage')}
       </Text>
       <Text style={{ color: colors.muted, fontSize: 14, lineHeight: 22, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }}>
-        {rtl ? inlineLatin(
+        {language === 'he' ? inlineLatin(
           '1 CLUB שומר במכשיר רק מה שצריך כדי להישאר מחוברים ולזכור שקראתם את ההודעה הזו. אין עוגיות פרסום. אפשר להמשיך לגלוש גם בלי ללחוץ, וההתחברות תמשיך לעבוד.',
-        ) : '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.'}
+        ) : t('', '1 CLUB stores only what is needed to keep you signed in and remember that you have seen this notice. We do not use advertising cookies. You can keep browsing without clicking this notice, and sign-in will continue to work.')}
       </Text>
       <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', gap: 8, justifyContent: rtl ? 'flex-start' : 'flex-start' }}>
         <Pressable
