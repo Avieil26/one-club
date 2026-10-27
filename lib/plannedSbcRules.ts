@@ -32,6 +32,7 @@ export function plannedSbcRule(label: string, locale: Locale): string | undefine
       if (NATION_NAMES_EN[name]) return displayNation(name, locale);
       if (LEAGUE_NAMES_EN[name]) return displayLeague(name, 'en');
       if (CLUB_NAMES_EN[name]) return displayClub(name, 'en');
+      if (name === 'אולימפיק מרסיי') return 'Olympique Marseille';
       return /[\u0590-\u05ff]/u.test(name) ? undefined : name;
     });
     if (localized.some(name => !name)) return undefined;
