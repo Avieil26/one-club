@@ -84,7 +84,7 @@ const { displayNation, NATION_NAMES_EN } = loadRepositoryModule('lib/footballLoc
 for (const locale of locales) {
   for (const nation of Object.keys(NATION_NAMES_EN)) assert(!/[\u0590-\u05ff]/u.test(displayNation(nation, locale)), `${locale}: untranslated football nation ${nation}`);
   const aliases = ['Korea Republic', 'Republic of Ireland', 'Czech Republic', 'Kosovo', 'Congo DR', 'Trinidad and Tobago', 'Cape Verde Islands', 'St. Kitts and Nevis', 'Chinese Taipei', 'Antigua and Barbuda', 'São Tomé e Príncipe', 'Korea DPR', 'Bosnia Herzegovina', 'Netherlands Antilles', 'CAR'];
-  for (const alias of aliases) if (!(alias === 'Kosovo' && locale !== 'ar')) assert.notEqual(displayNation(alias, locale), alias, `${locale}: untranslated football nation alias ${alias}`);
+  for (const alias of aliases) if (!(alias === 'Kosovo' && locale !== 'ar') && !(alias === 'São Tomé e Príncipe' && locale === 'pt-BR')) assert.notEqual(displayNation(alias, locale), alias, `${locale}: untranslated football nation alias ${alias}`);
 }
 const { formatRemaining } = loadRepositoryModule('lib/format.ts');
 const now = Date.parse('2026-10-27T00:00:00Z');
