@@ -21,14 +21,14 @@ function useSessionOptions() {
  };
 }
 function SessionInfo({ session }: { session: PartnerSession }) {
- const { t, language } = useLanguage(); const options = useSessionOptions();
+ const { t, locale } = useLanguage(); const options = useSessionOptions();
  const now = useCommunityNow();
  const joined = session.partner_session_members.filter((m) => m.status === 'joined').length;
- const date = new Date(session.starts_at).toLocaleString(language === 'he' ? 'he-IL' : 'en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+ const date = new Date(session.starts_at).toLocaleString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale, { dateStyle: 'medium', timeStyle: 'short' });
  return <>
   <Muted>{date} · {t('בזמן המקומי שלך', 'Your local time')}</Muted>
   <Muted>{session.mode} · {session.platforms.join(' / ')} · {joined}/{session.capacity} {t('שחקנים', 'players')}</Muted>
-  <Muted>{countryName(session.region, language)} · {options.languages.find((o) => o.value === session.language)?.label} · {options.styles.find((o) => o.value === session.play_style)?.label}</Muted>
+  <Muted>{countryName(session.region, locale)} · {options.languages.find((o) => o.value === session.language)?.label} · {options.styles.find((o) => o.value === session.play_style)?.label}</Muted>
   <Muted>{session.status === 'cancelled' ? t('בוטל', 'Cancelled') : session.status === 'completed' ? t('הסתיים', 'Completed') : new Date(session.starts_at).getTime() < now ? t('שעת ההתחלה עברה', 'Start time has passed') : session.weekly ? t('חבורה שבועית', 'Weekly group') : t('מפגש חד־פעמי', 'One-off session')}</Muted>
  </>;
 }
