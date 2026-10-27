@@ -9,7 +9,7 @@ import { GALLERY_GRADES } from '@/lib/galleryTypes';
 import { loadGalleryIndex, type GalleryIndex } from '@/lib/galleryData';
 import { useLanguage } from '@/lib/language';
 export default function GalleryScreen() {
- const { t, language, isRTL: rtl } = useLanguage(), router = useRouter();
+ const { t, language, locale, isRTL: rtl } = useLanguage(), router = useRouter();
  const [data, setData] = useState<GalleryIndex | null>(null), [failed, setFailed] = useState(false), [retry, setRetry] = useState(0);
  const [query, setQuery] = useState(''), [category, setCategory] = useState('all'), [visible, setVisible] = useState(18);
  const [filtersOpen, setFiltersOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function GalleryScreen() {
   <GallerySearch value={query} onChangeText={value => { setQuery(value); setVisible(18); }} placeholder={t('חיפוש אוסף, מועדון או ליגה', 'Search a set, club or league')} />
   {width<700?<GalleryButton label={`${category==='all'?t('כל האוספים','All collections'):categories.find(([slug])=>slug===category)?.[1]}  ${filtersOpen?'⌃':'⌄'}`} onPress={()=>setFiltersOpen(open=>!open)}/>:null}
   {width>=700||filtersOpen?<View style={{ flexDirection: row, gap: 7, flexWrap: 'wrap' }}><GalleryButton compact label={t('הכול', 'All')} active={category === 'all'} onPress={() => { setCategory('all'); setVisible(18); setFiltersOpen(false); }} />{categories.map(([slug,name]) => <GalleryButton compact key={slug} label={name.split(' / ')[0]} active={category === slug} onPress={() => { setCategory(slug); setVisible(18); setFiltersOpen(false); }} />)}</View>:null}
-  {data ? <GalleryText quiet size={12}>{filtered.length} {t('אוספים', 'sets')} · {t('נבדק ב־', 'Checked ')}{new Date(data.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</GalleryText> : <GalleryText>{failed ? t('לא ניתן לטעון את הגלריה כרגע.', 'The Gallery could not be loaded.') : t('טוען את האוספים…', 'Loading sets…')}</GalleryText>}
+  {data ? <GalleryText quiet size={12}>{filtered.length} {t('אוספים', 'sets')} · {t('נבדק ב־', 'Checked ')}{new Date(data.checkedAt).toLocaleDateString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale)}</GalleryText> : <GalleryText>{failed ? t('לא ניתן לטעון את הגלריה כרגע.', 'The Gallery could not be loaded.') : t('טוען את האוספים…', 'Loading sets…')}</GalleryText>}
   {failed ? <GalleryButton label={t('ניסיון נוסף', 'Try again')} onPress={() => setRetry(n => n + 1)} /> : null}
   {Array.from({ length: Math.ceil(Math.min(visible, filtered.length) / columns) }, (_,index) => <View key={index} style={{ flexDirection: row, gap: 14, alignItems: 'stretch' }}>{filtered.slice(index * columns, (index + 1) * columns).map(set => <Pressable key={set.id} testID="gallery-set-tile" accessibilityRole="button" accessibilityLabel={`${set.name} Gallery`} onPress={() => router.push(`/gallery/${set.id}`)} style={{ flex: 1, minWidth: 0, borderRadius: 12, overflow: 'hidden', borderWidth: 1, borderColor: '#4F4B43', backgroundColor: 'rgba(17,23,32,0.98)' }}>
    <View style={{ padding: 16, gap: 6, minHeight:250, overflow:'hidden' }}><GallerySetBackdrop name={set.name}/><View style={{alignItems:'center',gap:3}}>{set.badge ? <Image source={{ uri: set.badge }} style={{ width: 46, height: 46 }} resizeMode="contain" /> : <GalleryToken size={25} />}<GalleryText size={23} style={{ fontWeight: '900', textAlign:'center', textTransform:'uppercase', letterSpacing:0.5 }}>{set.name}</GalleryText><GalleryText quiet size={10} style={{textAlign:'center',letterSpacing:1}}>{set.category}</GalleryText></View>
