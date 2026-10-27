@@ -5,8 +5,8 @@ import { colors } from '@/components/ui';
 import { useLanguage } from '@/lib/language';
 
 export function AuthorNote({ name, body, avatarUrl }: { name: string; body: string; avatarUrl?: string | null }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { language, isRTL: rtl } = useLanguage();
+  
   const words = body.trim();
   if (!words) return null;
   return (
