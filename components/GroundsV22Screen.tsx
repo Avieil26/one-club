@@ -20,6 +20,7 @@ import {
 import { SiteNav } from '@/components/SiteNav';
 import { divisionLabel, intentLabel, platformLabel, playerLevelTone } from '@/lib/labels';
 import { GROUNDS_PLAYSTYLES } from '@/lib/groundsPlaystyles';
+import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
 import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
@@ -171,6 +172,7 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
 function PlayStyleIcons({ selections, labeled = false, limit = 5 }: {
   selections?: GroundsPost['playStyles']; labeled?: boolean; limit?: number;
 }) {
+  const { locale } = useLanguage();
   const selected = selections ?? [];
   if (!selected.length) return null;
   const visible = selected.slice(0, limit);
@@ -180,10 +182,11 @@ function PlayStyleIcons({ selections, labeled = false, limit = 5 }: {
         const playStyle = GROUNDS_PLAYSTYLES.find((item) => item.id === selection.id);
         if (!playStyle) return null;
         const plus = selection.tier === 'plus';
+        const displayName = localizedPlayStyle(playStyle.name, locale);
         return (
-          <View key={selection.id} accessibilityLabel={`${playStyle.name}${plus ? '+' : ''}`} style={{ minHeight: labeled ? 34 : 28, flexDirection: 'row', alignItems: 'center', gap: labeled ? 6 : 0, paddingHorizontal: labeled ? 7 : 3, borderWidth: 1, borderColor: plus ? 'rgba(237,198,110,0.58)' : 'rgba(177,199,210,0.35)', borderRadius: 5, backgroundColor: plus ? 'rgba(108,79,28,0.35)' : 'rgba(133,158,174,0.14)' }}>
+          <View key={selection.id} accessibilityLabel={`${displayName}${plus ? '+' : ''}`} style={{ minHeight: labeled ? 34 : 28, flexDirection: 'row', alignItems: 'center', gap: labeled ? 6 : 0, paddingHorizontal: labeled ? 7 : 3, borderWidth: 1, borderColor: plus ? 'rgba(237,198,110,0.58)' : 'rgba(177,199,210,0.35)', borderRadius: 5, backgroundColor: plus ? 'rgba(108,79,28,0.35)' : 'rgba(133,158,174,0.14)' }}>
             <Image source={playStyle.icon} resizeMode="contain" style={{ width: labeled ? 22 : 23, height: labeled ? 22 : 23, tintColor: C.gold }} />
-            {labeled ? <Text style={{ color: plus ? C.gold : '#F0E7D0', fontSize: 10, fontWeight: '900' }}>{playStyle.name}{plus ? '+' : ''}</Text> : null}
+            {labeled ? <Text style={{ color: plus ? C.gold : '#F0E7D0', fontSize: 10, fontWeight: '900' }}>{displayName}{plus ? '+' : ''}</Text> : null}
             {!labeled && plus ? <Text style={{ color: C.gold, fontSize: 8, fontWeight: '900' }}>+</Text> : null}
           </View>
         );
