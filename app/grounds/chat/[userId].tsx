@@ -1,4 +1,4 @@
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 import { useMemo, useRef, useState } from 'react';
 import {
   Alert,
@@ -32,14 +32,14 @@ function clock(iso: string) {
   return `${hh}:${mm}`;
 }
 
-function dayLabel(iso: string, language: 'he' | 'en') {
+function dayLabel(iso: string, locale: AppLocale, t: (he: string, en: string) => string) {
   const date = new Date(iso);
   const today = new Date();
-  if (date.toDateString() === today.toDateString()) return language === 'he' ? 'היום' : 'Today';
+  if (date.toDateString() === today.toDateString()) return t('היום', 'Today');
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
-  if (date.toDateString() === yesterday.toDateString()) return language === 'he' ? 'אתמול' : 'Yesterday';
-  return date.toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB', { day: 'numeric', month: 'short' });
+  if (date.toDateString() === yesterday.toDateString()) return t('אתמול', 'Yesterday');
+  return date.toLocaleDateString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale, { day: 'numeric', month: 'short' });
 }
 
 function ChatWallpaper() {
@@ -70,7 +70,7 @@ function ChatWallpaper() {
 }
 
 export default function GroundsChatScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const { userId } = useLocalSearchParams<{ userId: string }>();
   const app = useApp();
   const router = useRouter();
@@ -107,7 +107,7 @@ export default function GroundsChatScreen() {
     const next: Row[] = [];
     let lastDay = '';
     for (const message of thread) {
-      const label = dayLabel(message.createdAt, language);
+      const label = dayLabel(message.createdAt, locale, t);
       if (label !== lastDay) {
         lastDay = label;
         next.push({ kind: 'day', id: `day-${message.id}`, label });
@@ -115,7 +115,7 @@ export default function GroundsChatScreen() {
       next.push({ kind: 'msg', id: message.id, message });
     }
     return next;
-  }, [thread, language]);
+  }, [thread, locale, t]);
 
   async function send() {
     if (preview) return;
