@@ -79,6 +79,18 @@ for (const statement of careerSource.statements) if (ts.isVariableStatement(stat
   }
 }
 for (const locale of locales) assert.equal(careerText('USER_CREATED_CHALLENGE_SENTINEL', locale), 'USER_CREATED_CHALLENGE_SENTINEL');
+// For translated SBC descriptions, protect numeric requirements and rewards.
+const sbcSource = ts.createSourceFile('lib/sbcLocalization.ts', fs.readFileSync('lib/sbcLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const sbcTexts = new Set(Object.values(loadRepositoryModule('lib/sbcLive20261020.ts').LIVE_SBC_TRANSLATIONS));
+for (const statement of sbcSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(sbcSource) === 'SBC_ENGLISH' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.initializer)) sbcTexts.add(property.initializer.text);
+  }
+}
+const sbcNumbers = text => [...text.matchAll(/[0-9]+(?:[,.][0-9]{3})*/g)].map(match => match[0].replace(/[,.]/g, '')).sort();
+for (const locale of locales) for (const text of sbcTexts) {
+  if (ui[locale][text]) assert.deepEqual(sbcNumbers(ui[locale][text]), sbcNumbers(text), `${locale}: SBC number mismatch: ${text}`);
+}
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
