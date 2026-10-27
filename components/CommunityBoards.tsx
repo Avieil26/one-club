@@ -77,8 +77,8 @@ function Rank({ place }: { place: number }) {
 }
 
 function BoardRowView({ row, place, mark }: { row: BoardRow; place: number; mark?: 'check' | 'heart' }) {
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, t, isRTL: rtl } = useLanguage();
+  
   const router = useRouter();
   const value = row.value.toLocaleString('en-US');
   return (
@@ -140,8 +140,8 @@ function Column({
   rows: BoardRow[];
   mark?: 'check' | 'heart';
 }) {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   return (
     <View style={{ flex: 1, minWidth: 0 }}>
       <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
@@ -184,8 +184,8 @@ const head = {
 };
 
 export function CommunityBoards({ boards }: { boards: BoardData }) {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   const { width } = useWindowDimensions();
   const sideBySide = width >= 980;
   return (
