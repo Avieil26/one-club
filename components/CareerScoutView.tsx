@@ -417,7 +417,7 @@ export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges
                   <View style={styles.valueGroup}>
                     <Text style={styles.euroVal}>{formatEur(player.marketValueEur)}</Text>
                     <Text style={styles.wageVal}>
-                      • {t('שכר', 'Wage')}: {formatEur(player.weeklyWageEur)}/week
+                      • {t('שכר', 'Wage')}: {formatEur(player.weeklyWageEur)}/{locale === 'he' || locale === 'en' ? 'week' : t('שבוע', 'week')}
                     </Text>
                   </View>
                   <View style={styles.reportBtn}>
