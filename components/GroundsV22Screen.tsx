@@ -142,11 +142,11 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
         <LinearGradient colors={['rgba(2,9,15,0.03)', 'rgba(2,9,15,0.12)', 'rgba(2,9,15,0.94)']} locations={[0, 0.45, 1]} style={FILL} />
         <View style={s.cardTopLine}>
           <View style={s.livePill}><View style={s.greenDot} /><Text style={s.livePillText}>{t(displayIntent(post.intent, 'he'), displayIntent(post.intent, 'en'))}</Text></View>
-          {skillRating != null ? <View style={[s.ovrBadge, { borderColor: tone.bg, minWidth: 54 }]}><Text style={s.ovrTiny}>SKILL</Text><Text style={s.ovrValue}>{skillRating.toLocaleString()}</Text></View> : null}
+          {skillRating != null ? <View style={[s.ovrBadge, { borderColor: tone.bg, minWidth: 54 }]}><Text style={s.ovrTiny}>{t('SKILL', 'SKILL')}</Text><Text style={s.ovrValue}>{skillRating.toLocaleString()}</Text></View> : null}
         </View>
         <View style={s.cardPortraitBottom}>
           {hasArchetype ? <View style={[s.levelBadge, { borderColor: tone.bg, backgroundColor: tone.bg + '20' }]}>
-            <Text style={s.levelNumber}>{String(post.playerLevel).padStart(2, '0')}</Text><Text style={s.levelLabel}>LEVEL</Text>
+            <Text style={s.levelNumber}>{String(post.playerLevel).padStart(2, '0')}</Text><Text style={s.levelLabel}>{t('LEVEL', 'LEVEL')}</Text>
           </View> : null}
           <View style={s.playerNameWrap}><Text style={s.playerName} numberOfLines={1}>{name}</Text><Text style={s.playerHandle} numberOfLines={1}>{post.gamertag ? '@' + post.gamertag : '1 CLUB · ' + post.id.slice(0, 8).toUpperCase()}</Text></View>
         </View>
@@ -380,7 +380,7 @@ export default function GroundsV22Screen() {
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('מדינה', 'Country')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>EA ID</Text><Text style={s.detailValue}>{selected.eaId || t('לא נמסר', 'Not provided')}</Text></View>
                 {selected.archetype && selected.archetype !== 'לא צוין עדיין' ? <View style={s.detailTile}><Text style={s.detailLabel}>{t('רמת ארכיטיפ', 'Archetype level')}</Text><Text style={s.detailValue}>{selected.playerLevel} / 50</Text></View> : null}
-                <View style={s.detailTile}><Text style={s.detailLabel}>Skill Rating</Text><Text style={s.detailValue}>{selected.skillRating != null ? selected.skillRating.toLocaleString() : t('לא נמסר', 'Not provided')}</Text></View>
+                <View style={s.detailTile}><Text style={s.detailLabel}>{t('Skill Rating', 'Skill Rating')}</Text><Text style={s.detailValue}>{selected.skillRating != null ? selected.skillRating.toLocaleString() : t('לא נמסר', 'Not provided')}</Text></View>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('אימות רמה', 'Level verification')}</Text><Text style={s.detailValue}>{selected.levelVerified ? t('מאומתת', 'Verified') : t('דיווח עצמי', 'Self-reported')}</Text></View>
               </View>
               <View style={{ gap: 8 }}><Text style={s.detailLabel}>PlayStyles</Text><PlayStyleIcons selections={selected.playStyles} labeled limit={36} /></View>
