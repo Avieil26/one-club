@@ -8,7 +8,7 @@ import { formatDate } from '@/lib/format';
 import { modeLabel } from '@/lib/labels';
 import { isOpen } from '@/lib/selectors';
 import type { CareerChallenge } from '@/lib/types';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 
 const ink = '#F7F4EA';
 
@@ -17,9 +17,16 @@ function webPhotoStyle(position: string): ImageStyle | null {
   return { objectFit: 'cover', objectPosition: position } as ImageStyle;
 }
 
-export function challengeStatusLine(challenge: Pick<CareerChallenge, 'endsAt'>, language: 'he' | 'en' = 'he'): string {
+export function challengeStatusLine(challenge: Pick<CareerChallenge, 'endsAt'>, language: AppLocale = 'he'): string {
   if (language === 'en') return isOpen(challenge) ? (challenge.endsAt ? `Open until ${formatDate(challenge.endsAt, language)}` : 'No time limit') : 'Challenge closed';
-  return isOpen(challenge) ? `פתוח עד ${formatDate(challenge.endsAt)}` : 'האתגר נסגר';
+  if (language === 'he') return isOpen(challenge) ? `פתוח עד ${formatDate(challenge.endsAt)}` : 'האתגר נסגר';
+  const copy = {
+    ar: { closed: 'أُغلق التحدي', until: 'مفتوح حتى' },
+    'pt-BR': { closed: 'Desafio encerrado', until: 'Aberto até' },
+    es: { closed: 'Desafío cerrado', until: 'Abierto hasta' },
+  }[language];
+  if (!isOpen(challenge)) return copy.closed;
+  return challenge.endsAt ? `${copy.until} ${formatDate(challenge.endsAt, language)}` : formatDate(null, language);
 }
 
 export function CareerStripes({ theme }: { theme: CareerCardTheme }) {
@@ -104,7 +111,7 @@ export function CareerChallengeCard({
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
-            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
+            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, locale)}</Text>
           </View>
           <Text style={[styles.title, narrow && styles.titleNarrow]}>{careerText(challenge.title, locale)}</Text>
           <Text style={styles.rules}>{careerText(challenge.rules, locale)}</Text>
@@ -134,7 +141,7 @@ export function CareerDetailBlock({
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
             <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
-            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, language)}</Text>
+            <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, locale)}</Text>
           </View>
           <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{careerText(challenge.title, locale)}</Text>
         </View>
