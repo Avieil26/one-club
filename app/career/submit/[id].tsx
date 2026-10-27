@@ -28,7 +28,7 @@ export default function SubmitChallengeScreen() {
       const picked = await pickImages(3);
       if (picked.length) setImageUris(picked);
     } catch (error) {
-      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'Something went wrong'), errorMessage(error, locale));
     }
   }
 
@@ -46,7 +46,7 @@ export default function SubmitChallengeScreen() {
       );
       router.replace(`/career/${id}`);
     } catch (error) {
-      Alert.alert(t('רגע', 'Something went wrong'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'Something went wrong'), errorMessage(error, locale));
     }
   }
 
