@@ -15,7 +15,7 @@ import { evaluateSquad, formationById } from '@/lib/chemistry';
 import { formatRemaining } from '@/lib/format';
 import { displayName } from '@/lib/labels';
 import { catalogChallenge, placedPreview } from '@/lib/sbcCatalog';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { sbcFace, localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { isOpen, solutionsFor } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
@@ -57,7 +57,7 @@ export default function SbcDetailScreen() {
   if (!isOpen(challenge, now)) {
     return (
       <Screen scene="sbc">
-        <Title>{language === 'en' ? sbcFace(challenge).en : challenge.title}</Title>
+        <Title>{locale === 'he' ? challenge.title : localizedSbcTitle(challenge, locale)}</Title>
         <Muted>{t("הזמן ל-SBC הזה נגמר, והוא הוסר אוטומטית מהרשימה הפעילה.", "This SBC has expired and was automatically removed from the active list.")}</Muted>
         <Button label={t("חזרה לרשימת SBC", "Back to SBCs")} onPress={() => router.replace('/sbc')} />
       </Screen>
@@ -78,7 +78,7 @@ export default function SbcDetailScreen() {
         <SbcRewardVisual challenge={challenge} width={windowWidth < 600 ? 132 : 180} />
         <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
           <Badge text={face.category} tone={challenge.kind === 'streamlined' ? 'copper' : 'blue'} />
-          <Title>{face.en}</Title>
+          <Title>{locale === 'he' ? face.en : localizedSbcTitle(challenge, locale)}</Title>
           {language === 'he' && face.he !== face.en ? <Muted>{face.he}</Muted> : null}
         </View>
       </View>
