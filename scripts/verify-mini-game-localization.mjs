@@ -45,6 +45,10 @@ for (const prompt of prompts) {
   const english = miniGamePrompt(prompt, 'en');
   assert(english && !hebrew.test(english), `Untranslated question: ${prompt} => ${english}`);
   assert.equal(miniGamePrompt(prompt, 'en'), english, 'Switching language keeps the question stable');
+  for (const locale of ['ar', 'pt-BR', 'es']) {
+    const translated = miniGamePrompt(prompt, locale);
+    assert(translated && !hebrew.test(translated) && translated !== english, `${locale}: untranslated mini-game prompt: ${prompt}`);
+  }
 }
 assert.equal(miniGamePrompt('סמנו מי שמשחק בפרמייר ליג ומדורג 88+', 'en'), 'Select players in Premier League rated 88+');
 assert.equal(miniGamePrompt('סמנו מי שמשחק בברצלונה והוא החלוצים', 'en'), 'Select strikers at Barcelona');
