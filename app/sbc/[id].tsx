@@ -29,7 +29,7 @@ function useNow(intervalMs = 30_000) {
 }
 
 export default function SbcDetailScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function SbcDetailScreen() {
   }
 
   const challengeId = challenge.id;
-  const remaining = formatRemaining(challenge.endsAt, now, language);
+  const remaining = formatRemaining(challenge.endsAt, now, locale);
   const allSolutions = solutionsFor(app.solutions, challengeId);
   const solutions = allSolutions.filter((s) => communitySquadStatus(challengeId, s.formation, s.squad) !== 'invalid');
   const face = sbcFace(challenge);
