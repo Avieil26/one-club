@@ -5,11 +5,11 @@ import { inlineLatin } from '@/lib/legalBidi';
 import { colors } from '@/components/ui';
 import { LEGAL_LINKS } from '@/lib/legal';
 import { useLanguage } from '@/lib/language';
+import { localizedLegal } from '@/lib/legalLocalization';
 
 export function LegalLinks() {
   const router = useRouter();
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, locale, isRTL: rtl } = useLanguage();
   return (
     <View style={{ alignItems: 'center', gap: 8, paddingVertical: 10 }}>
       <View style={{ flexDirection: 'row', direction: rtl ? 'rtl' : 'ltr', flexWrap: 'wrap', gap: 4, justifyContent: 'center', alignItems: 'center' }}>
@@ -38,7 +38,7 @@ export function LegalLinks() {
           paddingHorizontal: 12,
         }}
       >
-        {rtl ? inlineLatin('1 CLUB הינו אתר מעריצים עצמאי ללא קשר ל-Electronic Arts Inc. כל שמות המשחקים, המותגים ותמונות השחקנים שייכים לבעליהם החוקיים ומשמשים בשימוש הוגן (Fair Use) בלבד.') : '1 CLUB is an independent fan site and is not affiliated with Electronic Arts Inc. Game titles, brands, and player images belong to their respective owners and are used under applicable fair-use principles.'}
+        {language === 'he' ? inlineLatin('1 CLUB הינו אתר מעריצים עצמאי ללא קשר ל-Electronic Arts Inc. כל שמות המשחקים, המותגים ותמונות השחקנים שייכים לבעליהם החוקיים ומשמשים בשימוש הוגן (Fair Use) בלבד.') : localizedLegal('1 CLUB is an independent fan site and is not affiliated with Electronic Arts Inc. Game titles, brands, and player images belong to their respective owners and are used under applicable fair-use principles.', locale)}
       </Text>
     </View>
   );
