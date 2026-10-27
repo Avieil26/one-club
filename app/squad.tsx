@@ -206,7 +206,7 @@ export default function SquadBuilderScreen() {
         <View style={{ gap: 8 }}>
           <Muted>
             {slots[active]
-              ? t(`נבחר ${playerById(slots[active])?.name ?? 'שחקן'}. לחצו על עמדה אחרת כדי להעביר אותו. אם היא תפוסה, השניים מתחלפים.`, `${playerById(slots[active]) ? playerDisplayName(playerById(slots[active])!, 'en') : 'Player'} selected. Select another position to move the player or swap cards.`)
+              ? t('נבחר {name}. לחצו על עמדה אחרת כדי להעביר אותו. אם היא תפוסה, השניים מתחלפים.', '{name} selected. Select another position to move the player or swap cards.').replace('{name}', playerById(slots[active]) ? playerDisplayName(playerById(slots[active])!, language) : t('שחקן', 'Player'))
               : t("נבחרה עמדה ריקה. חפשו שחקן למטה, או לחצו על שחקן שכבר על המגרש.", "Empty position selected. Search below or select a player already on the pitch.")}
           </Muted>
           {slots[active] ? (
@@ -219,7 +219,7 @@ export default function SquadBuilderScreen() {
       ) : null}
       {benchHold ? (
         <View style={{ gap: 8 }}>
-          <Muted>{t(`נבחר ${playerById(benchHold)?.name ?? 'מחליף'} מהספסל. לחצו על עמדה במגרש כדי להכניס אותו.`, `${playerById(benchHold) ? playerDisplayName(playerById(benchHold)!, 'en') : 'Substitute'} selected from the bench. Select a position on the pitch.`)}</Muted>
+          <Muted>{t('נבחר {name} מהספסל. לחצו על עמדה במגרש כדי להכניס אותו.', '{name} selected from the bench. Select a position on the pitch.').replace('{name}', playerById(benchHold) ? playerDisplayName(playerById(benchHold)!, language) : t('מחליף', 'Substitute'))}</Muted>
           <Button
             label={t("הוצאה מהסגל", "Remove from squad")}
             variant="ghost"
