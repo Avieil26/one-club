@@ -11,7 +11,7 @@ import { sbcCheckText } from '@/lib/sbcLocalization';
 import { useLanguage } from '@/lib/language';
 
 export function SbcClassicSolution({ challengeId }: { challengeId: string }) {
-  const { t, language, locale } = useLanguage();
+  const { t, language, locale, isRTL } = useLanguage();
   const [index, setIndex] = useState('0');
   const segments = classicSegments(challengeId);
   const segment = segments[Number(index)] ?? segments[0];
@@ -24,7 +24,7 @@ export function SbcClassicSolution({ challengeId }: { challengeId: string }) {
     {(segment.rules.playerCount ?? 11) === 11 || segment.activeSlots ? <Muted>{t('מערך האתגר: ', 'Challenge formation: ')}{formationById(segment.formation).label}</Muted> : null}
     <SbcText tone="label">✓ {t('ההרכב עומד בדרישות האתגר', 'Squad meets challenge requirements')}</SbcText>
     <Muted>{t('השתמשו בגרסאות הרגילות ובמיקומים המוצגים.', 'Use the base versions and positions shown.')}</Muted>
-    {(segment.rules.playerCount ?? 11) < 11 && !segment.activeSlots ? <View style={{ flexDirection: language === 'he' ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>{Object.values(placedPreview(segment.squad)).map((player) => player ? <View key={player.id} style={{ width: 126, alignItems: 'center', gap: 6 }}><PortraitCard player={player} edition="base" width={116} /><Text style={{ color: colors.text, textAlign: 'center' }}>{language === 'en' ? player.en ?? player.name : player.name}</Text></View> : null)}</View> : <SquadPitch activeSlots={segment.activeSlots} appearance="sbc" formation={formationById(segment.formation)} placed={placedPreview(segment.squad)} playerChem={report.playerChem} showChemHud={false} />}
-    <SbcSurface>{report.checks.map((check) => <Text key={check.label} style={{ color: colors.green, textAlign: language === 'he' ? 'right' : 'left' }}>✓ {sbcCheckText(check.label, locale)}</Text>)}</SbcSurface>
+    {(segment.rules.playerCount ?? 11) < 11 && !segment.activeSlots ? <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>{Object.values(placedPreview(segment.squad)).map((player) => player ? <View key={player.id} style={{ width: 126, alignItems: 'center', gap: 6 }}><PortraitCard player={player} edition="base" width={116} /><Text style={{ color: colors.text, textAlign: 'center' }}>{language === 'en' ? player.en ?? player.name : player.name}</Text></View> : null)}</View> : <SquadPitch activeSlots={segment.activeSlots} appearance="sbc" formation={formationById(segment.formation)} placed={placedPreview(segment.squad)} playerChem={report.playerChem} showChemHud={false} />}
+    <SbcSurface>{report.checks.map((check) => <Text key={check.label} style={{ color: colors.green, textAlign: isRTL ? 'right' : 'left' }}>✓ {sbcCheckText(check.label, locale)}</Text>)}</SbcSurface>
   </View>;
 }
