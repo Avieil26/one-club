@@ -2,6 +2,7 @@ import { displayClub, displayLeague, displayNation, LEAGUE_NAMES_EN } from '@/li
 import type { DraftManager } from '@/lib/draftRun';
 import type { AppLocale } from '@/lib/language';
 import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
+import { plannedMiniGamePrompt } from '@/lib/plannedMiniGamePatterns';
 
 type Language = 'he' | 'en';
 
@@ -69,6 +70,10 @@ export function miniGamePrompt(prompt: string, language: AppLocale): string {
   if (QUESTIONS_EN[prompt]) {
     const english = QUESTIONS_EN[prompt];
     return language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
+  }
+  if (language !== 'en') {
+    const translated = plannedMiniGamePrompt(prompt, language);
+    if (translated) return translated;
   }
   for (const [pattern, render] of PATTERNS) {
     const match = prompt.match(pattern);
