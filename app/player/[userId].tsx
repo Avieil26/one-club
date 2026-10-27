@@ -13,7 +13,7 @@ import { useApp } from '@/lib/store';
 
 export default function PlayerProfileScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const id = String(userId || '');
@@ -70,7 +70,7 @@ export default function PlayerProfileScreen() {
               }}
             >
               <Text style={{ color: colors.text, fontWeight: '700', textAlign: 'right' }}>
-                {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.position, language)}
+                {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.position, locale)}
               </Text>
               <Text style={{ color: colors.muted, textAlign: 'right' }}>
                 {post.archetype}
