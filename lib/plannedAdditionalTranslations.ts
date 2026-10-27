@@ -1,6 +1,7 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Division {count}": "القسم {count}",
     "Optional": "اختياري",
     "Base PlayStyle": "أسلوب لعب أساسي",
     "Notice": "تنبيه",
@@ -1265,6 +1266,7 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Division {count}": "Divisão {count}",
     "Optional": "Opcional",
     "Base PlayStyle": "Estilo de Jogo básico",
     "Notice": "Aviso",
@@ -2529,6 +2531,7 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Division {count}": "División {count}",
     "Optional": "Opcional",
     "Base PlayStyle": "Estilo de juego básico",
     "Notice": "Aviso",
