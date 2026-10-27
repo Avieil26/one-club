@@ -108,6 +108,14 @@ for (const challenge of titleChallenges) {
 const chemistry = loadRepositoryModule('lib/chemistry.ts');
 const challenges = loadRepositoryModule('lib/sbcCatalog.ts').officialChallenges;
 const players = loadRepositoryModule('lib/fcPlayers.ts').PLAYERS;
+const scoutPlayers = loadRepositoryModule('lib/careerScoutData.ts').CAREER_SCOUT_PLAYERS;
+const playStyleNames = new Set([
+  ...players.flatMap(player => (player.playstyles ?? []).map(style => style.name)),
+  ...scoutPlayers.flatMap(player => player.playstyles.map(style => style.name.match(/\(([^)]+)\)/)?.[1] ?? style.name)),
+]);
+for (const locale of locales) for (const name of playStyleNames) {
+  assert.notEqual(localizedPlayStyle(name, locale), name, `${locale}: untranslated player PlayStyle: ${name}`);
+}
 const { plannedSbcRule } = loadRepositoryModule('lib/plannedSbcRules.ts');
 const formation = chemistry.FORMATIONS[0];
 const filled = Object.fromEntries(formation.lines.flat().map((slot, index) => [slot.id, players[index]]));
