@@ -42,7 +42,7 @@ export default function SubmitChallengeScreen() {
       await app.submitCareer({ challengeId: id, playerOrClubName, note, imageUris });
       Alert.alert(
         t('נשלח לאישור', 'Submitted for approval'),
-        t(`ההגשה ל«${challengeTitle}» נשלחה לבדיקה. היא תופיע רק אחרי אישור מנהל.`, `Your submission for “${challengeTitle}” is awaiting review. It will appear after administrator approval.`),
+        t('ההגשה ל«{title}» נשלחה לבדיקה. היא תופיע רק אחרי אישור מנהל.', 'Your submission for “{title}” is awaiting review. It will appear after administrator approval.').replace('{title}', challengeTitle),
       );
       router.replace(`/career/${id}`);
     } catch (error) {
@@ -66,7 +66,7 @@ export default function SubmitChallengeScreen() {
       <View style={[styles.sheet, { backgroundColor: theme.background }]}>
         <CareerStripes theme={theme} />
         <Text style={[styles.kicker, { color: theme.accent }]}>{challengeTitle}</Text>
-        <Title>{t(`הגשה ל«${challengeTitle}»`, `Submit proof for “${challengeTitle}”`)}</Title>
+        <Title>{t('הגשה ל«{title}»', 'Submit proof for “{title}”').replace('{title}', challengeTitle)}</Title>
         <Muted>{t('ההגשה נשלחת למנהל לבדיקה ולא מופיעה בפיד לפני אישור.', 'Your submission is reviewed by an administrator before it appears in the feed.')}</Muted>
         {challenge.proofRequirements ? (
           <Muted>{t('מה חייב להופיע בצילום: ', 'Required proof: ')}{copy?.proofRequirements}</Muted>
@@ -93,7 +93,7 @@ export default function SubmitChallengeScreen() {
         <Pressable accessibilityRole="button" onPress={choose}>
           <View style={[styles.drop, { borderRightColor: theme.inset, borderColor: theme.accent }]}>
             <Text style={styles.dropTitle}>{t('צילום מסך להוכחה', 'Proof screenshots')}</Text>
-            <Muted>{t(`חובה להגשה ל«${challengeTitle}». עד 3 תמונות.`, `Required for “${challengeTitle}”. Up to 3 images.`)}</Muted>
+            <Muted>{t('חובה להגשה ל«{title}». עד 3 תמונות.', 'Required for “{title}”. Up to 3 images.').replace('{title}', challengeTitle)}</Muted>
             {imageUris.length ? <ImageRow uris={imageUris} /> : null}
           </View>
         </Pressable>
