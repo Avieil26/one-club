@@ -204,8 +204,7 @@ function InfoPanel({ title, icon, children, onTitlePress }: { title: string; ico
 
 export default function GroundsV22Screen() {
   const app = useApp();
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, locale, isRTL: rtl } = useLanguage();
   const router = useRouter();
   const { width, height } = useWindowDimensions();
   const [intent, setIntent] = useState<'all' | GroundsIntent>('all');
@@ -228,11 +227,11 @@ export default function GroundsV22Screen() {
       if (platform !== 'all' && post.platform !== platform) return false;
       if (!matchesPosition(post.position, position)) return false;
       const profile = app.profiles.find((item) => item.id === post.userId);
-      const haystack = [profile?.displayName, post.gamertag, post.eaId, post.position, post.archetype, post.region, countryName(post.region, language), countryName(post.region, language === 'he' ? 'en' : 'he'), platformLabel(post.platform), divisionLabel(post.division)]
+      const haystack = [profile?.displayName, post.gamertag, post.eaId, post.position, post.archetype, post.region, countryName(post.region, locale), countryName(post.region, 'en'), countryName(post.region, 'he'), platformLabel(post.platform), divisionLabel(post.division)]
         .filter(Boolean).join(' ').toLocaleLowerCase();
       return !query || haystack.includes(query);
     });
-  }, [posts, intent, platform, position, search, app.profiles, language]);
+  }, [posts, intent, platform, position, search, app.profiles, locale]);
   const recruiting = useMemo(() => posts.filter((post) => post.intent === 'need_player').slice(0, 3), [posts]);
   const profileFor = (post: GroundsPost) => app.profiles.find((profile) => profile.id === post.userId);
   const isFollowing = (userId: string) => app.follows.some((follow) => follow.followerId === app.user?.id && follow.followingId === userId);
