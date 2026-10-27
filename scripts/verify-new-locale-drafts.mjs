@@ -98,8 +98,14 @@ const players = loadRepositoryModule('lib/fcPlayers.ts').PLAYERS;
 const { plannedSbcRule } = loadRepositoryModule('lib/plannedSbcRules.ts');
 const formation = chemistry.FORMATIONS[0];
 const filled = Object.fromEntries(formation.lines.flat().map((slot, index) => [slot.id, players[index]]));
-for (const challenge of challenges) for (const placed of [{}, filled]) {
-  const report = chemistry.evaluateSquad(formation, placed, challenge.rules);
+const classicData = {
+  ...JSON.parse(fs.readFileSync('assets/data/sbc-classic-verified-20261021.json', 'utf8')),
+  ...JSON.parse(fs.readFileSync('assets/data/sbc-refresh-20261025.json', 'utf8')).classic,
+  ...JSON.parse(fs.readFileSync('assets/data/sbc-refresh-20261026.json', 'utf8')).classic,
+};
+const ruleSets = [...challenges.map(challenge => challenge.rules), ...Object.values(classicData).flatMap(entry => entry.segments.map(segment => segment.rules))];
+for (const rules of ruleSets) for (const placed of [{}, filled]) {
+  const report = chemistry.evaluateSquad(formation, placed, rules);
   for (const check of report.checks) for (const locale of locales) {
     const translated = plannedSbcRule(check.label, locale);
     assert(translated && !/[\u0590-\u05ff]/u.test(translated), `${locale}: untranslated SBC rule: ${check.label}`);
