@@ -11,12 +11,11 @@ import { displayName } from '@/lib/labels';
 import { isOpen } from '@/lib/selectors';
 import { useApp } from '@/lib/store';
 
-const STATUS = { pending: 'ממתין לאישור', approved: 'אושר', rejected: 'נדחה' } as const;
 
 export default function ChallengeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
-  const { language, locale, t } = useLanguage();
+  const { locale, t, isRTL } = useLanguage();
   const router = useRouter();
   const challenge = app.challenges.find((item) => item.id === id);
   if (!challenge) {
@@ -50,10 +49,10 @@ export default function ChallengeScreen() {
       {submissions.map((submission) => (
         <Card key={submission.id}>
           <Badge
-            text={language === 'he' ? STATUS[submission.status] : ({ pending: 'Pending approval', approved: 'Approved', rejected: 'Rejected' } as const)[submission.status]}
+            text={submission.status === 'pending' ? t('ממתין לאישור', 'Pending approval') : submission.status === 'approved' ? t('אושר', 'Approved') : t('נדחה', 'Rejected')}
             tone={submission.status === 'approved' ? 'blue' : submission.status === 'pending' ? 'amber' : 'muted'}
           />
-          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: 'right' }}>{submission.playerOrClubName}</Text>
+          <Text style={{ color: colors.text, fontSize: 17, fontWeight: '700', textAlign: isRTL ? 'right' : 'left' }}>{submission.playerOrClubName}</Text>
           <Muted>
             {displayName(app.profiles, submission.userId)} · {submission.note}
           </Muted>
