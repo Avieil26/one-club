@@ -97,7 +97,7 @@ export function CareerChallengeCard({
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 520;
 
-  const { language, locale, t } = useLanguage();
+  const { locale, t } = useLanguage();
   return (
     <Pressable
       accessibilityRole="button"
@@ -130,7 +130,7 @@ export function CareerDetailBlock({
   challenge: CareerChallenge;
   children: ReactNode;
 }) {
-  const { language, locale } = useLanguage();
+  const { locale } = useLanguage();
   const theme = careerThemeFor(challenge);
   const narrow = useWindowDimensions().width < 720;
   return (
