@@ -1,6 +1,17 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Complete 7 of 8 challenges in the Season 2 Daily Knockout Tournament and earn packs, coins, and exclusive rewards! All rewards are untradeable.": "أكمل 7 من أصل 8 تحديات في بطولة الإقصاء اليومية للموسم الثاني واحصل على حزم وعملات ومكافآت حصرية! جميع المكافآت غير قابلة للتداول.",
+    "Win the Season 2 Daily Knockout Tournament five times.": "فز ببطولة الإقصاء اليومية للموسم الثاني خمس مرات.",
+    "Score at least 1 goal in 50 separate matches in the Season 2 Daily Knockout Tournament.": "سجّل هدفًا واحدًا على الأقل في 50 مباراة منفصلة في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Win the Season 2 Daily Knockout Tournament.": "فز ببطولة الإقصاء اليومية للموسم الثاني.",
+    "Score at least 1 goal in 12 separate matches in the Season 2 Daily Knockout Tournament.": "سجّل هدفًا واحدًا على الأقل في 12 مباراة منفصلة في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Score 15 goals in the Season 2 Daily Knockout Tournament.": "سجّل 15 هدفًا في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Play 20 matches in the Season 2 Daily Knockout Tournament.": "العب 20 مباراة في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Play 10 matches in the Season 2 Daily Knockout Tournament.": "العب 10 مباريات في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Play 1 match in the Season 2 Daily Knockout Tournament.": "العب مباراة واحدة في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Score at least 1 goal in 5 separate matches in the Season 2 Daily Knockout Tournament.": "سجّل هدفًا واحدًا على الأقل في 5 مباريات منفصلة في بطولة الإقصاء اليومية للموسم الثاني.",
+    "Complete all Season 2 Daily Knockout Tournament Weekly Play objectives to earn FC Heritage Axel Witsel and Coins! All rewards are untradeable.": "أكمل جميع أهداف اللعب الأسبوعي في بطولة الإقصاء اليومية للموسم الثاني لتحصل على Axel Witsel من FC Heritage والعملات! جميع المكافآت غير قابلة للتداول.",
     "Hi {name}, see what is new and what ends soon.": "مرحبًا {name}، اطّلع على الجديد وما سينتهي قريبًا.",
     "{count} likes": "الإعجابات: {count}",
     "Your squad for “{title}” is awaiting administrator review.": "تشكيلتك لـ «{title}» بانتظار مراجعة المشرف.",
@@ -956,6 +967,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Complete 7 of 8 challenges in the Season 2 Daily Knockout Tournament and earn packs, coins, and exclusive rewards! All rewards are untradeable.": "Conclua 7 dos 8 desafios do Torneio Eliminatório Diário da Temporada 2 e ganhe pacotes, moedas e recompensas exclusivas! Todas as recompensas são inegociáveis.",
+    "Win the Season 2 Daily Knockout Tournament five times.": "Vença o Torneio Eliminatório Diário da Temporada 2 cinco vezes.",
+    "Score at least 1 goal in 50 separate matches in the Season 2 Daily Knockout Tournament.": "Marque pelo menos 1 gol em 50 partidas diferentes no Torneio Eliminatório Diário da Temporada 2.",
+    "Win the Season 2 Daily Knockout Tournament.": "Vença o Torneio Eliminatório Diário da Temporada 2.",
+    "Score at least 1 goal in 12 separate matches in the Season 2 Daily Knockout Tournament.": "Marque pelo menos 1 gol em 12 partidas diferentes no Torneio Eliminatório Diário da Temporada 2.",
+    "Score 15 goals in the Season 2 Daily Knockout Tournament.": "Marque 15 gols no Torneio Eliminatório Diário da Temporada 2.",
+    "Play 20 matches in the Season 2 Daily Knockout Tournament.": "Jogue 20 partidas no Torneio Eliminatório Diário da Temporada 2.",
+    "Play 10 matches in the Season 2 Daily Knockout Tournament.": "Jogue 10 partidas no Torneio Eliminatório Diário da Temporada 2.",
+    "Play 1 match in the Season 2 Daily Knockout Tournament.": "Jogue 1 partida no Torneio Eliminatório Diário da Temporada 2.",
+    "Score at least 1 goal in 5 separate matches in the Season 2 Daily Knockout Tournament.": "Marque pelo menos 1 gol em 5 partidas diferentes no Torneio Eliminatório Diário da Temporada 2.",
+    "Complete all Season 2 Daily Knockout Tournament Weekly Play objectives to earn FC Heritage Axel Witsel and Coins! All rewards are untradeable.": "Conclua todos os objetivos de jogo semanal do Torneio Eliminatório Diário da Temporada 2 para ganhar Axel Witsel FC Heritage e Moedas! Todas as recompensas são inegociáveis.",
     "Hi {name}, see what is new and what ends soon.": "Olá, {name}! Veja as novidades e o que termina em breve.",
     "{count} likes": "Curtidas: {count}",
     "Your squad for “{title}” is awaiting administrator review.": "Seu elenco para “{title}” está aguardando análise do administrador.",
@@ -1911,6 +1933,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Complete 7 of 8 challenges in the Season 2 Daily Knockout Tournament and earn packs, coins, and exclusive rewards! All rewards are untradeable.": "Completa 7 de los 8 desafíos del Torneo eliminatorio diario de la temporada 2 y consigue sobres, monedas y recompensas exclusivas. Todas las recompensas son intransferibles.",
+    "Win the Season 2 Daily Knockout Tournament five times.": "Gana el Torneo eliminatorio diario de la temporada 2 cinco veces.",
+    "Score at least 1 goal in 50 separate matches in the Season 2 Daily Knockout Tournament.": "Marca al menos 1 gol en 50 partidos distintos del Torneo eliminatorio diario de la temporada 2.",
+    "Win the Season 2 Daily Knockout Tournament.": "Gana el Torneo eliminatorio diario de la temporada 2.",
+    "Score at least 1 goal in 12 separate matches in the Season 2 Daily Knockout Tournament.": "Marca al menos 1 gol en 12 partidos distintos del Torneo eliminatorio diario de la temporada 2.",
+    "Score 15 goals in the Season 2 Daily Knockout Tournament.": "Marca 15 goles en el Torneo eliminatorio diario de la temporada 2.",
+    "Play 20 matches in the Season 2 Daily Knockout Tournament.": "Juega 20 partidos en el Torneo eliminatorio diario de la temporada 2.",
+    "Play 10 matches in the Season 2 Daily Knockout Tournament.": "Juega 10 partidos en el Torneo eliminatorio diario de la temporada 2.",
+    "Play 1 match in the Season 2 Daily Knockout Tournament.": "Juega 1 partido en el Torneo eliminatorio diario de la temporada 2.",
+    "Score at least 1 goal in 5 separate matches in the Season 2 Daily Knockout Tournament.": "Marca al menos 1 gol en 5 partidos distintos del Torneo eliminatorio diario de la temporada 2.",
+    "Complete all Season 2 Daily Knockout Tournament Weekly Play objectives to earn FC Heritage Axel Witsel and Coins! All rewards are untradeable.": "Completa todos los objetivos de juego semanal del Torneo eliminatorio diario de la temporada 2 para conseguir a Axel Witsel de FC Heritage y monedas. Todas las recompensas son intransferibles.",
     "Hi {name}, see what is new and what ends soon.": "Hola, {name}. Descubre las novedades y lo que termina pronto.",
     "{count} likes": "Me gusta: {count}",
     "Your squad for “{title}” is awaiting administrator review.": "Tu plantilla para «{title}» está pendiente de revisión por un administrador.",
