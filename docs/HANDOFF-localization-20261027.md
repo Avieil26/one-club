@@ -79,3 +79,9 @@ No credentials are in this document.
 ## Other verified session facts
 Supabase project hxjgphhcspzjnkkzdmpk: last queried auth.users count was 112 registered, 0 anonymous, 0 created that day in Israel time. This is historical and should be re-queried for a fresh count.
 Player comments are shared by player ID, with original user-written text and no automatic translation. User asked about FUTBIN; its comment-language implementation was not reliably established. Shared community with optional translate action was suggested, NOT implemented or included in this scope.
+
+## Continuation after handoff
+- Removed legacy binary switches in AccountForm and SiteNav; registration retains its change-language link, and settings remains the post-registration selector. Both use isRTL for layout; consent text in AccountForm aligns with direction.
+- Added draft new-locale copy for registration, settings and cookie notice. CookieNotice uses isRTL for layout and preserves the Hebrew-specific bidi branch; its headings and body now use translatable literal strings for new locales.
+- A targeted dictionary inspection found matching keys across all three additional dictionaries (390 each) and no missing literal t() keys in AccountForm, settings or CookieNotice, accounting for the existing glossary. This is not a linguistic, visual, runtime or complete coverage check.
+- Local clone could not be obtained in this environment; typecheck, lint, catalogue and localization verification were not rerun. Remaining handoff work, including dynamic consent modal text, all other screens and full review, still applies. NEW_LOCALES_READY remains false. No production deployment was made.
