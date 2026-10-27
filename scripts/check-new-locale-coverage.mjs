@@ -47,5 +47,19 @@ const missingLegal = Object.fromEntries(Object.keys(translations).map(locale => 
   const strings = [...legalTexts].filter(text => !legal[locale]?.[text]);
   return [locale, { missingCount: strings.length, strings }];
 }));
-console.log(JSON.stringify({ dynamicCalls, locales: result, legal: missingLegal }, null, 2));
-if (process.argv.includes('--require-complete') && (dynamicCalls || Object.values(missing).some(strings => strings.size) || Object.values(missingLegal).some(item => item.missingCount))) process.exitCode = 1;
+// Built-in SBC copy is selected dynamically and is not captured by t() literal scanning.
+const sbcSource = ts.createSourceFile('lib/sbcLocalization.ts', fs.readFileSync('lib/sbcLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const sbcTexts = new Set(Object.values(loadRepositoryModule('lib/sbcLive20261020.ts').LIVE_SBC_TRANSLATIONS));
+function inspectSbc(node) {
+  if (ts.isVariableDeclaration(node) && node.name.getText(sbcSource) === 'SBC_ENGLISH' && ts.isObjectLiteralExpression(node.initializer)) {
+    for (const property of node.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.initializer)) sbcTexts.add(property.initializer.text);
+  }
+  ts.forEachChild(node, inspectSbc);
+}
+inspectSbc(sbcSource);
+const missingSbc = Object.fromEntries(Object.keys(translations).map(locale => {
+  const strings = [...sbcTexts].filter(text => !translations[locale]?.[text]);
+  return [locale, { missingCount: strings.length, strings }];
+}));
+console.log(JSON.stringify({ dynamicCalls, locales: result, legal: missingLegal, sbc: missingSbc }, null, 2));
+if (process.argv.includes('--require-complete') && (dynamicCalls || Object.values(missing).some(strings => strings.size) || Object.values(missingLegal).some(item => item.missingCount) || Object.values(missingSbc).some(item => item.missingCount))) process.exitCode = 1;
