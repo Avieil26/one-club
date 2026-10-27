@@ -1,5 +1,5 @@
 import { sbcCheckText } from '@/lib/sbcLocalization';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { checkClassicSquad, classicSegments } from '@/lib/sbcClassic';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
@@ -154,7 +154,7 @@ export default function SquadBuildScreen() {
   return (
     <Screen scene="sbc">
       <Stack.Screen options={{ title: t("בניית סגל", "Build squad") }} />
-      <Title>{language === 'en' ? sbcFace(challenge).en : sbcFace(challenge).he}</Title>
+      <Title>{localizedSbcTitle(challenge, locale)}</Title>
       <Muted>{t("מגרש ריק. לחצו על עמדה, חפשו את שם השחקן באנגלית, והניחו את הקלף.", "Start with an empty pitch. Select a position, search for a player in English and add their card.")}</Muted>
       <ChoiceGroup
         label={t("מערך", "Formation")}
