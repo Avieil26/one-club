@@ -1,4 +1,4 @@
-// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot is provisional in Spanish; Rush Out and additional scouting labels are descriptive drafts.
+// Draft display names. The 35 listed FC 27 names follow EA's localized PlayStyles article; Power Shot follows EA Help; Rush Out and additional scouting labels are descriptive drafts.
 // https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles
@@ -159,7 +159,7 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Far Reach": "Largo alcance",
     "Far Throw": "Saque lejano",
     "Footwork": "Pies ágiles",
-    "Power Shot": "Tiro potente"
+    "Power Shot": "Zapatazo"
   }
 };
 
