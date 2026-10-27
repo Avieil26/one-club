@@ -1,6 +1,14 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Challenges and proof": "التحديات والإثبات",
+    "Squads and packs": "التشكيلات والحزم",
+    "Your run, rewards and tactics": "مشوارك ومكافآتك وتكتيكاتك",
+    "Find a player": "ابحث عن لاعب",
+    "Cards and data": "البطاقات والبيانات",
+    "The Grounds": "The Grounds",
+    "FUT Champions": "FUT Champions",
+    "SBC": "SBC",
     "Win 2 matches while having Min. 2 Real Madrid (LALIGA) players in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "فز بمباراتين مع وجود لاعبين اثنين على الأقل من ريال مدريد (LALIGA) في التشكيلة الأساسية في فعالية شبه المحترف لـ FC Heritage Circuit.",
     "Score at least 2 goals in one match while having Min. 1 MLS player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "سجّل هدفين على الأقل في مباراة واحدة مع وجود لاعب واحد على الأقل من MLS في التشكيلة الأساسية في فعالية شبه المحترف لـ FC Heritage Circuit.",
     "Assist at least 3 goals while having Min. 1 Ligue 1 player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "اصنع 3 أهداف على الأقل مع وجود لاعب واحد على الأقل من Ligue 1 في التشكيلة الأساسية في فعالية شبه المحترف لـ FC Heritage Circuit.",
@@ -999,6 +1007,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Challenges and proof": "Desafios e comprovação",
+    "Squads and packs": "Elencos e pacotes",
+    "Your run, rewards and tactics": "Sua campanha, recompensas e táticas",
+    "Find a player": "Encontre um jogador",
+    "Cards and data": "Cartas e dados",
+    "The Grounds": "The Grounds",
+    "FUT Champions": "FUT Champions",
+    "SBC": "DME",
     "Win 2 matches while having Min. 2 Real Madrid (LALIGA) players in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Vença 2 partidas com no mínimo 2 jogadores do Real Madrid (LALIGA) entre os titulares no evento Semiprofissional do FC Heritage Circuit.",
     "Score at least 2 goals in one match while having Min. 1 MLS player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Marque pelo menos 2 gols em uma partida com no mínimo 1 jogador da MLS entre os titulares no evento Semiprofissional do FC Heritage Circuit.",
     "Assist at least 3 goals while having Min. 1 Ligue 1 player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Dê pelo menos 3 assistências com no mínimo 1 jogador da Ligue 1 entre os titulares no evento Semiprofissional do FC Heritage Circuit.",
@@ -1997,6 +2013,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Challenges and proof": "Desafíos y pruebas",
+    "Squads and packs": "Plantillas y sobres",
+    "Your run, rewards and tactics": "Tu serie, recompensas y tácticas",
+    "Find a player": "Busca un jugador",
+    "Cards and data": "Cartas y datos",
+    "The Grounds": "The Grounds",
+    "FUT Champions": "FUT Champions",
+    "SBC": "DCP",
     "Win 2 matches while having Min. 2 Real Madrid (LALIGA) players in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Gana 2 partidos con al menos 2 jugadores del Real Madrid (LALIGA) en el once inicial del evento Semiprofesional de FC Heritage Circuit.",
     "Score at least 2 goals in one match while having Min. 1 MLS player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Marca al menos 2 goles en un partido con al menos 1 jugador de la MLS en el once inicial del evento Semiprofesional de FC Heritage Circuit.",
     "Assist at least 3 goals while having Min. 1 Ligue 1 player in your starting 11 in the FC Heritage Circuit Semi-Pro Event.": "Da al menos 3 asistencias con al menos 1 jugador de la Ligue 1 en el once inicial del evento Semiprofesional de FC Heritage Circuit.",
