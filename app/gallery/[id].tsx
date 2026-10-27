@@ -20,14 +20,14 @@ export default function GallerySetScreen() {
 }
 function GallerySetContent({ id, preferredLineup, preferredGrade }: { id: string; preferredLineup?: string; preferredGrade?: string }) {
  const setId = Number(id), router = useRouter(), app = useApp();
- const { t, language } = useLanguage(), width = useWindowDimensions().width;
+ const { t, language, isRTL } = useLanguage(), width = useWindowDimensions().width;
  const [data, setData] = useState<GalleryDetail | null>(null), [failed, setFailed] = useState(false), [retry, setRetry] = useState(0);
  const [tab, setTab] = useState<'solutions'|'build'|'rewards'|'community'>('solutions'), [target, setTarget] = useState<GalleryGrade>((['D','C','B','A','S'] as string[]).includes(preferredGrade??'')?preferredGrade as GalleryGrade:'D');
  const [query, setQuery] = useState(''), [limit, setLimit] = useState(12), [message, setMessage] = useState('');
  const [summaryExpanded, setSummaryExpanded] = useState(false);
  const [submitting, setSubmitting] = useState(false), [title, setTitle] = useState(''), [note, setNote] = useState(''), [proofs, setProofs] = useState<string[]>([]), [gameScore, setGameScore] = useState('');
  const { selection, ready, change, save } = useGallerySelection(setId, app.user?.id);
- const deferredQuery = useDeferredValue(query), rtl = language === 'he', row = rtl ? 'row-reverse' : 'row';
+ const deferredQuery = useDeferredValue(query), rtl = isRTL, row = rtl ? 'row-reverse' : 'row';
  useEffect(() => { let active = true; void loadGallerySet(setId).then(d=>{if(active){setData(d);setFailed(false);}}).catch(()=>{if(active)setFailed(true);}); return ()=>{active=false;}; },[setId,retry]);
  const map = useMemo(()=>new Map(data?.items.map(p=>[p.eaId,p])),[data]);
  const items = useMemo(()=>selection.ids.flatMap(n=>map.get(n)?[map.get(n)!]:[]),[selection.ids,map]);
