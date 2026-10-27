@@ -1,3 +1,6 @@
+import { COUNTRIES, countryName } from '@/lib/countries';
+import type { AppLocale } from '@/lib/language';
+
 export type FootballLanguage = 'he' | 'en';
 
 export const CLUB_NAMES_EN: Record<string, string> = {
@@ -152,8 +155,24 @@ export function displayClub(club: string, language: FootballLanguage): string {
   return language === 'en' ? (CLUB_NAMES_EN[club] ?? club) : club;
 }
 
-export function displayNation(nation: string, language: FootballLanguage): string {
-  return language === 'en' ? (NATION_NAMES_EN[nation] ?? nation) : nation;
+const COUNTRY_BY_EN = new Map(COUNTRIES.map(country => [country.en.toLocaleLowerCase(), country.code]));
+const COUNTRY_ALIASES: Record<string, string> = {
+  'Bosnia and Herzegovina': 'BA', 'Ivory Coast': 'CI', Congo: 'CG', 'DR Congo': 'CD',
+};
+const UK_NATIONS: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
+  ar: { England: 'إنجلترا', Scotland: 'اسكتلندا', Wales: 'ويلز', 'Northern Ireland': 'أيرلندا الشمالية' },
+  'pt-BR': { England: 'Inglaterra', Scotland: 'Escócia', Wales: 'País de Gales', 'Northern Ireland': 'Irlanda do Norte' },
+  es: { England: 'Inglaterra', Scotland: 'Escocia', Wales: 'Gales', 'Northern Ireland': 'Irlanda del Norte' },
+};
+
+export function displayNation(nation: string, language: AppLocale): string {
+  if (language === 'he') return nation;
+  const english = NATION_NAMES_EN[nation] ?? nation;
+  if (language === 'en') return english;
+  const subdivision = UK_NATIONS[language][english];
+  if (subdivision) return subdivision;
+  const code = COUNTRY_ALIASES[english] ?? COUNTRY_BY_EN.get(english.toLocaleLowerCase());
+  return code ? countryName(code, language) : english;
 }
 
 export function displayLeague(league: string, language: FootballLanguage): string {
