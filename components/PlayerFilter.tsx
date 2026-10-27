@@ -55,8 +55,8 @@ export function PlayerFilter({
   onChange: (next: PlayerFilters) => void;
   onClose: () => void;
 }) {
-  const { t, language, locale } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, locale, isRTL: rtl } = useLanguage();
+  
   const { height: windowHeight } = useWindowDimensions();
   const [panel, setPanel] = useState<Panel>('menu');
   const [leagueQuery, setLeagueQuery] = useState('');
