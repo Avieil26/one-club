@@ -29,7 +29,7 @@ function pendingChampions() {
 }
 
 export default function QueueScreen() {
-  const { t, language, locale } = useLanguage();
+  const { t, locale } = useLanguage();
   const router = useRouter();
   const app = useApp();
   const [galleryPending, setGalleryPending] = useState<number | null>(null);
