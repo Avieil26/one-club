@@ -14,7 +14,7 @@ export function Season2Acquisition({ card }: { card: Season2Card }) {
       <Text accessibilityRole="header" style={{ color: '#FFD1A1', fontWeight: '900', fontSize: 20, textAlign }}>{t('איך משיגים את הקלף?', 'How to earn this card')}</Text>
       {pass ? <>
         <Text style={{ color: '#F5F1E9', fontSize: 16, fontWeight: '800', textAlign }}>{a.premium ? 'Season 2 · Premium Pass' : t('עונה 2 · המסלול החינמי', 'Season 2 · Free Standard Pass')}</Text>
-        <Text style={{ color: '#FFBB77', fontSize: 22, fontWeight: '900', textAlign }}>{t(`רמה ${a.level} · ${a.seasonPoints!.toLocaleString('en-US')} נקודות עונה (SP)`, `Level ${a.level} · ${a.seasonPoints!.toLocaleString('en-US')} Season Points (SP)`)}</Text>
+        <Text style={{ color: '#FFBB77', fontSize: 22, fontWeight: '900', textAlign }}>{t('רמה {level} · {points} נקודות עונה (SP)', 'Level {level} · {points} Season Points (SP)').replace('{level}', String(a.level)).replace('{points}', a.seasonPoints!.toLocaleString('en-US'))}</Text>
         <Text style={{ color: '#C9C3BC', lineHeight: 21, textAlign }}>{a.premium ? t('נדרשת גם גישת Premium Pass לעונה 2. נקודות העונה אינן מחיר במטבעות.', 'Season 2 Premium Pass access is also required. Season Points are not a coin price.') : t('פתחו את הרמה באמצעות נקודות עונה וקבלו את הפרס במסלול החינמי.', 'Reach the level with Season Points and claim the reward on the free track.')}</Text>
       </> : a.kind === 'objective' ? <>
         <Text style={{ color: '#F5F1E9', fontWeight: '800', textAlign }}>{a.objectiveName}</Text>
