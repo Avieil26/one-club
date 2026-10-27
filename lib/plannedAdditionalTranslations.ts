@@ -1,6 +1,10 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "{name} selected. Select another position to move the player or swap cards.": "تم اختيار {name}. اختر مركزًا آخر لنقل اللاعب أو تبديل البطاقات.",
+    "{name} selected from the bench. Select a position on the pitch.": "تم اختيار {name} من دكة البدلاء. اختر مركزًا في الملعب.",
+    "Player": "لاعب",
+    "Substitute": "بديل",
     "Only an administrator can perform this action": "يمكن للمشرف فقط تنفيذ هذا الإجراء",
     "Upload at least one screenshot": "ارفع لقطة شاشة واحدة على الأقل",
     "This challenge has closed": "أُغلق هذا التحدي",
@@ -1041,6 +1045,10 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "{name} selected. Select another position to move the player or swap cards.": "{name} selecionado. Selecione outra posição para mover o jogador ou trocar cartas.",
+    "{name} selected from the bench. Select a position on the pitch.": "{name} selecionado do banco. Selecione uma posição no campo.",
+    "Player": "Jogador",
+    "Substitute": "Reserva",
     "Only an administrator can perform this action": "Somente um administrador pode realizar esta ação",
     "Upload at least one screenshot": "Envie pelo menos uma captura de tela",
     "This challenge has closed": "Este desafio foi encerrado",
@@ -2081,6 +2089,10 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "{name} selected. Select another position to move the player or swap cards.": "{name} seleccionado. Selecciona otra posición para mover al jugador o intercambiar cartas.",
+    "{name} selected from the bench. Select a position on the pitch.": "{name} seleccionado del banquillo. Selecciona una posición en el campo.",
+    "Player": "Jugador",
+    "Substitute": "Suplente",
     "Only an administrator can perform this action": "Solo un administrador puede realizar esta acción",
     "Upload at least one screenshot": "Sube al menos una captura de pantalla",
     "This challenge has closed": "Este desafío se ha cerrado",
