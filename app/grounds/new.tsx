@@ -152,7 +152,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
     <View style={{ width: '48.5%', minWidth: 130, flexGrow: 1, borderRadius: 7, borderWidth: 1, borderColor: highlighted ? `${highlightColor}88` : 'rgba(92, 144, 163, 0.24)', backgroundColor: highlighted ? 'rgba(14, 39, 50, 0.88)' : 'rgba(2, 13, 21, 0.78)', padding: 9, gap: 7 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, direction: rtl ? 'rtl' : 'ltr' }}>
         <View style={{ width: 40, height: 40, borderRadius: 6, backgroundColor: selected === 'plus' ? 'rgba(209,164,68,0.18)' : 'rgba(149,173,188,0.14)', borderWidth: 1, borderColor: highlighted ? highlightColor : 'rgba(149,173,188,0.25)', alignItems: 'center', justifyContent: 'center' }}>
-          <Image source={item.icon} resizeMode="contain" style={{ width: 34, height: 34, tintColor: colors.gold }} accessibilityLabel={displayName} />
+          <Image source={item.icon} resizeMode="contain" style={{ width: 34, height: 34, tintColor: colors.gold }} accessibilityLabel={locale === 'he' || locale === 'en' ? `${item.name} PlayStyle icon` : displayName} />
         </View>
         <Text numberOfLines={2} style={{ flex: 1, color: colors.ink, fontSize: 10, lineHeight: 14, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{displayName}</Text>
       </View>
