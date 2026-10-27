@@ -175,7 +175,8 @@ function Identity({ player, compact }: { player: FcPlayer; compact?: boolean }) 
   );
 }
 
-function BootPair({ foot, wide, narrow, language = 'he' }: { foot: 'L' | 'R'; wide: boolean; narrow?: boolean; language?: 'he' | 'en' }) {
+function BootPair({ foot, wide, narrow }: { foot: 'L' | 'R'; wide: boolean; narrow?: boolean }) {
+  const { t } = useLanguage();
   return (
     <View style={{ width: narrow ? 210 : wide ? 300 : 240, maxWidth: '100%' }}>
       <Image
@@ -184,8 +185,8 @@ function BootPair({ foot, wide, narrow, language = 'he' }: { foot: 'L' | 'R'; wi
         style={{ width: '100%', height: wide ? 120 : 100, transform: foot === 'L' ? [{ scaleX: -1 }] : undefined }}
       />
       <View style={{ flexDirection: 'row', direction: 'ltr', justifyContent: 'space-between', paddingHorizontal: 18 }}>
-        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{language === 'he' ? 'שמאל' : 'Left'}</Text>
-        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{language === 'he' ? 'ימין' : 'Right'}</Text>
+        <Text style={{ color: foot === 'L' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{t('שמאל', 'Left')}</Text>
+        <Text style={{ color: foot === 'R' ? '#E3B341' : '#9AA3A8', fontWeight: '700', fontSize: 12 }}>{t('ימין', 'Right')}</Text>
       </View>
     </View>
   );
@@ -563,7 +564,7 @@ export function PlayerDossier({ player }: { player: FcPlayer }) {
     </View>
   );
 
-  const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} language={language} /> : null;
+  const boots = foot === 'L' || foot === 'R' ? <BootPair foot={foot} wide={wide} narrow={iconPage} /> : null;
 
   const skills = meta ? (
     <View style={{ gap: 12, alignItems: 'flex-end' }}>
