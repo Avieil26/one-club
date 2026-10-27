@@ -20,7 +20,7 @@ async function readCollected(data: PlannerData, userId?: string) {
 }
 const defaults = (): Settings => ({ mode: 'target', target: '100', budget: '75000', claimed: {} });
 export function GalleryTokenPlanner({ userId }: { userId?: string }) {
- const { t, language, isRTL: rtl } = useLanguage(), router = useRouter(), { width } = useWindowDimensions();
+ const { t, language, locale, isRTL: rtl } = useLanguage(), router = useRouter(), { width } = useWindowDimensions();
  const [data, setData] = useState<PlannerData | null>(null), [failed, setFailed] = useState(false), [retry, setRetry] = useState(0);
  const [settings, setSettings] = useState<Settings>(defaults), [owned, setOwned] = useState<number[]>([]);
  const [result, setResult] = useState<PlannerResult | null>(null), [message, setMessage] = useState('');
@@ -110,7 +110,7 @@ export function GalleryTokenPlanner({ userId }: { userId?: string }) {
      <View style={{ flexDirection: row, gap: 22, flexWrap: 'wrap', justifyContent: 'space-between' }}><View style={{ gap: 5 }}><GalleryToken value={`+${num(result.tokens)}`} size={30} /><GalleryText quiet size={12}>{t('טוקנים נוספים', 'Additional tokens')}</GalleryText></View><View style={{ gap: 5 }}><GalleryText testID="planner-total-cost" size={28} style={{ fontWeight: '800' }}>◉ {num(result.cost)}</GalleryText><GalleryText quiet size={12}>{t('אומדן קוינס לרכישה', 'Estimated purchase coins')}</GalleryText></View><View style={{ gap: 5 }}><GalleryText size={28} style={{ fontWeight: '800' }}>{result.steps.length}</GalleryText><GalleryText quiet size={12}>{t('אוספים במסלול', 'Sets in your route')}</GalleryText></View></View>
      {!result.targetMet ? <GalleryText>{t('נותרו ליעד', 'Still needed')}: {num(result.shortfall)} {t('טוקנים. אפשר להגדיל תקציב או להפחית יעד.', 'tokens. Try a larger budget or a smaller goal.')}</GalleryText> : null}
      <GalleryText quiet size={13}>{num(result.uniqueItems)} {t('קלפים שונים לרכישה. קלף משותף לכמה אוספים נספר במחיר פעם אחת.', 'distinct items to buy. An item shared across sets is charged once.')}</GalleryText>
-     <GalleryText quiet size={12}>{t('מסלול מוצע מתוך ההרכבים שנבדקו, לא הבטחה לפתרון הזול ביותר. מחירי קונסולה מתאריך', 'Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:')} {new Date(data.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : language === 'ar' ? 'ar' : language === 'pt-BR' ? 'pt-BR' : language === 'es' ? 'es' : 'en-GB')}. {t('האומדן מניח רכישה ושמירת הקלפים, ללא מכירה חוזרת או הכנסה ממנה.', 'Estimate assumes you buy and keep the items, with no resale proceeds.')}</GalleryText>
+     <GalleryText quiet size={12}>{t('מסלול מוצע מתוך ההרכבים שנבדקו, לא הבטחה לפתרון הזול ביותר. מחירי קונסולה מתאריך', 'Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:')} {new Date(data.checkedAt).toLocaleDateString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale)}. {t('האומדן מניח רכישה ושמירת הקלפים, ללא מכירה חוזרת או הכנסה ממנה.', 'Estimate assumes you buy and keep the items, with no resale proceeds.')}</GalleryText>
      {result.unpricedOptions ? <GalleryText quiet size={12}>{result.unpricedOptions} {t('הרכבים לא נכללו בגלל מחיר חסר לקלפים שטרם נאספו.', 'lineups excluded because uncollected items have missing prices.')}</GalleryText> : null}
      <GalleryButton label={saving ? t('שומר…', 'Saving…') : t('שמירת המסלול וההתקדמות', 'Save route and progress')} disabled={saving} onPress={() => void save()} />
     </GalleryPanel>
