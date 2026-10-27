@@ -24,7 +24,7 @@ function cellKey(nation: string, club: string) {
 
 export default function GridGameScreen() {
   const router = useRouter();
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const [puzzle, setPuzzle] = useState<GridPuzzle>(() => makeGrid());
   const [filled, setFilled] = useState<Record<string, GamePlayer>>({});
   const [active, setActive] = useState<string | null>(null);
@@ -99,7 +99,7 @@ export default function GridGameScreen() {
             </View>
             {puzzle.nations.map((nation) => (
               <View key={nation} style={styles.row}>
-                <Text style={styles.side} numberOfLines={2}>{displayNation(nation, language)}</Text>
+                <Text style={styles.side} numberOfLines={2}>{displayNation(nation, locale)}</Text>
                 {puzzle.clubs.map((club) => {
                   const key = cellKey(nation, club);
                   const player = filled[key];
@@ -108,7 +108,7 @@ export default function GridGameScreen() {
                     <Pressable
                       key={key}
                       accessibilityRole="button"
-                      accessibilityLabel={player ? playerDisplayName(player, language) : `${displayNation(nation, language)}, ${displayClub(club, language)}`}
+                      accessibilityLabel={player ? playerDisplayName(player, language) : `${displayNation(nation, locale)}, ${displayClub(club, language)}`}
                       disabled={Boolean(player) || done}
                       onPress={() => {
                         setActive(key);
