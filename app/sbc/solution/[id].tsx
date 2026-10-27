@@ -77,8 +77,8 @@ export default function SbcSolutionScreen() {
       {solution.squad ? (
         <View style={{ gap: 10 }}>
           <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
-            {report ? t(`כימיה ${report.chemistry}/33`, `Chemistry ${report.chemistry}/33`) : t("הסגל שנבנה", "Submitted squad")}
-            {report?.rating == null ? '' : t(` · דירוג קבוצה ${report.rating}`, ` · Squad rating ${report.rating}`)}
+            {report ? t('כימיה {value}/33', 'Chemistry {value}/33').replace('{value}', String(report.chemistry)) : t("הסגל שנבנה", "Submitted squad")}
+            {report?.rating == null ? '' : t(' · דירוג קבוצה {value}', ' · Squad rating {value}').replace('{value}', String(report.rating))}
           </Text>
           <SquadPitch appearance="sbc" formation={formation} placed={placed} playerChem={report?.playerChem ?? {}} showChemHud={false} />
         </View>
@@ -90,7 +90,7 @@ export default function SbcSolutionScreen() {
         <View style={{ flexDirection: 'row-reverse', gap: 10 }}>
           <View style={{ flex: 1 }}>
             <Button
-              label={votedUp ? t(`סימנתם שעבד · ${ups}`, `Marked as working · ${ups}`) : t(`עבד לי · ${ups}`, `Worked for me · ${ups}`)}
+              label={votedUp ? t('סימנתם שעבד · {count}', 'Marked as working · {count}').replace('{count}', String(ups)) : t('עבד לי · {count}', 'Worked for me · {count}').replace('{count}', String(ups))}
               variant={votedUp ? 'copper' : 'ghost'}
               onPress={() => vote('up')}
               disabled={app.busy || mine || !app.user}
@@ -98,7 +98,7 @@ export default function SbcSolutionScreen() {
           </View>
           <View style={{ flex: 1 }}>
             <Button
-              label={t(`לא עבד · ${downs}`, `Did not work · ${downs}`)}
+              label={t('לא עבד · {count}', 'Did not work · {count}').replace('{count}', String(downs))}
               variant={votedDown ? 'danger' : 'ghost'}
               onPress={() => vote('down')}
               disabled={app.busy || mine || !app.user}
