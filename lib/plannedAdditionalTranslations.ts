@@ -1,6 +1,14 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "About {hours} hours left": "متبقٍ نحو {hours} ساعة",
+    "{approved} approved submissions · {pending} awaiting review": "مشاركات معتمدة: {approved} · بانتظار المراجعة: {pending}",
+    "Age {age}": "العمر: {age}",
+    "{name} player card, {rating} OVR": "بطاقة اللاعب {name}، التقييم {rating}",
+    "Add {name}": "إضافة {name}",
+    "Selected: {count}": "المحدد: {count}",
+    "Remove one {name}": "إزالة نسخة من {name}",
+    "Increase quantity of {name}": "زيادة عدد {name}",
     "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "أوسكار غلوخ في أياكس (إمكانات 86)، وعنان خلايلي في كريستال بالاس (85)، ودانيال بيرتس في ساوثهامبتون (83)، إلى جانب مواهب إسرائيلية أخرى.",
     "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "اطّلع على متطلبات نقاط الموسم ومكافآت Premium وأهداف اللعب. لا تزال طرق الحصول على النسخ الكلاسيكية قيد التحقق.",
     "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "مسار مقترح من بين التشكيلات التي تم التحقق منها، ولا يضمن الحل الأقل تكلفة. لقطة أسعار المنصات:",
@@ -923,6 +931,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "About {hours} hours left": "Restam cerca de {hours} horas",
+    "{approved} approved submissions · {pending} awaiting review": "Envios aprovados: {approved} · Aguardando análise: {pending}",
+    "Age {age}": "Idade: {age}",
+    "{name} player card, {rating} OVR": "Carta de {name}, nota geral {rating}",
+    "Add {name}": "Adicionar {name}",
+    "Selected: {count}": "Selecionados: {count}",
+    "Remove one {name}": "Remover uma unidade de {name}",
+    "Increase quantity of {name}": "Aumentar a quantidade de {name}",
     "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "Oscar Gloukh no Ajax (potencial 86), Anan Khalaili no Crystal Palace (85) e Daniel Peretz no Southampton (83), além de outras promessas israelenses.",
     "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "Veja os requisitos de Pontos de Temporada, recompensas Premium e objetivos de jogo. As formas de obter as versões retrô ainda estão sendo verificadas.",
     "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "Rota sugerida entre escalações verificadas, sem garantia de ser a solução mais barata. Registro de preços de console:",
@@ -1845,6 +1861,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "About {hours} hours left": "Quedan unas {hours} horas",
+    "{approved} approved submissions · {pending} awaiting review": "Envíos aprobados: {approved} · Pendientes de revisión: {pending}",
+    "Age {age}": "Edad: {age}",
+    "{name} player card, {rating} OVR": "Carta de {name}, valoración general {rating}",
+    "Add {name}": "Añadir a {name}",
+    "Selected: {count}": "Seleccionados: {count}",
+    "Remove one {name}": "Quitar una unidad de {name}",
+    "Increase quantity of {name}": "Aumentar la cantidad de {name}",
     "Oscar Gloukh at Ajax (86 potential), Anan Khalaili at Crystal Palace (85), and Daniel Peretz at Southampton (83) — plus other key Israeli prospects.": "Oscar Gloukh en el Ajax (potencial 86), Anan Khalaili en el Crystal Palace (85) y Daniel Peretz en el Southampton (83), además de otras promesas israelíes.",
     "See the Season Point requirements, Premium rewards and gameplay objectives. Acquisition routes for the retro versions are still being checked.": "Consulta los requisitos de puntos de temporada, las recompensas Premium y los objetivos de juego. Las vías para conseguir las versiones retro siguen en revisión.",
     "Suggested route among verified lineups, not a guarantee of the cheapest solution. Console price snapshot:": "Ruta sugerida entre alineaciones verificadas, sin garantía de ser la solución más barata. Instantánea de precios de consola:",
