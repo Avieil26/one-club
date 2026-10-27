@@ -3,10 +3,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useLanguage } from '@/lib/language';
 import type { RecentCard } from '@/lib/recentCards';
 export function RecentCardInfo({ card }: { card: RecentCard }) {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const { price } = card;
   const variant = card.holographicType === 'pristine' ? 'Pristine' : card.holographicType === 'holographic' ? 'Holographic' : '';
-  const align = { textAlign: language === 'he' ? 'right' as const : 'left' as const };
+  const align = { textAlign: isRTL ? 'right' as const : 'left' as const };
   return (
     <LinearGradient testID="recent-card-info" colors={['#1D2333', '#11151F']} style={styles.panel}>
       <Text style={[styles.title, align]}>{card.family}{variant ? ` · ${variant}` : ''}</Text>
