@@ -1,5 +1,7 @@
 import { errorText } from '@/lib/errorLocalization';
 import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
+import { plannedStructuredError } from '@/lib/plannedErrorTranslations';
 
 export function formatDate(iso: string | null, language: AppLocale = 'he'): string {
   if (!iso) {
@@ -78,6 +80,9 @@ export function nowIso(): string {
   return new Date().toISOString();
 }
 
-export function errorMessage(error: unknown, language: 'he' | 'en' = 'he'): string {
-  return errorText(error instanceof Error ? error.message : 'משהו השתבש. נסו שוב.', language);
+export function errorMessage(error: unknown, language: AppLocale = 'he'): string {
+  const message = error instanceof Error ? error.message : 'משהו השתבש. נסו שוב.';
+  if (language === 'he' || language === 'en') return errorText(message, language);
+  const english = errorText(message, 'en');
+  return plannedUiTranslations[language][english] ?? plannedStructuredError(language, english) ?? plannedUiTranslations[language]['Something went wrong. Try again.'];
 }
