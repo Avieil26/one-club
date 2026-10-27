@@ -6,7 +6,7 @@ import { GalleryCommunity } from '@/components/GalleryCommunity';
 import { SbcModerationActions } from '@/components/SbcModerationActions';
 import { SolutionGallery } from '@/components/SolutionGallery';
 import { catalogChallenge } from '@/lib/sbcCatalog';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { localizedSbcTitle } from '@/lib/sbcTileTheme';
 
 import { Badge, Button, Card, ImageRow, Muted, Screen, Title } from '@/components/ui';
 import { errorMessage } from '@/lib/format';
@@ -98,7 +98,7 @@ export default function QueueScreen() {
         const challenge = catalogChallenge(solution.challengeId) ?? app.sbcChallenges.find((c) => c.id === solution.challengeId);
         return <Card key={solution.id}>
           <Badge text={t('פתרון SBC · ממתין לאישור', 'SBC solution · Awaiting review')} tone="amber" />
-          <Title>{challenge ? (language === 'en' ? sbcFace(challenge).en : sbcFace(challenge).he) : 'SBC'}</Title>
+          <Title>{challenge ? (localizedSbcTitle(challenge, locale)) : 'SBC'}</Title>
           <Muted>{displayName(app.profiles, solution.userId)}</Muted>
           <Muted>{solution.explanation}</Muted>
           <SolutionGallery uris={solution.imageUris} />
