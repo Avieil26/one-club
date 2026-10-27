@@ -9,6 +9,7 @@ import { AvatarCropModal } from '@/components/AvatarCropModal';
 import { Screen } from '@/components/ui';
 import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
 import { GROUNDS_PLAYSTYLE_CATEGORIES, GROUNDS_PLAYSTYLES, selectionForPlayStyle } from '@/lib/groundsPlaystyles';
+import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
 import { ARCHETYPES, DIVISIONS, POSITIONS, playerLevelTone } from '@/lib/labels';
@@ -129,6 +130,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
   item: (typeof GROUNDS_PLAYSTYLES)[number]; selected: 'base' | 'plus' | null; onSelect: (tier: 'base' | 'plus') => void;
 }) {
   const { locale, isRTL: rtl } = useLanguage();
+  const displayName = localizedPlayStyle(item.name, locale);
   const tierButton = (tier: 'base' | 'plus', label: string) => {
     const active = selected === tier;
     const accent = tier === 'plus' ? colors.gold : '#D9E4EA';
@@ -136,7 +138,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
       <Pressable
         onPress={() => onSelect(tier)}
         accessibilityRole="button"
-        accessibilityLabel={`${item.name}, ${tier === 'plus' ? 'PlayStyle Plus' : groundsLabel('PlayStyle רגיל', locale)}`}
+        accessibilityLabel={`${displayName}, ${tier === 'plus' ? 'PlayStyle Plus' : groundsLabel('PlayStyle רגיל', locale)}`}
         accessibilityState={{ selected: active }}
         style={{ minHeight: 26, flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 4, borderWidth: 1, borderColor: active ? accent : 'rgba(131, 158, 171, 0.18)', backgroundColor: active ? (tier === 'plus' ? 'rgba(124, 87, 23, 0.48)' : 'rgba(164, 185, 196, 0.2)') : 'rgba(0,0,0,0.23)', paddingHorizontal: 3 }}
       >
@@ -150,9 +152,9 @@ function PlayStyleCard({ item, selected, onSelect }: {
     <View style={{ width: '48.5%', minWidth: 130, flexGrow: 1, borderRadius: 7, borderWidth: 1, borderColor: highlighted ? `${highlightColor}88` : 'rgba(92, 144, 163, 0.24)', backgroundColor: highlighted ? 'rgba(14, 39, 50, 0.88)' : 'rgba(2, 13, 21, 0.78)', padding: 9, gap: 7 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, direction: rtl ? 'rtl' : 'ltr' }}>
         <View style={{ width: 40, height: 40, borderRadius: 6, backgroundColor: selected === 'plus' ? 'rgba(209,164,68,0.18)' : 'rgba(149,173,188,0.14)', borderWidth: 1, borderColor: highlighted ? highlightColor : 'rgba(149,173,188,0.25)', alignItems: 'center', justifyContent: 'center' }}>
-          <Image source={item.icon} resizeMode="contain" style={{ width: 34, height: 34, tintColor: colors.gold }} accessibilityLabel={`${item.name} PlayStyle icon`} />
+          <Image source={item.icon} resizeMode="contain" style={{ width: 34, height: 34, tintColor: colors.gold }} accessibilityLabel={displayName} />
         </View>
-        <Text numberOfLines={2} style={{ flex: 1, color: colors.ink, fontSize: 10, lineHeight: 14, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{item.name}</Text>
+        <Text numberOfLines={2} style={{ flex: 1, color: colors.ink, fontSize: 10, lineHeight: 14, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{displayName}</Text>
       </View>
       <View style={{ flexDirection: 'row', gap: 5 }}>
         {tierButton('base', 'רגיל')}
