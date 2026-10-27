@@ -7,13 +7,13 @@ import { useApp } from '@/lib/store';
 import { useLanguage } from '@/lib/language';
 import type { GallerySubmission } from '@/lib/galleryTypes';
 export function GalleryCommunity({ setId, pendingOnly = false, onChoose, onCount }: { setId?: number; pendingOnly?: boolean; onChoose?: (solution: GallerySubmission) => void; onCount?: (count: number) => void }) {
- const { t, language } = useLanguage(), app = useApp(), router = useRouter();
+ const { t } = useLanguage(), app = useApp(), router = useRouter();
  const [rows, setRows] = useState<GallerySubmission[]>([]), [failed, setFailed] = useState(false), [version, setVersion] = useState(0);
  const userId = app.user?.id;
  useEffect(() => { let active = true; void loadGallerySubmissions(setId, pendingOnly).then(data => { if (active) { setRows(data); setFailed(false); onCount?.(data.length); } }).catch(() => { if (active) setFailed(true); }); return () => { active = false; }; }, [setId, pendingOnly, version, userId, onCount]);
  return <View style={{ gap: 14 }}><GalleryText size={23} style={{ fontWeight: '800' }}>{pendingOnly ? t('פתרונות גלריה לאישור', 'Gallery solutions awaiting review') : t('פתרונות הקהילה', 'Community solutions')}</GalleryText><GalleryText quiet size={13}>{t('פתרונות מתפרסמים רק אחרי בדיקת מנהל. עצם ההעלאה אינה מעניקה XP.', 'Solutions are published only after administrator review. Uploading alone does not award XP.')}</GalleryText>
  {failed ? <><GalleryText>{t('לא ניתן לטעון פתרונות כרגע.', 'Solutions could not be loaded.')}</GalleryText><GalleryButton label={t('ניסיון נוסף', 'Try again')} onPress={() => setVersion(n=>n+1)} /></> : !rows.length ? <GalleryText quiet>{t('אין כרגע פתרונות להצגה.', 'There are no solutions to display yet.')}</GalleryText> : null}
- {rows.map(solution => <CommunitySolution key={solution.id} solution={solution} onRefresh={() => setVersion(n=>n+1)} onChoose={() => onChoose ? onChoose(solution) : router.push(`/gallery/${solution.set_id}?review=${solution.id}`)} author={app.profiles.find(p=>p.id===solution.user_id)?.displayName || (language === 'he' ? 'חבר קהילה' : 'Community member')} admin={!!app.user?.isAdmin} />)}
+ {rows.map(solution => <CommunitySolution key={solution.id} solution={solution} onRefresh={() => setVersion(n=>n+1)} onChoose={() => onChoose ? onChoose(solution) : router.push(`/gallery/${solution.set_id}?review=${solution.id}`)} author={app.profiles.find(p=>p.id===solution.user_id)?.displayName || t('חבר קהילה', 'Community member')} admin={!!app.user?.isAdmin} />)}
  </View>;
 }
 function CommunitySolution({ solution, onRefresh, onChoose, author, admin }: { solution: GallerySubmission; onRefresh: () => void; onChoose: () => void; author: string; admin: boolean }) {
