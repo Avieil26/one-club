@@ -31,12 +31,11 @@ const colors = {
 };
 
 function FieldLabel({ children, optional = false }: { children: string; optional?: boolean }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl } = useLanguage();
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', direction: rtl ? 'rtl' : 'ltr', marginBottom: 7 }}>
-      <Text style={{ color: '#FFFFFF', fontWeight: '900', fontSize: 14, textAlign: rtl ? 'right' : 'left' }}>{groundsLabel(children, language)}</Text>
-      {optional ? <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '800' }}>{groundsLabel("רשות", language)}</Text> : null}
+      <Text style={{ color: '#FFFFFF', fontWeight: '900', fontSize: 14, textAlign: rtl ? 'right' : 'left' }}>{groundsLabel(children, locale)}</Text>
+      {optional ? <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '800' }}>{groundsLabel("רשות", locale)}</Text> : null}
     </View>
   );
 }
@@ -45,28 +44,26 @@ function TextField({ label, value, onChangeText, placeholder, keyboardType, maxL
   label: string; value: string; onChangeText: (value: string) => void; placeholder: string;
   keyboardType?: 'default' | 'number-pad'; maxLength?: number; optional?: boolean;
 }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl } = useLanguage();
   return (
     <View style={{ flex: 1, minWidth: 220 }}>
       <FieldLabel optional={optional}>{label}</FieldLabel>
       <TextInput
         value={value}
         onChangeText={onChangeText}
-        placeholder={groundsLabel(placeholder, language)}
+        placeholder={groundsLabel(placeholder, locale)}
         placeholderTextColor="#718591"
         keyboardType={keyboardType}
         maxLength={maxLength}
         style={{ minHeight: 46, borderRadius: 7, borderWidth: 1, borderColor: 'rgba(103, 166, 188, 0.35)', backgroundColor: 'rgba(1, 8, 14, 0.88)', color: colors.ink, paddingHorizontal: 12, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', fontSize: 13 }}
-        accessibilityLabel={groundsLabel(label, language)}
+        accessibilityLabel={groundsLabel(label, locale)}
       />
     </View>
   );
 }
 
 function Section({ title, subtitle, icon, children }: { title: string; subtitle?: string; icon: keyof typeof Ionicons.glyphMap; children: ReactNode }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl } = useLanguage();
   return (
     <View style={{ borderWidth: 1, borderColor: colors.line, borderRadius: 10, backgroundColor: colors.panel, padding: 16, gap: 15 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, direction: rtl ? 'rtl' : 'ltr', borderBottomWidth: 1, borderBottomColor: 'rgba(93, 168, 190, 0.17)', paddingBottom: 12 }}>
@@ -74,8 +71,8 @@ function Section({ title, subtitle, icon, children }: { title: string; subtitle?
           <Ionicons name={icon} size={18} color={colors.cyan} />
         </View>
         <View style={{ flex: 1, gap: 3, alignItems: 'flex-start' }}>
-          <Text style={{ color: '#FFFFFF', fontSize: 17, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel(title, language)}</Text>
-          {subtitle ? <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '700', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel(subtitle, language)}</Text> : null}
+          <Text style={{ color: '#FFFFFF', fontSize: 17, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel(title, locale)}</Text>
+          {subtitle ? <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '700', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel(subtitle, locale)}</Text> : null}
         </View>
       </View>
       {children}
@@ -101,8 +98,7 @@ function DivisionBadge({ id }: { id: string }) {
 function ChoiceChips({ label, values, value, onChange, columns, divisionBadges = false }: {
   label: string; values: { id: string; label: string }[]; value: string; onChange: (value: string) => void; columns?: number; divisionBadges?: boolean;
 }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl } = useLanguage();
   return (
     <View style={{ gap: 8 }}>
       <FieldLabel>{label}</FieldLabel>
@@ -119,7 +115,7 @@ function ChoiceChips({ label, values, value, onChange, columns, divisionBadges =
             >
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, direction: divisionBadges ? 'ltr' : rtl ? 'rtl' : 'ltr' }}>
                 {divisionBadges ? <DivisionBadge id={option.id} /> : null}
-                <Text style={{ color: selected ? '#FFFFFF' : '#E8EEF1', fontSize: 12, fontWeight: '900', textAlign: 'center' }}>{groundsLabel(option.label, language)}</Text>
+                <Text style={{ color: selected ? '#FFFFFF' : '#E8EEF1', fontSize: 12, fontWeight: '900', textAlign: 'center' }}>{groundsLabel(option.label, locale)}</Text>
               </View>
             </Pressable>
           );
@@ -132,8 +128,7 @@ function ChoiceChips({ label, values, value, onChange, columns, divisionBadges =
 function PlayStyleCard({ item, selected, onSelect }: {
   item: (typeof GROUNDS_PLAYSTYLES)[number]; selected: 'base' | 'plus' | null; onSelect: (tier: 'base' | 'plus') => void;
 }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, isRTL: rtl } = useLanguage();
   const tierButton = (tier: 'base' | 'plus', label: string) => {
     const active = selected === tier;
     const accent = tier === 'plus' ? colors.gold : '#D9E4EA';
@@ -141,11 +136,11 @@ function PlayStyleCard({ item, selected, onSelect }: {
       <Pressable
         onPress={() => onSelect(tier)}
         accessibilityRole="button"
-        accessibilityLabel={`${item.name}, ${tier === 'plus' ? 'PlayStyle Plus' : groundsLabel('PlayStyle רגיל', language)}`}
+        accessibilityLabel={`${item.name}, ${tier === 'plus' ? 'PlayStyle Plus' : groundsLabel('PlayStyle רגיל', locale)}`}
         accessibilityState={{ selected: active }}
         style={{ minHeight: 26, flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 4, borderWidth: 1, borderColor: active ? accent : 'rgba(131, 158, 171, 0.18)', backgroundColor: active ? (tier === 'plus' ? 'rgba(124, 87, 23, 0.48)' : 'rgba(164, 185, 196, 0.2)') : 'rgba(0,0,0,0.23)', paddingHorizontal: 3 }}
       >
-        <Text style={{ color: active ? accent : '#8799A4', fontSize: 8, fontWeight: '900' }}>{groundsLabel(label, language)}</Text>
+        <Text style={{ color: active ? accent : '#8799A4', fontSize: 8, fontWeight: '900' }}>{groundsLabel(label, locale)}</Text>
       </Pressable>
     );
   };
@@ -168,8 +163,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
 }
 
 export default function NewGroundsScreen() {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { language, locale, isRTL: rtl } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const { width } = useWindowDimensions();
@@ -199,7 +193,7 @@ export default function NewGroundsScreen() {
       setRawUri(picked[0]);
       setCropOpen(true);
     } catch (error) {
-      Alert.alert(groundsLabel("רגע", language), errorMessage(error));
+      Alert.alert(groundsLabel("רגע", locale), errorMessage(error, locale));
     }
   }
 
@@ -213,16 +207,16 @@ export default function NewGroundsScreen() {
   async function save() {
     if (saving) return;
     if (!app.user) {
-      Alert.alert(groundsLabel("צריך להתחבר", language), groundsLabel("התחברו כדי לשמור את פרופיל השחקן שלכם.", language));
+      Alert.alert(groundsLabel("צריך להתחבר", locale), groundsLabel("התחברו כדי לשמור את פרופיל השחקן שלכם.", locale));
       router.push('/register');
       return;
     }
     if (!gamertag.trim() && !eaId.trim()) {
-      Alert.alert(groundsLabel("חסר פרטי התחברות למשחק", language), groundsLabel("צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.", language));
+      Alert.alert(groundsLabel("חסר פרטי התחברות למשחק", locale), groundsLabel("צריך למלא לפחות שם משתמש או EA ID לפני הפרסום.", locale));
       return;
     }
     if (skillRating.trim() && (!/^\d+$/.test(skillRating.trim()) || Number(skillRating) < 1 || Number(skillRating) > 5000)) {
-      Alert.alert(groundsLabel("Skill Rating לא תקין", language), groundsLabel("אפשר להזין מספר בין 1 ל־5,000.", language));
+      Alert.alert(groundsLabel("Skill Rating לא תקין", locale), groundsLabel("אפשר להזין מספר בין 1 ל־5,000.", locale));
       return;
     }
     setSaving(true);
@@ -243,10 +237,10 @@ export default function NewGroundsScreen() {
         levelImageUri: null,
         playStyles,
       });
-      Alert.alert(groundsLabel("הפרופיל פורסם", language), groundsLabel("הפרטים נשמרו בגראונדס.", language));
+      Alert.alert(groundsLabel("הפרופיל פורסם", locale), groundsLabel("הפרטים נשמרו בגראונדס.", locale));
       router.replace('/grounds');
     } catch (error) {
-      Alert.alert(groundsLabel("שמירת הפרופיל נכשלה", language), errorMessage(error));
+      Alert.alert(groundsLabel("שמירת הפרופיל נכשלה", locale), errorMessage(error, locale));
     } finally {
       setSaving(false);
     }
@@ -254,7 +248,7 @@ export default function NewGroundsScreen() {
 
   return (
     <Screen scene="grounds" maxWidth={1180} backgroundImage={GROUNDS_PREVIEW_BACKGROUND}>
-      <Stack.Screen options={{ title: groundsLabel('יצירת פרופיל · THE GROUNDS', language) }} />
+      <Stack.Screen options={{ title: groundsLabel('יצירת פרופיל · THE GROUNDS', locale) }} />
       <View style={{ gap: 16, paddingBottom: 14 }}>
         <View style={{ minHeight: compact ? 180 : 220, overflow: 'hidden', borderRadius: 12, borderWidth: 1, borderColor: 'rgba(80, 201, 220, 0.44)', justifyContent: 'flex-end', backgroundColor: 'rgba(2, 11, 19, 0.78)' }}>
           <LinearGradient colors={['rgba(1,8,14,0.06)', 'rgba(2,10,17,0.28)', 'rgba(2,10,17,0.94)']} locations={[0, 0.4, 1]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
@@ -263,8 +257,8 @@ export default function NewGroundsScreen() {
               <View style={{ width: 7, height: 7, borderRadius: 4, backgroundColor: colors.green }} />
               <Text style={{ color: colors.green, fontSize: 9, fontWeight: '900' }}>FC 27 · CLUBS</Text>
             </View>
-            <Text style={{ color: colors.ink, fontSize: compact ? 24 : 31, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("בונים את הפרופיל שלך", language)}</Text>
-            <Text style={{ color: '#E0E8ED', maxWidth: 620, fontSize: 12, lineHeight: 19, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("הפרטים והסגנונות שתבחרו יוצגו לשחקנים שמחפשים אתכם בגראונדס.", language)}</Text>
+            <Text style={{ color: colors.ink, fontSize: compact ? 24 : 31, fontWeight: '900', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("בונים את הפרופיל שלך", locale)}</Text>
+            <Text style={{ color: '#E0E8ED', maxWidth: 620, fontSize: 12, lineHeight: 19, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("הפרטים והסגנונות שתבחרו יוצגו לשחקנים שמחפשים אתכם בגראונדס.", locale)}</Text>
           </View>
         </View>
 
@@ -296,22 +290,22 @@ export default function NewGroundsScreen() {
             <TextField label={platform === 'pc' ? 'שם משתמש במחשב' : 'שם משתמש במשחק'} value={gamertag} onChangeText={setGamertag} placeholder="כמו שמופיע ב־EA או בקונסולה" maxLength={40} />
             <TextField label="EA ID" value={eaId} onChangeText={setEaId} placeholder="מזהה EA שלכם" maxLength={40} />
           </View>
-          <Text style={{ color: '#8FA4AF', fontSize: 10, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("צריך למלא לפחות שם משתמש אחד או EA ID.", language)}</Text>
+          <Text style={{ color: '#8FA4AF', fontSize: 10, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("צריך למלא לפחות שם משתמש אחד או EA ID.", locale)}</Text>
           <ChoiceChips label="עמדה מועדפת" values={POSITIONS.map((item) => ({ id: item, label: item }))} value={position} onChange={setPosition} />
           <ChoiceChips label="Division ב־Clubs" values={DIVISIONS.map((item) => ({ id: item.id, label: item.label }))} value={division} onChange={(value) => setDivision(value as DivisionId)} divisionBadges />
           <ChoiceChips label="ארכיטיפ ב־Clubs" values={[{ id: '', label: 'לא בחרתי עדיין' }, ...ARCHETYPES.map((item) => ({ id: item, label: item }))]} value={archetype} onChange={setArchetype} />
-          <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '700', lineHeight: 17, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("ארכיטיפ הוא סוג הבנייה של ה־Pro, כמו Finisher או Creator. הוא משפיע על ההתפתחות וה־PlayStyles הייחודיים. אין לך את המשחק או שאתה לא בטוח? אפשר להשאיר ריק.", language)}</Text>
+          <Text style={{ color: '#D0DCE2', fontSize: 11, fontWeight: '700', lineHeight: 17, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("ארכיטיפ הוא סוג הבנייה של ה־Pro, כמו Finisher או Creator. הוא משפיע על ההתפתחות וה־PlayStyles הייחודיים. אין לך את המשחק או שאתה לא בטוח? אפשר להשאיר ריק.", locale)}</Text>
           {archetype ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end', direction: rtl ? 'rtl' : 'ltr' }}>
             <View style={{ flex: 1, minWidth: 230, gap: 8 }}>
               <FieldLabel optional>רמת ארכיטיפ</FieldLabel>
               <View style={{ minHeight: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 1, borderColor: 'rgba(103, 166, 188, 0.35)', borderRadius: 7, backgroundColor: 'rgba(1, 8, 14, 0.88)', paddingHorizontal: 8 }}>
-                <Pressable onPress={() => setPlayerLevel((level) => Math.max(1, level - 1))} accessibilityRole="button" accessibilityLabel={groundsLabel("הפחתת רמה", language)} style={{ width: 34, height: 34, borderRadius: 6, backgroundColor: 'rgba(29,106,119,0.35)', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="remove" size={18} color={colors.cyan} /></Pressable>
+                <Pressable onPress={() => setPlayerLevel((level) => Math.max(1, level - 1))} accessibilityRole="button" accessibilityLabel={groundsLabel("הפחתת רמה", locale)} style={{ width: 34, height: 34, borderRadius: 6, backgroundColor: 'rgba(29,106,119,0.35)', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="remove" size={18} color={colors.cyan} /></Pressable>
                 <View style={{ alignItems: 'center', flexDirection: 'row', gap: 7 }}>
-                  <Text style={{ color: levelTone.bg, fontSize: 12, fontWeight: '900' }}>{groundsLabel(levelTone.label, language)}</Text>
-                  <TextInput value={String(playerLevel)} onChangeText={(value) => { const next = Number(value.replace(/\D/g, '')); if (next >= 1 && next <= 50) setPlayerLevel(next); }} keyboardType="number-pad" maxLength={2} style={{ minWidth: 48, color: colors.ink, fontSize: 19, fontWeight: '900', textAlign: 'center', padding: 2 }} accessibilityLabel={groundsLabel("רמת ארכיטיפ בין 1 ל-50", language)} />
+                  <Text style={{ color: levelTone.bg, fontSize: 12, fontWeight: '900' }}>{groundsLabel(levelTone.label, locale)}</Text>
+                  <TextInput value={String(playerLevel)} onChangeText={(value) => { const next = Number(value.replace(/\D/g, '')); if (next >= 1 && next <= 50) setPlayerLevel(next); }} keyboardType="number-pad" maxLength={2} style={{ minWidth: 48, color: colors.ink, fontSize: 19, fontWeight: '900', textAlign: 'center', padding: 2 }} accessibilityLabel={groundsLabel("רמת ארכיטיפ בין 1 ל-50", locale)} />
                   <Text style={{ color: colors.muted, fontSize: 10 }}>/ 50</Text>
                 </View>
-                <Pressable onPress={() => setPlayerLevel((level) => Math.min(50, level + 1))} accessibilityRole="button" accessibilityLabel={groundsLabel("העלאת רמה", language)} style={{ width: 34, height: 34, borderRadius: 6, backgroundColor: 'rgba(29,106,119,0.35)', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="add" size={18} color={colors.cyan} /></Pressable>
+                <Pressable onPress={() => setPlayerLevel((level) => Math.min(50, level + 1))} accessibilityRole="button" accessibilityLabel={groundsLabel("העלאת רמה", locale)} style={{ width: 34, height: 34, borderRadius: 6, backgroundColor: 'rgba(29,106,119,0.35)', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="add" size={18} color={colors.cyan} /></Pressable>
               </View>
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5, direction: rtl ? 'rtl' : 'ltr' }}>
                 {LEVELS.filter((level) => level === 1 || level === 50 || level % 10 === 0).map((level) => <Pressable key={level} onPress={() => setPlayerLevel(level)} style={{ minWidth: 34, minHeight: 28, borderRadius: 5, borderWidth: 1, borderColor: level === playerLevel ? colors.cyan : 'rgba(111,153,171,0.24)', backgroundColor: level === playerLevel ? 'rgba(29,106,119,0.42)' : 'rgba(5,17,27,0.75)', alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: level === playerLevel ? colors.cyan : colors.muted, fontSize: 9, fontWeight: '800' }}>{level}</Text></Pressable>)}
@@ -323,7 +317,7 @@ export default function NewGroundsScreen() {
         </Section>
 
         <Section title="PlayStyles" subtitle={language === 'he' ? `36 הסגנונות של FC 27 · ${playStyleCount} נבחרו` : `36 FC 27 PlayStyles · ${playStyleCount} selected`} icon="flash-outline">
-          <Text style={{ color: colors.muted, fontSize: 10, lineHeight: 16, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("בחרו את הסגנונות שמופיעים אצלכם ב־My Pro. אפשר לסמן רגיל או PlayStyle+ לכל סגנון; סמני השוערות מוצגים בנפרד.", language)}</Text>
+          <Text style={{ color: colors.muted, fontSize: 10, lineHeight: 16, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("בחרו את הסגנונות שמופיעים אצלכם ב־My Pro. אפשר לסמן רגיל או PlayStyle+ לכל סגנון; סמני השוערות מוצגים בנפרד.", locale)}</Text>
           {GROUNDS_PLAYSTYLE_CATEGORIES.map((category) => {
             const items = GROUNDS_PLAYSTYLES.filter((style) => style.category === category.id);
             return (
@@ -344,15 +338,15 @@ export default function NewGroundsScreen() {
         </Section>
 
         <Section title="תמונת פרופיל" subtitle="תמונה ברורה עוזרת לשחקנים לזהות אתכם" icon="image-outline">
-          <Text style={{ color: colors.muted, fontSize: 10, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("אפשר להעלות תמונה, לחתוך אותה, ולשמור אותה כתמונת המשתמש שלכם.", language)}</Text>
+          <Text style={{ color: colors.muted, fontSize: 10, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("אפשר להעלות תמונה, לחתוך אותה, ולשמור אותה כתמונת המשתמש שלכם.", locale)}</Text>
           <Pressable onPress={() => void choosePhoto()} accessibilityRole="button" style={{ minHeight: 48, borderRadius: 7, borderWidth: 1, borderStyle: 'dashed', borderColor: colors.cyan, backgroundColor: 'rgba(12, 42, 54, 0.42)', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8 }}>
             <Ionicons name={avatarUri ? 'refresh-outline' : 'cloud-upload-outline'} size={18} color={colors.cyan} />
-            <Text style={{ color: colors.cyan, fontSize: 12, fontWeight: '900' }}>{groundsLabel(avatarUri ? 'בחירת תמונה אחרת' : 'בחירת תמונה וחיתוך', language)}</Text>
+            <Text style={{ color: colors.cyan, fontSize: 12, fontWeight: '900' }}>{groundsLabel(avatarUri ? 'בחירת תמונה אחרת' : 'בחירת תמונה וחיתוך', locale)}</Text>
           </Pressable>
           {avatarUri ? (
             <Pressable onPress={() => rawUri && setCropOpen(true)} accessibilityRole="button" style={{ alignSelf: 'center', alignItems: 'center', gap: 6 }}>
               <View style={{ width: 92, height: 92, borderRadius: 46, overflow: 'hidden', borderWidth: 2, borderColor: levelTone.bg }}><Image source={{ uri: avatarUri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" /></View>
-              <Text style={{ color: colors.muted, fontSize: 9 }}>{groundsLabel("לחצו על התמונה לעריכת החיתוך", language)}</Text>
+              <Text style={{ color: colors.muted, fontSize: 9 }}>{groundsLabel("לחצו על התמונה לעריכת החיתוך", locale)}</Text>
             </Pressable>
           ) : null}
         </Section>
@@ -360,7 +354,7 @@ export default function NewGroundsScreen() {
         <Pressable onPress={() => void save()} disabled={saving} accessibilityRole="button" style={({ pressed }) => ({ minHeight: 52, borderRadius: 8, overflow: 'hidden', opacity: saving ? 0.65 : pressed ? 0.84 : 1 })}>
           <LinearGradient colors={['#70E8E8', '#49D4DA', '#9FF3B0']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ flex: 1, minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
             <Ionicons name={saving ? 'hourglass-outline' : 'checkmark-circle-outline'} size={19} color="#06151A" />
-            <Text style={{ color: '#06151A', fontSize: 14, fontWeight: '900' }}>{groundsLabel(saving ? 'שומר את הפרופיל…' : app.user ? 'שמירת פרופיל בגראונדס' : 'התחברות לפרסום פרופיל', language)}</Text>
+            <Text style={{ color: '#06151A', fontSize: 14, fontWeight: '900' }}>{groundsLabel(saving ? 'שומר את הפרופיל…' : app.user ? 'שמירת פרופיל בגראונדס' : 'התחברות לפרסום פרופיל', locale)}</Text>
           </LinearGradient>
         </Pressable>
       </View>
