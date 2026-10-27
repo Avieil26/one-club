@@ -27,7 +27,8 @@ import {
   DetailedAttrGroup,
 } from '@/lib/careerAttributes';
 import { statTone } from '@/lib/playerMeta';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { displayClub, displayNation } from '@/lib/footballLocalization';
 
@@ -88,31 +89,38 @@ function displayPlayStyle(name: string, language: 'he' | 'en'): string {
   if (language === 'he') return name;
   return name.match(/\(([^)]+)\)/)?.[1] ?? name;
 }
-function displayScoutRole(player: CareerScoutPlayer, language: 'he' | 'en'): string {
+function displayScoutRole(player: CareerScoutPlayer, language: AppLocale): string {
   if (language === 'he') return player.squadRole;
   const position = POSITION_NAMES_EN[player.position] ?? 'Football';
-  if (player.category === 'israel') return 'Israeli ' + position.toLowerCase() + ' prospect';
-  if (player.category === 'wonderkids') return 'Wonderkid ' + position.toLowerCase();
-  if (player.category === 'bargains') return 'Value ' + position.toLowerCase();
-  return 'Career ' + position.toLowerCase() + ' prospect';
+  if (language === 'en') {
+    if (player.category === 'israel') return 'Israeli ' + position.toLowerCase() + ' prospect';
+    if (player.category === 'wonderkids') return 'Wonderkid ' + position.toLowerCase();
+    if (player.category === 'bargains') return 'Value ' + position.toLowerCase();
+    return 'Career ' + position.toLowerCase() + ' prospect';
+  }
+  const key = player.category === 'israel' ? 'Israeli {position} prospect' : player.category === 'wonderkids' ? 'Wonderkid {position}' : player.category === 'bargains' ? 'Value {position}' : 'Career {position} prospect';
+  return plannedUiTranslations[language][key].replace('{position}', plannedUiTranslations[language][position] ?? position);
 }
-function displayTacticalStyle(player: CareerScoutPlayer, language: 'he' | 'en'): string {
+function displayTacticalStyle(player: CareerScoutPlayer, language: AppLocale): string {
   if (language === 'he') return player.roleSystem;
   const position = player.position;
-  if (position === 'ST' || position === 'CF') return 'Finishing, movement and runs in behind';
-  if (['RW', 'LW', 'RM', 'LM'].includes(position)) return 'Pace, 1v1 dribbling and cut-inside runs';
-  if (position === 'CAM') return 'Chance creation, close control and through balls';
-  if (position === 'CM') return 'Midfield control, passing and late runs';
-  if (position === 'CDM') return 'Ball-winning, interceptions and defensive cover';
-  if (['CB', 'RCB', 'LCB'].includes(position)) return 'Defensive positioning, duels and recovery runs';
-  if (['LB', 'RB', 'LWB', 'RWB'].includes(position)) return 'Wide defending, recovery pace and overlapping runs';
-  if (position === 'GK') return 'Shot-stopping, reactions and distribution';
-  return 'Versatility, movement and team play';
+  const translate = (english: string) => language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
+  if (position === 'ST' || position === 'CF') return translate('Finishing, movement and runs in behind');
+  if (['RW', 'LW', 'RM', 'LM'].includes(position)) return translate('Pace, 1v1 dribbling and cut-inside runs');
+  if (position === 'CAM') return translate('Chance creation, close control and through balls');
+  if (position === 'CM') return translate('Midfield control, passing and late runs');
+  if (position === 'CDM') return translate('Ball-winning, interceptions and defensive cover');
+  if (['CB', 'RCB', 'LCB'].includes(position)) return translate('Defensive positioning, duels and recovery runs');
+  if (['LB', 'RB', 'LWB', 'RWB'].includes(position)) return translate('Wide defending, recovery pace and overlapping runs');
+  if (position === 'GK') return translate('Shot-stopping, reactions and distribution');
+  return translate('Versatility, movement and team play');
 }
-function displayContractYears(contractYears: string, language: 'he' | 'en'): string {
+function displayContractYears(contractYears: string, language: AppLocale): string {
   if (language === 'he') return contractYears;
   const match = contractYears.match(/(\d+)\s*שנים\s*\(עד\s*(\d{4})\)/);
-  return match ? match[1] + ' years (until ' + match[2] + ')' : contractYears;
+  if (!match) return contractYears;
+  if (language === 'en') return match[1] + ' years (until ' + match[2] + ')';
+  return plannedUiTranslations[language]['{count} years (until {year})'].replace('{count}', match[1]).replace('{year}', match[2]);
 }
 
 export function CareerScoutView({ onSwitchToChallenges }: { onSwitchToChallenges?: () => void }) {
@@ -612,7 +620,7 @@ function ScoutDossierModal({
                     {showPotential ? t('🚀 במלוא הפוטנציאל', '🚀 Full potential') : `+${player.growth} ${t('צמיחה בקריירה', 'career growth')}`}
                   </Text>
                 </View>
-                <Text style={styles.progRoleSub}>{t('מעמד:', 'Role:')} {displayScoutRole(player, language)}</Text>
+                <Text style={styles.progRoleSub}>{t('מעמד:', 'Role:')} {displayScoutRole(player, locale)}</Text>
               </View>
             </View>
 
@@ -661,7 +669,7 @@ function ScoutDossierModal({
             </View>
             <View style={styles.finTile}>
               <Text style={styles.finLabel}>{t('אורך חוזה קיים', 'Current contract length')}</Text>
-              <Text style={styles.finVal}>{displayContractYears(player.contractYears, language)}</Text>
+              <Text style={styles.finVal}>{displayContractYears(player.contractYears, locale)}</Text>
             </View>
           </View>
 
@@ -669,7 +677,7 @@ function ScoutDossierModal({
           <View style={styles.sectionCard}>
             <View style={styles.secTopLine}>
               <Text style={styles.secMainLabel}>{t('תפקידים טקטיים (FC 27 Player Roles)', 'Tactical roles (FC 27 Player Roles)')}</Text>
-              <Text style={styles.secSystemTag}>{displayTacticalStyle(player, language)}</Text>
+              <Text style={styles.secSystemTag}>{displayTacticalStyle(player, locale)}</Text>
             </View>
             <View style={styles.rolesRow}>
               <View style={[styles.roleBlock, styles.starRoleBlock]}>
