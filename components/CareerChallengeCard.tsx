@@ -110,7 +110,7 @@ export function CareerChallengeCard({
         {narrow ? <CareerPhoto theme={theme} banner /> : null}
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
-            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
+            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, locale)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, locale)}</Text>
           </View>
           <Text style={[styles.title, narrow && styles.titleNarrow]}>{careerText(challenge.title, locale)}</Text>
@@ -140,7 +140,7 @@ export function CareerDetailBlock({
         {narrow ? <CareerPhoto theme={theme} banner /> : null}
         <View style={styles.copy}>
           <View style={[styles.eye, narrow && styles.eyeStack]}>
-            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, language)}</Text>
+            <Text style={[styles.brand, { color: theme.accent }]}>{modeLabel(challenge.mode, locale)}</Text>
             <Text style={[styles.dim, narrow && styles.dimStack]}>{challengeStatusLine(challenge, locale)}</Text>
           </View>
           <Text style={[styles.detailTitle, narrow && styles.detailTitleNarrow]}>{careerText(challenge.title, locale)}</Text>
