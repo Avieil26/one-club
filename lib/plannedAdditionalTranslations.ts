@@ -1,6 +1,13 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "SBC player reward: Maghnes Akliouche 85 CAM. Card attributes: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Maghnes Akliouche 85 CAM. سمات البطاقة: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.",
+    "SBC player reward: Tarciane 84 CB. Card attributes: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Tarciane 84 CB. سمات البطاقة: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.",
+    "SBC player reward: Raphinha 89 ST. Card attributes: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Raphinha 89 ST. سمات البطاقة: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.",
+    "SBC player reward: Pascal Groß 84 CDM. Card attributes: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Pascal Groß 84 CDM. سمات البطاقة: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.",
+    "SBC player reward: Michael Olise 91 RW. Card attributes: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Michael Olise 91 RW. سمات البطاقة: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.",
+    "SBC player reward: Donyell Malen 85 ST. Card attributes: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Donyell Malen 85 ST. سمات البطاقة: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.",
+    "SBC player reward: Davide Frattesi 84 CM. Card attributes: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.": "مكافأة لاعب تحدي بناء التشكيلة: Davide Frattesi 84 CM. سمات البطاقة: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.",
     "Streamlined: submit 41,000 item points. Reward: Assane Diao 84 RM.": "Streamlined: أرسل 41,000 نقطة عنصر. المكافأة: Assane Diao 84 RM.",
     "Streamlined: submit 50,000 item points. Reward: Johan Manzambi 85 CM.": "Streamlined: أرسل 50,000 نقطة عنصر. المكافأة: Johan Manzambi 85 CM.",
     "Streamlined: submit 30,000 item points. Reward: Cora Zicai 85 LW.": "Streamlined: أرسل 30,000 نقطة عنصر. المكافأة: Cora Zicai 85 LW.",
@@ -1158,6 +1165,13 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "SBC player reward: Maghnes Akliouche 85 CAM. Card attributes: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.": "Recompensa de jogador de DME: Maghnes Akliouche 85 CAM. Atributos da carta: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.",
+    "SBC player reward: Tarciane 84 CB. Card attributes: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.": "Recompensa de jogador de DME: Tarciane 84 CB. Atributos da carta: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.",
+    "SBC player reward: Raphinha 89 ST. Card attributes: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.": "Recompensa de jogador de DME: Raphinha 89 ST. Atributos da carta: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.",
+    "SBC player reward: Pascal Groß 84 CDM. Card attributes: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.": "Recompensa de jogador de DME: Pascal Groß 84 CDM. Atributos da carta: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.",
+    "SBC player reward: Michael Olise 91 RW. Card attributes: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.": "Recompensa de jogador de DME: Michael Olise 91 RW. Atributos da carta: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.",
+    "SBC player reward: Donyell Malen 85 ST. Card attributes: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.": "Recompensa de jogador de DME: Donyell Malen 85 ST. Atributos da carta: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.",
+    "SBC player reward: Davide Frattesi 84 CM. Card attributes: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.": "Recompensa de jogador de DME: Davide Frattesi 84 CM. Atributos da carta: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.",
     "Streamlined: submit 41,000 item points. Reward: Assane Diao 84 RM.": "Streamlined: envie 41,000 pontos de item. Recompensa: Assane Diao 84 RM.",
     "Streamlined: submit 50,000 item points. Reward: Johan Manzambi 85 CM.": "Streamlined: envie 50,000 pontos de item. Recompensa: Johan Manzambi 85 CM.",
     "Streamlined: submit 30,000 item points. Reward: Cora Zicai 85 LW.": "Streamlined: envie 30,000 pontos de item. Recompensa: Cora Zicai 85 LW.",
@@ -2315,6 +2329,13 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "SBC player reward: Maghnes Akliouche 85 CAM. Card attributes: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.": "Recompensa de jugador de DCP: Maghnes Akliouche 85 CAM. Atributos de la carta: 84 PAC, 83 SHO, 86 PAS, 89 DRI, 55 DEF, 70 PHY.",
+    "SBC player reward: Tarciane 84 CB. Card attributes: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.": "Recompensa de jugador de DCP: Tarciane 84 CB. Atributos de la carta: 80 PAC, 45 SHO, 74 PAS, 70 DRI, 84 DEF, 87 PHY.",
+    "SBC player reward: Raphinha 89 ST. Card attributes: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.": "Recompensa de jugador de DCP: Raphinha 89 ST. Atributos de la carta: 92 PAC, 87 SHO, 86 PAS, 88 DRI, 55 DEF, 77 PHY.",
+    "SBC player reward: Pascal Groß 84 CDM. Card attributes: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.": "Recompensa de jugador de DCP: Pascal Groß 84 CDM. Atributos de la carta: 76 PAC, 79 SHO, 88 PAS, 83 DRI, 77 DEF, 79 PHY.",
+    "SBC player reward: Michael Olise 91 RW. Card attributes: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.": "Recompensa de jugador de DCP: Michael Olise 91 RW. Atributos de la carta: 84 PAC, 83 SHO, 90 PAS, 92 DRI, 48 DEF, 70 PHY.",
+    "SBC player reward: Donyell Malen 85 ST. Card attributes: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.": "Recompensa de jugador de DCP: Donyell Malen 85 ST. Atributos de la carta: 87 PAC, 85 SHO, 75 PAS, 86 DRI, 39 DEF, 70 PHY.",
+    "SBC player reward: Davide Frattesi 84 CM. Card attributes: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.": "Recompensa de jugador de DCP: Davide Frattesi 84 CM. Atributos de la carta: 84 PAC, 81 SHO, 81 PAS, 84 DRI, 77 DEF, 78 PHY.",
     "Streamlined: submit 41,000 item points. Reward: Assane Diao 84 RM.": "Streamlined: entrega 41,000 puntos de artículo. Recompensa: Assane Diao 84 RM.",
     "Streamlined: submit 50,000 item points. Reward: Johan Manzambi 85 CM.": "Streamlined: entrega 50,000 puntos de artículo. Recompensa: Johan Manzambi 85 CM.",
     "Streamlined: submit 30,000 item points. Reward: Cora Zicai 85 LW.": "Streamlined: entrega 30,000 puntos de artículo. Recompensa: Cora Zicai 85 LW.",
