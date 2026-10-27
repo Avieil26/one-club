@@ -16,7 +16,7 @@ import { useLanguage } from '@/lib/language';
 
 export default function ProfileScreen() {
   const app = useApp();
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const rtl = language === 'he';
   const router = useRouter();
   const badges = app.user ? badgesFor(app.user, app.grounds) : [];
@@ -31,7 +31,7 @@ export default function ProfileScreen() {
     try {
       await work();
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error, locale));
     }
   }
 
@@ -44,7 +44,7 @@ export default function ProfileScreen() {
       setRawUri(uri);
       setCropOpen(true);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error, locale));
     }
   }
 
@@ -53,7 +53,7 @@ export default function ProfileScreen() {
     try {
       await app.setAvatar(cropped);
     } catch (error) {
-      Alert.alert(t('רגע', 'One moment'), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t('רגע', 'One moment'), errorMessage(error, locale));
     }
   }
 
