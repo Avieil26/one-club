@@ -1,5 +1,7 @@
 import { displayClub, displayLeague, displayNation, LEAGUE_NAMES_EN } from '@/lib/footballLocalization';
 import type { DraftManager } from '@/lib/draftRun';
+import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 
 type Language = 'he' | 'en';
 
@@ -62,9 +64,12 @@ const PATTERNS: readonly PromptPattern[] = [
   [/^סמנו את (.+)$/, (m) => `Select the ${GROUPS_EN[m[1]] ?? m[1]}`],
 ];
 
-export function miniGamePrompt(prompt: string, language: Language): string {
+export function miniGamePrompt(prompt: string, language: AppLocale): string {
   if (language === 'he') return prompt;
-  if (QUESTIONS_EN[prompt]) return QUESTIONS_EN[prompt];
+  if (QUESTIONS_EN[prompt]) {
+    const english = QUESTIONS_EN[prompt];
+    return language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
+  }
   for (const [pattern, render] of PATTERNS) {
     const match = prompt.match(pattern);
     if (match) return render(match);
