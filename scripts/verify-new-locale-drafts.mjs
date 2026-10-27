@@ -91,6 +91,21 @@ const sbcNumbers = text => [...text.matchAll(/[0-9]+(?:[,.][0-9]{3})*/g)].map(ma
 for (const locale of locales) for (const text of sbcTexts) {
   if (ui[locale][text]) assert.deepEqual(sbcNumbers(ui[locale][text]), sbcNumbers(text), `${locale}: SBC number mismatch: ${text}`);
 }
+// Exercise generated rule labels for every built-in challenge with empty and filled squads.
+const chemistry = loadRepositoryModule('lib/chemistry.ts');
+const challenges = loadRepositoryModule('lib/sbcCatalog.ts').officialChallenges;
+const players = loadRepositoryModule('lib/fcPlayers.ts').PLAYERS;
+const { plannedSbcRule } = loadRepositoryModule('lib/plannedSbcRules.ts');
+const formation = chemistry.FORMATIONS[0];
+const filled = Object.fromEntries(formation.lines.flat().map((slot, index) => [slot.id, players[index]]));
+for (const challenge of challenges) for (const placed of [{}, filled]) {
+  const report = chemistry.evaluateSquad(formation, placed, challenge.rules);
+  for (const check of report.checks) for (const locale of locales) {
+    const translated = plannedSbcRule(check.label, locale);
+    assert(translated && !/[\u0590-\u05ff]/u.test(translated), `${locale}: untranslated SBC rule: ${check.label}`);
+    assert.deepEqual(sbcNumbers(translated), sbcNumbers(check.label), `${locale}: SBC rule number mismatch: ${check.label}`);
+  }
+}
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
