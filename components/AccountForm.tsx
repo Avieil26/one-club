@@ -10,7 +10,7 @@ import { useLanguage } from '@/lib/language';
 
 export function AccountForm() {
   const app = useApp();
-  const { t, isRTL: rtl } = useLanguage();
+  const { t, locale, isRTL: rtl } = useLanguage();
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ export function AccountForm() {
     try {
       await work();
     } catch (error) {
-      Alert.alert(t('רגע', 'Please try again'), errorMessage(error));
+      Alert.alert(t('רגע', 'Please try again'), errorMessage(error, locale));
     }
   }
 
