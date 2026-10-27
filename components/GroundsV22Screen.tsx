@@ -24,7 +24,7 @@ import { localizedPlayStyle } from '@/lib/plannedPlayStyleNames';
 import { useApp } from '@/lib/store';
 import type { GroundsIntent, GroundsPost, PlatformId, Profile } from '@/lib/types';
 import { GROUNDS_PREVIEW_BACKGROUND } from '@/assets/groundsPreviewBackground';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 
 const FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 };
 
@@ -82,6 +82,10 @@ function displayDivision(id: import('@/lib/types').DivisionId, language: 'he' | 
   if (label.startsWith('חלוקה ')) return `Division ${label.slice('חלוקה '.length)}`;
   return label;
 }
+function localizedDivision(id: import('@/lib/types').DivisionId, locale: AppLocale, t: (he: string, en: string) => string) {
+  if (locale === 'he' || locale === 'en') return displayDivision(id, locale);
+  return id === 'elite' ? t('אליט', 'Elite') : t('חלוקה {number}', 'Division {number}').replace('{number}', id);
+}
 function displayIntent(intent: GroundsIntent, language: 'he' | 'en') {
   if (language === 'he') return intentLabel(intent);
   return intent === 'need_player' ? 'Need a player' : 'Looking for a club';
@@ -118,7 +122,7 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
   post: GroundsPost; profile?: Profile; following: boolean;
   onOpen: () => void; onFollow: () => void; onMessage: () => void; onViewProfile: () => void;
 }) {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const tone = playerLevelTone(post.playerLevel);
   const avatar = post.avatarUri || profile?.avatarUrl || null;
   const name = profile?.displayName || post.gamertag || post.eaId || t('שחקן קהילה', 'Community player');
@@ -137,7 +141,7 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
         )}
         <LinearGradient colors={['rgba(2,9,15,0.03)', 'rgba(2,9,15,0.12)', 'rgba(2,9,15,0.94)']} locations={[0, 0.45, 1]} style={FILL} />
         <View style={s.cardTopLine}>
-          <View style={s.livePill}><View style={s.greenDot} /><Text style={s.livePillText}>{displayIntent(post.intent, language)}</Text></View>
+          <View style={s.livePill}><View style={s.greenDot} /><Text style={s.livePillText}>{t(displayIntent(post.intent, 'he'), displayIntent(post.intent, 'en'))}</Text></View>
           {skillRating != null ? <View style={[s.ovrBadge, { borderColor: tone.bg, minWidth: 54 }]}><Text style={s.ovrTiny}>SKILL</Text><Text style={s.ovrValue}>{skillRating.toLocaleString()}</Text></View> : null}
         </View>
         <View style={s.cardPortraitBottom}>
@@ -150,15 +154,15 @@ function PlayerCard({ post, profile, following, onOpen, onFollow, onMessage, onV
       <View style={s.cardBody}>
         <View style={s.cardHeadline}>
           <View style={s.platformBadge}><Ionicons name={post.platform === 'pc' ? 'desktop-outline' : 'game-controller-outline'} size={19} color={C.cyan} /></View>
-          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{positionLabel(post.position, language)}</Text>{hasArchetype ? <Text style={s.cardMeta} numberOfLines={1}>{displayArchetype(post.archetype, language)}</Text> : null}</View>
+          <View style={s.cardInfoMain}><Text style={s.cardPosition} numberOfLines={1}>{t(positionLabel(post.position, 'he'), positionLabel(post.position, 'en'))}</Text>{hasArchetype ? <Text style={s.cardMeta} numberOfLines={1}>{displayArchetype(post.archetype, language)}</Text> : null}</View>
         </View>
         <View style={s.cardTags}>
-          <View style={s.smallTag}><Text style={s.smallTagText}>{displayDivision(post.division, language)}</Text></View>
+          <View style={s.smallTag}><Text style={s.smallTagText}>{localizedDivision(post.division, locale, t)}</Text></View>
           <View style={s.smallTag}><Text style={s.smallTagText}>{displayPlatform(post.platform, language)}</Text></View>
           {post.levelVerified ? <View style={[s.smallTag, s.verifiedTag]}><Ionicons name="shield-checkmark-outline" size={12} color={C.green} /><Text style={[s.smallTagText, { color: C.green }]}>{t('רמה מאומתת', 'Verified level')}</Text></View> : null}
         </View>
         <PlayStyleIcons selections={post.playStyles} />
-        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, language) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View>
+        <View style={s.regionLine}><Ionicons name="location-outline" size={14} color={C.cyan} /><Text style={s.regionText}>{post.region ? displayRegion(post.region, locale) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View>
         <View style={s.cardActions}>
           <Pressable onPress={onMessage} style={s.messageButton}><Ionicons name="chatbubble-ellipses-outline" size={15} color="#041017" /><Text style={s.messageButtonText}>{t('פנייה לשחקן', 'Message player')}</Text></Pressable>
           <Pressable onPress={onFollow} accessibilityLabel={following ? t('הפסק מעקב', 'Unfollow') : t('עקוב', 'Follow')} style={[s.followButton, following && s.followButtonOn]}><Ionicons name={following ? 'heart' : 'heart-outline'} size={17} color={following ? '#FF7396' : C.ink} /></Pressable>
@@ -350,7 +354,7 @@ export default function GroundsV22Screen() {
               <InfoPanel title={t('גיוס פעיל', 'Active recruitment')} icon="people-outline" onTitlePress={showRecruiting}>
                 {recruiting.length ? recruiting.map((post) => {
                   const owner = profileFor(post);
-                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{positionLabel(post.position, language)} · {displayDivision(post.division, language)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region ? displayRegion(post.region, language) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
+                  return <Pressable key={post.id} onPress={() => setSelected(post)} style={s.recruitRow}><View style={s.recruitCrest}><Ionicons name="shield-outline" size={21} color={C.gold} /></View><View style={s.recruitCopy}><Text style={s.recruitName} numberOfLines={1}>{owner?.displayName || post.gamertag || t('שחקן מהקהילה', 'Community player')}</Text><Text style={s.recruitSub} numberOfLines={2}>{t(positionLabel(post.position, 'he'), positionLabel(post.position, 'en'))} · {localizedDivision(post.division, locale, t)} · {displayPlatform(post.platform, language)}</Text><Text style={s.recruitSub}>{post.region ? displayRegion(post.region, locale) : t('מדינה לא נבחרה', 'Country not selected')}</Text></View><Ionicons name="chevron-back" size={17} color={C.cyan} /></Pressable>;
                 }) : <Text style={s.panelEmpty}>{t('אין כרגע מודעות גיוס אמיתיות. אפשר לפרסם מודעה חדשה.', 'There are no active recruitment listings yet. You can post one.')}</Text>}
                 <Pressable onPress={showRecruiting} style={s.panelCta}><Text style={s.panelCtaText}>{t('צפה בכל הגיוסים', 'View all recruitment')}</Text><Ionicons name="open-outline" size={15} color={C.cyan} /></Pressable>
               </InfoPanel>
@@ -370,7 +374,7 @@ export default function GroundsV22Screen() {
             {selected ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.modalContent}>
               <View style={[s.modalHero, compact && { flexDirection: 'column' }]}>
                 <View style={s.modalAvatar}>{selectedAvatar ? <Image source={{ uri: selectedAvatar }} style={FILL} resizeMode="cover" /> : <Ionicons name="person-outline" size={64} color={C.cyan} />}{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? <View style={s.modalLevel}><Text style={s.modalLevelNumber}>{selected.playerLevel}</Text><Text style={s.modalLevelLabel}>LEVEL</Text></View> : null}</View>
-                <View style={s.modalIntro}><Eyebrow>{displayIntent(selected.intent, language)}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? `${displayArchetype(selected.archetype, language)} · ` : ''}{positionLabel(selected.position, language)}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {displayDivision(selected.division, language)}</Text></View>
+                <View style={s.modalIntro}><Eyebrow>{t(displayIntent(selected.intent, 'he'), displayIntent(selected.intent, 'en'))}</Eyebrow><Text style={s.modalPlayerName}>{selectedName}</Text><Text style={s.modalHandle}>{selected.gamertag ? '@' + selected.gamertag : selected.eaId || t('שם משתמש לא נמסר', 'Username not provided')}</Text><Text style={s.modalDescription}>{selected.archetype && selected.archetype !== 'לא צוין עדיין' ? `${displayArchetype(selected.archetype, language)} · ` : ''}{t(positionLabel(selected.position, 'he'), positionLabel(selected.position, 'en'))}</Text><Text style={s.modalDescription}>{displayPlatform(selected.platform, language)} · {localizedDivision(selected.division, locale, t)}</Text></View>
               </View>
               <View style={s.detailsGrid}>
                 <View style={s.detailTile}><Text style={s.detailLabel}>{t('מדינה', 'Country')}</Text><Text style={s.detailValue}>{selected.region ? displayRegion(selected.region, language) : t('לא נמסר', 'Not provided')}</Text></View>
