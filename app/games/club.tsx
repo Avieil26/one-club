@@ -19,8 +19,7 @@ function face(position: string): ImageStyle | null {
 }
 
 export default function ClubGameScreen() {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
   const [used, setUsed] = useState<string[]>([]);
   const [question, setQuestion] = useState<ClubQuestion | null>(() => nextClubQuestion([]));
   const [lives, setLives] = useState(3);
@@ -85,7 +84,7 @@ export default function ClubGameScreen() {
           </View>
           <Text style={[styles.title, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('איזה מועדון?', 'Which Club?')}</Text>
           <Text style={styles.lead}>
-            {over ? (language === 'he' ? `הסיבוב נגמר. ניקוד ${score}.` : `Round over. Score: ${score}.`) : t('השם מוסתר. שלוש טעויות סוגרות את הסיבוב.', 'The player name is hidden. Three mistakes end the round.')}
+            {over ? t('הסיבוב נגמר. ניקוד {score}.', 'Round over. Score: {score}.').replace('{score}', String(score)) : t('השם מוסתר. שלוש טעויות סוגרות את הסיבוב.', 'The player name is hidden. Three mistakes end the round.')}
           </Text>
 
           {question && !over ? (
