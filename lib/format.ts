@@ -1,4 +1,5 @@
 import { errorText } from '@/lib/errorLocalization';
+import type { AppLocale } from '@/lib/language';
 
 export function formatDate(iso: string | null, language: 'he' | 'en' = 'he'): string {
   if (!iso) return language === 'en' ? 'No time limit' : 'בלי הגבלת זמן';
@@ -6,7 +7,24 @@ export function formatDate(iso: string | null, language: 'he' | 'en' = 'he'): st
 }
 
 /** Live-friendly remaining time for SBC / challenge expiry. */
-export function formatRemaining(iso: string | null, at = Date.now(), language: 'he' | 'en' = 'he'): string {
+export function formatRemaining(iso: string | null, at = Date.now(), language: AppLocale = 'he'): string {
+  if (language !== 'he' && language !== 'en') {
+    const copy = {
+      ar: { unlimited: 'بلا حد زمني', expired: 'انتهى', less: 'أقل من دقيقة', day: 'ي', hour: 'س', minute: 'د' },
+      'pt-BR': { unlimited: 'Sem prazo', expired: 'Encerrado', less: 'Menos de um minuto', day: 'd', hour: 'h', minute: 'min' },
+      es: { unlimited: 'Sin límite de tiempo', expired: 'Finalizado', less: 'Menos de un minuto', day: 'd', hour: 'h', minute: 'min' },
+    }[language];
+    const end = iso ? new Date(iso).getTime() : NaN;
+    if (!Number.isFinite(end)) return copy.unlimited;
+    if (end <= at) return copy.expired;
+    const minutes = Math.floor((end - at) / 60_000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const number = (value: number) => value.toLocaleString(language);
+    if (days) return `${number(days)} ${copy.day} · ${number(hours % 24)} ${copy.hour}`;
+    if (hours) return `${number(hours)} ${copy.hour} · ${number(minutes % 60)} ${copy.minute}`;
+    return minutes ? `${number(minutes)} ${copy.minute}` : copy.less;
+  }
   if (language === 'en') {
     if (!iso || Number.isNaN(new Date(iso).getTime())) return 'No time limit';
     const minutes = Math.floor((new Date(iso).getTime() - at) / 60_000);
