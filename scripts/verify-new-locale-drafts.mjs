@@ -141,6 +141,20 @@ for (const locale of locales) {
   assert(groundsLabel('רמה 12', locale).includes('12'));
   assert(groundsLabel('חלוקה 3', locale).includes('3'));
 }
+// Check PlayStyle names from the source without loading image assets.
+const stylesSource = ts.createSourceFile('lib/groundsPlaystyles.ts', fs.readFileSync('lib/groundsPlaystyles.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const { localizedPlayStyle, plannedPlayStyleNames } = loadRepositoryModule('lib/plannedPlayStyleNames.ts');
+for (const statement of stylesSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(stylesSource) === 'GROUNDS_PLAYSTYLES' && ts.isArrayLiteralExpression(declaration.initializer)) {
+    for (const item of declaration.initializer.elements) if (ts.isObjectLiteralExpression(item)) {
+      const name = item.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(stylesSource) === 'name')?.initializer;
+      if (!name || !ts.isStringLiteral(name)) continue;
+      for (const locale of locales) assert(plannedPlayStyleNames[locale][name.text], `${locale}: missing PlayStyle ${name.text}`);
+      assert.equal(localizedPlayStyle(name.text, 'he'), name.text);
+      assert.equal(localizedPlayStyle(name.text, 'en'), name.text);
+    }
+  }
+}
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
