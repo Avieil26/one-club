@@ -10,11 +10,11 @@ import { errorMessage } from '@/lib/format';
 import { pickImages } from '@/lib/images';
 import { catalogChallenge } from '@/lib/sbcCatalog';
 import { isOpen } from '@/lib/selectors';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { sbcFace, localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 
 export default function SbcUploadSolutionScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
   const router = useRouter();
@@ -44,7 +44,7 @@ export default function SbcUploadSolutionScreen() {
   }
 
   const challengeId = challenge.id;
-  const challengeTitle = language === 'en' ? sbcFace(challenge).en : challenge.title;
+  const challengeTitle = locale === 'he' ? challenge.title : localizedSbcTitle(challenge, locale);
   const clubs = challenge.clubs ?? [];
   const nations = challenge.nations ?? [];
   const face = sbcFace(challenge);
