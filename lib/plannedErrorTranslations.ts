@@ -28,7 +28,7 @@ export function plannedStructuredError(locale: DraftLocale, english: string): st
   const field = fields[locale][(required ?? tooLong)?.[1] ?? ''];
   if (field && required) return locale === 'ar' ? `الحقل المطلوب: ${field}` : locale === 'pt-BR' ? `Campo obrigatório: ${field}` : `Campo obligatorio: ${field}`;
   if (field && tooLong) return locale === 'ar' ? `الحقل طويل جدًا: ${field}` : locale === 'pt-BR' ? `Campo longo demais: ${field}` : `Campo demasiado largo: ${field}`;
-  const screenshots = /^Upload (\\d+) screenshots$/.exec(english);
+  const screenshots = /^Upload (\d+) screenshots$/.exec(english);
   if (screenshots) {
     const count = screenshots[1];
     return locale === 'ar' ? `عدد لقطات الشاشة المطلوب رفعها: ${count}` : locale === 'pt-BR' ? `Capturas de tela a enviar: ${count}` : `Capturas de pantalla que debes subir: ${count}`;
