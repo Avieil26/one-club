@@ -2,6 +2,8 @@
 // https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles
 // https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles
+import type { AppLocale } from '@/lib/language';
+
 export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string, string>> = {
   "ar": {
     "Acrobatic": "حركات بهلوانية",
@@ -118,3 +120,8 @@ export const plannedPlayStyleNames: Record<'ar' | 'pt-BR' | 'es', Record<string,
     "Power Shot": "Tiro potente"
   }
 };
+
+export function localizedPlayStyle(name: string, locale: AppLocale): string {
+  if (locale === 'he' || locale === 'en') return name;
+  return plannedPlayStyleNames[locale][name] ?? name;
+}
