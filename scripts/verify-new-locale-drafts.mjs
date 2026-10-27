@@ -145,7 +145,7 @@ for (const locale of locales) {
   const aliases = ['Korea Republic', 'Republic of Ireland', 'Czech Republic', 'Kosovo', 'Congo DR', 'Trinidad and Tobago', 'Cape Verde Islands', 'St. Kitts and Nevis', 'Chinese Taipei', 'Antigua and Barbuda', 'São Tomé e Príncipe', 'Korea DPR', 'Bosnia Herzegovina', 'Netherlands Antilles', 'CAR'];
   for (const alias of aliases) if (!(alias === 'Kosovo' && locale !== 'ar') && !(alias === 'São Tomé e Príncipe' && locale === 'pt-BR')) assert.notEqual(displayNation(alias, locale), alias, `${locale}: untranslated football nation alias ${alias}`);
 }
-const { formatDate, formatRemaining } = loadRepositoryModule('lib/format.ts');
+const { formatDate, formatRemaining, errorMessage } = loadRepositoryModule('lib/format.ts');
 const now = Date.parse('2026-10-27T00:00:00Z');
 for (const locale of locales) {
   assert(formatDate(null, locale));
@@ -166,6 +166,9 @@ for (const locale of locales) {
     assert(ui[locale][english] || plannedStructuredError(locale, english), `${locale}: missing generated error ${english}`);
   }
   assert.equal(plannedStructuredError(locale, 'UNRECOGNIZED_ERROR_SENTINEL'), undefined);
+  assert.equal(errorMessage(new Error('צריך להתחבר'), locale), ui[locale]['Sign in required']);
+  assert(errorMessage(new Error('חסר כותרת'), locale));
+  assert.equal(errorMessage(new Error('UNRECOGNIZED_ERROR_SENTINEL'), locale), ui[locale]['Something went wrong. Try again.']);
 }
 const languageSource = fs.readFileSync('lib/language.tsx', 'utf8');
 assert(languageSource.includes('NEW_LOCALES_READY = false'), 'Keep incomplete languages unavailable');
