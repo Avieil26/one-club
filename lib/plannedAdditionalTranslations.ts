@@ -1,6 +1,8 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Right": "اليمنى",
+    "Left": "اليسرى",
     "Playmaker": "صانع لعب",
     "Shadow Striker": "مهاجم ظل",
     "Inside Forward": "مهاجم داخلي",
@@ -1408,6 +1410,8 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Right": "Direita",
+    "Left": "Esquerda",
     "Playmaker": "Armador",
     "Shadow Striker": "Segundo atacante",
     "Inside Forward": "Atacante por dentro",
@@ -2815,6 +2819,8 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Right": "Derecha",
+    "Left": "Izquierda",
     "Playmaker": "Organizador",
     "Shadow Striker": "Segundo delantero",
     "Inside Forward": "Delantero interior",
