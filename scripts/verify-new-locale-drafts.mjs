@@ -145,9 +145,11 @@ for (const locale of locales) {
   const aliases = ['Korea Republic', 'Republic of Ireland', 'Czech Republic', 'Kosovo', 'Congo DR', 'Trinidad and Tobago', 'Cape Verde Islands', 'St. Kitts and Nevis', 'Chinese Taipei', 'Antigua and Barbuda', 'São Tomé e Príncipe', 'Korea DPR', 'Bosnia Herzegovina', 'Netherlands Antilles', 'CAR'];
   for (const alias of aliases) if (!(alias === 'Kosovo' && locale !== 'ar') && !(alias === 'São Tomé e Príncipe' && locale === 'pt-BR')) assert.notEqual(displayNation(alias, locale), alias, `${locale}: untranslated football nation alias ${alias}`);
 }
-const { formatRemaining } = loadRepositoryModule('lib/format.ts');
+const { formatDate, formatRemaining } = loadRepositoryModule('lib/format.ts');
 const now = Date.parse('2026-10-27T00:00:00Z');
 for (const locale of locales) {
+  assert(formatDate(null, locale));
+  assert.equal(formatDate('2026-10-27T00:00:00Z', locale), new Date('2026-10-27T00:00:00Z').toLocaleDateString(locale));
   assert(formatRemaining(null, now, locale));
   assert(formatRemaining('2026-10-26T23:59:00Z', now, locale));
   assert(formatRemaining('2026-10-27T00:00:30Z', now, locale));
