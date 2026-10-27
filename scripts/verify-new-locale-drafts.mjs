@@ -91,6 +91,19 @@ const sbcNumbers = text => [...text.matchAll(/[0-9]+(?:[,.][0-9]{3})*/g)].map(ma
 for (const locale of locales) for (const text of sbcTexts) {
   if (ui[locale][text]) assert.deepEqual(sbcNumbers(ui[locale][text]), sbcNumbers(text), `${locale}: SBC number mismatch: ${text}`);
 }
+// Player names and these game-branded event names are intentionally unchanged.
+const unchangedSbcTitles = new Set(['Claudia Pina', 'Maghnes Akliouche', 'Tarciane', 'Raphinha', 'Pascal Groß', 'Michael Olise', 'Donyell Malen', 'Davide Frattesi', 'Renato Veiga', 'Antonio Nusa', 'Cristian Espinoza', 'Yan Diomande', 'Ayyoub Bouaddi', 'Ferran Torres', 'Emre Mor', 'Nick Woltemade', 'Spooky Nights', 'Scary Candy']);
+const { sbcFace, localizedSbcTitle } = loadRepositoryModule('lib/sbcTileTheme.ts');
+const titleChallenges = loadRepositoryModule('lib/sbcCatalog.ts').officialChallenges;
+for (const challenge of titleChallenges) {
+  const face = sbcFace(challenge);
+  assert.equal(localizedSbcTitle(challenge, 'he'), face.he);
+  assert.equal(localizedSbcTitle(challenge, 'en'), face.en);
+  for (const locale of locales) {
+    assert(ui[locale][face.en] || unchangedSbcTitles.has(face.en), `${locale}: missing SBC title ${face.en}`);
+    assert(localizedSbcTitle(challenge, locale));
+  }
+}
 // Exercise generated rule labels for every built-in challenge with empty and filled squads.
 const chemistry = loadRepositoryModule('lib/chemistry.ts');
 const challenges = loadRepositoryModule('lib/sbcCatalog.ts').officialChallenges;
