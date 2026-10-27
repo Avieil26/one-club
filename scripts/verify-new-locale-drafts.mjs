@@ -53,6 +53,19 @@ for (const locale of locales) {
   for (const date of ['1 באוקטובר 2026', '21 באוקטובר 2026']) assert(!/[\u0590-\u05ff]/u.test(localizedLegalDate(date, locale)));
   assert.throws(() => localizedLegal('UNTRANSLATED_LEGAL_SENTINEL', locale), 'Never silently fall back to English');
 }
+// Fixed mini-game questions also live in a data lookup rather than literal t() calls.
+const miniGameSource = ts.createSourceFile('lib/miniGameLocalization.ts', fs.readFileSync('lib/miniGameLocalization.ts', 'utf8'), ts.ScriptTarget.Latest, true);
+const { miniGamePrompt } = loadRepositoryModule('lib/miniGameLocalization.ts');
+for (const statement of miniGameSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(miniGameSource) === 'QUESTIONS_EN' && ts.isObjectLiteralExpression(declaration.initializer)) {
+    for (const property of declaration.initializer.properties) if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.name) && ts.isStringLiteral(property.initializer)) {
+      for (const locale of locales) {
+        assert(ui[locale][property.initializer.text], `${locale}: missing fixed mini-game question`);
+        assert.equal(miniGamePrompt(property.name.text, locale), ui[locale][property.initializer.text]);
+      }
+    }
+  }
+}
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
 for (const locale of locales) for (const label of dynamicLabels) assert(ui[locale][label], `${locale}: missing dynamic label ${label}`);
