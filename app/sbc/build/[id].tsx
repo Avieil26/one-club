@@ -144,7 +144,7 @@ export default function SquadBuildScreen() {
         squad,
         formation: formationId,
       });
-      Alert.alert(t("נשלח לאישור", "Submitted for review"), t(`הסגל ל«${challenge.title}» ממתין לאישור מנהל.`, `Your squad for “${challenge.title}” is awaiting administrator review.`));
+      Alert.alert(t("נשלח לאישור", "Submitted for review"), t('הסגל ל«{title}» ממתין לאישור מנהל.', 'Your squad for “{title}” is awaiting administrator review.').replace('{title}', challenge.title));
       router.replace(`/sbc/${challenge.id}`);
     } catch (error) {
       Alert.alert(t("רגע", "Something went wrong"), errorMessage(error));
@@ -182,7 +182,7 @@ export default function SquadBuildScreen() {
           <Text style={{ color: colors.text, fontWeight: '800', fontSize: 16, textAlign: 'right' }}>{t("כימיה", "Chemistry")}{report.chemistry}/33
           </Text>
           <Text style={{ color: colors.muted, fontWeight: '700', textAlign: 'right' }}>{t("מדינות", "Nations")}{report.nations}
-            {report.rating === null ? '' : t(` · דירוג ${report.rating}`, ` · Rating ${report.rating}`)}
+            {report.rating === null ? '' : t(' · דירוג {value}', ' · Rating {value}').replace('{value}', String(report.rating))}
           </Text>
         </View>
         {report.checks.map((check) => (
@@ -202,13 +202,13 @@ export default function SquadBuildScreen() {
         onSlot={setActive}
       />
       <Text style={{ color: colors.text, fontWeight: '800', textAlign: 'right' }}>
-        {active ? t(`עמדה נבחרת: ${slotPosition(formation, active)}`, `Selected position: ${slotPosition(formation, active)}`) : t("לחצו על עמדה במגרש", "Select a position on the pitch")}
+        {active ? t('עמדה נבחרת: {value}', 'Selected position: {value}').replace('{value}', slotPosition(formation, active)) : t("לחצו על עמדה במגרש", "Select a position on the pitch")}
       </Text>
       <Button label={t("פינוי העמדה", "Clear position")} variant="ghost" onPress={clearSlot} />
       <Field label={t("חיפוש שחקן", "Search players")} value={query} onChangeText={setQuery} placeholder={t("למשל Haaland", "For example, Haaland")} />
       <Muted>
         {query.trim()
-          ? t(`${results.total.toLocaleString('he-IL')} שחקנים נמצאו במאגר`, `${results.total.toLocaleString('en-US')} players found`)
+          ? t('{count} שחקנים נמצאו במאגר', '{count} players found').replace('{count}', results.total.toLocaleString(language === 'he' ? 'he-IL' : 'en-US'))
           : t("הקלפים של העמדה. חיפוש מוצא כל שחקן במאגר, בעברית או באנגלית.", "Players for this position. Search the full database in Hebrew or English.")}
       </Muted>
       <View style={{ gap: 8 }}>
