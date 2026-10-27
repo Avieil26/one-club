@@ -1,6 +1,13 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Scoring": "التسجيل",
+    "Passing": "التمرير",
+    "Ball Control": "التحكم بالكرة",
+    "Defending": "الدفاع",
+    "Physical": "القوة البدنية",
+    "Goalkeeping": "حراسة المرمى",
+    "36 FC 27 PlayStyles · {count} selected": "36 أسلوب لعب في FC 27 · المحدد: {count}",
     "Division {count}": "القسم {count}",
     "Optional": "اختياري",
     "Base PlayStyle": "أسلوب لعب أساسي",
@@ -1266,6 +1273,13 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Scoring": "Finalização",
+    "Passing": "Passe",
+    "Ball Control": "Controle de bola",
+    "Defending": "Defesa",
+    "Physical": "Físico",
+    "Goalkeeping": "Goleiro",
+    "36 FC 27 PlayStyles · {count} selected": "36 Estilos de Jogo do FC 27 · Selecionados: {count}",
     "Division {count}": "Divisão {count}",
     "Optional": "Opcional",
     "Base PlayStyle": "Estilo de Jogo básico",
@@ -2531,6 +2545,13 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Scoring": "Finalización",
+    "Passing": "Pase",
+    "Ball Control": "Control del balón",
+    "Defending": "Defensa",
+    "Physical": "Físico",
+    "Goalkeeping": "Portero",
+    "36 FC 27 PlayStyles · {count} selected": "36 estilos de juego de FC 27 · Seleccionados: {count}",
     "Division {count}": "División {count}",
     "Optional": "Opcional",
     "Base PlayStyle": "Estilo de juego básico",
