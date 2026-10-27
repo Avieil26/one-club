@@ -125,8 +125,8 @@ function PageChip({ label, active, onPress }: { label: string; active: boolean; 
 }
 
 export default function MarketScreen() {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, language, isRTL: rtl } = useLanguage();
+  
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
