@@ -1,9 +1,13 @@
 import { errorText } from '@/lib/errorLocalization';
 import type { AppLocale } from '@/lib/language';
 
-export function formatDate(iso: string | null, language: 'he' | 'en' = 'he'): string {
-  if (!iso) return language === 'en' ? 'No time limit' : 'בלי הגבלת זמן';
-  return new Date(iso).toLocaleDateString(language === 'en' ? 'en-GB' : 'he-IL');
+export function formatDate(iso: string | null, language: AppLocale = 'he'): string {
+  if (!iso) {
+    if (language === 'he') return 'בלי הגבלת זמן';
+    if (language === 'en') return 'No time limit';
+    return { ar: 'بلا حد زمني', 'pt-BR': 'Sem prazo', es: 'Sin límite de tiempo' }[language];
+  }
+  return new Date(iso).toLocaleDateString(language === 'en' ? 'en-GB' : language === 'he' ? 'he-IL' : language);
 }
 
 /** Live-friendly remaining time for SBC / challenge expiry. */
