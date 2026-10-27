@@ -1,6 +1,9 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "{count} filled": "الخانات المملوءة: {count}",
+    "Choose {position}": "اختر {position}",
+    "Round over. Score: {score}.": "انتهت الجولة. النتيجة: {score}.",
     "At least 1 player from Italy or Belgium, at least 3 clubs, at least 3 silver players, and 14 chemistry. Reward: Mini Gold Pack.": "1 على الأقل من لاعبي إيطاليا أو بلجيكا، و3 أندية على الأقل، و3 لاعبين فضيين على الأقل، وتناغم 14. المكافأة: حزمة ذهبية مصغرة.",
     "At least 1 player from Norway or Portugal, at least 3 from the same club, at most 5 leagues, at least 2 gold players, all cards silver or higher, and 18 chemistry. Reward: Small Mixed Players Pack.": "1 على الأقل من لاعبي النرويج أو البرتغال، و3 على الأقل من النادي نفسه، و5 دوريات كحد أقصى، و2 من اللاعبين الذهبيين على الأقل، وجميع البطاقات فضية أو أعلى، وتناغم 18. المكافأة: حزمة لاعبين مختلطة صغيرة.",
     "At least 2 players from the Netherlands or Germany, at most 2 from the same club, at least 4 from the same league, at least 2 gold players, all cards silver or higher, and 22 chemistry. Reward: Small Gold Players Pack.": "2 على الأقل من لاعبي هولندا أو ألمانيا، و2 كحد أقصى من النادي نفسه، و4 على الأقل من الدوري نفسه، و2 من اللاعبين الذهبيين على الأقل، وجميع البطاقات فضية أو أعلى، وتناغم 22. المكافأة: حزمة لاعبين ذهبية صغيرة.",
@@ -1206,6 +1209,9 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "{count} filled": "Preenchidos: {count}",
+    "Choose {position}": "Escolha {position}",
+    "Round over. Score: {score}.": "Rodada encerrada. Pontuação: {score}.",
     "At least 1 player from Italy or Belgium, at least 3 clubs, at least 3 silver players, and 14 chemistry. Reward: Mini Gold Pack.": "Pelo menos 1 jogador da Itália ou Bélgica, pelo menos 3 clubes, pelo menos 3 jogadores de prata e 14 de entrosamento. Recompensa: pacote de ouro mini.",
     "At least 1 player from Norway or Portugal, at least 3 from the same club, at most 5 leagues, at least 2 gold players, all cards silver or higher, and 18 chemistry. Reward: Small Mixed Players Pack.": "Pelo menos 1 jogador da Noruega ou Portugal, pelo menos 3 do mesmo clube, no máximo 5 ligas, pelo menos 2 jogadores de ouro, todas as cartas de prata ou superior e 18 de entrosamento. Recompensa: pacote pequeno de jogadores mistos.",
     "At least 2 players from the Netherlands or Germany, at most 2 from the same club, at least 4 from the same league, at least 2 gold players, all cards silver or higher, and 22 chemistry. Reward: Small Gold Players Pack.": "Pelo menos 2 jogadores dos Países Baixos ou Alemanha, no máximo 2 do mesmo clube, pelo menos 4 da mesma liga, pelo menos 2 jogadores de ouro, todas as cartas de prata ou superior e 22 de entrosamento. Recompensa: pacote pequeno de jogadores de ouro.",
@@ -2411,6 +2417,9 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "{count} filled": "Completadas: {count}",
+    "Choose {position}": "Elige {position}",
+    "Round over. Score: {score}.": "Ronda terminada. Puntuación: {score}.",
     "At least 1 player from Italy or Belgium, at least 3 clubs, at least 3 silver players, and 14 chemistry. Reward: Mini Gold Pack.": "Al menos 1 jugador de Italia o Bélgica, al menos 3 clubes, al menos 3 jugadores de plata y 14 de química. Recompensa: sobre de oro mini.",
     "At least 1 player from Norway or Portugal, at least 3 from the same club, at most 5 leagues, at least 2 gold players, all cards silver or higher, and 18 chemistry. Reward: Small Mixed Players Pack.": "Al menos 1 jugador de Noruega o Portugal, al menos 3 del mismo club, máximo 5 ligas, al menos 2 jugadores de oro, todas las cartas de plata o superior y 18 de química. Recompensa: sobre pequeño de jugadores mixtos.",
     "At least 2 players from the Netherlands or Germany, at most 2 from the same club, at least 4 from the same league, at least 2 gold players, all cards silver or higher, and 22 chemistry. Reward: Small Gold Players Pack.": "Al menos 2 jugadores de Países Bajos o Alemania, máximo 2 del mismo club, al menos 4 de la misma liga, al menos 2 jugadores de oro, todas las cartas de plata o superior y 22 de química. Recompensa: sobre pequeño de jugadores de oro.",
