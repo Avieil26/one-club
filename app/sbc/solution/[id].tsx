@@ -59,7 +59,7 @@ export default function SbcSolutionScreen() {
     try {
       await app.voteSolution(solutionId, choice);
     } catch (error) {
-      Alert.alert(t("רגע", "Something went wrong"), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error, locale));
     }
   }
 
