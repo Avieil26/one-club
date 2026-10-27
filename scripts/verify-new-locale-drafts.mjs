@@ -108,6 +108,7 @@ for (const challenge of titleChallenges) {
 const chemistry = loadRepositoryModule('lib/chemistry.ts');
 const challenges = loadRepositoryModule('lib/sbcCatalog.ts').officialChallenges;
 const players = loadRepositoryModule('lib/fcPlayers.ts').PLAYERS;
+const { localizedPlayStyle, plannedPlayStyleNames } = loadRepositoryModule('lib/plannedPlayStyleNames.ts');
 const scoutPlayers = loadRepositoryModule('lib/careerScoutData.ts').CAREER_SCOUT_PLAYERS;
 const playStyleNames = new Set([
   ...players.flatMap(player => (player.playstyles ?? []).map(style => style.name)),
@@ -151,7 +152,6 @@ for (const locale of locales) {
 }
 // Check PlayStyle names from the source without loading image assets.
 const stylesSource = ts.createSourceFile('lib/groundsPlaystyles.ts', fs.readFileSync('lib/groundsPlaystyles.ts', 'utf8'), ts.ScriptTarget.Latest, true);
-const { localizedPlayStyle, plannedPlayStyleNames } = loadRepositoryModule('lib/plannedPlayStyleNames.ts');
 for (const statement of stylesSource.statements) if (ts.isVariableStatement(statement)) {
   for (const declaration of statement.declarationList.declarations) if (declaration.name.getText(stylesSource) === 'GROUNDS_PLAYSTYLES' && ts.isArrayLiteralExpression(declaration.initializer)) {
     for (const item of declaration.initializer.elements) if (ts.isObjectLiteralExpression(item)) {
