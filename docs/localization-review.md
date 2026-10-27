@@ -13,6 +13,10 @@ Status: incomplete draft; new languages remain disabled. Do not deploy as a comp
 
 These sources support game terminology, not the accuracy of every interface sentence or a legal review. The translated UI sentences and policy excerpts are drafts authored for this project. They have not all received independent linguistic review.
 
+## FC 27 PlayStyle names
+
+EA's FC 27 PlayStyles article was consulted for the 35 names listed in its Arabic, Brazilian Portuguese and Spanish versions: https://www.ea.com/ar/games/ea-sports-fc/fc-27/news/what-are-playstyles, https://www.ea.com/pt-br/games/ea-sports-fc/fc-27/news/what-are-playstyles and https://www.ea.com/es/games/ea-sports-fc/fc-27/news/what-are-playstyles. Power Shot was not in those lists; the Arabic and Portuguese terms are supported by the EA Help guides above, while the Spanish label is provisional and needs independent review. Check terminology in the actual game before release.
+
 ## Checks and remaining work
 
 `node scripts/verify-new-locale-drafts.mjs` checks matching keys, nonempty values and absence of Hebrew in the draft dictionaries. It does not establish linguistic correctness.
