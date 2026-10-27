@@ -171,6 +171,24 @@ for (const statement of scoutSource.statements) if (ts.isVariableStatement(state
     }
   }
 }
+const scoutRoleNames = {};
+const scoutPositions = {};
+for (const statement of scoutSource.statements) if (ts.isVariableStatement(statement)) {
+  for (const declaration of statement.declarationList.declarations) {
+    const target = declaration.name.getText(scoutSource) === 'SIMPLE_ROLES_EN' ? scoutRoleNames : declaration.name.getText(scoutSource) === 'POSITION_NAMES_EN' ? scoutPositions : null;
+    if (target && ts.isObjectLiteralExpression(declaration.initializer)) for (const property of declaration.initializer.properties) {
+      if (ts.isPropertyAssignment(property) && ts.isStringLiteral(property.initializer)) {
+        const key = ts.isStringLiteral(property.name) ? property.name.text : property.name.getText(scoutSource);
+        target[key] = property.initializer.text;
+      }
+    }
+  }
+}
+for (const player of scoutPlayers) for (const role of [player.primaryRole, player.secondaryRole]) {
+  if (!role) continue;
+  const english = role.match(/\(([^)]+)\)/)?.[1] ?? scoutRoleNames[role] ?? scoutPositions[player.position] ?? 'Player role';
+  for (const locale of locales) assert(ui[locale][english], `${locale}: missing scouting role ${english}`);
+}
 for (const player of scoutPlayers) assert(/(\d+)\s*שנים\s*\(עד\s*(\d{4})\)/.test(player.contractYears), `Unrecognized contract years: ${player.contractYears}`);
 // These choices come from dynamic lookup tables rather than literal t() arguments.
 const dynamicLabels = ['Challenges and proof', 'Squads and packs', 'Your run, rewards and tactics', 'Find a player', 'Community solutions', 'Cards and data', 'All positions', 'Goalkeeper', 'Striker', 'Winger', 'Attacking midfielder', 'Central midfielder', 'Defensive midfielder', 'Centre back', 'Full back', 'All platforms'];
