@@ -799,7 +799,7 @@ function ScoutDossierModal({
                 {detailedGroups.map((group) => (
                   <View key={group.label} style={styles.detailedGroupCard}>
                     <View style={styles.detailedGroupHeader}>
-                      <Text style={styles.detailedGroupTitle}>{language === 'he' ? group.hebrewLabel : group.label}</Text>
+                      <Text style={styles.detailedGroupTitle}>{t(group.hebrewLabel, group.label)}</Text>
                       <Text style={[styles.detailedGroupTotal, { color: statTone(group.total) }]}>
                         {group.total}
                       </Text>
@@ -823,7 +823,7 @@ function ScoutDossierModal({
                       {group.stats.map((item) => (
                         <View key={item.key} style={styles.subStatRow}>
                           <Text style={styles.subStatLabel} numberOfLines={1}>
-                            {language === 'he' ? item.hebrewLabel : item.label}
+                            {t(item.hebrewLabel, item.label)}
                           </Text>
                           <View style={styles.subStatValueWrap}>
                             {item.diff && item.diff > 0 ? (
