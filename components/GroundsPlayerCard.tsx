@@ -136,7 +136,7 @@ function RankMonument({ level }: { level: number }) {
 }
 
 export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, onFollow, onOpenProfile, onNeedAuth }: Props) {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const tone = playerLevelTone(post.playerLevel);
   const name = displayName(profiles, post.userId);
   const followers = follows.filter((f) => f.followingId === post.userId).length;
@@ -221,7 +221,7 @@ export function GroundsPlayerCard({ post, profiles, follows, meId, onMessage, on
               {intentLabel(post.intent)} · {post.position}
             </Text>
             <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', fontWeight: '600', width: '100%' }}>
-              {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.archetype, language)}
+              {divisionLabel(post.division)} · {platformLabel(post.platform, language)} · {groundsLabel(post.archetype, locale)}
             </Text>
             <Text style={{ color: 'rgba(220,230,240,0.75)', fontSize: 13, textAlign: 'right', width: '100%' }}>
               EA ID: {post.eaId || '—'} · {post.gamertag || '—'}
