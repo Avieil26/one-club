@@ -11,8 +11,8 @@ import { useLanguage } from '@/lib/language';
 
 export default function CareerScreen() {
   const app = useApp();
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { language, t, isRTL: rtl } = useLanguage();
+  
   const router = useRouter();
   const params = useLocalSearchParams<{ tab?: string }>();
   const [careerTab, setCareerTab] = useState<'scout' | 'challenges' | 'journeys'>(
