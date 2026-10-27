@@ -8,14 +8,14 @@ import { SEASON2_CARDS } from '@/lib/season2';
 const featured = [50563325, 84095411, 50539776, 67289794].map((id) => SEASON2_CARDS.find((card) => card.itemId === id)!);
 
 export function HomeSeason2Overview() {
-  const { language, t } = useLanguage();
+  const { language, t, isRTL } = useLanguage();
   const router = useRouter();
   const { width } = useWindowDimensions();
   const narrow = width < 650;
-  const textAlign = language === 'he' ? 'right' as const : 'left' as const;
+  const textAlign = isRTL ? 'right' as const : 'left' as const;
   return (
     <LinearGradient testID="home-season2" colors={['#382619', '#171D27', '#0B111A']} start={{ x: 1, y: 0 }} end={{ x: 0, y: 1 }} style={{ borderRadius: 18, borderWidth: 1, borderColor: '#6F5236', padding: narrow ? 16 : 24, gap: 16 }}>
-      <View style={{ flexDirection: narrow ? 'column' : language === 'he' ? 'row-reverse' : 'row', gap: 18, alignItems: narrow ? 'stretch' : 'center' }}>
+      <View style={{ flexDirection: narrow ? 'column' : isRTL ? 'row-reverse' : 'row', gap: 18, alignItems: narrow ? 'stretch' : 'center' }}>
         <View style={{ flex: 1, minWidth: 0, gap: 9 }}>
           <Text style={{ color: '#FFB577', fontWeight: '800', fontSize: 12, letterSpacing: 1, textAlign }}>{t('חדש בקטלוג · 22.10.2026', 'NEW IN THE CATALOGUE · 22 OCT 2026')}</Text>
           <Text accessibilityRole="header" style={{ color: '#FFF4E6', fontSize: narrow ? 26 : 32, fontWeight: '900', textAlign }}>Season 2 · FC Heritage</Text>
@@ -26,7 +26,7 @@ export function HomeSeason2Overview() {
           {featured.map((card) => <PortraitCard key={card.id} player={card} width={narrow ? 64 : 90} />)}
         </View>
       </View>
-      <Pressable accessibilityRole="button" onPress={() => router.push('/market?kind=season2')} style={{ alignSelf: language === 'he' ? 'flex-end' : 'flex-start', borderRadius: 10, backgroundColor: '#F8832E', paddingVertical: 12, paddingHorizontal: 20 }}>
+      <Pressable accessibilityRole="button" onPress={() => router.push('/market?kind=season2')} style={{ alignSelf: isRTL ? 'flex-end' : 'flex-start', borderRadius: 10, backgroundColor: '#F8832E', paddingVertical: 12, paddingHorizontal: 20 }}>
         <Text style={{ color: '#1E1007', fontSize: 15, fontWeight: '900' }}>{t('לכל קלפי עונה 2 ודרכי ההשגה', 'Explore Season 2 cards and requirements')}</Text>
       </Pressable>
     </LinearGradient>
