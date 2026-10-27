@@ -9,8 +9,7 @@ import { colors } from '@/components/ui';
 export default function RegisterScreen() {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const wide = Platform.OS === 'web' && width >= 768;
 
   return (
