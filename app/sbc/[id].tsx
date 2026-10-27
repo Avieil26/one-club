@@ -83,7 +83,7 @@ export default function SbcDetailScreen() {
         </View>
       </View>
       <Muted>
-        {challenge.reward ? `${sbcText(challenge.reward, language)} · ` : ''}
+        {challenge.reward ? `${sbcText(challenge.reward, locale)} · ` : ''}
         {challenge.endsAt ? t('נשאר: {value}', 'Remaining: {value}').replace('{value}', remaining) : remaining}
       </Muted>
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
@@ -111,7 +111,7 @@ export default function SbcDetailScreen() {
         </View>
       ) : challenge.kind !== 'streamlined' ? (
         <Card>
-          <Muted>{sbcText(challenge.requirements, language)}</Muted>
+          <Muted>{sbcText(challenge.requirements, locale)}</Muted>
           {challenge.targetScore ? <ItemScore value={challenge.targetScore} /> : null}
         </Card>
       ) : null}
