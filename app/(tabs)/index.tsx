@@ -81,8 +81,7 @@ function DoorButton({
   door: (typeof doors)[number];
   onPress: () => void;
 }) {
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const label = t(door.label, door.href === '/career' ? 'Career' : door.href === '/ultimate' ? 'Ultimate Team' : door.href === '/champions' ? 'FUT Champions' : door.href === '/grounds' ? 'Grounds' : door.href === '/sbc' ? 'SBC' : 'Players');
   const hint = t(door.hint, door.href === '/career' ? 'Challenges and proof' : door.href === '/ultimate' ? 'Squads and packs' : door.href === '/champions' ? 'Your run, rewards and tactics' : door.href === '/grounds' ? 'Find a player' : door.href === '/sbc' ? 'Community solutions' : 'Cards and data');
   return (
@@ -161,8 +160,7 @@ function DoorButton({
 export default function HomeScreen() {
   const router = useRouter();
   const { user, futPosts, profiles, likes } = useApp();
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const columns = useColumns(3, 1);
   const featured = futPosts.find((post) => post.kind === 'squad');
   const featuredLikes = featured ? likes.filter((like) => like.postId === featured.id).length : 0;
