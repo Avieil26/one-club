@@ -76,7 +76,7 @@ export default function SbcUploadSolutionScreen() {
     setSaving(true);
     try {
       await app.addSolution({ challengeId, explanation, imageUris });
-      Alert.alert(t("נשלח לאישור", "Submitted for review"), t(`הפתרון שלך ל«${challengeTitle}» ממתין לאישור מנהל. הוא יופיע בקהילה רק אחרי אישור.`, `Your solution for “${challengeTitle}” is awaiting administrator review. It will appear in the community after approval.`));
+      Alert.alert(t("נשלח לאישור", "Submitted for review"), t('הפתרון שלך ל«{title}» ממתין לאישור מנהל. הוא יופיע בקהילה רק אחרי אישור.', 'Your solution for “{title}” is awaiting administrator review. It will appear in the community after approval.').replace('{title}', challengeTitle));
       router.replace(`/sbc/${challengeId}`);
     } catch (error) {
       Alert.alert(t("שגיאה בהעלאה", "Upload error"), errorMessage(error));
@@ -170,7 +170,7 @@ export default function SbcUploadSolutionScreen() {
             <Text style={{ color: colors.gold, fontSize: 24 }}>📷</Text>
             <Text style={{ color: colors.text, fontSize: 15, fontWeight: '700', textAlign: 'center' }}>
               {imageUris.length
-                ? t(`נבחרו ${imageUris.length} תמונות (לחצו להחלפה)`, `${imageUris.length} images selected (select to replace)`)
+                ? t('נבחרו {count} תמונות (לחצו להחלפה)', '{count} images selected (select to replace)').replace('{count}', String(imageUris.length))
                 : t("לחצו לבחירת תמונות מהגלריה", "Select images from your gallery")}
             </Text>
             <Text style={{ color: colors.muted, fontSize: 12, textAlign: 'center' }}>{t("עד 3 תמונות (סגל, כימיה או דרישות)", "Up to 3 images (squad, chemistry or requirements)")}</Text>
