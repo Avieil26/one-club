@@ -82,7 +82,7 @@ for (const score of [0, 3, 6, 10, 15, 25]) {
 for (const [filename, binding] of [
   ['app/games/who.tsx', 'miniGamePrompt(round.prompt, language)'],
   ['components/MiniGameChrome.tsx', 'miniGameMessage(text, language)'],
-  ['app/games/grid.tsx', 'displayNation(nation, language)'],
+  ['app/games/grid.tsx', 'displayNation(nation, locale)'],
   ['app/games/club.tsx', 'displayClub(club, language)'],
   ['app/games/draft.tsx', 'draftManagerName(item, language)'],
 ]) {
