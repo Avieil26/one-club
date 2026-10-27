@@ -19,7 +19,7 @@ function face(colored: boolean): ImageStyle {
 
 export default function WhoGameScreen() {
   const router = useRouter();
-  const { t, language } = useLanguage();
+  const { t, language, locale, isRTL } = useLanguage();
   const [correctCount, setCorrectCount] = useState(0);
   const [usedPrompts, setUsedPrompts] = useState<string[]>([]);
   const [round, setRound] = useState<MarkRound>(() => makeMarkRound(0, []));
@@ -100,7 +100,7 @@ export default function WhoGameScreen() {
         <View style={styles.glow} />
         <View style={styles.pad}>
           <View style={styles.top}>
-            <Text style={styles.pill}>{over ? t('נגמר', 'Finished') : language === 'he' ? `נשארו ${remain}` : `${remain} left`}</Text>
+            <Text style={styles.pill}>{over ? t('נגמר', 'Finished') : t('נשארו {count}', '{count} left').replace('{count}', String(remain))}</Text>
             <Hearts lives={lives} />
           </View>
           <Text style={styles.title}>{t('נחש מי', 'Guess Who')}</Text>
@@ -108,7 +108,7 @@ export default function WhoGameScreen() {
 
           <LinearGradient colors={['#fffaf4', '#ffe8c8']} style={styles.ask}>
             <View style={styles.askEdge} />
-            <Text style={[styles.askText, { textAlign: language === 'he' ? 'right' : 'left', writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{miniGamePrompt(round.prompt, language)}</Text>
+            <Text style={[styles.askText, { textAlign: isRTL ? 'right' : 'left', writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{miniGamePrompt(round.prompt, locale)}</Text>
           </LinearGradient>
 
           {note && !over ? <RoundNote text={note} good={good} /> : null}
