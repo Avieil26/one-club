@@ -163,7 +163,7 @@ function FormationShape({ formation, height }: { formation: DraftFormation; heig
 }
 
 export default function DraftScreen() {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const { width } = useWindowDimensions();
   const wide = width >= 768;
   const pitchH = wide ? 920 : 560;
@@ -340,7 +340,7 @@ export default function DraftScreen() {
                 ? t('מחוץ לסגל', 'Out of squad')
                 : t('בחרו מחליף', 'Choose a substitute')
               : asking
-                ? (language === 'he' ? `בחרו ${asking.position}` : `Choose ${asking.position}`)
+                ? t('בחרו {position}', 'Choose {position}').replace('{position}', asking.position)
                 : t('לחצו על עמדה', 'Tap a position');
 
   return (
@@ -490,8 +490,8 @@ export default function DraftScreen() {
                 <LinearGradient colors={['#4A3514', '#16110A', '#2A1C0C']} style={styles.managerFill}>
                   <View style={styles.managerShine} />
                   <Image source={{ uri: item.photo }} resizeMode="cover" style={{ width: wide ? 168 : 148, height: wide ? 168 : 136 }} />
-                  <Text style={[styles.managerName, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{draftManagerName(item, language)}</Text>
-                  <Text style={[styles.managerMeta, { writingDirection: language === 'he' ? 'rtl' : 'ltr' }]}>{displayLeague(item.league, language)}</Text>
+                  <Text style={[styles.managerName, { writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{draftManagerName(item, language)}</Text>
+                  <Text style={[styles.managerMeta, { writingDirection: isRTL ? 'rtl' : 'ltr' }]}>{displayLeague(item.league, language)}</Text>
                   <Text style={styles.managerChem}>{t('כימיה', 'Chemistry')} {chemistryFor(item)}</Text>
                 </LinearGradient>
               </Pressable>
