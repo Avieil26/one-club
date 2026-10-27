@@ -7,7 +7,7 @@ import { Button, Muted, Screen } from '@/components/ui';
 import { openSbcChallenges } from '@/lib/selectors';
 import { SBC_AUDIT_CHECKED_AT } from '@/lib/sbcLive20261020';
 import { endsSoon, filterSbcs, newlyReleased, type SbcFilter } from '@/lib/sbcBrowse';
-import { sbcFace } from '@/lib/sbcTileTheme';
+import { sbcFace, localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
 import { useLanguage } from '@/lib/language';
@@ -40,15 +40,15 @@ function compactRemaining(iso: string | null, now: number) {
 
 function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: number; onPress: () => void }) {
  const viewportWidth = useWindowDimensions().width;
- const { language, t } = useLanguage(); const rtl = language === 'he'; const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now);
- return <Pressable accessibilityRole="button" accessibilityLabel={face.en} onPress={onPress} style={{ flex: 1, minWidth: 0, backgroundColor: 'rgba(5,12,22,0.96)', borderWidth: 1, borderColor: '#30404D', borderRadius: 7, overflow: 'hidden' }}>
+ const { locale, t, isRTL: rtl } = useLanguage(); const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now);
+ return <Pressable accessibilityRole="button" accessibilityLabel={locale === 'he' || locale === 'en' ? face.en : localizedSbcTitle(challenge, locale)} onPress={onPress} style={{ flex: 1, minWidth: 0, backgroundColor: 'rgba(5,12,22,0.96)', borderWidth: 1, borderColor: '#30404D', borderRadius: 7, overflow: 'hidden' }}>
   <View style={{ height: 3, backgroundColor: face.edge }} />
   <View style={{ padding: 14, gap: 14, flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center' }}>
    <SbcRewardVisual challenge={challenge} width={viewportWidth < 760 ? 116 : 132} />
    <View style={{ flex: 1, minWidth: 0, gap: 8 }}>
     {endsSoon(challenge, now) || newlyReleased(challenge, now) ? <Text style={{ color: endsSoon(challenge, now) ? '#FFB59C' : '#88E1BE', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{endsSoon(challenge, now) ? t('מסתיים ב־24 השעות הקרובות', 'Ends within 24 hours') : t('חדש', 'New')}</Text> : null}
     <Text style={{ color: '#D6B46B', fontSize: 9, fontWeight: '900', letterSpacing: 1, textAlign: rtl ? 'right' : 'left' }}>{face.category}</Text>
-    <Text numberOfLines={3} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'he' ? face.he : face.en}</Text>
+    <Text numberOfLines={3} style={{ color: '#F7F8FA', fontSize: 18, lineHeight: 23, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{localizedSbcTitle(challenge, locale)}</Text>
     {challenge.kind === 'streamlined' && challenge.targetScore ? <ItemScore value={challenge.targetScore} size={16} /> : null}
     {remaining ? <Text style={{ color: '#C3CED6', fontSize: 12, fontWeight: '700', textAlign: rtl ? 'right' : 'left' }}>{t('נותרו ', 'Ends in ')}{remaining}</Text> : null}
     <Text style={{ color: '#83DCE4', fontSize: 11, fontWeight: '800', textAlign: rtl ? 'right' : 'left' }}>{t('דרישות ופתרונות', 'Requirements & solutions')} →</Text>
