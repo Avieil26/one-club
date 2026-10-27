@@ -1,4 +1,6 @@
 import type { CareerChallenge } from '@/lib/types';
+import type { AppLocale } from '@/lib/language';
+import { plannedUiTranslations } from '@/lib/plannedUiTranslations';
 
 const ENGLISH: Record<string, string> = {
   "אליפות עם לידס": "Win the league with Leeds",
@@ -21,11 +23,14 @@ const ENGLISH: Record<string, string> = {
   "מאמן": "Manager"
 };
 
-export function careerText(text: string, language: 'he' | 'en'): string {
-  return language === 'en' ? (ENGLISH[text] ?? text) : text;
+export function careerText(text: string, language: AppLocale): string {
+  if (language === 'he') return text;
+  const english = ENGLISH[text];
+  if (!english) return text; // User-generated challenge content stays in its original language.
+  return language === 'en' ? english : plannedUiTranslations[language][english] ?? english;
 }
 
-export function careerChallengeCopy(challenge: CareerChallenge, language: 'he' | 'en') {
+export function careerChallengeCopy(challenge: CareerChallenge, language: AppLocale) {
   return {
     title: careerText(challenge.title, language),
     rules: careerText(challenge.rules, language),
