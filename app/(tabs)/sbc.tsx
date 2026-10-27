@@ -10,7 +10,7 @@ import { endsSoon, filterSbcs, newlyReleased, type SbcFilter } from '@/lib/sbcBr
 import { sbcFace, localizedSbcTitle } from '@/lib/sbcTileTheme';
 import { useApp } from '@/lib/store';
 import type { SbcChallenge } from '@/lib/types';
-import { useLanguage } from '@/lib/language';
+import { useLanguage, type AppLocale } from '@/lib/language';
 
 function rowsOf<T>(items: T[], columns: number) {
   const rows: T[][] = [];
@@ -27,20 +27,27 @@ function useNow(intervalMs = 30_000) {
   return now;
 }
 
-function compactRemaining(iso: string | null, now: number) {
+function compactRemaining(iso: string | null, now: number, locale: AppLocale) {
   if (!iso) return '';
   const diff = new Date(iso).getTime() - now;
   if (Number.isNaN(diff) || diff <= 0) return '';
   const hours = Math.floor(diff / 3_600_000);
   const days = Math.floor(hours / 24);
-  if (days >= 1) return `${days}d`;
-  if (hours >= 1) return `${hours}h`;
-  return `${Math.max(1, Math.floor(diff / 60_000))}m`;
+  const minutes = Math.max(1, Math.floor(diff / 60_000));
+  if (locale === 'he' || locale === 'en') {
+    if (days >= 1) return `${days}d`;
+    if (hours >= 1) return `${hours}h`;
+    return `${minutes}m`;
+  }
+  const units = locale === 'ar' ? { day: 'ي', hour: 'س', minute: 'د' } : { day: 'd', hour: 'h', minute: 'min' };
+  const value = days >= 1 ? days : hours >= 1 ? hours : minutes;
+  const unit = days >= 1 ? units.day : hours >= 1 ? units.hour : units.minute;
+  return `${value.toLocaleString(locale)} ${unit}`;
 }
 
 function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: number; onPress: () => void }) {
  const viewportWidth = useWindowDimensions().width;
- const { locale, t, isRTL: rtl } = useLanguage(); const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now);
+ const { locale, t, isRTL: rtl } = useLanguage(); const face = sbcFace(challenge); const remaining = compactRemaining(challenge.endsAt, now, locale);
  return <Pressable accessibilityRole="button" accessibilityLabel={locale === 'he' || locale === 'en' ? face.en : localizedSbcTitle(challenge, locale)} onPress={onPress} style={{ flex: 1, minWidth: 0, backgroundColor: 'rgba(5,12,22,0.96)', borderWidth: 1, borderColor: '#30404D', borderRadius: 7, overflow: 'hidden' }}>
   <View style={{ height: 3, backgroundColor: face.edge }} />
   <View style={{ padding: 14, gap: 14, flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center' }}>
@@ -59,8 +66,7 @@ function SbcTile({ challenge, now, onPress }: { challenge: SbcChallenge; now: nu
 
 export default function SbcScreen() {
   const app = useApp();
-  const { language, t } = useLanguage();
-  const rtl = language === 'he';
+  const { locale, t, isRTL: rtl } = useLanguage();
   const router = useRouter();
   const now = useNow();
   const width = useWindowDimensions().width;
@@ -82,7 +88,7 @@ export default function SbcScreen() {
       <View accessibilityRole="tablist" style={{ flexDirection: rtl ? 'row-reverse' : 'row', flexWrap: 'wrap', gap: 8 }}>
         {([{value:'all',label:t('הכול','All')},{value:'players',label:t('שחקנים','Players')},{value:'packs',label:t('חבילות','Packs')},{value:'upgrades',label:t('שדרוגים','Upgrades')},{value:'ending',label:t('מסתיימים בקרוב','Ending soon')}] as {value:SbcFilter;label:string}[]).map(option=><Pressable key={option.value} accessibilityRole="tab" aria-selected={filter===option.value} accessibilityState={{selected:filter===option.value}} onPress={()=>setFilter(option.value)} style={{ minHeight: 44, paddingHorizontal: 13, justifyContent:'center', borderRadius: 5, borderWidth: 1, borderColor:filter===option.value?'#E9C36A':'#30404D', backgroundColor:filter===option.value?'#2A2519':'#080F17' }}><Text style={{color:filter===option.value?'#F5DEA0':'#C3CED6',fontWeight:'800'}}>{option.label}</Text></Pressable>)}
       </View>
-      <Muted>{filtered.length} {t('אתגרים', 'challenges')} · {t('עודכן: ', 'Updated: ')}{new Date(SBC_AUDIT_CHECKED_AT).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Muted>
+      <Muted>{filtered.length} {t('אתגרים', 'challenges')} · {t('עודכן: ', 'Updated: ')}{new Date(SBC_AUDIT_CHECKED_AT).toLocaleDateString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-GB' : locale)}</Muted>
       {app.user?.isAdmin ? <Button label={t('אתגר SBC חדש', 'New SBC challenge')} variant="ghost" onPress={() => router.push('/sbc/new')} /> : null}
       {!filtered.length ? <View style={{ gap: 12 }}><Muted>{t('לא נמצאו אתגרים. נסו חיפוש או סינון אחרים.', 'No matching challenges. Try another search or filter.')}</Muted><Button label={t('איפוס חיפוש וסינון', 'Reset search & filters')} variant="ghost" onPress={()=>{setQuery('');setFilter('all');}} /></View> : null}
       {rows.map((row, rowIndex) => (
