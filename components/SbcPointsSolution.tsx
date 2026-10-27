@@ -91,14 +91,14 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
               <View testID="sbc-option-unit-price" style={{ alignItems: 'center', gap: 5, alignSelf: 'stretch', paddingTop: 10, borderTopWidth: 1, borderTopColor: '#46546B' }}>
                 <SbcText tone="caption" center>{t('מחיר משוער לשחקן', 'Estimated price per item')}</SbcText>
                 {price.unit !== null ? <Coins value={price.unit} /> : <SbcText center>{t('מחיר לא זמין', 'Price unavailable')}</SbcText>}
-                {line.count > 1 && price.total !== null ? <SbcText tone="caption" center>{t(`לכל ${line.count} העותקים: ≈ ${price.total.toLocaleString('en-US')}`, `All ${line.count} copies: ≈ ${price.total.toLocaleString('en-US')}`)}</SbcText> : null}
+                {line.count > 1 && price.total !== null ? <SbcText tone="caption" center>{t('לכל {count} העותקים: ≈ {price}', 'All {count} copies: ≈ {price}').replace('{count}', String(line.count)).replace('{price}', price.total.toLocaleString('en-US'))}</SbcText> : null}
               </View>
               {line.alternatives.length > 1 ? <Pressable accessibilityRole="button" accessibilityLabel={t('שחקן חלופי באותו ניקוד', 'Alternative player with the same score')} onPress={() => { const i = line.alternatives.findIndex((p) => p.id === line.player.id); setAlternatives((v) => ({ ...v, [line.key]: line.alternatives[(i + 1) % line.alternatives.length].id })); }} style={{ minHeight: 44, padding: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: '#F5E2B7', fontSize: 15, fontWeight: '700' }}>{t('החלפת שחקן', 'Swap player')} ↔</Text></Pressable> : null}
             </View>;
           })}
         </View>
-        {plan.lines.length > visible ? <Button label={t(`הצגת עוד קלפים · ${plan.lines.length - visible} נותרו`, `Show more items · ${plan.lines.length - visible} remaining`)} variant="ghost" onPress={() => setVisible((n) => n + 12)} /> : null}
-        <SbcText tone="caption">{t(`עודף מעל היעד: ${plan.total - (segment.target - number)} נקודות.`, `Above target: ${plan.total - (segment.target - number)} points.`)}</SbcText>
+        {plan.lines.length > visible ? <Button label={t('הצגת עוד קלפים · {count} נותרו', 'Show more items · {count} remaining').replace('{count}', String(plan.lines.length - visible))} variant="ghost" onPress={() => setVisible((n) => n + 12)} /> : null}
+        <SbcText tone="caption">{t('עודף מעל היעד: {count} נקודות.', 'Above target: {count} points.').replace('{count}', String(plan.total - (segment.target - number)))}</SbcText>
         {plan.lines.some((l) => l.count > 1) ? <SbcText>{t('× מציין מספר עותקים. לחלופה בלי כפילויות בחרו בשחקנים שונים.', '× means copies. For an option without duplicates, choose different players.')}</SbcText> : null}
         <SbcText tone="caption">{t('העלות היא סכום מחירי השחקנים שמוצגים, לפי הפלטפורמה שבחרתם. זו הערכה שעשויה להשתנות בשוק. קלפים שכבר יש לכם אינם מחייבים קנייה.', 'Cost is the sum of the displayed player prices for your chosen platform. Market estimates can change. Items you already own do not require a purchase.')}</SbcText>
       </View> : validInput && number >= segment.target ? <SbcText>{t('לפי הניקוד שהזנתם, הגעתם ליעד.', 'Your entered progress reaches the target.')}</SbcText> : null}
@@ -106,7 +106,7 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
     <View style={{ gap: 12, paddingTop: 16, borderTopWidth: 1, borderTopColor: '#536078' }}>
       <Button label={showProgress ? t('סגירת הניקוד שכבר הוגש', 'Hide submitted progress') : t('כבר הגשת נקודות במשחק?', 'Already submitted points in-game?')} variant="ghost" onPress={() => setShowProgress((v) => !v)} />
       {showProgress ? <Field tone="sbc" label={t('נקודות שכבר הגשת במשחק', 'Points already submitted in-game')} value={submitted} onChangeText={setSubmitted} keyboardType="number-pad" /> : null}
-      {number > 0 && validInput ? <SbcText>{t(`הוגשו במשחק: ${number.toLocaleString('en-US')} נקודות.`, `Submitted in-game: ${number.toLocaleString('en-US')} points.`)}</SbcText> : null}
+      {number > 0 && validInput ? <SbcText>{t('הוגשו במשחק: {count} נקודות.', 'Submitted in-game: {count} points.').replace('{count}', number.toLocaleString('en-US'))}</SbcText> : null}
       {!validInput ? <SbcText>{t('הכניסו מספר שלם בין 0 ליעד האתגר.', 'Enter a whole number between zero and the target.')}</SbcText> : null}
     </View>
   </SbcSurface>;
