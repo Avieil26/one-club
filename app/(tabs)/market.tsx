@@ -125,7 +125,7 @@ function PageChip({ label, active, onPress }: { label: string; active: boolean; 
 }
 
 export default function MarketScreen() {
-  const { t, language, isRTL: rtl } = useLanguage();
+  const { t, language, locale, isRTL: rtl } = useLanguage();
   
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -260,7 +260,7 @@ export default function MarketScreen() {
               <Text style={{ color: '#F4D6AE', fontWeight: '700', fontSize: 13 }}>{t('הקלפים החדשים · 23–24 באוקטובר', 'New releases · 23–24 October')}</Text>
             </Pressable>
             <Muted>
-              {PLAYERS.length.toLocaleString(language === 'he' ? 'he-IL' : 'en-US')} {t('קלפים במאגר', 'cards in the database')} · {PAGE_SIZE} {t('בעמוד', 'per page')} · {t('לחיצה פותחת פרטים מלאים.', 'Select a card to view full details.')}
+              {PLAYERS.length.toLocaleString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : locale)} {t('קלפים במאגר', 'cards in the database')} · {PAGE_SIZE} {t('בעמוד', 'per page')} · {t('לחיצה פותחת פרטים מלאים.', 'Select a card to view full details.')}
             </Muted>
             <View style={{ flexDirection: rtl ? 'row-reverse' : 'row', alignItems: 'center', gap: 10 }}>
               <View
@@ -331,7 +331,7 @@ export default function MarketScreen() {
             <Text style={{ color: colors.muted, textAlign: rtl ? 'right' : 'left', fontWeight: '700' }}>
               {players.length === 0
                 ? t('אין תוצאות', 'No results')
-                : `${t('מציג', 'Showing')} ${from}–${to} ${t('מתוך', 'of')} ${players.length.toLocaleString(language === 'he' ? 'he-IL' : 'en-US')}`}
+                : `${t('מציג', 'Showing')} ${from}–${to} ${t('מתוך', 'of')} ${players.length.toLocaleString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : locale)}`}
             </Text>
           </View>
         }
