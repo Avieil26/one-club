@@ -369,7 +369,10 @@ export const plannedAdditionalTranslations = {
     "Journey identity": "هوية الرحلة",
     "Kicking (KIC)": "الركل (KIC)",
     "Leave journey (keep updates)": "مغادرة الرحلة (مع الاحتفاظ بالتحديثات)",
-    "Like squad": "الإعجاب بالتشكيلة"
+    "Like squad": "الإعجاب بالتشكيلة",
+    "Privacy": "الخصوصية",
+    "Cookies": "ملفات تعريف الارتباط",
+    "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
     "Name": "Nome",
@@ -740,7 +743,10 @@ export const plannedAdditionalTranslations = {
     "Journey identity": "Identidade da jornada",
     "Kicking (KIC)": "Chute (KIC)",
     "Leave journey (keep updates)": "Sair da jornada (manter atualizações)",
-    "Like squad": "Curtir elenco"
+    "Like squad": "Curtir elenco",
+    "Privacy": "Privacidade",
+    "Cookies": "Cookies",
+    "Accessibility": "Acessibilidade"
   },
   "es": {
     "Name": "Nombre",
@@ -1111,6 +1117,9 @@ export const plannedAdditionalTranslations = {
     "Journey identity": "Identidad de la trayectoria",
     "Kicking (KIC)": "Saque (KIC)",
     "Leave journey (keep updates)": "Salir de la trayectoria (conservar actualizaciones)",
-    "Like squad": "Me gusta la plantilla"
+    "Like squad": "Me gusta la plantilla",
+    "Privacy": "Privacidad",
+    "Cookies": "Cookies",
+    "Accessibility": "Accesibilidad"
   }
 } as const;
