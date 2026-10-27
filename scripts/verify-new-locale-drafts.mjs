@@ -179,6 +179,25 @@ for (const locale of locales) {
   assert(groundsLabel('רמה 12', locale).includes('12'));
   assert(groundsLabel('חלוקה 3', locale).includes('3'));
 }
+// Navigation uses conditional expressions for its English source labels.
+let navigationCallCount = 0;
+for (const filename of ['app/(tabs)/index.tsx', 'components/SiteNav.tsx']) {
+  const source = ts.createSourceFile(filename, fs.readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  function inspect(node) {
+    if (ts.isCallExpression(node) && node.expression.getText(source) === 't' && node.arguments.length > 1 && ts.isConditionalExpression(node.arguments[1])) {
+      function checkBranch(expression) {
+        if (ts.isConditionalExpression(expression)) { checkBranch(expression.whenTrue); checkBranch(expression.whenFalse); return; }
+        assert(ts.isStringLiteral(expression), `${filename}: unexpected navigation label`);
+        const glossaryKey = { Settings: 'settings', Players: 'players' }[expression.text];
+        for (const locale of locales) assert(ui[locale][expression.text] || (glossaryKey && glossary[locale][glossaryKey]), `${locale}: missing navigation label ${expression.text}`);
+      }
+      checkBranch(node.arguments[1]); navigationCallCount++;
+    }
+    ts.forEachChild(node, inspect);
+  }
+  inspect(source);
+}
+assert.equal(navigationCallCount, 3, 'Navigation dynamic expressions changed; review the coverage check');
 // Filter kinds and Grounds positions use dynamic lookup tables.
 const filterSource = ts.createSourceFile('PlayerFilter.tsx', fs.readFileSync('components/PlayerFilter.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 const unchangedBrands = new Set(['TOTW', 'OTW', 'Future Stars']);
