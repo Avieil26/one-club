@@ -1,6 +1,17 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Terms acceptance required": "الموافقة على الشروط مطلوبة",
+    "Please read and accept the Terms of Use and Privacy Policy to create an account.": "يرجى قراءة شروط الاستخدام وسياسة الخصوصية والموافقة عليهما لإنشاء حساب.",
+    "Your name, email and password — then you are ready to join.": "أدخل اسمك وبريدك الإلكتروني وكلمة المرور للانضمام.",
+    "Enter the email and password for your account.": "أدخل البريد الإلكتروني وكلمة المرور لحسابك.",
+    "I accept the Terms of Use and Privacy Policy": "أوافق على شروط الاستخدام وسياسة الخصوصية",
+    "I have read and agree to the ": "قرأت وأوافق على ",
+    "and the ": "و",
+    "Users under 18 need consent from a parent or legal guardian.": "يحتاج المستخدمون دون سن 18 عامًا إلى موافقة أحد الوالدين أو الوصي القانوني.",
+    "You must accept the Terms of Use and Privacy Policy to register.": "يجب الموافقة على شروط الاستخدام وسياسة الخصوصية للتسجيل.",
+    "Sign up with Google": "التسجيل باستخدام Google",
+    "Sign in with Google": "تسجيل الدخول باستخدام Google",
     "Name": "الاسم",
     "Name required": "الاسم مطلوب",
     "Nation": "الجنسية",
@@ -375,6 +386,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Terms acceptance required": "É necessário aceitar os termos",
+    "Please read and accept the Terms of Use and Privacy Policy to create an account.": "Leia e aceite os Termos de Uso e a Política de Privacidade para criar uma conta.",
+    "Your name, email and password — then you are ready to join.": "Informe seu nome, e-mail e senha para participar.",
+    "Enter the email and password for your account.": "Informe o e-mail e a senha da sua conta.",
+    "I accept the Terms of Use and Privacy Policy": "Aceito os Termos de Uso e a Política de Privacidade",
+    "I have read and agree to the ": "Li e concordo com os ",
+    "and the ": "e a ",
+    "Users under 18 need consent from a parent or legal guardian.": "Menores de 18 anos precisam do consentimento de um dos pais ou responsável legal.",
+    "You must accept the Terms of Use and Privacy Policy to register.": "Você precisa aceitar os Termos de Uso e a Política de Privacidade para se cadastrar.",
+    "Sign up with Google": "Cadastrar-se com o Google",
+    "Sign in with Google": "Entrar com o Google",
     "Name": "Nome",
     "Name required": "O nome é obrigatório",
     "Nation": "Nacionalidade",
@@ -749,6 +771,17 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Terms acceptance required": "Debes aceptar los términos",
+    "Please read and accept the Terms of Use and Privacy Policy to create an account.": "Lee y acepta los Términos de uso y la Política de privacidad para crear una cuenta.",
+    "Your name, email and password — then you are ready to join.": "Introduce tu nombre, correo electrónico y contraseña para unirte.",
+    "Enter the email and password for your account.": "Introduce el correo electrónico y la contraseña de tu cuenta.",
+    "I accept the Terms of Use and Privacy Policy": "Acepto los Términos de uso y la Política de privacidad",
+    "I have read and agree to the ": "He leído y acepto los ",
+    "and the ": "y la ",
+    "Users under 18 need consent from a parent or legal guardian.": "Los menores de 18 años necesitan el consentimiento de un padre, madre o tutor legal.",
+    "You must accept the Terms of Use and Privacy Policy to register.": "Debes aceptar los Términos de uso y la Política de privacidad para registrarte.",
+    "Sign up with Google": "Registrarse con Google",
+    "Sign in with Google": "Iniciar sesión con Google",
     "Name": "Nombre",
     "Name required": "El nombre es obligatorio",
     "Nation": "Nacionalidad",
