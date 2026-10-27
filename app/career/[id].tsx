@@ -16,7 +16,7 @@ const STATUS = { pending: 'ממתין לאישור', approved: 'אושר', rejec
 export default function ChallengeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const app = useApp();
-  const { language, t } = useLanguage();
+  const { language, locale, t } = useLanguage();
   const router = useRouter();
   const challenge = app.challenges.find((item) => item.id === id);
   if (!challenge) {
@@ -26,7 +26,7 @@ export default function ChallengeScreen() {
       </Screen>
     );
   }
-  const copy = careerChallengeCopy(challenge, language);
+  const copy = careerChallengeCopy(challenge, locale);
   const submissions = app.submissions.filter((item) => item.challengeId === challenge.id);
 
   return (
