@@ -163,7 +163,7 @@ function PlayStyleCard({ item, selected, onSelect }: {
 }
 
 export default function NewGroundsScreen() {
-  const { language, locale, isRTL: rtl } = useLanguage();
+  const { language, locale, t, isRTL: rtl } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const { width } = useWindowDimensions();
@@ -316,7 +316,7 @@ export default function NewGroundsScreen() {
           <CountryPicker value={region} onChange={setRegion} />
         </Section>
 
-        <Section title="PlayStyles" subtitle={language === 'he' ? `36 הסגנונות של FC 27 · ${playStyleCount} נבחרו` : `36 FC 27 PlayStyles · ${playStyleCount} selected`} icon="flash-outline">
+        <Section title="PlayStyles" subtitle={t('36 הסגנונות של FC 27 · {count} נבחרו', '36 FC 27 PlayStyles · {count} selected').replace('{count}', String(playStyleCount))} icon="flash-outline">
           <Text style={{ color: colors.muted, fontSize: 10, lineHeight: 16, textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }}>{groundsLabel("בחרו את הסגנונות שמופיעים אצלכם ב־My Pro. אפשר לסמן רגיל או PlayStyle+ לכל סגנון; סמני השוערות מוצגים בנפרד.", locale)}</Text>
           {GROUNDS_PLAYSTYLE_CATEGORIES.map((category) => {
             const items = GROUNDS_PLAYSTYLES.filter((style) => style.category === category.id);
@@ -324,7 +324,7 @@ export default function NewGroundsScreen() {
               <View key={category.id} style={{ gap: 8 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 7, direction: rtl ? 'rtl' : 'ltr' }}>
                   <View style={{ width: 4, height: 17, borderRadius: 2, backgroundColor: category.id === 'Goalkeeping' ? colors.gold : colors.cyan }} />
-                  <Text style={{ color: colors.ink, fontSize: 12, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{language === 'en' ? category.id : category.label}</Text>
+                  <Text style={{ color: colors.ink, fontSize: 12, fontWeight: '900', textAlign: rtl ? 'right' : 'left' }}>{t(category.label, category.id)}</Text>
                   <Text style={{ color: colors.muted, fontSize: 9 }}>{items.length}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 7, direction: rtl ? 'rtl' : 'ltr' }}>
