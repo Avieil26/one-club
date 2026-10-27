@@ -55,7 +55,7 @@ export function PlayerFilter({
   onChange: (next: PlayerFilters) => void;
   onClose: () => void;
 }) {
-  const { t, language } = useLanguage();
+  const { t, language, locale } = useLanguage();
   const rtl = language === 'he';
   const { height: windowHeight } = useWindowDimensions();
   const [panel, setPanel] = useState<Panel>('menu');
@@ -167,7 +167,7 @@ export function PlayerFilter({
                 }}
               >
                 <NationFlag nation={nation} size={26} />
-                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{displayNation(nation, language)}</Text>
+                <Text style={{ color: filters.nation === nation ? TEXT : QUIET, fontWeight: '500', fontSize: 12, textAlign: 'center' }}>{displayNation(nation, locale)}</Text>
               </Pressable>
             ))}
           </ScrollView>
