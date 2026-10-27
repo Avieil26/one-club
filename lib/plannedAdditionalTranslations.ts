@@ -1,6 +1,14 @@
 // Draft translations; rollout remains disabled pending complete review.
 export const plannedAdditionalTranslations = {
   "ar": {
+    "Hello ONE CLUB,\nPlease delete my account and its associated data.\nAccount email:\nDisplay name (optional):": "مرحبًا ONE CLUB،\nيرجى حذف حسابي والبيانات المرتبطة به.\nالبريد الإلكتروني للحساب:\nاسم العرض (اختياري):",
+    "ONE CLUB — Account and data deletion": "ONE CLUB — حذف الحساب والبيانات",
+    "Request deletion of your ONE CLUB account and its associated data here, without signing in or reinstalling the app.": "يمكنك طلب حذف حسابك في ONE CLUB والبيانات المرتبطة به هنا، دون تسجيل الدخول أو إعادة تثبيت التطبيق.",
+    "1. Email us from the address registered to your account, requesting account and data deletion. If you cannot access that address, explain this so we can discuss another way to verify ownership.": "1. أرسل إلينا من عنوان البريد الإلكتروني المسجّل في حسابك طلبًا لحذف الحساب والبيانات. إذا لم يعد لديك وصول إلى ذلك العنوان، فأوضح ذلك لنناقش طريقة أخرى للتحقق من ملكية الحساب.",
+    "If no email app opens, copy the address and send a message from your email service.": "إذا لم يُفتح تطبيق البريد الإلكتروني، انسخ العنوان وأرسل رسالة من خدمة البريد التي تستخدمها.",
+    "2. We verify account ownership before processing the request. Do not send passwords or verification codes.": "2. نتحقق من ملكية الحساب قبل معالجة الطلب. لا ترسل كلمات المرور أو رموز التحقق.",
+    "3. The request covers your account, profile and associated data, including content and photos you uploaded. Sending a request starts a review; clicking the link does not immediately delete your account.": "3. يشمل الطلب حسابك وملفك الشخصي والبيانات المرتبطة به، بما في ذلك المحتوى والصور التي رفعتها. يبدأ إرسال الطلب عملية مراجعة؛ ولا يؤدي النقر على الرابط إلى حذف حسابك فورًا.",
+    "As described in our privacy policy, information subject to a legal retention obligation may be retained. If this applies to your request, we will explain what is retained, why and for how long in our response.": "كما هو موضح في سياسة الخصوصية، قد يُحتفظ بالمعلومات التي يفرض القانون الاحتفاظ بها. إذا انطبق ذلك على طلبك، فسنوضح في ردنا ما يُحتفظ به وسبب ذلك ومدة الاحتفاظ.",
     "Terms approval required • LEGAL CONSENT": "الموافقة على الشروط مطلوبة • الموافقة القانونية",
     "Welcome to FC27 Israel!": "مرحبًا بك في FC27 Israel!",
     "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "مرحبًا {name}، يرجى قراءة شروط الاستخدام وسياسة الخصوصية الحالية والموافقة عليهما قبل استخدام التطبيق.",
@@ -404,6 +412,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "إمكانية الوصول"
   },
   "pt-BR": {
+    "Hello ONE CLUB,\nPlease delete my account and its associated data.\nAccount email:\nDisplay name (optional):": "Olá, ONE CLUB,\nSolicito a exclusão da minha conta e dos dados associados a ela.\nE-mail da conta:\nNome de exibição (opcional):",
+    "ONE CLUB — Account and data deletion": "ONE CLUB — Exclusão de conta e dados",
+    "Request deletion of your ONE CLUB account and its associated data here, without signing in or reinstalling the app.": "Solicite aqui a exclusão da sua conta ONE CLUB e dos dados associados, sem entrar na conta ou reinstalar o aplicativo.",
+    "1. Email us from the address registered to your account, requesting account and data deletion. If you cannot access that address, explain this so we can discuss another way to verify ownership.": "1. Envie um e-mail do endereço cadastrado na sua conta solicitando a exclusão da conta e dos dados. Se você não tiver acesso a esse endereço, informe isso para que possamos discutir outra forma de verificar a titularidade.",
+    "If no email app opens, copy the address and send a message from your email service.": "Se nenhum aplicativo de e-mail abrir, copie o endereço e envie uma mensagem pelo seu serviço de e-mail.",
+    "2. We verify account ownership before processing the request. Do not send passwords or verification codes.": "2. Verificamos a titularidade da conta antes de processar a solicitação. Não envie senhas ou códigos de verificação.",
+    "3. The request covers your account, profile and associated data, including content and photos you uploaded. Sending a request starts a review; clicking the link does not immediately delete your account.": "3. A solicitação abrange sua conta, perfil e dados associados, incluindo conteúdos e fotos enviados por você. O envio inicia uma análise; clicar no link não exclui sua conta imediatamente.",
+    "As described in our privacy policy, information subject to a legal retention obligation may be retained. If this applies to your request, we will explain what is retained, why and for how long in our response.": "Conforme descrito em nossa política de privacidade, informações sujeitas a uma obrigação legal de retenção podem ser mantidas. Se isso se aplicar à sua solicitação, explicaremos na resposta o que será mantido, por quê e por quanto tempo.",
     "Terms approval required • LEGAL CONSENT": "É necessário aceitar os termos • CONSENTIMENTO LEGAL",
     "Welcome to FC27 Israel!": "Boas-vindas ao FC27 Israel!",
     "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "Olá, {name}. Leia e aceite os Termos de Uso e a Política de Privacidade atuais antes de usar o aplicativo.",
@@ -807,6 +823,14 @@ export const plannedAdditionalTranslations = {
     "Accessibility": "Acessibilidade"
   },
   "es": {
+    "Hello ONE CLUB,\nPlease delete my account and its associated data.\nAccount email:\nDisplay name (optional):": "Hola, ONE CLUB:\nSolicito la eliminación de mi cuenta y de los datos asociados.\nCorreo electrónico de la cuenta:\nNombre visible (opcional):",
+    "ONE CLUB — Account and data deletion": "ONE CLUB — Eliminación de cuenta y datos",
+    "Request deletion of your ONE CLUB account and its associated data here, without signing in or reinstalling the app.": "Solicita aquí la eliminación de tu cuenta de ONE CLUB y sus datos asociados, sin iniciar sesión ni volver a instalar la aplicación.",
+    "1. Email us from the address registered to your account, requesting account and data deletion. If you cannot access that address, explain this so we can discuss another way to verify ownership.": "1. Envíanos un correo desde la dirección registrada en tu cuenta solicitando la eliminación de la cuenta y los datos. Si no tienes acceso a esa dirección, indícalo para que podamos estudiar otra forma de verificar que la cuenta es tuya.",
+    "If no email app opens, copy the address and send a message from your email service.": "Si no se abre ninguna aplicación de correo, copia la dirección y envía un mensaje desde tu servicio de correo.",
+    "2. We verify account ownership before processing the request. Do not send passwords or verification codes.": "2. Verificamos la titularidad de la cuenta antes de tramitar la solicitud. No envíes contraseñas ni códigos de verificación.",
+    "3. The request covers your account, profile and associated data, including content and photos you uploaded. Sending a request starts a review; clicking the link does not immediately delete your account.": "3. La solicitud abarca tu cuenta, perfil y datos asociados, incluido el contenido y las fotos que hayas subido. El envío inicia una revisión; pulsar el enlace no elimina la cuenta inmediatamente.",
+    "As described in our privacy policy, information subject to a legal retention obligation may be retained. If this applies to your request, we will explain what is retained, why and for how long in our response.": "Como se describe en nuestra política de privacidad, es posible que se conserve la información sujeta a una obligación legal de conservación. Si esto se aplica a tu solicitud, explicaremos en la respuesta qué se conserva, por qué y durante cuánto tiempo.",
     "Terms approval required • LEGAL CONSENT": "Debes aceptar los términos • CONSENTIMIENTO LEGAL",
     "Welcome to FC27 Israel!": "¡Te damos la bienvenida a FC27 Israel!",
     "Hello {name}, please read and accept the current Terms of Use and Privacy Policy before using the app.": "Hola, {name}. Lee y acepta los Términos de uso y la Política de privacidad actuales antes de usar la aplicación.",
