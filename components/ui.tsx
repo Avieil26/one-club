@@ -57,8 +57,7 @@ export function Screen({
   showNav?: boolean;
   backgroundImage?: string;
 }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { isRTL: rtl } = useLanguage();
   const web = Platform.OS === 'web';
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
@@ -110,8 +109,7 @@ export function Screen({
 }
 
 export function Title({ children }: { children: ReactNode }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { isRTL: rtl } = useLanguage();
   return (
     <Text style={[styles.h1, { width: '100%', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
@@ -120,8 +118,7 @@ export function Title({ children }: { children: ReactNode }) {
 }
 
 export function Muted({ children }: { children: ReactNode }) {
-  const { language } = useLanguage();
-  const rtl = language === 'he';
+  const { isRTL: rtl } = useLanguage();
   return (
     <Text style={[styles.muted, { width: '100%', textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr', alignSelf: 'stretch' }]}>
       {children}
@@ -182,8 +179,7 @@ export function Field({
   maxLength?: number;
   tone?: 'sbc';
 }) {
-  const { t, language } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const remaining = maxLength != null ? Math.max(0, maxLength - value.length) : 0;
   return (
     <View style={styles.field}>
@@ -203,7 +199,7 @@ export function Field({
         style={[styles.input, tone === 'sbc' && { backgroundColor: '#101724', borderColor: '#46516A', borderRadius: 6 }, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }, multiline && { minHeight: 96, textAlignVertical: 'top' }]}
       />
       {maxLength != null ? (
-        <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t(`נשארו ${remaining}`, `${remaining} left`)}</Text>
+        <Text style={[styles.label, { textAlign: rtl ? 'right' : 'left', writingDirection: rtl ? 'rtl' : 'ltr' }]}>{t('נשארו {count}', '{count} left').replace('{count}', String(remaining))}</Text>
       ) : null}
     </View>
   );
