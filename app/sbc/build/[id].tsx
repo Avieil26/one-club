@@ -208,7 +208,7 @@ export default function SquadBuildScreen() {
       <Field label={t("חיפוש שחקן", "Search players")} value={query} onChangeText={setQuery} placeholder={t("למשל Haaland", "For example, Haaland")} />
       <Muted>
         {query.trim()
-          ? t('{count} שחקנים נמצאו במאגר', '{count} players found').replace('{count}', results.total.toLocaleString(language === 'he' ? 'he-IL' : 'en-US'))
+          ? t('{count} שחקנים נמצאו במאגר', '{count} players found').replace('{count}', results.total.toLocaleString(locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : locale))
           : t("הקלפים של העמדה. חיפוש מוצא כל שחקן במאגר, בעברית או באנגלית.", "Players for this position. Search the full database in Hebrew or English.")}
       </Muted>
       <View style={{ gap: 8 }}>
