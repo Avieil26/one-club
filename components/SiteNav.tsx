@@ -34,8 +34,7 @@ export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
   const app = useApp();
-  const { t, language, chooseLanguage } = useLanguage();
-  const rtl = language === 'he';
+  const { t, isRTL: rtl } = useLanguage();
   const { user } = app;
   const progress = user ? xpProgress(communityXp(user.id, app)) : null;
   const insets = useSafeAreaInsets();
@@ -95,33 +94,8 @@ export function SiteNav() {
     </Pressable>
   );
 
-  const languageNode = (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={language === 'he' ? 'Switch language to English' : 'החלפת שפה לעברית'}
-      onPress={() => void chooseLanguage(language === 'he' ? 'en' : 'he')}
-      style={{
-        minHeight: 44,
-        minWidth: 42,
-        paddingHorizontal: 10,
-        paddingVertical: 4,
-        borderRadius: 16,
-        backgroundColor: 'rgba(22, 30, 24, 0.7)',
-        borderWidth: 1,
-        borderColor: 'rgba(227, 179, 65, 0.45)',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text style={{ color: '#FFE08A', fontWeight: '800', fontSize: 12 }}>
-        {language === 'he' ? 'EN' : 'עב'}
-      </Text>
-    </Pressable>
-  );
-
   const accountNode = (
     <View style={{ flexDirection: 'row', direction: 'ltr', alignItems: 'center', gap: 8 }}>
-      {languageNode}
       {progress ? <LevelChip progress={progress} /> : null}
       {profileNode}
     </View>
