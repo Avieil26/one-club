@@ -120,7 +120,7 @@ export function PlayerFilter({
         {panel === 'menu' ? (
           <ScrollView keyboardShouldPersistTaps="handled">
             <MenuRow label={t('סוג קלף', 'Card type')} value={filters.kind === 'all' ? '' : kindLabel(filters.kind, t)} onPress={() => setPanel('kind')} />
-            <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ? displayNation(filters.nation, locale) : ''} onPress={() => setPanel('nation')} />
+            <MenuRow label={t('מדינה', 'Nation')} value={filters.nation ? (locale === 'he' || locale === 'en' ? filters.nation : displayNation(filters.nation, locale)) : ''} onPress={() => setPanel('nation')} />
             <MenuRow label={t('ליגה וקבוצה', 'League & club')} value={[filters.league, filters.club].filter(Boolean).join(' · ')} onPress={() => setPanel('squad')} />
             <MenuRow label={t('עמדה', 'Position')} value={filters.position ?? ''} onPress={() => setPanel('position')} />
             <MenuRow label={t('דירוג', 'Rating')} value={ratingLabel(filters, choices.ratingMin, choices.ratingMax)} onPress={() => setPanel('rating')} />
