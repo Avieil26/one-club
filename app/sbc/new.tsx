@@ -9,7 +9,7 @@ import { useApp } from '@/lib/store';
 import type { SbcKind } from '@/lib/types';
 
 export default function NewSbcScreen() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const app = useApp();
   const router = useRouter();
   const [title, setTitle] = useState('');
@@ -31,7 +31,7 @@ export default function NewSbcScreen() {
       await app.createSbc({ title, kind, requirements, endsAt, targetScore });
       router.back();
     } catch (error) {
-      Alert.alert(t("רגע", "Something went wrong"), t(errorMessage(error), errorMessage(error, 'en')));
+      Alert.alert(t("רגע", "Something went wrong"), errorMessage(error, locale));
     }
   }
 
