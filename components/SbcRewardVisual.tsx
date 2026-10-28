@@ -18,7 +18,8 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
- if (challenge.id === 'sbc-bellerin-20261027') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Héctor Bellerín 85 RM Ultimate Scream" style={{ width, height: width * 1.4, backgroundColor: '#321B1D', borderWidth: 2, borderColor: '#F19851', borderRadius: 12, alignItems: 'center', justifyContent: 'center', gap: 7, padding: 8 }}><Text style={{ color: '#FFE6BC', fontSize: width * 0.24, fontWeight: '900' }}>85</Text><Text style={{ color: '#FFE6BC', fontWeight: '800' }}>RM / RB</Text><Text numberOfLines={2} style={{ color: '#FFE6BC', textAlign: 'center', fontWeight: '900', fontSize: width * 0.105 }}>HÉCTOR BELLERÍN</Text><Text style={{ color: '#F19851', fontSize: width * 0.075, fontWeight: '800' }}>ULTIMATE SCREAM</Text></View>;
+ // Complete Ultimate Scream item 67312611, sourced from FUT.GG and bundled locally.
+ if (challenge.id === 'sbc-bellerin-20261027') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Héctor Bellerín Ultimate Scream 85 RM" style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={require('@/assets/images/sbc-rewards/bellerin-67312611.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  if (challenge.id === 'sbc-hero-20261026') {
   const heroes = ['hero-ruicosta', 'hero-luishernandez', 'hero-henriklarsson', 'hero-parkjisung'];
   const cardWidth = width * 0.44;
