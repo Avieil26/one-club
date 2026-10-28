@@ -1,4 +1,6 @@
 export const RECENT_CARD_ART: Record<string, number> = {
+  'recent-50545314': require('@/assets/images/sbc-rewards/ruben-50545314.png'),
+  'recent-50590296': require('@/assets/images/sbc-rewards/carlos-50590296.png'),
   'recent-67180169': require('@/assets/images/cards/recent/67180169.png'),
   'recent-50562888': require('@/assets/images/cards/recent/50562888.png'),
   'recent-50402953': require('@/assets/images/cards/recent/50402953.png'),

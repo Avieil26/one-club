@@ -1,0 +1,237 @@
+[
+  {
+    "id": "recent-50545314",
+    "baseId": "ea-213666-ruben-loftuscheek",
+    "itemId": 50545314,
+    "baseItemId": 213666,
+    "name": "רובן לופטוס-צ׳יק",
+    "en": "Ruben Loftus-Cheek",
+    "rating": 83,
+    "position": "CAM",
+    "positions": [
+      "CM"
+    ],
+    "nation": "אנגליה",
+    "league": "סרייה א׳",
+    "club": "מילאן",
+    "edition": "recent",
+    "face": {
+      "ovr": 83,
+      "pac": 81,
+      "sho": 78,
+      "pas": 79,
+      "dri": 83,
+      "def": 78,
+      "phy": 83
+    },
+    "foot": "R",
+    "weakFoot": 4,
+    "skillMoves": 4,
+    "heightCm": 191,
+    "weightKg": 88,
+    "age": 30,
+    "accelerate": "LENGTHY",
+    "playstyles": [
+      {
+        "name": "Tiki Taka",
+        "plus": false
+      },
+      {
+        "name": "Press Proven",
+        "plus": false
+      },
+      {
+        "name": "Enforcer",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        131,
+        132,
+        133,
+        134
+      ]
+    },
+    "attributes": {
+      "acceleration": 81,
+      "sprintSpeed": 81,
+      "positioning": 84,
+      "finishing": 78,
+      "shotPower": 84,
+      "longShots": 77,
+      "volleys": 62,
+      "penalties": 58,
+      "vision": 78,
+      "crossing": 77,
+      "freeKickAccuracy": 59,
+      "shortPassing": 85,
+      "longPassing": 80,
+      "curve": 72,
+      "agility": 78,
+      "balance": 75,
+      "reactions": 81,
+      "ballControl": 83,
+      "dribbling": 84,
+      "composure": 84,
+      "interceptions": 80,
+      "headingAccuracy": 84,
+      "defensiveAwareness": 77,
+      "standingTackle": 77,
+      "slidingTackle": 72,
+      "jumping": 96,
+      "stamina": 75,
+      "strength": 89,
+      "aggression": 76,
+      "gkDiving": 11,
+      "gkHandling": 7,
+      "gkKicking": 12,
+      "gkReflexes": 13,
+      "gkPositioning": 15
+    },
+    "backgroundId": 58,
+    "family": "Showdown",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-28",
+    "createdAt": "2026-10-28T18:00:00.000Z",
+    "gradingScore": 410,
+    "price": {
+      "kind": "sbc",
+      "console": 28200,
+      "pc": 28150,
+      "checkedAt": "2026-10-28T20:40:00.000Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/213666-ruben-loftus-cheek/27-50545314/",
+    "referenceUrl": "https://www.futbin.com/27/player/23704/ruben-loftus-cheek",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50545314.5808ecda97894f6155732166ecd1645c528ff6b1c135c6e7a03062bd6720f261.webp",
+    "checkedAt": "2026-10-28T20:40:00.000Z"
+  },
+  {
+    "id": "recent-50590296",
+    "baseId": "ea-258648-carlos-augusto",
+    "itemId": 50590296,
+    "baseItemId": 258648,
+    "name": "קרלוס אוגוסטו",
+    "en": "Carlos Augusto",
+    "rating": 83,
+    "position": "LB",
+    "positions": [
+      "CB",
+      "LM"
+    ],
+    "nation": "ברזיל",
+    "league": "סרייה א׳",
+    "club": "אינטר",
+    "edition": "recent",
+    "face": {
+      "ovr": 83,
+      "pac": 81,
+      "sho": 75,
+      "pas": 81,
+      "dri": 82,
+      "def": 83,
+      "phy": 80
+    },
+    "foot": "L",
+    "weakFoot": 2,
+    "skillMoves": 3,
+    "heightCm": 184,
+    "weightKg": 78,
+    "age": 27,
+    "accelerate": "CONTROLLED",
+    "playstyles": [
+      {
+        "name": "Whipped Pass",
+        "plus": false
+      },
+      {
+        "name": "Anticipate",
+        "plus": false
+      },
+      {
+        "name": "Aerial Fortress",
+        "plus": false
+      }
+    ],
+    "roleIds": {
+      "plus": [],
+      "plusPlus": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        127,
+        128,
+        129,
+        130,
+        147,
+        148
+      ]
+    },
+    "attributes": {
+      "acceleration": 81,
+      "sprintSpeed": 81,
+      "positioning": 82,
+      "finishing": 71,
+      "shotPower": 82,
+      "longShots": 80,
+      "volleys": 77,
+      "penalties": 54,
+      "vision": 80,
+      "crossing": 82,
+      "freeKickAccuracy": 77,
+      "shortPassing": 82,
+      "longPassing": 77,
+      "curve": 80,
+      "agility": 78,
+      "balance": 77,
+      "reactions": 84,
+      "ballControl": 83,
+      "dribbling": 83,
+      "composure": 81,
+      "interceptions": 82,
+      "headingAccuracy": 80,
+      "defensiveAwareness": 84,
+      "standingTackle": 84,
+      "slidingTackle": 82,
+      "jumping": 87,
+      "stamina": 80,
+      "strength": 78,
+      "aggression": 82,
+      "gkDiving": 11,
+      "gkHandling": 12,
+      "gkKicking": 5,
+      "gkReflexes": 13,
+      "gkPositioning": 12
+    },
+    "backgroundId": 58,
+    "family": "Showdown",
+    "holographicType": null,
+    "isHero": false,
+    "isIcon": false,
+    "releasedAt": "2026-10-28",
+    "createdAt": "2026-10-28T18:00:00.000Z",
+    "gradingScore": 410,
+    "price": {
+      "kind": "sbc",
+      "console": 28200,
+      "pc": 28150,
+      "checkedAt": "2026-10-28T20:40:00.000Z"
+    },
+    "sourceUrl": "https://www.fut.gg/players/258648-carlos-augusto/27-50590296/",
+    "referenceUrl": "https://www.futbin.com/27/player/23706/carlos-augusto-zopolato-neves",
+    "artUrl": "https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50590296.bd49ccca4a0a185bbe9510e0b8a7b67ed7279c5a68d893df419bff353544b9f3.webp",
+    "checkedAt": "2026-10-28T20:40:00.000Z"
+  }
+]

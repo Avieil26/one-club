@@ -14,7 +14,7 @@ export function RecentCardInfo({ card }: { card: RecentCard }) {
         <View style={styles.rows}>
           <Text style={[styles.text, align]}>{t('עלות השלמת SBC משוערת', 'Estimated SBC completion cost')}</Text>
           <Text style={[styles.price, align]}>{t('קונסולות', 'Consoles')}: {price.console?.toLocaleString('en-US') ?? '—'} · PC: {price.pc?.toLocaleString('en-US') ?? '—'}</Text>
-          <Text style={[styles.muted, align]}>{t('מטבעות להשלמת האתגר; זה אינו מחיר שוק של הקלף.', 'Coins to complete the challenge; this is not a market price for the card.')}</Text>
+          <Text style={[styles.muted, align]}>{t('מטבעות להשלמת האתגר; זה אינו מחיר שוק של הקלף.', 'Coins to complete the challenge; this is not a market price for the card.')} {t('נבדק:', 'Checked:')} {new Date(price.checkedAt).toLocaleDateString(language === 'he' ? 'he-IL' : 'en-GB')}</Text>
         </View>
       ) : price.kind === 'unavailable' || (!price.console && !price.pc) ? (
         <Text style={[styles.text, align]}>{t('אין מחיר שוק זמין לגרסה הזאת כרגע.', 'No market price is currently available for this edition.')}</Text>
