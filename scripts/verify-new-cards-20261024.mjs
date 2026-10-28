@@ -7,19 +7,19 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const cards = JSON.parse(fs.readFileSync('assets/data/recentCards20261024.json', 'utf8'));
 const audit = JSON.parse(fs.readFileSync('docs/recent-card-art-audit.json', 'utf8'));
 const all = loadPlayerCatalogue();
-assert.equal(all.length, 20198);
-assert.equal(all.filter(c => c.edition === 'recent').length, 51);
+assert.equal(all.length, 20200);
+assert.equal(all.filter(c => c.edition === 'recent').length, 53);
 assert.equal(new Set(all.map(c => c.id)).size, all.length);
 const prior = all.filter(c => c.edition !== 'recent');
 assert.equal(prior.length, 20147);
 assert.equal(hash(JSON.stringify(prior)), '67e3a91626725de737c61a053b7c389403601cb4b4a711453b23d3bc3f07fe5f');
-assert.equal(hash(JSON.stringify(cards)), hash(JSON.stringify(all.slice(-51))));
+assert.equal(hash(JSON.stringify(cards)), hash(JSON.stringify(all.slice(-53,-2))));
 const { META_ATTRS } = loadRepositoryModule('lib/playerMeta.ts');
 const { recentCardMeta, recentCardFor } = loadRepositoryModule('lib/recentCards.ts');
 const { RECENT_CARD_ART } = loadRepositoryModule('lib/recentCardArt.ts');
 const { EMPTY_FILTERS, playerMatches } = loadRepositoryModule('lib/playerFilter.ts');
-assert.equal(all.filter(c => playerMatches(c, {...EMPTY_FILTERS, kind: 'recent'})).length, 51);
-assert.equal(Object.keys(RECENT_CARD_ART).length, 51);
+assert.equal(all.filter(c => playerMatches(c, {...EMPTY_FILTERS, kind: 'recent'})).length, 53);
+assert.equal(Object.keys(RECENT_CARD_ART).length, 53);
 function crc32(bytes) {
   let crc = 0xffffffff;
   for (const byte of bytes) {
@@ -75,7 +75,7 @@ const prices = await response.json();
 assert.deepEqual(prices['recent-100896715'], [6400000,14000000]);
 assert.deepEqual(prices['recent-117673931'], [0,0]);
 for (const card of cards.filter(c=>c.price.kind !== 'market')) assert.equal(prices[card.id], undefined);
-console.log('PASS: 20,198 unique cards; prior 20,147 unchanged; 51 exact editions, 34 attributes, CRC/inflated original artwork, missing prices and independent-platform market API fixture.');
+console.log('PASS: 20,200 unique cards; prior 20,147 unchanged; 51 original exact editions, 34 attributes, CRC/inflated original artwork, missing prices and independent-platform market API fixture.');
 
 // Edition navigation is grouped by stable person identity, never by display name.
 const { playerEditionsFor } = loadRepositoryModule('lib/playerEditions.ts');
