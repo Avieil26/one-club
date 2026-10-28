@@ -247,6 +247,10 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-upgrade-80x5-20261027': { en: '5×80+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-upgrade-79x3-20261026': { en: '3×79+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-showdown-carlos-20261028': { en: 'Carlos Augusto', category: 'SHOWDOWN', edge: '#ED6F53', rank: 0 },
+  'sbc-showdown-ruben-20261028': { en: 'Ruben Loftus-Cheek', category: 'SHOWDOWN', edge: '#62A7EC', rank: 0 },
   'sbc-bellerin-20261027': { en: 'Héctor Bellerín', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
   'sbc-hero-20261026': { en: 'Base Hero Player Pick', category: 'HERO PICK', edge: '#ED9A64', rank: 0 },
   'sbc-candy-20261026': { en: 'Scary Candy', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
@@ -310,7 +314,7 @@ export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   if (challenge.id === 'sbc-silver-upgrade' || challenge.id === 'sbc-bronze-silver-reroll') return { ...FALLBACK_CLASSIC, pack: 'rare-75', packLabel: '75+' };
   if (challenge.id === 'sbc-bronze-upgrade') return { ...FALLBACK_CLASSIC, pack: 'silver-x2', packLabel: '2× SILVER' };
   if (challenge.id === 'sbc-gold-upgrade' || challenge.id === 'sbc-gold-reroll') return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2×78+' };
-  if (['sbc-laliga-20261026', 'sbc-premier-20261026'].includes(challenge.id)) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2× MAX 85' };
+  if (['sbc-laliga-20261026', 'sbc-premier-20261026', 'sbc-ligue-arkema-upgrade-20261028', 'sbc-bundesliga-frauen-upgrade-20261028'].includes(challenge.id)) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2× MAX 85' };
   if (known) return known;
   const reward = challenge.reward ?? '';
   const rating = reward.match(/(?:×|x)\s*(\d{2})\+/i)?.[1] ?? reward.match(/(\d{2})\+/)?.[1];

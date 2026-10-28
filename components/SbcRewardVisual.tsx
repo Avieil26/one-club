@@ -20,6 +20,8 @@ const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
  // Complete Ultimate Scream item 67312611, sourced from FUT.GG and bundled locally.
  if (challenge.id === 'sbc-bellerin-20261027') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Héctor Bellerín Ultimate Scream 85 RM" style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={require('@/assets/images/sbc-rewards/bellerin-67312611.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
+ if (challenge.id === 'sbc-showdown-carlos-20261028') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Carlos Augusto Showdown 83 LB" style={{ width, height: width * 1.4 }}><Image source={require('@/assets/images/sbc-rewards/carlos-50590296.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
+ if (challenge.id === 'sbc-showdown-ruben-20261028') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Ruben Loftus-Cheek Showdown 83 CAM" style={{ width, height: width * 1.4 }}><Image source={require('@/assets/images/sbc-rewards/ruben-50545314.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  if (challenge.id === 'sbc-hero-20261026') {
   const heroes = ['hero-ruicosta', 'hero-luishernandez', 'hero-henriklarsson', 'hero-parkjisung'];
   const cardWidth = width * 0.44;
