@@ -39,4 +39,11 @@ for (const platform of ['ps5','pc']) {
 }
 const view = fs.readFileSync('components/SbcPointsSolution.tsx','utf8');
 assert(view.includes('Submit at most 30 items at a time'));
+const image = fs.readFileSync('assets/images/sbc-rewards/bellerin-67312611.png');
+assert.equal(image.subarray(0,8).toString('hex'), '89504e470d0a1a0a');
+assert.equal(image.readUInt32BE(16), 300);
+assert.equal(image.readUInt32BE(20), 419);
+const visual = fs.readFileSync('components/SbcRewardVisual.tsx', 'utf8');
+assert(visual.includes("require('@/assets/images/sbc-rewards/bellerin-67312611.png')"), 'Bellerín reward image must be bundled');
+assert(visual.includes('sbc-card-complete-'), 'Reward image must expose its test ID');
 console.log('Bellerín: 30,000 points; five cross-checked plans on both platforms; eligibility, expiry, partial progress, Hebrew copy and catalogue verified.');
