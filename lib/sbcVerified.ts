@@ -1,3 +1,4 @@
+import bellerin from '@/assets/data/sbc-bellerin-20261028.json';
 import latest from '@/assets/data/sbc-refresh-20261026.json';
 import refresh from '@/assets/data/sbc-refresh-20261025.json';
 import { eligiblePointsPlayer } from '@/lib/sbcEligibility';
@@ -14,7 +15,7 @@ export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
-  return ({ ...snapshot.challenges, ...refresh.points, ...latest.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
+  return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
   if (!Number.isSafeInteger(segment.target) || segment.target <= 0 || !plan.lines.length) return false;
@@ -67,6 +68,7 @@ export function pointsPlans(segment: PointsSegment, platform: 'ps5' | 'pc', subm
   const result = [make('value', counts)];
   if (submitted === 0) {
     for (const route of segment.platforms[platform].routes ?? []) {
+      if (route.key.startsWith('verified-')) continue;
       const grouped = new Map<number, number>();
       let valid = true;
       for (const group of route.groups) {
@@ -77,6 +79,19 @@ export function pointsPlans(segment: PointsSegment, platform: 'ps5' | 'pc', subm
       const balanced = make('balanced', grouped);
       if (valid && balanced.count < result[0].count && balanced.cost <= result[0].cost * 1.25 && pointsPlanValid(segment, balanced, platform)) { result.push(balanced); break; }
     }
+  }
+  if (submitted === 0) for (const route of segment.platforms[platform].routes ?? []) {
+    if (!route.key.startsWith('verified-')) continue;
+    const grouped = new Map<number, number>();
+    let valid = true;
+    for (const group of route.groups) {
+      const i = rates.findIndex((r) => r.overall === group.overall && r.rarity === group.rarity && r.score === group.unitScore);
+      if (i < 0 || !Number.isSafeInteger(group.count) || group.count <= 0) { valid = false; break; }
+      grouped.set(i, (grouped.get(i) ?? 0) + group.count);
+    }
+    if (!valid) continue;
+    const option = make(route.key, grouped);
+    if (pointsPlanValid(segment, option, platform)) result.push(option);
   }
   const high = rates.reduce((best, r, i) => r.score > rates[best].score ? i : best, 0);
   const fewer = make('fewer', new Map([[high, Math.ceil(target / rates[high].score)]]));

@@ -247,6 +247,7 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-bellerin-20261027': { en: 'Héctor Bellerín', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
   'sbc-hero-20261026': { en: 'Base Hero Player Pick', category: 'HERO PICK', edge: '#ED9A64', rank: 0 },
   'sbc-candy-20261026': { en: 'Scary Candy', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
   'sbc-fs-mls-pick-20261020': { en: 'MLS Future Stars Player Pick', category: 'FUTURE STARS / MLS', edge: '#AD89F8', rank: 0 },
