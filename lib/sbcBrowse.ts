@@ -5,7 +5,7 @@ import { sbcFace } from '@/lib/sbcTileTheme';
 export type SbcFilter = 'all' | 'players' | 'packs' | 'upgrades' | 'ending';
 export function rewardKind(challenge: SbcChallenge): 'players' | 'packs' | 'upgrades' {
   const art = (artwork as Record<string, { kind: string }>)[challenge.id];
-  if (art?.kind === 'player' || art?.kind === 'pick') return 'players';
+  if (challenge.id === 'sbc-bellerin-20261027' || art?.kind === 'player' || art?.kind === 'pick') return 'players';
   if (/upgrade|reroll/i.test(challenge.id)) return 'upgrades';
   return 'packs';
 }
