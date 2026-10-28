@@ -39,7 +39,7 @@ await context.route('https://hxjgphhcspzjnkkzdmpk.supabase.co/**',async route=>{
     const filter = page.getByRole('button',{name:language==='he'?'הקלפים החדשים · 23–24 באוקטובר':'New releases · 23–24 October',exact:true});
     await filter.click();
     await page.getByRole('img',{name:/New release$/}).first().waitFor();
-    await page.getByText(language==='he'?/מתוך 51$/:/of 51$/).waitFor();
+    await page.getByText(language==='he'?/מתוך 76$/:/of 76$/).waitFor();
     await noOverflow(page,'catalogue');
     await page.screenshot({path:path.join(output,`catalogue-${language}-${width}.png`)});
     // Search within recent filter, then navigate to that exact edition by touching its artwork.

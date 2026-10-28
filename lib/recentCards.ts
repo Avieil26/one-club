@@ -1,3 +1,4 @@
+import totw7 from '@/assets/data/totw7Cards20261028.json';
 import showdown from '@/assets/data/showdownCards20261028.json';
 import cards from '@/assets/data/recentCards20261024.json';
 import type { FcPlayer } from '@/lib/fcPlayers';
@@ -7,7 +8,7 @@ export type RecentCard = FcPlayer & {
   family: string; holographicType: 'holographic' | 'pristine' | null; releasedAt: string;
   price: { kind: 'market' | 'sbc' | 'unavailable'; console: number | null; pc: number | null; checkedAt: string };
 };
-export const RECENT_CARDS = [...cards, ...showdown] as unknown as RecentCard[];
+export const RECENT_CARDS = [...cards, ...showdown, ...totw7] as unknown as RecentCard[];
 const byId = new Map(RECENT_CARDS.map(card => [card.id, card]));
 export function recentCardFor(id: string): RecentCard | undefined { return byId.get(id); }
 export function recentCardMeta(card: RecentCard): CardMeta {

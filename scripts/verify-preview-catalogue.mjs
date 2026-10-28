@@ -43,13 +43,13 @@ for (const [baseId, row] of Object.entries(destined)) {
 }
 
 console.log(JSON.stringify({
-  expected: 20200,
+  expected: 20223,
   calculated: players.length,
   uniqueIds: byId.size,
-  missingFromTarget: 20200 - players.length,
+  missingFromTarget: 20223 - players.length,
   editionCounts,
 }, null, 2));
-assert.equal(editionCounts.recent, 53, 'Missing new releases');
+assert.equal(editionCounts.recent, 76, 'Missing new releases');
 assert.equal(editionCounts.season2, 29, 'Missing Season 2 cards');
-assert.equal(players.length, 20200,
-  `Runtime catalogue has ${players.length} cards; expected 20200. Refusing this build.`);
+assert.equal(players.length, 20223,
+  `Runtime catalogue has ${players.length} cards; expected 20223. Refusing this build.`);

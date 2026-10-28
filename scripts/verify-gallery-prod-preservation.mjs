@@ -10,5 +10,5 @@ for(const file of changed)assert(allowed.has(file)||/^public\/gallery-data\/(?:\
 const before=JSON.parse(execFileSync('git',['show',base+':package.json'],{encoding:'utf8'})),after=JSON.parse(fs.readFileSync('package.json'));
 const build=before.scripts['build:web'];assert.equal(after.scripts['build:web'],build.replace(' && expo export',' && npm run verify:planner && expo export'));
 delete before.scripts['build:web'];delete after.scripts['build:web'];delete after.scripts['verify:planner'];assert.deepEqual(after,before,'Unrelated package or existing build check changed');
-const all=loadPlayerCatalogue();assert.equal(all.length,20200);assert.equal(new Set(all.map(p=>p.id)).size,20200);assert.equal(all.filter(p=>p.edition==='recent').length,53);
-console.log('Production preservation passed: only approved Gallery files changed; every existing package setting/check preserved; 20,200 unique cards with 53 recent editions. Catalogue SHA256:',crypto.createHash('sha256').update(JSON.stringify(all)).digest('hex'));
+const all=loadPlayerCatalogue();assert.equal(all.length,20223);assert.equal(new Set(all.map(p=>p.id)).size,20223);assert.equal(all.filter(p=>p.edition==='recent').length,76);
+console.log('Production preservation passed: only approved Gallery files changed; every existing package setting/check preserved; 20,223 unique cards with 76 recent editions. Catalogue SHA256:',crypto.createHash('sha256').update(JSON.stringify(all)).digest('hex'));

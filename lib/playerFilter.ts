@@ -1,4 +1,7 @@
+import totw7 from '@/assets/data/totw7Cards20261028.json';
 import type { FcPlayer } from '@/lib/fcPlayers';
+
+const TOTW7_IDS = new Set(totw7.map(card => card.id));
 
 export type CardKind = 'all' | 'gold' | 'silver' | 'icon' | 'promo' | 'hero' | 'totw' | 'future-stars' | 'season2' | 'recent';
 
@@ -42,7 +45,7 @@ export function playerMatches(player: FcPlayer, filters: PlayerFilters) {
   if (filters.kind === 'icon' && !player.icon) return false;
   if (filters.kind === 'promo' && player.edition !== 'destined') return false;
   if (filters.kind === 'hero' && player.edition !== 'hero') return false;
-  if (filters.kind === 'totw' && player.edition !== 'totw') return false;
+  if (filters.kind === 'totw' && player.edition !== 'totw' && !TOTW7_IDS.has(player.id)) return false;
   if (filters.kind === 'future-stars' && player.edition !== 'future-stars') return false;
   if (filters.nation && player.nation !== filters.nation) return false;
   if (filters.league && player.league !== filters.league) return false;

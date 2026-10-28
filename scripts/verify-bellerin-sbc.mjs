@@ -17,7 +17,7 @@ assert.equal(rewardKind(challenge), 'players');
 assert.equal(filterSbcs([challenge], 'bellerin', 'players', Date.parse('2026-10-28T10:00:00Z')).length, 1);
 assert.equal(filterSbcs([challenge], 'הקטור', 'players', Date.parse('2026-10-28T10:00:00Z')).length, 1);
 assert.equal(sbcText(challenge.requirements, 'he'), challenge.requirements);
-assert.equal(PLAYERS.length, 20200);
+assert.equal(PLAYERS.length, 20223);
 const [segment] = pointsSegments(id);
 assert.equal(segment.target, 30000);
 assert.deepEqual(segment.requirements, ['Rating: Min. 45']);

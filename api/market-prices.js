@@ -1,3 +1,4 @@
+import totw7Cards from '../assets/data/totw7Cards20261028.json';
 import recentCards from '../assets/data/recentCards20261024.json';
 import eaByCard from '../assets/data/priceEaIds.json';
 import totw4EaByCard from '../assets/data/totw4PriceEaIds.json';
@@ -41,7 +42,7 @@ export default async function handler() {
       const row = [consolePrices.get(eaId) || 0, pcPrices.get(eaId) || 0];
       if (row.some(amount => amount > 0)) byEa.set(eaId, row);
     }
-    const recentIds = Object.fromEntries(recentCards.filter(c => c.price.kind === 'market').map(c => [c.id, c.itemId]));
+    const recentIds = Object.fromEntries([...recentCards, ...totw7Cards].filter(c => c.price.kind === 'market').map(c => [c.id, c.itemId]));
 
     const prices = {};
     for (const [id, eaId] of Object.entries({ ...eaByCard, ...totw4EaByCard, ...recentIds })) {
