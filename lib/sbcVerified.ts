@@ -1,3 +1,4 @@
+import current from '@/assets/data/sbc-refresh-20261028.json';
 import bellerin from '@/assets/data/sbc-bellerin-20261028.json';
 import latest from '@/assets/data/sbc-refresh-20261026.json';
 import refresh from '@/assets/data/sbc-refresh-20261025.json';
@@ -15,7 +16,7 @@ export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
-  return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
+  return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points, ...current.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
   if (!Number.isSafeInteger(segment.target) || segment.target <= 0 || !plan.lines.length) return false;

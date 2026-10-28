@@ -1,6 +1,6 @@
 import { sbcCheckText } from '@/lib/sbcLocalization';
 import { sbcFace } from '@/lib/sbcTileTheme';
-import { checkClassicSquad, classicSegments } from '@/lib/sbcClassic';
+import { checkClassicSquad, classicSegments, classicFormation } from '@/lib/sbcClassic';
 import { playerDisplayName } from '@/lib/playerDisplayName';
 import { useLanguage } from '@/lib/language';
 import { useMemo, useState } from 'react';
@@ -53,7 +53,7 @@ export default function SquadBuildScreen() {
   const [active, setActive] = useState<string | null>(activeSlots?.[0] ?? formationById(initialFormation).lines[0]?.[0]?.id ?? null);
   const [query, setQuery] = useState('');
   const [explanation, setExplanation] = useState('');
-  const formation = formationById(formationId);
+  const formation = classicSegment ? classicFormation(classicSegment, formationId) : formationById(formationId);
   const report = useMemo(
     () => classicSegment ? checkClassicSquad(classicSegment, formationId, Object.fromEntries(Object.entries(placed).flatMap(([slot, player]) => player ? [[slot, player.id]] : []))) : evaluateSquad(formation, placed, challenge?.rules ?? null),
     [challenge?.rules, classicSegment, formation, formationId, placed],
