@@ -34,7 +34,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       backgroundId:151,
       holographicType:null,
       releasedAt:card.releasedAt,
-      face:card.face,
+      face:card.face, foot:card.foot, weakFoot:card.weakFoot, skillMoves:card.skillMoves,
       attributes:{},
       price:{kind:'unavailable',console:null,pc:null,checkedAt:card.releasedAt},
       pairRating:base?.rating,
