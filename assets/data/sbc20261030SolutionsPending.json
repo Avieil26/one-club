@@ -1,0 +1,142 @@
+[
+  {
+    "challengeId": "sbc-reijnders-scream-20261030",
+    "kind": "streamlined",
+    "targetScore": 60000,
+    "reportedScore": 60300,
+    "source": "https://www.fodder.gg/sbc/tijjani-reijnders-95",
+    "status": "source-proposed-awaiting-app-validation",
+    "players": [
+      {
+        "name": "Fermín",
+        "rating": 85
+      },
+      {
+        "name": "Nmecha",
+        "rating": 85
+      },
+      {
+        "name": "Ødegaard",
+        "rating": 86
+      },
+      {
+        "name": "Cucurella",
+        "rating": 86
+      },
+      {
+        "name": "Bastoni",
+        "rating": 86
+      },
+      {
+        "name": "Fernández",
+        "rating": 86
+      },
+      {
+        "name": "Pau Cubarsí",
+        "rating": 86
+      },
+      {
+        "name": "Fabián Ruiz",
+        "rating": 86
+      },
+      {
+        "name": "Reiten",
+        "rating": 86
+      },
+      {
+        "name": "McCabe",
+        "rating": 86
+      },
+      {
+        "name": "Heaps",
+        "rating": 86
+      },
+      {
+        "name": "Dimarco",
+        "rating": 86
+      },
+      {
+        "name": "Debinha",
+        "rating": 87
+      },
+      {
+        "name": "Lavelle",
+        "rating": 87
+      },
+      {
+        "name": "Bacha",
+        "rating": 86
+      }
+    ]
+  },
+  {
+    "challengeId": "sbc-81-totw1-7-upgrade-20261030",
+    "kind": "streamlined",
+    "targetScore": 22000,
+    "source": "https://www.fut.gg/sbc/upgrades/27-102-81-totw-1-7-upgrade/",
+    "status": "source-rating-combination-awaiting-app-validation",
+    "ratingComposition": [
+      {
+        "rating": 86,
+        "quantity": 4
+      },
+      {
+        "rating": 84,
+        "quantity": 7
+      }
+    ],
+    "note": "Source +10% recommended route; full player IDs still required"
+  },
+  {
+    "challengeId": "sbc-freaky-zombie-20261030",
+    "kind": "classic",
+    "source": "https://tech.yahoo.com/gaming/articles/fc-27-freaky-zombie-sbc-191243840.html",
+    "status": "source-proposed-awaiting-7-player-chemistry-validation",
+    "players": [
+      {
+        "name": "Oude Kotte",
+        "position": "CDM",
+        "rating": 72
+      },
+      {
+        "name": "Noordman",
+        "position": "CDM",
+        "rating": 73
+      },
+      {
+        "name": "Oosterwolde",
+        "position": "LB",
+        "rating": 76
+      },
+      {
+        "name": "Aké",
+        "position": "CB",
+        "rating": 80
+      },
+      {
+        "name": "Koopmeiners",
+        "position": "CAM",
+        "rating": 78
+      },
+      {
+        "name": "Kalulu",
+        "position": "CB",
+        "rating": 81
+      },
+      {
+        "name": "Grabara",
+        "position": "GK",
+        "rating": 81
+      }
+    ],
+    "requirements": {
+      "playerCount": 7,
+      "minLeagues": 2,
+      "maxSameLeague": 5,
+      "minSameNation": 4,
+      "minGold": 4,
+      "minQuality": "silver",
+      "minChemistry": 20
+    }
+  }
+]
