@@ -58,7 +58,7 @@ function SegmentSolution({ segment }: { segment: PointsSegment }) {
   function reset() { setBasket({}); setSubmitted('0'); setShowProgress(false); }
   return <SbcSurface>
     <View style={{ gap: 6 }}><SbcText tone="title" testID="sbc-points-heading">{segment.name}</SbcText><SbcText tone="caption">{pointsEligibilityLabel(segment.requirements, language)}</SbcText></View>
-    <SbcChoices label={t('איך תרצו להשלים?', 'How would you like to complete it?')} value={mode} options={[{ id: 'my-items', label: t('בנייה עצמית', 'Build my own') }, { id: 'suggestions', label: t('פתרונות מוכנים', 'Ready-made options') }]} onChange={setMode} />
+    <SbcChoices label={t('איך תרצו להשלים?', 'How would you like to complete it?')} value={mode} options={segment.platforms.ps5.rates.length ? [{ id: 'my-items', label: t('בנייה עצמית', 'Build my own') }, { id: 'suggestions', label: t('פתרונות מוכנים', 'Ready-made options') }] : [{ id: 'my-items', label: t('בנייה עצמית', 'Build my own') }]} onChange={setMode} />
     {mode === 'my-items' ? <>
       <View testID="sbc-manual-summary" style={{ flexDirection: row, flexWrap: 'wrap', gap: 18, paddingVertical: 18, borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#536078' }}>
         <View style={{ flexGrow: 1, gap: 7, alignItems: language === 'he' ? 'flex-end' : 'flex-start' }}><SbcText tone="caption">{t('יעד האתגר', 'Challenge target')}</SbcText><ItemScore value={segment.target} size={24} /></View>
