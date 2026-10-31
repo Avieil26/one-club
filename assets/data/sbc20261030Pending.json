@@ -16,10 +16,17 @@
     "releasedAt": "2026-10-30T18:00:00Z",
     "endsAt": "2026-11-06T18:00:00Z",
     "segments": 1,
-    "verifiedRequirements": false,
-    "requirements": null,
-    "solutionStatus": "not-verified",
-    "source": "https://fcdata.io/sbc/"
+    "verifiedRequirements": true,
+    "requirements": {
+      "kind": "streamlined",
+      "minItemRating": 45,
+      "targetItemScore": 60000
+    },
+    "solutionStatus": "source-proposed-not-in-app-verified",
+    "source": "https://www.fut.gg/sbc/players/27-95-tijjani-reijnders/",
+    "rewardItemId": 50572286,
+    "referenceSolutionUrl": "https://www.fodder.gg/sbc/tijjani-reijnders-95",
+    "publishingStatus": "pending-app-validation"
   },
   {
     "id": "sbc-81-totw1-7-upgrade-20261030",
@@ -29,10 +36,15 @@
     "releasedAt": "2026-10-30T18:00:00Z",
     "endsAt": "2026-11-06T18:00:00Z",
     "segments": 1,
-    "verifiedRequirements": false,
-    "requirements": null,
-    "solutionStatus": "not-verified",
-    "source": "https://fcdata.io/sbc/"
+    "verifiedRequirements": true,
+    "requirements": {
+      "kind": "streamlined",
+      "minItemRating": 45,
+      "targetItemScore": 22000
+    },
+    "solutionStatus": "source-proposed-not-in-app-verified",
+    "source": "https://www.fut.gg/sbc/upgrades/27-102-81-totw-1-7-upgrade/",
+    "publishingStatus": "pending-app-validation"
   },
   {
     "id": "sbc-freaky-zombie-20261030",
@@ -52,7 +64,9 @@
       "playerCount": 7
     },
     "verifiedRequirements": true,
-    "solutionStatus": "not-verified",
-    "source": "https://nokafut.com/en/fc27/sbc-solutions/freaky-zombie-c115/"
+    "solutionStatus": "source-proposed-not-in-app-verified",
+    "source": "https://www.fut.gg/sbc/challenges/27-75-freaky-zombie/",
+    "referenceSolutionUrl": "https://nokafut.com/en/fc27/sbc-solutions/freaky-zombie-c115/",
+    "publishingStatus": "pending-app-validation"
   }
 ]
