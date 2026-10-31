@@ -1,4 +1,5 @@
 import roster from '@/assets/data/players.json';
+import octoberSbcs from '@/assets/data/sbc20261030Pending.json';
 import team2 from '@/assets/data/ultimateScream2Cards20261030.json';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import type { RecentCard } from '@/lib/recentCards';
@@ -49,6 +50,24 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       holographicType:'pristine',
       family:'Ultimate Scream Team 2 Pristine Holographic',
     });
+  }
+  const reijnders=octoberSbcs.find(row=>row.id==='sbc-reijnders-scream-20261030');
+  if(reijnders?.rewardFace && reijnders.rewardItemId){
+    const baseId=rosterIds.get('tijjani reijnders');
+    const base=basePlayers.find(p=>p.id===baseId);
+    result.push({
+      ...(base || {}),
+      id:'scream2-reijnders-sbc-20261030',
+      baseId:baseId,
+      itemId:reijnders.rewardItemId,
+      baseItemId:240638,
+      en:'Tijjani Reijnders',name:base?.name || 'Tijjani Reijnders',
+      rating:85,position:'CDM',nation:'הולנד',league:'ליגת העל הסעודית',club:'אל-קאדסיה',
+      face:reijnders.rewardFace,
+      edition:'recent',family:'Ultimate Scream SBC',backgroundId:151,holographicType:null,
+      releasedAt:'2026-10-30T18:00:00Z',attributes:{},
+      price:{kind:'sbc',console:null,pc:null,checkedAt:'2026-10-30T18:00:00Z'}
+    } as RecentCard);
   }
   return result;
 }
