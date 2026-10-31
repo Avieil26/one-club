@@ -50,7 +50,7 @@
     "verify:players": "node scripts/verify-sample.mjs",
     "lint": "expo lint",
     "verify:catalogue": "node scripts/verify-preview-catalogue.mjs",
-    "build:web": "npm run verify:catalogue && npm run verify:season2 && npm run verify:recent && npm run verify:preservation && npm run verify:localization && npm run verify:community && npm run verify:planner && expo export -p web",
+    "build:web": "npm run verify:catalogue && node scripts/verify-scream2-preview-repair.mjs && npm run verify:season2 && npm run verify:recent && npm run verify:preservation && npm run verify:localization && npm run verify:community && npm run verify:planner && expo export -p web",
     "verify:preservation": "node scripts/verify-preview-preservation.mjs",
     "verify:localization": "node scripts/verify-preview-localization.mjs && node scripts/verify-mini-game-localization.mjs",
     "verify:mobile": "node scripts/verify-mobile-layout.mjs",
