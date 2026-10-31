@@ -1,3 +1,4 @@
+import roster from '@/assets/data/players.json';
 import team2 from '@/assets/data/ultimateScream2Cards20261030.json';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import type { RecentCard } from '@/lib/recentCards';
@@ -5,6 +6,7 @@ import type { RecentCard } from '@/lib/recentCards';
 /** FC27 Team 2. This app-preview adapter intentionally never fabricates 34 attributes or prices. */
 export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
   const byEnglish = new Map<string,FcPlayer>();
+  const rosterIds = new Map((roster as {id:string;en:string}[]).map(row => [row.en.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim(), row.id]));
   for (const player of basePlayers) {
     const key = (player.en || player.name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     if (!byEnglish.has(key)) byEnglish.set(key,player);
@@ -12,12 +14,12 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
   const result: RecentCard[]=[];
   for (const card of team2) {
     const key=card.en.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-    const base=byEnglish.get(key);
+    const base=byEnglish.get(key) || basePlayers.find(row => row.id === rosterIds.get(key));
     result.push({
       ...(base || {}),
       id:card.id,
       baseId:base?.id,
-      baseItemId: 0,
+      baseItemId: Number(card.itemSourceUrl.split('/players/')[1]?.split('-')[0]) || 0,
       itemId:card.itemId,
       name:base?.name || card.en,
       en:card.en,
