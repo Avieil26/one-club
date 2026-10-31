@@ -19,8 +19,11 @@
       "def": 50,
       "phy": 71
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": 100911123,
+    "artUrl": null,
+    "itemSourceUrl": "https://www.fut.gg/players/247827-michael-olise/27-100911123/"
   },
   {
     "id": "scream2-ginola-20261030",
@@ -29,7 +32,7 @@
     "rating": 90,
     "position": "ST",
     "nation": "צרפת",
-    "league": "Hero",
+    "league": "ליג 1",
     "club": "Hero",
     "edition": "ultimate-scream-2",
     "releasedAt": "2026-10-30T18:00:00Z",
@@ -42,8 +45,11 @@
       "def": 56,
       "phy": 85
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": 84078052,
+    "artUrl": null,
+    "itemSourceUrl": "https://www.fut.gg/players/191972-david-ginola/27-84078052/"
   },
   {
     "id": "scream2-messi-20261030",
@@ -65,8 +71,10 @@
       "def": 34,
       "phy": 64
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-laudehr-20261030",
@@ -75,7 +83,7 @@
     "rating": 89,
     "position": "RM",
     "nation": "גרמניה",
-    "league": "Hero",
+    "league": "בונדסליגה נשים",
     "club": "Hero",
     "edition": "ultimate-scream-2",
     "releasedAt": "2026-10-30T18:00:00Z",
@@ -88,8 +96,10 @@
       "def": 83,
       "phy": 83
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-kvaratskhelia-20261030",
@@ -111,8 +121,10 @@
       "def": 59,
       "phy": 81
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-valverde-20261030",
@@ -134,8 +146,10 @@
       "def": 85,
       "phy": 86
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-mctominay-20261030",
@@ -157,8 +171,10 @@
       "def": 85,
       "phy": 88
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-quaresma-20261030",
@@ -167,7 +183,7 @@
     "rating": 87,
     "position": "LW",
     "nation": "פורטוגל",
-    "league": "Hero",
+    "league": "ליגה פורטוגל",
     "club": "Hero",
     "edition": "ultimate-scream-2",
     "releasedAt": "2026-10-30T18:00:00Z",
@@ -180,8 +196,10 @@
       "def": 31,
       "phy": 72
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-matheus-cunha-20261030",
@@ -203,8 +221,10 @@
       "def": 46,
       "phy": 77
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-ryerson-20261030",
@@ -226,8 +246,10 @@
       "def": 80,
       "phy": 83
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-perisic-20261030",
@@ -249,8 +271,10 @@
       "def": 72,
       "phy": 81
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-garner-20261030",
@@ -272,8 +296,10 @@
       "def": 85,
       "phy": 81
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-jonsdottir-20261030",
@@ -295,8 +321,10 @@
       "def": 48,
       "phy": 75
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-amoura-20261030",
@@ -318,8 +346,10 @@
       "def": 53,
       "phy": 66
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-crnogorcevic-20261030",
@@ -341,8 +371,10 @@
       "def": 84,
       "phy": 87
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-laura-perez-20261030",
@@ -364,8 +396,10 @@
       "def": 60,
       "phy": 72
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   },
   {
     "id": "scream2-ciss-20261030",
@@ -387,7 +421,9 @@
       "def": 85,
       "phy": 91
     },
-    "source": "https://www.moddingway.com/fut/news/10468/ultimate-scream-team-2-now-in-packs",
-    "verification": "official-release-stats; art and game item IDs pending"
+    "source": "https://unplayed.gg/blog/fc-27-ultimate-scream-team-2-leaks",
+    "verification": "EA official Team 2 stats cross-checked 2026-10-31; individual item ID and art pending",
+    "itemId": null,
+    "artUrl": null
   }
 ]
