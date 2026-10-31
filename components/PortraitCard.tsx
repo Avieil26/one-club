@@ -13,6 +13,7 @@ import { HERO_ART } from '@/lib/heroArt';
 import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
 import { RECENT_CARD_ART } from '@/lib/recentCardArt';
+import { Scream2Portrait } from '@/components/Scream2Portrait';
 import { SEASON2_ART } from '@/lib/season2Art';
 
 export const PORTRAIT_RATIO = 1.6;
@@ -735,6 +736,7 @@ export function PortraitCard({
   compactStats?: boolean;
 }) {
   const artId = player.baseId ?? player.id;
+  if (!shell && player.id.startsWith('scream2-')) return <Scream2Portrait player={player} width={width}/>;
   if (!shell && (edition === 'recent' || (edition === 'auto' && player.edition === 'recent'))) {
     const art = RECENT_CARD_ART[player.id];
     if (art) return <Image accessibilityLabel={`${player.en || player.name} · ${player.rating} · New release`} source={art} resizeMode="contain" style={{ width, height: Math.round(width * 419 / 300) }} />;
