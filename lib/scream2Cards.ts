@@ -6,7 +6,7 @@ import type { RecentCard } from '@/lib/recentCards';
 /** FC27 Team 2. This app-preview adapter intentionally never fabricates 34 attributes or prices. */
 export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
   const byEnglish = new Map<string,FcPlayer>();
-  const rosterIds = new Map((roster as {id:string;en:string}[]).map(row => [row.en.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim(), row.id]));
+  const rosterIds = new Map((roster as {id:string;en:string}[]).map(row => [row.en.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(), row.id]));
   for (const player of basePlayers) {
     const key = (player.en || player.name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     if (!byEnglish.has(key)) byEnglish.set(key,player);
