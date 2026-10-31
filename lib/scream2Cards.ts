@@ -73,7 +73,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       baseItemId:240638,
       en:'Tijjani Reijnders',name:base?.name || 'Tijjani Reijnders',
       rating:85,position:'CDM',nation:'הולנד',league:'ליגת העל הסעודית',club:'אל-קאדסיה',
-      face:reijnders.rewardFace,
+      face:reijnders.rewardFace,foot:'R',skillMoves:4,weakFoot:4,
       edition:'recent',family:'Ultimate Scream SBC',backgroundId:151,holographicType:null,
       releasedAt:'2026-10-30T18:00:00Z',attributes:fullAttributes('reijnders'),
       price:{kind:'sbc',console:null,pc:null,checkedAt:'2026-10-30T18:00:00Z'}
