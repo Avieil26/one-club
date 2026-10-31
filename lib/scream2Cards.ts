@@ -1,6 +1,8 @@
 import roster from '@/assets/data/players.json';
 import octoberSbcs from '@/assets/data/sbc20261030Pending.json';
 import team2 from '@/assets/data/ultimateScream2Cards20261030.json';
+import fullStats from '@/assets/data/ultimateScream2FullStats20261030.json';
+import { META_ATTRS } from '@/lib/playerMeta';
 import type { FcPlayer } from '@/lib/fcPlayers';
 import type { RecentCard } from '@/lib/recentCards';
 
@@ -12,6 +14,13 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
     const key = (player.en || player.name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     if (!byEnglish.has(key)) byEnglish.set(key,player);
   }
+  const detailed = fullStats.players as Record<string, number[]>;
+  const fullAttributes = (key:string): Record<string,number> => {
+    const values = detailed[key];
+    if (!values || values.length !== 29 || values.some(x=>!Number.isInteger(x) || x<0 || x>99))
+      throw new Error('Unverified complete FC27 stats: ' + key);
+    return Object.fromEntries(META_ATTRS.slice(0,29).map((name,i)=>[name,values[i]]));
+  };
   const result: RecentCard[]=[];
   for (const card of team2) {
     const key=card.en.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
@@ -35,7 +44,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       holographicType:null,
       releasedAt:card.releasedAt,
       face:card.face, foot:card.foot, weakFoot:card.weakFoot, skillMoves:card.skillMoves,
-      attributes:{},
+      attributes:fullAttributes(card.id.replace(/^scream2-/,'').replace(/-20261030$/,'')),
       price:{kind:card.prices?.console?'market':'unavailable',console:card.prices?.console??null,pc:null,checkedAt:card.releasedAt},
       pairRating:base?.rating,
       regularPosition:base?.position,
@@ -66,7 +75,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       rating:85,position:'CDM',nation:'הולנד',league:'ליגת העל הסעודית',club:'אל-קאדסיה',
       face:reijnders.rewardFace,
       edition:'recent',family:'Ultimate Scream SBC',backgroundId:151,holographicType:null,
-      releasedAt:'2026-10-30T18:00:00Z',attributes:{},
+      releasedAt:'2026-10-30T18:00:00Z',attributes:fullAttributes('reijnders'),
       price:{kind:'sbc',console:null,pc:null,checkedAt:'2026-10-30T18:00:00Z'}
     } as RecentCard);
   }
