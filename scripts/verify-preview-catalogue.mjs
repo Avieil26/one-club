@@ -43,18 +43,18 @@ for (const [baseId, row] of Object.entries(destined)) {
 }
 
 console.log(JSON.stringify({
-  expected: 20240,
+  expected: 20257,
   calculated: players.length,
   uniqueIds: byId.size,
-  missingFromTarget: 20240 - players.length,
+  missingFromTarget: 20257 - players.length,
   editionCounts,
 }, null, 2));
-assert.equal(editionCounts.recent, 93, 'Missing new releases');
+assert.equal(editionCounts.recent, 110, 'Missing new releases');
 const team2 = readData('ultimateScream2Cards20261030');
 assert.equal(team2.length,17);
-for(const card of team2){const row=byId.get(card.id);assert.ok(row,'Team 2 absent: '+card.en);assert.equal(row.itemId,card.itemId);assert.deepEqual(row.face,card.face);}
+for(const card of team2){const row=byId.get(card.id);assert.ok(row,'Team 2 absent: '+card.en);assert.equal(row.itemId,card.itemId);assert.deepEqual(row.face,card.face);const pristine=byId.get(card.id+'-pristine');assert.ok(pristine,'Pristine Team 2 absent: '+card.en);assert.equal(pristine.itemId,card.itemId+16777216);assert.equal(pristine.holographicType,'pristine');}
 const legacyCount=players.filter(p=>!p.id.startsWith('scream2-')).length;
 assert.equal(legacyCount,20223,'Production 20,223 baseline must remain unchanged');
 assert.equal(editionCounts.season2, 29, 'Missing Season 2 cards');
-assert.equal(players.length, 20240,
-  `Runtime catalogue has ${players.length} cards; expected 20240. Refusing this build.`);
+assert.equal(players.length, 20257,
+  `Runtime catalogue has ${players.length} cards; expected 20257. Refusing this build.`);
