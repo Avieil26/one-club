@@ -23,7 +23,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 100911123,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/247827-michael-olise/27-100911123/"
+    "itemSourceUrl": "https://www.fut.gg/players/247827-michael-olise/27-100911123/",
+    "foot": "L",
+    "skillMoves": 5,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/247827-michael-olise/27-100911123/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-ginola-20261030",
@@ -49,7 +54,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 84078052,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/191972-david-ginola/27-84078052/"
+    "itemSourceUrl": "https://www.fut.gg/players/191972-david-ginola/27-84078052/",
+    "foot": "R",
+    "skillMoves": 5,
+    "weakFoot": 5,
+    "verifiedSource": "https://www.fut.gg/players/191972-david-ginola/27-84078052/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-messi-20261030",
@@ -75,7 +85,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50489671,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/158023-lionel-messi/27-50489671/"
+    "itemSourceUrl": "https://www.fut.gg/players/158023-lionel-messi/27-50489671/",
+    "foot": "L",
+    "skillMoves": 5,
+    "weakFoot": 4,
+    "verifiedSource": "https://www.fut.gg/players/158023-lionel-messi/27-50489671/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-laudehr-20261030",
@@ -101,7 +116,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 84112387,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/226307-simone-laudehr/27-84112387/"
+    "itemSourceUrl": "https://www.fut.gg/players/226307-simone-laudehr/27-84112387/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 4,
+    "verifiedSource": "https://www.fut.gg/players/226307-simone-laudehr/27-84112387/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-kvaratskhelia-20261030",
@@ -127,7 +147,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50579283,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/247635-khvicha-kvaratskhelia/27-50579283/"
+    "itemSourceUrl": "https://www.fut.gg/players/247635-khvicha-kvaratskhelia/27-50579283/",
+    "foot": "R",
+    "skillMoves": 5,
+    "weakFoot": 5,
+    "verifiedSource": "https://www.fut.gg/players/247635-khvicha-kvaratskhelia/27-50579283/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-valverde-20261030",
@@ -153,7 +178,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50570701,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/239053-federico-valverde/27-50570701/"
+    "itemSourceUrl": "https://www.fut.gg/players/239053-federico-valverde/27-50570701/",
+    "foot": "R",
+    "skillMoves": 3,
+    "weakFoot": 4,
+    "verifiedSource": "https://www.fut.gg/players/239053-federico-valverde/27-50570701/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-mctominay-20261030",
@@ -179,7 +209,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50568886,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/237238-scott-mctominay/27-50568886/"
+    "itemSourceUrl": "https://www.fut.gg/players/237238-scott-mctominay/27-50568886/",
+    "foot": "R",
+    "skillMoves": 3,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/237238-scott-mctominay/27-50568886/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-quaresma-20261030",
@@ -205,7 +240,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 83906855,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/20775-quaresma/27-83906855/"
+    "itemSourceUrl": "https://www.fut.gg/players/20775-quaresma/27-83906855/",
+    "foot": "R",
+    "skillMoves": 5,
+    "weakFoot": 4,
+    "verifiedSource": "https://www.fut.gg/players/20775-quaresma/27-83906855/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-matheus-cunha-20261030",
@@ -231,7 +271,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50571891,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/240243-matheus-cunha/27-50571891/"
+    "itemSourceUrl": "https://www.fut.gg/players/240243-matheus-cunha/27-50571891/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 4,
+    "verifiedSource": "https://www.fut.gg/players/240243-matheus-cunha/27-50571891/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-ryerson-20261030",
@@ -257,7 +302,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50561539,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/229891-julian-ryerson/27-50561539/"
+    "itemSourceUrl": "https://www.fut.gg/players/229891-julian-ryerson/27-50561539/",
+    "foot": "R",
+    "skillMoves": 3,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/229891-julian-ryerson/27-50561539/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-perisic-20261030",
@@ -283,7 +333,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 67290322,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/181458-ivan-perisic/27-67290322/"
+    "itemSourceUrl": "https://www.fut.gg/players/181458-ivan-perisic/27-67290322/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 5,
+    "verifiedSource": "https://www.fut.gg/players/181458-ivan-perisic/27-67290322/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-garner-20261030",
@@ -309,7 +364,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50575305,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/243657-james-garner/27-50575305/"
+    "itemSourceUrl": "https://www.fut.gg/players/243657-james-garner/27-50575305/",
+    "foot": "R",
+    "skillMoves": 3,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/243657-james-garner/27-50575305/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-jonsdottir-20261030",
@@ -335,7 +395,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50598032,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/266384-sveindis-jane-jonsdottir/27-50598032/"
+    "itemSourceUrl": "https://www.fut.gg/players/266384-sveindis-jane-jonsdottir/27-50598032/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/266384-sveindis-jane-jonsdottir/27-50598032/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-amoura-20261030",
@@ -361,7 +426,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 67373561,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/264697-mohamed-amoura/27-67373561/"
+    "itemSourceUrl": "https://www.fut.gg/players/264697-mohamed-amoura/27-67373561/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/264697-mohamed-amoura/27-67373561/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-crnogorcevic-20261030",
@@ -387,7 +457,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50600588,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/268940-ana-maria-crnogorcevic/27-50600588/"
+    "itemSourceUrl": "https://www.fut.gg/players/268940-ana-maria-crnogorcevic/27-50600588/",
+    "foot": "R",
+    "skillMoves": 3,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/268940-ana-maria-crnogorcevic/27-50600588/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-laura-perez-20261030",
@@ -413,7 +488,12 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50607435,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/275787-laura-perez/27-50607435/"
+    "itemSourceUrl": "https://www.fut.gg/players/275787-laura-perez/27-50607435/",
+    "foot": "R",
+    "skillMoves": 4,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/275787-laura-perez/27-50607435/",
+    "marketPriceStatus": "not-listed-at-source"
   },
   {
     "id": "scream2-ciss-20261030",
@@ -439,6 +519,11 @@
     "verification": "Team 2 official face stats plus FUT.GG item ID verified; 34 details and full card art pending",
     "itemId": 50582506,
     "artUrl": null,
-    "itemSourceUrl": "https://www.fut.gg/players/250858-pathe-ciss/27-50582506/"
+    "itemSourceUrl": "https://www.fut.gg/players/250858-pathe-ciss/27-50582506/",
+    "foot": "R",
+    "skillMoves": 2,
+    "weakFoot": 3,
+    "verifiedSource": "https://www.fut.gg/players/250858-pathe-ciss/27-50582506/",
+    "marketPriceStatus": "not-listed-at-source"
   }
 ]
