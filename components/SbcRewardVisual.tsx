@@ -1,3 +1,5 @@
+import { Scream2Portrait } from '@/components/Scream2Portrait';
+import { PLAYERS } from '@/lib/fcPlayers';
 import { HERO_ART } from '@/lib/heroArt';
 import { RECENT_CARD_ART } from '@/lib/recentCardArt';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,6 +20,10 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
+ if (challenge.id === 'sbc-reijnders-scream-20261030') {
+  const base = PLAYERS.find(p => (p.en || p.name).toLowerCase().includes('reijnders'));
+  return <Scream2Portrait width={width} player={{ ...base, id:'scream2-reijnders-sbc-20261030', baseId:base?.id, name:base?.name || 'Reijnders', en:'Tijjani Reijnders', nation:'הולנד', league:'ליגת העל הסעודית', club:'אל-קאדסיה', rating:85, position:'CDM', face:{ovr:85,pac:81,sho:81,pas:85,dri:84,def:82,phy:84} }} />;
+ }
  // Complete Ultimate Scream item 67312611, sourced from FUT.GG and bundled locally.
  if (challenge.id === 'sbc-bellerin-20261027') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Héctor Bellerín Ultimate Scream 85 RM" style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={require('@/assets/images/sbc-rewards/bellerin-67312611.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  if (challenge.id === 'sbc-showdown-carlos-20261028') return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel="Carlos Augusto Showdown 83 LB" style={{ width, height: width * 1.4 }}><Image source={require('@/assets/images/sbc-rewards/carlos-50590296.png')} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
