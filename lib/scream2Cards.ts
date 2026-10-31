@@ -36,7 +36,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       releasedAt:card.releasedAt,
       face:card.face, foot:card.foot, weakFoot:card.weakFoot, skillMoves:card.skillMoves,
       attributes:{},
-      price:{kind:'unavailable',console:null,pc:null,checkedAt:card.releasedAt},
+      price:{kind:card.prices?.console?'market':'unavailable',console:card.prices?.console??null,pc:null,checkedAt:card.releasedAt},
       pairRating:base?.rating,
       regularPosition:base?.position,
       regularClub:base?.club,
@@ -49,6 +49,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       itemId:card.itemId+16777216,
       holographicType:'pristine',
       family:'Ultimate Scream Team 2 Pristine Holographic',
+      price:{kind:card.prices?.pristineConsole?'market':'unavailable',console:card.prices?.pristineConsole??null,pc:null,checkedAt:card.releasedAt},
     });
   }
   const reijnders=octoberSbcs.find(row=>row.id==='sbc-reijnders-scream-20261030') as {rewardFace?:{ovr:number;pac:number;sho:number;pas:number;dri:number;def:number;phy:number};rewardItemId?:number}|undefined;
