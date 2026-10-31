@@ -1,0 +1,48 @@
+name: Publish Android OTA — FC27 approved release
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'Select the EAS Update channel already configured in the installed APK'
+        type: choice
+        required: true
+        options:
+          - android-season2-20261022
+          - android-hotfix-20261020
+      confirm_runtime:
+        description: 'Enter 1.0.3 to confirm the installed APK appVersion runtime'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: fc27-android-ota-${{ inputs.channel }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: inputs.confirm_runtime == '1.0.3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ff801b75eacad7fa32627b584a24773681e2baa7
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck && npm run verify:catalogue && node scripts/verify-scream2-preview-repair.mjs
+      - name: Verify exact runtime version
+        run: node -e "const c=require('./app.json').expo;if(c.version!=='1.0.3'||c.updates?.enabled!==true||c.runtimeVersion?.policy!=='appVersion')process.exit(1)"
+      - name: Publish OTA for selected installed APK channel
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          CHANNEL: ${{ inputs.channel }}
+        run: |
+          if [ -z "$EXPO_TOKEN" ]; then
+            echo "EXPO_TOKEN missing in GitHub Actions secrets; no update was published."
+            exit 1
+          fi
+          npx --yes eas-cli@latest update --channel "$CHANNEL" --platform android --message "FC27 Ultimate Scream Team 2 - 20258 cards" --non-interactive
