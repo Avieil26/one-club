@@ -8,7 +8,7 @@ import type { FcPlayer } from '@/lib/fcPlayers';
  */
 export function Scream2Portrait({ player, width }: {player: FcPlayer; width: number}) {
   const [failed, setFailed] = useState(false);
-  const itemId = (player as FcPlayer & {itemId?:number}).itemId;
+  const itemId = (player as FcPlayer & {itemId?:number}).itemId ?? (player.id === 'scream2-reijnders-sbc-20261030' ? 50572286 : undefined);
   const height = Math.round(width * 419 / 300);
   if (!Number.isInteger(itemId) || !itemId || failed) {
     return <View style={{width,height,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
