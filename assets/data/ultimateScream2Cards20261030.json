@@ -28,7 +28,15 @@
     "skillMoves": 5,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/247827-michael-olise/27-100911123/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 1799000,
+      "pristineConsole": 3450000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-ginola-20261030",
@@ -59,7 +67,8 @@
     "skillMoves": 5,
     "weakFoot": 5,
     "verifiedSource": "https://www.fut.gg/players/191972-david-ginola/27-84078052/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": null
   },
   {
     "id": "scream2-messi-20261030",
@@ -90,7 +99,15 @@
     "skillMoves": 5,
     "weakFoot": 4,
     "verifiedSource": "https://www.fut.gg/players/158023-lionel-messi/27-50489671/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 5750000,
+      "pristineConsole": 7100000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-laudehr-20261030",
@@ -121,7 +138,8 @@
     "skillMoves": 4,
     "weakFoot": 4,
     "verifiedSource": "https://www.fut.gg/players/226307-simone-laudehr/27-84112387/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": null
   },
   {
     "id": "scream2-kvaratskhelia-20261030",
@@ -152,7 +170,15 @@
     "skillMoves": 5,
     "weakFoot": 5,
     "verifiedSource": "https://www.fut.gg/players/247635-khvicha-kvaratskhelia/27-50579283/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 2900000,
+      "pristineConsole": 3905000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-valverde-20261030",
@@ -183,7 +209,15 @@
     "skillMoves": 3,
     "weakFoot": 4,
     "verifiedSource": "https://www.fut.gg/players/239053-federico-valverde/27-50570701/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 2910000,
+      "pristineConsole": null,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-mctominay-20261030",
@@ -214,7 +248,15 @@
     "skillMoves": 3,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/237238-scott-mctominay/27-50568886/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 580000,
+      "pristineConsole": 793000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-quaresma-20261030",
@@ -245,7 +287,8 @@
     "skillMoves": 5,
     "weakFoot": 4,
     "verifiedSource": "https://www.fut.gg/players/20775-quaresma/27-83906855/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": null
   },
   {
     "id": "scream2-matheus-cunha-20261030",
@@ -276,7 +319,15 @@
     "skillMoves": 4,
     "weakFoot": 4,
     "verifiedSource": "https://www.fut.gg/players/240243-matheus-cunha/27-50571891/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 344000,
+      "pristineConsole": 389000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-ryerson-20261030",
@@ -307,7 +358,15 @@
     "skillMoves": 3,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/229891-julian-ryerson/27-50561539/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 85500,
+      "pristineConsole": 134000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-perisic-20261030",
@@ -338,7 +397,15 @@
     "skillMoves": 4,
     "weakFoot": 5,
     "verifiedSource": "https://www.fut.gg/players/181458-ivan-perisic/27-67290322/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 50500,
+      "pristineConsole": 86500,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-garner-20261030",
@@ -369,7 +436,15 @@
     "skillMoves": 3,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/243657-james-garner/27-50575305/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 96000,
+      "pristineConsole": 336000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-jonsdottir-20261030",
@@ -400,7 +475,15 @@
     "skillMoves": 4,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/266384-sveindis-jane-jonsdottir/27-50598032/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 71000,
+      "pristineConsole": 91000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-amoura-20261030",
@@ -431,7 +514,15 @@
     "skillMoves": 4,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/264697-mohamed-amoura/27-67373561/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 86500,
+      "pristineConsole": 115000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-crnogorcevic-20261030",
@@ -462,7 +553,15 @@
     "skillMoves": 3,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/268940-ana-maria-crnogorcevic/27-50600588/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 23000,
+      "pristineConsole": 163000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-laura-perez-20261030",
@@ -493,7 +592,15 @@
     "skillMoves": 4,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/275787-laura-perez/27-50607435/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 61000,
+      "pristineConsole": 322000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   },
   {
     "id": "scream2-ciss-20261030",
@@ -524,6 +631,14 @@
     "skillMoves": 2,
     "weakFoot": 3,
     "verifiedSource": "https://www.fut.gg/players/250858-pathe-ciss/27-50582506/",
-    "marketPriceStatus": "not-listed-at-source"
+    "marketPriceStatus": "not-listed-at-source",
+    "prices": {
+      "console": 37000,
+      "pristineConsole": 154000,
+      "pc": null,
+      "pristinePc": null,
+      "checkedAt": "2026-10-31",
+      "sourceUrl": "https://futflipper.com/promos/ultimate-scream"
+    }
   }
 ]
