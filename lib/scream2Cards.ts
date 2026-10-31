@@ -15,7 +15,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
   for (const card of team2) {
     const key=card.en.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
     const base=byEnglish.get(key) || basePlayers.find(row => row.id === rosterIds.get(key));
-    result.push({
+    const normal = {
       ...(base || {}),
       id:card.id,
       baseId:base?.id,
@@ -40,7 +40,15 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       regularPosition:base?.position,
       regularClub:base?.club,
       regularLeague:base?.league,
-    } as RecentCard);
+    } as RecentCard;
+    result.push(normal);
+    result.push({
+      ...normal,
+      id:card.id+'-pristine',
+      itemId:card.itemId+16777216,
+      holographicType:'pristine',
+      family:'Ultimate Scream Team 2 Pristine Holographic',
+    });
   }
   return result;
 }
