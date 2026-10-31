@@ -1,5 +1,9 @@
 name: Publish Android OTA — FC27 approved release
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-approved-android-ota.yml'
   workflow_dispatch:
     inputs:
       channel:
@@ -20,7 +24,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
-    if: inputs.confirm_runtime == '1.0.3'
+    if: github.event_name == 'push' || inputs.confirm_runtime == '1.0.3'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -45,4 +49,10 @@ jobs:
             echo "EXPO_TOKEN missing in GitHub Actions secrets; no update was published."
             exit 1
           fi
-          npx --yes eas-cli@latest update --channel "$CHANNEL" --platform android --message "FC27 Ultimate Scream Team 2 - 20258 cards" --non-interactive
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            for target in android-season2-20261022 android-hotfix-20261020; do
+              npx --yes eas-cli@latest update --channel "$target" --platform android --message "FC27 Ultimate Scream Team 2 - 20258 cards" --non-interactive
+            done
+          else
+            npx --yes eas-cli@latest update --channel "$CHANNEL" --platform android --message "FC27 Ultimate Scream Team 2 - 20258 cards" --non-interactive
+          fi
