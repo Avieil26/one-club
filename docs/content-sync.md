@@ -35,3 +35,51 @@ This is a transport/staging schema, **not** a complete production representation
 `node scripts/sync-content-feed.mjs path/to/authorized-feed.json`
 
 No unauthenticated FUTBIN scraping or assumed FUTBIN API is implemented.
+
+
+## Current pipeline outputs (not live)
+Every successful run creates three review files:
+- `pending.json`: raw validated provider feed
+- `sbc-candidates.json`: complete challenges mapped to the existing `SbcChallenge` app type
+- `card-candidates.json`: complete player stats with art origin and license-review status
+
+A source that omits `app` mappings for SBCs, or full six-stat values plus an HTTPS artwork source for cards, fails closed. No partial payload is silently published.
+
+### Complete card candidate
+```json
+{
+  "id": "unique-promo-card-id",
+  "baseId": "existing-player-id",
+  "name": "Player",
+  "program": "Ultimate Scream",
+  "rating": 88,
+  "position": "ST",
+  "nation": "England",
+  "league": "Premier League",
+  "club": "Example FC",
+  "artSourceUrl": "https://licensed-provider.example/card.png",
+  "face": { "pac": 88, "sho": 89, "pas": 78, "dri": 85, "def": 40, "phy": 81 }
+}
+```
+
+### Complete SBC app mapping
+Each feed SBC still has unique `id`, `name`, nonempty `requirements` array, and `rewardCardId`, plus:
+```json
+{
+  "app": {
+    "title": "Challenge",
+    "kind": "classic",
+    "requirements": "Full text of verified requirements",
+    "reward": "Verified reward",
+    "createdAt": "2026-10-31T18:00:00Z",
+    "endsAt": "2026-11-05T18:00:00Z",
+    "targetScore": null,
+    "rules": { "chemistry": 20, "minRating": 83 },
+    "previewFormation": null,
+    "previewSquad": null
+  }
+}
+```
+Classic rules must map exactly to supported app rule keys. Structured constraints requiring richer types are rejected until a safe adapter exists. Streamlined entries instead require `rules:null` and a positive integer `targetScore`.
+
+**Not implemented yet:** live source connection, automatic licensed artwork acquisition, reliable solution generation, SBC player reward previews, release packaging, and production publishing. The scheduled Action runs only from the default GitHub branch after merge and needs secrets before it can fetch anything. Android builds use bundled data and do not automatically refresh from GitHub changes.
