@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { loadPlayerCatalogue, loadRepositoryModule } from './load-player-catalogue.mjs';
 const cards = loadPlayerCatalogue();
+const { META_ATTRS } = loadRepositoryModule('lib/playerMeta.ts');
 assert.equal(cards.length,20258,'Keep 20223 originals + 35 new editions');
 assert.equal(cards.filter(x=>x.id.startsWith('scream2-')).length,35);
 const {pointsSegments,pointsPlans,pointsPlanValid}=loadRepositoryModule('lib/sbcVerified.ts');
@@ -22,7 +23,11 @@ for(const row of cards.filter(x=>x.id.startsWith('scream2-')&&!x.id.includes('re
  const card=recentCardFor(row.id);
  assert(card && Number.isInteger(card.itemId),row.id);
  assert(card.foot==='L'||card.foot==='R',row.id+' missing foot');
+ for(const key of META_ATTRS.slice(0,29)) assert(Number.isInteger(card.attributes[key]) && card.attributes[key]>=0 && card.attributes[key]<=99,row.id+' missing or invalid '+key);
  assert(card.skillMoves>=1&&card.skillMoves<=5,row.id+' missing skill');
  assert(card.weakFoot>=1&&card.weakFoot<=5,row.id+' missing weak foot');
 }
-console.log('PASS: 20258 cards, 34 Team 2 edition foot/skill/wf details, both SBC score plans and 7-slot self builder.');
+const reijnders=recentCardFor('scream2-reijnders-sbc-20261030');
+assert(reijnders,'Reijnders reward missing');
+for(const key of META_ATTRS.slice(0,29)) assert(Number.isInteger(reijnders.attributes[key]),'Reijnders '+key);
+console.log('PASS: 20258 cards, 35 new editions with complete 29 outfield detail stats and foot/skill/wf, both SBC score plans and 7-slot self builder.');
