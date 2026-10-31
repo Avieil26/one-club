@@ -1,3 +1,4 @@
+import { SbcOctober30Solutions } from '@/components/SbcOctober30Solutions';
 import { SbcClassicSolution } from '@/components/SbcClassicSolution';
 import { classicSegments, communitySquadStatus } from '@/lib/sbcClassic';
 import { SbcRewardVisual } from '@/components/SbcRewardVisual';
@@ -86,6 +87,7 @@ export default function SbcDetailScreen() {
         {challenge.reward ? `${sbcText(challenge.reward, language)} · ` : ''}
         {challenge.endsAt ? t(`נשאר: ${remaining}`, `Remaining: ${remaining}`) : remaining}
       </Muted>
+      <SbcOctober30Solutions challengeId={challengeId} />
       {challenge.groupReward ? <Muted>{t('פרס נוסף אחרי השלמת כל ארבעת חלקי Marquee Matchups: ', 'Bonus after completing all four Marquee Matchups segments: ')}{challenge.groupReward}</Muted> : null}
       {challenge.kind === 'classic' && classicSegments(challengeId).length ? <SbcClassicSolution key={challengeId} challengeId={challengeId} /> : challenge.kind === 'classic' && challenge.previewSquad && !challenge.manualValidation && challenge.rules && report.ready ? (
         <View style={split ? { flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 18 } : { gap: 14 }}>
