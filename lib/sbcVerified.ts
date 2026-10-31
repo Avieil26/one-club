@@ -1,3 +1,5 @@
+import priceSnapshot from '@/assets/data/marketPrices.json';
+import eaIds from '@/assets/data/priceEaIds.json';
 import current from '@/assets/data/sbc-refresh-20261028.json';
 import bellerin from '@/assets/data/sbc-bellerin-20261028.json';
 import latest from '@/assets/data/sbc-refresh-20261026.json';
@@ -21,10 +23,28 @@ export function pointsSegments(id: string): PointsSegment[] {
     'sbc-81-totw1-7-upgrade-20261030': {eaId:102,name:'81+ TOTW 1–7 Upgrade',target:22000},
   };
   const next=pending[id];
-  if(next) return [{
-    ...next, requirements:['Rating: Min. 45'],
-    platforms:{ps5:{pricedAt:'',rates:[]},pc:{pricedAt:'',rates:[]}},
-  }];
+  if(next) {
+    const prices=priceSnapshot as Record<string,number[]>;
+    const knownIds=eaIds as Record<string,number>;
+    const makeRates=(platform:'ps5'|'pc'): ItemRate[]=>{
+      const index=platform==='ps5'?0:1;
+      const ratings=[82,83,84,85,86,87,88,89];
+      return ratings.flatMap(overall=>{
+        const players=PLAYERS.filter(p=>!p.edition&&!p.icon&&p.rating===overall&&knownIds[p.id]&&prices[p.id]?.[index]>0)
+          .sort((a,b)=>prices[a.id][index]-prices[b.id][index]).slice(0,12);
+        const score=players.length?itemScore(players[0]):null;
+        if(!score)return [];
+        return [{overall,rarity:0,score,price:prices[players[0].id][index],players:players.map(p=>p.id),eaIds:players.map(p=>knownIds[p.id])}];
+      });
+    };
+    return [{
+      ...next, requirements:['Rating: Min. 45'],
+      platforms:{
+        ps5:{pricedAt:'2026-10-28 snapshot',rates:makeRates('ps5')},
+        pc:{pricedAt:'2026-10-28 snapshot',rates:makeRates('pc')},
+      },
+    }];
+  }
   return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points, ...current.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
