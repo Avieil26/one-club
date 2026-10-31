@@ -50,7 +50,7 @@ export type MarketPrice = { console?: number; pc?: number };
 /** Real market price for a card that can be bought. TOTW cards with no live listing are explicitly shown as 0. */
 export function marketQuote(id: string): MarketPrice | null {
   const row = table[id];
-  if (id.startsWith('recent-')) {
+  if (id.startsWith('recent-') || id.startsWith('scream2-')) {
     if (!row) return null;
     return { console: row[0] > 0 ? row[0] : undefined, pc: row[1] > 0 ? row[1] : undefined };
   }
