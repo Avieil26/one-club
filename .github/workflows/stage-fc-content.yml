@@ -25,6 +25,8 @@ jobs:
         run: node scripts/sync-content-feed.mjs artifacts/content-sync/feed.json
       - name: Prepare SBC entries for app schema
         run: node scripts/prepare-sbc-catalog.mjs artifacts/content-sync/pending.json
+      - name: Validate card previews and art provenance
+        run: node scripts/prepare-card-catalog.mjs artifacts/content-sync/pending.json
       - name: Publish review artifact
         uses: actions/upload-artifact@v4
         with:
@@ -32,4 +34,5 @@ jobs:
           path: |
             artifacts/content-sync/pending.json
             artifacts/content-sync/sbc-candidates.json
+            artifacts/content-sync/card-candidates.json
           retention-days: 14
