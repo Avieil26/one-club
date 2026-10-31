@@ -8,6 +8,7 @@ import { NationFlag } from '@/components/NationFlag';
 /** Team 2 preview renderer: purple/orange Scream chrome, no counterfeit item image. */
 export function Scream2Portrait({player,width}: {player:FcPlayer;width:number}) {
   const height=width*419/300;
+  const pristine=(player as FcPlayer & {holographicType?:string}).holographicType==='pristine';
   const media=playerMedia(player.baseId || player.id);
   const [cutoutUnavailable,setCutoutUnavailable]=useState(false);
   const [backupUnavailable,setBackupUnavailable]=useState(false);
@@ -42,7 +43,7 @@ export function Scream2Portrait({player,width}: {player:FcPlayer;width:number}) 
       <Path d="M173 83 L210 96 L192 112 L207 119 L184 134 L165 112 Z" fill="#FF8B20" opacity=".85"/>
       <Ellipse cx="149" cy="145" rx="121" ry="121" fill="url(#screamFire)" opacity=".7"/>
       <Path d="M44 292 Q89 259 127 294 Q174 274 264 295 L262 355 L253 374 L150 394 L47 372 L40 357 Z" fill="url(#screamBottom)"/>
-      <Path d="M28 28 L75 16 L118 9 L148 17 L180 9 L230 18 L272 31 L279 84 L275 357 L264 384 L150 406 L36 384 L24 356 L23 86 Z" fill="none" stroke="#FFA43D" strokeWidth="2"/>
+      <Path d="M28 28 L75 16 L118 9 L148 17 L180 9 L230 18 L272 31 L279 84 L275 357 L264 384 L150 406 L36 384 L24 356 L23 86 Z" fill="none" stroke={pristine ? '#D8F9FF' : '#FFA43D'} strokeWidth={pristine ? '4' : '2'}/>
     </Svg>
     {photoUrl ? <Image source={{uri:photoUrl}} onError={()=>{ if(!cutoutUnavailable) setCutoutUnavailable(true); else setBackupUnavailable(true); }} resizeMode="contain" style={{position:'absolute',top:height*.12,left:width*.22,width:width*.72,height:height*.51}}/> : <Text style={{position:'absolute',top:height*.28,left:width*.29,color:'#F6B963',fontSize:width*.3,fontWeight:'900'}}>{(player.en || player.name).slice(0,1)}</Text>}
     <View style={{position:'absolute',left:width*.09,top:height*.16}}>
@@ -53,6 +54,7 @@ export function Scream2Portrait({player,width}: {player:FcPlayer;width:number}) 
     <View style={{position:'absolute',top:height*.752,left:width*.11,width:width*.78,flexDirection:'row',justifyContent:'space-between'}}>
       {fields.map(([name,value])=><View key={name} style={{alignItems:'center'}}><Text style={{fontSize:width*.038,fontWeight:'800',color:'#FFE9C4'}}>{name}</Text><Text style={{fontSize:width*.065,fontWeight:'900',color:'#FFF7EE'}}>{value ?? '—'}</Text></View>)}
     </View>
+    {pristine ? <Text style={{position:'absolute',top:height*.06,right:width*.09,color:'#D7F6FF',fontSize:width*.08,fontWeight:'900',textShadowColor:'#B166FF',textShadowRadius:7}}>✦</Text> : null}
     <View style={{position:'absolute',bottom:height*.09,alignSelf:'center',flexDirection:'row',alignItems:'center',gap:width*.045}}>
       <NationFlag nation={player.nation} size={width*.095}/>
       <Text style={{fontSize:width*.043,color:'#FFCB86',fontWeight:'900'}}>ULTIMATE SCREAM</Text>
