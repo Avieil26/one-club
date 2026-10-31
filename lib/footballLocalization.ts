@@ -1,6 +1,11 @@
 export type FootballLanguage = 'he' | 'en';
 
 export const CLUB_NAMES_EN: Record<string, string> = {
+  'אנג׳ל סיטי': 'Angel City FC',
+  'ניס': 'OGC Nice',
+  'שטרסבורג': 'RC Strasbourg',
+  'סביליה': 'Sevilla FC',
+  'ראיו וייקאנו': 'Rayo Vallecano',
   "אייקונים": "Icons",
   "לונדון סיטי": "London City Lionesses",
   "באיירן מינכן": "Bayern Munich",
