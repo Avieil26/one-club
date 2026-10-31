@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '22'
       - name: Run importer safety tests
-        run: node --test scripts/sync-content-feed.test.mjs
+        run: node --test scripts/sync-content-feed.test.mjs scripts/prepare-sbc-catalog.test.mjs
       - name: Fetch authorized card and SBC feed
         env:
           FC_CONTENT_FEED_URL: ${{ secrets.FC_CONTENT_FEED_URL }}
@@ -23,9 +23,13 @@ jobs:
         run: node scripts/fetch-content-feed.mjs
       - name: Validate and stage pending content
         run: node scripts/sync-content-feed.mjs artifacts/content-sync/feed.json
+      - name: Prepare SBC entries for app schema
+        run: node scripts/prepare-sbc-catalog.mjs artifacts/content-sync/pending.json
       - name: Publish review artifact
         uses: actions/upload-artifact@v4
         with:
           name: fc-content-pending
-          path: artifacts/content-sync/pending.json
+          path: |
+            artifacts/content-sync/pending.json
+            artifacts/content-sync/sbc-candidates.json
           retention-days: 14
