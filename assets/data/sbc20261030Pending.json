@@ -1,0 +1,58 @@
+[
+  {
+    "id": "sbc-reijnders-scream-20261030",
+    "title": "Ultimate Scream · Tijjani Reijnders",
+    "kind": "streamlined",
+    "reward": "85 CDM Tijjani Reijnders · Ultimate Scream",
+    "rewardFace": {
+      "ovr": 85,
+      "pac": 81,
+      "sho": 81,
+      "pas": 85,
+      "dri": 84,
+      "def": 82,
+      "phy": 84
+    },
+    "releasedAt": "2026-10-30T18:00:00Z",
+    "endsAt": "2026-11-06T18:00:00Z",
+    "segments": 1,
+    "verifiedRequirements": false,
+    "requirements": null,
+    "solutionStatus": "not-verified",
+    "source": "https://fcdata.io/sbc/"
+  },
+  {
+    "id": "sbc-81-totw1-7-upgrade-20261030",
+    "title": "81+ TOTW 1–7 Upgrade",
+    "kind": "classic",
+    "reward": "81+ TOTW 1–7 Player Pack",
+    "releasedAt": "2026-10-30T18:00:00Z",
+    "endsAt": "2026-11-06T18:00:00Z",
+    "segments": 1,
+    "verifiedRequirements": false,
+    "requirements": null,
+    "solutionStatus": "not-verified",
+    "source": "https://fcdata.io/sbc/"
+  },
+  {
+    "id": "sbc-freaky-zombie-20261030",
+    "title": "Freaky Zombie",
+    "kind": "classic",
+    "reward": "Large Gold Pack",
+    "releasedAt": "2026-10-30T18:00:00Z",
+    "endsAt": "2026-11-06T18:00:00Z",
+    "segments": 1,
+    "requirements": {
+      "minLeagues": 2,
+      "maxSameLeague": 5,
+      "minSameNation": 4,
+      "minQuality": "silver",
+      "minGold": 4,
+      "minChemistry": 20,
+      "playerCount": 7
+    },
+    "verifiedRequirements": true,
+    "solutionStatus": "not-verified",
+    "source": "https://nokafut.com/en/fc27/sbc-solutions/freaky-zombie-c115/"
+  }
+]
