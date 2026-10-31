@@ -51,7 +51,7 @@ export function scream2Cards(basePlayers: readonly FcPlayer[]): RecentCard[] {
       family:'Ultimate Scream Team 2 Pristine Holographic',
     });
   }
-  const reijnders=octoberSbcs.find(row=>row.id==='sbc-reijnders-scream-20261030');
+  const reijnders=octoberSbcs.find(row=>row.id==='sbc-reijnders-scream-20261030') as {rewardFace?:{ovr:number;pac:number;sho:number;pas:number;dri:number;def:number;phy:number};rewardItemId?:number}|undefined;
   if(reijnders?.rewardFace && reijnders.rewardItemId){
     const baseId=rosterIds.get('tijjani reijnders');
     const base=basePlayers.find(p=>p.id===baseId);
