@@ -16,6 +16,15 @@ export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
+  const pending: Record<string,{eaId:number;name:string;target:number}> = {
+    'sbc-reijnders-scream-20261030': {eaId:95,name:'Tijjani Reijnders Ultimate Scream',target:60000},
+    'sbc-81-totw1-7-upgrade-20261030': {eaId:102,name:'81+ TOTW 1–7 Upgrade',target:22000},
+  };
+  const next=pending[id];
+  if(next) return [{
+    ...next, requirements:['Rating: Min. 45'],
+    platforms:{ps5:{pricedAt:'',rates:[]},pc:{pricedAt:'',rates:[]}},
+  }];
   return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points, ...current.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
