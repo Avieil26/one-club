@@ -1,0 +1,27 @@
+name: Verify Ultimate Scream Team 2 staging
+on:
+  push:
+    branches:
+      - preview/scream2-preserve-20223-20261031
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-staging:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/verify-scream2-20261030.mjs
+      - name: Publication readiness check (expected fail until images and details are verified)
+        run: |
+          if node scripts/check-scream2-publish-ready.mjs; then
+            echo "All required card assets verified; review before publishing."
+          else
+            echo "Staging passes identity checks but is NOT ready for publication."
+          fi
