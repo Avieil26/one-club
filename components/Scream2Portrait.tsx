@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgLinearGradient, RadialGradient, Stop, Path, Ellipse } from 'react-native-svg';
 import type { FcPlayer } from '@/lib/fcPlayers';
@@ -8,6 +9,11 @@ import { NationFlag } from '@/components/NationFlag';
 export function Scream2Portrait({player,width}: {player:FcPlayer;width:number}) {
   const height=width*419/300;
   const media=playerMedia(player.baseId || player.id);
+  const [cutoutUnavailable,setCutoutUnavailable]=useState(false);
+  const [backupUnavailable,setBackupUnavailable]=useState(false);
+  const itemId = (player as FcPlayer & {itemId?:number}).itemId || (player.id === 'scream2-reijnders-sbc-20261030' ? 50572286 : 0);
+  const remoteCutout = itemId > 0 ? 'https://assets.fodder.gg/renders/' + itemId + '.webp' : '';
+  const photoUrl = !cutoutUnavailable && remoteCutout ? remoteCutout : !backupUnavailable ? media.photo : undefined;
   const face=player.face;
   const fields:[string,number|undefined][]=[['PAC',face?.pac],['SHO',face?.sho],['PAS',face?.pas],['DRI',face?.dri],['DEF',face?.def],['PHY',face?.phy]];
   const ratio=width/300;
@@ -38,7 +44,7 @@ export function Scream2Portrait({player,width}: {player:FcPlayer;width:number}) 
       <Path d="M44 292 Q89 259 127 294 Q174 274 264 295 L262 355 L253 374 L150 394 L47 372 L40 357 Z" fill="url(#screamBottom)"/>
       <Path d="M28 28 L75 16 L118 9 L148 17 L180 9 L230 18 L272 31 L279 84 L275 357 L264 384 L150 406 L36 384 L24 356 L23 86 Z" fill="none" stroke="#FFA43D" strokeWidth="2"/>
     </Svg>
-    {media.photo ? <Image source={{uri:media.photo}} resizeMode="contain" style={{position:'absolute',top:height*.12,left:width*.22,width:width*.72,height:height*.51}}/> : <Text style={{position:'absolute',top:height*.28,left:width*.29,color:'#F6B963',fontSize:width*.3,fontWeight:'900'}}>{(player.en || player.name).slice(0,1)}</Text>}
+    {photoUrl ? <Image source={{uri:photoUrl}} onError={()=>{ if(!cutoutUnavailable) setCutoutUnavailable(true); else setBackupUnavailable(true); }} resizeMode="contain" style={{position:'absolute',top:height*.12,left:width*.22,width:width*.72,height:height*.51}}/> : <Text style={{position:'absolute',top:height*.28,left:width*.29,color:'#F6B963',fontSize:width*.3,fontWeight:'900'}}>{(player.en || player.name).slice(0,1)}</Text>}
     <View style={{position:'absolute',left:width*.09,top:height*.16}}>
       <Text style={{color:'#FFF5DA',fontSize:width*.13,fontWeight:'900',lineHeight:width*.145,textShadowColor:'#351024',textShadowRadius:4}}>{player.rating}</Text>
       <Text style={{color:'#FFF5DA',fontSize:width*.066,fontWeight:'800'}}>{player.position}</Text>
