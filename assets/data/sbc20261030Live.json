@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sbc-reijnders-scream-20261030",
+    "title": "Ultimate Scream · Tijjani Reijnders",
+    "kind": "streamlined",
+    "requirements": "צוברים 60,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Reijnders Ultimate Scream 85.",
+    "endsAt": "2026-11-06T18:00:00.000Z",
+    "createdBy": "admin",
+    "targetScore": 60000,
+    "rules": null,
+    "createdAt": "2026-10-30T18:00:00.000Z",
+    "reward": "Ultimate Scream Tijjani Reijnders 85 CDM",
+    "clubs": [],
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-95-tijjani-reijnders/"
+  },
+  {
+    "id": "sbc-81-totw1-7-upgrade-20261030",
+    "title": "81+ TOTW 1–7 Upgrade",
+    "kind": "streamlined",
+    "requirements": "צוברים 22,000 נקודות פריטים עם פריטים בדירוג 45 ומעלה; פרס: שחקן TOTW בדירוג 81+ משבועות 1 עד 7.",
+    "endsAt": "2026-11-06T18:00:00.000Z",
+    "createdBy": "admin",
+    "targetScore": 22000,
+    "rules": null,
+    "createdAt": "2026-10-30T18:00:00.000Z",
+    "reward": "81+ TOTW 1–7 Player Pack",
+    "clubs": [],
+    "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-102-81-totw-1-7-upgrade/"
+  },
+  {
+    "id": "sbc-freaky-zombie-20261030",
+    "title": "Freaky Zombie",
+    "kind": "classic",
+    "requirements": "7 שחקנים, לפחות 2 ליגות, עד 5 מאותה ליגה, לפחות 4 מאותה מדינה, לפחות 4 זהב, כל הקלפים כסף ומעלה וכימיה לפחות 20.",
+    "endsAt": "2026-11-06T18:00:00.000Z",
+    "createdBy": "admin",
+    "targetScore": null,
+    "rules": {
+      "playerCount": 7,
+      "chemistry": 20,
+      "minLeagues": 2,
+      "maxSameLeague": 5,
+      "sameNationAtLeast": 4,
+      "minGold": 4,
+      "minQuality": "silver"
+    },
+    "playerCount": 7,
+    "createdAt": "2026-10-30T18:00:00.000Z",
+    "reward": "Large Gold Pack",
+    "clubs": [],
+    "previewFormation": null,
+    "previewSquad": null,
+    "sourceUrl": "https://www.fut.gg/sbc/challenges/27-75-freaky-zombie/",
+    "manualValidation": true
+  }
+]
