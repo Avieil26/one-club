@@ -21,6 +21,7 @@ export function pointsSegments(id: string): PointsSegment[] {
   const pending: Record<string,{eaId:number;name:string;target:number}> = {
     'sbc-reijnders-scream-20261030': {eaId:95,name:'Tijjani Reijnders Ultimate Scream',target:60000},
     'sbc-81-totw1-7-upgrade-20261030': {eaId:102,name:'81+ TOTW 1–7 Upgrade',target:22000},
+    'sbc-lea-schuller-scream-20261101': {eaId:98,name:'Lea Schüller Ultimate Scream',target:35000},
   };
   const next=pending[id];
   if(next) {
