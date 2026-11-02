@@ -5,7 +5,7 @@ const { META_ATTRS } = loadRepositoryModule('lib/playerMeta.ts');
 assert.equal(cards.length,20258,'Keep 20223 originals + 35 new editions');
 assert.equal(cards.filter(x=>x.id.startsWith('scream2-')).length,35);
 const {pointsSegments,pointsPlans,pointsPlanValid}=loadRepositoryModule('lib/sbcVerified.ts');
-for(const [id,target] of [['sbc-reijnders-scream-20261030',60000],['sbc-81-totw1-7-upgrade-20261030',22000]]){
+for(const [id,target] of [['sbc-reijnders-scream-20261030',60000],['sbc-81-totw1-7-upgrade-20261030',22000],['sbc-lea-schuller-scream-20261101',35000]]){
  const segments=pointsSegments(id);
  assert.equal(segments.length,1,id+' expected one valid points segment');
  assert.equal(segments[0].target,target);
@@ -18,6 +18,8 @@ for(const [id,target] of [['sbc-reijnders-scream-20261030',60000],['sbc-81-totw1
 const {officialChallenges}=loadRepositoryModule('lib/sbcCatalog.ts');
 const zombie=officialChallenges.find(x=>x.id==='sbc-freaky-zombie-20261030');
 assert(zombie && zombie.kind==='classic' && zombie.manualValidation!==true && zombie.rules?.playerCount===7);
+const pumpkin=officialChallenges.find(x=>x.id==='sbc-pumpkin-seeds-20261101');
+assert(pumpkin && pumpkin.kind==='classic' && pumpkin.manualValidation!==true && pumpkin.rules?.playerCount===8 && pumpkin.rules?.chemistry===22 && pumpkin.rules?.maxSameLeague===4 && pumpkin.rules?.minSameClub===3 && pumpkin.rules?.maxClubs===4 && pumpkin.rules?.minGold===7 && pumpkin.rules?.minRating===70);
 const {recentCardFor}=loadRepositoryModule('lib/recentCards.ts');
 for(const row of cards.filter(x=>x.id.startsWith('scream2-')&&!x.id.includes('reijnders'))){
  const card=recentCardFor(row.id);
