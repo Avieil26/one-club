@@ -1,4 +1,5 @@
 import halloweenSbc from '@/assets/data/sbc20261030Live.json';
+import november1Sbc from '@/assets/data/sbc20261101Live.json';
 import { classicSegments } from '@/lib/sbcClassic';
 import { C, L, N, PLAYERS, type FcPlayer } from '@/lib/fcPlayers';
 import { isOpen } from '@/lib/selectors';
@@ -812,6 +813,7 @@ export const officialChallenges: SbcChallenge[] = [
   ...legacyChallenges.map((challenge) => ({ ...challenge, ...liveById.get(challenge.id), ...(RETIRED_SBC_IDS.has(challenge.id) ? { archived: true } : {}) })),
   ...LIVE_SBC_CHALLENGES.filter((challenge) => !legacyChallenges.some((old) => old.id === challenge.id)),
   ...(halloweenSbc as SbcChallenge[]),
+  ...(november1Sbc as SbcChallenge[]),
 ].map((challenge) => {
   const segments = classicSegments(challenge.id);
   if (segments.length !== 1 || !segments[0].squad) return challenge;
