@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sbc-lea-schuller-scream-20261101",
+    "title": "Ultimate Scream · Lea Schüller",
+    "kind": "streamlined",
+    "requirements": "צוברים 35,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Lea Schüller Ultimate Scream 86 CAM.",
+    "endsAt": "2026-11-08T18:00:00.000Z",
+    "createdBy": "admin",
+    "targetScore": 35000,
+    "rules": null,
+    "createdAt": "2026-11-01T18:00:00.000Z",
+    "reward": "Ultimate Scream Lea Schüller 86 CAM",
+    "clubs": [],
+    "sourceUrl": "https://www.fut.gg/sbc/players/27-98-lea-schuller/"
+  },
+  {
+    "id": "sbc-pumpkin-seeds-20261101",
+    "title": "Pumpkin Seeds",
+    "kind": "classic",
+    "requirements": "8 שחקנים, עד 4 מאותה ליגה, לפחות 3 מאותו מועדון, עד 4 מועדונים, לפחות 7 שחקני זהב, דירוג קבוצה לפחות 70 וכימיה לפחות 22.",
+    "endsAt": "2026-11-06T18:00:00.000Z",
+    "createdBy": "admin",
+    "targetScore": null,
+    "rules": {
+      "playerCount": 8,
+      "chemistry": 22,
+      "maxSameLeague": 4,
+      "minSameClub": 3,
+      "maxClubs": 4,
+      "minGold": 7,
+      "minRating": 70
+    },
+    "playerCount": 8,
+    "createdAt": "2026-11-01T18:00:00.000Z",
+    "reward": "Large Gold Players Pack",
+    "clubs": [],
+    "previewFormation": null,
+    "previewSquad": null,
+    "sourceUrl": "https://www.fut.gg/sbc/challenges/27-76-pumpkin-seeds/",
+    "manualValidation": false
+  }
+]
