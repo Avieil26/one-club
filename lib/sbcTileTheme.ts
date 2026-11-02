@@ -247,6 +247,8 @@ const FALLBACK_STREAM: SbcTileTheme = {
 };
 
 const FACE: Record<string, { en: string; category: string; edge: string; rank: number }> = {
+  'sbc-lea-schuller-scream-20261101': { en: 'Lea Schüller', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
+  'sbc-pumpkin-seeds-20261101': { en: 'Pumpkin Seeds', category: 'ULTIMATE SCREAM', edge: '#F19851', rank: 0 },
   'sbc-upgrade-80x5-20261027': { en: '5×80+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-upgrade-79x3-20261026': { en: '3×79+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-showdown-carlos-20261028': { en: 'Carlos Augusto', category: 'SHOWDOWN', edge: '#ED6F53', rank: 0 },
