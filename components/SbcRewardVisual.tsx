@@ -20,6 +20,10 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
+ if (challenge.id === 'sbc-lea-schuller-scream-20261101') {
+  const base = PLAYERS.find(p => (p.en || p.name).toLowerCase().includes('schüller') || (p.en || p.name).toLowerCase().includes('schuller'));
+  return <Scream2Portrait width={width} player={{ ...base, id:'scream2-lea-schuller-sbc-20261101', baseId:base?.id, itemId:50575950, name:base?.name || 'Lea Schüller', en:'Lea Schüller', nation:'גרמניה', league:'Barclays WSL', club:'Manchester United', rating:86, position:'CAM', face:{ovr:86,pac:89,sho:83,pas:84,dri:86,def:42,phy:74} }} />;
+ }
  if (challenge.id === 'sbc-reijnders-scream-20261030') {
   const base = PLAYERS.find(p => (p.en || p.name).toLowerCase().includes('reijnders'));
   return <Scream2Portrait width={width} player={{ ...base, id:'scream2-reijnders-sbc-20261030', baseId:base?.id, name:base?.name || 'Reijnders', en:'Tijjani Reijnders', nation:'הולנד', league:'ליגת העל הסעודית', club:'אל-קאדסיה', rating:85, position:'CDM', face:{ovr:85,pac:81,sho:81,pas:85,dri:84,def:82,phy:84} }} />;
