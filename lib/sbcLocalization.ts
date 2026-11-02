@@ -1,6 +1,8 @@
 import { LIVE_SBC_TRANSLATIONS } from '@/lib/sbcLive20261020';
 
 const SBC_ENGLISH: Record<string, string> = {
+  "צוברים 35,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Lea Schüller Ultimate Scream 86 CAM.": "Earn 35,000 item-score points using players rated 45 or higher. Reward: Ultimate Scream Lea Schüller 86 CAM.",
+  "8 שחקנים, עד 4 מאותה ליגה, לפחות 3 מאותו מועדון, עד 4 מועדונים, לפחות 7 שחקני זהב, דירוג קבוצה לפחות 70 וכימיה לפחות 22.": "8 players, at most 4 from the same league, at least 3 from the same club, at most 4 clubs, at least 7 gold players, squad rating at least 70, and chemistry at least 22.",
   "7 שחקנים, לפחות 2 ליגות, עד 5 מאותה ליגה, לפחות 4 מאותה מדינה, לפחות 4 זהב, כל הקלפים כסף ומעלה וכימיה לפחות 20.": "7 players, at least 2 leagues, at most 5 from the same league, at least 4 from one nation, at least 4 gold, all silver or better, and at least 20 chemistry.",
   
   "צוברים 22,000 נקודות פריטים עם פריטים בדירוג 45 ומעלה; פרס: שחקן TOTW בדירוג 81+ משבועות 1 עד 7.": "Earn 22,000 item-score points using players rated 45 or higher. Reward: one 81+ Team of the Week player from TOTW 1–7.",
