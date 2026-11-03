@@ -20,6 +20,10 @@ function bundledImage(url: string) {
 }
 const labels = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'];
 export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChallenge; width?: number }) {
+ if (challenge.id === 'sbc-jonny-scream-20261031') {
+  const base = PLAYERS.find(p => (p.en || p.name).toLowerCase().includes('jonny'));
+  return <Scream2Portrait width={width} player={{ ...base, id:'scream2-jonny-sbc-20261031', baseId:base?.id, itemId:50542103, name:base?.name || 'Jonny', en:'Jonny', nation:'ספרד', league:'לה ליגה', club:'דפורטיבו אלאבס', rating:85, position:'LB', preferredFoot:'R', skillMoves:3, weakFoot:4, face:{ovr:85,pac:85,sho:64,pas:82,dri:85,def:81,phy:81} } as any} />;
+ }
  if (challenge.id === 'sbc-reijnders-scream-20261030') {
   const base = PLAYERS.find(p => (p.en || p.name).toLowerCase().includes('reijnders'));
   return <Scream2Portrait width={width} player={{ ...base, id:'scream2-reijnders-sbc-20261030', baseId:base?.id, name:base?.name || 'Reijnders', en:'Tijjani Reijnders', nation:'הולנד', league:'ליגת העל הסעודית', club:'אל-קאדסיה', rating:85, position:'CDM', face:{ovr:85,pac:81,sho:81,pas:85,dri:84,def:82,phy:84} }} />;
