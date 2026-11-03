@@ -1,0 +1,23 @@
+name: FC content sync safety tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/*content*.mjs'
+      - 'scripts/*content*.test.mjs'
+      - 'scripts/audit-content-roster*.mjs'
+      - '.github/workflows/*fc-content*.yml'
+      - '.github/workflows/stage-fc-content.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  safety-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test staged content rules and roster safety
+        run: node --test scripts/sync-content-feed.test.mjs scripts/prepare-sbc-catalog.test.mjs scripts/prepare-card-catalog.test.mjs scripts/audit-content-roster.test.mjs

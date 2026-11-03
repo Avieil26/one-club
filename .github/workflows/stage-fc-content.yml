@@ -1,0 +1,41 @@
+name: Stage FC content updates
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */4 * * *'
+permissions:
+  contents: read
+jobs:
+  stage-feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run importer safety tests
+        run: node --test scripts/sync-content-feed.test.mjs scripts/prepare-sbc-catalog.test.mjs scripts/prepare-card-catalog.test.mjs scripts/audit-content-roster.test.mjs
+      - name: Fetch authorized card and SBC feed
+        env:
+          FC_CONTENT_FEED_URL: ${{ secrets.FC_CONTENT_FEED_URL }}
+          FC_CONTENT_FEED_TOKEN: ${{ secrets.FC_CONTENT_FEED_TOKEN }}
+        run: node scripts/fetch-content-feed.mjs
+      - name: Validate and stage pending content
+        run: node scripts/sync-content-feed.mjs artifacts/content-sync/feed.json
+      - name: Prepare SBC entries for app schema
+        run: node scripts/prepare-sbc-catalog.mjs artifacts/content-sync/pending.json
+      - name: Validate card previews and art provenance
+        run: node scripts/prepare-card-catalog.mjs artifacts/content-sync/pending.json
+      - name: Check candidate cards against roster baseline
+        run: node scripts/audit-content-roster.mjs artifacts/content-sync/card-candidates.json
+      - name: Publish review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fc-content-pending
+          path: |
+            artifacts/content-sync/pending.json
+            artifacts/content-sync/sbc-candidates.json
+            artifacts/content-sync/card-candidates.json
+            artifacts/content-sync/roster-audit.json
+          retention-days: 14
