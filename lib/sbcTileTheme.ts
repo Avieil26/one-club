@@ -254,6 +254,8 @@ const FACE: Record<string, { en: string; category: string; edge: string; rank: n
   'sbc-mls-nwsl-20261102': { en: 'MLS & NWSL', category: 'LEAGUE UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-seriea-saudi-20261102': { en: 'Serie A & ROSHN Saudi League', category: 'LEAGUE UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-chem-styles-pick-20261102': { en: '1 of 4 Chemistry Styles Pick', category: 'UPGRADES', edge: '#14B8A6', rank: 1 },
+  'sbc-laliga-ligaf-20261103': { en: 'LALIGA & Liga F', category: 'LEAGUE UPGRADES', edge: '#14B8A6', rank: 2 },
+  'sbc-premier-wsl-20261103': { en: 'Premier League & Barclays WSL', category: 'LEAGUE UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-upgrade-80x5-20261027': { en: '5×80+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-upgrade-79x3-20261026': { en: '3×79+ Upgrade', category: 'UPGRADES', edge: '#14B8A6', rank: 2 },
   'sbc-showdown-carlos-20261028': { en: 'Carlos Augusto', category: 'SHOWDOWN', edge: '#ED6F53', rank: 0 },
@@ -321,7 +323,7 @@ export function sbcTileTheme(challenge: SbcChallenge): SbcTileTheme {
   if (challenge.id === 'sbc-silver-upgrade' || challenge.id === 'sbc-bronze-silver-reroll') return { ...FALLBACK_CLASSIC, pack: 'rare-75', packLabel: '75+' };
   if (challenge.id === 'sbc-bronze-upgrade') return { ...FALLBACK_CLASSIC, pack: 'silver-x2', packLabel: '2× SILVER' };
   if (challenge.id === 'sbc-gold-upgrade' || challenge.id === 'sbc-gold-reroll') return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2×78+' };
-  if (['sbc-laliga-20261026', 'sbc-premier-20261026', 'sbc-ligue-arkema-upgrade-20261028', 'sbc-bundesliga-frauen-upgrade-20261028', 'sbc-mls-nwsl-20261102', 'sbc-seriea-saudi-20261102'].includes(challenge.id)) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2× MAX 85' };
+  if (['sbc-laliga-20261026', 'sbc-premier-20261026', 'sbc-ligue-arkema-upgrade-20261028', 'sbc-bundesliga-frauen-upgrade-20261028', 'sbc-mls-nwsl-20261102', 'sbc-seriea-saudi-20261102', 'sbc-laliga-ligaf-20261103', 'sbc-premier-wsl-20261103'].includes(challenge.id)) return { ...FALLBACK_CLASSIC, pack: 'gold', packLabel: '2× MAX 85' };
   if (known) return known;
   const reward = challenge.reward ?? '';
   const rating = reward.match(/(?:×|x)\s*(\d{2})\+/i)?.[1] ?? reward.match(/(\d{2})\+/)?.[1];
