@@ -18,35 +18,52 @@ export type PointsPlan = { key: string; lines: PointsLine[]; total: number; cost
 const byId = new Map(PLAYERS.map((p) => [p.id, p]));
 export const SBC_SOLUTION_CHECKED_AT = snapshot.checkedAt;
 export function pointsSegments(id: string): PointsSegment[] {
-  const pending: Record<string,{eaId:number;name:string;target:number}> = {
-    'sbc-reijnders-scream-20261030': {eaId:95,name:'Tijjani Reijnders Ultimate Scream',target:60000},
-    'sbc-81-totw1-7-upgrade-20261030': {eaId:102,name:'81+ TOTW 1–7 Upgrade',target:22000},
+  const pending: Record<string, { eaId: number; name: string; target: number; sourceUrl?: string }[]> = {
+    'sbc-reijnders-scream-20261030': [{ eaId: 95, name: 'Tijjani Reijnders Ultimate Scream', target: 60000 }],
+    'sbc-81-totw1-7-upgrade-20261030': [{ eaId: 102, name: '81+ TOTW 1–7 Upgrade', target: 22000 }],
+    'sbc-jonny-scream-20261031': [{ eaId: 106, name: 'Jonny Ultimate Scream', target: 42000, sourceUrl: 'https://www.fut.gg/sbc/players/27-106-jonny/' }],
+    'sbc-79pp-20261102': [{ eaId: 105, name: '1 of 3 79+ Gold Player Pick', target: 2500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-105-1-of-3-79-gold-player-pick/' }],
+    'sbc-max88-hero-20261102': [{ eaId: 101, name: 'Max. 88 Base Hero Upgrade', target: 140000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-101-max-88-base-hero-upgrade/' }],
+    'sbc-mls-nwsl-20261102': [
+      { eaId: 1001, name: 'MLS', target: 1500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-100-mls-nwsl/' },
+      { eaId: 1002, name: 'NWSL', target: 1500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-100-mls-nwsl/' },
+    ],
+    'sbc-seriea-saudi-20261102': [
+      { eaId: 991, name: 'Serie A', target: 1500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-99-serie-a-roshn-saudi-league/' },
+      { eaId: 992, name: 'ROSHN Saudi League', target: 1500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-99-serie-a-roshn-saudi-league/' },
+    ],
+    'sbc-chem-styles-pick-20261102': [{ eaId: 104, name: '1 of 4 Chemistry Styles Pick', target: 5000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-104-1-of-4-chemistry-styles-pick/' }],
   };
-  const next=pending[id];
-  if(next) {
-    const prices=priceSnapshot as Record<string,number[]>;
-    const knownIds=eaIds as Record<string,number>;
-    const makeRates=(platform:'ps5'|'pc'): ItemRate[]=>{
-      const index=platform==='ps5'?0:1;
-      const ratings=[82,83,84,85,86,87,88,89];
-      return ratings.flatMap(overall=>{
-        const players=PLAYERS.filter(p=>!p.edition&&!p.icon&&p.rating===overall&&knownIds[p.id]&&prices[p.id]?.[index]>0)
-          .sort((a,b)=>prices[a.id][index]-prices[b.id][index]).slice(0,12);
-        const score=players.length?itemScore(players[0]):null;
-        if(!score)return [];
-        return [{overall,rarity:0,score,price:prices[players[0].id][index],players:players.map(p=>p.id),eaIds:players.map(p=>knownIds[p.id])}];
+  const next = pending[id];
+  if (next) {
+    const prices = priceSnapshot as Record<string, number[]>;
+    const knownIds = eaIds as Record<string, number>;
+    const makeRates = (platform: 'ps5' | 'pc'): ItemRate[] => {
+      const index = platform === 'ps5' ? 0 : 1;
+      const ratings = [82, 83, 84, 85, 86, 87, 88, 89, 90];
+      return ratings.flatMap((overall) => {
+        const players = PLAYERS.filter((p) => !p.edition && !p.icon && p.rating === overall && knownIds[p.id] && prices[p.id]?.[index] > 0)
+          .sort((a, b) => prices[a.id][index] - prices[b.id][index]).slice(0, 12);
+        const score = players.length ? itemScore(players[0]) : null;
+        if (!score) return [];
+        return [{ overall, rarity: 0, score, price: prices[players[0].id][index], players: players.map((p) => p.id), eaIds: players.map((p) => knownIds[p.id]) }];
       });
     };
-    return [{
-      ...next, requirements:['Rating: Min. 45'],
-      platforms:{
-        ps5:{pricedAt:'2026-10-28 snapshot',rates:makeRates('ps5')},
-        pc:{pricedAt:'2026-10-28 snapshot',rates:makeRates('pc')},
+    const ps5Rates = makeRates('ps5');
+    const pcRates = makeRates('pc');
+    return next.map((segment) => ({
+      ...segment,
+      requirements: ['Rating: Min. 45'],
+      checkedAt: '2026-11-03T14:45:00.000Z',
+      platforms: {
+        ps5: { pricedAt: '2026-10-28 snapshot', rates: ps5Rates },
+        pc: { pricedAt: '2026-10-28 snapshot', rates: pcRates },
       },
-    }];
+    }));
   }
   return ({ ...snapshot.challenges, ...refresh.points, ...latest.points, ...bellerin.points, ...current.points } as unknown as Record<string, { segments: PointsSegment[] }>)[id]?.segments ?? [];
 }
+
 export function pointsPlanValid(segment: PointsSegment, plan: PointsPlan, platform: 'ps5' | 'pc'): boolean {
   if (!Number.isSafeInteger(segment.target) || segment.target <= 0 || !plan.lines.length) return false;
   for (const line of plan.lines) {
