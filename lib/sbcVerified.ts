@@ -33,6 +33,14 @@ export function pointsSegments(id: string): PointsSegment[] {
       { eaId: 992, name: 'ROSHN Saudi League', target: 1500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-99-serie-a-roshn-saudi-league/' },
     ],
     'sbc-chem-styles-pick-20261102': [{ eaId: 104, name: '1 of 4 Chemistry Styles Pick', target: 5000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-104-1-of-4-chemistry-styles-pick/' }],
+    'sbc-laliga-ligaf-20261103': [
+      { eaId: 941, name: 'LALIGA', target: 3000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-94-laliga-liga-f/' },
+      { eaId: 942, name: 'Liga F', target: 3000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-94-laliga-liga-f/' },
+    ],
+    'sbc-premier-wsl-20261103': [
+      { eaId: 931, name: 'Premier League', target: 4500, sourceUrl: 'https://www.fut.gg/sbc/category/upgrades/' },
+      { eaId: 932, name: 'Barclays WSL', target: 4500, sourceUrl: 'https://www.fut.gg/sbc/category/upgrades/' },
+    ],
   };
   const next = pending[id];
   if (next) {
@@ -54,7 +62,7 @@ export function pointsSegments(id: string): PointsSegment[] {
     return next.map((segment) => ({
       ...segment,
       requirements: ['Rating: Min. 45'],
-      checkedAt: '2026-11-03T14:45:00.000Z',
+      checkedAt: '2026-11-03T18:35:00.000Z',
       platforms: {
         ps5: { pricedAt: '2026-10-28 snapshot', rates: ps5Rates },
         pc: { pricedAt: '2026-10-28 snapshot', rates: pcRates },
