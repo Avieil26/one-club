@@ -41,6 +41,15 @@ export function pointsSegments(id: string): PointsSegment[] {
       { eaId: 931, name: 'Premier League', target: 4500, sourceUrl: 'https://www.fut.gg/sbc/category/upgrades/' },
       { eaId: 932, name: 'Barclays WSL', target: 4500, sourceUrl: 'https://www.fut.gg/sbc/category/upgrades/' },
     ],
+    'sbc-ampadu-scream-20261103': [{ eaId: 97, name: 'Ethan Ampadu Ultimate Scream', target: 22000, sourceUrl: 'https://www.fut.gg/sbc/players/27-97-ethan-ampadu/' }],
+    'sbc-2x83-upgrade-20261103': [{ eaId: 109, name: '2x 83+ Upgrade', target: 5500, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-109-2x-83-upgrade/' }],
+    'sbc-ojeda-scream-20261104': [{ eaId: 96, name: 'Martin Ojeda Ultimate Scream', target: 24000, sourceUrl: 'https://www.fut.gg/sbc/players/27-96-martin-ojeda/' }],
+    'sbc-openda-rttk-20261106': [{ eaId: 124, name: 'Lois Openda RTTK', target: 96000, sourceUrl: 'https://www.fut.gg/sbc/players/27-124-lois-openda/' }],
+    'sbc-totw1-8-upgrade-20261106': [{ eaId: 123, name: '81+ TOTW 1-8 Upgrade', target: 18000, sourceUrl: 'https://www.fut.gg/sbc/upgrades/27-123-81-totw-1-8-upgrade/' }],
+    'sbc-schertenleib-showdown-20261107': [{ eaId: 117, name: 'Sydney Schertenleib Showdown', target: 16000, sourceUrl: 'https://www.fut.gg/sbc/players/27-117-sydney-schertenleib/' }],
+    'sbc-smith-showdown-20261107': [{ eaId: 118, name: 'Olivia Smith Showdown', target: 16000, sourceUrl: 'https://www.fut.gg/sbc/players/27-118-olivia-smith/' }],
+    'sbc-feller-showdown-20261107': [{ eaId: 119, name: 'Naomie Feller Showdown', target: 12000, sourceUrl: 'https://www.fut.gg/sbc/players/27-119-naomie-feller/' }],
+    'sbc-kett-showdown-20261107': [{ eaId: 120, name: 'Franziska Kett Showdown', target: 12000, sourceUrl: 'https://www.fut.gg/sbc/players/27-120-franziska-kett/' }],
   };
   const next = pending[id];
   if (next) {
@@ -62,7 +71,7 @@ export function pointsSegments(id: string): PointsSegment[] {
     return next.map((segment) => ({
       ...segment,
       requirements: ['Rating: Min. 45'],
-      checkedAt: '2026-11-03T18:35:00.000Z',
+      checkedAt: '2026-11-08T10:15:00.000Z',
       platforms: {
         ps5: { pricedAt: '2026-10-28 snapshot', rates: ps5Rates },
         pc: { pricedAt: '2026-10-28 snapshot', rates: pcRates },
