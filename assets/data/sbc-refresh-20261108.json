@@ -1,0 +1,413 @@
+{
+  "checkedAt": "2026-11-08T10:15:00.000Z",
+  "challenges": [
+    {
+      "id": "sbc-ampadu-scream-20261103",
+      "title": "Ultimate Scream · Ethan Ampadu",
+      "kind": "streamlined",
+      "requirements": "צוברים 22,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Ethan Ampadu Ultimate Scream.",
+      "requirementsEn": "Submit 22,000 item points; minimum item rating 45. Reward: Ultimate Scream Ethan Ampadu.",
+      "endsAt": "2026-11-10T18:00:01.147757Z",
+      "createdBy": "admin",
+      "targetScore": 22000,
+      "rules": null,
+      "createdAt": "2026-11-03T18:00:28.035970Z",
+      "reward": "Ethan Ampadu Ultimate Scream",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-97-ethan-ampadu/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-2x83-upgrade-20261103",
+      "title": "2×83+ Upgrade",
+      "kind": "streamlined",
+      "requirements": "צוברים 5,500 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: 2× 83+ Gold Players Pack.",
+      "requirementsEn": "Submit 5,500 item points; minimum item rating 45. Reward: 2x 83+ Gold Players Pack.",
+      "endsAt": "2026-11-10T18:00:01.078183Z",
+      "createdBy": "admin",
+      "targetScore": 5500,
+      "rules": null,
+      "createdAt": "2026-11-03T18:00:24.632958Z",
+      "reward": "2x 83+ Gold Players Pack (Untradeable)",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-109-2x-83-upgrade/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-ojeda-scream-20261104",
+      "title": "Ultimate Scream · Martín Ojeda",
+      "kind": "streamlined",
+      "requirements": "צוברים 24,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Martín Ojeda Ultimate Scream.",
+      "requirementsEn": "Submit 24,000 item points; minimum item rating 45. Reward: Ultimate Scream Martín Ojeda.",
+      "endsAt": "2026-11-11T18:00:01.127109Z",
+      "createdBy": "admin",
+      "targetScore": 24000,
+      "rules": null,
+      "createdAt": "2026-11-04T18:00:21.500085Z",
+      "reward": "Martín Ojeda Ultimate Scream",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-96-martin-ojeda/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-marquee-20261105",
+      "title": "Marquee Matchups",
+      "kind": "classic",
+      "requirements": "4 אתגרים: Club Brugge–Anderlecht, Rennes–LOSC, Fiorentina–Juventus, Atlético Madrid–Barcelona.",
+      "requirementsEn": "Four challenges: Club Brugge v Anderlecht, Rennes v LOSC, Fiorentina v Juventus, Atlético Madrid v Barcelona.",
+      "endsAt": "2026-11-12T18:00:00.914324Z",
+      "createdBy": "admin",
+      "targetScore": null,
+      "rules": null,
+      "createdAt": "2026-11-05T18:00:14.478712Z",
+      "reward": "Large Mixed Electrum Players Pack",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/challenges/27-108-marquee-matchups/",
+      "manualValidation": false,
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-openda-rttk-20261106",
+      "title": "RTTK · Loïs Openda",
+      "kind": "streamlined",
+      "requirements": "צוברים 96,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Loïs Openda RTTK.",
+      "requirementsEn": "Submit 96,000 item points; minimum item rating 45. Reward: RTTK Loïs Openda.",
+      "endsAt": "2026-11-13T18:00:01.203388Z",
+      "createdBy": "admin",
+      "targetScore": 96000,
+      "rules": null,
+      "createdAt": "2026-11-06T18:00:23.740938Z",
+      "reward": "Loïs Openda RTTK",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-124-lois-openda/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-totw1-8-upgrade-20261106",
+      "title": "81+ TOTW 1–8 Upgrade",
+      "kind": "streamlined",
+      "requirements": "צוברים 18,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: שחקן TOTW בדירוג 81+ מקבוצות השבוע 1–8.",
+      "requirementsEn": "Submit 18,000 item points; minimum item rating 45. Reward: one 81+ TOTW Player Item from TOTW 1–8.",
+      "endsAt": "2026-11-13T18:00:01.087727Z",
+      "createdBy": "admin",
+      "targetScore": 18000,
+      "rules": null,
+      "createdAt": "2026-11-06T18:00:18.775674Z",
+      "reward": "81+ TOTW 1–8 Player Pack (Untradeable)",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/upgrades/27-123-81-totw-1-8-upgrade/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-rttk-challenge1-20261107",
+      "title": "Road to the Knockout Challenge 1",
+      "kind": "classic",
+      "requirements": "11 שחקנים; לפחות 4 מאותה ליגה; לפחות 5 מדינות; עד 6 מועדונים; לפחות 3 שחקני כסף; איכות מינימום ארד; כימיה 14.",
+      "requirementsEn": "11 players; min 4 from the same league; min 5 nations; max 6 clubs; min 3 Silver players; minimum Bronze quality; chemistry min 14.",
+      "endsAt": "2026-11-10T18:00:00.886075Z",
+      "createdBy": "admin",
+      "targetScore": null,
+      "rules": {
+        "playerCount": 11,
+        "chemistry": 14,
+        "minSameLeague": 4,
+        "minNations": 5,
+        "maxClubs": 6,
+        "minSilver": 3,
+        "minQuality": "bronze"
+      },
+      "createdAt": "2026-11-07T18:00:19.441765Z",
+      "reward": "Small Electrum Players Pack (Untradeable)",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/challenges/27-103-road-to-the-knockout-challenge-1/",
+      "manualValidation": false,
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-schertenleib-showdown-20261107",
+      "title": "Showdown · Sydney Schertenleib",
+      "kind": "streamlined",
+      "requirements": "צוברים 16,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Sydney Schertenleib Showdown.",
+      "requirementsEn": "Submit 16,000 item points; minimum item rating 45. Reward: Showdown Sydney Schertenleib.",
+      "endsAt": "2026-11-12T17:45:01.168836Z",
+      "createdBy": "admin",
+      "targetScore": 16000,
+      "rules": null,
+      "createdAt": "2026-11-07T18:00:25.661345Z",
+      "reward": "Sydney Schertenleib Showdown",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-117-sydney-schertenleib/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-smith-showdown-20261107",
+      "title": "Showdown · Olivia Smith",
+      "kind": "streamlined",
+      "requirements": "צוברים 16,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Olivia Smith Showdown.",
+      "requirementsEn": "Submit 16,000 item points; minimum item rating 45. Reward: Showdown Olivia Smith.",
+      "endsAt": "2026-11-12T17:45:01.177429Z",
+      "createdBy": "admin",
+      "targetScore": 16000,
+      "rules": null,
+      "createdAt": "2026-11-07T18:00:35.849063Z",
+      "reward": "Olivia Smith Showdown",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-118-olivia-smith/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-feller-showdown-20261107",
+      "title": "Showdown · Naomie Feller",
+      "kind": "streamlined",
+      "requirements": "צוברים 12,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Naomie Feller Showdown.",
+      "requirementsEn": "Submit 12,000 item points; minimum item rating 45. Reward: Showdown Naomie Feller.",
+      "endsAt": "2026-11-10T18:00:01.187647Z",
+      "createdBy": "admin",
+      "targetScore": 12000,
+      "rules": null,
+      "createdAt": "2026-11-07T18:00:41.828812Z",
+      "reward": "Naomie Feller Showdown",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-119-naomie-feller/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    },
+    {
+      "id": "sbc-kett-showdown-20261107",
+      "title": "Showdown · Franziska Kett",
+      "kind": "streamlined",
+      "requirements": "צוברים 12,000 נקודות פריטים, עם פריטים בדירוג 45 ומעלה. הפרס: Franziska Kett Showdown.",
+      "requirementsEn": "Submit 12,000 item points; minimum item rating 45. Reward: Showdown Franziska Kett.",
+      "endsAt": "2026-11-10T18:00:01.195847Z",
+      "createdBy": "admin",
+      "targetScore": 12000,
+      "rules": null,
+      "createdAt": "2026-11-07T18:00:45.559588Z",
+      "reward": "Franziska Kett Showdown",
+      "clubs": [],
+      "sourceUrl": "https://www.fut.gg/sbc/players/27-120-franziska-kett/",
+      "lastCheckedAt": "2026-11-08T10:15:00.000Z"
+    }
+  ],
+  "classic": {
+    "sbc-rttk-challenge1-20261107": {
+      "segments": [
+        {
+          "name": "Road to the Knockout Challenge 1",
+          "rules": {
+            "playerCount": 11,
+            "chemistry": 14,
+            "minSameLeague": 4,
+            "minNations": 5,
+            "maxClubs": 6,
+            "minSilver": 3,
+            "minQuality": "bronze"
+          },
+          "formation": "433",
+          "squad": {
+            "lb": "ea-222875-joris-kayembe",
+            "gk": "ea-177683-yann-sommer",
+            "rb": "ea-275353-zakaria-el-ouahdi",
+            "st": "ea-266895-nicolo-tresoldi",
+            "lw": "ea-80915-jan-virgili",
+            "rw": "ea-260570-jarne-steuckers",
+            "lcb": "ea-212204-brandon-mechele",
+            "lcm": "ea-261776-enric-llansana",
+            "cm": "ea-260162-mario-stroeykens",
+            "rcm": "ea-260398-nathandylan-saliba",
+            "rcb": "ea-271563-moussa-ndiaye"
+          },
+          "sourceRequirements": [
+            "Same league: Min. 4 players",
+            "Nations: Min. 5",
+            "Clubs: Max. 6",
+            "Quality: Min. 3 Silver players",
+            "Quality: Min. Bronze",
+            "Chemistry: Min. 14"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-103-road-to-the-knockout-challenge-1/",
+          "solutionUrl": "https://www.fut.gg/27/squad-builder/f7e7b32a-d73a-4577-a256-b96891230f92/",
+          "checkedAt": "2026-11-08T10:15:00.000Z",
+          "provenance": "source-rules/local-validated-solution"
+        }
+      ]
+    },
+    "sbc-marquee-20261105": {
+      "segments": [
+        {
+          "name": "Club Brugge v RSC Anderlecht",
+          "rules": {
+            "playerCount": 11,
+            "chemistry": 14,
+            "clubsAtLeast": {
+              "clubs": [
+                "קלאב ברוז׳",
+                "RSC Anderlecht"
+              ],
+              "count": 1
+            },
+            "maxClubs": 6,
+            "minSilver": 3,
+            "minQuality": "bronze"
+          },
+          "formation": "433",
+          "squad": {
+            "lb": "ea-222875-joris-kayembe",
+            "gk": "ea-177683-yann-sommer",
+            "rb": "ea-275353-zakaria-el-ouahdi",
+            "st": "ea-266895-nicolo-tresoldi",
+            "lw": "ea-80915-jan-virgili",
+            "rw": "ea-260570-jarne-steuckers",
+            "lcb": "ea-212204-brandon-mechele",
+            "lcm": "ea-261776-enric-llansana",
+            "cm": "ea-260162-mario-stroeykens",
+            "rcm": "ea-260398-nathandylan-saliba",
+            "rcb": "ea-271563-moussa-ndiaye"
+          },
+          "sourceRequirements": [
+            "Club: Min. 1 player from Club Brugge or RSC Anderlecht",
+            "Clubs: Max. 6",
+            "Quality: Min. 3 Silver players",
+            "Quality: Min. Bronze",
+            "Chemistry: Min. 14"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-108-marquee-matchups/",
+          "solutionUrl": "https://www.fut.gg/27/squad-builder/489ba588-d1b4-42e8-acac-c2715ca289bc/",
+          "checkedAt": "2026-11-08T10:15:00.000Z",
+          "provenance": "source-rules/local-validated-solution"
+        },
+        {
+          "name": "Stade Rennais FC v LOSC",
+          "rules": {
+            "playerCount": 11,
+            "chemistry": 18,
+            "clubsAtLeast": {
+              "clubs": [
+                "Stade Rennais FC",
+                "LOSC Lille"
+              ],
+              "count": 1
+            },
+            "maxSameClub": 2,
+            "minLeagues": 3,
+            "minGold": 1,
+            "minQuality": "silver"
+          },
+          "formation": "433",
+          "squad": {
+            "gk": "raya",
+            "rb": "hakimi",
+            "lb": "nuno",
+            "rw": "olise",
+            "st": "kane",
+            "lw": "wirtz",
+            "lcb": "gabriel",
+            "rcb": "vandijk",
+            "lcm": "nmecha",
+            "cm": "ea-278901-ayyoub-bouaddi",
+            "rcm": "ea-190674-benjamin-andre"
+          },
+          "sourceRequirements": [
+            "Club: Min. 1 player from Stade Rennais FC or LOSC",
+            "Same club: Max. 2 players",
+            "Leagues: Min. 3",
+            "Quality: Min. 1 Gold player",
+            "Quality: Min. Silver",
+            "Chemistry: Min. 18"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-108-marquee-matchups/",
+          "solutionUrl": "https://www.fut.gg/27/squad-builder/1676ab51-c564-4be5-b070-fd47914a2d99/",
+          "checkedAt": "2026-11-08T10:15:00.000Z",
+          "provenance": "source-rules/local-validated-solution"
+        },
+        {
+          "name": "Fiorentina v Juventus FC",
+          "rules": {
+            "playerCount": 11,
+            "chemistry": 22,
+            "clubsAtLeast": {
+              "clubs": [
+                "Fiorentina",
+                "יובנטוס"
+              ],
+              "count": 2
+            },
+            "minSameClub": 2,
+            "maxSameLeague": 4,
+            "minGold": 2,
+            "minQuality": "silver"
+          },
+          "formation": "433",
+          "squad": {
+            "gk": "raya",
+            "rw": "olise",
+            "lb": "ea-225375-konrad-laimer",
+            "rb": "kimmich",
+            "lw": "diaz",
+            "st": "gyokeres",
+            "lcb": "gabriel",
+            "rcb": "bremer",
+            "lcm": "ea-222077-manuel-locatelli",
+            "cm": "ea-225439-rolando-mandragora",
+            "rcm": "ea-272783-arthur-atta"
+          },
+          "sourceRequirements": [
+            "Club: Min. 2 players from ACF Fiorentina or Juventus FC",
+            "Same club: Min. 2 players",
+            "Same league: Max. 4 players",
+            "Quality: Min. 2 Gold players",
+            "Quality: Min. Silver",
+            "Chemistry: Min. 22"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-108-marquee-matchups/",
+          "solutionUrl": "https://www.fut.gg/27/squad-builder/be8173b9-1bfb-46ca-beb3-ac3cced4ecce/",
+          "checkedAt": "2026-11-08T10:15:00.000Z",
+          "provenance": "source-rules/local-validated-solution"
+        },
+        {
+          "name": "Atlético de Madrid v FC Barcelona",
+          "rules": {
+            "playerCount": 11,
+            "chemistry": 26,
+            "clubsAtLeast": {
+              "clubs": [
+                "אתלטיקו מדריד",
+                "ברצלונה"
+              ],
+              "count": 2
+            },
+            "maxSameNation": 3,
+            "minSameClub": 4,
+            "minLeagues": 3,
+            "minRating": 75
+          },
+          "formation": "433",
+          "squad": {
+            "gk": "raya",
+            "st": "kane",
+            "rb": "kimmich",
+            "rw": "yamal",
+            "lb": "ea-225375-konrad-laimer",
+            "lw": "raphinha",
+            "lcb": "gabriel",
+            "rcb": "saliba",
+            "lcm": "pedri",
+            "cm": "dejong",
+            "rcm": "pavlovic"
+          },
+          "sourceRequirements": [
+            "Club: Min. 2 players from Atlético de Madrid or FC Barcelona",
+            "Same nation: Max. 3 players",
+            "Same club: Min. 4 players",
+            "Leagues: Min. 3",
+            "Team rating: Min. 75",
+            "Chemistry: Min. 26"
+          ],
+          "sourceUrl": "https://www.fut.gg/sbc/challenges/27-108-marquee-matchups/",
+          "solutionUrl": "https://www.fut.gg/27/squad-builder/9e1e7056-6b45-46d0-b72c-fc5662b0becb/",
+          "checkedAt": "2026-11-08T10:15:00.000Z",
+          "provenance": "source-rules/local-validated-solution"
+        }
+      ]
+    }
+  }
+}
