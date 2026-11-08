@@ -1,3 +1,4 @@
+import newest from '@/assets/data/sbc-refresh-20261108.json';
 import current from '@/assets/data/sbc-refresh-20261028.json';
 import latest from '@/assets/data/sbc-refresh-20261026.json';
 import refresh from '@/assets/data/sbc-refresh-20261025.json';
@@ -9,7 +10,7 @@ import type { SquadRules } from '@/lib/types';
 export type ClassicSegment = { name: string; rules: SquadRules; formation: string; squad?: Record<string, string>; activeSlots?: string[]; positionOverrides?: Record<string, string>; sourceUrl?: string; solutionUrl?: string; checkedAt?: string; provenance?: string; sourceRequirements?: string[] };
 const players = new Map(PLAYERS.map((p) => [p.id, p]));
 export function classicSegments(id: string): ClassicSegment[] {
-  return ({ ...snapshot, ...refresh.classic, ...latest.classic, ...current.classic } as unknown as Record<string, { segments: ClassicSegment[] }>)[id]?.segments ?? [];
+  return ({ ...snapshot, ...refresh.classic, ...latest.classic, ...current.classic, ...newest.classic } as unknown as Record<string, { segments: ClassicSegment[] }>)[id]?.segments ?? [];
 }
 export function classicFormation(segment: ClassicSegment, formation = segment.formation) {
   const base = formationById(formation);
