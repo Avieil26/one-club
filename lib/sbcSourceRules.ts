@@ -5,7 +5,7 @@ const keys = new Set(['playerCount','maxRating','maxPlayerRating','minLeagues','
 export function knownClassicRules(rules: SquadRules): boolean {
   return Object.keys(rules).every((key) => keys.has(key));
 }
-const clubs: Record<string, string> = { PSG: 'פריז סן ז׳רמן', OL: 'Olympique Lyonnais', 'SSC Napoli': 'נאפולי', 'AS Roma': 'רומא', Chelsea: 'צ׳לסי', Spurs: 'טוטנהאם', 'FC Barcelona': 'ברצלונה', 'Real Madrid': 'ריאל מדריד' };
+const clubs: Record<string, string> = { PSG: 'פריז סן ז׳רמן', OL: 'Olympique Lyonnais', 'SSC Napoli': 'נאפולי', 'AS Roma': 'רומא', Chelsea: 'צ׳לסי', Spurs: 'טוטנהאם', 'FC Barcelona': 'ברצלונה', 'Real Madrid': 'ריאל מדריד', 'Club Brugge': 'קלאב ברוז׳', 'RSC Anderlecht': 'RSC Anderlecht', 'Stade Rennais FC': 'Stade Rennais FC', LOSC: 'LOSC Lille', 'ACF Fiorentina': 'Fiorentina', 'Juventus FC': 'יובנטוס', 'Atlético de Madrid': 'אתלטיקו מדריד' };
 export function parseClassicRequirements(requirements: string[], playerCount = 11): SquadRules | null {
   const rules: SquadRules = { playerCount, chemistry: 0 };
   for (const text of requirements) {
@@ -14,16 +14,19 @@ export function parseClassicRequirements(requirements: string[], playerCount = 1
       if (!clubs[m[2]] || !clubs[m[3]]) return null;
       rules.clubsAtLeast = { clubs: [clubs[m[2]], clubs[m[3]]], count: Number(m[1]) };
     } else if ((m = text.match(/^Same nation: Min\. (\d+) players$/))) rules.sameNationAtLeast = Number(m[1]);
+    else if ((m = text.match(/^Same nation: Max\. (\d+) players$/))) rules.maxSameNation = Number(m[1]);
     else if ((m = text.match(/^Same league: Max\. (\d+) players$/))) rules.maxSameLeague = Number(m[1]);
     else if ((m = text.match(/^Same league: Min\. (\d+) players$/))) rules.minSameLeague = Number(m[1]);
     else if ((m = text.match(/^Same club: (Min|Max)\. (\d+) players$/))) rules[m[1] === 'Min' ? 'minSameClub' : 'maxSameClub'] = Number(m[2]);
     else if ((m = text.match(/^Leagues: (Min|Max)\. (\d+)$/))) rules[m[1] === 'Min' ? 'minLeagues' : 'maxLeagues'] = Number(m[2]);
     else if ((m = text.match(/^Clubs: Min\. (\d+)$/))) rules.minClubs = Number(m[1]);
+    else if ((m = text.match(/^Clubs: Max\. (\d+)$/))) rules.maxClubs = Number(m[1]);
     else if ((m = text.match(/^Quality: Min\. (\d+) (Gold|Silver) players$/))) rules[m[2] === 'Gold' ? 'minGold' : 'minSilver'] = Number(m[1]);
     else if ((m = text.match(/^Quality: Min\. (Gold|Silver|Bronze)$/))) rules.minQuality = m[1].toLowerCase() as SquadRules['minQuality'];
     else if ((m = text.match(/^Chemistry: Min\. (\d+)$/))) rules.chemistry = Number(m[1]);
     else if ((m = text.match(/^Team rating: Min\. (\d+)$/))) rules.minRating = Number(m[1]);
     else if ((m = text.match(/^Nations: Max\. (\d+)$/))) rules.maxNations = Number(m[1]);
+    else if ((m = text.match(/^Nations: Min\. (\d+)$/))) rules.minNations = Number(m[1]);
     else if ((m = text.match(/^Players: (\d+)$/))) rules.playerCount = Number(m[1]);
     else return null;
   }
