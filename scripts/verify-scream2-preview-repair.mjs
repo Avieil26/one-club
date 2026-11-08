@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { loadPlayerCatalogue, loadRepositoryModule } from './load-player-catalogue.mjs';
 const cards = loadPlayerCatalogue();
 const { META_ATTRS } = loadRepositoryModule('lib/playerMeta.ts');
-assert.equal(cards.length,20258,'Keep 20223 originals + 35 new editions');
+assert.equal(cards.length,20343,'Keep 20258 prior cards + 85 Nov 8 editions');
 assert.equal(cards.filter(x=>x.id.startsWith('scream2-')).length,35);
 const {pointsSegments,pointsPlans,pointsPlanValid}=loadRepositoryModule('lib/sbcVerified.ts');
 for(const [id,target] of [['sbc-reijnders-scream-20261030',60000],['sbc-81-totw1-7-upgrade-20261030',22000]]){
@@ -30,4 +30,4 @@ for(const row of cards.filter(x=>x.id.startsWith('scream2-')&&!x.id.includes('re
 const reijnders=recentCardFor('scream2-reijnders-sbc-20261030');
 assert(reijnders,'Reijnders reward missing');
 for(const key of META_ATTRS.slice(0,29)) assert(Number.isInteger(reijnders.attributes[key]),'Reijnders '+key);
-console.log('PASS: 20258 cards, 35 new editions with complete 29 outfield detail stats and foot/skill/wf, both SBC score plans and 7-slot self builder.');
+console.log('PASS: 20343 cards; all 35 Scream 2 editions remain complete with detail stats, foot/skill/wf and SBC plans.');
