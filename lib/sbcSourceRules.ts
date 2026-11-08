@@ -21,7 +21,7 @@ export function parseClassicRequirements(requirements: string[], playerCount = 1
     else if ((m = text.match(/^Leagues: (Min|Max)\. (\d+)$/))) rules[m[1] === 'Min' ? 'minLeagues' : 'maxLeagues'] = Number(m[2]);
     else if ((m = text.match(/^Clubs: Min\. (\d+)$/))) rules.minClubs = Number(m[1]);
     else if ((m = text.match(/^Clubs: Max\. (\d+)$/))) rules.maxClubs = Number(m[1]);
-    else if ((m = text.match(/^Quality: Min\. (\d+) (Gold|Silver) players$/))) rules[m[2] === 'Gold' ? 'minGold' : 'minSilver'] = Number(m[1]);
+    else if ((m = text.match(/^Quality: Min\. (\d+) (Gold|Silver) players?$/))) rules[m[2] === 'Gold' ? 'minGold' : 'minSilver'] = Number(m[1]);
     else if ((m = text.match(/^Quality: Min\. (Gold|Silver|Bronze)$/))) rules.minQuality = m[1].toLowerCase() as SquadRules['minQuality'];
     else if ((m = text.match(/^Chemistry: Min\. (\d+)$/))) rules.chemistry = Number(m[1]);
     else if ((m = text.match(/^Team rating: Min\. (\d+)$/))) rules.minRating = Number(m[1]);
