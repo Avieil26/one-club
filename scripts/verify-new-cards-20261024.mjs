@@ -7,9 +7,9 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const cards = JSON.parse(fs.readFileSync('assets/data/recentCards20261024.json', 'utf8'));
 const audit = JSON.parse(fs.readFileSync('docs/recent-card-art-audit.json', 'utf8'));
 const all = loadPlayerCatalogue();
-assert.equal(all.length, 20258);
-assert.equal(all.filter(p=>!p.id.startsWith('scream2-')).length,20223,'Legacy 20,223 must be untouched');
-assert.equal(all.filter(c => c.edition === 'recent').length, 111);
+assert.equal(all.length, 20343);
+assert.equal(all.filter(p=>!p.id.startsWith('scream2-')).length,20308,'Legacy 20,223 plus Nov 8 recent cards must be present');
+assert.equal(all.filter(c => c.edition === 'recent').length, 196);
 assert.equal(new Set(all.map(c => c.id)).size, all.length);
 const prior = all.filter(c => c.edition !== 'recent');
 assert.equal(prior.length, 20147);
@@ -19,7 +19,7 @@ const { META_ATTRS } = loadRepositoryModule('lib/playerMeta.ts');
 const { recentCardMeta, recentCardFor } = loadRepositoryModule('lib/recentCards.ts');
 const { RECENT_CARD_ART } = loadRepositoryModule('lib/recentCardArt.ts');
 const { EMPTY_FILTERS, playerMatches } = loadRepositoryModule('lib/playerFilter.ts');
-assert.equal(all.filter(c => playerMatches(c, {...EMPTY_FILTERS, kind: 'recent'})).length, 111);
+assert.equal(all.filter(c => playerMatches(c, {...EMPTY_FILTERS, kind: 'recent'})).length, 196);
 assert.equal(Object.keys(RECENT_CARD_ART).length, 76);
 function crc32(bytes) {
   let crc = 0xffffffff;
@@ -76,7 +76,7 @@ const prices = await response.json();
 assert.deepEqual(prices['recent-100896715'], [6400000,14000000]);
 assert.deepEqual(prices['recent-117673931'], [0,0]);
 for (const card of cards.filter(c=>c.price.kind !== 'market')) assert.equal(prices[card.id], undefined);
-console.log('PASS: 20,223 unique cards; prior 20,147 unchanged; 51 original exact editions, 34 attributes, CRC/inflated original artwork, missing prices and independent-platform market API fixture.');
+console.log('PASS: 20,343 runtime cards; prior 20,147 non-recent cards unchanged; Oct 24 exact editions and artwork remain intact.');
 
 // Edition navigation is grouped by stable person identity, never by display name.
 const { playerEditionsFor } = loadRepositoryModule('lib/playerEditions.ts');
