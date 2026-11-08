@@ -89,6 +89,7 @@ export function sbcCheckText(label: string, language: 'he' | 'en'): string {
   .replace(/מיובנטוס/g, 'from Juventus')
   .replace(/יובנטוס/g, 'Juventus')
   .replace(/מברצלונה/g, 'from FC Barcelona')
+  .replace(/ברצלונה/g, 'FC Barcelona')
   .replace(/ממנצ׳סטר יונייטד/g, 'from Manchester United')
   .replace(/מפריז סן ז׳רמן/g, 'from Paris Saint-Germain')
   .replace(/מנאפולי/g, 'from Napoli')
