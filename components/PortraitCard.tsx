@@ -13,6 +13,7 @@ import { HERO_ART } from '@/lib/heroArt';
 import { otwFor, totwFor } from '@/lib/specialCards';
 import { totwFinish } from '@/lib/totwShine';
 import { RECENT_CARD_ART } from '@/lib/recentCardArt';
+import { recentCardFor } from '@/lib/recentCards';
 import { Scream2Portrait } from '@/components/Scream2Portrait';
 import { SEASON2_ART } from '@/lib/season2Art';
 
@@ -740,6 +741,8 @@ export function PortraitCard({
   if (!shell && (edition === 'recent' || (edition === 'auto' && player.edition === 'recent'))) {
     const art = RECENT_CARD_ART[player.id];
     if (art) return <Image accessibilityLabel={`${player.en || player.name} · ${player.rating} · New release`} source={art} resizeMode="contain" style={{ width, height: Math.round(width * 419 / 300) }} />;
+    const remote = recentCardFor(player.id)?.artUrl;
+    if (remote) return <RemoteCardArt uri={remote} fallbackUri={player.itemId ? `https://assets.fodder.gg/renders/${player.itemId}.webp` : undefined} width={width} />;
   }
   if (!shell && (edition === 'season2' || (edition === 'auto' && player.edition === 'season2'))) {
     const art = SEASON2_ART[player.id];
