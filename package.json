@@ -59,7 +59,7 @@
     "verify:community": "node scripts/verify-community-logic.mjs && node scripts/verify-community-return.mjs && node scripts/verify-sbc-refresh.mjs && node scripts/verify-sbc-20261025.mjs && node scripts/verify-sbc-20261026.mjs && node scripts/verify-sbc-20261103.mjs && node scripts/verify-site-polish.mjs && node scripts/verify-sbc-solutions.mjs && node scripts/verify-sbc-player-selection.mjs && node scripts/verify-sbc-moderation.mjs",
     "verify:season2": "node scripts/verify-season2.mjs",
     "verify:apk": "npm run typecheck && npm run verify:catalogue && npm run verify:season2 && npm run verify:recent && npm run verify:preservation && npm run verify:localization && npm run verify:mobile && npm run verify:startup && node scripts/verify-gallery.mjs && node scripts/verify-apk-release.mjs",
-    "verify:recent": "node scripts/verify-new-cards-20261024.mjs",
+    "verify:recent": "node scripts/verify-new-cards-20261024.mjs && node scripts/verify-content-20261108.mjs",
     "verify:planner": "node scripts/build-gallery-planner.mjs && node scripts/verify-gallery-planner.mjs"
   },
   "private": true
