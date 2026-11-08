@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import { ClubBadge } from '@/components/ClubBadge';
 import { NationFlag } from '@/components/NationFlag';
@@ -83,6 +82,49 @@ const SBC_PLAYER_CARDS: Record<string, { player: FcPlayer; photo: string }> = {
   },
 };
 
+// Player-reward SBCs must show the rewarded player card, not the generic OTW pack art.
+// Keep these separate from the legacy single-card map so Duo rewards can show both choices.
+const SBC_PLAYER_CARD_GROUPS: Record<string, { player: FcPlayer; photo: string }[]> = {
+  'sbc-intro-espinoza': [
+    {
+      player: {
+        id: 'sbc-card-espinoza', name: 'אספינוזה', en: 'Cristian Espinoza', rating: 82,
+        position: 'RW', nation: 'ארגנטינה', league: 'MLS', club: 'San Jose Earthquakes',
+        face: { ovr: 82, pac: 91, sho: 78, pas: 82, dri: 88, def: 35, phy: 63 },
+      },
+      photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p226385.png',
+    },
+  ],
+  'sbc-otw-bouaddi': [
+    {
+      player: {
+        id: 'sbc-card-bouaddi', name: 'בואדי', en: 'Ayyoub Bouaddi', rating: 83,
+        position: 'CM', nation: 'צרפת', league: 'Ligue 1', club: 'Lille',
+        face: { ovr: 83, pac: 75, sho: 60, pas: 82, dri: 78, def: 74, phy: 72 },
+      },
+      photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p278901.png',
+    },
+  ],
+  'sbc-otw-duo-1': [
+    {
+      player: {
+        id: 'sbc-card-mora', name: 'מורה', en: 'Rodrigo Mora', rating: 83,
+        position: 'CAM', nation: 'פורטוגל', league: 'Liga Portugal', club: 'Porto',
+        face: { ovr: 83, pac: 86, sho: 78, pas: 82, dri: 90, def: 34, phy: 48 },
+      },
+      photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p72997.png',
+    },
+    {
+      player: {
+        id: 'sbc-card-pote', name: 'פוטה', en: 'Pedro Gonçalves', rating: 84,
+        position: 'CAM', nation: 'פורטוגל', league: 'Liga Portugal', club: 'Sporting CP',
+        face: { ovr: 84, pac: 79, sho: 84, pas: 83, dri: 88, def: 42, phy: 62 },
+      },
+      photo: 'https://ratings-images-prod.pulse.ea.com/FC25/full/player-portraits/p240950.png',
+    },
+  ],
+};
+
 function SideMark({ club, nation, size }: { club?: string; nation?: string; size: number }) {
   if (nation) return <NationFlag nation={nation} size={size} />;
   if (club) return <ClubBadge club={club} size={size} />;
@@ -109,6 +151,7 @@ function SbcTile({
   const remaining = compactRemaining(challenge.endsAt, now);
   const legacyPlayerCard = PLAYER_REWARD[challenge.id];
   const playerCard = SBC_PLAYER_CARDS[challenge.id];
+  const rewardCards = playerCard ? [playerCard] : (SBC_PLAYER_CARD_GROUPS[challenge.id] ?? []);
 
   return (
     <Pressable
@@ -144,15 +187,20 @@ function SbcTile({
         <View style={{ marginRight: 8, width: 72, alignItems: 'center', justifyContent: 'center' }}>
           {legacyPlayerCard ? (
             <Image source={legacyPlayerCard} resizeMode="contain" accessibilityIgnoresInvertColors style={{ width: 70, height: 92 }} />
-          ) : playerCard ? (
-            <PortraitCard
-              player={playerCard.player}
-              width={70}
-              edition="base"
-              photoOverride={playerCard.photo}
-              faceOverride={playerCard.player.face}
-              compactStats
-            />
+          ) : rewardCards.length ? (
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+              {rewardCards.map((card) => (
+                <PortraitCard
+                  key={card.player.id}
+                  player={card.player}
+                  width={rewardCards.length > 1 ? 48 : 70}
+                  edition="base"
+                  photoOverride={card.photo}
+                  faceOverride={card.player.face}
+                  compactStats
+                />
+              ))}
+            </View>
           ) : (
             <SbcRewardPack visual={theme.pack} size={58} label={theme.packLabel} />
           )}
@@ -202,3 +250,4 @@ export default function SbcScreen() {
     </Screen>
   );
 }
+
