@@ -1,0 +1,34 @@
+name: Generate Nov 8 FC27 content data
+on:
+  push:
+    branches:
+      - preview/content-sync-20261108
+    paths:
+      - .github/workflows/sync-content-20261108.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: preview/content-sync-20261108
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate current player-card data
+        run: node scripts/sync-cards-20261108.mjs
+      - name: Verify generated data
+        run: |
+          node -e "const x=require('./assets/data/recentCards20261108.json'); if(x.length!==85) process.exit(1); console.log('generated',x.length)"
+      - name: Commit generated data
+        run: |
+          git config user.name "fc27-content-sync"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/data/recentCards20261108.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Generate Nov 8 player content data"
+          git push origin HEAD:preview/content-sync-20261108
