@@ -40,6 +40,14 @@ export function SbcRewardVisual({ challenge, width = 100 }: { challenge: SbcChal
     <Text style={{ position: 'absolute', bottom: 0, width, textAlign: 'center', color: '#FFD0A1', fontSize: Math.max(10, width * 0.1), fontWeight: '900' }}>HERO · 1 OF 4</Text>
   </View>;
  }
+ const sbcPlayerRewardUrl = ({
+  'sbc-feller-showdown-20261107': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50597548.7f03634e7d3da666315d5692dc714635f842790b6687b1ba8c5dec413aec5539.webp',
+  'sbc-kett-showdown-20261107': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50602173.33034544c69a69d3a84b4c69a3bfebbdedd2d510662da9a5d48c7cef139a8262.webp',
+  'sbc-schertenleib-showdown-20261107': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50609347.3e7a5144f3113e84e6fa69b2514b7ced0b53ad6742a16ecec085cd1a20d7a3fc.webp',
+  'sbc-smith-showdown-20261107': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50608200.8236cc092fd0148ae9616063df9d2ed8feb3ad997cdeef19ce467b26386117a9.webp',
+  'sbc-openda-rttk-20261106': 'https://game-assets.fut.gg/cdn-cgi/image/quality=85,format=auto,width=300/2027/futgg-player-item-card/27-50575228.32e19bf625714d4ace292f099d4574e1fa8bca1f08401393ff04b0568ca50ada.webp',
+ } as Record<string, string>)[challenge.id];
+ if (sbcPlayerRewardUrl) return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel={challenge.reward ?? challenge.title} style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={{ uri: sbcPlayerRewardUrl }} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  const recentReward = ({ 'sbc-mor-20261025': 'recent-50562888', 'sbc-woltemade-20261025': 'recent-67362886' } as Record<string, string>)[challenge.id];
  if (recentReward) return <View testID={`sbc-reward-${challenge.id}`} accessibilityRole="image" accessibilityLabel={challenge.reward ?? challenge.title} style={{ width, height: width * 1.4 }}><Image testID={`sbc-card-complete-${challenge.id}`} source={RECENT_CARD_ART[recentReward]} resizeMode="contain" style={{ width, height: width * 1.4 }} /></View>;
  const art = artById[challenge.id]; const height = width * 1.4;
